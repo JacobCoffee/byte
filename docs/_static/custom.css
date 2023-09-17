@@ -1,0 +1,40 @@
+:root {
+  --byte-teal: #42b1a8;
+  --byte-blue: #7bcebc;
+  --byte-light-blue: #abe6d2;
+  --byte-orange: #d4a35a;
+  --byte-red: #ad2a13;
+  --byte-dark: #0c0c0c;
+  --byte-white: #ebebe9;
+}
+
+html.dark,
+html.light {
+}
+
+html.light {
+  --syntax-light-constant: var(--byte-teal);
+  /*  --syntax-light-text: #09090a;*/
+  /*  --syntax-light-cap-bg: #325b76;*/
+  /*  --syntax-light-pre-bg: #ddefff;*/
+  --syntax-light-keyword: var(--byte-teal);
+  --syntax-light-property: var(--byte-orange);
+}
+
+html.light .yue {
+  --yue-c-code-bg: var(--byte-white) !important;
+  --yue-c-code: #0b8980 !important;
+  /*--yue-c-black: #11a1ff !important;*/
+}
+
+html.dark {
+  --syntax-dark-keyword: var(--byte-teal);
+  --syntax-dark-property: var(--byte-orange);
+  --syntax-dark-constant: var(--byte-teal);
+}
+
+html.dark .yue {
+  --yue-c-code-bg: var(--byte-dark) !important;
+  --yue-c-code: #0b8980 !important;
+  /*--yue-c-black: #11a1ff !important;*/
+}

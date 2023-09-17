@@ -1,0 +1,92 @@
+<!doctype html>
+<html class="h-full" lang="en-us">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <link rel="stylesheet" href="static/style.css" />
+    <title>{% block title %}{% endblock %} {{ title }}</title>
+
+    <link rel="icon" href="static/badge.png" type="image/x-icon" />
+
+    {% block extrahead %}{% endblock %} {% block extrastyle %}{% endblock %}
+  </head>
+
+  <body
+    class="font-mono leading-none byte-teal antialiased bg-white dark:bg-byte-dark/95 flex flex-col min-h-screen"
+  >
+    <div class="flex flex-col w-full min-h-screen">
+      {% block nav %} {% include 'base/nav.html' %} {% endblock nav %} {% block
+      headercontent %}{% endblock headercontent %}
+
+      <main>
+        <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+          {% block basecontent %}
+          <div id="byte-bot">{% block body %} {% endblock body %}</div>
+          <div class="toast toast-end">
+            <div class="alert alert-info shadow">
+              <span>Service started successfully!</span>
+            </div>
+            <div class="alert alert-warning shadow">
+              <span
+                >Byte had an accident:
+                <a
+                  href="#"
+                  class="no-underline hover:underline decoration-byte-teal text-base-content"
+                >
+                  <b>Check the logs</b></a
+                ></span
+              >
+            </div>
+            <div class="alert alert-success shadow">
+              <span>Byte was invited to <b>Python Discord</b>!</span>
+            </div>
+          </div>
+          {% endblock basecontent %}
+        </div>
+      </main>
+
+      {% block content %}{% endblock content %}
+
+      <footer class="w-full mt-auto">
+        {% block footer %} {% include 'base/footer.html' %} {% endblock footer
+        %}
+      </footer>
+    </div>
+  </body>
+
+  <script>
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+      document.getElementById("light-mode-toggle").style.display = "block";
+      document.getElementById("dark-mode-toggle").style.display = "none";
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.getElementById("dark-mode-toggle").style.display = "block";
+      document.getElementById("light-mode-toggle").style.display = "none";
+    }
+
+    function toggleDarkMode() {
+      document.documentElement.classList.add("dark");
+      localStorage.theme = "dark";
+      document.getElementById("light-mode-toggle").style.display = "block";
+      document.getElementById("dark-mode-toggle").style.display = "none";
+    }
+
+    function toggleLightMode() {
+      document.documentElement.classList.remove("dark");
+      localStorage.theme = "light";
+      document.getElementById("dark-mode-toggle").style.display = "block";
+      document.getElementById("light-mode-toggle").style.display = "none";
+    }
+  </script>
+
+  {% block extrajs %} {% endblock extrajs %}
+</html>

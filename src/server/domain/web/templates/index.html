@@ -1,0 +1,185 @@
+{% extends 'base/base.html' %} {% block extrahead %}{% endblock extrahead %} {%
+block extrastyle %}
+<style>
+  .mockup-phone {
+    aspect-ratio: 1/1.7;
+    object-fit: contain;
+  }
+</style>
+{% endblock extrastyle %} {% block title %}Home{% endblock %} {% block body %}
+
+<div class="alert alert-info">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    class="stroke-current shrink-0 w-6 h-6"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+    ></path>
+  </svg>
+  <span>New Byte Bot version available!</span>
+  <div>
+    <button class="btn btn-sm">Close</button>
+    <button class="btn btn-sm btn-primary">Changelog</button>
+  </div>
+</div>
+
+<div class="overflow-hidden py-24 sm:py-24">
+  <div class="mx-auto max-w-7xl px-6 lg:px-8">
+    <div
+      class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2"
+    >
+      <div class="lg:pr-8 lg:pt-4">
+        <div class="lg:max-w-lg">
+          <h2
+            class="text-base font-semibold leading-7 text-base-content dark:text-base-100/80"
+          >
+            Discord x Litestar
+          </h2>
+          <p
+            class="mt-2 text-3xl font-bold tracking-tight text-base-content dark:text-base-100 sm:text-4xl"
+          >
+            Developer Experience First
+          </p>
+          <p
+            class="mt-6 text-lg leading-8 text-base-content dark:text-base-100"
+          >
+            Byte is built on the Litestar framework, ready to serve
+            developer-oriented Discord servers with grea tools to make their
+            lives easier.
+          </p>
+          <dl
+            class="mt-10 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none"
+          >
+            <div class="relative pl-9">
+              <dt
+                class="inline font-semibold text-base-content dark:text-base-100"
+              >
+                <!-- https://feathericons.dev/?search=send&iconset=feather -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  class="absolute left-1 top-1 h-5 w-5 text-primary dark:text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                >
+                  <line x1="22" x2="11" y1="2" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+                Ready for invite
+              </dt>
+              <dd
+                class="inline-flex items-center text-base-content dark:text-base-100"
+              >
+                Invite Byte to your server and start using it right away.
+                <!-- https://feathericons.dev/?search=arrow-right&iconset=feather -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  class="main-grid-item-icon h-5 w-5 ml-2"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                >
+                  <line x1="5" x2="19" y1="12" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </dd>
+            </div>
+            <div class="mockup-code bg-primary text-primary-content shadow-2xl">
+              <pre data-prefix="1"><code>litestar run byte-bot</code></pre>
+              <pre data-prefix="2"><code>starting service...</code></pre>
+              <pre
+                data-prefix="3"
+                class="bg-info text-info-content"
+              ><code>Byte is ready for action!</code></pre>
+            </div>
+          </dl>
+        </div>
+      </div>
+      <div class="mockup-phone border-primary shadow-2xl">
+        <div class="camera text-black">i c u</div>
+        <div class="display">
+          <div
+            class="artboard artboard-demo phone-1 bg-no-repeat bg-contain h-full"
+            style="
+              background-image: linear-gradient(
+                  to bottom,
+                  rgba(255, 255, 255, 0) 0%,
+                  rgba(255, 255, 255, 1) 30%,
+                  rgba(255, 255, 255, 1) 100%
+                ),
+                url(&quot;static/splash-bg.png&quot;);
+              background-position: top center;
+            "
+          >
+            <div
+              class="flex flex-col justify-between items-center h-full px-5 pb-5 py-36"
+            >
+              <div class="flex flex-col justify-center items-center">
+                <img
+                  class="h-12 w-auto align-middle"
+                  src="static/logo.svg"
+                  alt="Byte Logo"
+                />
+                <p class="text-center">
+                  Byte:
+                  <span
+                    class="{{ 'text-success' if byte_status == 'online' else 'text-warning' }}"
+                    ><b>{{ byte_status | default('Unknown') }}</b></span
+                  >.
+                </p>
+                <!-- TODO: Make this dynamic with a /health healthckeck! -->
+                <p class="text-center py-5">
+                  Currently in <br />probably 1 server
+                </p>
+              </div>
+              <a
+                href="#"
+                role="button"
+                class="btn btn-info btn-wide hover:bg-[#5865F2]/70"
+              >
+                <!-- TODO: Add invite link -->
+                <!-- https://feathericons.dev/?search=discord&iconset=brands -->
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  class="main-grid-item-icon h-5 w-5"
+                  fill="none"
+                >
+                  <path
+                    d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.865-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037c-1.687.29-3.33.8-4.885 1.515a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.083.083 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.077.077 0 0 0 .084-.028c.462-.63.874-1.295 1.227-1.994a.076.076 0 0 0-.042-.106 13.107 13.107 0 0 1-1.872-.892.078.078 0 0 1-.038-.062.077.077 0 0 1 .03-.066c.126-.094.252-.192.372-.292a.075.075 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.076.076 0 0 1 .30.065c-.599.349-1.225.647-1.873.89a.076.076 0 0 0-.05.076c.001.012.004.022.009.032.36.698.772 1.362 1.225 1.993a.077.077 0 0 0 .084.028 19.84 19.84 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.06.06 0 0 0-.031-.03ZM8.02 15.33c-1.182 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418Zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418Z"
+                    fill="#5865F2"
+                  ></path>
+                </svg>
+                <p class="text-center">Invite Byte</p>
+              </a>
+              <img
+                class="py-10"
+                src="static/powered-by-litestar.svg"
+                alt="Powered by Litestar"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %} {% block extrajs %}{% endblock extrajs %}
