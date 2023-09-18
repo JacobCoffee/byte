@@ -1,0 +1,11 @@
+blank_lines_enabled: true
+contact_links:
+  - name: Byte Documentation
+    url: https://docs.byte-bot.app/
+    about: Official Byte documentation - please check here before opening an issue.
+  - name: Byte Website
+    url: https://byte-bot.app
+    about: Main Byte website
+  - name: Discord
+    url: https://discord.gg/ZVG8hN6RrJ
+    about: Join our Discord community to chat or get in touch with the maintainers.
