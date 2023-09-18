@@ -34,9 +34,10 @@ upgrade:       ## Upgrade all dependencies to the latest stable versions
 # Developer Utils
 # =============================================================================
 
-install-pdm: ## Install latest version of PDM
-	@echo "Installing PDM..."
-	@curl -sSL https://pdm.fming.dev/dev/install-pdm.py | python3 -
+install-pdm: 										## Install latest version of PDM
+	@curl -sSLO https://pdm.fming.dev/install-pdm.py && \
+	curl -sSL https://pdm.fming.dev/install-pdm.py.sha256 | shasum -a 256 -c - && \
+	python3 install-pdm.py
 
 install-pre-commit: ## Install pre-commit and install hooks
 	@echo "Installing pre-commit"
@@ -67,7 +68,7 @@ test:  ## Run the tests
 	$(PDM_RUN_BIN) pytest tests
 
 coverage:  ## Run the tests and generate coverage report
-	$(PDM_RUN_BIN) pytest tests --cov=app
+	$(PDM_RUN_BIN) pytest tests --cov=src
 	$(PDM_RUN_BIN) coverage html
 	$(PDM_RUN_BIN) coverage xml
 
@@ -76,18 +77,24 @@ check-all: lint test fmt-check coverage ## Run all linting, tests, and coverage 
 # =============================================================================
 # Docs
 # =============================================================================
+.PHONY: docs-install
+docs-install: 										## Install docs dependencies
+	@echo "=> Installing documentation dependencies"
+	@$(PDM) install -G:docs
+	@echo "=> Installed documentation dependencies"
 
-docs-install: ## Install docs dependencies
-	$(PDM) env use python3 && $(PDM) install --with dev,docs
+docs-clean: 										## Dump the existing built docs
+	@echo "=> Cleaning documentation build assets"
+	@rm -rf docs/_build
+	@echo "=> Removed existing documentation build assets"
 
-docs-clean: ## Dump the existing built docs
-	rm -rf docs/_build
+docs-serve: docs-clean 								## Serve the docs locally
+	@echo "=> Serving documentation"
+	$(PDM_RUN_BIN) sphinx-autobuild docs docs/_build/ -j auto --watch src --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002
 
-docs-serve: docs-clean ## Serve the docs locally
-	$(PDM_RUN_BIN) $(SPHINXAUTOBUILD) docs docs/_build/ -j auto --watch app --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002
-
-docs: docs-clean ## Dump the existing built docs and rebuild them
-	$(PDM_RUN_BIN) $(SPHINXBUILD) docs docs/_build/ -E -a -j auto --keep-going
+docs: docs-clean 									## Dump the existing built docs and rebuild them
+	@echo "=> Building documentation"
+	@$(PDM_RUN_BIN) sphinx-build -M html docs docs/_build/ -E -a -j auto --keep-going
 
 # =============================================================================
 # Main
@@ -132,8 +139,14 @@ develop: install ## Install the project in dev mode.
 	if [ "$(VENV_EXISTS)" && ! -f .env ]; then cp .env.example .env; fi
 	@echo "=> Install complete! Note: If you want to re-install re-run 'make develop'"
 
+run-dev-bot: ## Run the bot in dev mode
+	$(PDM_RUN_BIN) app run-bot
+
 run-dev-server: ## Run the app in dev mode
-	$(PDM_RUN_BIN) app run server --http-workers 1 --reload
+	$(PDM_RUN_BIN) app run-web --http-workers 1 --reload
 
 run-dev-frontend: ## Run the app frontend in dev mode
 	$(PDM_RUN_BIN) tailwindcss -i src/server/domain/web/resources/input.css -o src/server/domain/web/resources/style.css --watch
+
+run-dev: ## Run the bot, web, and front end in dev mode
+	$(PDM_RUN_BIN) app run-all --http-workers 1 -d -v --reload

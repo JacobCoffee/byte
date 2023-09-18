@@ -66,7 +66,7 @@ Then you can serve the documentation with ``make docs-serve``, or build them wit
 Creating a new release
 ----------------------
 
-1. Increment the version in ``pyproject.toml`` using `` poetry version <version>``. The version should follow
+1. Increment the version in ``pyproject.toml`` using ``poetry version <version>``. The version should follow
    `semantic versioning <https://semver.org/>`_ and `PEP 440 <https://www.python.org/dev/peps/pep-0440/>`_.
 2. `Draft a new release <https://github.com/JacobCoffee/byte-bot/releases/new>`_ on GitHub
 

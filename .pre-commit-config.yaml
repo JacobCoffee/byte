@@ -2,7 +2,7 @@ default_language_version:
   python: "3.11"
 repos:
   - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v2.3.0
+    rev: v2.4.0
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
@@ -17,7 +17,7 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.278"
+    rev: "v0.0.290"
     hooks:
       - id: ruff
         args: ["--fix"]
@@ -26,16 +26,16 @@ repos:
     hooks:
       - id: codespell
   - repo: https://github.com/psf/black
-    rev: 23.7.0
+    rev: 23.9.1
     hooks:
       - id: black
         args: [--config=./pyproject.toml]
   - repo: https://github.com/asottile/blacken-docs
-    rev: 1.15.0
+    rev: 1.16.0
     hooks:
       - id: blacken-docs
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v3.0.0"
+    rev: "v3.0.3"
     hooks:
       - id: prettier
         exclude: "_templates|.git"
@@ -46,7 +46,7 @@ repos:
         exclude: "test*|examples*|tools"
         args: ["--use-tuple"]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.4.1"
+    rev: "v1.5.1"
     hooks:
       - id: mypy
         exclude: "tools|docs"
@@ -72,6 +72,6 @@ repos:
             prometheus_client,
           ]
   - repo: https://github.com/sphinx-contrib/sphinx-lint
-    rev: "v0.6.7"
+    rev: "v0.6.8"
     hooks:
       - id: sphinx-lint
