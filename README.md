@@ -12,3 +12,19 @@
 >   and whatever else is found to be useful.
 
 All of this may go down in flames, though... so... yeah - good luck :)
+
+## Bot
+
+## Web
+
+The web service is a [Litestar][litestar] application. It is utilizing Jinja2 templating and TailwindCSS for the
+front end, and the backend is using the Litestar-provided utilities for routing, middleware, and more.
+
+### UI Examples
+
+![Home](docs/images/home.png)
+![Dark Home](docs/images/dark-home.png)
+![Dashboard](docs/images/dashboard.png)
+![API - Elements](docs/images/api-elements.png)
+
+[litestar]: https://litestar.dev
