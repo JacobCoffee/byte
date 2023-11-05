@@ -1,5 +1,4 @@
 """Discord Bot."""
-
 from __future__ import annotations
 
 import contextlib
@@ -14,7 +13,6 @@ from src.server.lib import settings
 
 __all__ = ("run",)
 
-
 load_dotenv()
 
 
@@ -23,7 +21,9 @@ def run() -> None:
     intents = discord.Intents.default()
     intents.message_content = True
     intents.members = True
-    bot = commands.Bot(command_prefix=settings.discord.COMMAND_PREFIX, intents=intents)
+    presence = discord.Activity(name="!help", type=discord.ActivityType.custom, state="Serving Developers",
+                                details="!help", url="https://byte-bot.app/")
+    bot = commands.Bot(command_prefix=settings.discord.COMMAND_PREFIX, intents=intents, activity=presence)
 
     @bot.event
     async def on_ready() -> None:
@@ -78,9 +78,9 @@ def run() -> None:
             reply = (
                 f"At your assistance, {thread.owner.mention}.\n"
                 f"Make sure you include an [MCVE](https://stackoverflow.com/help/minimal-reproducible-example) in "
-                f"your post.\n"
-                f"When you are done you can tag your post as ***✅ Solved***!\n"
-                f"If no one responds within 4 hours, please ping `@Member`."
+                f"your post if relevant.\n"
+                f"When you are done you can tag your post as ***✅ Solved*** or type ``!solve``!\n"
+                f"If no one responds within a reasonable amount of time, please ping `@Member`."
             )
             await thread.send(reply)
         if thread.parent.name == "forum":
