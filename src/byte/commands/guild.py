@@ -74,12 +74,26 @@ class GuildCommands(commands.Cog):
         description="Mark a forum post as solved and close it.",
     )
     async def solved(self, ctx: commands.Context) -> None:
-        """Mark the forum post as solved and close it."""
+        """Mark the forum post as solved and close it.
+
+        .. todo: Parameterize the tag name and allow each guild to assign it
+            in placed of "Solved" (Default can stay as solved, though)
+
+        .. todo:: Parameterize the channel name (default of help, still).
+            Also, allow for a list of channels to be specified.
+            users may want to be able to mark things solved/closed in
+            Help, Suggestions, Showcase, etc. (or any other forum channel)
+        """
+        _solved_tag = "Solved"
         if isinstance(ctx.channel, Thread) and ctx.channel.parent.name == "help":
-            solved_tag = ForumTag(name="Solved", emoji="✅")
-            await ctx.channel.add_tags(solved_tag)
-            await ctx.send("Marked as solved and closed the help forum!")
-            await ctx.channel.edit(archived=True)
+            solved_tag = discord.utils.find(lambda t: t.name == _solved_tag, ctx.channel.parent.available_tags)
+
+            if solved_tag:
+                await ctx.channel.add_tags(solved_tag, reason="Marked as solved.")
+                await ctx.send("Marked as solved and closed the help forum!")
+                await ctx.channel.edit(archived=True)
+            else:
+                await ctx.send(f"'{_solved_tag}' tag not found.")
         else:
             await ctx.send("This command can only be used in the help forum.")
 
