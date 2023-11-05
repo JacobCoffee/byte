@@ -7,7 +7,7 @@ repos:
       - id: conventional-pre-commit
         stages: [commit-msg]
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: check-ast
       - id: check-case-conflict
@@ -17,19 +17,15 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.0.290"
+    rev: "v0.1.4"
     hooks:
       - id: ruff
         args: ["--fix"]
+      - id: ruff-format
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.5
+    rev: v2.2.6
     hooks:
       - id: codespell
-  - repo: https://github.com/psf/black
-    rev: 23.9.1
-    hooks:
-      - id: black
-        args: [--config=./pyproject.toml]
   - repo: https://github.com/asottile/blacken-docs
     rev: 1.16.0
     hooks:
@@ -46,7 +42,7 @@ repos:
         exclude: "test*|examples*|tools"
         args: ["--use-tuple"]
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.5.1"
+    rev: "v1.6.1"
     hooks:
       - id: mypy
         exclude: "tools|docs"
@@ -72,6 +68,6 @@ repos:
             prometheus_client,
           ]
   - repo: https://github.com/sphinx-contrib/sphinx-lint
-    rev: "v0.6.8"
+    rev: "v0.8.1"
     hooks:
       - id: sphinx-lint

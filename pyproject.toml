@@ -52,13 +52,6 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = 'src/__metadata__.py'
 
-[project.scripts]
-app = "litestar.__main__:run_cli"
-
-[project.entry-points."litestar.commands"]
-run-bot = "src.cli:run_bot"
-run-web = "src.cli:run_web"
-run-all = "src.cli:run_all"
 
 [tool.pdm.scripts]
 lint = "pre-commit run --all-files"
@@ -86,13 +79,11 @@ docs = [
     "pydata-sphinx-theme>=0.13.3",
     "sphinx-click>=4.4.0",
     "sphinx-toolbox>=3.4.0",
-    # Pending https://github.com/mansenfranzen/autodoc_pydantic/pull/162
-    # "autodoc-pydantic>=1.9.0",
+     "autodoc-pydantic>=1.9.0",
     "shibuya>=2023.7.16",
     "sphinxcontrib-mermaid>=0.9.2",
 ]
 lint = [
-    "black>=23.7.0",
     "ruff>=0.0.280",
     "codespell>=2.2.5",
     "mypy>=1.4.1",
@@ -102,13 +93,21 @@ lint = [
     "pre-commit>=3.3.3",
 ]
 
+[project.scripts]
+app = "litestar.__main__:run_cli"
+
+[project.entry-points."litestar.commands"]
+run-bot = "src.cli:run_bot"
+run-web = "src.cli:run_web"
+run-all = "src.cli:run_all"
+
 [tool.black]
 line-length = 120
 include = '\.pyi?$'
 
 [tool.codespell]
 ignore-words-list = "selectin"
-skip = "poetry.lock"
+skip = "pdm.lock"
 
 [tool.coverage.run]
 omit = ["*/tests/*"]

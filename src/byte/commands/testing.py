@@ -1,10 +1,7 @@
 """Commands for testing purposes."""
 from __future__ import annotations
 
-import discord
 from discord.ext import commands
-
-from src.byte import bot
 
 
 class TestingCommands(commands.Cog):
@@ -36,8 +33,8 @@ class TestingCommands(commands.Cog):
             ctx: Context object.
         """
         print(f"pinged by {ctx.author}")
-        await ctx.send("pong!")
-        discord.utils.get(bot.guilds[0], name="Byte").get_member(660881647918645259)
+        guild = ctx.guild.id
+        await ctx.send(f"pong to {guild}")
 
 
 async def setup(bot: commands.Bot) -> None:
