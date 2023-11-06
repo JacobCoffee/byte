@@ -78,6 +78,9 @@ repos:
             structlog,
             uvicorn,
             prometheus_client,
+            litestar,
+            polyfactory,
+            discord-py,
           ]
   - repo: https://github.com/sphinx-contrib/sphinx-lint
     rev: "v0.8.1"
