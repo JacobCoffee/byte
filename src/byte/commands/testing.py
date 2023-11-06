@@ -34,7 +34,7 @@ class TestingCommands(commands.Cog):
             ctx: Context object.
         """
         print(f"pinged by {ctx.author}")  # noqa: T201
-        guild = ctx.guild.id
+        guild = ctx.guild.id  # type: ignore[union-attr]
         await ctx.send(f"pong to {guild}")
 
     @commands.command(name="gethelp")

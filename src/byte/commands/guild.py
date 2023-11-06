@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import discord
-from discord import ForumTag, Thread
+from discord import Thread
 from discord.ext import commands
 
 __all__ = ("GuildCommands", "setup")

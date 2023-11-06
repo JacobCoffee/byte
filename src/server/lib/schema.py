@@ -13,7 +13,6 @@ class BaseModel(_BaseModel):
     """Base Settings."""
 
     model_config = ConfigDict(
-        case_sensitive=False,
         validate_assignment=True,
         from_attributes=True,
         use_enum_values=True,
