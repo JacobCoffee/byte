@@ -276,19 +276,23 @@ class OpenAPISettings(BaseSettings):
         Returns:
             The assembled OpenAPI servers.
         """
+        env_urls = {
+            "prod": "https://byte-bot.app/",
+            "test": "https://dev.byte-bot.app/",
+            "dev": "http://0.0.0.0:8000",
+        }
         environment = os.getenv("ENVIRONMENT", "dev")
+        url = os.getenv("WEB_URL", env_urls[environment])
+        description = environment.capitalize()
 
-        if environment == "prod":
-            return [
-                {
-                    "url": os.getenv("WEB_URL", "https://byte-bot.app/"),
-                    "description": "Production",
-                },
-            ]
-        if environment == "dev":
-            return [{"url": "http://0.0.0.0:8000", "description": "Local Development"}]
-
-        return value
+        return [
+            {
+                "url": url,  # type: ignore[list-item]
+                "description": f"{description}",
+            }
+            if environment in env_urls
+            else value
+        ]
 
 
 class TemplateSettings(BaseSettings):
