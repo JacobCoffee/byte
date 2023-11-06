@@ -21,15 +21,20 @@ def run() -> None:
     intents = discord.Intents.default()
     intents.message_content = True
     intents.members = True
-    presence = discord.Activity(name="!help", type=discord.ActivityType.custom, state="Serving Developers",
-                                details="!help", url="https://byte-bot.app/")
+    presence = discord.Activity(
+        name="!help",
+        type=discord.ActivityType.custom,
+        state="Serving Developers",
+        details="!help",
+        url="https://byte-bot.app/",
+    )
     bot = commands.Bot(command_prefix=settings.discord.COMMAND_PREFIX, intents=intents, activity=presence)
 
     @bot.event
     async def on_ready() -> None:
         """Event handler for a bots ready state."""
         print(f"{bot.user} has connected to Discord!")
-        cogs = []
+        cogs: list[Path] = []
         for command_dir in map(Path, settings.discord.COMMANDS_DIRS):
             cogs.extend(command_dir.glob("*.py"))
 

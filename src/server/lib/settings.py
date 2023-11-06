@@ -4,7 +4,7 @@ from __future__ import annotations
 import binascii
 import os
 from pathlib import Path
-from typing import TYPE_CHECKING, Final
+from typing import Final
 
 from dotenv import load_dotenv
 from litestar.contrib.jinja import JinjaTemplateEngine
@@ -15,9 +15,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from src import utils
 from src.__metadata__ import __version__ as version
-
-if TYPE_CHECKING:
-    from pydantic_core.core_schema import FieldValidationInfo
 
 __all__ = ()
 
@@ -64,7 +61,7 @@ class ServerSettings(BaseSettings):
     """Seconds to hold connections open."""
     PORT: int = 8000
     """Server port."""
-    RELOAD: bool = False
+    RELOAD: bool | None = False
     """Turn on hot reloading."""
     RELOAD_DIRS: list[str] = [f"{BASE_DIR}"]
     """Directories to watch for reloading.
@@ -130,6 +127,7 @@ class ProjectSettings(BaseSettings):
         """
         return "-".join(s.lower() for s in self.NAME.split())
 
+    @classmethod
     @field_validator("BACKEND_CORS_ORIGINS")
     def assemble_cors_origins(
         cls,
@@ -157,7 +155,8 @@ class ProjectSettings(BaseSettings):
         raise ValueError(value)
 
     @field_validator("SECRET_KEY", mode="before")
-    def generate_secret_key(cls, value: str | None, info: FieldValidationInfo) -> SecretBytes:
+    @classmethod
+    def generate_secret_key(cls, value: str | None) -> SecretBytes:
         """Generate a secret key.
 
         Args:
@@ -168,8 +167,7 @@ class ProjectSettings(BaseSettings):
         """
         if value is None:
             return SecretBytes(binascii.hexlify(os.urandom(32)))
-        else:
-            return SecretBytes(value.encode())
+        return SecretBytes(value.encode())
 
 
 class APISettings(BaseSettings):
@@ -267,8 +265,8 @@ class OpenAPISettings(BaseSettings):
     }
     """External documentation for the API."""
 
+    @classmethod  # pyright: ignore
     @field_validator("SERVERS", mode="before")
-    @classmethod
     def assemble_openapi_servers(cls, value: list[dict[str, str]]) -> list[dict[str, str]]:
         """Assembles the OpenAPI servers based on the environment.
 
@@ -278,19 +276,23 @@ class OpenAPISettings(BaseSettings):
         Returns:
             The assembled OpenAPI servers.
         """
+        env_urls = {
+            "prod": "https://byte-bot.app/",
+            "test": "https://dev.byte-bot.app/",
+            "dev": "http://0.0.0.0:8000",
+        }
         environment = os.getenv("ENVIRONMENT", "dev")
+        url = os.getenv("WEB_URL", env_urls[environment])
+        description = environment.capitalize()
 
-        if environment == "prod":
-            return [
-                {
-                    "url": os.getenv("WEB_URL", "https://byte-bot.app/"),
-                    "description": "Production",
-                },
-            ]
-        if environment == "dev":
-            return [{"url": "http://0.0.0.0:8000", "description": "Local Development"}]
-
-        return value
+        return [
+            {
+                "url": url,  # type: ignore[list-item]
+                "description": f"{description}",
+            }
+            if environment in env_urls
+            else value
+        ]
 
 
 class TemplateSettings(BaseSettings):

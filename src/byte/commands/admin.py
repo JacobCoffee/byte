@@ -9,10 +9,12 @@ __all__ = ("AdminCommands", "setup")
 
 
 class AdminCommands(commands.Cog):
+    """Commands for guild admins."""
+
     def __init__(self, bot: commands.Bot) -> None:
         """Initialize cog."""
         self.bot = bot
-        self.__cog_name__ = "Admin Commands"
+        self.__cog_name__ = "Admin Commands"  # type: ignore[misc]
 
     @commands.group(name="admin")
     @is_byte_dev_or_owner()
@@ -48,6 +50,11 @@ class AdminCommands(commands.Cog):
             await self.reload_single_cog(ctx, cog)
 
     async def reload_all_cogs(self, ctx: commands.Context) -> None:
+        """Reload all cogs.
+
+        Args:
+            ctx: Context object.
+        """
         extensions = list(self.bot.extensions.keys())
         results = []
 
@@ -60,6 +67,7 @@ class AdminCommands(commands.Cog):
         await ctx.send("\n".join(results))
 
     async def reload_single_cog(self, ctx: commands.Context, cog: str, send_message: bool = True) -> str:
+        """Reload a single cog."""
         try:
             await self.bot.reload_extension(f"commands.{cog}")
             message = f"Cog `{cog}` reloaded!"

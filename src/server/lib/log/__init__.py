@@ -120,4 +120,4 @@ def get_logger(*args: Any, **kwargs: Any) -> BoundLogger:
     """
     config.configure()
     configure(default_processors)  # type: ignore[arg-type]
-    return structlog.getLogger(*args, **kwargs)  # type: ignore
+    return structlog.getLogger(*args, **kwargs)  # type: ignore[no-any-return]
