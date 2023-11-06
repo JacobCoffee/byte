@@ -141,6 +141,7 @@ exclude = [
 pythonVersion = "3.11"
 reportOptionalMemberAccess = false
 reportUnknownMemberType = false
+reportGeneralTypeIssues = false
 
 [tool.mypy]
 namespace_packages = true # discord.py
@@ -216,32 +217,76 @@ classmethod-decorators = [
 known-first-party = ["src", "tests"]
 
 [tool.ruff.per-file-ignores]
-"tests/**/*.*" = [
-    "A",
-    "ARG",
-    "B",
-    "BLE",
-    "C901",
-    "D",
-    "DTZ",
-    "EM",
-    "FBT",
-    "G",
-    "N",
-    "PGH",
-    "PIE",
-    "PLR",
-    "PLW",
-    "PTH",
-    "RSE",
-    "S",
-    "S101",
-    "SIM",
-    "TCH",
-    "TRY",
+# Tests can use magic values, assertions, and relative imports
+"**/*.*" = [
+    "ANN101",
+    "ANN401",
+    "ANN102",
+    "TD",
+    "FIX002",
+    "RUF012",  # ClassVar Annotations - # TODO: Investigate/Fix
+    "FBT001", # Boolean typed positional argument in function definition
+    "FBT002", # Boolean default positional argument in function definition
+    "FBT003", # Boolean Boolean default positional argument in function definition
+    "B008", # Do not perform function calls in argument defaults
 ]
-"docs/**/*.*" = ["S", "B", "DTZ", "A", "TCH", "ERA", "D", "RET"]
-"tools/**/*.*" = ["D", "ARG", "EM", "TRY", "G", "FBT"]
+"src/**/*.*" = ["PLR0913", "SLF001"]
+"src/lib/db/base.py" = ["E501"]
+"src/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"tests/**/*.*" = [
+    "S101",
+    "D",
+    "ARG",
+    "PGH",
+    "B",
+    "FBT",
+    "PTH",
+    "A",
+    "TCH",
+    "DTZ",
+    "TRY",
+    "EM",
+    "S",
+    "N",
+    "SIM",
+    "PLR",
+    "BLE",
+    "RSE",
+    "C901",
+    "PLW",
+    "G",
+    "PIE",
+    "RUF012",
+    "FA",
+    "ANN",
+    "SLF",
+    "PT",
+    "INP",
+    "TD",
+    "FIX",
+    "FBT",
+    "PLR0913", # too many arguments
+    "PT",
+    "PLR2004",
+    "TID252",
+    "T",
+]
+"docs/**/*.*" = [
+    "S",
+    "B",
+    "DTZ",
+    "A",
+    "TCH",
+    "ERA",
+    "D",
+    "RET",
+    "E731",
+    "RUF012",
+    "FA100",
+    "ARG001",
+]
+"docs/conf.py" = ["FIX002", "ARG001", "INP001"]
+"tools/**/*.*" = ["D", "ARG", "EM", "TRY", "G", "FBT", "INP"]
 
 [tool.git-cliff.changelog]
 header = """

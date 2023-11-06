@@ -113,6 +113,7 @@ repos:
             prometheus_client,
             "pydantic>=2",
             pydantic-extra-types,
+            pydantic-settings,
             pytest,
             pytest-asyncio,
             pytest-cov,

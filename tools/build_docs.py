@@ -1,3 +1,4 @@
+"""Builds the documentation and copies it to the output directory."""
 from __future__ import annotations
 
 import argparse
