@@ -1,5 +1,6 @@
 default_language_version:
   python: "3.11"
+default_install_hook_types: [commit-msg, pre-commit]
 repos:
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v2.4.0
@@ -26,6 +27,12 @@ repos:
     rev: v2.2.6
     hooks:
       - id: codespell
+        additional_dependencies:
+          - tomli
+        exclude: >
+          (?x)^(
+              .*\.json |.*\.svg
+          )$
   - repo: https://github.com/asottile/blacken-docs
     rev: 1.16.0
     hooks:
@@ -35,6 +42,11 @@ repos:
     hooks:
       - id: prettier
         exclude: "_templates|.git"
+  - repo: https://github.com/thibaudcolas/curlylint
+    rev: v0.13.1
+    hooks:
+      - id: curlylint
+        args: ["--format", "stylish"]
   - repo: https://github.com/python-formate/flake8-dunder-all
     rev: v0.3.0
     hooks:
