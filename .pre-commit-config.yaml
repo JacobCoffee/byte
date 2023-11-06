@@ -53,31 +53,83 @@ repos:
       - id: ensure-dunder-all
         exclude: "test*|examples*|tools"
         args: ["--use-tuple"]
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: "v1.6.1"
+  #   - repo: https://github.com/pre-commit/mirrors-mypy
+  #     rev: "v1.6.1"
+  #     hooks:
+  #       - id: mypy
+  #         exclude: "tools|docs"
+  #         additional_dependencies:
+  #           [
+  #             annotated_types,
+  #             httpx,
+  #             httpx_sse,
+  #             hypothesis,
+  #             jsbeautifier,
+  #             pydantic>=2,
+  #             pydantic-extra-types,
+  #             pytest,
+  #             pytest-lazy-fixture,
+  #             pytest-mock,
+  #             pytest_docker,
+  #             python-dotenv,
+  #             click,
+  #             rich,
+  #             rich-click,
+  #             structlog,
+  #             uvicorn,
+  #             prometheus_client,
+  #             litestar,
+  #             polyfactory,
+  #             discord-py,
+  #           ]
+  - repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.334
     hooks:
-      - id: mypy
-        exclude: "tools|docs"
+      - id: pyright
         additional_dependencies:
           [
+            advanced_alchemy,
             annotated_types,
-            httpx,
+            anyio>=3,
+            asyncpg,
+            asyncpg_stubs,
+            brotli,
+            click,
+            cryptography,
+            fast-query-parsers>=1.0.2,
+            fsspec,
+            greenlet,
+            httpx>=0.22,
             httpx_sse,
             hypothesis,
+            jinja2>=3.1.2,
             jsbeautifier,
-            pydantic>=2,
+            mako>=1.2.4,
+            msgspec>=0.18.2,
+            multidict>=6.0.2,
+            opentelemetry-instrumentation-asgi,
+            opentelemetry-sdk,
+            polyfactory>=2.6.3,
+            prometheus_client,
+            "pydantic>=2",
             pydantic-extra-types,
             pytest,
+            pytest-asyncio,
+            pytest-cov,
             pytest-lazy-fixture,
             pytest-mock,
-            pytest_docker,
+            pytest-rerunfailures,
+            pytest-timeout,
             python-dotenv,
-            click,
-            rich,
+            pyyaml,
             rich-click,
+            rich>=13.0.0,
             structlog,
-            uvicorn,
-            prometheus_client,
+            types-pytest-lazy-fixture,
+            types-pyyaml,
+            typing-extensions,
+            "uvicorn[standard]",
+            uvloop>=0.18.0,
             litestar,
             polyfactory,
             discord-py,

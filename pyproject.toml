@@ -54,6 +54,7 @@ build-backend = "hatchling.build"
 path = 'src/__metadata__.py'
 
 
+
 [tool.pdm.scripts]
 lint = "pre-commit run --all-files"
 test = "pytest"
@@ -92,6 +93,7 @@ lint = [
     "pytailwindcss>=0.2.0",
     "sourcery>=1.6.0",
     "pre-commit>=3.3.3",
+    "pyright>=1.1.334",
 ]
 
 [project.scripts]
@@ -128,6 +130,17 @@ filterwarnings = [
     "ignore::DeprecationWarning:pkg_resources.*",
     "ignore::DeprecationWarning:sphinxcontrib",
 ]
+
+[tool.pyright]
+include = ["src/", "tests"]
+disableBytesTypePromotions = true
+exclude = [
+  "tools",
+  "docs",
+]
+pythonVersion = "3.11"
+reportOptionalMemberAccess = false
+reportUnknownMemberType = false
 
 [tool.mypy]
 namespace_packages = true # discord.py
