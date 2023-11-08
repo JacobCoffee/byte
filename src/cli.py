@@ -36,6 +36,14 @@ def bot() -> None:
         sys.exit()
 
 
+@click.group(name="run-bot", invoke_without_command=True, help="Starts the bot.")
+def run_bot() -> None:
+    """Run the bot."""
+    bot_process = multiprocessing.Process(target=bot)
+    bot_process.start()
+    bot_process.join()
+
+
 def web(
     host: str,
     port: int | None,
@@ -78,14 +86,6 @@ def web(
             process.terminate()
         logger.info("🖥️ Server Shutdown complete")
         sys.exit()
-
-
-@click.group(name="run-bot", invoke_without_command=True, help="Starts the bot.")
-def run_bot() -> None:
-    """Run the bot."""
-    bot_process = multiprocessing.Process(target=bot)
-    bot_process.start()
-    bot_process.join()
 
 
 @click.group(name="run-web", invoke_without_command=True, help="Starts the application server.")

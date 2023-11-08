@@ -1,32 +1,34 @@
-"""Commands for bot admins."""
-from __future__ import annotations
+"""Plugins for admins.
 
+.. todo:: add an unload cog command.
+"""
 from discord.ext import commands
+from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
-from src.byte.checks import is_byte_dev_or_owner
+from src.byte.lib.utils import is_byte_dev_or_owner
 
 __all__ = ("AdminCommands", "setup")
 
 
-class AdminCommands(commands.Cog):
-    """Commands for guild admins."""
+class AdminCommands(Cog):
+    """Admin command cog."""
 
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: Bot) -> None:
         """Initialize cog."""
         self.bot = bot
         self.__cog_name__ = "Admin Commands"  # type: ignore[misc]
 
-    @commands.group(name="admin")
+    @group(name="admin")
     @is_byte_dev_or_owner()
-    async def admin(self, ctx: commands.Context) -> None:
+    async def admin(self, ctx: Context) -> None:
         """Commands for bot admins."""
         if ctx.invoked_subcommand is None:
             await ctx.send("Invalid admin command passed...")
             await ctx.send_help(ctx.command)
 
-    @commands.command(name="list-cogs", help="Lists all loaded cogs.", aliases=["lc"], hidden=True)
-    @commands.is_owner()
-    async def list_cogs(self, ctx: commands.Context) -> None:
+    @command(name="list-cogs", help="Lists all loaded cogs.", aliases=["lc"], hidden=True)
+    @is_owner()
+    async def list_cogs(self, ctx: Context) -> None:
         """Lists all loaded cogs.
 
         Args:
@@ -35,9 +37,9 @@ class AdminCommands(commands.Cog):
         cogs = [cog.split(".")[-1] for cog in self.bot.extensions]
         await ctx.send(f"Loaded cogs: {', '.join(cogs)}")
 
-    @commands.command(name="reload", help="Reloads a cog.", aliases=["rl"], hidden=True)
-    @commands.is_owner()
-    async def reload(self, ctx: commands.Context, cog: str = "all") -> None:
+    @command(name="reload", help="Reloads a cog.", aliases=["rl"], hidden=True)
+    @is_owner()
+    async def reload(self, ctx: Context, cog: str = "all") -> None:
         """Reloads a cog or all cogs if specified.
 
         Args:
@@ -49,27 +51,24 @@ class AdminCommands(commands.Cog):
         else:
             await self.reload_single_cog(ctx, cog)
 
-    async def reload_all_cogs(self, ctx: commands.Context) -> None:
+    async def reload_all_cogs(self, ctx: Context) -> None:
         """Reload all cogs.
 
         Args:
             ctx: Context object.
         """
-        extensions = list(self.bot.extensions.keys())
         results = []
-
-        for extension in extensions:
-            extension_name = extension[9:]
-            result = await self.reload_single_cog(ctx, extension_name, send_message=False)
+        for extension in list(self.bot.extensions):
+            cog_name = extension.split(".")[-1]
+            result = await self.reload_single_cog(ctx, cog_name, send_message=False)
             results.append(result)
-
         results.append("All cogs reloaded!")
         await ctx.send("\n".join(results))
 
-    async def reload_single_cog(self, ctx: commands.Context, cog: str, send_message: bool = True) -> str:
+    async def reload_single_cog(self, ctx: Context, cog: str, send_message: bool = True) -> str:
         """Reload a single cog."""
         try:
-            await self.bot.reload_extension(f"commands.{cog}")
+            await self.bot.reload_extension(f"plugins.{cog}")
             message = f"Cog `{cog}` reloaded!"
         except (commands.ExtensionNotLoaded, commands.ExtensionNotFound) as e:
             message = f"Error with cog `{cog}`: {e!s}"
@@ -80,7 +79,7 @@ class AdminCommands(commands.Cog):
         return message
 
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot: Bot) -> None:
     """Add cog to bot.
 
     Args:
