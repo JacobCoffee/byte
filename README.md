@@ -21,7 +21,7 @@ The Discord bot is built on the [Discord.py v2][discordpy] library.
 
 ## Web
 
-The web service is a [Litestar][litestar] application. It is utilizing Jinja2[jinja] templating, TailwindCSS[tailwind],
+The web service is a [Litestar][litestar] application. It is utilizing [Jinja2][jinja] templating, [TailwindCSS][tailwind],
 [DaisyUI][daisy], and [Feather icons][feather] for the front end, and the backend is using the Litestar-provided
 utilities for routing, middleware, and more.
 
