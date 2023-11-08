@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 from litestar.contrib.jinja import JinjaTemplateEngine
 from litestar.data_extractors import RequestExtractorField, ResponseExtractorField  # noqa: TCH002
 from pydantic import ValidationError, field_validator
-from pydantic.types import SecretBytes, SecretStr
+from pydantic.types import SecretBytes
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from src import utils
@@ -24,26 +24,6 @@ DEFAULT_MODULE_NAME = "src"
 BASE_DIR: Final = utils.module_to_os_path(DEFAULT_MODULE_NAME)
 STATIC_DIR = Path(BASE_DIR / "server" / "domain" / "web" / "resources")
 TEMPLATES_DIR = Path(BASE_DIR / "server" / "domain" / "web" / "templates")
-COMMANDS_DIR = utils.module_to_os_path("src.byte.commands")
-
-
-class DiscordSettings(BaseSettings):
-    """Discord Settings."""
-
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="DISCORD_")
-
-    API_TOKEN: SecretStr
-    """Discord API token."""
-    COMMAND_PREFIX: str = "!"
-    """Command prefix for bot commands."""
-    DEV_GUILD_ID: int
-    """Discord Guild ID for development."""
-    DEV_USER_ID: int
-    """Discord User ID for development."""
-    COMMANDS_LOC: str = "src.byte.commands"
-    """Base Path to commands directory."""
-    COMMANDS_DIRS: list[str] = [f"{COMMANDS_DIR}"]
-    """Directories to search for commands."""
 
 
 class ServerSettings(BaseSettings):
@@ -265,7 +245,7 @@ class OpenAPISettings(BaseSettings):
     }
     """External documentation for the API."""
 
-    @classmethod  # pyright: ignore
+    @classmethod
     @field_validator("SERVERS", mode="before")
     def assemble_openapi_servers(cls, value: list[dict[str, str]]) -> list[dict[str, str]]:
         """Assembles the OpenAPI servers based on the environment.
@@ -318,7 +298,6 @@ class HTTPClientSettings(BaseSettings):
 # noinspection PyShadowingNames
 def load_settings() -> (
     tuple[
-        DiscordSettings,
         ProjectSettings,
         APISettings,
         OpenAPISettings,
@@ -339,7 +318,6 @@ def load_settings() -> (
         server: ServerSettings = ServerSettings.model_validate(
             {"HOST": "0.0.0.0", "RELOAD_DIRS": [str(BASE_DIR)]},  # noqa: S104
         )
-        discord: DiscordSettings = DiscordSettings.model_validate({})
         project: ProjectSettings = ProjectSettings.model_validate({})
         api: APISettings = APISettings.model_validate({})
         openapi: OpenAPISettings = OpenAPISettings.model_validate({})
@@ -351,7 +329,6 @@ def load_settings() -> (
         print(f"Could not load settings. Error: {error!r}")  # noqa: T201
         raise error from error
     return (
-        discord,
         project,
         api,
         openapi,
@@ -363,7 +340,6 @@ def load_settings() -> (
 
 
 (
-    discord,
     project,
     api,
     openapi,

@@ -1,6 +1,9 @@
 """Byte Bot Bot."""
 from __future__ import annotations
 
-from src.byte import bot, checks, commands
+from src.byte import bot, lib
+from src.byte.lib.logging import setup_logging
 
-__all__ = ["bot", "checks", "commands"]
+__all__ = ["bot", "lib"]
+
+setup_logging()

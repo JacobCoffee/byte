@@ -1,23 +1,85 @@
-"""Discord Bot."""
+"""Byte Bot."""
 from __future__ import annotations
 
 import contextlib
 from pathlib import Path
 
 import discord
+from anyio import run
+from discord import Activity, Intents
 from discord.ext import commands
-from discord.ext.commands import MemberNotFound
+from discord.ext.commands import Bot
 from dotenv import load_dotenv
 
-from src.server.lib import settings
+from src.byte.lib import settings
+from src.byte.lib.logging import get_logger
 
-__all__ = ("run",)
+__all__ = [
+    "Byte",
+    "run_bot",
+]
 
+logger = get_logger()
 load_dotenv()
 
 
-def run() -> None:
-    """Run bot."""
+class Byte(Bot):
+    """Byte Bot Base Class."""
+
+    def __init__(self, command_prefix: str, intents: Intents, activity: Activity) -> None:
+        """Initialize the bot.
+
+        Args:
+            command_prefix (str): Command prefix for the bot.
+            intents (discord.Intents): Intents for the bot.
+            activity (discord.Activity): Activity for the bot.
+        """
+        super().__init__(command_prefix=command_prefix, intents=intents, activity=activity)
+
+    async def setup_hook(self) -> None:
+        """Any setup we need can be here."""
+        dev_guild = discord.Object(id=settings.discord.DEV_GUILD_ID)
+        self.tree.copy_global_to(guild=dev_guild)
+        await self.tree.sync(guild=dev_guild)
+        await self.load_cogs()
+
+    async def load_cogs(self) -> None:
+        """Load cogs."""
+        cogs = []
+        for plugins_dir in settings.discord.PLUGINS_DIRS:
+            path = Path(plugins_dir)
+            cogs.extend(path.glob("*.py"))
+
+        cogs = [cog for cog in cogs if cog.stem != "__init__"]
+        cogs_import_path = [f"{cog.parent.name}.{cog.stem}" for cog in cogs]
+
+        for cog in cogs_import_path:
+            with contextlib.suppress(commands.ExtensionAlreadyLoaded):
+                await self.load_extension(cog)
+
+    async def on_ready(self) -> None:
+        """Handle bot ready event."""
+        logger.info("%s has connected to Discord!", self.user)
+
+    async def on_message(self, message: discord.Message) -> None:
+        """Handle messages.
+
+        Args:
+            message: Message object.
+        """
+        await self.process_commands(message)
+
+    async def on_command_error(self, ctx: commands.Context, error: commands.CommandError) -> None:
+        """Handle command errors.
+
+        Args:
+            ctx: Context object.
+            error: Error object.
+        """
+
+
+def run_bot() -> None:
+    """Run the bot."""
     intents = discord.Intents.default()
     intents.message_content = True
     intents.members = True
@@ -26,97 +88,16 @@ def run() -> None:
         type=discord.ActivityType.custom,
         state="Serving Developers",
         details="!help",
-        url="https://byte-bot.app/",
+        url=settings.discord.PRESENCE_URL,
     )
-    bot = commands.Bot(command_prefix=settings.discord.COMMAND_PREFIX, intents=intents, activity=presence)
+    bot = Byte(command_prefix=settings.discord.COMMAND_PREFIX, intents=intents, activity=presence)
 
-    @bot.event
-    async def on_ready() -> None:
-        """Event handler for a bots ready state."""
-        print(f"{bot.user} has connected to Discord!")
-        cogs: list[Path] = []
-        for command_dir in map(Path, settings.discord.COMMANDS_DIRS):
-            cogs.extend(command_dir.glob("*.py"))
+    async def start_bot() -> None:
+        """Start the bot."""
+        await bot.start(settings.discord.TOKEN)
 
-        cogs = [cog for cog in cogs if cog.stem != "__init__"]
-        cogs_import_path = [f"{cog.parent.name}.{cog.stem}" for cog in cogs]
-
-        for cog in cogs_import_path:
-            with contextlib.suppress(commands.ExtensionAlreadyLoaded):
-                await bot.load_extension(cog)
-        print(f"Bot is ready with {len(cogs_import_path)} cogs added: {cogs_import_path}")
-        print(f"Discord Settings: {settings.discord.__dict__}")
-        print(settings.discord.DEV_GUILD_ID)
-        bot.tree.copy_global_to(guild=discord.Object(id=settings.discord.DEV_GUILD_ID))
-        await bot.tree.sync(guild=discord.Object(id=settings.discord.DEV_GUILD_ID))
-
-    @bot.event
-    async def on_message(message: discord.Message) -> None:
-        """Event handler for messages.
-
-        Args:
-            message: Message object.
-        """
-        await bot.process_commands(message)
-
-    @bot.event
-    async def on_command_error(ctx: commands.Context, error: commands.CommandError) -> None:
-        """Global error handler.
-
-        Args:
-            ctx: Context object.
-            error: Error object.
-        """
-        if isinstance(error, commands.CommandNotFound):
-            await ctx.send(f"Oh no! I couldn't find the command `{ctx.invoked_with}` :cry:")
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(f"It looks like you forgot to pass in `{error.param.name}`!")
-        elif isinstance(error, MemberNotFound):
-            await ctx.send(f"Well shit... I couldn't find the user `{error.argument}`... maybe they left the server?")
-        else:
-            await ctx.send(f"Something bad happened! Error: {error!r}")
-            raise error
-
-    @bot.event
-    async def on_thread_create(thread: discord.Thread) -> None:
-        if thread.parent.name == "help":
-            reply = (
-                f"At your assistance, {thread.owner.mention}.\n"
-                f"Make sure you include an [MCVE](https://stackoverflow.com/help/minimal-reproducible-example) in "
-                f"your post if relevant.\n"
-                f"When you are done you can tag your post as ***✅ Solved*** or type ``!solve``!\n"
-                f"If no one responds within a reasonable amount of time, please ping `@Member`."
-            )
-            await thread.send(reply)
-        if thread.parent.name == "forum":
-            reply = f"Thanks for posting, {thread.owner.mention}!"
-            await thread.send(reply)
-
-    @bot.tree.context_menu(name="Get user data")
-    async def get_user_data(interaction: discord.Interaction, member: discord.Member) -> None:
-        """Get user data."""
-        embed = discord.Embed(color=member.color, timestamp=interaction.created_at)
-        embed.set_author(name=f"User Info - {member}")
-        embed.set_thumbnail(url=member.avatar.url)
-        embed.set_footer(text=f"Requested by {interaction.user}", icon_url=member.avatar.url)
-        embed.add_field(name="ID:", value=member.id)
-        embed.add_field(name="Guild name:", value=interaction.guild.name)
-        embed.add_field(name="Nickname:", value=member.display_name)
-        embed.add_field(name="Created at:", value=member.created_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
-        embed.add_field(name="Joined at:", value=member.joined_at.strftime("%a, %#d %B %Y, %I:%M %p UTC"))
-        embed.add_field(name="Bot?", value=member.bot)
-        embed.add_field(name="Top role:", value=member.top_role.mention)
-        embed.add_field(name="Status:", value=member.status)
-        embed.add_field(name="Activity:", value=member.activity)
-        await interaction.response.send_message(embed=embed, ephemeral=True)
-
-    @bot.tree.command(name="message")
-    async def send_message(interaction: discord.Interaction, message: str) -> None:
-        """Send a message."""
-        await interaction.response.send_message(message)
-
-    bot.run(settings.discord.API_TOKEN.get_secret_value())
+    run(start_bot)
 
 
 if __name__ == "__main__":
-    run()
+    run_bot()
