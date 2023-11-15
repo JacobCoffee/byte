@@ -12,6 +12,11 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+    env:
+      DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      DISCORD_DEV_GUILD_ID: ${{ secrets.DISCORD_DEV_GUILD_ID }}
+      DISCORD_DEV_USER_ID: ${{ secrets.DISCORD_DEV_USER_ID }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
       - uses: actions/checkout@v4
 
