@@ -13,9 +13,12 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     env:
-          TOKEN: ${{ secrets.DISCORD_TOKEN }}
-          DEV_GUILD_ID: ${{ secrets.DISCORD_DEV_GUILD_ID }}
-          DEV_USER_ID: ${{ secrets.DISCORD_DEV_USER_ID }}
+      TOKEN: "123"
+      DEV_GUILD_ID: "456"
+      DEV_USER_ID: "789"
+      DISCORD_TOKEN: "123"
+      DISCORD_DEV_GUILD_ID: "456"
+      DISCORD_DEV_USER_ID: "789"
     steps:
       - uses: actions/checkout@v4
 
