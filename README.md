@@ -1,6 +1,9 @@
 # Byte Bot
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > [!WARNING]\
@@ -42,12 +45,15 @@ or set up your environment using PDM[pdm].
 
 All contributions are welcome! Please see [CONTRIBUTING](./CONTRIBUTING.rst) for more information.
 
-### UI Examples
+<details>
+<summary>### UI Examples</summary>
 
 ![Home](docs/images/home.png)
 ![Dark Home](docs/images/dark-home.png)
 ![Dashboard](docs/images/dashboard.png)
 ![API - Elements](docs/images/api-elements.png)
+
+</details>
 
 [litestar]: https://litestar.dev
 [discordpy]: https://discordpy.readthedocs.io/en/stable/
