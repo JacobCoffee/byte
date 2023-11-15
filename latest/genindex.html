@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Index - Docs</title>
+    <link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="shortcut icon" href="_static/badge.svg"/><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=aecf457f" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=28c32440" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=ee381b95" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=80d31e7b" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:56px;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));--sy-c-link-weak:rgba(var(--sy-rc-theme), 0.86);
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+  }
+}
+html.light {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+html.dark {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    </head>
+<body><div class="document"><div class="announcement">
+    <div class="announcement-inner">
+      <p>This documentation is currently under development.</p>
+      <button class="announcement-close" aria-label="Close announcement">
+        <i class="i-icon close"></i>
+      </button>
+    </div>
+  </div><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand mr-4" href="/">
+      <img class="light-logo" src="_static/badge.svg" alt="byte-bot" height="28" />
+      <img class="dark-logo" src="_static/badge.svg" alt="byte-bot" height="28" />
+      <strong>byte-bot</strong>
+    </a>
+    <div class="sy-head-links" id="NavLinks">
+      <nav class="sy-head-nav">
+
+<ul><li class="link">
+          <a href="https://byte-bot.app/"><span>Dashboard</span><i class="i-icon external-link"></i></a>
+        </li><li class="link">
+          <a href="https://github.com/sponsors/JacobCoffee"><span>Sponsor me</span><i class="i-icon external-link"></i></a>
+        </li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+        
+        
+        <div class="sy-head-social flex items-center">
+            <a class="flex items-center" href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub">
+              <i class="i-icon github"></i>
+            </a>
+            <a class="flex items-center" href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord">
+              <i class="i-icon discord"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden">
+      <button class="js-theme theme-switch flex items-center" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div><div class="sy-container mx-auto body">
+    <main class="sy-content mx-auto pt-12 px-6 xl:px-12 break-words">
+      <article class="yue" role="main">
+        
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#Symbols"><strong>Symbols</strong></a>
+ | <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ 
+</div>
+<h2 id="Symbols">Symbols</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    --debug
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-d">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-d">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --host
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-H">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-H">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --http-workers
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-W">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-W">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --port
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-p">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-p">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --reload
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-r">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-r">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    --verbose
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-v">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-v">run_web command line option</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    -d
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-d">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-d">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -H
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-H">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-H">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -p
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-p">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-p">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -r
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-r">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-r">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -v
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-v">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-v">run_web command line option</a>
+</li>
+      </ul></li>
+      <li>
+    -W
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-W">run_all command line option</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-W">run_web command line option</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/bot.html#src.byte.bot.Byte.__init__">__init__() (src.byte.bot.Byte method)</a>
+
+      <ul>
+        <li><a href="byte/api/plugins/admin.html#src.byte.plugins.admin.AdminCommands.__init__">(src.byte.plugins.admin.AdminCommands method)</a>
+</li>
+        <li><a href="byte/api/plugins/github.html#src.byte.plugins.events.Events.__init__">(src.byte.plugins.events.Events method)</a>
+</li>
+        <li><a href="byte/api/plugins/guild.html#src.byte.plugins.forums.ForumCommands.__init__">(src.byte.plugins.forums.ForumCommands method)</a>
+</li>
+        <li><a href="byte/api/plugins/testing.html#src.byte.plugins.testing.TestCog.__init__">(src.byte.plugins.testing.TestCog method)</a>
+</li>
+        <li><a href="byte/api/views/forums.html#src.byte.views.forums.HelpThreadView.__init__">(src.byte.views.forums.HelpThreadView method)</a>
+</li>
+        <li><a href="web/api/lib/exceptions.html#src.server.lib.exceptions.MissingDependencyError.__init__">(src.server.lib.exceptions.MissingDependencyError method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/metadata.html#src.__metadata__.__project__">__project__ (in module src.__metadata__)</a>
+</li>
+      <li><a href="web/api/metadata.html#src.__metadata__.__version__">__version__ (in module src.__metadata__)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/plugins/admin.html#src.byte.plugins.admin.AdminCommands">AdminCommands (class in src.byte.plugins.admin)</a>
+</li>
+      <li><a href="web/api/lib/exceptions.html#src.server.lib.exceptions.after_exception_hook_handler">after_exception_hook_handler() (in module src.server.lib.exceptions)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.after_request">after_request (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.after_request">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.after_response">after_response (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.after_response">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/lib/exceptions.html#src.server.lib.exceptions.ApplicationError">ApplicationError</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.assemble_command_prefix">assemble_command_prefix() (src.byte.lib.settings.DiscordSettings class method)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.assemble_presence_url">assemble_presence_url() (src.byte.lib.settings.DiscordSettings class method)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.LogSettings.ASYNCIO_LEVEL">ASYNCIO_LEVEL (src.byte.lib.settings.LogSettings attribute)</a>
+</li>
+      <li><a href="web/api/lib/exceptions.html#src.server.lib.exceptions.AuthorizationError">AuthorizationError</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.before_request">before_request (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.before_request">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/bot.html#src.byte.bot.Byte">Byte (class in src.byte.bot)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/utils.html#src.utils.camel_case">camel_case() (in module src.utils)</a>
+</li>
+      <li><a href="web/api/utils.html#src.utils.case_insensitive_string_compare">case_insensitive_string_compare() (in module src.utils)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.COMMAND_PREFIX">COMMAND_PREFIX (src.byte.lib.settings.DiscordSettings attribute)</a>
+</li>
+      <li><a href="web/api/lib/cors.html#src.server.lib.cors.config">config (in module src.server.lib.cors)</a>
+
+      <ul>
+        <li><a href="web/api/lib/static_files.html#src.server.lib.static_files.config">(in module src.server.lib.static_files)</a>
+</li>
+        <li><a href="web/api/lib/template.html#src.server.lib.template.config">(in module src.server.lib.template)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.convert_camel_to_snake_case">convert_camel_to_snake_case() (in module src.server.lib.serialization)</a>
+</li>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.convert_datetime_to_gmt">convert_datetime_to_gmt() (in module src.server.lib.serialization)</a>
+</li>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.convert_string_to_camel_case">convert_string_to_camel_case() (in module src.server.lib.serialization)</a>
+</li>
+      <li><a href="web/api/app.html#src.app.create_app">create_app() (in module src.app)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/utils.html#src.utils.dataclass_as_dict_shallow">dataclass_as_dict_shallow() (in module src.utils)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.ProjectSettings.DEBUG">DEBUG (src.byte.lib.settings.ProjectSettings attribute)</a>
+</li>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.UUIDEncoder.default">default() (src.server.lib.serialization.UUIDEncoder method)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.dependencies">dependencies (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.dependencies">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.DEV_GUILD_ID">DEV_GUILD_ID (src.byte.lib.settings.DiscordSettings attribute)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.DEV_USER_ID">DEV_USER_ID (src.byte.lib.settings.DiscordSettings attribute)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.LogSettings.DISCORD_LEVEL">DISCORD_LEVEL (src.byte.lib.settings.LogSettings attribute)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.dto">dto (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.dto">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.ProjectSettings.ENVIRONMENT">ENVIRONMENT (src.byte.lib.settings.ProjectSettings attribute)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.etag">etag (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.etag">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/plugins/github.html#src.byte.plugins.events.Events">Events (class in src.byte.plugins.events)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.exception_handlers">exception_handlers (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.exception_handlers">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.LogSettings.FILE">FILE (src.byte.lib.settings.LogSettings attribute)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.LogSettings.FORMAT">FORMAT (src.byte.lib.settings.LogSettings attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/plugins/guild.html#src.byte.plugins.forums.ForumCommands">ForumCommands (class in src.byte.plugins.forums)</a>
+</li>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.from_json">from_json() (in module src.server.lib.serialization)</a>
+</li>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.from_msgpack">from_msgpack() (in module src.server.lib.serialization)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/logging.html#src.byte.lib.logging.get_logger">get_logger() (in module src.byte.lib.logging)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.guards">guards (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.guards">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/lib/exceptions.html#src.server.lib.exceptions.HealthCheckConfigurationError">HealthCheckConfigurationError</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/views/forums.html#src.byte.views.forums.HelpThreadView">HelpThreadView (class in src.byte.views.forums)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/utils.html#src.utils.import_string">import_string() (in module src.utils)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.include_in_schema">include_in_schema (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.include_in_schema">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/urls.html#src.server.domain.urls.INDEX">INDEX (in module src.server.domain.urls)</a>
+</li>
+      <li><a href="byte/api/views/forums.html#src.byte.views.forums.HelpThreadView.interaction_check">interaction_check() (src.byte.views.forums.HelpThreadView method)</a>
+</li>
+      <li><a href="byte/api/lib/utils.html#src.byte.lib.utils.is_byte_dev_or_owner">is_byte_dev_or_owner() (in module src.byte.lib.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.LogSettings.LEVEL">LEVEL (src.byte.lib.settings.LogSettings attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/bot.html#src.byte.bot.Byte.load_cogs">load_cogs() (src.byte.bot.Byte method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.middleware">middleware (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.middleware">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/lib/exceptions.html#src.server.lib.exceptions.MissingDependencyError">MissingDependencyError</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="web/api/metadata.html#module-src.__metadata__">src.__metadata__</a>
+</li>
+        <li><a href="web/api/app.html#module-src.app">src.app</a>
+</li>
+        <li><a href="byte/api/bot.html#module-src.byte.bot">src.byte.bot</a>
+</li>
+        <li><a href="byte/api/lib/common.html#module-src.byte.lib.common">src.byte.lib.common</a>
+</li>
+        <li><a href="byte/api/lib/logging.html#module-src.byte.lib.logging">src.byte.lib.logging</a>
+</li>
+        <li><a href="byte/api/lib/settings.html#module-src.byte.lib.settings">src.byte.lib.settings</a>
+</li>
+        <li><a href="byte/api/lib/utils.html#module-src.byte.lib.utils">src.byte.lib.utils</a>
+</li>
+        <li><a href="byte/api/plugins/admin.html#module-src.byte.plugins.admin">src.byte.plugins.admin</a>
+</li>
+        <li><a href="byte/api/plugins/github.html#module-src.byte.plugins.events">src.byte.plugins.events</a>
+</li>
+        <li><a href="byte/api/plugins/guild.html#module-src.byte.plugins.forums">src.byte.plugins.forums</a>
+</li>
+        <li><a href="byte/api/plugins/testing.html#module-src.byte.plugins.testing">src.byte.plugins.testing</a>
+</li>
+        <li><a href="byte/api/views/forums.html#module-src.byte.views.forums">src.byte.views.forums</a>
+</li>
+        <li><a href="web/api/domain/init.html#module-src.server.domain.__init__">src.server.domain.__init__</a>
+</li>
+        <li><a href="web/api/domain/system/controllers.html#module-src.server.domain.system.controllers">src.server.domain.system.controllers</a>
+</li>
+        <li><a href="web/api/domain/urls.html#module-src.server.domain.urls">src.server.domain.urls</a>
+</li>
+        <li><a href="web/api/domain/web/controllers.html#module-src.server.domain.web.controllers.web">src.server.domain.web.controllers.web</a>
+</li>
+        <li><a href="web/api/lib/cors.html#module-src.server.lib.cors">src.server.lib.cors</a>
+</li>
+        <li><a href="web/api/lib/exceptions.html#module-src.server.lib.exceptions">src.server.lib.exceptions</a>
+</li>
+        <li><a href="web/api/lib/openapi.html#module-src.server.lib.openapi">src.server.lib.openapi</a>
+</li>
+        <li><a href="web/api/lib/serialization.html#module-src.server.lib.serialization">src.server.lib.serialization</a>
+</li>
+        <li><a href="web/api/lib/settings.html#module-src.server.lib.settings">src.server.lib.settings</a>
+</li>
+        <li><a href="web/api/lib/static_files.html#module-src.server.lib.static_files">src.server.lib.static_files</a>
+</li>
+        <li><a href="web/api/lib/template.html#module-src.server.lib.template">src.server.lib.template</a>
+</li>
+        <li><a href="web/api/utils.html#module-src.utils">src.utils</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/utils.html#src.utils.module_to_os_path">module_to_os_path() (in module src.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/bot.html#src.byte.bot.Byte.on_command_error">on_command_error() (src.byte.bot.Byte method)</a>
+</li>
+      <li><a href="byte/api/bot.html#src.byte.bot.Byte.on_message">on_message() (src.byte.bot.Byte method)</a>
+</li>
+      <li><a href="byte/api/bot.html#src.byte.bot.Byte.on_ready">on_ready() (src.byte.bot.Byte method)</a>
+</li>
+      <li><a href="byte/api/plugins/github.html#src.byte.plugins.events.Events.on_thread_create">on_thread_create() (src.byte.plugins.events.Events method)</a>
+</li>
+      <li><a href="web/api/domain/urls.html#src.server.domain.urls.OPENAPI_SCHEMA">OPENAPI_SCHEMA (in module src.server.domain.urls)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.opt">opt (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.opt">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController">OverridenController (class in src.server.lib.openapi)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.owner">owner (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.owner">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.parameters">parameters (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.parameters">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.path">path (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.path">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.PLUGINS_DIRS">PLUGINS_DIRS (src.byte.lib.settings.DiscordSettings attribute)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.PLUGINS_LOC">PLUGINS_LOC (src.byte.lib.settings.DiscordSettings attribute)</a>
+</li>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.PRESENCE_URL">PRESENCE_URL (src.byte.lib.settings.DiscordSettings attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/plugins/admin.html#src.byte.plugins.admin.AdminCommands.reload_all_cogs">reload_all_cogs() (src.byte.plugins.admin.AdminCommands method)</a>
+</li>
+      <li><a href="byte/api/plugins/admin.html#src.byte.plugins.admin.AdminCommands.reload_single_cog">reload_single_cog() (src.byte.plugins.admin.AdminCommands method)</a>
+</li>
+      <li><a href="byte/api/views/forums.html#src.byte.views.forums.HelpThreadView.remove_button_callback">remove_button_callback() (src.byte.views.forums.HelpThreadView method)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.response_class">response_class (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.response_class">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.response_cookies">response_cookies (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.response_cookies">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.response_headers">response_headers (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.response_headers">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.return_dto">return_dto (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.return_dto">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/init.html#src.server.domain.__init__.routes">routes (in module src.server.domain.__init__)</a>
+</li>
+      <li>
+    run_all command line option
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_all-d">--debug</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-H">--host</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-W">--http-workers</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-p">--port</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-r">--reload</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-v">--verbose</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-d">-d</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-H">-H</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-p">-p</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-r">-r</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-v">-v</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_all-W">-W</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/bot.html#src.byte.bot.run_bot">run_bot() (in module src.byte.bot)</a>
+</li>
+      <li>
+    run_web command line option
+
+      <ul>
+        <li><a href="web/api/cli.html#cmdoption-run_web-d">--debug</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-H">--host</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-W">--http-workers</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-p">--port</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-r">--reload</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-v">--verbose</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-d">-d</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-H">-H</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-p">-p</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-r">-r</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-v">-v</a>
+</li>
+        <li><a href="web/api/cli.html#cmdoption-run_web-W">-W</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.security">security (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.security">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="byte/api/plugins/admin.html#src.byte.plugins.admin.setup">setup() (in module src.byte.plugins.admin)</a>
+
+      <ul>
+        <li><a href="byte/api/plugins/github.html#src.byte.plugins.events.setup">(in module src.byte.plugins.events)</a>
+</li>
+        <li><a href="byte/api/plugins/guild.html#src.byte.plugins.forums.setup">(in module src.byte.plugins.forums)</a>
+</li>
+        <li><a href="byte/api/plugins/testing.html#src.byte.plugins.testing.setup">(in module src.byte.plugins.testing)</a>
+</li>
+      </ul></li>
+      <li><a href="byte/api/bot.html#src.byte.bot.Byte.setup_hook">setup_hook() (src.byte.bot.Byte method)</a>
+</li>
+      <li><a href="byte/api/lib/logging.html#src.byte.lib.logging.setup_logging">setup_logging() (in module src.byte.lib.logging)</a>
+</li>
+      <li><a href="web/api/domain/init.html#src.server.domain.__init__.signature_namespace">signature_namespace (in module src.server.domain.__init__)</a>
+
+      <ul>
+        <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.signature_namespace">(src.server.domain.web.controllers.web.WebController attribute)</a>
+</li>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.signature_namespace">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/urls.html#src.server.domain.urls.SITE_ROOT">SITE_ROOT (in module src.server.domain.urls)</a>
+</li>
+      <li><a href="web/api/utils.html#src.utils.slugify">slugify() (in module src.utils)</a>
+</li>
+      <li><a href="byte/api/views/forums.html#src.byte.views.forums.HelpThreadView.solve_button_callback">solve_button_callback() (src.byte.views.forums.HelpThreadView method)</a>
+</li>
+      <li>
+    src.__metadata__
+
+      <ul>
+        <li><a href="web/api/metadata.html#module-src.__metadata__">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.app
+
+      <ul>
+        <li><a href="web/api/app.html#module-src.app">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.bot
+
+      <ul>
+        <li><a href="byte/api/bot.html#module-src.byte.bot">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.lib.common
+
+      <ul>
+        <li><a href="byte/api/lib/common.html#module-src.byte.lib.common">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.lib.logging
+
+      <ul>
+        <li><a href="byte/api/lib/logging.html#module-src.byte.lib.logging">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.lib.settings
+
+      <ul>
+        <li><a href="byte/api/lib/settings.html#module-src.byte.lib.settings">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.lib.utils
+
+      <ul>
+        <li><a href="byte/api/lib/utils.html#module-src.byte.lib.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.plugins.admin
+
+      <ul>
+        <li><a href="byte/api/plugins/admin.html#module-src.byte.plugins.admin">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.plugins.events
+
+      <ul>
+        <li><a href="byte/api/plugins/github.html#module-src.byte.plugins.events">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    src.byte.plugins.forums
+
+      <ul>
+        <li><a href="byte/api/plugins/guild.html#module-src.byte.plugins.forums">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.plugins.testing
+
+      <ul>
+        <li><a href="byte/api/plugins/testing.html#module-src.byte.plugins.testing">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.byte.views.forums
+
+      <ul>
+        <li><a href="byte/api/views/forums.html#module-src.byte.views.forums">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.domain.__init__
+
+      <ul>
+        <li><a href="web/api/domain/init.html#module-src.server.domain.__init__">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.domain.system.controllers
+
+      <ul>
+        <li><a href="web/api/domain/system/controllers.html#module-src.server.domain.system.controllers">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.domain.urls
+
+      <ul>
+        <li><a href="web/api/domain/urls.html#module-src.server.domain.urls">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.domain.web.controllers.web
+
+      <ul>
+        <li><a href="web/api/domain/web/controllers.html#module-src.server.domain.web.controllers.web">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.lib.cors
+
+      <ul>
+        <li><a href="web/api/lib/cors.html#module-src.server.lib.cors">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.lib.exceptions
+
+      <ul>
+        <li><a href="web/api/lib/exceptions.html#module-src.server.lib.exceptions">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.lib.openapi
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#module-src.server.lib.openapi">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.lib.serialization
+
+      <ul>
+        <li><a href="web/api/lib/serialization.html#module-src.server.lib.serialization">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.lib.settings
+
+      <ul>
+        <li><a href="web/api/lib/settings.html#module-src.server.lib.settings">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.lib.static_files
+
+      <ul>
+        <li><a href="web/api/lib/static_files.html#module-src.server.lib.static_files">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.server.lib.template
+
+      <ul>
+        <li><a href="web/api/lib/template.html#module-src.server.lib.template">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.utils
+
+      <ul>
+        <li><a href="web/api/utils.html#module-src.utils">module</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/urls.html#src.server.domain.urls.SYSTEM_HEALTH">SYSTEM_HEALTH (in module src.server.domain.urls)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.tags">tags (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.tags">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="byte/api/plugins/testing.html#src.byte.plugins.testing.TestCog">TestCog (class in src.byte.plugins.testing)</a>
+</li>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.to_json">to_json() (in module src.server.lib.serialization)</a>
+</li>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.to_msgpack">to_msgpack() (in module src.server.lib.serialization)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.DiscordSettings.TOKEN">TOKEN (src.byte.lib.settings.DiscordSettings attribute)</a>
+</li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.type_decoders">type_decoders (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.type_decoders">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController.type_encoders">type_encoders (src.server.domain.web.controllers.web.WebController attribute)</a>
+
+      <ul>
+        <li><a href="web/api/lib/openapi.html#src.server.lib.openapi.OverridenController.type_encoders">(src.server.lib.openapi.OverridenController attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/lib/serialization.html#src.server.lib.serialization.UUIDEncoder">UUIDEncoder (class in src.server.lib.serialization)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.ProjectSettings.VERSION">VERSION (src.byte.lib.settings.ProjectSettings attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="web/api/domain/web/controllers.html#src.server.domain.web.controllers.web.WebController">WebController (class in src.server.domain.web.controllers.web)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="byte/api/lib/settings.html#src.byte.lib.settings.LogSettings.WEBSOCKETS_LEVEL">WEBSOCKETS_LEVEL (src.byte.lib.settings.LogSettings attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+      </article>
+    </main>
+  </div><footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2023, Jacob Coffee</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+          <a href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub"><i class="i-icon github"></i></a>
+          <a href="https://twitter.com/_scriptr" aria-label="X (Twitter)"><i class="i-icon x-twitter"></i></a>
+          <a href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord"><i class="i-icon discord"></i></a>
+          <a href="https://youtube.com/@monorepo" aria-label="YouTube"><i class="i-icon youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script src="_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="_static/doctools.js?v=888ff710"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=36754332"></script>
+      <script src="_static/shibuya.js?v=3e5c8598"></script>
+      <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+      <script>mermaid.initialize({startOnLoad:true});</script>
+    
+</body>
+</html>
