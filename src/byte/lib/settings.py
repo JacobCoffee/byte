@@ -15,6 +15,10 @@ from src.__metadata__ import __version__ as version
 __all__ = [
     "discord",
     "log",
+    "project",
+    "DiscordSettings",
+    "LogSettings",
+    "ProjectSettings",
 ]
 
 load_dotenv()
