@@ -12,6 +12,10 @@ jobs:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+    env:
+      DISCORD_TOKEN: "123"
+      DISCORD_DEV_GUILD_ID: "456"
+      DISCORD_DEV_USER_ID: "789"
     steps:
       - uses: actions/checkout@v4
 
