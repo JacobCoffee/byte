@@ -8,9 +8,9 @@ authors = [
 dependencies = [
     "python-dotenv>=1.0.0",
     "discord-py>=2.3.1",
-    "pydantic[settings]>=2.0.3",
+    "pydantic>=2.5.0",
     "litestar[jwt,opentelemetry,prometheus,standard,structlog]>=2.0.0b4",
-    "pydantic-settings>=2.0.2",
+    "pydantic-settings>=2.1.0",
     "anyio>=3.7.1",
     "advanced-alchemy>=0.5.4",
 ]
@@ -53,8 +53,6 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = 'src/__metadata__.py'
 
-
-
 [tool.pdm.scripts]
 lint = "pre-commit run --all-files"
 test = "pytest"
@@ -84,6 +82,7 @@ docs = [
     "autodoc-pydantic>=1.9.0",
     "shibuya>=2023.7.16",
     "sphinxcontrib-mermaid>=0.9.2",
+    "sphinx-design>=0.5.0",
 ]
 lint = [
     "ruff>=0.0.280",
