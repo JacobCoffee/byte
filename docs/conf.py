@@ -36,9 +36,8 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx_click",
     "sphinx_toolbox.collapse",
-    # "sphinx_design",  # not available in 7.0
-    # Pending https://github.com/mansenfranzen/autodoc_pydantic/pull/162
-    # "sphinxcontrib.autodoc_pydantic",
+    "sphinx_design",
+    "sphinxcontrib.autodoc_pydantic",
 ]
 
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
