@@ -127,8 +127,7 @@ class BeforeSendHandler:
         )
 
     async def __call__(self, message: Message, scope: Scope) -> None:
-        """Receives ASGI response messages and scope, and logs per
-        configuration.
+        """Receives ASGI response messages and scope, and logs per configuration.
 
         Args:
             message: ASGI response event.

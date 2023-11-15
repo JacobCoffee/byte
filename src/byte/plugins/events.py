@@ -1,6 +1,11 @@
 """Plugins for events."""
-import discord
+from threading import Thread
+
+from discord import Embed
 from discord.ext.commands import Bot, Cog
+
+from src.byte.lib.common import litestar_logo_yellow, mcve
+from src.byte.views.forums import HelpThreadView
 
 __all__ = ("Events", "setup")
 
@@ -13,7 +18,7 @@ class Events(Cog):
         self.bot = bot
 
     @Cog.listener()
-    async def on_thread_create(self, thread: discord.Thread) -> None:
+    async def on_thread_create(self, thread: Thread) -> None:
         """Handle thread create event.
 
         .. todo:: parameterize the command prefix per guild, and the
@@ -23,14 +28,16 @@ class Events(Cog):
             thread (discord.Thread): Thread that was created.
         """
         if thread.parent.name == "help":
-            reply = (
-                f"At your assistance, {thread.owner.mention}.\n"
-                f"Make sure you include an [MCVE](https://stackoverflow.com/help/minimal-reproducible-example) in "
-                f"your post if relevant.\n"
-                f"When you are done you can tag your post as ***✅ Solved*** or type `!solve`!\n"
-                f"If no one responds within a reasonable amount of time, please ping `@Member`."
+            embed = Embed(title=f"Notes for {thread.name}", color=0x42B1A8)
+            embed.add_field(name="At your assistance", value=f"{thread.owner.mention}", inline=False)
+            embed.add_field(
+                name="No Response?", value="If no response in a reasonable time, ping @Member.", inline=True
             )
-            await thread.send(reply)
+            embed.add_field(name="Closing", value=f"To close, type `{self.bot.command_prefix}solve`.", inline=True)
+            embed.add_field(name="MCVE", value=f"Please include an [MCVE](<{mcve}>) if relevant.", inline=False)
+            embed.set_thumbnail(url=litestar_logo_yellow)
+            view = HelpThreadView(author=thread.owner, bot=self.bot)
+            await thread.send(embed=embed, view=view)
         elif thread.parent.name == "forum":
             reply = f"Thanks for posting, {thread.owner.mention}!"
             await thread.send(reply)

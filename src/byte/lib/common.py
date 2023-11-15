@@ -4,17 +4,13 @@
 """
 from typing import Final
 
-__all__ = [
-    "litestar_logo_white",
-    "litestar_logo_yellow",
-]
-
 # --- Links
 litestar_issues: Final = "https://github.com/litestar-org/litestar/issues"
 github_litestar_projects: Final = "https://github.com/orgs/litestar-org/litestar/projects"
 github_org_projects: Final = "https://github.com/orgs/litestar-org/projects"
 pypi_litestar: Final = "https://pypi.org/project/litestar/"
 pypi_polyfactory: Final = "https://pypi.org/project/polyfactory/"
+mcve: Final = "https://stackoverflow.com/help/minimal-reproducible-example"
 
 # --- Assets
 litestar_logo_white: Final = "https://raw.githubusercontent.com/litestar-org/branding/main/assets/Branding%20-%20PNG%20-%20Transparent/Badge%20-%20White.png"
