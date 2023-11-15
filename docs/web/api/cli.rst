@@ -15,10 +15,6 @@ CLI Usage
    :prog: run_bot
    :nested: full
 
-.. click:: src.cli:run_app
-   :prog: app
-   :nested: full
-
 .. click:: src.cli:run_all
    :prog: run_all
    :nested: full

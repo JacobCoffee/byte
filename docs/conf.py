@@ -6,15 +6,12 @@ import os
 import sys
 from pathlib import Path
 
-import urllib3
 from dotenv import load_dotenv
 
 from src.__metadata__ import __project__
 
 # -- Environmental Data ------------------------------------------------------
 path = Path("..").resolve()
-tls_verify = False
-urllib3.disable_warnings()
 sys.path.insert(0, path.as_posix())
 load_dotenv()
 
@@ -122,7 +119,6 @@ brand_colors = {
     "--byte-dark": {"rgb": "12, 12, 12", "hex": "#0C0C0C"},
     "--byte-white": {"rgb": "235, 235, 233", "hex": "#EBEBE9"},
 }
-
 
 html_theme_options = {
     "logo_target": "/",

@@ -8,5 +8,7 @@ API Reference
     :glob:
     :hidden:
 
-    commands/index
     bot
+    plugins/index
+    views/index
+    lib/index
