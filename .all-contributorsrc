@@ -1,5 +1,7 @@
 {
-  "files": ["README.md"],
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "commit": false,
   "commitType": "docs",
@@ -10,14 +12,20 @@
       "name": "Alc-Alc",
       "avatar_url": "https://avatars.githubusercontent.com/u/45509143?v=4",
       "profile": "https://github.com/Alc-Alc",
-      "contributions": ["code", "ideas"]
+      "contributions": [
+        "code",
+        "ideas",
+        "infra"
+      ]
     },
     {
       "login": "allcontributors[bot]",
       "name": "allcontributors[bot]",
       "avatar_url": "https://avatars.githubusercontent.com/in/23186?v=4",
       "profile": "https://github.com/apps/allcontributors",
-      "contributions": ["projectManagement"]
+      "contributions": [
+        "projectManagement"
+      ]
     }
   ],
   "contributorsPerLine": 7,
