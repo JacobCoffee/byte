@@ -26,7 +26,7 @@ load_dotenv()
 class Byte(Bot):
     """Byte Bot Base Class."""
 
-    def __init__(self, command_prefix: str, intents: Intents, activity: Activity) -> None:
+    def __init__(self, command_prefix: list[str], intents: Intents, activity: Activity) -> None:
         """Initialize the bot.
 
         Args:
