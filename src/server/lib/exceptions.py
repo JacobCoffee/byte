@@ -77,10 +77,9 @@ class _HTTPConflictException(HTTPException):
 
 
 async def after_exception_hook_handler(exc: Exception, _scope: Scope) -> None:
-    """Binds ``exc_info`` key with exception instance as value to structlog
-    context vars.
+    """Binds ``exc_info`` key with exception instance as value to structlog context vars.
 
-    This must be a coroutine so that it is not wrapped in a thread where we'll lose context.
+    .. note:: This must be a coroutine so that it is not wrapped in a thread where we'll lose context.
 
     Args:
         exc: the exception that was raised.

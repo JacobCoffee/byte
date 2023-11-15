@@ -9,7 +9,7 @@ from pathlib import Path
 import urllib3
 from dotenv import load_dotenv
 
-from src.__metadata__ import __project__ as project
+from src.__metadata__ import __project__
 
 # -- Environmental Data ------------------------------------------------------
 path = Path("..").resolve()
@@ -19,7 +19,7 @@ sys.path.insert(0, path.as_posix())
 load_dotenv()
 
 # -- Project information -----------------------------------------------------
-project = project
+project = __project__
 copyright = "2023, Jacob Coffee"
 author = "Jacob Coffee"
 release = os.getenv("_BYTE_BOT_DOCS_BUILD_VERSION", importlib.metadata.version("byte-bot").rsplit(".")[0])
