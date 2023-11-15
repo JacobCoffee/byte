@@ -31,7 +31,7 @@ class DiscordSettings(BaseSettings):
 
     TOKEN: str
     """Discord API token."""
-    COMMAND_PREFIX: str = ""
+    COMMAND_PREFIX: list[str] = ["!"]
     """Command prefix for bot commands."""
     DEV_GUILD_ID: int
     """Discord Guild ID for development."""
@@ -45,11 +45,11 @@ class DiscordSettings(BaseSettings):
 
     @field_validator("COMMAND_PREFIX")
     @classmethod
-    def assemble_command_prefix(cls, value: str) -> str:  # noqa: ARG003
+    def assemble_command_prefix(cls, value: str) -> list[str]:
         """Assembles the bot command prefix based on the environment.
 
         Args:
-            value: Not used.
+            value: Default value of ``COMMAND_PREFIX``. Currently ``["!"]``
 
         Returns:
             The assembled prefix string.
@@ -57,10 +57,12 @@ class DiscordSettings(BaseSettings):
         env_urls = {
             "prod": "byte ",
             "test": "bit ",
-            "dev": "bit ",
+            "dev": "nibble ",
         }
         environment = os.getenv("ENVIRONMENT", "dev")
-        return os.getenv("COMMAND_PREFIX", env_urls[environment])
+        # Add env specific command prefix in addition to the default "!"
+        value.append(os.getenv("COMMAND_PREFIX", env_urls[environment]))
+        return value
 
     @field_validator("PRESENCE_URL")
     @classmethod
