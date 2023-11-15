@@ -1,7 +1,12 @@
 # Byte Bot
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
+[![Tests And Linting](https://github.com/JacobCoffee/byte/actions/workflows/ci.yml/badge.svg)](https://github.com/JacobCoffee/byte/actions/workflows/ci.yml)
+[![Documentation Building](https://github.com/JacobCoffee/byte/actions/workflows/docs.yml/badge.svg)](https://github.com/JacobCoffee/byte/actions/workflows/docs.yml)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > [!WARNING]\
