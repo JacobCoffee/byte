@@ -57,6 +57,11 @@ jobs:
         run: pdm run pytest
 
   build-docs:
+    env:
+      DISCORD_TOKEN: "123"
+      DISCORD_DEV_GUILD_ID: "456"
+      DISCORD_DEV_USER_ID: "789"
+      SECRET_KEY: "123"
     needs:
       - validate
     if: github.event_name == 'pull_request'
