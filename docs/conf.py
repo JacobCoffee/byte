@@ -3,17 +3,13 @@ from __future__ import annotations
 
 import importlib.metadata
 import os
-import sys
-from pathlib import Path
-
-from dotenv import load_dotenv
 
 from src.__metadata__ import __project__
 
 # -- Environmental Data ------------------------------------------------------
-path = Path("..").resolve()
-sys.path.insert(0, path.as_posix())
-load_dotenv()
+# path = Path("..").resolve()
+# sys.path.insert(0, path.as_posix())
+# load_dotenv()
 
 # -- Project information -----------------------------------------------------
 project = __project__
