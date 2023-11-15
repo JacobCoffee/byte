@@ -34,9 +34,7 @@ class ForumCommands(Cog):
         """
         _solved_tag = "Solved"
         if isinstance(ctx.channel, Thread) and ctx.channel.parent.name == "help":
-            solved_tag = discord.utils.find(lambda t: t.name == _solved_tag, ctx.channel.parent.available_tags)
-
-            if solved_tag:
+            if solved_tag := discord.utils.find(lambda t: t.name == _solved_tag, ctx.channel.parent.available_tags):
                 await ctx.channel.add_tags(solved_tag, reason="Marked as solved.")
                 await ctx.send("Marked as solved and closed the help forum!")
                 await ctx.channel.edit(archived=True)
