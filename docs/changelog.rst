@@ -8,7 +8,7 @@ All commits to this project will be documented in this file.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * `See All commits in v0.2.0 <https://github.com/JacobCoffee/byte-bot/commits/v0.2.0>`_
 
-`f175b4a <https://github.com/JacobCoffee/byte-bot/commit/f175b4ac69de862682b8c2f82e7518562365ae5c>`_ ... `603d644 <https://github.com/JacobCoffee/byte-bot/commit/603d644ae057fa5a6fe586e80be5dee0a6d3ab49>`_ | `See diff for 0.2.0 <https://github.com/JacobCoffee/byte-bot/compare/f175b4ac69de862682b8c2f82e7518562365ae5c...603d644ae057fa5a6fe586e80be5dee0a6d3ab49>`_
+`f175b4a <https://github.com/JacobCoffee/byte-bot/commit/f175b4ac69de862682b8c2f82e7518562365ae5c>`_ ... `31c0024 <https://github.com/JacobCoffee/byte-bot/commit/31c00249ea0b09f1df4aad1e6ac4b45e5bc7fe67>`_ | `See diff for 0.2.0 <https://github.com/JacobCoffee/byte-bot/compare/f175b4ac69de862682b8c2f82e7518562365ae5c...31c00249ea0b09f1df4aad1e6ac4b45e5bc7fe67>`_
 
 Bug Fixes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -18,7 +18,8 @@ Bug Fixes
 Features
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* (`603d644 <https://github.com/JacobCoffee/byte-bot/commit/603d644ae057fa5a6fe586e80be5dee0a6d3ab49>`_)  - Add ``!`` as command prefix in addition to an env specific command prefix (#15) (Alc-Alc), Co-authored-by:Alc-Alc <alc@localhost>c
+* (`603d644 <https://github.com/JacobCoffee/byte-bot/commit/603d644ae057fa5a6fe586e80be5dee0a6d3ab49>`_)  - Add ``!`` as command prefix in addition to an env specific command prefix (#15) (Alc-Alc), Co-authored-by:Alc-Alc <alc@localhost>
+* (`31c0024 <https://github.com/JacobCoffee/byte-bot/commit/31c00249ea0b09f1df4aad1e6ac4b45e5bc7fe67>`_)  - Replace help thread with embed (Jacob Coffee)c
 
 `Release [v0.1.0] - 2023-11-08 <https://github.com/JacobCoffee/byte-bot/releases/tag/v0.1.0>`_
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
