@@ -31,7 +31,7 @@ repos:
           - tomli
         exclude: >
           (?x)^(
-              .*\.json |.*\.svg
+              .*\.json |.*\.svg |docs/changelog.rst
           )$
   - repo: https://github.com/asottile/blacken-docs
     rev: 1.16.0
