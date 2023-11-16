@@ -116,7 +116,7 @@ brand_colors = {
 html_theme_options = {
     "logo_target": "/",
     "announcement": "This documentation is currently under development.",
-    "github_url": "https://github.com/JacobCoffee/byte-bot",
+    "github_url": "https://github.com/",
     "discord_url": "https://discord.gg/ZVG8hN6RrJ/",
     "twitter_url": "https://twitter.com/_scriptr",
     "youtube_url": "https://youtube.com/@monorepo",
