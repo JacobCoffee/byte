@@ -100,7 +100,7 @@ html_logo = "_static/badge.svg"
 html_context = {
     "source_type": "github",
     "source_user": "JacobCoffee",
-    "source_repo": "byte-bot",
+    "source_repo": "byte",
 }
 
 brand_colors = {
