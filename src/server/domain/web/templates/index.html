@@ -23,8 +23,17 @@
   </svg>
   <span>New Byte Bot version available!</span>
   <div>
-    <button class="btn btn-sm">Close</button>
-    <button class="btn btn-sm btn-primary">Changelog</button>
+    <button
+      class="btn btn-sm"
+      onclick="this.parentElement.parentElement.remove();"
+    >
+      Close
+    </button>
+    <a
+      href="https://docs.byte-bot.app/latest/changelog"
+      class="btn btn-sm btn-primary"
+      >Changelog</a
+    >
   </div>
 </div>
 
@@ -136,11 +145,10 @@
                 <p class="text-center py-5">Currently in <br />probably 1 server</p>
               </div>
               <a
-                href="#"
+                href="https://discord.com/api/oauth2/authorize?client_id=1132179951567786015&permissions=17998865853505&scope=bot%20applications.commands"
                 role="button"
                 class="btn btn-info btn-wide hover:bg-[#5865F2]/70"
               >
-                <!-- TODO: Add invite link -->
                 <!-- https://feathericons.dev/?search=discord&iconset=brands -->
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

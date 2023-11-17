@@ -103,10 +103,6 @@ run-bot = "src.cli:run_bot"
 run-web = "src.cli:run_web"
 run-all = "src.cli:run_all"
 
-[tool.black]
-line-length = 120
-include = '\.pyi?$'
-
 [tool.codespell]
 quiet-level = 3
 ignore-words-list = "selectin, alog"
@@ -194,6 +190,10 @@ ignore = ["ANN101", "ANN102", "ANN401", "PLR0913", "RUF012", "COM812", "ISC001",
 line-length = 120
 src = ["src", "tests"]
 target-version = "py311"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
 
 [tool.ruff.pydocstyle]
 convention = "google"

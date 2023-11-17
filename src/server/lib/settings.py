@@ -234,14 +234,14 @@ class OpenAPISettings(BaseSettings):
     """Document version."""
     PATH: str = "/api"
     """Path to access the root API documentation."""
-    DESCRIPTION: str | None = f"""The Byte Bot API supports the Byte Discord bot.
+    DESCRIPTION: str | None = """The Byte Bot API supports the Byte Discord bot.
                                   You can find out more about this project in the
-                                  [docs]({os.getenv("WEB_URL", "http://localhost") + "docs"})."""
+                                  [docs](https://docs.byte-bot.app/latest)."""
     SERVERS: list[dict[str, str]] = []
     """Servers to use for the OpenAPI documentation."""
     EXTERNAL_DOCS: dict[str, str] | None = {
         "description": "Byte Bot API Docs",
-        "url": os.getenv("WEB_URL", "http://localhost") + "docs",
+        "url": "https://docs.byte-bot.app/latest",
     }
     """External documentation for the API."""
 
