@@ -38,10 +38,11 @@ class Byte(Bot):
 
     async def setup_hook(self) -> None:
         """Any setup we need can be here."""
+        # Load cogs before syncing the tree.
+        await self.load_cogs()
         dev_guild = discord.Object(id=settings.discord.DEV_GUILD_ID)
         self.tree.copy_global_to(guild=dev_guild)
         await self.tree.sync(guild=dev_guild)
-        await self.load_cogs()
 
     async def load_cogs(self) -> None:
         """Load cogs."""
