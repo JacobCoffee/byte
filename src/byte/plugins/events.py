@@ -1,5 +1,6 @@
 """Plugins for events."""
 from threading import Thread
+from typing import cast
 
 from discord import Embed
 from discord.ext.commands import Bot, Cog
@@ -33,7 +34,10 @@ class Events(Cog):
             embed.add_field(
                 name="No Response?", value="If no response in a reasonable time, ping @Member.", inline=True
             )
-            embed.add_field(name="Closing", value=f"To close, type `{self.bot.command_prefix}solve`.", inline=True)
+            commands_to_solve = " or ".join(
+                f"`{command_prefix}solve`" for command_prefix in cast(list[str], self.bot.command_prefix)
+            )
+            embed.add_field(name="Closing", value=f"To close, type {commands_to_solve}.", inline=True)
             embed.add_field(name="MCVE", value=f"Please include an [MCVE](<{mcve}>) if relevant.", inline=False)
             embed.set_thumbnail(url=litestar_logo_yellow)
             view = HelpThreadView(author=thread.owner, bot=self.bot)
