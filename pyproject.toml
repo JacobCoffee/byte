@@ -13,6 +13,7 @@ dependencies = [
     "pydantic-settings>=2.1.0",
     "anyio>=3.7.1",
     "advanced-alchemy>=0.5.4",
+    "certifi>=2023.11.17",
 ]
 requires-python = ">=3.11,<4.0"
 readme = "README.md"
@@ -306,8 +307,8 @@ body = """
 {% if previous %}\
     {% if previous.commit_id %}
         `{{ previous.commit_id | truncate(length=7, end="") }} <https://github.com/JacobCoffee/byte/commit/{{ previous.commit_id }}>`_ ... \
-            `{{ commit_id | truncate(length=7, end="") }} <https://github.com/JacobCoffee/byte/commit/{{ commit_id }}>`_ \
-            | `See diff for {{ version | trim_start_matches(pat="v") }} <https://github.com/JacobCoffee/byte/compare/{{ previous.commit_id }}...{{ commit_id }}>`_
+            `{{ previous.commit_id | truncate(length=7, end="") }} <https://github.com/JacobCoffee/byte/commit/{{ commit_id }}>`_ \
+            | `See diff for {{ version }} <https://github.com/JacobCoffee/byte/compare/{{ previous.commit_id }}...{{ commit_id }}>`_
     {% endif %}\
 {% endif %}\
 {% for group, commits in commits | group_by(attribute="group") %}

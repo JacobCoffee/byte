@@ -4,22 +4,25 @@ Changelog
 
 All commits to this project will be documented in this file.
 
-`Release [v0.2.0] - 2023-11-16 <https://github.com/JacobCoffee/byte/releases/tag/v0.2.0>`_
+[unreleased]
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-* `See All commits in v0.2.0 <https://github.com/JacobCoffee/byte/commits/v0.2.0>`_
 
-`860bd65 <https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0>`_ ... `98d5dc9 <https://github.com/JacobCoffee/byte/commit/98d5dc9918aae97e46c728a1d59d4cbfec740c44>`_ | `See diff for 0.2.0 <https://github.com/JacobCoffee/byte/compare/860bd656b438e546d552c7f6a090a2cd0719a6f0...98d5dc9918aae97e46c728a1d59d4cbfec740c44>`_
+`860bd65 <https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0>`_ ... `860bd65 <https://github.com/JacobCoffee/byte/commit/>`_ | `See diff for  <https://github.com/JacobCoffee/byte/compare/860bd656b438e546d552c7f6a090a2cd0719a6f0...>`_
 
 Bug Fixes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * (`98d5dc9 <https://github.com/JacobCoffee/byte/commit/98d5dc9918aae97e46c728a1d59d4cbfec740c44>`_)  - Replace incorrect repo links (Jacob Coffee)
+* (`fb95f02 <https://github.com/JacobCoffee/byte/commit/fb95f0241458b0fc53d36d44b9b6111e183113ff>`_)  - Replace incorrect repo links (Jacob Coffee)
+* (`f9ee620 <https://github.com/JacobCoffee/byte/commit/f9ee620e3d98b991fdc1f0d978c104245f3109bd>`_)  - Replace incorrect repo link (Jacob Coffee)
+* (`2be3030 <https://github.com/JacobCoffee/byte/commit/2be3030f25de18a6ec343db62e5bff98536160e4>`_)  - Update links (Jacob Coffee)
+* (`ae4ec60 <https://github.com/JacobCoffee/byte/commit/ae4ec6015866826acfbceb9a9cead55e708c9664>`_)  - Resolve hybrid commands not displaying slash commands (#26) (Alc-Alc), Co-authored-by:Alc-Alc <alc@localhost>
 
 `Release [v0.2.0] - 2023-11-15 <https://github.com/JacobCoffee/byte/releases/tag/v0.2.0>`_
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * `See All commits in v0.2.0 <https://github.com/JacobCoffee/byte/commits/v0.2.0>`_
 
-`f175b4a <https://github.com/JacobCoffee/byte/commit/f175b4ac69de862682b8c2f82e7518562365ae5c>`_ ... `860bd65 <https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0>`_ | `See diff for 0.2.0 <https://github.com/JacobCoffee/byte/compare/f175b4ac69de862682b8c2f82e7518562365ae5c...860bd656b438e546d552c7f6a090a2cd0719a6f0>`_
+`f175b4a <https://github.com/JacobCoffee/byte/commit/f175b4ac69de862682b8c2f82e7518562365ae5c>`_ ... `f175b4a <https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0>`_ | `See diff for v0.2.0 <https://github.com/JacobCoffee/byte/compare/f175b4ac69de862682b8c2f82e7518562365ae5c...860bd656b438e546d552c7f6a090a2cd0719a6f0>`_
 
 Bug Fixes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
