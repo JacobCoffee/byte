@@ -2,6 +2,8 @@
 
 .. todo:: add an unload cog command.
 """
+from discord import Interaction
+from discord.app_commands import command as app_command
 from discord.ext import commands
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
@@ -77,6 +79,13 @@ class AdminCommands(Cog):
             await ctx.send(message)
 
         return message
+
+    @app_command(name="sync")
+    @is_byte_dev_or_owner()
+    async def tree_sync(self, interaction: Interaction) -> None:
+        """Slash command to perform a global sync."""
+        results = await self.bot.tree.sync()
+        await interaction.response.send_message("\n".join(i.name for i in results), ephemeral=True)
 
 
 async def setup(bot: Bot) -> None:
