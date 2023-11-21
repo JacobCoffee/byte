@@ -1,14 +1,23 @@
 """Byte utilities."""
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from discord.ext import commands
-from discord.ext.commands import Context, check
 
 from src.byte.lib import settings
 
-__all__ = ("is_byte_dev_or_owner",)
+if TYPE_CHECKING:
+    from typing import Any
+
+    from discord.ext.commands import Context
+    from discord.ext.commands._types import Check
+
+__all__ = ("is_byte_dev",)
 
 
-def is_byte_dev_or_owner() -> check:
-    """Check if the user is a Byte Dev or Owner.
+def is_byte_dev() -> Check[Any]:
+    """Check if the user is a Byte developer.
 
     Returns:
         A check function.
