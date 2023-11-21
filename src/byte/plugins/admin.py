@@ -81,7 +81,7 @@ class AdminCommands(Cog):
         return message
 
     @app_command(name="sync")
-    @is_byte_dev_or_owner()
+    @is_byte_dev()
     async def tree_sync(self, interaction: Interaction) -> None:
         """Slash command to perform a global sync."""
         results = await self.bot.tree.sync()

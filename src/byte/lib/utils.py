@@ -13,11 +13,11 @@ if TYPE_CHECKING:
     from discord.ext.commands import Context
     from discord.ext.commands._types import Check
 
-__all__ = ("is_byte_dev_or_owner",)
+__all__ = ("is_byte_dev",)
 
 
-def is_byte_dev_or_owner() -> Check[Any]:
-    """Check if the user is a Byte Dev or Owner.
+def is_byte_dev() -> Check[Any]:
+    """Check if the user is a Byte developer.
 
     Returns:
         A check function.
