@@ -7,7 +7,7 @@ from discord.app_commands import command as app_command
 from discord.ext import commands
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
-from src.byte.lib.utils import is_byte_dev_or_owner
+from src.byte.lib.utils import is_byte_dev
 
 __all__ = ("AdminCommands", "setup")
 
@@ -21,7 +21,7 @@ class AdminCommands(Cog):
         self.__cog_name__ = "Admin Commands"  # type: ignore[misc]
 
     @group(name="admin")
-    @is_byte_dev_or_owner()
+    @is_byte_dev()
     async def admin(self, ctx: Context) -> None:
         """Commands for bot admins."""
         if ctx.invoked_subcommand is None:
