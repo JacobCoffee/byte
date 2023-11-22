@@ -9,6 +9,8 @@ from src.byte.lib.common import litestar_logo_yellow, mcve
 
 __all__ = ("ForumCommands", "setup")
 
+from src.byte.lib.utils import linker
+
 
 class ForumCommands(Cog):
     """Forum command cog."""
@@ -71,7 +73,7 @@ class ForumCommands(Cog):
         embed.add_field(name="Hi", value=f"{user.mention}", inline=True)
         embed.add_field(
             name="MCVE",
-            value=f"Please include an [MCVE](<{mcve}>) so that we can reproduce your issue locally.",
+            value=f"Please include an {linker('MCVE', mcve)} so that we can reproduce your issue locally.",
             inline=True,
         )
         embed.set_thumbnail(url=litestar_logo_yellow)

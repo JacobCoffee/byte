@@ -6,6 +6,7 @@ from discord import Embed
 from discord.ext.commands import Bot, Cog
 
 from src.byte.lib.common import litestar_logo_yellow, mcve
+from src.byte.lib.utils import linker
 from src.byte.views.forums import HelpThreadView
 
 __all__ = ("Events", "setup")
@@ -38,7 +39,11 @@ class Events(Cog):
                 f"`{command_prefix}solve`" for command_prefix in cast(list[str], self.bot.command_prefix)
             )
             embed.add_field(name="Closing", value=f"To close, type {commands_to_solve}.", inline=True)
-            embed.add_field(name="MCVE", value=f"Please include an [MCVE](<{mcve}>) if relevant.", inline=False)
+            embed.add_field(
+                name="MCVE",
+                value=f"Please include an {linker('MCVE', mcve)} so that we can reproduce your issue locally.",
+                inline=False,
+            )
             embed.set_thumbnail(url=litestar_logo_yellow)
             view = HelpThreadView(author=thread.owner, bot=self.bot)
             await thread.send(embed=embed, view=view)
