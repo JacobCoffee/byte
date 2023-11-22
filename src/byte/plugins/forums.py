@@ -1,7 +1,11 @@
 """Plugins related to forums."""
+
 import discord
-from discord import Thread
+from discord import Embed, Interaction, Thread
+from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog, Context, command, hybrid_command
+
+from src.byte.lib.common import litestar_logo_yellow, mcve
 
 __all__ = ("ForumCommands", "setup")
 
@@ -52,6 +56,26 @@ class ForumCommands(Cog):
         """
         tags = ctx.channel.applied_tags
         await ctx.send(f"Tags in this channel: {', '.join([tag.name for tag in tags])}")
+
+    @app_command(name="mcve")
+    async def tree_sync(self, interaction: Interaction) -> None:
+        """Slash command to request an MCVE from a user.
+
+        Args:
+            interaction: Interaction object.
+        """
+        await interaction.response.send_message("Processing request...", ephemeral=True)
+
+        embed = Embed(title="MCVE needed to reproduce!", color=0x42B1A8)
+        embed.add_field(name="Hi", value=f"{interaction.user.mention}", inline=True)
+        embed.add_field(
+            name="MCVE",
+            value=f"Please include an [MCVE](<{mcve}>) so that we can reproduce your issue locally.",
+            inline=True,
+        )
+        embed.set_thumbnail(url=litestar_logo_yellow)
+
+        await interaction.followup.send(embed=embed)
 
 
 async def setup(bot: Bot) -> None:
