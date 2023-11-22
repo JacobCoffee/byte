@@ -254,91 +254,93 @@ html.dark {
 </span><span id="1-9">
 </span><span id="1-10"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ForumCommands&quot;</span><span class="p">,</span> <span class="s2">&quot;setup&quot;</span><span class="p">)</span>
 </span><span id="1-11">
-</span><span id="1-12">
+</span><span id="1-12"><span class="kn">from</span> <span class="nn">src.byte.lib.utils</span> <span class="kn">import</span> <span class="n">linker</span>
+</span><span id="1-13">
+</span><span id="1-14">
 <div class="viewcode-block" id="ForumCommands">
 <a class="viewcode-back" href="../../../../byte/api/plugins/guild.html#src.byte.plugins.forums.ForumCommands">[docs]</a>
-</span><span id="1-13"><span class="k">class</span> <span class="nc">ForumCommands</span><span class="p">(</span><span class="n">Cog</span><span class="p">):</span>
-</span><span id="1-14"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Forum command cog.&quot;&quot;&quot;</span>
-</span><span id="1-15">
+</span><span id="1-15"><span class="k">class</span> <span class="nc">ForumCommands</span><span class="p">(</span><span class="n">Cog</span><span class="p">):</span>
+</span><span id="1-16"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Forum command cog.&quot;&quot;&quot;</span>
+</span><span id="1-17">
 <div class="viewcode-block" id="ForumCommands.__init__">
 <a class="viewcode-back" href="../../../../byte/api/plugins/guild.html#src.byte.plugins.forums.ForumCommands.__init__">[docs]</a>
-</span><span id="1-16">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot</span><span class="p">:</span> <span class="n">Bot</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-17"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize cog.&quot;&quot;&quot;</span>
-</span><span id="1-18">        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">bot</span>
-</span><span id="1-19">        <span class="bp">self</span><span class="o">.</span><span class="n">__cog_name__</span> <span class="o">=</span> <span class="s2">&quot;Forum Commands&quot;</span></div>
+</span><span id="1-18">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot</span><span class="p">:</span> <span class="n">Bot</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-19"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize cog.&quot;&quot;&quot;</span>
+</span><span id="1-20">        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">bot</span>
+</span><span id="1-21">        <span class="bp">self</span><span class="o">.</span><span class="n">__cog_name__</span> <span class="o">=</span> <span class="s2">&quot;Forum Commands&quot;</span></div>
 
-</span><span id="1-20">
-</span><span id="1-21">    <span class="nd">@hybrid_command</span><span class="p">(</span>
-</span><span id="1-22">        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;solve&quot;</span><span class="p">,</span>
-</span><span id="1-23">        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run `!solve` or `!s` to mark a forum post as solved and close it.&quot;</span><span class="p">,</span>
-</span><span id="1-24">        <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">],</span>
-</span><span id="1-25">        <span class="n">brief</span><span class="o">=</span><span class="s2">&quot;Run `!solve` or `!s` to mark a forum post as solved and close it.&quot;</span><span class="p">,</span>
-</span><span id="1-26">        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mark a forum post as solved and close it.&quot;</span><span class="p">,</span>
-</span><span id="1-27">    <span class="p">)</span>
-</span><span id="1-28">    <span class="k">async</span> <span class="k">def</span> <span class="nf">solved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-29"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark the forum post as solved and close it.</span>
-</span><span id="1-30">
-</span><span id="1-31"><span class="sd">        .. todo: Parameterize the tag name and allow each guild to assign it</span>
-</span><span id="1-32"><span class="sd">            in placed of &quot;Solved&quot; (Default can stay as solved, though)</span>
-</span><span id="1-33">
-</span><span id="1-34"><span class="sd">        .. todo:: Parameterize the channel name (default of help, still).</span>
-</span><span id="1-35"><span class="sd">            Also, allow for a list of channels to be specified.</span>
-</span><span id="1-36"><span class="sd">            users may want to be able to mark things solved/closed in</span>
-</span><span id="1-37"><span class="sd">            Help, Suggestions, Showcase, etc. (or any other forum channel)</span>
-</span><span id="1-38"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-39">        <span class="n">_solved_tag</span> <span class="o">=</span> <span class="s2">&quot;Solved&quot;</span>
-</span><span id="1-40">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span> <span class="n">Thread</span><span class="p">)</span> <span class="ow">and</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
-</span><span id="1-41">            <span class="k">if</span> <span class="n">solved_tag</span> <span class="o">:=</span> <span class="n">discord</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">_solved_tag</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">available_tags</span><span class="p">):</span>
-</span><span id="1-42">                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">add_tags</span><span class="p">(</span><span class="n">solved_tag</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Marked as solved.&quot;</span><span class="p">)</span>
-</span><span id="1-43">                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Marked as solved and closed the help forum!&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="1-44">                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span><span class="n">archived</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="1-45">            <span class="k">else</span><span class="p">:</span>
-</span><span id="1-46">                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">_solved_tag</span><span class="si">}</span><span class="s2">&#39; tag not found.&quot;</span><span class="p">)</span>
-</span><span id="1-47">        <span class="k">else</span><span class="p">:</span>
-</span><span id="1-48">            <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;This command can only be used in the help forum.&quot;</span><span class="p">)</span>
-</span><span id="1-49">
-</span><span id="1-50">    <span class="nd">@command</span><span class="p">()</span>
-</span><span id="1-51">    <span class="k">async</span> <span class="k">def</span> <span class="nf">tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-52"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all tags in the channel.</span>
-</span><span id="1-53">
-</span><span id="1-54"><span class="sd">        Args:</span>
-</span><span id="1-55"><span class="sd">            ctx: Context object.</span>
-</span><span id="1-56"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-57">        <span class="n">tags</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">applied_tags</span>
-</span><span id="1-58">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tags in this channel: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">tag</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">tag</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">tags</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="1-59">
-</span><span id="1-60">    <span class="nd">@app_command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mcve&quot;</span><span class="p">)</span>
-</span><span id="1-61">    <span class="k">async</span> <span class="k">def</span> <span class="nf">tree_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction</span><span class="p">:</span> <span class="n">Interaction</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">Member</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-62"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Slash command to request an MCVE from a user.</span>
-</span><span id="1-63">
-</span><span id="1-64"><span class="sd">        Args:</span>
-</span><span id="1-65"><span class="sd">            interaction: Interaction object.</span>
-</span><span id="1-66"><span class="sd">            user: The user to target with the MCVE request.</span>
-</span><span id="1-67"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-68">        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;Processing request...&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="1-69">
-</span><span id="1-70">        <span class="n">embed</span> <span class="o">=</span> <span class="n">Embed</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;MCVE Needed to Reproduce!&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="mh">0x42B1A8</span><span class="p">)</span>
-</span><span id="1-71">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Hi&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">mention</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="1-72">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span>
-</span><span id="1-73">            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MCVE&quot;</span><span class="p">,</span>
-</span><span id="1-74">            <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Please include an [MCVE](&lt;</span><span class="si">{</span><span class="n">mcve</span><span class="si">}</span><span class="s2">&gt;) so that we can reproduce your issue locally.&quot;</span><span class="p">,</span>
-</span><span id="1-75">            <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-76">        <span class="p">)</span>
-</span><span id="1-77">        <span class="n">embed</span><span class="o">.</span><span class="n">set_thumbnail</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">litestar_logo_yellow</span><span class="p">)</span>
-</span><span id="1-78">
-</span><span id="1-79">        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">followup</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">embed</span><span class="p">)</span></div>
-
+</span><span id="1-22">
+</span><span id="1-23">    <span class="nd">@hybrid_command</span><span class="p">(</span>
+</span><span id="1-24">        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;solve&quot;</span><span class="p">,</span>
+</span><span id="1-25">        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run `!solve` or `!s` to mark a forum post as solved and close it.&quot;</span><span class="p">,</span>
+</span><span id="1-26">        <span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">],</span>
+</span><span id="1-27">        <span class="n">brief</span><span class="o">=</span><span class="s2">&quot;Run `!solve` or `!s` to mark a forum post as solved and close it.&quot;</span><span class="p">,</span>
+</span><span id="1-28">        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Mark a forum post as solved and close it.&quot;</span><span class="p">,</span>
+</span><span id="1-29">    <span class="p">)</span>
+</span><span id="1-30">    <span class="k">async</span> <span class="k">def</span> <span class="nf">solved</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-31"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Mark the forum post as solved and close it.</span>
+</span><span id="1-32">
+</span><span id="1-33"><span class="sd">        .. todo: Parameterize the tag name and allow each guild to assign it</span>
+</span><span id="1-34"><span class="sd">            in placed of &quot;Solved&quot; (Default can stay as solved, though)</span>
+</span><span id="1-35">
+</span><span id="1-36"><span class="sd">        .. todo:: Parameterize the channel name (default of help, still).</span>
+</span><span id="1-37"><span class="sd">            Also, allow for a list of channels to be specified.</span>
+</span><span id="1-38"><span class="sd">            users may want to be able to mark things solved/closed in</span>
+</span><span id="1-39"><span class="sd">            Help, Suggestions, Showcase, etc. (or any other forum channel)</span>
+</span><span id="1-40"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-41">        <span class="n">_solved_tag</span> <span class="o">=</span> <span class="s2">&quot;Solved&quot;</span>
+</span><span id="1-42">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span> <span class="n">Thread</span><span class="p">)</span> <span class="ow">and</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
+</span><span id="1-43">            <span class="k">if</span> <span class="n">solved_tag</span> <span class="o">:=</span> <span class="n">discord</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">_solved_tag</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">available_tags</span><span class="p">):</span>
+</span><span id="1-44">                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">add_tags</span><span class="p">(</span><span class="n">solved_tag</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Marked as solved.&quot;</span><span class="p">)</span>
+</span><span id="1-45">                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;Marked as solved and closed the help forum!&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="1-46">                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">edit</span><span class="p">(</span><span class="n">archived</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="1-47">            <span class="k">else</span><span class="p">:</span>
+</span><span id="1-48">                <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">_solved_tag</span><span class="si">}</span><span class="s2">&#39; tag not found.&quot;</span><span class="p">)</span>
+</span><span id="1-49">        <span class="k">else</span><span class="p">:</span>
+</span><span id="1-50">            <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;This command can only be used in the help forum.&quot;</span><span class="p">)</span>
+</span><span id="1-51">
+</span><span id="1-52">    <span class="nd">@command</span><span class="p">()</span>
+</span><span id="1-53">    <span class="k">async</span> <span class="k">def</span> <span class="nf">tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-54"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Get all tags in the channel.</span>
+</span><span id="1-55">
+</span><span id="1-56"><span class="sd">        Args:</span>
+</span><span id="1-57"><span class="sd">            ctx: Context object.</span>
+</span><span id="1-58"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-59">        <span class="n">tags</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">applied_tags</span>
+</span><span id="1-60">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tags in this channel: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">tag</span><span class="o">.</span><span class="n">name</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">tag</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">tags</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="1-61">
+</span><span id="1-62">    <span class="nd">@app_command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;mcve&quot;</span><span class="p">)</span>
+</span><span id="1-63">    <span class="k">async</span> <span class="k">def</span> <span class="nf">tree_sync</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction</span><span class="p">:</span> <span class="n">Interaction</span><span class="p">,</span> <span class="n">user</span><span class="p">:</span> <span class="n">Member</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-64"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Slash command to request an MCVE from a user.</span>
+</span><span id="1-65">
+</span><span id="1-66"><span class="sd">        Args:</span>
+</span><span id="1-67"><span class="sd">            interaction: Interaction object.</span>
+</span><span id="1-68"><span class="sd">            user: The user to target with the MCVE request.</span>
+</span><span id="1-69"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-70">        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="s2">&quot;Processing request...&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="1-71">
+</span><span id="1-72">        <span class="n">embed</span> <span class="o">=</span> <span class="n">Embed</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;MCVE Needed to Reproduce!&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="mh">0x42B1A8</span><span class="p">)</span>
+</span><span id="1-73">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Hi&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">mention</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="1-74">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span>
+</span><span id="1-75">            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;MCVE&quot;</span><span class="p">,</span>
+</span><span id="1-76">            <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Please include an </span><span class="si">{</span><span class="n">linker</span><span class="p">(</span><span class="s1">&#39;MCVE&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">mcve</span><span class="p">)</span><span class="si">}</span><span class="s2"> so that we can reproduce your issue locally.&quot;</span><span class="p">,</span>
+</span><span id="1-77">            <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-78">        <span class="p">)</span>
+</span><span id="1-79">        <span class="n">embed</span><span class="o">.</span><span class="n">set_thumbnail</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">litestar_logo_yellow</span><span class="p">)</span>
 </span><span id="1-80">
-</span><span id="1-81">
+</span><span id="1-81">        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">followup</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">embed</span><span class="p">)</span></div>
+
+</span><span id="1-82">
+</span><span id="1-83">
 <div class="viewcode-block" id="setup">
 <a class="viewcode-back" href="../../../../byte/api/plugins/guild.html#src.byte.plugins.forums.setup">[docs]</a>
-</span><span id="1-82"><span class="k">async</span> <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">Bot</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-83"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add cog to bot.</span>
-</span><span id="1-84">
-</span><span id="1-85"><span class="sd">    Args:</span>
-</span><span id="1-86"><span class="sd">        bot: Bot object.</span>
-</span><span id="1-87"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-88">    <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">add_cog</span><span class="p">(</span><span class="n">ForumCommands</span><span class="p">(</span><span class="n">bot</span><span class="p">))</span></div>
+</span><span id="1-84"><span class="k">async</span> <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">Bot</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-85"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add cog to bot.</span>
+</span><span id="1-86">
+</span><span id="1-87"><span class="sd">    Args:</span>
+</span><span id="1-88"><span class="sd">        bot: Bot object.</span>
+</span><span id="1-89"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-90">    <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">add_cog</span><span class="p">(</span><span class="n">ForumCommands</span><span class="p">(</span><span class="n">bot</span><span class="p">))</span></div>
 
 </span></pre></div>
         </article>

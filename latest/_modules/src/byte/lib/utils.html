@@ -258,7 +258,7 @@ html.dark {
 </span><span id="1-13">    <span class="kn">from</span> <span class="nn">discord.ext.commands</span> <span class="kn">import</span> <span class="n">Context</span>
 </span><span id="1-14">    <span class="kn">from</span> <span class="nn">discord.ext.commands._types</span> <span class="kn">import</span> <span class="n">Check</span>
 </span><span id="1-15">
-</span><span id="1-16"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;is_byte_dev&quot;</span><span class="p">,)</span>
+</span><span id="1-16"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;is_byte_dev&quot;</span><span class="p">,</span> <span class="s2">&quot;linker&quot;</span><span class="p">)</span>
 </span><span id="1-17">
 </span><span id="1-18">
 <div class="viewcode-block" id="is_byte_dev">
@@ -285,6 +285,23 @@ html.dark {
 </span><span id="1-38">        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;byte-dev&quot;</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">roles</span><span class="p">)</span>
 </span><span id="1-39">
 </span><span id="1-40">    <span class="k">return</span> <span class="n">commands</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span></div>
+
+</span><span id="1-41">
+</span><span id="1-42">
+<div class="viewcode-block" id="linker">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.linker">[docs]</a>
+</span><span id="1-43"><span class="k">def</span> <span class="nf">linker</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show_embed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-44"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Markdown link, optionally with an embed.</span>
+</span><span id="1-45">
+</span><span id="1-46"><span class="sd">    Args:</span>
+</span><span id="1-47"><span class="sd">        title: The title of the link.</span>
+</span><span id="1-48"><span class="sd">        link: The URL of the link.</span>
+</span><span id="1-49"><span class="sd">        show_embed: Whether to show the embed or not.</span>
+</span><span id="1-50">
+</span><span id="1-51"><span class="sd">    Returns:</span>
+</span><span id="1-52"><span class="sd">        A Markdown link.</span>
+</span><span id="1-53"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-54">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">show_embed</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](&lt;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&gt;)&quot;</span></div>
 
 </span></pre></div>
         </article>
