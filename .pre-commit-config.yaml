@@ -131,7 +131,10 @@ repos:
             typing-extensions,
             "uvicorn[standard]",
             uvloop>=0.18.0,
-            litestar,
+            asyncpg,
+            "litestar[cli,structlog,standard]",
+            types-click,
+            asyncpg-stubs,
             polyfactory,
             discord-py,
           ]

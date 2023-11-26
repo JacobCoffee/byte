@@ -97,6 +97,19 @@ docs: docs-clean 									## Dump the existing built docs and rebuild them
 	@$(PDM_RUN_BIN) sphinx-build -M html docs docs/_build/ -E -a -j auto --keep-going
 
 # =============================================================================
+# Database
+# =============================================================================
+migrations:       ## Generate database migrations
+	@echo "ATTENTION: This operation will create a new database migration for any defined models changes."
+	@while [ -z "$$MIGRATION_MESSAGE" ]; do read -r -p "Migration message: " MIGRATION_MESSAGE; done ;
+	@$(ENV_PREFIX)app database make-migrations --autogenerate -m "$${MIGRATION_MESSAGE}"
+
+.PHONY: migrate
+migrate:          ## Apply database migrations
+	@echo "ATTENTION: Will apply all database migrations."
+	@$(ENV_PREFIX)app database upgrade
+
+# =============================================================================
 # Main
 # =============================================================================
 

@@ -22,6 +22,7 @@ API Reference
     domain/*
     domain/web/index
     domain/system/index
+    domain/db/index
 
 .. toctree::
     :titlesonly:
@@ -31,3 +32,4 @@ API Reference
 
     lib/*
     lib/log/index
+    lib/db/index

@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    hostname: db
+    environment:
+      POSTGRES_USER: "byte"
+      POSTGRES_PASSWORD: "bot"
+      POSTGRES_DB: "byte"
+
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+
+    healthcheck:
+      test:
+        - CMD
+        - pg_isready
+        - -U
+        - app
+      interval: 2s
+      timeout: 3s
+      retries: 40
+
+volumes:
+  db-data: {}
+  cache-data: {}

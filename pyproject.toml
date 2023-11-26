@@ -12,8 +12,9 @@ dependencies = [
     "litestar[jwt,opentelemetry,prometheus,standard,structlog]>=2.0.0b4",
     "pydantic-settings>=2.1.0",
     "anyio>=3.7.1",
-    "advanced-alchemy>=0.5.4",
+    "advanced-alchemy>=0.5.5",
     "certifi>=2023.11.17",
+    "asyncpg>=0.29.0",
 ]
 requires-python = ">=3.11,<4.0"
 readme = "README.md"
@@ -97,7 +98,7 @@ lint = [
 ]
 
 [project.scripts]
-app = "litestar.__main__:run_cli"
+app = "src.__main__:run_cli"
 
 [project.entry-points."litestar.commands"]
 run-bot = "src.cli:run_bot"
