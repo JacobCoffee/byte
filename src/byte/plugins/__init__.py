@@ -1,3 +1,11 @@
 """Pluggable modules for Byte."""
 
-__all__ = []
+from src.byte.plugins import admin, events, forums, general, testing
+
+__all__ = [
+    "admin",
+    "events",
+    "forums",
+    "general",
+    "testing",
+]
