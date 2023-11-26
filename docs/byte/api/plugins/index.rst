@@ -10,6 +10,7 @@ This includes things like commands, event handlers, and other features.
     :caption: Plugins
 
     admin
+    general
     github
     guild
     testing

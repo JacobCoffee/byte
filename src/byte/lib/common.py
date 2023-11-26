@@ -11,6 +11,8 @@ github_org_projects: Final = "https://github.com/orgs/litestar-org/projects"
 pypi_litestar: Final = "https://pypi.org/project/litestar/"
 pypi_polyfactory: Final = "https://pypi.org/project/polyfactory/"
 mcve: Final = "https://stackoverflow.com/help/minimal-reproducible-example"
+paste: Final = "https://paste.pythondiscord.com"
+markdown_guide: Final = "https://support.discord.com/hc/en-us/articles/210298617-Markdown-Text-101-Chat-Formatting-Bold-Italic-Underline-#h_01GY0DAKGXDEHE263BCAYEGFJA"
 
 # --- Assets
 litestar_logo_white: Final = "https://raw.githubusercontent.com/litestar-org/branding/main/assets/Branding%20-%20PNG%20-%20Transparent/Badge%20-%20White.png"
