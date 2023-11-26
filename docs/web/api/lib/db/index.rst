@@ -9,5 +9,4 @@ Documentation for the Database library.
     :titlesonly:
 
     base
-    utils
     orm

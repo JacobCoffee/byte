@@ -1,7 +1,7 @@
 """Core DB Package."""
 from __future__ import annotations
 
-from src.server.lib.db import orm, utils
+from src.server.lib.db import orm
 from src.server.lib.db.base import (
     async_session_factory,
     config,
@@ -11,7 +11,6 @@ from src.server.lib.db.base import (
 )
 
 __all__ = [
-    "utils",
     "config",
     "plugin",
     "engine",
