@@ -26,8 +26,6 @@ class GeneralCommands(Cog):
         Args:
             interaction: Interaction object.
         """
-        await interaction.response.send_message("Processing request...", ephemeral=True)
-
         embed = Embed(title="Paste long format code", color=0x42B1A8)
         embed.add_field(
             name="Paste Service",
@@ -41,7 +39,7 @@ class GeneralCommands(Cog):
         )
         embed.set_thumbnail(url=litestar_logo_yellow)
 
-        await interaction.followup.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
 
 async def setup(bot: Bot) -> None:
