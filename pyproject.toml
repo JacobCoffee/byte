@@ -232,8 +232,8 @@ known-first-party = ["src", "tests"]
     "B008", # Do not perform function calls in argument defaults
 ]
 "src/**/*.*" = ["PLR0913", "SLF001"]
-"src/database/base.py" = ["E501"]
-"src/database/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"src/server/lib/db/base.py" = ["E501"]
+"src/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
 "tests/**/*.*" = [
     "S101",
     "D",

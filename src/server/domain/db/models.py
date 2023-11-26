@@ -16,7 +16,7 @@ class GuildConfig(TimestampedDatabaseModel):
     __tablename__ = "guild_config"
     __table_args__ = {"comment": "Configuration for a Discord guild."}
 
-    guild_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
+    guild_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True)
     guild_name: Mapped[str] = mapped_column(String(100), nullable=False)
     prefix: Mapped[str] = mapped_column(String(5), nullable=False, server_default="!", default="!")
     help_channel_id: Mapped[int] = mapped_column(BigInteger, index=True)
@@ -108,7 +108,7 @@ class GuildSOTagsConfig(DatabaseModel, AuditColumns):
 
     __tablename__ = "guild_sotags_config"
     __table_args__ = (
-        UniqueConstraint("guild_id", "sotags_config_id"),
+        UniqueConstraint("guild_id", "sotag_config_id"),
         {"comment": "Configuration for a Discord guild's Stack Overflow tags."},
     )
 
