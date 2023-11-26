@@ -10,9 +10,8 @@ import structlog
 from litestar.logging.config import LoggingConfig
 
 from src.server.lib import settings
-
-from . import controller
-from .utils import EventFilter, msgspec_json_renderer
+from src.server.lib.log import controller
+from src.server.lib.log.utils import EventFilter, msgspec_json_renderer
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

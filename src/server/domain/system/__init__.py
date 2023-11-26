@@ -1,7 +1,7 @@
 """System domain."""
 from __future__ import annotations
 
-from . import controllers
+from src.server.domain.system import controllers
 
 __all__ = [
     "controllers",
