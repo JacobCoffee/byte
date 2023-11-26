@@ -3,8 +3,6 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from src.server.lib import db
-
 if TYPE_CHECKING:
     from litestar import Litestar
 
@@ -24,6 +22,7 @@ def create_app() -> Litestar:
     from src.server import domain
     from src.server.lib import (
         cors,
+        db,
         exceptions,
         log,
         openapi,

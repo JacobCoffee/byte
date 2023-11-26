@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from litestar.contrib.repository.filters import FilterTypes
 from litestar.pagination import OffsetPagination
 
-from . import system, urls, web
+from src.server.domain import db, system, urls, web
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -17,6 +17,7 @@ if TYPE_CHECKING:
 __all__ = [
     "system",
     "web",
+    "db",
     "urls",
     "routes",
     "signature_namespace",

@@ -40,7 +40,7 @@ class FieldSearchProtocol(Protocol):
     ) -> ModelT | None:
         """Select a single record.
 
-        Matches `advanced_alchemy.repository._async.SQLAlchemyAsyncRepository.get_one_or_none`
+        Matches :meth:`advanced_alchemy.repository._async.SQLAlchemyAsyncRepository.get_one_or_none`
         """
         ...
 
