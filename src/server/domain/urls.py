@@ -17,3 +17,7 @@ SYSTEM_HEALTH: Final = "/health"
 # --- Bot
 
 # --- Reports
+
+# --- Guilds
+GUILDS_API: Final = f"{OPENAPI_SCHEMA}/guilds"
+GUILDS_LIST: Final = f"{GUILDS_API}/list"

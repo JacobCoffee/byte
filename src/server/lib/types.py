@@ -1,7 +1,7 @@
 """Library module for type definitions to be used in the application."""
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, TypeAlias, TypeVar
+from typing import TYPE_CHECKING, Any, Literal, TypeAlias, TypeVar
 
 from advanced_alchemy import FilterTypes
 from advanced_alchemy.extensions.litestar import SQLAlchemyDTO
@@ -37,3 +37,7 @@ ModelDictDTOT: TypeAlias = dict[str, Any] | ModelT | DTOData
 """Type alias for model or dict DTOs."""
 ModelDictListDTOT: TypeAlias = list[ModelT | dict[str, Any]] | list[dict[str, Any]] | DTOData
 """Type alias for model or dict DTOs."""
+
+# -- App Types
+Status: TypeAlias = Literal["online", "offline", "degraded"]
+"""Type alias for health check status."""

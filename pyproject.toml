@@ -52,9 +52,11 @@ Youtube = 'https://www.youtube.com/@monorepo'
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
+[tool.hatch.metadata]
+allow-direct-references = true
+
 [tool.hatch.version]
 path = 'src/__metadata__.py'
-
 
 [tool.pdm.scripts]
 lint = "pre-commit run --all-files"

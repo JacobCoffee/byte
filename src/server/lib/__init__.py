@@ -4,6 +4,8 @@ from __future__ import annotations
 from src.server.lib import (
     cors,
     db,
+    dependencies,
+    dto,
     exceptions,
     log,
     openapi,
@@ -27,4 +29,6 @@ __all__ = [
     "serialization",
     "types",
     "db",
+    "dependencies",
+    "dto",
 ]
