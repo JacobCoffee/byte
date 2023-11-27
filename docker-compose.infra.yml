@@ -25,7 +25,7 @@ services:
         - CMD
         - pg_isready
         - -U
-        - app
+        - byte
       interval: 2s
       timeout: 3s
       retries: 40
