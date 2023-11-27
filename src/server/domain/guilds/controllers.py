@@ -1,4 +1,4 @@
-"""User Account Controllers."""
+"""Guilds Controllers."""
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -24,9 +24,9 @@ class GuildsController(Controller):
     dependencies = {"guilds_service": Provide(provides_guild_config_service)}
 
     @get(
-        operation_id="ListTeams",
-        name="teams:list",
-        summary="List Teams",
+        operation_id="ListGuilds",
+        name="guilds:list",
+        summary="List all guilds",
         path=urls.GUILDS_LIST,
     )
     async def list_guilds(
