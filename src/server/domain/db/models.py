@@ -17,7 +17,7 @@ class GuildConfig(TimestampedDatabaseModel):
     A single guild will contain base defaults (e.g., ``prefix``, boolean flags for linking, etc.)
     with configurable options that can be set by the guild owner or ``allowed_users``.
 
-    Part of the featureset of Byte is that you have interactivity with your git repositories,
+    Part of the feature set of Byte is that you have interactivity with your git repositories,
     StackOverflow, Discord forums, and other external services.
 
     Here, a guild should be able to configure their own GitHub organization, StackOverflow tags, etc.
