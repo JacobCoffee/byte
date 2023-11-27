@@ -2,11 +2,14 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from uuid import UUID
 
-from litestar.contrib.repository.filters import FilterTypes
+from litestar.dto import DTOData
 from litestar.pagination import OffsetPagination
+from litestar.types import TypeEncodersMap
 
 from server.domain import db, guilds, system, urls, web
+from server.domain.db.models import GuildConfig
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -31,7 +34,11 @@ routes: list[ControllerRouterHandler] = [
 """Routes for the application."""
 
 signature_namespace: Mapping[str, Any] = {
-    "FilterTypes": FilterTypes,
+    "UUID": UUID,
+    "GuildConfig": GuildConfig,
     "OffsetPagination": OffsetPagination,
+    "GuildConfigService": guilds.services.GuildConfigService,
+    "DTOData": DTOData,
+    "TypeEncodersMap": TypeEncodersMap,
 }
 """Namespace for the application signature."""

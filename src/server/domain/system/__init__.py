@@ -5,4 +5,6 @@ from server.domain.system import controllers
 
 __all__ = [
     "controllers",
+    "dtos",
+    "helpers",
 ]

@@ -5,6 +5,7 @@ from server.lib import (
     cors,
     db,
     dependencies,
+    dto,
     exceptions,
     log,
     openapi,
@@ -29,4 +30,5 @@ __all__ = [
     "types",
     "db",
     "dependencies",
+    "dto",
 ]

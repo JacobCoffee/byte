@@ -1,39 +1,87 @@
 """Guild services."""
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, TypeVar
 
-from server.domain.db.models import Guild
-from server.lib import log
-from server.lib.repository import SQLAlchemyAsyncSlugRepository
-from server.lib.service import SQLAlchemyAsyncRepositoryService
+from src.server.domain.db.models import GuildAllowedUsersConfig, GuildConfig, GuildGitHubConfig, GuildSOTagsConfig
+from src.server.lib import log
+from src.server.lib.repository import SQLAlchemyAsyncRepository, SQLAlchemyAsyncSlugRepository
+from src.server.lib.service import SQLAlchemyAsyncRepositoryService
 
-__all__ = ("GuildsRepository", "GuildsService")
+__all__ = (
+    "GuildAllowedUsersConfigRepository",
+    "GuildAllowedUsersConfigService",
+    "GuildConfigRepository",
+    "GuildConfigService",
+    "GuildGitHubConfigRepository",
+    "GuildGitHubConfigService",
+    "GuildSOTagsConfigRepository",
+    "GuildSOTagsConfigService",
+)
 
+T = TypeVar("T")
 
 logger = log.get_logger()
 
 
-class GuildsRepository(SQLAlchemyAsyncSlugRepository[Guild]):
-    """Guilds SQLAlchemy Repository."""
+class GuildConfigRepository(SQLAlchemyAsyncSlugRepository[GuildConfig]):
+    """Guild Config SQLAlchemy Repository."""
 
-    model_type = Guild
+    model_type = GuildConfig
 
 
-class GuildsService(SQLAlchemyAsyncRepositoryService[Guild]):
+class GuildConfigService(SQLAlchemyAsyncRepositoryService[GuildConfig]):
     """Handles basic operations for a guild."""
 
-    repository_type = GuildsRepository
+    repository_type = GuildConfigRepository
     match_fields = ["name"]
 
-    async def to_model(self, data: Guild | dict[str, Any], operation: str | None = None) -> Guild:
-        """Convert data to a model.
+    async def to_model(self, data: GuildConfig | dict[str, Any], operation: str | None = None) -> GuildConfig:
+        """Convert data of GuildConfig to a model of GuildConfig.
 
         Args:
-            data (Guild | dict[str, Any]): Data to convert to a model
+            data (GuildConfig | dict[str, Any]): Data to convert to a model
             operation (str | None): Operation to perform on the data
 
         Returns:
-            Project: Converted model
+            GuildConfig: Converted model
         """
+        if isinstance(data, dict) and "slug" not in data and operation == "create":
+            data["slug"] = await self.repository.get_available_slug(data["name"])  # type: ignore[attr-defined]
         return await super().to_model(data, operation)
+
+
+class GuildGitHubConfigRepository(SQLAlchemyAsyncRepository[GuildGitHubConfig]):
+    """GuildGitHubConfig SQLAlchemy Repository."""
+
+    model_type = GuildGitHubConfig
+
+
+class GuildGitHubConfigService(SQLAlchemyAsyncRepositoryService[GuildGitHubConfig]):
+    """Handles basic operations for the guilds' GitHub config."""
+
+    repository_type = GuildGitHubConfigRepository
+
+
+class GuildSOTagsConfigRepository(SQLAlchemyAsyncRepository[GuildSOTagsConfig]):
+    """GuildSOTagsConfig SQLAlchemy Repository."""
+
+    model_type = GuildSOTagsConfig
+
+
+class GuildSOTagsConfigService(SQLAlchemyAsyncRepositoryService[GuildSOTagsConfig]):
+    """Handles basic operations for the guilds' StackOverflow tags config."""
+
+    repository_type = GuildSOTagsConfigRepository
+
+
+class GuildAllowedUsersConfigRepository(SQLAlchemyAsyncRepository[GuildAllowedUsersConfig]):
+    """GuildAllowedUsersConfig SQLAlchemy Repository."""
+
+    model_type = GuildAllowedUsersConfig
+
+
+class GuildAllowedUsersConfigService(SQLAlchemyAsyncRepositoryService[GuildAllowedUsersConfig]):
+    """Handles basic operations for the guilds' Allowed Users config."""
+
+    repository_type = GuildAllowedUsersConfigRepository

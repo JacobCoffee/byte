@@ -18,7 +18,10 @@ SYSTEM_HEALTH: Final = "/health"
 
 # --- Reports
 
-# --- API
+# -- API
+
+# --- Guilds
+GUILDS_API: Final = f"{OPENAPI_SCHEMA}/guilds"
 GUILD_CREATE: Final = f"{OPENAPI_SCHEMA}/guilds/create"
 """Create guild URL."""
 GUILD_UPDATE: Final = f"{OPENAPI_SCHEMA}/guilds/update"

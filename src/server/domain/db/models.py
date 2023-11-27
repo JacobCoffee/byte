@@ -8,9 +8,16 @@ from sqlalchemy import BigInteger, ForeignKey, String, UniqueConstraint
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-__all__ = ("GitHubConfig", "Guild", "SOTagsConfig", "User")
 
-
+__all__ = (
+    "GitHubConfig",
+    "GuildConfig",
+    "GuildGitHubConfig",
+    "GuildSOTagsConfig",
+    "SOTagConfig",
+    "User",
+    "GuildAllowedUsersConfig",
+)
 class Guild(UUIDAuditBase):
     """Guild configuration.
 

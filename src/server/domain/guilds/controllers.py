@@ -1,81 +1,43 @@
-"""Guild controller."""
+"""User Account Controllers."""
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from litestar import Controller, get, post
+from litestar import Controller, get
 from litestar.di import Provide
-from litestar.params import Dependency, Parameter
 
-from server.domain import urls
-from server.domain.guilds.dependencies import provides_guilds_service
-from server.domain.guilds.schemas import GuildSchema
-from server.domain.guilds.services import GuildsService  # noqa: TCH001
+from src.server.domain import urls
+from src.server.domain.db.models import GuildConfig  # noqa: TCH001
+from src.server.domain.guilds.dependencies import provides_guild_config_service
+from src.server.domain.guilds.services import GuildConfigService  # noqa: TCH001
 
 if TYPE_CHECKING:
-    from advanced_alchemy import FilterTypes
     from litestar.pagination import OffsetPagination
 
-__all__ = ("GuildController",)
+__all__ = ["GuildsController"]
 
 
-class GuildController(Controller):
-    """Controller for guild-based routes."""
+class GuildsController(Controller):
+    """Routes for guilds."""
 
     tags = ["Guilds"]
-    dependencies = {"guilds_service": Provide(provides_guilds_service)}
+    dependencies = {"guilds_service": Provide(provides_guild_config_service)}
 
     @get(
-        operation_id="Guilds",
-        name="guilds:list",
-        summary="List Guilds",
-        path=urls.GUILD_LIST,
+        operation_id="ListTeams",
+        name="teams:list",
+        summary="List Teams",
+        path=urls.GUILDS_LIST,
     )
     async def list_guilds(
         self,
-        guilds_service: GuildsService,
-        filters: list[FilterTypes] = Dependency(skip_validation=True),
-    ) -> OffsetPagination[GuildSchema]:
+        guilds_service: GuildConfigService,
+        # filters: list[FilterTypes] = Dependency(skip_validation=True),
+    ) -> OffsetPagination[GuildConfig]:
         """List guilds.
 
-        Args:
-            guilds_service (GuildsService): Guilds service
-            filters (list[FilterTypes]): Filters
-
-        Returns:
-            list[Guild]: List of guilds
+        .. todo:: Add guards and return only what the user can access.
+            Re-enable filters after resolving ``ImproperlyConfiguredException``.
         """
-        results, total = await guilds_service.list_and_count(*filters)
-        return guilds_service.to_schema(GuildSchema, results, total, *filters)
-
-    @post(
-        operation_id="CreateGuild",
-        name="guilds:create",
-        summary="Create a new guild.",
-        path=urls.GUILD_CREATE,
-    )
-    async def create_guild(
-        self,
-        guilds_service: GuildsService,
-        guild_id: int = Parameter(
-            title="Guild ID",
-            description="The guild ID.",
-        ),
-        guild_name: str = Parameter(
-            title="Guild Name",
-            description="The guild name.",
-        ),
-    ) -> str:
-        """Create a guild.
-
-        Args:
-            guilds_service (GuildsService): Guilds service
-            guild_id (int): Guild ID
-            guild_name (str): Guild name
-
-        Returns:
-            Guild: Created guild object
-        """
-        new_guild = {"guild_id": guild_id, "guild_name": guild_name}
-        await guilds_service.create(new_guild)
-        return f"Guild {guild_name} created."
+        results, total = await guilds_service.list_and_count()
+        return guilds_service.to_dto(results, total)
