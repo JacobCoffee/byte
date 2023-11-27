@@ -28,7 +28,7 @@ class GuildConfig(TimestampedDatabaseModel):
 
     guild_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True)
     guild_name: Mapped[str] = mapped_column(String(100))
-    prefix: Mapped[str] = mapped_column(String(5), nullable=False, server_default="!", default="!")
+    prefix: Mapped[str] = mapped_column(String(5), server_default="!", default="!")
     help_channel_id: Mapped[int] = mapped_column(BigInteger, index=True)
     sync_label: Mapped[str | None]
     issue_linking: Mapped[bool] = mapped_column(default=False)
