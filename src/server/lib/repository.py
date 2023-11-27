@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import random
 import string
-from typing import TYPE_CHECKING, Any, Protocol
+from typing import TYPE_CHECKING, Any
 
 from advanced_alchemy.repository import SQLAlchemyAsyncRepository
 from advanced_alchemy.repository.typing import ModelT
@@ -13,7 +13,6 @@ from src.utils import slugify
 
 if TYPE_CHECKING:
     from litestar.config.app import AppConfig
-    from sqlalchemy import Select, StatementLambdaElement
 
 __all__ = ["SQLAlchemyAsyncRepository", "SQLAlchemyAsyncSlugRepository", "on_app_init"]
 
@@ -27,22 +26,6 @@ def on_app_init(app_config: AppConfig) -> AppConfig:
         },
     )
     return _on_app_init(app_config)
-
-
-class FieldSearchProtocol(Protocol):
-    """Protocol for adding search by field capabilities to a repository."""
-
-    async def get_one_or_none(
-        self,
-        auto_expunge: bool | None = None,
-        statement: Select[tuple[ModelT]] | StatementLambdaElement | None = None,
-        **kwargs: Any,
-    ) -> ModelT | None:
-        """Select a single record.
-
-        Matches :meth:`advanced_alchemy.repository._async.SQLAlchemyAsyncRepository.get_one_or_none`
-        """
-        ...
 
 
 class SQLAlchemyAsyncSlugRepository(SQLAlchemyAsyncRepository[ModelT]):
