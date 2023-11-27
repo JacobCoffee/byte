@@ -148,28 +148,43 @@ html.dark {
 <li class="toctree-l2"><a class="reference internal" href="web/api/cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web/api/metadata.html">metadata</a></li>
 <li class="toctree-l2"><a class="reference internal" href="web/api/utils.html">utils</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/domain/init.html">Domain Initializer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/domain/urls.html">urls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/domain/web/index.html">web</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="web/api/domain/web/controllers.html">controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/domain/index.html">domain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/init.html">Domain Initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/urls.html">urls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/system/index.html">system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/system/controllers.html">controllers</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/domain/system/index.html">system</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="web/api/domain/system/controllers.html">controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/web/index.html">web</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/web/controllers.html">controllers</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/cors.html">cors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/exceptions.html">exceptions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/openapi.html">openapi</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/schema.html">schema</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/serialization.html">serialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/settings.html">settings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/static_files.html">static files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/template.html">template</a></li>
-<li class="toctree-l2"><a class="reference internal" href="web/api/lib/log/index.html">logging</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="web/api/lib/log/controller.html">controller</a></li>
-<li class="toctree-l3"><a class="reference internal" href="web/api/lib/log/init.html">init</a></li>
-<li class="toctree-l3"><a class="reference internal" href="web/api/lib/log/utils.html">utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/db/index.html">Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/db/models.html">models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/schema.html">schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/serialization.html">serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/static_files.html">static files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/template.html">template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/log/index.html">logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/controller.html">controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/init.html">init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/db/index.html">Database Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/db/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/db/orm.html">orm</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -197,23 +212,30 @@ html.dark {
     <ul>
 <li><a class="reference internal" href="#unreleased">[unreleased]</a><ul>
 <li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id2">Release [v0.2.0] - 2023-11-15</a><ul>
-<li><a class="reference internal" href="#id4">Bug Fixes</a></li>
-<li><a class="reference internal" href="#documentation">Documentation</a></li>
 <li><a class="reference internal" href="#features">Features</a></li>
 <li><a class="reference internal" href="#miscellaneous-tasks">Miscellaneous Tasks</a></li>
+<li><a class="reference internal" href="#infra">Infra</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Release [v0.3.0] - 2023-11-20</a><ul>
+<li><a class="reference internal" href="#id2">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">Release [v0.2.0] - 2023-11-15</a><ul>
+<li><a class="reference internal" href="#id6">Bug Fixes</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#id7">Features</a></li>
+<li><a class="reference internal" href="#id8">Miscellaneous Tasks</a></li>
 <li><a class="reference internal" href="#ci">Ci</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id6">Release [v0.1.0] - 2023-11-08</a><ul>
-<li><a class="reference internal" href="#id7">Bug Fixes</a></li>
-<li><a class="reference internal" href="#id8">Documentation</a></li>
-<li><a class="reference internal" href="#id10">Features</a></li>
-<li><a class="reference internal" href="#id11">Miscellaneous Tasks</a></li>
-<li><a class="reference internal" href="#id12">Ci</a></li>
-<li><a class="reference internal" href="#infra">Infra</a></li>
+<li><a class="reference internal" href="#id10">Release [v0.1.0] - 2023-11-08</a><ul>
+<li><a class="reference internal" href="#id11">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id12">Documentation</a></li>
+<li><a class="reference internal" href="#id14">Features</a></li>
+<li><a class="reference internal" href="#id15">Miscellaneous Tasks</a></li>
+<li><a class="reference internal" href="#id16">Ci</a></li>
+<li><a class="reference internal" href="#id17">Infra</a></li>
 </ul>
 </li>
 </ul>
@@ -275,26 +297,65 @@ html.dark {
 <p>All commits to this project will be documented in this file.</p>
 <section id="unreleased">
 <h2>[unreleased]<a class="headerlink" href="#unreleased" title="Link to this heading">¶</a></h2>
-<p><a class="reference external" href="https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0">860bd65</a> … <a class="reference external" href="https://github.com/JacobCoffee/byte/commit/">860bd65</a> | <a class="reference external" href="https://github.com/JacobCoffee/byte/compare/860bd656b438e546d552c7f6a090a2cd0719a6f0...">See diff for</a></p>
 <section id="bug-fixes">
 <h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/b84431dd6ef3d80cd1f933bb4ede8b45090a3377">b84431d</a>)  - Update repo link (Jacob Coffee)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/d2de3b7e93bf697c66c8e0acb9780708669f1fa4">d2de3b7</a>)  - Mention specified user instead of author of command (Jacob Coffee)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/a138f5b9854b156a001bd31a3b19455e68b3f3bc">a138f5b</a>)  - Use correct user for healthcheck (Jacob Coffee)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/e95da39d7f89631ee19a5aead6f66d0abe065816">e95da39</a>)  - Use correct types (Jacob Coffee)</p></li>
+</ul>
+</section>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/a06c77f781d613fde497e5ff9eb4f5abd27fd576">a06c77f</a>)  - Adds a new slash command for performing a global sync (#27) (Alc-Alc)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/e936605e97474a89f90162261148bda1652c82c3">e936605</a>)  - Add <code class="docutils literal notranslate"><span class="pre">mcve</span></code> command (#30) (Jacob Coffee)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/96bcf7ed3ace5763a85e1c6af16db073ba2bed62">96bcf7e</a>)  - Add helper function for markdown links (Jacob Coffee)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/d03b845439fa5ee5676edabfd1bdc904ce376e59">d03b845</a>)  - Flesh out db schema more (Jacob Coffee)</p></li>
+</ul>
+</section>
+<section id="miscellaneous-tasks">
+<h3>Miscellaneous Tasks<a class="headerlink" href="#miscellaneous-tasks" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/fe0818199634b93e1280715b5d14fdffd1ced63d">fe08181</a>)  - Remove unused module (Jacob Coffee)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/9520e9305d6244022a989dbcb09bd6d2add82888">9520e93</a>)  - Initial migration schema (Jacob Coffee)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/4c7676e7fa38b76284f199d864bab534f766e0c2">4c7676e</a>)  - Clean up imports (Jacob Coffee)</p></li>
+</ul>
+</section>
+<section id="infra">
+<h3>Infra<a class="headerlink" href="#infra" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/bba35b8cae53455c848861194b1d1b01f8b7ef63">bba35b8</a>)  - Update railway config for db (Jacob Coffee)</p></li>
+</ul>
+</section>
+</section>
+<section id="id1">
+<h2><a class="reference external" href="https://github.com/JacobCoffee/byte/releases/tag/v0.3.0">Release [v0.3.0] - 2023-11-20</a><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/JacobCoffee/byte/commits/v0.3.0">See All commits in v0.3.0</a></p></li>
+</ul>
+<p><a class="reference external" href="https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0">860bd65</a> … <a class="reference external" href="https://github.com/JacobCoffee/byte/commit/d30c1d78933c78eba8235a167bbd07a83005dfcc">d30c1d7</a> | <a class="reference external" href="https://github.com/JacobCoffee/byte/compare/860bd656b438e546d552c7f6a090a2cd0719a6f0...d30c1d78933c78eba8235a167bbd07a83005dfcc">See diff for v0.3.0</a></p>
+<section id="id2">
+<h3>Bug Fixes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/98d5dc9918aae97e46c728a1d59d4cbfec740c44">98d5dc9</a>)  - Replace incorrect repo links (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/fb95f0241458b0fc53d36d44b9b6111e183113ff">fb95f02</a>)  - Replace incorrect repo links (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/f9ee620e3d98b991fdc1f0d978c104245f3109bd">f9ee620</a>)  - Replace incorrect repo link (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/2be3030f25de18a6ec343db62e5bff98536160e4">2be3030</a>)  - Update links (Jacob Coffee)</p></li>
-<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/ae4ec6015866826acfbceb9a9cead55e708c9664">ae4ec60</a>)  - Resolve hybrid commands not displaying slash commands (#26) (Alc-Alc), Co-authored-by:Alc-Alc &lt;alc&#64;localhost&gt;</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/ae4ec6015866826acfbceb9a9cead55e708c9664">ae4ec60</a>)  - Resolve hybrid commands not displaying slash commands (#26) (Alc-Alc)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/d30c1d78933c78eba8235a167bbd07a83005dfcc">d30c1d7</a>)  - Update deps (Jacob Coffee)</p></li>
 </ul>
 </section>
 </section>
-<section id="id2">
-<h2><a class="reference external" href="https://github.com/JacobCoffee/byte/releases/tag/v0.2.0">Release [v0.2.0] - 2023-11-15</a><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h2><a class="reference external" href="https://github.com/JacobCoffee/byte/releases/tag/v0.2.0">Release [v0.2.0] - 2023-11-15</a><a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/JacobCoffee/byte/commits/v0.2.0">See All commits in v0.2.0</a></p></li>
 </ul>
-<p><a class="reference external" href="https://github.com/JacobCoffee/byte/commit/f175b4ac69de862682b8c2f82e7518562365ae5c">f175b4a</a> … <a class="reference external" href="https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0">f175b4a</a> | <a class="reference external" href="https://github.com/JacobCoffee/byte/compare/f175b4ac69de862682b8c2f82e7518562365ae5c...860bd656b438e546d552c7f6a090a2cd0719a6f0">See diff for v0.2.0</a></p>
-<section id="id4">
-<h3>Bug Fixes<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/JacobCoffee/byte/commit/f175b4ac69de862682b8c2f82e7518562365ae5c">f175b4a</a> … <a class="reference external" href="https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0">860bd65</a> | <a class="reference external" href="https://github.com/JacobCoffee/byte/compare/f175b4ac69de862682b8c2f82e7518562365ae5c...860bd656b438e546d552c7f6a090a2cd0719a6f0">See diff for v0.2.0</a></p>
+<section id="id6">
+<h3>Bug Fixes<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/afe39940a6212f470294e92fe86ef6610b120456">afe3994</a>)  - Update example <code class="docutils literal notranslate"><span class="pre">.env</span></code> (Jacob Coffee)</p></li>
 </ul>
@@ -302,24 +363,24 @@ html.dark {
 <section id="documentation">
 <h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/97bac2821cbb43b53162e7c3e577c80d80a847bc">97bac28</a>)  - Add allcontributors[bot] as a contributor for projectManagement (#18) (allcontributors[bot]), Co-authored-by:allcontributors[bot] &lt;46447321+allcontributors[bot]&#64;users.noreply.github.com&gt;, Co-authored-by:Jacob Coffee &lt;jacob&#64;z7x.org&gt;</p></li>
-<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/c3ce85064e26384b7e3dc338e3c2ead7a127a462">c3ce850</a>)  - Add Alc-Alc as a contributor for code, and ideas (#19) (allcontributors[bot]), Co-authored-by:allcontributors[bot] &lt;46447321+allcontributors[bot]&#64;users.noreply.github.com&gt;, Co-authored-by:Jacob Coffee &lt;jacob&#64;z7x.org&gt;</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/97bac2821cbb43b53162e7c3e577c80d80a847bc">97bac28</a>)  - Add allcontributors[bot] as a contributor for projectManagement (#18) (allcontributors[bot])</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/c3ce85064e26384b7e3dc338e3c2ead7a127a462">c3ce850</a>)  - Add Alc-Alc as a contributor for code, and ideas (#19) (allcontributors[bot])</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/71a04f241ca8d2bc3a26cd39472eef4c0fd60f2f">71a04f2</a>)  - Update readme (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/c5902885ab1cca187090ec1e1dfe2a4801fd804c">c590288</a>)  - Reenable packaages (Jacob Coffee)</p></li>
-<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/afef867dce1dcaea9ff37b120ed416f518182a60">afef867</a>)  - Update to latest (#20) (Jacob Coffee), Co-authored-by:Alc-Alc &lt;45509143+Alc-Alc&#64;users.noreply.github.com&gt;, Co-authored-by:Alc-Alc &lt;alc&#64;localhost&gt;</p></li>
-<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/c139ff6067f06080003a08989b21bf73321a221c">c139ff6</a>)  - Add Alc-Alc as a contributor for infra (#23) (allcontributors[bot]), Co-authored-by:allcontributors[bot] &lt;46447321+allcontributors[bot]&#64;users.noreply.github.com&gt;</p></li>
-<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/dde5c87d73e1378be9356767d4cabb89b73bde22">dde5c87</a>)  - Add JacobCoffee as a contributor for doc, infra, and 2 more (#24) (allcontributors[bot]), Co-authored-by:allcontributors[bot] &lt;46447321+allcontributors[bot]&#64;users.noreply.github.com&gt;</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/afef867dce1dcaea9ff37b120ed416f518182a60">afef867</a>)  - Update to latest (#20) (Jacob Coffee)</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/c139ff6067f06080003a08989b21bf73321a221c">c139ff6</a>)  - Add Alc-Alc as a contributor for infra (#23) (allcontributors[bot])</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/dde5c87d73e1378be9356767d4cabb89b73bde22">dde5c87</a>)  - Add JacobCoffee as a contributor for doc, infra, and 2 more (#24) (allcontributors[bot])</p></li>
 </ul>
 </section>
-<section id="features">
-<h3>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h3>
+<section id="id7">
+<h3>Features<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/603d644ae057fa5a6fe586e80be5dee0a6d3ab49">603d644</a>)  - Add <code class="docutils literal notranslate"><span class="pre">!</span></code> as command prefix in addition to an env specific command prefix (#15) (Alc-Alc), Co-authored-by:Alc-Alc &lt;alc&#64;localhost&gt;</p></li>
+<li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/603d644ae057fa5a6fe586e80be5dee0a6d3ab49">603d644</a>)  - Add <code class="docutils literal notranslate"><span class="pre">!</span></code> as command prefix in addition to an env specific command prefix (#15) (Alc-Alc)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/211f50fc685054d7508ed283ca7693945946c2a3">211f50f</a>)  - Replace help thread with embed (#16) (Jacob Coffee)</p></li>
 </ul>
 </section>
-<section id="miscellaneous-tasks">
-<h3>Miscellaneous Tasks<a class="headerlink" href="#miscellaneous-tasks" title="Link to this heading">¶</a></h3>
+<section id="id8">
+<h3>Miscellaneous Tasks<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/0d1f1020f17be28ff06dacdc0599f51a0633e257">0d1f102</a>)  - Update deps (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/0e861d1c72d8c607fd758fbc851813faca9275ee">0e861d1</a>)  - Rename to correct extension (Jacob Coffee)</p></li>
@@ -333,20 +394,20 @@ html.dark {
 </ul>
 </section>
 </section>
-<section id="id6">
-<h2><a class="reference external" href="https://github.com/JacobCoffee/byte/releases/tag/v0.1.0">Release [v0.1.0] - 2023-11-08</a><a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id10">
+<h2><a class="reference external" href="https://github.com/JacobCoffee/byte/releases/tag/v0.1.0">Release [v0.1.0] - 2023-11-08</a><a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/JacobCoffee/byte/commits/v0.1.0">See All commits in v0.1.0</a></p></li>
 </ul>
-<section id="id7">
-<h3>Bug Fixes<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<section id="id11">
+<h3>Bug Fixes<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/f83609e1969dbecded57dff723cdd5ad64508067">f83609e</a>)  - Make <code class="docutils literal notranslate"><span class="pre">solve</span></code> command tag posts correctly (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/1141e7bb2e7c260a3882ab1e83031dc78bab1f8e">1141e7b</a>)  - Fix links (Jacob Coffee)</p></li>
 </ul>
 </section>
-<section id="id8">
-<h3>Documentation<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h3>
+<section id="id12">
+<h3>Documentation<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/8705637a3401bb519b7a677fa6bb01df1fc3fcd5">8705637</a>)  - Update readme (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/298a60fbc3e4998eb37c285612ab1f5f14af576e">298a60f</a>)  - Source api docs (Jacob Coffee)</p></li>
@@ -354,31 +415,31 @@ html.dark {
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/d900885831b7e6c10b71fed7783826182d41a5ec">d900885</a>)  - Update readme (Jacob Coffee)</p></li>
 </ul>
 </section>
-<section id="id10">
-<h3>Features<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<section id="id14">
+<h3>Features<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/95b017e1f70d2c765cae06f719f0be87b99fd3c1">95b017e</a>)  - Initial commit (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/23beff6925b00149f73843389ffcfd60822a073c">23beff6</a>)  - Add presence to bot (Jacob Coffee)</p></li>
 </ul>
 </section>
-<section id="id11">
-<h3>Miscellaneous Tasks<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h3>
+<section id="id15">
+<h3>Miscellaneous Tasks<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/472043bec39549652ce6d447f8401875a4393b1c">472043b</a>)  - Update packages (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/6a936340c33c5225b52eec95ee0bc3c337174536">6a93634</a>)  - Remove cname (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/b8455538ec3e37d7091a6baa1b94b64da99afd27">b845553</a>)  - Update deps (Jacob Coffee)</p></li>
 </ul>
 </section>
-<section id="id12">
-<h3>Ci<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<section id="id16">
+<h3>Ci<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/f5aca6c60500cb4785b9336fcc2b2e7ac2343a89">f5aca6c</a>)  - Add templates (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/bf5f0b3dd543f1d30e650ab5521e929e19e33d99">bf5f0b3</a>)  - Use only python3.11 (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/8777acca14c51b0aa68af9cdd86d0c09f5e41969">8777acc</a>)  - Add railway configs (Jacob Coffee)</p></li>
 </ul>
 </section>
-<section id="infra">
-<h3>Infra<a class="headerlink" href="#infra" title="Link to this heading">¶</a></h3>
+<section id="id17">
+<h3>Infra<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/dbff0f45a08c7796fe0535ef15dcbd13e35ffe99">dbff0f4</a>)  - Fix Makefile (Jacob Coffee)</p></li>
 <li><p>(<a class="reference external" href="https://github.com/JacobCoffee/byte/commit/d3aef8987338bb8f9bdbce656588c5512e631db1">d3aef89</a>)  - Update settings files (#12) (Jacob Coffee)</p></li>
