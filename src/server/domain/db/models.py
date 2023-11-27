@@ -8,7 +8,15 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.server.lib.db.orm import DatabaseModel, TimestampedDatabaseModel
 
-__all__ = ("GitHubConfig", "GuildConfig", "GuildGitHubConfig", "GuildSOTagsConfig", "SOTagConfig", "User")
+__all__ = (
+    "GitHubConfig",
+    "GuildConfig",
+    "GuildGitHubConfig",
+    "GuildSOTagsConfig",
+    "SOTagConfig",
+    "User",
+    "GuildAllowedUsersConfig",
+)
 
 
 class GuildConfig(TimestampedDatabaseModel):
