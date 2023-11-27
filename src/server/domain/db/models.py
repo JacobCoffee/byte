@@ -11,7 +11,16 @@ __all__ = ("GitHubConfig", "GuildConfig")
 
 
 class GuildConfig(TimestampedDatabaseModel):
-    """Guild configuration."""
+    """Guild configuration.
+
+    A single guild will contain base defaults (e.g., ``prefix``, boolean flags for linking, etc.)
+    with configurable options that can be set by the guild owner or ``allowed_users``.
+
+    Part of the featureset of Byte is that you have interactivity with your git repositories,
+    StackOverflow, Discord forums, and other external services.
+
+    Here, a guild should be able to configure their own GitHub organization, StackOverflow tags, etc.
+    """
 
     __tablename__ = "guild_config"
     __table_args__ = {"comment": "Configuration for a Discord guild."}
@@ -50,6 +59,7 @@ class GuildConfig(TimestampedDatabaseModel):
 
 class GuildGitHubConfig(DatabaseModel, AuditColumns):
     """SQLAlchemy association model representing a guild GitHub config."""
+    """SQLAlchemy association model representing a guild's unique GitHub config."""
 
     __tablename__ = "guild_github_config"
     __table_args__ = (
@@ -83,7 +93,12 @@ class GuildGitHubConfig(DatabaseModel, AuditColumns):
 
 
 class GitHubConfig(TimestampedDatabaseModel):
-    """GitHub configuration."""
+    """GitHub configuration.
+
+    A guild will be able to configure which organization or user they want as a default
+    base, which repository they want as a default, and whether they would like to sync
+    discussions with forum posts.
+    """
 
     __tablename__ = "github_config"
     __table_args__ = {"comment": "GitHub configuration for a guild."}
@@ -138,7 +153,12 @@ class GuildSOTagsConfig(DatabaseModel, AuditColumns):
 
 
 class SOTagConfig(DatabaseModel):
-    """Stack Overflow tag configuration."""
+    """Stack Overflow tag configuration.
+
+    A guild will be able to configure which Stack Overflow tags they want to monitor
+    and report on. Byte will then utilize the StackOverflow API to fetch new questions
+    and post them to the guild's configured channel.
+    """
 
     __tablename__ = "sotag_config"
     __table_args__ = {"comment": "Configuration for Stack Overflow tags."}
@@ -158,6 +178,14 @@ class SOTagConfig(DatabaseModel):
 
 class GuildAllowedUsersConfig(DatabaseModel, AuditColumns):
     """SQLAlchemy association model for a guild's allowed users config."""
+    """SQLAlchemy association model for a guild's allowed users' config.
+
+    A guild normally has a set of users to perform administrative actions, but sometimes
+    we don't want to give full administrative access to a user.
+
+    This model allows us to configure which users are allowed to perform administrative
+    actions on Byte specifically without giving them full administrative access to the Discord guild.
+    """
 
     __tablename__ = "guild_allowed_users_config"
     __table_args__ = (
@@ -192,6 +220,15 @@ class GuildAllowedUsersConfig(DatabaseModel, AuditColumns):
 
 class User(DatabaseModel, AuditColumns):
     """SQLAlchemy model representing a user."""
+    """SQLAlchemy model representing a user.
+
+    .. todo:: This may not really be needed?
+
+    Currently, a user in the Byte context is an individual user assigned to the
+    guild's allowed users config.
+
+    In the future we may want to expand this to allow for more granular permissions.
+    """
 
     __tablename__ = "user"
     __table_args__ = {"comment": "A user."}

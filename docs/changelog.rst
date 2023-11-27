@@ -7,7 +7,39 @@ All commits to this project will be documented in this file.
 [unreleased]
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-`860bd65 <https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0>`_ ... `860bd65 <https://github.com/JacobCoffee/byte/commit/>`_ | `See diff for  <https://github.com/JacobCoffee/byte/compare/860bd656b438e546d552c7f6a090a2cd0719a6f0...>`_
+Bug Fixes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* (`b84431d <https://github.com/JacobCoffee/byte/commit/b84431dd6ef3d80cd1f933bb4ede8b45090a3377>`_)  - Update repo link (Jacob Coffee)
+* (`d2de3b7 <https://github.com/JacobCoffee/byte/commit/d2de3b7e93bf697c66c8e0acb9780708669f1fa4>`_)  - Mention specified user instead of author of command (Jacob Coffee)
+* (`a138f5b <https://github.com/JacobCoffee/byte/commit/a138f5b9854b156a001bd31a3b19455e68b3f3bc>`_)  - Use correct user for healthcheck (Jacob Coffee)
+* (`e95da39 <https://github.com/JacobCoffee/byte/commit/e95da39d7f89631ee19a5aead6f66d0abe065816>`_)  - Use correct types (Jacob Coffee)
+
+Features
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* (`a06c77f <https://github.com/JacobCoffee/byte/commit/a06c77f781d613fde497e5ff9eb4f5abd27fd576>`_)  - Adds a new slash command for performing a global sync (#27) (Alc-Alc)
+* (`e936605 <https://github.com/JacobCoffee/byte/commit/e936605e97474a89f90162261148bda1652c82c3>`_)  - Add ``mcve`` command (#30) (Jacob Coffee)
+* (`96bcf7e <https://github.com/JacobCoffee/byte/commit/96bcf7ed3ace5763a85e1c6af16db073ba2bed62>`_)  - Add helper function for markdown links (Jacob Coffee)
+* (`d03b845 <https://github.com/JacobCoffee/byte/commit/d03b845439fa5ee5676edabfd1bdc904ce376e59>`_)  - Flesh out db schema more (Jacob Coffee)
+
+Miscellaneous Tasks
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* (`fe08181 <https://github.com/JacobCoffee/byte/commit/fe0818199634b93e1280715b5d14fdffd1ced63d>`_)  - Remove unused module (Jacob Coffee)
+* (`9520e93 <https://github.com/JacobCoffee/byte/commit/9520e9305d6244022a989dbcb09bd6d2add82888>`_)  - Initial migration schema (Jacob Coffee)
+* (`4c7676e <https://github.com/JacobCoffee/byte/commit/4c7676e7fa38b76284f199d864bab534f766e0c2>`_)  - Clean up imports (Jacob Coffee)
+
+Infra
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* (`bba35b8 <https://github.com/JacobCoffee/byte/commit/bba35b8cae53455c848861194b1d1b01f8b7ef63>`_)  - Update railway config for db (Jacob Coffee)
+
+`Release [v0.3.0] - 2023-11-20 <https://github.com/JacobCoffee/byte/releases/tag/v0.3.0>`_
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+* `See All commits in v0.3.0 <https://github.com/JacobCoffee/byte/commits/v0.3.0>`_
+
+`860bd65 <https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0>`_ ... `d30c1d7 <https://github.com/JacobCoffee/byte/commit/d30c1d78933c78eba8235a167bbd07a83005dfcc>`_ | `See diff for v0.3.0 <https://github.com/JacobCoffee/byte/compare/860bd656b438e546d552c7f6a090a2cd0719a6f0...d30c1d78933c78eba8235a167bbd07a83005dfcc>`_
 
 Bug Fixes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -16,13 +48,14 @@ Bug Fixes
 * (`fb95f02 <https://github.com/JacobCoffee/byte/commit/fb95f0241458b0fc53d36d44b9b6111e183113ff>`_)  - Replace incorrect repo links (Jacob Coffee)
 * (`f9ee620 <https://github.com/JacobCoffee/byte/commit/f9ee620e3d98b991fdc1f0d978c104245f3109bd>`_)  - Replace incorrect repo link (Jacob Coffee)
 * (`2be3030 <https://github.com/JacobCoffee/byte/commit/2be3030f25de18a6ec343db62e5bff98536160e4>`_)  - Update links (Jacob Coffee)
-* (`ae4ec60 <https://github.com/JacobCoffee/byte/commit/ae4ec6015866826acfbceb9a9cead55e708c9664>`_)  - Resolve hybrid commands not displaying slash commands (#26) (Alc-Alc), Co-authored-by:Alc-Alc <alc@localhost>
+* (`ae4ec60 <https://github.com/JacobCoffee/byte/commit/ae4ec6015866826acfbceb9a9cead55e708c9664>`_)  - Resolve hybrid commands not displaying slash commands (#26) (Alc-Alc)
+* (`d30c1d7 <https://github.com/JacobCoffee/byte/commit/d30c1d78933c78eba8235a167bbd07a83005dfcc>`_)  - Update deps (Jacob Coffee)
 
 `Release [v0.2.0] - 2023-11-15 <https://github.com/JacobCoffee/byte/releases/tag/v0.2.0>`_
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 * `See All commits in v0.2.0 <https://github.com/JacobCoffee/byte/commits/v0.2.0>`_
 
-`f175b4a <https://github.com/JacobCoffee/byte/commit/f175b4ac69de862682b8c2f82e7518562365ae5c>`_ ... `f175b4a <https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0>`_ | `See diff for v0.2.0 <https://github.com/JacobCoffee/byte/compare/f175b4ac69de862682b8c2f82e7518562365ae5c...860bd656b438e546d552c7f6a090a2cd0719a6f0>`_
+`f175b4a <https://github.com/JacobCoffee/byte/commit/f175b4ac69de862682b8c2f82e7518562365ae5c>`_ ... `860bd65 <https://github.com/JacobCoffee/byte/commit/860bd656b438e546d552c7f6a090a2cd0719a6f0>`_ | `See diff for v0.2.0 <https://github.com/JacobCoffee/byte/compare/f175b4ac69de862682b8c2f82e7518562365ae5c...860bd656b438e546d552c7f6a090a2cd0719a6f0>`_
 
 Bug Fixes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -32,18 +65,18 @@ Bug Fixes
 Documentation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* (`97bac28 <https://github.com/JacobCoffee/byte/commit/97bac2821cbb43b53162e7c3e577c80d80a847bc>`_)  - Add allcontributors[bot] as a contributor for projectManagement (#18) (allcontributors[bot]), Co-authored-by:allcontributors[bot] <46447321+allcontributors[bot]@users.noreply.github.com>, Co-authored-by:Jacob Coffee <jacob@z7x.org>
-* (`c3ce850 <https://github.com/JacobCoffee/byte/commit/c3ce85064e26384b7e3dc338e3c2ead7a127a462>`_)  - Add Alc-Alc as a contributor for code, and ideas (#19) (allcontributors[bot]), Co-authored-by:allcontributors[bot] <46447321+allcontributors[bot]@users.noreply.github.com>, Co-authored-by:Jacob Coffee <jacob@z7x.org>
+* (`97bac28 <https://github.com/JacobCoffee/byte/commit/97bac2821cbb43b53162e7c3e577c80d80a847bc>`_)  - Add allcontributors[bot] as a contributor for projectManagement (#18) (allcontributors[bot])
+* (`c3ce850 <https://github.com/JacobCoffee/byte/commit/c3ce85064e26384b7e3dc338e3c2ead7a127a462>`_)  - Add Alc-Alc as a contributor for code, and ideas (#19) (allcontributors[bot])
 * (`71a04f2 <https://github.com/JacobCoffee/byte/commit/71a04f241ca8d2bc3a26cd39472eef4c0fd60f2f>`_)  - Update readme (Jacob Coffee)
 * (`c590288 <https://github.com/JacobCoffee/byte/commit/c5902885ab1cca187090ec1e1dfe2a4801fd804c>`_)  - Reenable packaages (Jacob Coffee)
-* (`afef867 <https://github.com/JacobCoffee/byte/commit/afef867dce1dcaea9ff37b120ed416f518182a60>`_)  - Update to latest (#20) (Jacob Coffee), Co-authored-by:Alc-Alc <45509143+Alc-Alc@users.noreply.github.com>, Co-authored-by:Alc-Alc <alc@localhost>
-* (`c139ff6 <https://github.com/JacobCoffee/byte/commit/c139ff6067f06080003a08989b21bf73321a221c>`_)  - Add Alc-Alc as a contributor for infra (#23) (allcontributors[bot]), Co-authored-by:allcontributors[bot] <46447321+allcontributors[bot]@users.noreply.github.com>
-* (`dde5c87 <https://github.com/JacobCoffee/byte/commit/dde5c87d73e1378be9356767d4cabb89b73bde22>`_)  - Add JacobCoffee as a contributor for doc, infra, and 2 more (#24) (allcontributors[bot]), Co-authored-by:allcontributors[bot] <46447321+allcontributors[bot]@users.noreply.github.com>
+* (`afef867 <https://github.com/JacobCoffee/byte/commit/afef867dce1dcaea9ff37b120ed416f518182a60>`_)  - Update to latest (#20) (Jacob Coffee)
+* (`c139ff6 <https://github.com/JacobCoffee/byte/commit/c139ff6067f06080003a08989b21bf73321a221c>`_)  - Add Alc-Alc as a contributor for infra (#23) (allcontributors[bot])
+* (`dde5c87 <https://github.com/JacobCoffee/byte/commit/dde5c87d73e1378be9356767d4cabb89b73bde22>`_)  - Add JacobCoffee as a contributor for doc, infra, and 2 more (#24) (allcontributors[bot])
 
 Features
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* (`603d644 <https://github.com/JacobCoffee/byte/commit/603d644ae057fa5a6fe586e80be5dee0a6d3ab49>`_)  - Add ``!`` as command prefix in addition to an env specific command prefix (#15) (Alc-Alc), Co-authored-by:Alc-Alc <alc@localhost>
+* (`603d644 <https://github.com/JacobCoffee/byte/commit/603d644ae057fa5a6fe586e80be5dee0a6d3ab49>`_)  - Add ``!`` as command prefix in addition to an env specific command prefix (#15) (Alc-Alc)
 * (`211f50f <https://github.com/JacobCoffee/byte/commit/211f50fc685054d7508ed283ca7693945946c2a3>`_)  - Replace help thread with embed (#16) (Jacob Coffee)
 
 Miscellaneous Tasks

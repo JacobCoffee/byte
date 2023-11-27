@@ -5,7 +5,7 @@
 groups = ["default", "test", "docs", "lint"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:8d7d79e2458c9ba8756a834145323c698a1d7dce6a734dacdade5d14b21ea011"
+content_hash = "sha256:076b886108f15144680eeff6b97af9b5bc54c84fe2ed11b192de96a28b831a63"
 
 [[package]]
 name = "accessible-pygments"
@@ -2327,6 +2327,20 @@ dependencies = [
 ]
 files = [
     {file = "sphinx_prompt-1.5.0-py3-none-any.whl", hash = "sha256:fa4e90d8088b5a996c76087d701fc7e31175f8b9dc4aab03a507e45051067162"},
+]
+
+[[package]]
+name = "sphinx-sqlalchemy"
+version = "0.2.0"
+requires_python = "~=3.8"
+summary = "Sphinx extension for documenting SQLAlchemy ORMs"
+dependencies = [
+    "sphinx<8,>=5",
+    "sqlalchemy~=2.0",
+]
+files = [
+    {file = "sphinx_sqlalchemy-0.2.0-py3-none-any.whl", hash = "sha256:af16547ff1ee750f4005b2cb4171a8283c57ca6b3ab6282bc5ec5955f1de118f"},
+    {file = "sphinx_sqlalchemy-0.2.0.tar.gz", hash = "sha256:a19aa4c3fd24f9e9caa83ab7c0088a54e31eb9a74c18c0f1d9aaabd7501030fd"},
 ]
 
 [[package]]
