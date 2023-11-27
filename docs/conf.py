@@ -3,10 +3,15 @@ from __future__ import annotations
 
 import importlib.metadata
 import os
+import warnings
+
+from sqlalchemy.exc import SAWarning
 
 from src.__metadata__ import __project__
 
 # -- Environmental Data ------------------------------------------------------
+warnings.filterwarnings("ignore", category=SAWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)  # RemovedInSphinx80Warning
 
 # -- Project information -----------------------------------------------------
 project = __project__
@@ -28,6 +33,7 @@ extensions = [
     "sphinx_toolbox.collapse",
     "sphinx_design",
     "sphinxcontrib.autodoc_pydantic",
+    "sphinx_sqlalchemy",
 ]
 
 exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]

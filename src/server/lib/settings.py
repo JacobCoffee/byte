@@ -4,7 +4,7 @@ from __future__ import annotations
 import binascii
 import os
 from pathlib import Path
-from typing import Final
+from typing import Any, Final, Literal
 
 from dotenv import load_dotenv
 from litestar.contrib.jinja import JinjaTemplateEngine
@@ -284,27 +284,67 @@ class TemplateSettings(BaseSettings):
     """Template engine to use. (Jinja2 or Mako)"""
 
 
-class HTTPClientSettings(BaseSettings):
-    """HTTP Client configurations."""
+class DatabaseSettings(BaseSettings):
+    """Configures the database for the application."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="HTTP_")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        env_prefix="DB_",
+        case_sensitive=False,
+    )
 
-    BACKOFF_MAX: float = 60
-    BACKOFF_MIN: float = 0
-    EXPONENTIAL_BACKOFF_BASE: float = 2
-    EXPONENTIAL_BACKOFF_MULTIPLIER: float = 1
+    ECHO: bool = False
+    """Enable SQLAlchemy engine logs."""
+    ECHO_POOL: bool | Literal["debug"] = False
+    """Enable SQLAlchemy connection pool logs."""
+    POOL_DISABLE: bool = True
+    """Disable SQLAlchemy pooling, same as setting pool to.
+
+    See :class:`NullPool <sqlalchemy.pool.NullPool>`.
+    """
+    POOL_MAX_OVERFLOW: int = 10
+    """See :class:`QueuePool <sqlalchemy.pool.QueuePool>`.
+
+    .. warning:: This is arguably pretty high,
+        and shouldn't be raised past 10.
+    """
+    POOL_SIZE: int = 5
+    """See :class:`QueuePool <sqlalchemy.pool.QueuePool>`."""
+    POOL_TIMEOUT: int = 30
+    """See :class:`QueuePool <sqlalchemy.pool.QueuePool>`."""
+    POOL_RECYCLE: int = 300
+    """See :class:`QueuePool <sqlalchemy.pool.QueuePool>`."""
+    POOL_PRE_PING: bool = False
+    """See :class:`QueuePool <sqlalchemy.pool.QueuePool>`."""
+    CONNECT_ARGS: dict[str, Any] = {}
+    """Connection arguments to pass to the database driver."""
+    URL: str = "postgresql+asyncpg://byte:bot@localhost:5432/byte"
+    """Database connection URL."""
+    ENGINE: str | None = None
+    """Database engine."""
+    USER: str = "byte"
+    """Database user."""
+    PASSWORD: str = "bot"
+    """Database password."""
+    HOST: str = "localhost"
+    """Database host."""
+    PORT: int = 5432
+    """Database port."""
+    NAME: str = "byte"
+    """Database name."""
+    MIGRATION_CONFIG: str = f"{BASE_DIR}/server/lib/db/alembic.ini"
+    """Path to Alembic config file."""
+    MIGRATION_PATH: str = f"{BASE_DIR}/server/lib/db/migrations"
+    """Path to Alembic migration files."""
+    MIGRATION_DDL_VERSION_TABLE: str = "ddl_version"
+    """Name of the table used to track DDL version."""
 
 
 # noinspection PyShadowingNames
 def load_settings() -> (
     tuple[
-        ProjectSettings,
-        APISettings,
-        OpenAPISettings,
-        TemplateSettings,
-        ServerSettings,
-        LogSettings,
-        HTTPClientSettings,
+        ProjectSettings, APISettings, OpenAPISettings, TemplateSettings, ServerSettings, LogSettings, DatabaseSettings
     ]
 ):
     """Load Settings file.
@@ -323,7 +363,7 @@ def load_settings() -> (
         openapi: OpenAPISettings = OpenAPISettings.model_validate({})
         template: TemplateSettings = TemplateSettings.model_validate({})
         log: LogSettings = LogSettings.model_validate({})
-        http_client: HTTPClientSettings = HTTPClientSettings.model_validate({})
+        database: DatabaseSettings = DatabaseSettings.model_validate({})
 
     except ValidationError as error:
         print(f"Could not load settings. Error: {error!r}")  # noqa: T201
@@ -335,7 +375,7 @@ def load_settings() -> (
         template,
         server,
         log,
-        http_client,
+        database,
     )
 
 
@@ -346,5 +386,5 @@ def load_settings() -> (
     template,
     server,
     log,
-    http_client,
+    db,
 ) = load_settings()

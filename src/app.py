@@ -15,12 +15,14 @@ def create_app() -> Litestar:
     Returns:
         Litestar: The Litestar application.
     """
+    from advanced_alchemy.exceptions import RepositoryError
     from litestar import Litestar
     from pydantic import SecretStr
 
     from src.server import domain
     from src.server.lib import (
         cors,
+        db,
         exceptions,
         log,
         openapi,
@@ -33,6 +35,7 @@ def create_app() -> Litestar:
         # Handlers
         exception_handlers={
             exceptions.ApplicationError: exceptions.exception_to_http_response,
+            RepositoryError: exceptions.exception_to_http_response,
         },
         route_handlers=[*domain.routes],
         # Configs
@@ -51,10 +54,13 @@ def create_app() -> Litestar:
         middleware=[log.controller.middleware_factory],
         signature_namespace=domain.signature_namespace,
         type_encoders={SecretStr: str},
-        plugins=[],
+        plugins=[db.plugin],
     )
 
 
 def create_bot() -> None:
-    """Application factory to instantiate a Discord bot."""
+    """Application factory to instantiate a Discord bot.
+
+    .. todo:: Move into this file.
+    """
     ...

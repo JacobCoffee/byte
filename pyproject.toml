@@ -12,8 +12,9 @@ dependencies = [
     "litestar[jwt,opentelemetry,prometheus,standard,structlog]>=2.0.0b4",
     "pydantic-settings>=2.1.0",
     "anyio>=3.7.1",
-    "advanced-alchemy>=0.5.4",
+    "advanced-alchemy>=0.5.5",
     "certifi>=2023.11.17",
+    "asyncpg>=0.29.0",
 ]
 requires-python = ">=3.11,<4.0"
 readme = "README.md"
@@ -54,6 +55,7 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = 'src/__metadata__.py'
 
+
 [tool.pdm.scripts]
 lint = "pre-commit run --all-files"
 test = "pytest"
@@ -84,6 +86,7 @@ docs = [
     "shibuya>=2023.7.16",
     "sphinxcontrib-mermaid>=0.9.2",
     "sphinx-design>=0.5.0",
+    "sphinx-sqlalchemy>=0.2.0",
 ]
 lint = [
     "ruff>=0.0.280",
@@ -97,7 +100,7 @@ lint = [
 ]
 
 [project.scripts]
-app = "litestar.__main__:run_cli"
+app = "src.__main__:run_cli"
 
 [project.entry-points."litestar.commands"]
 run-bot = "src.cli:run_bot"
@@ -131,8 +134,8 @@ filterwarnings = [
 include = ["src/", "tests"]
 disableBytesTypePromotions = true
 exclude = [
-  "tools",
-  "docs",
+    "tools",
+    "docs",
 ]
 pythonVersion = "3.11"
 reportOptionalMemberAccess = false
@@ -224,15 +227,15 @@ known-first-party = ["src", "tests"]
     "ANN102",
     "TD",
     "FIX002",
-    "RUF012",  # ClassVar Annotations - # TODO: Investigate/Fix
+    "RUF012", # ClassVar Annotations - # TODO: Investigate/Fix
     "FBT001", # Boolean typed positional argument in function definition
     "FBT002", # Boolean default positional argument in function definition
     "FBT003", # Boolean Boolean default positional argument in function definition
     "B008", # Do not perform function calls in argument defaults
 ]
 "src/**/*.*" = ["PLR0913", "SLF001"]
-"src/database/base.py" = ["E501"]
-"src/database/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"src/server/lib/db/base.py" = ["E501"]
+"src/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
 "tests/**/*.*" = [
     "S101",
     "D",
@@ -304,11 +307,11 @@ body = """
     [unreleased]
     ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 {% endif %}\
-{% if previous %}\
+{% if version and previous %}\
     {% if previous.commit_id %}
         `{{ previous.commit_id | truncate(length=7, end="") }} <https://github.com/JacobCoffee/byte/commit/{{ previous.commit_id }}>`_ ... \
-            `{{ previous.commit_id | truncate(length=7, end="") }} <https://github.com/JacobCoffee/byte/commit/{{ commit_id }}>`_ \
-            | `See diff for {{ version }} <https://github.com/JacobCoffee/byte/compare/{{ previous.commit_id }}...{{ commit_id }}>`_
+        `{{ commit_id | truncate(length=7, end="") }} <https://github.com/JacobCoffee/byte/commit/{{ commit_id }}>`_ \
+        | `See diff for {{ version }} <https://github.com/JacobCoffee/byte/compare/{{ previous.commit_id }}...{{ commit_id }}>`_
     {% endif %}\
 {% endif %}\
 {% for group, commits in commits | group_by(attribute="group") %}
@@ -326,22 +329,36 @@ trim = true
 footer = """
 Byte Bot Changelog
 """
+#postprocessors = [{ pattern = "`", replace = "``" }]
 
 [tool.git-cliff.git]
 conventional_commits = true
 filter_unconventional = true
 split_commits = false
 commit_parsers = [
-  { message = "^feat", group = "Features" },
-  { message = "^fix", group = "Bug Fixes" },
-  { message = "^doc", group = "Documentation" },
-  { message = "^perf", group = "Performance" },
-  { message = "^refactor", group = "Refactor" },
-  { message = "^style", group = "Styling" },
-  { message = "^test", group = "Testing" },
-  { message = "^chore\\(release\\): prepare for", skip = true },
-  { message = "^chore", group = "Miscellaneous Tasks" },
-  { body = ".*security", group = "Security" },
+    { message = "^feat", group = "Features" },
+    { message = "^fix", group = "Bug Fixes" },
+    { message = "^doc", group = "Documentation" },
+    { message = "^perf", group = "Performance" },
+    { message = "^refactor", group = "Refactor" },
+    { message = "^style", group = "Styling" },
+    { message = "^test", group = "Testing" },
+    { message = "^chore\\(release\\): prepare for", skip = true },
+    { message = "^chore", group = "Miscellaneous Tasks" },
+    { body = ".*security", group = "Security" },
+]
+commit_preprocessors = [
+    # Matches a single backtick that is not preceded by another backtick (negative lookbehind)
+    # and not followed by another backtick (negative lookahead).. but these aren't supported
+    # in git cliff regexes. So we have to do it in 3 steps:
+    # Step 1: Replace pairs of backticks with a placeholder (e.g., "DOUBLEBACKTICK")
+    { pattern = "``", replace = "DOUBLEBACKTICK" },
+    # Step 2: Replace single backticks with double backticks
+    { pattern = "`", replace = "``" },
+    # Step 3: Replace the placeholder back to double backticks
+    { pattern = "DOUBLEBACKTICK", replace = "``" },
+
+    # TODO: Fix Co-authored commits
 ]
 protect_breaking_commits = false
 filter_commits = false
@@ -350,3 +367,7 @@ skip_tags = "v0.1.0-beta.1"
 ignore_tags = ""
 topo_order = false
 sort_commits = "oldest"
+link_parsers = [
+    # TODO: Supposedly matches on #1234 but doesn't work?
+    { pattern = "\\(#(\\d+)\\)", href = "https://github.com/JacobCoffee/byte/issues/$1" },
+]
