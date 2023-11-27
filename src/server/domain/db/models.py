@@ -1,7 +1,7 @@
 """Shared models."""
 from uuid import UUID
 
-from sqlalchemy import BigInteger, Boolean, ForeignKey, String, UniqueConstraint
+from sqlalchemy import BigInteger, ForeignKey, String, UniqueConstraint
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -17,13 +17,13 @@ class GuildConfig(TimestampedDatabaseModel):
     __table_args__ = {"comment": "Configuration for a Discord guild."}
 
     guild_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True)
-    guild_name: Mapped[str] = mapped_column(String(100), nullable=False)
+    guild_name: Mapped[str] = mapped_column(String(100))
     prefix: Mapped[str] = mapped_column(String(5), nullable=False, server_default="!", default="!")
     help_channel_id: Mapped[int] = mapped_column(BigInteger, index=True)
-    sync_label: Mapped[str | None] = mapped_column(String)
-    issue_linking: Mapped[bool] = mapped_column(Boolean, default=False)
-    comment_linking: Mapped[bool] = mapped_column(Boolean, default=False)
-    pep_linking: Mapped[bool] = mapped_column(Boolean, default=False)
+    sync_label: Mapped[str | None]
+    issue_linking: Mapped[bool] = mapped_column(default=False)
+    comment_linking: Mapped[bool] = mapped_column(default=False)
+    pep_linking: Mapped[bool] = mapped_column(default=False)
 
     # =================
     # ORM Relationships
@@ -88,9 +88,9 @@ class GitHubConfig(TimestampedDatabaseModel):
     __tablename__ = "github_config"
     __table_args__ = {"comment": "GitHub configuration for a guild."}
 
-    discussion_sync: Mapped[bool] = mapped_column(Boolean, default=False)
-    github_organization: Mapped[str | None] = mapped_column(String)
-    github_repository: Mapped[str | None] = mapped_column(String)
+    discussion_sync: Mapped[bool] = mapped_column(default=False)
+    github_organization: Mapped[str | None]
+    github_repository: Mapped[str | None]
 
     # =================
     # ORM Relationships
@@ -196,9 +196,9 @@ class User(DatabaseModel, AuditColumns):
     __tablename__ = "user"
     __table_args__ = {"comment": "A user."}
 
-    name: Mapped[str] = mapped_column(String(100), nullable=False)
-    avatar_url: Mapped[str | None] = mapped_column(String)
-    discriminator: Mapped[str] = mapped_column(String(4), nullable=False)
+    name: Mapped[str] = mapped_column(String(100))
+    avatar_url: Mapped[str | None]
+    discriminator: Mapped[str] = mapped_column(String(4))
 
     # =================
     # ORM Relationships
