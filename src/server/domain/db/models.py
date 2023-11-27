@@ -41,7 +41,6 @@ class GuildConfig(TimestampedDatabaseModel):
     github_config: Mapped["GitHubConfig"] = relationship(
         lazy="noload",
         back_populates="guild_config",
-        uselist=False,
         cascade="save-update, merge, delete",
     )
     sotags_config: Mapped[list["SOTagConfig"]] = relationship(
@@ -78,14 +77,12 @@ class GuildGitHubConfig(UUIDAuditBase):
         back_populates="github_config",
         foreign_keys="GuildGitHubConfig.guild_id",
         innerjoin=True,
-        uselist=False,
         lazy="noload",
     )
     github_config: Mapped["GitHubConfig"] = relationship(
         back_populates="guild_config",
         foreign_keys="GuildGitHubConfig.github_config_id",
         innerjoin=True,
-        uselist=False,
         lazy="noload",
     )
 
@@ -111,7 +108,6 @@ class GitHubConfig(TimestampedDatabaseModel):
     guild_config: Mapped[GuildGitHubConfig] = relationship(
         back_populates="github_config",
         lazy="noload",
-        uselist=False,
         cascade="save-update, merge, delete",
     )
 
@@ -138,14 +134,12 @@ class GuildSOTagsConfig(UUIDAuditBase):
         back_populates="sotags_config",
         foreign_keys="GuildSOTagsConfig.guild_id",
         innerjoin=True,
-        uselist=False,
         lazy="noload",
     )
     sotag_config: Mapped["SOTagConfig"] = relationship(
         back_populates="guild_config",
         foreign_keys="GuildSOTagsConfig.sotag_config_id",
         innerjoin=True,
-        uselist=False,
         lazy="noload",
     )
 
@@ -169,7 +163,6 @@ class SOTagConfig(DatabaseModel):
     guild_config: Mapped["GuildSOTagsConfig"] = relationship(
         back_populates="sotag_config",
         lazy="noload",
-        uselist=False,
         cascade="save-update, merge, delete",
     )
 
@@ -203,14 +196,12 @@ class GuildAllowedUsersConfig(UUIDAuditBase):
         back_populates="allowed_users_config",
         foreign_keys="GuildAllowedUsersConfig.guild_id",
         innerjoin=True,
-        uselist=False,
         lazy="noload",
     )
     user: Mapped["User"] = relationship(
         back_populates="guilds_allowed",
         foreign_keys="GuildAllowedUsersConfig.user_id",
         innerjoin=True,
-        uselist=False,
         lazy="noload",
     )
 
