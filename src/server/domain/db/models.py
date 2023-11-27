@@ -1,13 +1,14 @@
 """Shared models."""
 from uuid import UUID
 
+from advanced_alchemy.base import UUIDAuditBase
 from sqlalchemy import BigInteger, ForeignKey, String, UniqueConstraint
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.server.lib.db.orm import AuditColumns, DatabaseModel, TimestampedDatabaseModel
+from src.server.lib.db.orm import DatabaseModel, TimestampedDatabaseModel
 
-__all__ = ("GitHubConfig", "GuildConfig")
+__all__ = ("GitHubConfig", "GuildConfig", "GuildGitHubConfig", "GuildSOTagsConfig", "SOTagConfig", "User")
 
 
 class GuildConfig(TimestampedDatabaseModel):
@@ -43,22 +44,19 @@ class GuildConfig(TimestampedDatabaseModel):
         uselist=False,
         cascade="save-update, merge, delete",
     )
-    sotags_config: Mapped["SOTagConfig"] = relationship(
+    sotags_config: Mapped[list["SOTagConfig"]] = relationship(
         lazy="noload",
         back_populates="guild_config",
-        uselist=False,
         cascade="save-update, merge, delete",
     )
-    allowed_users_config: Mapped["GuildAllowedUsersConfig"] = relationship(
+    allowed_users_config: Mapped[list["GuildAllowedUsersConfig"]] = relationship(
         lazy="noload",
         back_populates="guild_config",
-        uselist=True,
         cascade="save-update, merge, delete",
     )
 
 
-class GuildGitHubConfig(DatabaseModel, AuditColumns):
-    """SQLAlchemy association model representing a guild GitHub config."""
+class GuildGitHubConfig(UUIDAuditBase):
     """SQLAlchemy association model representing a guild's unique GitHub config."""
 
     __tablename__ = "guild_github_config"
@@ -118,7 +116,7 @@ class GitHubConfig(TimestampedDatabaseModel):
     )
 
 
-class GuildSOTagsConfig(DatabaseModel, AuditColumns):
+class GuildSOTagsConfig(UUIDAuditBase):
     """SQLAlchemy association model for a guild's Stack Overflow tags config."""
 
     __tablename__ = "guild_sotags_config"
@@ -176,8 +174,7 @@ class SOTagConfig(DatabaseModel):
     )
 
 
-class GuildAllowedUsersConfig(DatabaseModel, AuditColumns):
-    """SQLAlchemy association model for a guild's allowed users config."""
+class GuildAllowedUsersConfig(UUIDAuditBase):
     """SQLAlchemy association model for a guild's allowed users' config.
 
     A guild normally has a set of users to perform administrative actions, but sometimes
@@ -218,8 +215,7 @@ class GuildAllowedUsersConfig(DatabaseModel, AuditColumns):
     )
 
 
-class User(DatabaseModel, AuditColumns):
-    """SQLAlchemy model representing a user."""
+class User(UUIDAuditBase):
     """SQLAlchemy model representing a user.
 
     .. todo:: This may not really be needed?
@@ -243,6 +239,5 @@ class User(DatabaseModel, AuditColumns):
     guilds_allowed: Mapped[list[GuildAllowedUsersConfig]] = relationship(
         back_populates="user",
         lazy="noload",
-        uselist=True,
         cascade="save-update, merge, delete",
     )
