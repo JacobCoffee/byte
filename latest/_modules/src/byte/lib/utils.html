@@ -274,50 +274,203 @@ html.dark {
 </span><span id="1-13">    <span class="kn">from</span> <span class="nn">discord.ext.commands</span> <span class="kn">import</span> <span class="n">Context</span>
 </span><span id="1-14">    <span class="kn">from</span> <span class="nn">discord.ext.commands._types</span> <span class="kn">import</span> <span class="n">Check</span>
 </span><span id="1-15">
-</span><span id="1-16"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;is_byte_dev&quot;</span><span class="p">,</span> <span class="s2">&quot;linker&quot;</span><span class="p">)</span>
-</span><span id="1-17">
-</span><span id="1-18">
+</span><span id="1-16"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="1-17">    <span class="s2">&quot;is_byte_dev&quot;</span><span class="p">,</span>
+</span><span id="1-18">    <span class="s2">&quot;linker&quot;</span><span class="p">,</span>
+</span><span id="1-19">    <span class="s2">&quot;mention_user&quot;</span><span class="p">,</span>
+</span><span id="1-20">    <span class="s2">&quot;mention_user_nickname&quot;</span><span class="p">,</span>
+</span><span id="1-21">    <span class="s2">&quot;mention_channel&quot;</span><span class="p">,</span>
+</span><span id="1-22">    <span class="s2">&quot;mention_role&quot;</span><span class="p">,</span>
+</span><span id="1-23">    <span class="s2">&quot;mention_slash_command&quot;</span><span class="p">,</span>
+</span><span id="1-24">    <span class="s2">&quot;mention_custom_emoji&quot;</span><span class="p">,</span>
+</span><span id="1-25">    <span class="s2">&quot;mention_custom_emoji_animated&quot;</span><span class="p">,</span>
+</span><span id="1-26">    <span class="s2">&quot;mention_timestamp&quot;</span><span class="p">,</span>
+</span><span id="1-27">    <span class="s2">&quot;mention_guild_navigation&quot;</span><span class="p">,</span>
+</span><span id="1-28"><span class="p">)</span>
+</span><span id="1-29">
+</span><span id="1-30">
 <div class="viewcode-block" id="is_byte_dev">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.is_byte_dev">[docs]</a>
-</span><span id="1-19"><span class="k">def</span> <span class="nf">is_byte_dev</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Check</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-</span><span id="1-20"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the user is a Byte developer.</span>
-</span><span id="1-21">
-</span><span id="1-22"><span class="sd">    Returns:</span>
-</span><span id="1-23"><span class="sd">        A check function.</span>
-</span><span id="1-24"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-25">
-</span><span id="1-26">    <span class="k">async</span> <span class="k">def</span> <span class="nf">predicate</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="1-27"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the user is a Byte Dev or Owner.</span>
-</span><span id="1-28">
-</span><span id="1-29"><span class="sd">        Args:</span>
-</span><span id="1-30"><span class="sd">            ctx: Context object.</span>
-</span><span id="1-31">
-</span><span id="1-32"><span class="sd">        Returns:</span>
-</span><span id="1-33"><span class="sd">            True if the user is a Byte Dev or Owner, False otherwise.</span>
-</span><span id="1-34"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-35">        <span class="k">if</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">is_owner</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">DEV_USER_ID</span><span class="p">:</span>
-</span><span id="1-36">            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="1-31"><span class="k">def</span> <span class="nf">is_byte_dev</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Check</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+</span><span id="1-32"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the user is a Byte developer.</span>
+</span><span id="1-33">
+</span><span id="1-34"><span class="sd">    Returns:</span>
+</span><span id="1-35"><span class="sd">        A check function.</span>
+</span><span id="1-36"><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="1-37">
-</span><span id="1-38">        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;byte-dev&quot;</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">roles</span><span class="p">)</span>
-</span><span id="1-39">
-</span><span id="1-40">    <span class="k">return</span> <span class="n">commands</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span></div>
+</span><span id="1-38">    <span class="k">async</span> <span class="k">def</span> <span class="nf">predicate</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="1-39"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the user is a Byte Dev or Owner.</span>
+</span><span id="1-40">
+</span><span id="1-41"><span class="sd">        Args:</span>
+</span><span id="1-42"><span class="sd">            ctx: Context object.</span>
+</span><span id="1-43">
+</span><span id="1-44"><span class="sd">        Returns:</span>
+</span><span id="1-45"><span class="sd">            True if the user is a Byte Dev or Owner, False otherwise.</span>
+</span><span id="1-46"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-47">        <span class="k">if</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">is_owner</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">DEV_USER_ID</span><span class="p">:</span>
+</span><span id="1-48">            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="1-49">
+</span><span id="1-50">        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;byte-dev&quot;</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">roles</span><span class="p">)</span>
+</span><span id="1-51">
+</span><span id="1-52">    <span class="k">return</span> <span class="n">commands</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span></div>
 
-</span><span id="1-41">
-</span><span id="1-42">
+</span><span id="1-53">
+</span><span id="1-54">
 <div class="viewcode-block" id="linker">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.linker">[docs]</a>
-</span><span id="1-43"><span class="k">def</span> <span class="nf">linker</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show_embed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-44"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Markdown link, optionally with an embed.</span>
-</span><span id="1-45">
-</span><span id="1-46"><span class="sd">    Args:</span>
-</span><span id="1-47"><span class="sd">        title: The title of the link.</span>
-</span><span id="1-48"><span class="sd">        link: The URL of the link.</span>
-</span><span id="1-49"><span class="sd">        show_embed: Whether to show the embed or not.</span>
-</span><span id="1-50">
-</span><span id="1-51"><span class="sd">    Returns:</span>
-</span><span id="1-52"><span class="sd">        A Markdown link.</span>
-</span><span id="1-53"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-54">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">show_embed</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](&lt;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&gt;)&quot;</span></div>
+</span><span id="1-55"><span class="k">def</span> <span class="nf">linker</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show_embed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-56"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Markdown link, optionally with an embed.</span>
+</span><span id="1-57">
+</span><span id="1-58"><span class="sd">    Args:</span>
+</span><span id="1-59"><span class="sd">        title: The title of the link.</span>
+</span><span id="1-60"><span class="sd">        link: The URL of the link.</span>
+</span><span id="1-61"><span class="sd">        show_embed: Whether to show the embed or not.</span>
+</span><span id="1-62">
+</span><span id="1-63"><span class="sd">    Returns:</span>
+</span><span id="1-64"><span class="sd">        A Markdown link.</span>
+</span><span id="1-65"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-66">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">show_embed</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](&lt;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&gt;)&quot;</span></div>
+
+</span><span id="1-67">
+</span><span id="1-68">
+<div class="viewcode-block" id="mention_user">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_user">[docs]</a>
+</span><span id="1-69"><span class="k">def</span> <span class="nf">mention_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-70"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a user by ID.</span>
+</span><span id="1-71">
+</span><span id="1-72"><span class="sd">    Args:</span>
+</span><span id="1-73"><span class="sd">        user_id: The unique identifier for the user.</span>
+</span><span id="1-74">
+</span><span id="1-75"><span class="sd">    Returns:</span>
+</span><span id="1-76"><span class="sd">        A formatted string that mentions the user.</span>
+</span><span id="1-77"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-78">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</span><span id="1-79">
+</span><span id="1-80">
+<div class="viewcode-block" id="mention_user_nickname">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_user_nickname">[docs]</a>
+</span><span id="1-81"><span class="k">def</span> <span class="nf">mention_user_nickname</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-82"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a user by ID with a nickname.</span>
+</span><span id="1-83">
+</span><span id="1-84"><span class="sd">    Args:</span>
+</span><span id="1-85"><span class="sd">        user_id: The unique identifier for the user.</span>
+</span><span id="1-86">
+</span><span id="1-87"><span class="sd">    Returns:</span>
+</span><span id="1-88"><span class="sd">        A formatted string that mentions the user with a nickname.</span>
+</span><span id="1-89"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-90">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@!</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</span><span id="1-91">
+</span><span id="1-92">
+<div class="viewcode-block" id="mention_channel">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_channel">[docs]</a>
+</span><span id="1-93"><span class="k">def</span> <span class="nf">mention_channel</span><span class="p">(</span><span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-94"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a channel by ID.</span>
+</span><span id="1-95">
+</span><span id="1-96"><span class="sd">    Args:</span>
+</span><span id="1-97"><span class="sd">        channel_id: The unique identifier for the channel.</span>
+</span><span id="1-98">
+</span><span id="1-99"><span class="sd">    Returns:</span>
+</span><span id="1-100"><span class="sd">        A formatted string that mentions the channel.</span>
+</span><span id="1-101"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-102">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;#</span><span class="si">{</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</span><span id="1-103">
+</span><span id="1-104">
+<div class="viewcode-block" id="mention_role">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_role">[docs]</a>
+</span><span id="1-105"><span class="k">def</span> <span class="nf">mention_role</span><span class="p">(</span><span class="n">role_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-106"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a role by ID.</span>
+</span><span id="1-107">
+</span><span id="1-108"><span class="sd">    Args:</span>
+</span><span id="1-109"><span class="sd">        role_id: The unique identifier for the role.</span>
+</span><span id="1-110">
+</span><span id="1-111"><span class="sd">    Returns:</span>
+</span><span id="1-112"><span class="sd">        A formatted string that mentions the role.</span>
+</span><span id="1-113"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-114">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@&amp;</span><span class="si">{</span><span class="n">role_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</span><span id="1-115">
+</span><span id="1-116">
+<div class="viewcode-block" id="mention_slash_command">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_slash_command">[docs]</a>
+</span><span id="1-117"><span class="k">def</span> <span class="nf">mention_slash_command</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">command_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-118"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a slash command by name and ID.</span>
+</span><span id="1-119">
+</span><span id="1-120"><span class="sd">    Args:</span>
+</span><span id="1-121"><span class="sd">        name: The name of the slash command.</span>
+</span><span id="1-122"><span class="sd">        command_id: The unique identifier for the slash command.</span>
+</span><span id="1-123">
+</span><span id="1-124"><span class="sd">    Returns:</span>
+</span><span id="1-125"><span class="sd">        A formatted string that mentions the slash command.</span>
+</span><span id="1-126"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-127">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">command_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</span><span id="1-128">
+</span><span id="1-129">
+<div class="viewcode-block" id="mention_custom_emoji">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_custom_emoji">[docs]</a>
+</span><span id="1-130"><span class="k">def</span> <span class="nf">mention_custom_emoji</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">emoji_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-131"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a custom emoji by name and ID.</span>
+</span><span id="1-132">
+</span><span id="1-133"><span class="sd">    Args:</span>
+</span><span id="1-134"><span class="sd">        name: The name of the emoji.</span>
+</span><span id="1-135"><span class="sd">        emoji_id: The unique identifier for the emoji.</span>
+</span><span id="1-136">
+</span><span id="1-137"><span class="sd">    Returns:</span>
+</span><span id="1-138"><span class="sd">        A formatted string that mentions the custom emoji.</span>
+</span><span id="1-139"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-140">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;:</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">emoji_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</span><span id="1-141">
+</span><span id="1-142">
+<div class="viewcode-block" id="mention_custom_emoji_animated">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_custom_emoji_animated">[docs]</a>
+</span><span id="1-143"><span class="k">def</span> <span class="nf">mention_custom_emoji_animated</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">emoji_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-144"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention an animated custom emoji by name and ID.</span>
+</span><span id="1-145">
+</span><span id="1-146"><span class="sd">    Args:</span>
+</span><span id="1-147"><span class="sd">        name: The name of the animated emoji.</span>
+</span><span id="1-148"><span class="sd">        emoji_id: The unique identifier for the animated emoji.</span>
+</span><span id="1-149">
+</span><span id="1-150"><span class="sd">    Returns:</span>
+</span><span id="1-151"><span class="sd">        A formatted string that mentions the animated custom emoji.</span>
+</span><span id="1-152"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-153">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;a:</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">emoji_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</span><span id="1-154">
+</span><span id="1-155">
+<div class="viewcode-block" id="mention_timestamp">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_timestamp">[docs]</a>
+</span><span id="1-156"><span class="k">def</span> <span class="nf">mention_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-157"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a timestamp, optionally with a style.</span>
+</span><span id="1-158">
+</span><span id="1-159"><span class="sd">    Args:</span>
+</span><span id="1-160"><span class="sd">        timestamp: The Unix timestamp to format.</span>
+</span><span id="1-161"><span class="sd">        style: An optional string representing the timestamp style.</span>
+</span><span id="1-162"><span class="sd">               (Default ````, valid styles: ``t``, ``T``, ``d``, ``D``, ``f``, ``F``, ``R``)</span>
+</span><span id="1-163">
+</span><span id="1-164"><span class="sd">    Returns:</span>
+</span><span id="1-165"><span class="sd">        A formatted string that represents the timestamp.</span>
+</span><span id="1-166"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-167">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;t:</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">&gt;&quot;</span> <span class="k">if</span> <span class="n">style</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;&lt;t:</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+
+</span><span id="1-168">
+</span><span id="1-169">
+<div class="viewcode-block" id="mention_guild_navigation">
+<a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_guild_navigation">[docs]</a>
+</span><span id="1-170"><span class="k">def</span> <span class="nf">mention_guild_navigation</span><span class="p">(</span><span class="n">guild_nav_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">guild_element_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-171"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a guild navigation element by type and ID.</span>
+</span><span id="1-172">
+</span><span id="1-173"><span class="sd">    Args:</span>
+</span><span id="1-174"><span class="sd">        guild_nav_type: The type of the guild navigation element.</span>
+</span><span id="1-175"><span class="sd">        guild_element_id: The unique identifier for the element.</span>
+</span><span id="1-176">
+</span><span id="1-177"><span class="sd">    Returns:</span>
+</span><span id="1-178"><span class="sd">        A formatted string that mentions the guild navigation element.</span>
+</span><span id="1-179"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-180">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="n">guild_element_id</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">guild_nav_type</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
 </span></pre></div>
         </article>

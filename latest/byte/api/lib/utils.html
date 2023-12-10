@@ -212,6 +212,15 @@ html.dark {
     <ul>
 <li><a class="reference internal" href="#src.byte.lib.utils.is_byte_dev"><code class="docutils literal notranslate"><span class="pre">is_byte_dev()</span></code></a></li>
 <li><a class="reference internal" href="#src.byte.lib.utils.linker"><code class="docutils literal notranslate"><span class="pre">linker()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_user"><code class="docutils literal notranslate"><span class="pre">mention_user()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_user_nickname"><code class="docutils literal notranslate"><span class="pre">mention_user_nickname()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_channel"><code class="docutils literal notranslate"><span class="pre">mention_channel()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_role"><code class="docutils literal notranslate"><span class="pre">mention_role()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_slash_command"><code class="docutils literal notranslate"><span class="pre">mention_slash_command()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_custom_emoji"><code class="docutils literal notranslate"><span class="pre">mention_custom_emoji()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_custom_emoji_animated"><code class="docutils literal notranslate"><span class="pre">mention_custom_emoji_animated()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_timestamp"><code class="docutils literal notranslate"><span class="pre">mention_timestamp()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.mention_guild_navigation"><code class="docutils literal notranslate"><span class="pre">mention_guild_navigation()</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -299,6 +308,148 @@ html.dark {
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A Markdown link.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_user">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_user" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a user by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> – The unique identifier for the user.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the user.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_user_nickname">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_user_nickname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_user_nickname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_user_nickname" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a user by ID with a nickname.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>user_id</strong> – The unique identifier for the user.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the user with a nickname.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_channel">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_channel" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a channel by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>channel_id</strong> – The unique identifier for the channel.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the channel.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_role">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_role" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a role by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>role_id</strong> – The unique identifier for the role.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the role.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_slash_command">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_slash_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">command_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_slash_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_slash_command" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a slash command by name and ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the slash command.</p></li>
+<li><p><strong>command_id</strong> – The unique identifier for the slash command.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the slash command.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_custom_emoji">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_custom_emoji</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_custom_emoji"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_custom_emoji" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a custom emoji by name and ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the emoji.</p></li>
+<li><p><strong>emoji_id</strong> – The unique identifier for the emoji.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the custom emoji.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_custom_emoji_animated">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_custom_emoji_animated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_custom_emoji_animated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_custom_emoji_animated" title="Link to this definition">¶</a></dt>
+<dd><p>Mention an animated custom emoji by name and ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the animated emoji.</p></li>
+<li><p><strong>emoji_id</strong> – The unique identifier for the animated emoji.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the animated custom emoji.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_timestamp">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_timestamp" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a timestamp, optionally with a style.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timestamp</strong> – The Unix timestamp to format.</p></li>
+<li><p><strong>style</strong> – An optional string representing the timestamp style.
+(Default <a href="#id1"><span class="problematic" id="id2">``</span></a><code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">valid</span> <span class="pre">styles:</span> <span class="pre">``t</span></code>, <code class="docutils literal notranslate"><span class="pre">T</span></code>, <code class="docutils literal notranslate"><span class="pre">d</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code>, <code class="docutils literal notranslate"><span class="pre">f</span></code>, <code class="docutils literal notranslate"><span class="pre">F</span></code>, <code class="docutils literal notranslate"><span class="pre">R</span></code>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that represents the timestamp.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.mention_guild_navigation">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_guild_navigation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guild_nav_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">guild_element_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_guild_navigation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_guild_navigation" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a guild navigation element by type and ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>guild_nav_type</strong> – The type of the guild navigation element.</p></li>
+<li><p><strong>guild_element_id</strong> – The unique identifier for the element.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the guild navigation element.</p>
 </dd>
 </dl>
 </dd></dl>
