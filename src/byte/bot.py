@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import contextlib
-from pathlib import Path
 
 import discord
 from anyio import run
@@ -46,13 +45,14 @@ class Byte(Bot):
 
     async def load_cogs(self) -> None:
         """Load cogs."""
-        cogs = []
-        for plugins_dir in settings.discord.PLUGINS_DIRS:
-            path = Path(plugins_dir)
-            cogs.extend(path.glob("*.py"))
+        cogs = [
+            cog
+            for plugins_dir in settings.discord.PLUGINS_DIRS
+            for cog in plugins_dir.rglob("*.py")
+            if cog.stem != "__init__"
+        ]
 
-        cogs = [cog for cog in cogs if cog.stem != "__init__"]
-        cogs_import_path = [f"{cog.parent.name}.{cog.stem}" for cog in cogs]
+        cogs_import_path = [".".join(cog.parts[cog.parts.index("src") : -1]) + "." + cog.stem for cog in cogs]
 
         for cog in cogs_import_path:
             with contextlib.suppress(commands.ExtensionAlreadyLoaded):
