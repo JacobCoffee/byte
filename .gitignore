@@ -299,3 +299,4 @@ dist
 .pnp.*
 !/src/byte/lib/
 !/src/byte/lib/
+*.pem

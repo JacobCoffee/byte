@@ -157,6 +157,22 @@ class APISettings(BaseSettings):
 
     HEALTH_PATH: str = "/health"
     """Route that the health check is served under."""
+    OPENCOLLECTIVE_KEY: str | None = None
+    """OpenCollective API key."""
+    OPENCOLLECTIVE_URL: str = "https://api.opencollective.com/graphql/v2"
+    """OpenCollective API URL.
+
+    .. note:: This is the GraphQL endpoint, the REST endpoint is no longer maintained.
+        See also: `OpenCollective API Docs <https://graphql-docs-v2.opencollective.com/>`_
+    """
+    POLAR_KEY: str | None = None
+    """Polar API key."""
+    POLAR_URL: str = "https://api.polar.sh"
+    """Polar API URL.
+
+    .. seealso:: `Polar API Docs <https://api.polar.sh/docs>`_ and
+        the `Public API #834 Issue <https://github.com/polarsource/polar/issues/834>`_.
+    """
 
 
 class LogSettings(BaseSettings):
@@ -341,10 +357,63 @@ class DatabaseSettings(BaseSettings):
     """Name of the table used to track DDL version."""
 
 
+class GitHubSettings(BaseSettings):
+    """Configures GitHub app for the project."""
+
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="GITHUB_")
+
+    NAME: str = "byte-bot-app"
+    """GitHub App name."""
+    APP_ID: int = 480575
+    """GitHub App ID."""
+    APP_PRIVATE_KEY: str = ""
+    """GitHub App private key."""
+    APP_CLIENT_ID: str = "Iv1.c3a5214c6642dedd"
+    """GitHub App client ID."""
+    APP_CLIENT_SECRET: str = ""
+    """GitHub App client secret."""
+    REDIRECT_URL: str = "http://127.0.0.1:3000/github/session"
+    """GitHub App redirect URL."""
+    PERSONAL_ACCESS_TOKEN: str | None = None
+    """GitHub personal access token."""
+
+    @field_validator("APP_PRIVATE_KEY", mode="before")
+    def validate_and_load_private_key(cls, value: str) -> str:
+        """Validates and loads the GitHub App private key.
+
+        Args:
+            value: The value of the APP_PRIVATE_KEY setting.
+
+        Returns:
+            The validated and loaded GitHub App private key.
+        """
+        environment = os.getenv("ENVIRONMENT", "dev")
+        if environment == "dev":
+            key_path = Path(BASE_DIR).parent / value
+
+            if key_path.is_file():
+                return key_path.read_text()
+            msg = f"Private key file not found at {key_path}"
+            raise ValueError(msg)
+
+        if not value.startswith("-----BEGIN RSA PRIVATE KEY") and not value.endswith("END RSA PRIVATE KEY-----"):
+            msg = "The GitHub private key must be a valid RSA key"
+            raise ValueError(msg)
+
+        return value
+
+
 # noinspection PyShadowingNames
 def load_settings() -> (
     tuple[
-        ProjectSettings, APISettings, OpenAPISettings, TemplateSettings, ServerSettings, LogSettings, DatabaseSettings
+        ProjectSettings,
+        APISettings,
+        OpenAPISettings,
+        TemplateSettings,
+        ServerSettings,
+        LogSettings,
+        DatabaseSettings,
+        GitHubSettings,
     ]
 ):
     """Load Settings file.
@@ -364,6 +433,7 @@ def load_settings() -> (
         template: TemplateSettings = TemplateSettings.model_validate({})
         log: LogSettings = LogSettings.model_validate({})
         database: DatabaseSettings = DatabaseSettings.model_validate({})
+        github: GitHubSettings = GitHubSettings.model_validate({})
 
     except ValidationError as error:
         print(f"Could not load settings. Error: {error!r}")  # noqa: T201
@@ -376,6 +446,7 @@ def load_settings() -> (
         server,
         log,
         database,
+        github,
     )
 
 
@@ -387,4 +458,5 @@ def load_settings() -> (
     server,
     log,
     db,
+    github,
 ) = load_settings()

@@ -1,10 +1,11 @@
 """Custom plugins for the Litestar Discord."""
 from __future__ import annotations
 
-from discord import Embed
+from discord import Embed, Interaction, Message, app_commands
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
 from src.byte.lib.utils import is_byte_dev, mention_role, mention_user
+from src.server.domain.github.helpers import github_client
 
 __all__ = ("LitestarCommands", "setup")
 
@@ -16,6 +17,8 @@ class LitestarCommands(Cog):
         """Initialize cog."""
         self.bot = bot
         self.__cog_name__ = "Litestar Commands"  # type: ignore[misc]
+        self.context_menu = app_commands.ContextMenu(name="Create GitHub Issue", callback=self.create_github_issue)
+        bot.tree.add_command(self.context_menu)
 
     @group(name="litestar")
     @is_byte_dev()
@@ -83,6 +86,31 @@ class LitestarCommands(Cog):
         )
 
         await ctx.send(embed=embed)
+
+    async def create_github_issue(self, interaction: Interaction, message: Message) -> None:
+        """Context menu command to create a GitHub issue from a Discord message.
+
+        Args:
+            interaction: Interaction object.
+            message: Message object.
+        """
+        issue_title = "Issue from Discord"
+        issue_body = message.content
+
+        try:
+            response_wrapper = await github_client.rest.issues.async_create(
+                owner="JacobCoffee", repo="byte", data={"title": issue_title, "body": issue_body}
+            )
+
+            if response_wrapper._response.is_success:
+                issue_data = response_wrapper._data_model.parse_obj(response_wrapper._response.json())
+                issue_url = issue_data.html_url
+                await interaction.response.send_message(f"GitHub Issue created: {issue_url}", ephemeral=True)
+            else:
+                await interaction.response.send_message("Issue creation failed.", ephemeral=True)
+
+        except Exception as e:  # noqa: BLE001
+            await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=False)
 
 
 async def setup(bot: Bot) -> None:
