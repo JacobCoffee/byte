@@ -1,9 +1,10 @@
 """Custom plugins for the Litestar Discord."""
 from __future__ import annotations
 
-from discord import Embed, Interaction, Message, app_commands
+from discord import Embed, Interaction, Message, Object, app_commands
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
+from src.byte.lib.settings import discord
 from src.byte.lib.utils import is_byte_dev, mention_role, mention_user
 from src.server.domain.github.helpers import github_client
 
@@ -95,22 +96,25 @@ class LitestarCommands(Cog):
             message: Message object.
         """
         issue_title = "Issue from Discord"
-        issue_body = message.content
+        issue_reporter = message.author
+        issue_body = (
+            f"Reported by {issue_reporter.display_name} in Discord: {message.channel.mention}:\n\n{message.content}"
+        )
 
         try:
             response_wrapper = await github_client.rest.issues.async_create(
-                owner="JacobCoffee", repo="byte", data={"title": issue_title, "body": issue_body}
+                owner="litestar-org", repo="litestar", data={"title": issue_title, "body": issue_body}
             )
 
             if response_wrapper._response.is_success:
                 issue_data = response_wrapper._data_model.parse_obj(response_wrapper._response.json())
                 issue_url = issue_data.html_url
-                await interaction.response.send_message(f"GitHub Issue created: {issue_url}", ephemeral=True)
+                await interaction.response.send_message(f"GitHub Issue created: {issue_url}", ephemeral=False)
             else:
                 await interaction.response.send_message("Issue creation failed.", ephemeral=True)
 
         except Exception as e:  # noqa: BLE001
-            await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=False)
+            await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=True)
 
 
 async def setup(bot: Bot) -> None:
@@ -119,4 +123,7 @@ async def setup(bot: Bot) -> None:
     Args:
         bot: Bot object.
     """
-    await bot.add_cog(LitestarCommands(bot))
+    cog = LitestarCommands(bot)
+    await bot.add_cog(cog)
+    await bot.tree.sync(guild=Object(id=919193495116337154))
+    await bot.tree.sync(guild=Object(id=discord.DEV_GUILD_ID))
