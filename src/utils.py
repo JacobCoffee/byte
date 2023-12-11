@@ -1,6 +1,7 @@
 """General utility functions."""
 from __future__ import annotations
 
+import base64
 import dataclasses
 import pkgutil
 import re
@@ -156,3 +157,19 @@ def import_string(dotted_path: str) -> Any:
     except AttributeError as e:
         msg = "Module '%s' does not define a '%s' attribute/class"
         raise ImportError(msg, module_path, class_name) from e
+
+
+def encode_to_base64(file: Path) -> str:
+    """Encode a file to base64.
+
+    Args:
+        file: The path to the PEM file.
+
+    Returns:
+        The encoded contents of the PEM file.
+    """
+    with Path(file).open("r") as file:
+        pem_contents = file.read()
+
+    encoded_contents = base64.b64encode(pem_contents.encode("utf-8"))
+    return encoded_contents.decode("utf-8")

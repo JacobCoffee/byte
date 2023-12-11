@@ -1,6 +1,7 @@
 """Project Settings."""
 from __future__ import annotations
 
+import base64
 import binascii
 import os
 from pathlib import Path
@@ -387,20 +388,25 @@ class GitHubSettings(BaseSettings):
         Returns:
             The validated and loaded GitHub App private key.
         """
-        environment = os.getenv("ENVIRONMENT", "dev")
-        if environment == "dev":
-            key_path = Path(BASE_DIR).parent / value
+        try:
+            decoded_key = base64.b64decode(value).decode("utf-8")
+        except base64.binascii.Error as e:
+            environment = os.getenv("ENVIRONMENT", "dev")
+            if environment != "dev":
+                msg = "The GitHub private key must be a valid base64 encoded string"
+                raise ValueError(msg) from e
 
+            key_path = Path(BASE_DIR).parent / value
             if key_path.is_file():
                 return key_path.read_text()
             msg = f"Private key file not found at {key_path}"
-            raise ValueError(msg)
+            raise ValueError(msg) from e
+        # if not decoded_key.startswith("-----BEGIN RSA PRIVATE KEY-----") or not decoded_key.endswith(
+        #         "-----END RSA PRIVATE KEY-----"):
+        #     msg = "The GitHub private key must be a valid RSA key"
+        #     raise ValueError(msg)
 
-        if not value.startswith("-----BEGIN RSA PRIVATE KEY") and not value.endswith("END RSA PRIVATE KEY-----"):
-            msg = "The GitHub private key must be a valid RSA key"
-            raise ValueError(msg)
-
-        return value
+        return decoded_key
 
 
 # noinspection PyShadowingNames
