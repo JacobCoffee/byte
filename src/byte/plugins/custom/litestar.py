@@ -95,22 +95,25 @@ class LitestarCommands(Cog):
             message: Message object.
         """
         issue_title = "Issue from Discord"
-        issue_body = message.content
+        issue_reporter = message.author
+        issue_body = (
+            f"Reported by {issue_reporter.display_name} in Discord: {message.channel.mention}:\n\n{message.content}"
+        )
 
         try:
             response_wrapper = await github_client.rest.issues.async_create(
-                owner="JacobCoffee", repo="byte", data={"title": issue_title, "body": issue_body}
+                owner="litestar-org", repo="litestar", data={"title": issue_title, "body": issue_body}
             )
 
             if response_wrapper._response.is_success:
                 issue_data = response_wrapper._data_model.parse_obj(response_wrapper._response.json())
                 issue_url = issue_data.html_url
-                await interaction.response.send_message(f"GitHub Issue created: {issue_url}", ephemeral=True)
+                await interaction.response.send_message(f"GitHub Issue created: {issue_url}", ephemeral=False)
             else:
                 await interaction.response.send_message("Issue creation failed.", ephemeral=True)
 
         except Exception as e:  # noqa: BLE001
-            await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=False)
+            await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=True)
 
 
 async def setup(bot: Bot) -> None:
@@ -120,3 +123,13 @@ async def setup(bot: Bot) -> None:
         bot: Bot object.
     """
     await bot.add_cog(LitestarCommands(bot))
+    # TODO: Only sync the appropriate guilds needed.
+    #    This is a temporary fix to get the context menu working.
+    #    The invite link was generated with correct permissions, but it seems that it still won't work?
+    #    cc: @alc-alc
+    #    ExtensionFailed: Extension 'src.byte.plugins.custom.litestar' raised an error: Forbidden: 403 Forbidden (error code: 50001): Missing Access  # noqa: E501
+    #
+    # cog = LitestarCommands(bot)
+    # await bot.add_cog(cog)
+    # await bot.tree.sync(guild=Object(id=919193495116337154))
+    # await bot.tree.sync(guild=Object(id=discord.DEV_GUILD_ID))
