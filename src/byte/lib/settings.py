@@ -25,7 +25,7 @@ load_dotenv()
 
 DEFAULT_MODULE_NAME: Final = "src"
 BASE_DIR: Final = utils.module_to_os_path(DEFAULT_MODULE_NAME)
-PLUGINS_DIR: Final = utils.module_to_os_path("src.byte.plugins")
+PLUGINS_DIR: Final = utils.module_to_os_path("byte.plugins")
 
 
 class DiscordSettings(BaseSettings):
