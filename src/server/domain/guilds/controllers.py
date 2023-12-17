@@ -5,18 +5,18 @@ from typing import TYPE_CHECKING
 
 from litestar import Controller, get, post
 from litestar.di import Provide
-from litestar.params import Parameter
+from litestar.params import Dependency, Parameter
 
 from server.domain import urls
 from server.domain.guilds.dependencies import provides_guilds_service
-from server.domain.guilds.schemas import GuildSchema  # noqa: TCH001
+from server.domain.guilds.schemas import GuildSchema
 from server.domain.guilds.services import GuildsService  # noqa: TCH001
 
-__all__ = ("GuildController",)
-
-
 if TYPE_CHECKING:
+    from advanced_alchemy import FilterTypes
     from litestar.pagination import OffsetPagination
+
+__all__ = ("GuildController",)
 
 
 class GuildController(Controller):
@@ -34,7 +34,7 @@ class GuildController(Controller):
     async def list_guilds(
         self,
         guilds_service: GuildsService,
-        # filters: list[FilterTypes] = Dependency(skip_validation=True),
+        filters: list[FilterTypes] = Dependency(skip_validation=True),
     ) -> OffsetPagination[GuildSchema]:
         """List guilds.
 
@@ -45,8 +45,8 @@ class GuildController(Controller):
         Returns:
             list[Guild]: List of guilds
         """
-        # results, total = await guilds_service.list_and_count(*filters)
-        # return guilds_service.to_schema(GuildSchema, results, total, *filters)
+        results, total = await guilds_service.list_and_count(*filters)
+        return guilds_service.to_schema(GuildSchema, results, total, *filters)
 
     @post(
         operation_id="CreateGuild",
