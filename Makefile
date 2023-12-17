@@ -58,11 +58,14 @@ install: ## Install all dependencies
 lint: ## Runs pre-commit hooks; includes ruff linting, codespell, black
 	$(PDM_RUN_BIN) pre-commit run --all-files
 
-fmt-check: ## Runs black in check mode (no changes)
-	$(PDM_RUN_BIN) black --check --fast .
+fmt-check: ## Runs Ruff format in check mode (no changes)
+	$(PDM_RUN_BIN) ruff format --check .
 
-fmt-fix: ## Runs black, makes changes where necessary
-	$(PDM_RUN_BIN) black --line-length 120 .
+fmt: ## Runs Ruff format, makes changes where necessary
+	$(PDM_RUN_BIN) ruff format .
+
+ruff: ## Runs Ruff
+	$(PDM_RUN_BIN) ruff check . --unsafe-fixes --fix
 
 test:  ## Run the tests
 	$(PDM_RUN_BIN) pytest tests
@@ -107,7 +110,7 @@ migrations:       ## Generate database migrations
 .PHONY: migrate
 migrate:          ## Apply database migrations
 	@echo "ATTENTION: Will apply all database migrations."
-	@$(ENV_PREFIX)app database upgrade
+	@$(ENV_PREFIX)app database upgrade --no-prompt
 
 # =============================================================================
 # Main

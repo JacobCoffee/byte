@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 
 from discord.ext import commands
 
-from src.byte.lib import settings
+from byte.lib import settings
 
 if TYPE_CHECKING:
     from typing import Any
@@ -159,7 +159,7 @@ def mention_timestamp(timestamp: int, style: str = "") -> str:
     Args:
         timestamp: The Unix timestamp to format.
         style: An optional string representing the timestamp style.
-               (Default ````, valid styles: ``t``, ``T``, ``d``, ``D``, ``f``, ``F``, ``R``)
+               (Default `` ``, valid styles: ``t``, ``T``, ``d``, ``D``, ``f``, ``F``, ``R``)
 
     Returns:
         A formatted string that represents the timestamp.

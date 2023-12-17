@@ -1,14 +1,24 @@
 """Shared models."""
-from uuid import UUID
+from __future__ import annotations
+
+from uuid import UUID  # noqa: TCH003
 
 from advanced_alchemy.base import UUIDAuditBase
 from sqlalchemy import BigInteger, ForeignKey, String, UniqueConstraint
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from src.server.lib.db.orm import DatabaseModel, TimestampedDatabaseModel
+from server.lib.db.orm import DatabaseModel, TimestampedDatabaseModel
 
-__all__ = ("GitHubConfig", "GuildConfig", "GuildGitHubConfig", "GuildSOTagsConfig", "SOTagConfig", "User")
+__all__ = (
+    "GitHubConfig",
+    "GuildConfig",
+    "GuildGitHubConfig",
+    "GuildSOTagsConfig",
+    "SOTagConfig",
+    "User",
+    "GuildAllowedUsersConfig",
+)
 
 
 class GuildConfig(TimestampedDatabaseModel):
@@ -38,17 +48,17 @@ class GuildConfig(TimestampedDatabaseModel):
     # =================
     # ORM Relationships
     # =================
-    github_config: Mapped["GitHubConfig"] = relationship(
+    github_config: Mapped[GitHubConfig] = relationship(
         lazy="noload",
         back_populates="guild_config",
         cascade="save-update, merge, delete",
     )
-    sotags_config: Mapped[list["SOTagConfig"]] = relationship(
+    sotags_config: Mapped[list[SOTagConfig]] = relationship(
         lazy="noload",
         back_populates="guild_config",
         cascade="save-update, merge, delete",
     )
-    allowed_users_config: Mapped[list["GuildAllowedUsersConfig"]] = relationship(
+    allowed_users_config: Mapped[list[GuildAllowedUsersConfig]] = relationship(
         lazy="noload",
         back_populates="guild_config",
         cascade="save-update, merge, delete",
@@ -79,7 +89,7 @@ class GuildGitHubConfig(UUIDAuditBase):
         innerjoin=True,
         lazy="noload",
     )
-    github_config: Mapped["GitHubConfig"] = relationship(
+    github_config: Mapped[GitHubConfig] = relationship(
         back_populates="guild_config",
         foreign_keys="GuildGitHubConfig.github_config_id",
         innerjoin=True,
@@ -136,7 +146,7 @@ class GuildSOTagsConfig(UUIDAuditBase):
         innerjoin=True,
         lazy="noload",
     )
-    sotag_config: Mapped["SOTagConfig"] = relationship(
+    sotag_config: Mapped[SOTagConfig] = relationship(
         back_populates="guild_config",
         foreign_keys="GuildSOTagsConfig.sotag_config_id",
         innerjoin=True,
@@ -160,7 +170,7 @@ class SOTagConfig(DatabaseModel):
     # =================
     # ORM Relationships
     # =================
-    guild_config: Mapped["GuildSOTagsConfig"] = relationship(
+    guild_config: Mapped[GuildSOTagsConfig] = relationship(
         back_populates="sotag_config",
         lazy="noload",
         cascade="save-update, merge, delete",
@@ -198,7 +208,7 @@ class GuildAllowedUsersConfig(UUIDAuditBase):
         innerjoin=True,
         lazy="noload",
     )
-    user: Mapped["User"] = relationship(
+    user: Mapped[User] = relationship(
         back_populates="guilds_allowed",
         foreign_keys="GuildAllowedUsersConfig.user_id",
         innerjoin=True,

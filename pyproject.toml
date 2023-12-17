@@ -51,7 +51,7 @@ Reddit = 'https://reddit.com/monorepo'
 Youtube = 'https://www.youtube.com/@monorepo'
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "nodeenv"]
 build-backend = "hatchling.build"
 
 [tool.hatch.metadata]
@@ -59,6 +59,10 @@ allow-direct-references = true
 
 [tool.hatch.version]
 path = 'src/__metadata__.py'
+
+[tool.hatch.build]
+dev-mode-dirs = ["src/", "."]
+packages = ["."]
 
 [tool.pdm.scripts]
 lint = "pre-commit run --all-files"

@@ -12,7 +12,7 @@ from sqlalchemy import event
 from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 from sqlalchemy.pool import NullPool
 
-from src.server.lib import constants, serialization, settings
+from server.lib import constants, serialization, settings
 
 __all__ = ["session", "engine", "async_session_factory", "config", "plugin"]
 

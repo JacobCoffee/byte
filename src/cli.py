@@ -9,7 +9,7 @@ from typing import Any
 import click
 from rich import get_console
 
-from src.server.lib import log, settings
+from server.lib import log, settings
 
 __all__ = [
     "run_bot",
@@ -76,7 +76,7 @@ def web(
             "timeout-keep-alive": settings.server.KEEPALIVE,
         }
         if reload_dirs:
-            process_args["reload-dir"] = reload_dirs
+            process_args["reload-dir"] = " ".join(reload_dirs)
         subprocess.run(
             ["uvicorn", settings.server.APP_LOC, *_convert_uvicorn_args(process_args)],  # noqa: S603, S607
             check=True,

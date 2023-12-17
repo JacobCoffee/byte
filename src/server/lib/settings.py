@@ -10,14 +10,26 @@ from typing import Any, Final, Literal
 from dotenv import load_dotenv
 from litestar.contrib.jinja import JinjaTemplateEngine
 from litestar.data_extractors import RequestExtractorField, ResponseExtractorField  # noqa: TCH002
+from litestar.openapi.spec import Server
 from pydantic import ValidationError, field_validator
 from pydantic.types import SecretBytes
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from src import utils
-from src.__metadata__ import __version__ as version
+import utils
+from __metadata__ import __version__ as version
 
-__all__ = ()
+__all__ = (
+    "APISettings",
+    "DatabaseSettings",
+    "GitHubSettings",
+    "LogSettings",
+    "OpenAPISettings",
+    "ProjectSettings",
+    "ServerSettings",
+    "TemplateSettings",
+    "load_settings",
+)
+
 
 load_dotenv()
 
@@ -262,9 +274,8 @@ class OpenAPISettings(BaseSettings):
     }
     """External documentation for the API."""
 
-    @classmethod
-    @field_validator("SERVERS", mode="before")
-    def assemble_openapi_servers(cls, value: list[dict[str, str]]) -> list[dict[str, str]]:
+    @field_validator("SERVERS", mode="after")
+    def assemble_openapi_servers(cls, value: list[Server]) -> list[Server]:  # noqa: ARG003
         """Assembles the OpenAPI servers based on the environment.
 
         Args:
@@ -273,23 +284,18 @@ class OpenAPISettings(BaseSettings):
         Returns:
             The assembled OpenAPI servers.
         """
-        env_urls = {
-            "prod": "https://byte-bot.app/",
-            "test": "https://dev.byte-bot.app/",
-            "dev": "http://0.0.0.0:8000",
+        servers = {
+            "prod": Server(url="https://byte-bot.app/", description="Production"),
+            "test": Server(url="https://dev.byte-bot.app/", description="Test"),
+            "dev": Server(url="http://0.0.0.0:8000", description="Development"),
         }
         environment = os.getenv("ENVIRONMENT", "dev")
-        url = os.getenv("WEB_URL", env_urls[environment])
-        description = environment.capitalize()
 
-        return [
-            {
-                "url": url,  # type: ignore[list-item]
-                "description": f"{description}",
-            }
-            if environment in env_urls
-            else value
-        ]
+        if environment == "prod":
+            return [servers["prod"]]
+        if environment == "test":
+            return [servers["test"], servers["prod"]]
+        return [servers["dev"], servers["test"], servers["prod"]]
 
 
 class TemplateSettings(BaseSettings):

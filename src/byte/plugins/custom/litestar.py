@@ -4,8 +4,8 @@ from __future__ import annotations
 from discord import Embed, Interaction, Message, app_commands
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
-from src.byte.lib.utils import is_byte_dev, mention_role, mention_user
-from src.server.domain.github.helpers import github_client
+from byte.lib.utils import is_byte_dev, mention_role, mention_user
+from server.domain.github.helpers import github_client
 
 __all__ = ("LitestarCommands", "setup")
 

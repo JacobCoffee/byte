@@ -7,7 +7,7 @@ import warnings
 
 from sqlalchemy.exc import SAWarning
 
-from src.__metadata__ import __project__
+from __metadata__ import __project__
 
 # -- Environmental Data ------------------------------------------------------
 warnings.filterwarnings("ignore", category=SAWarning)
@@ -48,6 +48,7 @@ intersphinx_mapping = {
     "msgspec": ("https://jcristharif.com/msgspec/", None),
     "advanced-alchemy": ("https://docs.advanced-alchemy.jolt.rs/latest/", None),
     "sqlalchemy": ("https://docs.sqlalchemy.org/en/20/", None),
+    "discord.py": ("https://discordpy.readthedocs.io/en/stable/", None),
 }
 
 napoleon_google_docstring = True
