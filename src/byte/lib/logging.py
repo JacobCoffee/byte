@@ -44,20 +44,18 @@ def setup_logging() -> None:
             "address": "/dev/log",
             "level": "INFO",
         },
-    }
-
-    if env == "dev":
-        handlers["console"] = {
+        "console": {
             "class": "rich.logging.RichHandler",
             "formatter": "simple",
             "level": "DEBUG",
         }
-    else:
-        handlers["console"] = {
+        if env == "dev"
+        else {
             "class": "logging.StreamHandler",
             "formatter": "simple",
             "level": "INFO",
-        }
+        },
+    }
 
     logging_config = {
         "version": 1,
