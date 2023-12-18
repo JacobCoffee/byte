@@ -270,7 +270,7 @@ html.dark {
 </span><span id="1-9"><span class="kn">from</span> <span class="nn">rich.logging</span> <span class="kn">import</span> <span class="n">RichHandler</span>  <span class="c1"># noqa: F401</span>
 </span><span id="1-10"><span class="kn">from</span> <span class="nn">rich.traceback</span> <span class="kn">import</span> <span class="n">install</span>
 </span><span id="1-11">
-</span><span id="1-12"><span class="kn">from</span> <span class="nn">src.byte.lib</span> <span class="kn">import</span> <span class="n">settings</span>
+</span><span id="1-12"><span class="kn">from</span> <span class="nn">byte.lib</span> <span class="kn">import</span> <span class="n">settings</span>
 </span><span id="1-13">
 </span><span id="1-14"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
 </span><span id="1-15">    <span class="s2">&quot;setup_logging&quot;</span><span class="p">,</span>
@@ -307,70 +307,68 @@ html.dark {
 </span><span id="1-44">            <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;/dev/log&quot;</span><span class="p">,</span>
 </span><span id="1-45">            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
 </span><span id="1-46">        <span class="p">},</span>
-</span><span id="1-47">    <span class="p">}</span>
-</span><span id="1-48">
-</span><span id="1-49">    <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;dev&quot;</span><span class="p">:</span>
-</span><span id="1-50">        <span class="n">handlers</span><span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="1-51">            <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;rich.logging.RichHandler&quot;</span><span class="p">,</span>
-</span><span id="1-52">            <span class="s2">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;simple&quot;</span><span class="p">,</span>
-</span><span id="1-53">            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
-</span><span id="1-54">        <span class="p">}</span>
-</span><span id="1-55">    <span class="k">else</span><span class="p">:</span>
-</span><span id="1-56">        <span class="n">handlers</span><span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="1-57">            <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.StreamHandler&quot;</span><span class="p">,</span>
-</span><span id="1-58">            <span class="s2">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;simple&quot;</span><span class="p">,</span>
-</span><span id="1-59">            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
-</span><span id="1-60">        <span class="p">}</span>
-</span><span id="1-61">
-</span><span id="1-62">    <span class="n">logging_config</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="1-63">        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-</span><span id="1-64">        <span class="s2">&quot;disable_existing_loggers&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="1-65">        <span class="s2">&quot;formatters&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="1-66">            <span class="s2">&quot;simple&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="1-67">                <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">FORMAT</span><span class="p">,</span>
-</span><span id="1-68">            <span class="p">},</span>
-</span><span id="1-69">        <span class="p">},</span>
-</span><span id="1-70">        <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="n">handlers</span><span class="p">,</span>
-</span><span id="1-71">        <span class="s2">&quot;loggers&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="1-72">            <span class="s2">&quot;discord&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="1-73">                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">DISCORD_LEVEL</span><span class="p">,</span>
-</span><span id="1-74">                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">],</span>
-</span><span id="1-75">                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="1-76">            <span class="p">},</span>
-</span><span id="1-77">            <span class="s2">&quot;websockets&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="1-78">                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">WEBSOCKETS_LEVEL</span><span class="p">,</span>
-</span><span id="1-79">                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">],</span>
-</span><span id="1-80">                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="1-81">            <span class="p">},</span>
-</span><span id="1-82">            <span class="s2">&quot;asyncio&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="1-83">                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">ASYNCIO_LEVEL</span><span class="p">,</span>
-</span><span id="1-84">                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">],</span>
-</span><span id="1-85">                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="1-86">            <span class="p">},</span>
-</span><span id="1-87">            <span class="s2">&quot;root&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="1-88">                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">DEBUG</span> <span class="k">else</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
-</span><span id="1-89">                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;dev&quot;</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;syslog&quot;</span><span class="p">],</span>
-</span><span id="1-90">                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="1-91">            <span class="p">},</span>
-</span><span id="1-92">        <span class="p">},</span>
-</span><span id="1-93">    <span class="p">}</span>
-</span><span id="1-94">
-</span><span id="1-95">    <span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">dictConfig</span><span class="p">(</span><span class="n">logging_config</span><span class="p">)</span></div>
+</span><span id="1-47">        <span class="s2">&quot;console&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="1-48">            <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;rich.logging.RichHandler&quot;</span><span class="p">,</span>
+</span><span id="1-49">            <span class="s2">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;simple&quot;</span><span class="p">,</span>
+</span><span id="1-50">            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span><span class="p">,</span>
+</span><span id="1-51">        <span class="p">}</span>
+</span><span id="1-52">        <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;dev&quot;</span>
+</span><span id="1-53">        <span class="k">else</span> <span class="p">{</span>
+</span><span id="1-54">            <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;logging.StreamHandler&quot;</span><span class="p">,</span>
+</span><span id="1-55">            <span class="s2">&quot;formatter&quot;</span><span class="p">:</span> <span class="s2">&quot;simple&quot;</span><span class="p">,</span>
+</span><span id="1-56">            <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+</span><span id="1-57">        <span class="p">},</span>
+</span><span id="1-58">    <span class="p">}</span>
+</span><span id="1-59">
+</span><span id="1-60">    <span class="n">logging_config</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="1-61">        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span><span id="1-62">        <span class="s2">&quot;disable_existing_loggers&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="1-63">        <span class="s2">&quot;formatters&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="1-64">            <span class="s2">&quot;simple&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="1-65">                <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">FORMAT</span><span class="p">,</span>
+</span><span id="1-66">            <span class="p">},</span>
+</span><span id="1-67">        <span class="p">},</span>
+</span><span id="1-68">        <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="n">handlers</span><span class="p">,</span>
+</span><span id="1-69">        <span class="s2">&quot;loggers&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="1-70">            <span class="s2">&quot;discord&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="1-71">                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">DISCORD_LEVEL</span><span class="p">,</span>
+</span><span id="1-72">                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">],</span>
+</span><span id="1-73">                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="1-74">            <span class="p">},</span>
+</span><span id="1-75">            <span class="s2">&quot;websockets&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="1-76">                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">WEBSOCKETS_LEVEL</span><span class="p">,</span>
+</span><span id="1-77">                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">],</span>
+</span><span id="1-78">                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="1-79">            <span class="p">},</span>
+</span><span id="1-80">            <span class="s2">&quot;asyncio&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="1-81">                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="n">settings</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">ASYNCIO_LEVEL</span><span class="p">,</span>
+</span><span id="1-82">                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">],</span>
+</span><span id="1-83">                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="1-84">            <span class="p">},</span>
+</span><span id="1-85">            <span class="s2">&quot;root&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="1-86">                <span class="s2">&quot;level&quot;</span><span class="p">:</span> <span class="s2">&quot;DEBUG&quot;</span> <span class="k">if</span> <span class="n">settings</span><span class="o">.</span><span class="n">project</span><span class="o">.</span><span class="n">DEBUG</span> <span class="k">else</span> <span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+</span><span id="1-87">                <span class="s2">&quot;handlers&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;console&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s2">&quot;dev&quot;</span> <span class="k">else</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;syslog&quot;</span><span class="p">],</span>
+</span><span id="1-88">                <span class="s2">&quot;propagate&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+</span><span id="1-89">            <span class="p">},</span>
+</span><span id="1-90">        <span class="p">},</span>
+</span><span id="1-91">    <span class="p">}</span>
+</span><span id="1-92">
+</span><span id="1-93">    <span class="n">logging</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">dictConfig</span><span class="p">(</span><span class="n">logging_config</span><span class="p">)</span></div>
 
-</span><span id="1-96">
-</span><span id="1-97">
+</span><span id="1-94">
+</span><span id="1-95">
 <div class="viewcode-block" id="get_logger">
 <a class="viewcode-back" href="../../../../byte/api/lib/logging.html#src.byte.lib.logging.get_logger">[docs]</a>
-</span><span id="1-98"><span class="k">def</span> <span class="nf">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;__main__&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Logger</span><span class="p">:</span>
-</span><span id="1-99"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a logger with the specified name.</span>
-</span><span id="1-100">
-</span><span id="1-101"><span class="sd">    Args:</span>
-</span><span id="1-102"><span class="sd">        name (str): The name of the logger.</span>
-</span><span id="1-103">
-</span><span id="1-104"><span class="sd">    Returns:</span>
-</span><span id="1-105"><span class="sd">        logging.Logger: The logger with the specified name.</span>
-</span><span id="1-106"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-107">    <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
+</span><span id="1-96"><span class="k">def</span> <span class="nf">get_logger</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;__main__&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Logger</span><span class="p">:</span>
+</span><span id="1-97"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a logger with the specified name.</span>
+</span><span id="1-98">
+</span><span id="1-99"><span class="sd">    Args:</span>
+</span><span id="1-100"><span class="sd">        name (str): The name of the logger.</span>
+</span><span id="1-101">
+</span><span id="1-102"><span class="sd">    Returns:</span>
+</span><span id="1-103"><span class="sd">        logging.Logger: The logger with the specified name.</span>
+</span><span id="1-104"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-105">    <span class="k">return</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">name</span><span class="p">)</span></div>
 
 </span></pre></div>
         </article>

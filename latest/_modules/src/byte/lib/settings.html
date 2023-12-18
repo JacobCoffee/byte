@@ -270,8 +270,8 @@ html.dark {
 </span><span id="1-9"><span class="kn">from</span> <span class="nn">pydantic</span> <span class="kn">import</span> <span class="n">ValidationError</span><span class="p">,</span> <span class="n">field_validator</span>
 </span><span id="1-10"><span class="kn">from</span> <span class="nn">pydantic_settings</span> <span class="kn">import</span> <span class="n">BaseSettings</span><span class="p">,</span> <span class="n">SettingsConfigDict</span>
 </span><span id="1-11">
-</span><span id="1-12"><span class="kn">from</span> <span class="nn">src</span> <span class="kn">import</span> <span class="n">utils</span>
-</span><span id="1-13"><span class="kn">from</span> <span class="nn">src.__metadata__</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">version</span>
+</span><span id="1-12"><span class="kn">import</span> <span class="nn">utils</span>
+</span><span id="1-13"><span class="kn">from</span> <span class="nn">__metadata__</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">version</span>
 </span><span id="1-14">
 </span><span id="1-15"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
 </span><span id="1-16">    <span class="s2">&quot;discord&quot;</span><span class="p">,</span>
@@ -286,7 +286,7 @@ html.dark {
 </span><span id="1-25">
 </span><span id="1-26"><span class="n">DEFAULT_MODULE_NAME</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="s2">&quot;src&quot;</span>
 </span><span id="1-27"><span class="n">BASE_DIR</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">module_to_os_path</span><span class="p">(</span><span class="n">DEFAULT_MODULE_NAME</span><span class="p">)</span>
-</span><span id="1-28"><span class="n">PLUGINS_DIR</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">module_to_os_path</span><span class="p">(</span><span class="s2">&quot;src.byte.plugins&quot;</span><span class="p">)</span>
+</span><span id="1-28"><span class="n">PLUGINS_DIR</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="n">utils</span><span class="o">.</span><span class="n">module_to_os_path</span><span class="p">(</span><span class="s2">&quot;byte.plugins&quot;</span><span class="p">)</span>
 </span><span id="1-29">
 </span><span id="1-30">
 <div class="viewcode-block" id="DiscordSettings">
