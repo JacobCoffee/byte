@@ -1,9 +1,9 @@
 # type: ignore
 """
 
-Revision ID: 31780d474d8d
+Revision ID: feebdacfdd91
 Revises: 43165a559e89
-Create Date: 2023-12-18 03:03:12.575974+00:00
+Create Date: 2023-12-18 03:20:32.171148+00:00
 
 """
 from __future__ import annotations
@@ -23,7 +23,7 @@ sa.DateTimeUTC = DateTimeUTC
 sa.ORA_JSONB = ORA_JSONB
 
 # revision identifiers, used by Alembic.
-revision = "31780d474d8d"
+revision = "feebdacfdd91"
 down_revision = "43165a559e89"
 branch_labels = None
 depends_on = None
@@ -97,9 +97,9 @@ def schema_upgrades() -> None:
         sa.UniqueConstraint("guild_id", "tag_name", name=op.f("uq_so_tags_guild_id")),
     )
     op.drop_table("guild_sotags_config")
-    op.drop_table("sotag_config")
     op.drop_table("guild_github_config")
     op.drop_table("guild_allowed_users_config")
+    op.drop_table("sotag_config")
     op.drop_table("guild_config")
     with op.batch_alter_table("github_config", schema=None) as batch_op:
         batch_op.add_column(sa.Column("guild_id", sa.GUID(length=16), nullable=False))
@@ -125,6 +125,14 @@ def schema_downgrades() -> None:
         batch_op.drop_constraint(batch_op.f("fk_github_config_guild_id_guild"), type_="foreignkey")
         batch_op.drop_column("guild_id")
 
+    op.create_table(
+        "sotag_config",
+        sa.Column("id", sa.UUID(), autoincrement=False, nullable=False),
+        sa.Column("tag_name", sa.VARCHAR(length=50), autoincrement=False, nullable=False),
+        sa.Column("sa_orm_sentinel", sa.INTEGER(), autoincrement=False, nullable=True),
+        sa.PrimaryKeyConstraint("id", name="pk_sotag_config"),
+        postgresql_ignore_search_path=False,
+    )
     op.create_table(
         "guild_allowed_users_config",
         sa.Column("id", sa.UUID(), autoincrement=False, nullable=False),
@@ -194,14 +202,6 @@ def schema_downgrades() -> None:
         ),
         sa.PrimaryKeyConstraint("id", name="pk_guild_github_config"),
         sa.UniqueConstraint("guild_id", "github_config_id", name="uq_guild_github_config_guild_id"),
-    )
-    op.create_table(
-        "sotag_config",
-        sa.Column("id", sa.UUID(), autoincrement=False, nullable=False),
-        sa.Column("tag_name", sa.VARCHAR(length=50), autoincrement=False, nullable=False),
-        sa.Column("sa_orm_sentinel", sa.INTEGER(), autoincrement=False, nullable=True),
-        sa.PrimaryKeyConstraint("id", name="pk_sotag_config"),
-        postgresql_ignore_search_path=False,
     )
     op.create_table(
         "guild_sotags_config",

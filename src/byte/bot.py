@@ -110,7 +110,7 @@ class Byte(Bot):
             guild: Guild object.
         """
         await self.tree.sync(guild=guild)
-        api_url = f"http://0.0.0.0:8000/api/guilds/create?guild_id={guild.id}&name={guild.name}"
+        api_url = f"http://0.0.0.0:8000/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
 
         async with httpx.AsyncClient() as client:
             response = await client.post(api_url)

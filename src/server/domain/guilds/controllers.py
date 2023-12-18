@@ -8,7 +8,6 @@ from litestar.di import Provide
 from litestar.params import Dependency, Parameter
 
 from server.domain import urls
-from server.domain.db.models import Guild  # noqa: TCH001
 from server.domain.guilds.dependencies import provides_guilds_service
 from server.domain.guilds.schemas import GuildSchema
 from server.domain.guilds.services import GuildsService  # noqa: TCH001
@@ -62,20 +61,21 @@ class GuildController(Controller):
             title="Guild ID",
             description="The guild ID.",
         ),
-        name: str = Parameter(
-            title="Name",
+        guild_name: str = Parameter(
+            title="Guild Name",
             description="The guild name.",
         ),
-    ) -> Guild:
+    ) -> str:
         """Create a guild.
 
         Args:
             guilds_service (GuildsService): Guilds service
             guild_id (int): Guild ID
-            name (str): Guild name
+            guild_name (str): Guild name
 
         Returns:
             Guild: Created guild object
         """
-        new_guild = {"guild_id": guild_id, "guild_name": name}
-        return await guilds_service.create(new_guild)
+        new_guild = {"guild_id": guild_id, "guild_name": guild_name}
+        await guilds_service.create(new_guild)
+        return f"Guild {guild_name} created."
