@@ -19,8 +19,8 @@ def create_app() -> Litestar:
     from litestar import Litestar
     from pydantic import SecretStr
 
-    from src.server import domain
-    from src.server.lib import (
+    from server import domain
+    from server.lib import (
         cors,
         db,
         exceptions,
@@ -30,6 +30,9 @@ def create_app() -> Litestar:
         static_files,
         template,
     )
+    from server.lib.dependencies import create_collection_dependencies
+
+    dependencies = create_collection_dependencies()
 
     return Litestar(
         # Handlers
@@ -44,6 +47,7 @@ def create_app() -> Litestar:
         openapi_config=openapi.config,
         static_files_config=static_files.config,
         template_config=template.config,
+        dependencies=dependencies,
         # Lifecycle
         before_send=[log.controller.BeforeSendHandler()],
         on_shutdown=[],

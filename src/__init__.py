@@ -4,8 +4,8 @@ from __future__ import annotations
 from rich import get_console
 from rich.traceback import install as rich_tracebacks
 
+from __metadata__ import __version__
 from src import app, byte, cli, server, utils
-from src.__metadata__ import __version__
 
 __all__ = (
     "__version__",

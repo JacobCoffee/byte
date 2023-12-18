@@ -9,7 +9,7 @@ from rich.console import Console
 from rich.logging import RichHandler  # noqa: F401
 from rich.traceback import install
 
-from src.byte.lib import settings
+from byte.lib import settings
 
 __all__ = [
     "setup_logging",
@@ -44,20 +44,18 @@ def setup_logging() -> None:
             "address": "/dev/log",
             "level": "INFO",
         },
-    }
-
-    if env == "dev":
-        handlers["console"] = {
+        "console": {
             "class": "rich.logging.RichHandler",
             "formatter": "simple",
             "level": "DEBUG",
         }
-    else:
-        handlers["console"] = {
+        if env == "dev"
+        else {
             "class": "logging.StreamHandler",
             "formatter": "simple",
             "level": "INFO",
-        }
+        },
+    }
 
     logging_config = {
         "version": 1,

@@ -1,9 +1,10 @@
 """Server Lib."""
 from __future__ import annotations
 
-from src.server.lib import (
+from server.lib import (
     cors,
     db,
+    dependencies,
     exceptions,
     log,
     openapi,
@@ -27,4 +28,5 @@ __all__ = [
     "serialization",
     "types",
     "db",
+    "dependencies",
 ]

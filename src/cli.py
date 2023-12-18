@@ -9,7 +9,7 @@ from typing import Any
 import click
 from rich import get_console
 
-from src.server.lib import log, settings
+from server.lib import log, settings
 
 __all__ = [
     "run_bot",
@@ -21,6 +21,29 @@ console = get_console()
 """Pre-configured CLI Console."""
 
 logger = log.get_logger()
+
+
+def frontend() -> None:
+    """Run the tailwind compiler."""
+    log.config.configure()
+    logger.info("🎨 Starting Tailwind Compiler.")
+    try:
+        subprocess.run(
+            [  # noqa: S603, S607
+                "tailwindcss",
+                "-i",
+                "src/server/domain/web/resources/input.css",
+                "-o",
+                "src/server/domain/web/resources/style.css",
+                "--watch",
+            ],
+            check=True,
+        )
+    finally:
+        for process in multiprocessing.active_children():
+            process.terminate()
+        logger.info("🎨 Tailwind Compiler Shutdown complete")
+        sys.exit()
 
 
 def bot() -> None:
@@ -60,10 +83,9 @@ def web(
     settings.server.HTTP_WORKERS = http_workers or settings.server.HTTP_WORKERS
     settings.project.DEBUG = debug or settings.project.DEBUG
     settings.log.LEVEL = 10 if verbose or settings.project.DEBUG else settings.log.LEVEL
-    logger.info("🖥️ Starting Litestar Web Server.")
 
     try:
-        logger.info("Starting HTTP Server.")
+        logger.info("🖥️ Starting Litestar Web Server.")
         reload_dirs = settings.server.RELOAD_DIRS if settings.server.RELOAD else None
         process_args = {
             "reload": bool(settings.server.RELOAD),
@@ -76,7 +98,7 @@ def web(
             "timeout-keep-alive": settings.server.KEEPALIVE,
         }
         if reload_dirs:
-            process_args["reload-dir"] = reload_dirs
+            process_args["reload-dir"] = " ".join(reload_dirs)
         subprocess.run(
             ["uvicorn", settings.server.APP_LOC, *_convert_uvicorn_args(process_args)],  # noqa: S603, S607
             check=True,
@@ -175,12 +197,15 @@ def run_all(
     """Runs both the bot and the web server."""
     bot_process = multiprocessing.Process(target=bot)
     web_process = multiprocessing.Process(target=web, args=(host, port, http_workers, reload, verbose, debug))
+    frontend_process = multiprocessing.Process(target=frontend)
 
     bot_process.start()
     web_process.start()
+    frontend_process.start()
 
     bot_process.join()
     web_process.join()
+    frontend_process.join()
 
 
 def _convert_uvicorn_args(args: dict[str, Any]) -> list[str]:

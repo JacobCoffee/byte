@@ -17,6 +17,7 @@ dependencies = [
     "asyncpg>=0.29.0",
     "githubkit[auth-app] @ git+https://github.com/yanyongyu/githubkit.git",
     "PyJWT>=2.8.0",
+    "alembic>=1.13.0",
 ]
 requires-python = ">=3.11,<4.0"
 readme = "README.md"
@@ -51,7 +52,7 @@ Reddit = 'https://reddit.com/monorepo'
 Youtube = 'https://www.youtube.com/@monorepo'
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "nodeenv"]
 build-backend = "hatchling.build"
 
 [tool.hatch.metadata]
@@ -59,6 +60,10 @@ allow-direct-references = true
 
 [tool.hatch.version]
 path = 'src/__metadata__.py'
+
+[tool.hatch.build]
+dev-mode-dirs = ["src/", "."]
+packages = ["src/", "."]
 
 [tool.pdm.scripts]
 lint = "pre-commit run --all-files"

@@ -22,7 +22,7 @@ from litestar.status_codes import (
 )
 from litestar.utils.scope import get_litestar_scope_state
 
-from src.server.lib import settings
+from server.lib import settings
 
 __all__ = ["BeforeSendHandler", "drop_health_logs", "middleware_factory"]
 

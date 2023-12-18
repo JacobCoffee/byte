@@ -5,9 +5,9 @@ from typing import cast
 from discord import Embed
 from discord.ext.commands import Bot, Cog
 
-from src.byte.lib.common import litestar_logo_yellow, mcve
-from src.byte.lib.utils import linker
-from src.byte.views.forums import HelpThreadView
+from byte.lib.common import litestar_logo_yellow, mcve
+from byte.lib.utils import linker
+from byte.views.forums import HelpThreadView
 
 __all__ = ("Events", "setup")
 
