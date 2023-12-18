@@ -4,13 +4,8 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from sqlalchemy import select
-from sqlalchemy.orm import joinedload, noload, selectinload
 
-from server.domain.db.models import (
-    GitHubConfig,
-    GuildConfig,
-    GuildGitHubConfig,
-)
+from server.domain.db.models import Guild
 from server.domain.guilds.services import GuildsService
 from server.lib import log
 
@@ -33,19 +28,7 @@ async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[Gu
     Yields:
         GuildsService: GuildConfig-based service
     """
-    async with GuildsService.new(
-        session=db_session,
-        statement=select(GuildConfig)
-        .order_by(GuildConfig.guild_id)
-        .options(
-            selectinload(GuildConfig.github_config)
-            .joinedload(GuildGitHubConfig.guild_id, innerjoin=True)
-            .options(
-                joinedload(GitHubConfig.guild_config),
-                noload("*"),
-            ),
-        ),
-    ) as service:
+    async with GuildsService.new(session=db_session, statement=select(Guild).order_by(Guild.guild_id)) as service:
         try:
             yield service
         finally:

@@ -24,9 +24,13 @@ class GuildSchema(CamelizedBaseModel):
 
 
 class GuildCreate(CamelizedBaseModel):
-    """Schema representing a guild create request."""
+    """Schema representing a guild create request.
+
+    .. todo:: Add owner ID
+    """
 
     guild_id: int = Field(title="Guild ID", description="The guild ID.", alias="id")
+    name: str = Field(title="Name", description="The guild name.")
 
 
 class GuildUpdate(CamelizedBaseModel):

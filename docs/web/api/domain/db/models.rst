@@ -15,15 +15,11 @@ Model Reference
 
 .. sqla-model:: server.domain.db.models.GuildConfig
 
-.. sqla-model:: server.domain.db.models.GuildGitHubConfig
-
 .. sqla-model:: server.domain.db.models.GitHubConfig
 
-.. sqla-model:: server.domain.db.models.GuildSOTagsConfig
+.. sqla-model:: server.domain.db.models.SOTagsConfig
 
-.. sqla-model:: server.domain.db.models.SOTagConfig
-
-.. sqla-model:: server.domain.db.models.GuildAllowedUsersConfig
+.. sqla-model:: server.domain.db.models.AllowedUsersConfig
 
 .. sqla-model:: server.domain.db.models.User
 

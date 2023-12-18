@@ -4,6 +4,7 @@ from __future__ import annotations
 import contextlib
 
 import discord
+import httpx
 from anyio import run
 from discord import Activity, Forbidden, Intents, Member, Message, NotFound
 from discord.ext.commands import Bot, CommandError, Context, ExtensionAlreadyLoaded
@@ -109,7 +110,15 @@ class Byte(Bot):
             guild: Guild object.
         """
         await self.tree.sync(guild=guild)
-        # create a new database entry for the guild
+        api_url = f"http://0.0.0.0:8000/api/guilds/create?guild_id={guild.id}&name={guild.name}"
+
+        async with httpx.AsyncClient() as client:
+            response = await client.post(api_url)
+
+            if response.status_code == httpx.codes.OK:
+                logger.info("successfully added guild %s (ID: %s)", guild.name, guild.id)
+            else:
+                logger.error("%s joined guild '%s' but was not added to database", self.user.name, guild.name)
 
 
 def run_bot() -> None:
