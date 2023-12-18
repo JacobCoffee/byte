@@ -115,7 +115,7 @@ class Byte(Bot):
         async with httpx.AsyncClient() as client:
             response = await client.post(api_url)
 
-            if response.status_code == httpx.codes.OK:
+            if response.status_code == httpx.codes.CREATED:
                 logger.info("successfully added guild %s (ID: %s)", guild.name, guild.id)
             else:
                 logger.error("%s joined guild '%s' but was not added to database", self.user.name, guild.name)
