@@ -63,7 +63,7 @@ path = 'src/__metadata__.py'
 
 [tool.hatch.build]
 dev-mode-dirs = ["src/", "."]
-packages = ["."]
+packages = ["src/", "."]
 
 [tool.pdm.scripts]
 lint = "pre-commit run --all-files"
