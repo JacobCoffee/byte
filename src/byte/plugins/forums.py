@@ -39,8 +39,13 @@ class ForumCommands(Cog):
             Help, Suggestions, Showcase, etc. (or any other forum channel)
         """
         _solved_tag = "Solved"
+        _tags_per_post = 5
         if isinstance(ctx.channel, Thread) and ctx.channel.parent.name == "help":
             if solved_tag := discord.utils.find(lambda t: t.name == _solved_tag, ctx.channel.parent.available_tags):
+                if len(ctx.channel.applied_tags) == _tags_per_post and solved_tag not in ctx.channel.applied_tags:
+                    # Tags per post are limited to 5
+                    # Remove a tag to make room for "Solved"
+                    await ctx.channel.remove_tags(ctx.channel.applied_tags[-1])
                 await ctx.channel.add_tags(solved_tag, reason="Marked as solved.")
                 await ctx.send("Marked as solved and closed the help forum!", ephemeral=True)
                 await ctx.channel.edit(archived=True)
