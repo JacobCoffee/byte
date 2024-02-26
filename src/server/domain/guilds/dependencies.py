@@ -37,13 +37,13 @@ async def provides_guild_config_service(db_session: AsyncSession) -> AsyncGenera
         .order_by(Guild.guild_name)
         .options(
             selectinload(Guild.github_config).options(
-                joinedload(GitHubConfig, innerjoin=True).options(noload("*")),  # type: ignore[reportArgumentType]
+                joinedload(GitHubConfig.guild, innerjoin=True).options(noload("*")),
             ),
-            selectinload(Guild.sotags_config).options(  # type: ignore[reportAttributeAccessIssue]
-                joinedload(SOTagsConfig.guild_name, innerjoin=True).options(noload("*")),  # type: ignore[reportArgumentType]
+            selectinload(Guild.sotags_configs).options(
+                joinedload(SOTagsConfig.guild, innerjoin=True).options(noload("*")),
             ),
-            selectinload(Guild.allowed_users_config).options(  # type: ignore[reportAttributeAccessIssue]
-                joinedload(AllowedUsersConfig.guild_name, innerjoin=True).options(noload("*")),  # type: ignore[reportArgumentType]
+            selectinload(Guild.allowed_users).options(
+                joinedload(AllowedUsersConfig.guild, innerjoin=True).options(noload("*")),
             ),
         ),
     ) as service:

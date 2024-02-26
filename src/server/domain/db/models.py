@@ -1,6 +1,7 @@
 """Shared models."""
 from __future__ import annotations
 
+from typing import Annotated
 from uuid import UUID  # noqa: TCH003
 
 from advanced_alchemy.base import UUIDAuditBase
@@ -33,7 +34,7 @@ class Guild(UUIDAuditBase):
     __table_args__ = {"comment": "Configuration for a Discord guild."}
 
     guild_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True)
-    guild_name: Mapped[str] = mapped_column(String(100))
+    guild_name: Mapped[Annotated[str, 100]]
     prefix: Mapped[str] = mapped_column(String(5), server_default="!", default="!")
     help_channel_id: Mapped[int | None] = mapped_column(BigInteger)
     sync_label: Mapped[str | None]
@@ -98,7 +99,7 @@ class SOTagsConfig(UUIDAuditBase):
 
     guild_id: Mapped[UUID] = mapped_column(ForeignKey("guild.id", ondelete="cascade"))
     guild_name: AssociationProxy[str] = association_proxy("guild", "guild_name")
-    tag_name: Mapped[str] = mapped_column(String(50))
+    tag_name: Mapped[Annotated[str, 50]]
 
     # =================
     # ORM Relationships
@@ -164,9 +165,9 @@ class User(UUIDAuditBase):
     __tablename__ = "user"  # type: ignore[assignment]
     __table_args__ = {"comment": "A user."}
 
-    name: Mapped[str] = mapped_column(String(100))
+    name: Mapped[Annotated[str, 100]]
     avatar_url: Mapped[str | None]
-    discriminator: Mapped[str] = mapped_column(String(4))
+    discriminator: Mapped[Annotated[str, 4]]
 
     # =================
     # ORM Relationships
