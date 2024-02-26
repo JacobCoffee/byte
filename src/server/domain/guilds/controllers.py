@@ -6,10 +6,10 @@ from typing import TYPE_CHECKING
 from litestar import Controller, get
 from litestar.di import Provide
 
-from src.server.domain import urls
-from src.server.domain.db.models import GuildConfig  # noqa: TCH001
-from src.server.domain.guilds.dependencies import provides_guild_config_service
-from src.server.domain.guilds.services import GuildConfigService  # noqa: TCH001
+from server.domain.db.models import Guild  # noqa: TCH001
+from server.domain.guilds import urls as guild_urls
+from server.domain.guilds.dependencies import provides_guild_config_service
+from server.domain.guilds.services import GuildService  # noqa: TCH001
 
 if TYPE_CHECKING:
     from litestar.pagination import OffsetPagination
@@ -27,13 +27,13 @@ class GuildsController(Controller):
         operation_id="ListGuilds",
         name="guilds:list",
         summary="List all guilds",
-        path=urls.GUILDS_LIST,
+        path=guild_urls.GUILD_LIST,
     )
     async def list_guilds(
         self,
-        guilds_service: GuildConfigService,
+        guilds_service: GuildService,
         # filters: list[FilterTypes] = Dependency(skip_validation=True),
-    ) -> OffsetPagination[GuildConfig]:
+    ) -> OffsetPagination[Guild]:
         """List guilds.
 
         .. todo:: Add guards and return only what the user can access.

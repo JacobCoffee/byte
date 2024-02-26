@@ -6,10 +6,10 @@ from typing import TYPE_CHECKING
 from litestar import Controller, MediaType, get
 from litestar.response import Response
 
-from src.server.domain import urls
-from src.server.domain.system.dtos import SystemHealth
-from src.server.domain.system.helpers import check_byte_status, check_database_status
-from src.server.lib import log
+from server.domain import urls
+from server.domain.system.dtos import SystemHealth
+from server.domain.system.helpers import check_byte_status, check_database_status
+from server.lib import log
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession

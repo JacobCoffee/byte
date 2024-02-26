@@ -12,7 +12,7 @@ __all__ = ("check_byte_status", "check_database_status")
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
-    from src.server.lib.types import Status
+    from server.lib.types import Status
 
 DEGRADED_THRESHOLD = 2.0
 """float: Threshold in seconds for degraded status."""

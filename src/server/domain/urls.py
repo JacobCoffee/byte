@@ -14,19 +14,6 @@ OPENAPI_SCHEMA: Final = "/api"
 SYSTEM_HEALTH: Final = "/health"
 """System health URL."""
 
-# --- Bot
-
 # --- Reports
 
 # -- API
-
-# --- Guilds
-GUILDS_API: Final = f"{OPENAPI_SCHEMA}/guilds"
-GUILD_CREATE: Final = f"{OPENAPI_SCHEMA}/guilds/create"
-"""Create guild URL."""
-GUILD_UPDATE: Final = f"{OPENAPI_SCHEMA}/guilds/update"
-"""Update guild URL."""
-GUILD_DETAIL: Final = f"{OPENAPI_SCHEMA}/guilds/{{guild_id}}"
-"""Guild detail URL."""
-GUILD_LIST: Final = f"{OPENAPI_SCHEMA}/guilds/list"
-"""Guild list URL."""

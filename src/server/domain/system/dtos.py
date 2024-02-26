@@ -4,7 +4,7 @@ from typing import Annotated, Literal
 
 from litestar.dto import DataclassDTO
 
-from src.server.lib import dto, settings
+from server.lib import dto, settings
 
 __all__ = ["SystemHealth", "SystemHealthDTO"]
 

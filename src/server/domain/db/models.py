@@ -8,16 +8,15 @@ from sqlalchemy import BigInteger, ForeignKey, String, UniqueConstraint
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-
 __all__ = (
+    "Guild",
     "GitHubConfig",
-    "GuildConfig",
-    "GuildGitHubConfig",
-    "GuildSOTagsConfig",
-    "SOTagConfig",
+    "SOTagsConfig",
+    "AllowedUsersConfig",
     "User",
-    "GuildAllowedUsersConfig",
 )
+
+
 class Guild(UUIDAuditBase):
     """Guild configuration.
 
@@ -30,7 +29,7 @@ class Guild(UUIDAuditBase):
     Here, a guild should be able to configure their own GitHub organization, StackOverflow tags, etc.
     """
 
-    __tablename__ = "guild"
+    __tablename__ = "guild"  # type: ignore[assignment]
     __table_args__ = {"comment": "Configuration for a Discord guild."}
 
     guild_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True)
@@ -70,7 +69,7 @@ class GitHubConfig(UUIDAuditBase):
     discussions with forum posts.
     """
 
-    __tablename__ = "github_config"
+    __tablename__ = "github_config"  # type: ignore[assignment]
     __table_args__ = {"comment": "GitHub configuration for a guild."}
     guild_id: Mapped[UUID] = mapped_column(ForeignKey("guild.id", ondelete="cascade"))
     discussion_sync: Mapped[bool] = mapped_column(default=False)
@@ -91,7 +90,7 @@ class GitHubConfig(UUIDAuditBase):
 class SOTagsConfig(UUIDAuditBase):
     """SQLAlchemy association model for a guild's Stack Overflow tags config."""
 
-    __tablename__ = "so_tags"
+    __tablename__ = "so_tags"  # type: ignore[assignment]
     __table_args__ = (
         UniqueConstraint("guild_id", "tag_name"),
         {"comment": "Configuration for a Discord guild's Stack Overflow tags."},
@@ -122,7 +121,7 @@ class AllowedUsersConfig(UUIDAuditBase):
     actions on Byte specifically without giving them full administrative access to the Discord guild.
     """
 
-    __tablename__ = "allowed_users"
+    __tablename__ = "allowed_users"  # type: ignore[assignment]
     __table_args__ = (
         UniqueConstraint("guild_id", "user_id"),
         {"comment": "Configuration for allowed users in a Discord guild."},
@@ -162,7 +161,7 @@ class User(UUIDAuditBase):
     In the future we may want to expand this to allow for more granular permissions.
     """
 
-    __tablename__ = "user"
+    __tablename__ = "user"  # type: ignore[assignment]
     __table_args__ = {"comment": "A user."}
 
     name: Mapped[str] = mapped_column(String(100))

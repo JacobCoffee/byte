@@ -6,14 +6,11 @@ from typing import TYPE_CHECKING, Literal, overload
 from advanced_alchemy.extensions.litestar.dto import SQLAlchemyDTO, SQLAlchemyDTOConfig
 from litestar.dto import DataclassDTO, dto_field
 from litestar.dto.config import DTOConfig
-from sqlalchemy.orm import DeclarativeBase
 
 if TYPE_CHECKING:
     from collections.abc import Set as AbstractSet
 
     from litestar.dto import RenameStrategy
-
-    from src.server.lib.types import DTOT, DataclassModelT, DTOFactoryT, ModelT
 
 __all__ = ["config", "dto_field", "DTOConfig", "SQLAlchemyDTO", "DataclassDTO"]
 
@@ -76,27 +73,3 @@ def config(
     if partial:
         default_kwargs["partial"] = partial
     return DTOConfig(**default_kwargs)  # type: ignore[arg-type]
-
-
-@overload
-def builder(dto: DeclarativeBase) -> DataclassDTO[DTOT]:
-    ...
-
-
-@overload
-def builder(dto: DataclassModelT) -> SQLAlchemyDTO[DTOT]:  # type: ignore[misc]
-    ...
-
-
-def builder(dto: ModelT) -> DTOFactoryT[ModelT]:  # type: ignore[valid-type]
-    """Construct a DTO.
-
-    Args:
-        dto (ModelT): Model to construct DTO for
-
-    Returns:
-        DTOFactoryT[ModelT]: DTO class
-    """
-    if issubclass(dto, DeclarativeBase):
-        return SQLAlchemyDTO[dto]
-    return DataclassDTO[dto]

@@ -16,7 +16,7 @@ from advanced_alchemy.filters import (
 from litestar.di import Provide
 from litestar.params import Dependency, Parameter
 
-from src.server.lib import constants
+from server.lib import constants
 
 __all__ = [
     "create_collection_dependencies",
@@ -205,8 +205,7 @@ def provide_filter_dependencies(
     .. code-block:: python
 
         @get
-        def get_collection_handler(filters: Filters) -> ...:
-            ...
+        def get_collection_handler(filters: Filters) -> ...: ...
 
     The dependency is provided in the application layer, so only need to inject the dependency where
     necessary.

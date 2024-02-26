@@ -6,14 +6,13 @@ from typing import TYPE_CHECKING
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload, noload, selectinload
 
-from src.server.domain.db.models import GuildAllowedUsersConfig, GuildConfig, GuildGitHubConfig, GuildSOTagsConfig
-from src.server.domain.guilds.services import (
-    GuildConfigService,
+from server.domain.db.models import AllowedUsersConfig, GitHubConfig, Guild, SOTagsConfig
+from server.domain.guilds.services import (
+    GuildService,
 )
-from src.server.lib import log
+from server.lib import log
 
 __all__ = ("provides_guild_config_service",)
-
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
@@ -23,28 +22,28 @@ if TYPE_CHECKING:
 logger = log.get_logger()
 
 
-async def provides_guild_config_service(db_session: AsyncSession) -> AsyncGenerator[GuildConfigService, None]:
-    """Construct GuildConfig-based repository and service objects for the request.
+async def provides_guild_config_service(db_session: AsyncSession) -> AsyncGenerator[GuildService, None]:
+    """Construct Guild-based repository and service objects for the request.
 
     Args:
         db_session (AsyncSession): SQLAlchemy AsyncSession
 
     Yields:
-        GuildConfigService: GuildConfig-based service
+        GuildService: Guild-based service
     """
-    async with GuildConfigService.new(
+    async with GuildService.new(
         session=db_session,
-        statement=select(GuildConfig)
-        .order_by(GuildConfig.guild_name)
+        statement=select(Guild)
+        .order_by(Guild.guild_name)
         .options(
-            selectinload(GuildConfig.github_config).options(
-                joinedload(GuildGitHubConfig.guild_name, innerjoin=True).options(noload("*")),
+            selectinload(Guild.github_config).options(
+                joinedload(GitHubConfig, innerjoin=True).options(noload("*")),  # type: ignore[reportArgumentType]
             ),
-            selectinload(GuildConfig.sotags_config).options(
-                joinedload(GuildSOTagsConfig.guild_name, innerjoin=True).options(noload("*")),
+            selectinload(Guild.sotags_config).options(  # type: ignore[reportAttributeAccessIssue]
+                joinedload(SOTagsConfig.guild_name, innerjoin=True).options(noload("*")),  # type: ignore[reportArgumentType]
             ),
-            selectinload(GuildConfig.allowed_users_config).options(
-                joinedload(GuildAllowedUsersConfig.guild_name, innerjoin=True).options(noload("*")),
+            selectinload(Guild.allowed_users_config).options(  # type: ignore[reportAttributeAccessIssue]
+                joinedload(AllowedUsersConfig.guild_name, innerjoin=True).options(noload("*")),  # type: ignore[reportArgumentType]
             ),
         ),
     ) as service:

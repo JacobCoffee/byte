@@ -9,7 +9,7 @@ from litestar.pagination import OffsetPagination
 from litestar.types import TypeEncodersMap
 
 from server.domain import db, guilds, system, urls, web
-from server.domain.db.models import GuildConfig
+from server.domain.db.models import Guild
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -29,15 +29,15 @@ __all__ = [
 routes: list[ControllerRouterHandler] = [
     system.controllers.system.SystemController,
     web.controllers.web.WebController,
-    guilds.controllers.GuildController,
+    guilds.controllers.GuildsController,
 ]
 """Routes for the application."""
 
 signature_namespace: Mapping[str, Any] = {
     "UUID": UUID,
-    "GuildConfig": GuildConfig,
+    "Guild": Guild,
     "OffsetPagination": OffsetPagination,
-    "GuildConfigService": guilds.services.GuildConfigService,
+    "GuildService": guilds.services.GuildService,
     "DTOData": DTOData,
     "TypeEncodersMap": TypeEncodersMap,
 }

@@ -206,23 +206,23 @@ warn_untyped_fields = true
 strict-imports = false
 
 [tool.ruff]
-select = ["ALL"]
-ignore = ["ANN101", "ANN102", "ANN401", "PLR0913", "RUF012", "COM812", "ISC001", "ERA001", "TD", "FIX002"]
-line-length = 120
-src = ["src", "tests"]
 target-version = "py311"
+src = ["src", "tests"]
+line-length = 120
+lint.select = ["ALL"]
+lint.ignore = ["ANN101", "ANN102", "ANN401", "PLR0913", "RUF012", "COM812", "ISC001", "ERA001", "TD", "FIX002"]
 
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.mccabe]
 max-complexity = 12
 
-[tool.ruff.pep8-naming]
+[tool.ruff.lint.pep8-naming]
 classmethod-decorators = [
     "classmethod",
     "pydantic.validator",
@@ -233,10 +233,10 @@ classmethod-decorators = [
     "sqlalchemy.orm.declared_attr",
 ]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["src", "tests"]
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
 "**/*.*" = [
     "ANN101",

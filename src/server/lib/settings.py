@@ -120,8 +120,8 @@ class ProjectSettings(BaseSettings):
         """
         return "-".join(s.lower() for s in self.NAME.split())
 
-    @classmethod
     @field_validator("BACKEND_CORS_ORIGINS")
+    @classmethod
     def assemble_cors_origins(
         cls,
         value: str | list[str] | None,
@@ -396,7 +396,7 @@ class GitHubSettings(BaseSettings):
         """
         try:
             decoded_key = base64.b64decode(value).decode("utf-8")
-        except base64.binascii.Error as e:
+        except base64.binascii.Error as e:  # pyright: ignore[reportAttributeAccessIssue]
             environment = os.getenv("ENVIRONMENT", "dev")
             if environment != "dev":
                 msg = "The GitHub private key must be a valid base64 encoded string"
