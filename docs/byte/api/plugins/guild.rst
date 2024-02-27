@@ -1,6 +1,6 @@
-======
-forums
-======
+=====
+guild
+=====
 
-.. automodule:: src.byte.plugins.forums
+.. automodule:: src.byte.plugins.guild
    :members:
