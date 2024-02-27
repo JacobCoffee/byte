@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import re
 import subprocess
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, TypedDict
 
 import httpx
 from anyio import run_process
@@ -19,6 +19,19 @@ if TYPE_CHECKING:
 
     from discord.ext.commands import Context
     from discord.ext.commands._types import Check
+
+
+# TODO: find a better place
+class RuffRule(TypedDict):
+    name: str
+    code: str
+    linter: str
+    summary: str
+    message_formats: list[str]
+    fix: str
+    explanation: str
+    preview: bool
+
 
 __all__ = (
     "is_byte_dev",
@@ -211,6 +224,18 @@ def format_ruff_rule(rule_data: dict) -> dict[str, str | Any]:
         "fix": rule_data.get("fix", "No fix available"),
         "rule_link": rule_link,
     }
+
+
+async def query_all_ruff_rules() -> list[RuffRule]:
+    _ruff = find_ruff_bin()
+    try:
+        result = await run_process([_ruff, "rule", "--all", "--output-format", "json"])
+    except subprocess.CalledProcessError as e:
+        stderr = getattr(e, "stderr", "")
+        msg = f"Error while querying all rules: {stderr}"
+        raise ValueError(msg) from e
+    else:
+        return json.loads(result.stdout.decode())
 
 
 async def query_ruff_rule(rule: str) -> dict[str, Any]:
