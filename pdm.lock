@@ -5,7 +5,7 @@
 groups = ["default", "test", "docs", "lint"]
 strategy = ["cross_platform"]
 lock_version = "4.4.1"
-content_hash = "sha256:d7b1452b0187d9bbee094fa353b516d784b85b7588137796a9143d141e1452a7"
+content_hash = "sha256:1936ff9368fbebd658e3e5c54f755a0b0a52eb11b662174bfaede50d25b1c899"
 
 [[package]]
 name = "accessible-pygments"
@@ -906,7 +906,7 @@ git = "https://github.com/yanyongyu/githubkit.git"
 revision = "5d88fdc2349496a696d000ea31fef30efcae5e55"
 summary = "GitHub SDK for Python"
 dependencies = [
-    "hishel<1.0.0,>=0.0.21",
+    "hishel<0.0.22,>=0.0.21",
     "httpx<1.0.0,>=0.23.0",
     "pydantic!=2.5.0,!=2.5.1,<3.0.0,>=1.9.1",
     "typing-extensions<5.0.0,>=4.3.0",
@@ -921,7 +921,8 @@ git = "https://github.com/yanyongyu/githubkit.git"
 revision = "5d88fdc2349496a696d000ea31fef30efcae5e55"
 summary = "GitHub SDK for Python"
 dependencies = [
-    "githubkit @ git+https://github.com/yanyongyu/githubkit.git",
+    "PyJWT[crypto]<3.0.0,>=2.4.0",
+    "githubkit @ git+https://github.com/yanyongyu/githubkit.git@5d88fdc2349496a696d000ea31fef30efcae5e55",
 ]
 
 [[package]]
@@ -963,16 +964,15 @@ files = [
 
 [[package]]
 name = "hishel"
-version = "0.0.24"
+version = "0.0.21"
 requires_python = ">=3.8"
 summary = "Persistent cache implementation for httpx and httpcore"
 dependencies = [
     "httpx>=0.22.0",
-    "typing-extensions>=4.8.0",
 ]
 files = [
-    {file = "hishel-0.0.24-py3-none-any.whl", hash = "sha256:8b6e43481485e1938d78bd35c0bcb38646fe8f2e090fedb64b4dc1d6015ffe49"},
-    {file = "hishel-0.0.24.tar.gz", hash = "sha256:4ac494c6bfedc431e480ab85d3435d4710230b2ad6092766b6ccf82b1d7e4152"},
+    {file = "hishel-0.0.21-py3-none-any.whl", hash = "sha256:2347180fb2396700f0616cdfd4bb9d04ba0c543694d19f2d0156226dfa5a511d"},
+    {file = "hishel-0.0.21.tar.gz", hash = "sha256:62de30930e7fc02551d17d0f653f6e79499eaeffe32be9e36664ea7e0c0b82bd"},
 ]
 
 [[package]]
@@ -1831,6 +1831,21 @@ files = [
 ]
 
 [[package]]
+name = "pyjwt"
+version = "2.8.0"
+extras = ["crypto"]
+requires_python = ">=3.7"
+summary = "JSON Web Token implementation in Python"
+dependencies = [
+    "PyJWT==2.8.0",
+    "cryptography>=3.4.0",
+]
+files = [
+    {file = "PyJWT-2.8.0-py3-none-any.whl", hash = "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"},
+    {file = "PyJWT-2.8.0.tar.gz", hash = "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"},
+]
+
+[[package]]
 name = "pyright"
 version = "1.1.351"
 requires_python = ">=3.7"
@@ -2173,15 +2188,15 @@ files = [
 
 [[package]]
 name = "shibuya"
-version = "2024.2.21"
+version = "2023.10.26"
 requires_python = ">=3.7"
 summary = "A clean, responsive, and customizable Sphinx documentation theme with light/dark mode."
 dependencies = [
     "Sphinx",
 ]
 files = [
-    {file = "shibuya-2024.2.21-py3-none-any.whl", hash = "sha256:a10c7b83a45ab9ccb51ce6d9acd4384e5dee3e41cc0c557395c39ff33edc35c2"},
-    {file = "shibuya-2024.2.21.tar.gz", hash = "sha256:022577dc83c781bea1208ed2ae8a7f5034171a365b463456fea75ebc43de9cb4"},
+    {file = "shibuya-2023.10.26-py3-none-any.whl", hash = "sha256:e8a8647005a410d929fe4fdd3af2b88c156efbca8582ce3803ebd7771d08cebb"},
+    {file = "shibuya-2023.10.26.tar.gz", hash = "sha256:878f866a8720776c878ff1d9e17f7731cf8923859ff6fec77999b469477764a1"},
 ]
 
 [[package]]

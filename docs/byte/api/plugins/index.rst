@@ -12,7 +12,6 @@ This includes things like commands, event handlers, and other features.
     admin
     astral
     events
+    forums
     general
-    github
-    guild
     testing

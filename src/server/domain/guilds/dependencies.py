@@ -20,13 +20,13 @@ logger = log.get_logger()
 
 
 async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[GuildsService, None]:
-    """Construct GuildConfig-based repository and service objects for the request.
+    """Construct Guild-based repository and service objects for the request.
 
     Args:
         db_session (AsyncSession): SQLAlchemy AsyncSession
 
     Yields:
-        GuildsService: GuildConfig-based service
+        GuildsService: Guild-based service
     """
     async with GuildsService.new(session=db_session, statement=select(Guild).order_by(Guild.guild_id)) as service:
         try:
