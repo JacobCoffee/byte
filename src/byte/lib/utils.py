@@ -4,7 +4,8 @@ from __future__ import annotations
 import json
 import re
 import subprocess
-from typing import TYPE_CHECKING, Any
+from itertools import islice
+from typing import TYPE_CHECKING, TypedDict, TypeVar
 
 import httpx
 from anyio import run_process
@@ -15,10 +16,33 @@ from byte.lib import settings
 from byte.lib.common import pastebin
 
 if TYPE_CHECKING:
+    from collections.abc import Iterable
     from typing import Any
 
     from discord.ext.commands import Context
     from discord.ext.commands._types import Check
+
+
+_T = TypeVar("_T")
+
+
+class BaseRuffRule(TypedDict):
+    name: str
+    summary: str
+    fix: str
+    explanation: str
+
+
+class RuffRule(BaseRuffRule):
+    code: str
+    linter: str
+    message_formats: list[str]
+    preview: bool
+
+
+class FormattedRuffRule(BaseRuffRule):
+    rule_link: str
+
 
 __all__ = (
     "is_byte_dev",
@@ -33,7 +57,7 @@ __all__ = (
     "mention_timestamp",
     "mention_guild_navigation",
     "format_ruff_rule",
-    "query_ruff_rule",
+    "query_all_ruff_rules",
     "run_ruff_format",
     "paste",
 )
@@ -191,14 +215,14 @@ def mention_guild_navigation(guild_nav_type: str, guild_element_id: int) -> str:
     return f"<{guild_element_id}:{guild_nav_type}>"
 
 
-def format_ruff_rule(rule_data: dict) -> dict[str, str | Any]:
+def format_ruff_rule(rule_data: RuffRule) -> FormattedRuffRule:
     """Format ruff rule data for embed-friendly output and append rule link.
 
     Args:
         rule_data: The ruff rule data.
 
     Returns:
-        The formatted rule data as a string.
+        FormattedRuffRule: The formatted rule data.
     """
     explanation_formatted = re.sub(r"## (.+)", r"**\1**", rule_data["explanation"])
     rule_name = rule_data["code"]
@@ -213,30 +237,21 @@ def format_ruff_rule(rule_data: dict) -> dict[str, str | Any]:
     }
 
 
-async def query_ruff_rule(rule: str) -> dict[str, Any]:
-    """Query a Ruff linting rule.
-
-    Args:
-        rule: The rule to query.
+async def query_all_ruff_rules() -> list[RuffRule]:
+    """Query all Ruff linting rules.
 
     Returns:
-        dict[str, Any]: The resulting rule, if found or an error dict.
+        list[RuffRule]: All ruff rules
     """
     _ruff = find_ruff_bin()
-
     try:
-        result = await run_process(
-            [_ruff, "rule", "--output-format", "json", rule],
-        )
-    except Exception as e:  # noqa: BLE001
-        stderr = e.stderr.decode() if hasattr(e, "stderr") else ""  # type: ignore[reportAttributeAccessIssue]
-        if "invalid value" in stderr:
-            return {"error": f"Rule '{rule}' not found."}
-        msg = f"Error querying rule {rule}: {stderr}"
+        result = await run_process([_ruff, "rule", "--all", "--output-format", "json"])
+    except subprocess.CalledProcessError as e:
+        stderr = getattr(e, "stderr", b"").decode()
+        msg = f"Error while querying all rules: {stderr}"
         raise ValueError(msg) from e
-
-    rule_data = json.loads(result.stdout.decode())
-    return format_ruff_rule(rule_data)
+    else:
+        return json.loads(result.stdout.decode())
 
 
 def run_ruff_format(code: str) -> str:
@@ -278,3 +293,18 @@ async def paste(code: str) -> str:
         response_data = response.json()
         paste_link = response_data.get("link")
         return paste_link or "Failed to upload formatted code."
+
+
+def chunk_sequence(sequence: Iterable[_T], size: int) -> Iterable[tuple[_T, ...]]:
+    """Naïve chunking of an iterable
+
+    Args:
+        sequence (Iterable[_T]): Iterable to chunk
+        size (int): Size of chunk
+
+    Yields:
+        Iterable[tuple[_T, ...]]: An n-tuple that contains chunked data
+    """
+    _sequence = iter(sequence)
+    while chunk := tuple(islice(_sequence, size)):
+        yield chunk
