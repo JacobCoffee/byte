@@ -23,7 +23,6 @@ if TYPE_CHECKING:
     from discord.ext.commands._types import Check
 
 
-# TODO: find a better place
 _T = TypeVar("_T")
 
 
