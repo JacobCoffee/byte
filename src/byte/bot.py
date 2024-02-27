@@ -11,7 +11,7 @@ from discord.ext.commands import Bot, CommandError, Context, ExtensionAlreadyLoa
 from dotenv import load_dotenv
 
 from byte.lib import settings
-from byte.lib.logging import get_logger
+from byte.lib.log import get_logger
 
 __all__ = [
     "Byte",

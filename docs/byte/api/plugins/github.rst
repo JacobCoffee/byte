@@ -1,6 +1,6 @@
 ======
-events
+github
 ======
 
-.. automodule:: src.byte.plugins.events
+.. automodule:: src.byte.plugins.github
    :members:

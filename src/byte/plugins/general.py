@@ -5,7 +5,7 @@ from discord import Embed, Interaction
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
-from byte.lib.common import litestar_logo_yellow, markdown_guide, paste
+from byte.lib.common import litestar_logo_yellow, markdown_guide, pastebin
 from byte.lib.utils import linker
 
 __all__ = ("GeneralCommands", "setup")
@@ -29,7 +29,7 @@ class GeneralCommands(Cog):
         embed = Embed(title="Paste long format code", color=0x42B1A8)
         embed.add_field(
             name="Paste Service",
-            value=f"You can easily paste long code by using the {linker('Paste', paste)} service.",
+            value=f"You can easily paste long code by using the {linker('Paste', pastebin)} service.",
             inline=True,
         )
         embed.add_field(
