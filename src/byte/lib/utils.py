@@ -23,19 +23,26 @@ if TYPE_CHECKING:
     from discord.ext.commands._types import Check
 
 
+# TODO: find a better place
 _T = TypeVar("_T")
 
 
-# TODO: find a better place
-class RuffRule(TypedDict):
+class BaseRuffRule(TypedDict):
     name: str
-    code: str
-    linter: str
     summary: str
-    message_formats: list[str]
     fix: str
     explanation: str
+
+
+class RuffRule(BaseRuffRule):
+    code: str
+    linter: str
+    message_formats: list[str]
     preview: bool
+
+
+class FormattedRuffRule(BaseRuffRule):
+    rule_link: str
 
 
 __all__ = (
@@ -209,7 +216,7 @@ def mention_guild_navigation(guild_nav_type: str, guild_element_id: int) -> str:
     return f"<{guild_element_id}:{guild_nav_type}>"
 
 
-def format_ruff_rule(rule_data: dict) -> dict[str, str | Any]:
+def format_ruff_rule(rule_data: RuffRule) -> FormattedRuffRule:
     """Format ruff rule data for embed-friendly output and append rule link.
 
     Args:
@@ -293,11 +300,11 @@ def chunk_sequence(sequence: Iterable[_T], size: int) -> Iterable[tuple[_T, ...]
     """Naïve chunking of an iterable
 
     Args:
-        sequence (Iterable[T]): Iterable to chunk
+        sequence (Iterable[_T]): Iterable to chunk
         size (int): Size of chunk
 
     Yields:
-        Iterable[tuple[T, ...]]: An n-tuple that contains chunked data
+        Iterable[tuple[_T, ...]]: An n-tuple that contains chunked data
     """
     _sequence = iter(sequence)
     while chunk := tuple(islice(_sequence, size)):

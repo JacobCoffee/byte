@@ -9,7 +9,7 @@ from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
 from byte.lib.common import ruff_logo
-from byte.lib.utils import chunk_sequence, query_all_ruff_rules
+from byte.lib.utils import chunk_sequence, format_ruff_rule, query_all_ruff_rules
 
 if TYPE_CHECKING:
     from byte.lib.utils import RuffRule
@@ -51,17 +51,19 @@ class Astral(Cog):
             await interaction.followup.send(embed=embed)
             return
 
-        embed = Embed(title=f"Ruff Rule: {rule_details['name']}", color=0xD7FF64)
-        embed.add_field(name="Summary", value=rule_details["summary"], inline=False)
+        formatted_rule_details = format_ruff_rule(rule_details)
+
+        embed = Embed(title=f"Ruff Rule: {formatted_rule_details['name']}", color=0xD7FF64)
+        embed.add_field(name="Summary", value=formatted_rule_details["summary"], inline=False)
+
         # TODO: Better chunking
-        for idx, chunk in enumerate(chunk_sequence(rule_details["explanation"], 1000)):
+        for idx, chunk in enumerate(chunk_sequence(formatted_rule_details["explanation"], 1000)):
             embed.add_field(name="Explanation" if not idx else "", value="".join(chunk), inline=False)
-        if "fix" in rule_details:
-            embed.add_field(name="Fix", value=rule_details["fix"], inline=False)
-        if "rule_link" in rule_details:
-            embed.add_field(
-                name="Documentation", value=f"[Rule Documentation]({rule_details['rule_link']})", inline=False
-            )
+
+        embed.add_field(name="Fix", value=formatted_rule_details["fix"], inline=False)
+        embed.add_field(
+            name="Documentation", value=f"[Rule Documentation]({formatted_rule_details['rule_link']})", inline=False
+        )
         embed.set_thumbnail(url=ruff_logo)
 
         await interaction.followup.send(embed=embed)
