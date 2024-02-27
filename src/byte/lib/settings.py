@@ -23,7 +23,7 @@ __all__ = [
 
 load_dotenv()
 
-DEFAULT_MODULE_NAME: Final = "src"
+DEFAULT_MODULE_NAME: str = "src"
 BASE_DIR: Final = utils.module_to_os_path(DEFAULT_MODULE_NAME)
 PLUGINS_DIR: Final = utils.module_to_os_path("byte.plugins")
 
@@ -31,7 +31,7 @@ PLUGINS_DIR: Final = utils.module_to_os_path("byte.plugins")
 class DiscordSettings(BaseSettings):
     """Discord Settings."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="DISCORD_")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="DISCORD_", extra="ignore")
 
     TOKEN: str
     """Discord API token."""
@@ -91,7 +91,7 @@ class DiscordSettings(BaseSettings):
 class LogSettings(BaseSettings):
     """Logging config for the Project."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="LOG_")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="LOG_", extra="ignore")
 
     LEVEL: int = 20
     """Stdlib log levels.
@@ -113,7 +113,7 @@ class LogSettings(BaseSettings):
 class ProjectSettings(BaseSettings):
     """Project Settings."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", extra="allow")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", extra="ignore")
 
     DEBUG: bool = False
     """Run app with ``debug=True``."""

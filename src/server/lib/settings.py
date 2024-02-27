@@ -42,7 +42,7 @@ TEMPLATES_DIR = Path(BASE_DIR / "server" / "domain" / "web" / "templates")
 class ServerSettings(BaseSettings):
     """Server configurations."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="SERVER_")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="SERVER_", extra="ignore")
 
     APP_LOC: str = "src.app:create_app"
     """Path to app executable, or factory."""
@@ -69,7 +69,7 @@ class ServerSettings(BaseSettings):
 class ProjectSettings(BaseSettings):
     """Project Settings."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", extra="allow")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", extra="ignore")
 
     BUILD_NUMBER: str = ""
     """Identifier for CI build."""
@@ -166,7 +166,7 @@ class ProjectSettings(BaseSettings):
 class APISettings(BaseSettings):
     """API specific configuration."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="API_")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="API_", extra="ignore")
 
     HEALTH_PATH: str = "/health"
     """Route that the health check is served under."""
@@ -191,7 +191,7 @@ class APISettings(BaseSettings):
 class LogSettings(BaseSettings):
     """Logging config for the Project."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="LOG_")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="LOG_", extra="ignore")
 
     """https://stackoverflow.com/a/1845097/6560549"""
     EXCLUDE_PATHS: str = r"\A(?!x)x"
@@ -251,7 +251,7 @@ class LogSettings(BaseSettings):
 class OpenAPISettings(BaseSettings):
     """Configures OpenAPI for the Project."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="OPENAPI_")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="OPENAPI_", extra="ignore")
 
     CONTACT_NAME: str = "Admin"
     """Name of contact on document."""
@@ -301,7 +301,7 @@ class OpenAPISettings(BaseSettings):
 class TemplateSettings(BaseSettings):
     """Configures Templating for the project."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="TEMPLATE_")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="TEMPLATE_", extra="ignore")
 
     ENGINE: type[JinjaTemplateEngine] = JinjaTemplateEngine
     """Template engine to use. (Jinja2 or Mako)"""
@@ -315,6 +315,7 @@ class DatabaseSettings(BaseSettings):
         env_file_encoding="utf-8",
         env_prefix="DB_",
         case_sensitive=False,
+        extra="ignore",
     )
 
     ECHO: bool = False
@@ -367,7 +368,7 @@ class DatabaseSettings(BaseSettings):
 class GitHubSettings(BaseSettings):
     """Configures GitHub app for the project."""
 
-    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="GITHUB_")
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="GITHUB_", extra="ignore")
 
     NAME: str = "byte-bot-app"
     """GitHub App name."""

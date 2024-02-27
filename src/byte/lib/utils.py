@@ -1,11 +1,17 @@
 """Byte utilities."""
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+import json
+import re
+import subprocess
+from typing import TYPE_CHECKING, Any
 
+import httpx
 from discord.ext import commands
+from ruff.__main__ import find_ruff_bin  # type: ignore[import-untyped]
 
 from byte.lib import settings
+from byte.lib.common import pastebin
 
 if TYPE_CHECKING:
     from typing import Any
@@ -178,3 +184,94 @@ def mention_guild_navigation(guild_nav_type: str, guild_element_id: int) -> str:
         A formatted string that mentions the guild navigation element.
     """
     return f"<{guild_element_id}:{guild_nav_type}>"
+
+
+def format_ruff_rule(rule_data: dict) -> dict[str, str | Any]:
+    """Format ruff rule data for embed-friendly output and append rule link.
+
+    Args:
+        rule_data: The ruff rule data.
+
+    Returns:
+        The formatted rule data as a string.
+    """
+    explanation_formatted = re.sub(r"## (.+)", r"**\1**", rule_data["explanation"])
+    rule_name = rule_data["code"]
+    rule_link = f"https://docs.astral.sh/ruff/rules/#{rule_name}"
+
+    return {
+        "name": rule_data.get("name", "No name available"),
+        "summary": rule_data.get("summary", "No summary available"),
+        "explanation": explanation_formatted,
+        "fix": rule_data.get("fix", "No fix available"),
+        "rule_link": rule_link,
+    }
+
+
+def query_ruff_rule(rule: str) -> dict[str, Any]:
+    """Query a Ruff linting rule.
+
+    Args:
+        rule: The rule to query.
+
+    Returns:
+        dict[str, Any]: The resulting rule, if found or an error dict.
+    """
+    _ruff = find_ruff_bin()
+
+    try:
+        result = subprocess.run(
+            [_ruff, "rule", "--output-format", "json", rule],  # noqa: S603
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+    except subprocess.CalledProcessError as e:
+        if "invalid value" in e.stderr:
+            return {"error": f"Rule '{rule}' not found."}
+        msg = f"Error querying rule {rule}: {e.stderr}"
+        raise ValueError(msg) from e
+
+    rule_data = json.loads(result.stdout)
+    return format_ruff_rule(rule_data)
+
+
+def run_ruff_format(code: str) -> str:
+    """Formats code using Ruff.
+
+    Args:
+        code: The code to format.
+
+    Returns:
+        str: The formatted code.
+    """
+    result = subprocess.run(
+        ["ruff", "format", "-"],  # noqa: S603, S607
+        input=code,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    return result.stdout if result.returncode == 0 else code
+
+
+async def paste(code: str) -> str:
+    """Uploads the given code to paste.pythondiscord.com.
+
+    Args:
+        code: The formatted code to upload.
+
+    Returns:
+        str: The URL of the uploaded paste.
+    """
+    async with httpx.AsyncClient() as client:
+        response = await client.post(
+            f"{pastebin}/api/v1/paste",
+            json={
+                "expiry": "1day",
+                "files": [{"name": "byte-bot_formatted_code.py", "lexer": "python", "content": code}],
+            },
+        )
+        response_data = response.json()
+        paste_link = response_data.get("link")
+        return paste_link or "Failed to upload formatted code."
