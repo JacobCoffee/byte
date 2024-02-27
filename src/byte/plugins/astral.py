@@ -21,7 +21,7 @@ class Astral(Cog):
 
     @app_command(name="ruff")
     async def ruff_rule(self, interaction: Interaction, rule: str) -> None:
-        """Slash command to lookup and display a Ruff linting rule.
+        """Slash command to look up and display a Ruff linting rule.
 
         Args:
             interaction: Interaction object.
@@ -29,7 +29,13 @@ class Astral(Cog):
         """
         await interaction.response.send_message("Querying Ruff rule...", ephemeral=True)
 
-        rule_details = query_ruff_rule(rule)
+        rule_details = await query_ruff_rule(rule)
+
+        if "error" in rule_details:
+            embed = Embed(title=rule_details["error"], color=0x261230)
+            await interaction.followup.send(embed=embed)
+            return
+
         embed = Embed(title=f"Ruff Rule: {rule_details['name']}", color=0xD7FF64)
         embed.add_field(name="Summary", value=rule_details["summary"], inline=False)
         embed.add_field(name="Explanation", value=rule_details["explanation"], inline=False)
@@ -44,7 +50,7 @@ class Astral(Cog):
         await interaction.followup.send(embed=embed)
 
     @app_command(name="format")
-    async def format_code(self, interaction: Interaction, code_block: str) -> None:
+    async def format_code(self, interaction: Interaction, code_block: str) -> None:  # noqa: ARG002
         """Formats the provided code using Ruff and uploads the result to a pastebin.
 
         Args:

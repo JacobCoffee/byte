@@ -7,6 +7,7 @@ import subprocess
 from typing import TYPE_CHECKING, Any
 
 import httpx
+from anyio import run_process
 from discord.ext import commands
 from ruff.__main__ import find_ruff_bin  # type: ignore[import-untyped]
 
@@ -31,6 +32,10 @@ __all__ = (
     "mention_custom_emoji_animated",
     "mention_timestamp",
     "mention_guild_navigation",
+    "format_ruff_rule",
+    "query_ruff_rule",
+    "run_ruff_format",
+    "paste",
 )
 
 
@@ -53,7 +58,7 @@ def is_byte_dev() -> Check[Any]:
         if await ctx.bot.is_owner(ctx.author) or ctx.author.id == settings.discord.DEV_USER_ID:
             return True
 
-        return any(role.name == "byte-dev" for role in ctx.author.roles)
+        return any(role.name == "byte-dev" for role in ctx.author.roles)  # type: ignore[reportAttributeAccessIssue]
 
     return commands.check(predicate)
 
@@ -208,7 +213,7 @@ def format_ruff_rule(rule_data: dict) -> dict[str, str | Any]:
     }
 
 
-def query_ruff_rule(rule: str) -> dict[str, Any]:
+async def query_ruff_rule(rule: str) -> dict[str, Any]:
     """Query a Ruff linting rule.
 
     Args:
@@ -220,19 +225,17 @@ def query_ruff_rule(rule: str) -> dict[str, Any]:
     _ruff = find_ruff_bin()
 
     try:
-        result = subprocess.run(
-            [_ruff, "rule", "--output-format", "json", rule],  # noqa: S603
-            capture_output=True,
-            text=True,
-            check=True,
+        result = await run_process(
+            [_ruff, "rule", "--output-format", "json", rule],
         )
-    except subprocess.CalledProcessError as e:
-        if "invalid value" in e.stderr:
+    except Exception as e:  # noqa: BLE001
+        stderr = e.stderr.decode() if hasattr(e, "stderr") else ""  # type: ignore[reportAttributeAccessIssue]
+        if "invalid value" in stderr:
             return {"error": f"Rule '{rule}' not found."}
-        msg = f"Error querying rule {rule}: {e.stderr}"
+        msg = f"Error querying rule {rule}: {stderr}"
         raise ValueError(msg) from e
 
-    rule_data = json.loads(result.stdout)
+    rule_data = json.loads(result.stdout.decode())
     return format_ruff_rule(rule_data)
 
 
