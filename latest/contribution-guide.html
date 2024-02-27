@@ -1,29 +1,53 @@
-
-  <!DOCTYPE html>
-<html lang="en" data-accent-color="violet" data-content_root="./">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Contribution guide - Docs</title>
-    <link rel="shortcut icon" href="_static/badge.svg"/><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changelog" href="changelog.html" /><link rel="prev" title="orm" href="web/api/lib/db/orm.html" />
-
+    <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changelog" href="changelog.html" /><link rel="prev" title="orm" href="web/api/lib/db/orm.html" />
   <script>
-    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
-    setColorMode(sessionStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=aecf457f" />
-    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=b6637a78" />
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="shortcut icon" href="_static/badge.svg"/><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=aecf457f" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=28c32440" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
-    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=ee381b95" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=80d31e7b" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:56px;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));--sy-c-link-weak:rgba(var(--sy-rc-theme), 0.86);
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+  }
+}
+html.light {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+html.dark {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+}
+</style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
-  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
     <meta property="og:type" content="website"/><meta property="og:title" content="Contribution guide"/>
@@ -51,8 +75,7 @@
         </li><li class="link">
           <a href="https://github.com/sponsors/JacobCoffee"><span>Sponsor me</span><i class="i-icon external-link"></i></a>
         </li></ul></nav>
-      <div class="sy-head-extra flex items-center print:hidden">
-<form class="searchbox flex items-center" action="search.html" method="get">
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
 </form>
@@ -69,10 +92,7 @@
       </div>
     </div>
     <div class="sy-head-actions flex items-center shrink-0 print:hidden">
-      <button class="js-theme theme-switch flex items-center"
-        data-aria-auto="Switch to light color mode"
-        data-aria-light="Switch to dark color mode"
-        data-aria-dark="Switch to auto color mode">
+      <button class="js-theme theme-switch flex items-center" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
         <i class="i-icon theme-icon"></i>
       </button>
       <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
@@ -210,7 +230,7 @@
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
-  <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
+  <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
   </span>
   <span class="flex-grow px-2">
@@ -240,22 +260,15 @@
         <i class="i-icon menu"></i>
       </button>
     </div>
-    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <ul class="flex-1">
       
       
-      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <a itemprop="item" href="index.html"><span itemprop="name">byte-bot</span></a>
-        <span>/</span>
-        <meta itemprop="position" content="1" />
-      </li>
+      <li><a href="index.html">byte-bot</a><span>/</span></li>
       
-      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Contribution guide</strong>
-        <meta itemprop="position" content="2" />
-      </li>
+      <li><strong>Contribution guide</strong></li>
       
       
-    </ol>
+    </ul>
     <div class="xl:hidden ml-1">
       <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
         aria-expanded="false">
@@ -410,7 +423,7 @@ could be titled <code class="docutils literal notranslate"><span class="pre">fix
       <script src="_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="_static/copybutton.js?v=f281be69"></script>
       <script src="_static/design-tabs.js?v=36754332"></script>
-      <script src="_static/shibuya.js?v=ccb09f80"></script>
+      <script src="_static/shibuya.js?v=3e5c8598"></script>
     
 </body>
 </html>
