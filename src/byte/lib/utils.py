@@ -51,7 +51,7 @@ __all__ = (
     "mention_timestamp",
     "mention_guild_navigation",
     "format_ruff_rule",
-    "query_ruff_rule",
+    "query_all_ruff_rules",
     "run_ruff_format",
     "paste",
 )
