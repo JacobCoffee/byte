@@ -10,6 +10,8 @@ This includes things like commands, event handlers, and other features.
     :caption: Plugins
 
     admin
+    astral
+    events
     general
     github
     guild

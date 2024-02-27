@@ -98,9 +98,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../bot.html">bot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/events.html">events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/general.html">general</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/github.html">events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/guild.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/guild.html">guild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/testing.html">testing</a></li>
 </ul>
 </li>
@@ -357,18 +359,18 @@ validated to form a valid model.</p>
 </span><span id="1-48"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
 </span><span id="1-49"><span class="w">      </span><span class="p">}</span>
 </span><span id="1-50"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-51"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="1-52"><span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="1-53"><span class="w">      </span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span>
-</span><span id="1-54"><span class="w">      </span><span class="s2">&quot;DEV_GUILD_ID&quot;</span><span class="p">,</span>
-</span><span id="1-55"><span class="w">      </span><span class="s2">&quot;DEV_USER_ID&quot;</span>
-</span><span id="1-56"><span class="w">   </span><span class="p">]</span>
-</span><span id="1-57"><span class="p">}</span>
+</span><span id="1-51"><span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-52"><span class="w">      </span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span>
+</span><span id="1-53"><span class="w">      </span><span class="s2">&quot;DEV_GUILD_ID&quot;</span><span class="p">,</span>
+</span><span id="1-54"><span class="w">      </span><span class="s2">&quot;DEV_USER_ID&quot;</span>
+</span><span id="1-55"><span class="w">   </span><span class="p">]</span>
+</span><span id="1-56"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = DISCORD_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
@@ -529,14 +531,14 @@ validated to form a valid model.</p>
 </span><span id="1-34"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File&quot;</span><span class="p">,</span>
 </span><span id="1-35"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
 </span><span id="1-36"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-37"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-38"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="1-39"><span class="p">}</span>
+</span><span id="1-37"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-38"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = LOG_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
@@ -628,15 +630,14 @@ validated to form a valid model.</p>
 </span><span id="1-18"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Version&quot;</span><span class="p">,</span>
 </span><span id="1-19"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
 </span><span id="1-20"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-21"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-22"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
-</span><span id="1-23"><span class="p">}</span>
+</span><span id="1-21"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-22"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>extra</strong>: <em>str = allow</em></p></li>
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
 </ul>

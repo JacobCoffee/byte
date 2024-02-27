@@ -98,9 +98,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../../byte/api/bot.html">bot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../../byte/api/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/events.html">events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/general.html">general</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/github.html">events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/guild.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/guild.html">guild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/testing.html">testing</a></li>
 </ul>
 </li>
@@ -265,19 +267,19 @@
 </span><span id="1-13">
 </span><span id="1-14">
 <div class="viewcode-block" id="Events">
-<a class="viewcode-back" href="../../../../byte/api/plugins/github.html#src.byte.plugins.events.Events">[docs]</a>
+<a class="viewcode-back" href="../../../../byte/api/plugins/events.html#src.byte.plugins.events.Events">[docs]</a>
 </span><span id="1-15"><span class="k">class</span> <span class="nc">Events</span><span class="p">(</span><span class="n">Cog</span><span class="p">):</span>
 </span><span id="1-16"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Events cog.&quot;&quot;&quot;</span>
 </span><span id="1-17">
 <div class="viewcode-block" id="Events.__init__">
-<a class="viewcode-back" href="../../../../byte/api/plugins/github.html#src.byte.plugins.events.Events.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../byte/api/plugins/events.html#src.byte.plugins.events.Events.__init__">[docs]</a>
 </span><span id="1-18">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot</span><span class="p">:</span> <span class="n">Bot</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="1-19"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize cog.&quot;&quot;&quot;</span>
 </span><span id="1-20">        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">bot</span></div>
 
 </span><span id="1-21">
 <div class="viewcode-block" id="Events.on_thread_create">
-<a class="viewcode-back" href="../../../../byte/api/plugins/github.html#src.byte.plugins.events.Events.on_thread_create">[docs]</a>
+<a class="viewcode-back" href="../../../../byte/api/plugins/events.html#src.byte.plugins.events.Events.on_thread_create">[docs]</a>
 </span><span id="1-22">    <span class="nd">@Cog</span><span class="o">.</span><span class="n">listener</span><span class="p">()</span>
 </span><span id="1-23">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_thread_create</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">thread</span><span class="p">:</span> <span class="n">Thread</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="1-24"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle thread create event.</span>
@@ -314,7 +316,7 @@
 </span><span id="1-53">
 </span><span id="1-54">
 <div class="viewcode-block" id="setup">
-<a class="viewcode-back" href="../../../../byte/api/plugins/github.html#src.byte.plugins.events.setup">[docs]</a>
+<a class="viewcode-back" href="../../../../byte/api/plugins/events.html#src.byte.plugins.events.setup">[docs]</a>
 </span><span id="1-55"><span class="k">async</span> <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">Bot</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 </span><span id="1-56"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up the Events cog.&quot;&quot;&quot;</span>
 </span><span id="1-57">    <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">add_cog</span><span class="p">(</span><span class="n">Events</span><span class="p">(</span><span class="n">bot</span><span class="p">))</span></div>

@@ -98,9 +98,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../bot.html">bot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/events.html">events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/general.html">general</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/github.html">events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../plugins/guild.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../plugins/guild.html">guild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../plugins/testing.html">testing</a></li>
 </ul>
 </li>
@@ -186,15 +188,7 @@
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
-  <div class="localtoc">
-    <h3>On this page</h3>
-    <ul>
-<li><a class="reference internal" href="#src.byte.lib.logging.setup_logging"><code class="docutils literal notranslate"><span class="pre">setup_logging()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.logging.get_logger"><code class="docutils literal notranslate"><span class="pre">get_logger()</span></code></a></li>
-</ul>
-
-  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-3xl">
     <i class="i-icon github"></i>
@@ -268,30 +262,6 @@
           <section id="logging">
 <h1>logging<a class="headerlink" href="#logging" title="Link to this heading">¶</a></h1>
 <p>Logging configuration for Byte</p>
-<p id="module-src.byte.lib.logging">Centralized logging configuration.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.logging.setup_logging">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.logging.</span></span><span class="sig-name descname"><span class="pre">setup_logging</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/logging.html#setup_logging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.logging.setup_logging" title="Link to this definition">¶</a></dt>
-<dd><p>Set up logging configuration based on the environment.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.logging.get_logger">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.logging.</span></span><span class="sig-name descname"><span class="pre">get_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'__main__'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.12)"><span class="pre">Logger</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/logging.html#get_logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.logging.get_logger" title="Link to this definition">¶</a></dt>
-<dd><p>Get a logger with the specified name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a>) – The name of the logger.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The logger with the specified name.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.Logger" title="(in Python v3.12)">logging.Logger</a></p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
         </article>

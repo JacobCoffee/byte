@@ -98,9 +98,11 @@
 <li class="toctree-l2"><a class="reference internal" href="../../../byte/api/bot.html">bot</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../byte/api/plugins/index.html">plugins</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/events.html">events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/general.html">general</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/github.html">events</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/guild.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/guild.html">guild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/testing.html">testing</a></li>
 </ul>
 </li>
@@ -437,14 +439,14 @@ validated to form a valid model.</p>
 </span><span id="1-42"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Polar Url&quot;</span><span class="p">,</span>
 </span><span id="1-43"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
 </span><span id="1-44"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-45"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-46"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="1-47"><span class="p">}</span>
+</span><span id="1-45"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-46"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = API_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
@@ -632,14 +634,14 @@ validated to form a valid model.</p>
 </span><span id="1-112"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Migration Ddl Version Table&quot;</span><span class="p">,</span>
 </span><span id="1-113"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
 </span><span id="1-114"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-115"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-116"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="1-117"><span class="p">}</span>
+</span><span id="1-115"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-116"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = DB_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
 <li><p><strong>env_file_encoding</strong>: <em>str = utf-8</em></p></li>
@@ -854,14 +856,14 @@ validated to form a valid model.</p>
 </span><span id="1-45"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 </span><span id="1-46"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Personal Access Token&quot;</span>
 </span><span id="1-47"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-48"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-49"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="1-50"><span class="p">}</span>
+</span><span id="1-48"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-49"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = GITHUB_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
@@ -1088,14 +1090,14 @@ validated to form a valid model.</p>
 </span><span id="1-121"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Uvicorn Error Level&quot;</span><span class="p">,</span>
 </span><span id="1-122"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
 </span><span id="1-123"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-124"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-125"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="1-126"><span class="p">}</span>
+</span><span id="1-124"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-125"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = LOG_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
@@ -1282,14 +1284,14 @@ validated to form a valid model.</p>
 </span><span id="1-76"><span class="w">         </span><span class="p">},</span>
 </span><span id="1-77"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;External Docs&quot;</span>
 </span><span id="1-78"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-79"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-80"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="1-81"><span class="p">}</span>
+</span><span id="1-79"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-80"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = OPENAPI_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
@@ -1492,17 +1494,16 @@ validated to form a valid model.</p>
 </span><span id="1-91"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 </span><span id="1-92"><span class="w">      </span><span class="p">}</span>
 </span><span id="1-93"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-94"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-</span><span id="1-95"><span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="1-96"><span class="w">      </span><span class="s2">&quot;SECRET_KEY&quot;</span>
-</span><span id="1-97"><span class="w">   </span><span class="p">]</span>
-</span><span id="1-98"><span class="p">}</span>
+</span><span id="1-94"><span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-95"><span class="w">      </span><span class="s2">&quot;SECRET_KEY&quot;</span>
+</span><span id="1-96"><span class="w">   </span><span class="p">]</span>
+</span><span id="1-97"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>extra</strong>: <em>str = allow</em></p></li>
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
 </ul>
@@ -1774,14 +1775,14 @@ validated to form a valid model.</p>
 </span><span id="1-62"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 </span><span id="1-63"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Http Workers&quot;</span>
 </span><span id="1-64"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-65"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-66"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="1-67"><span class="p">}</span>
+</span><span id="1-65"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-66"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = SERVER_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
@@ -1878,14 +1879,14 @@ validated to form a valid model.</p>
 </span><span id="1-6"><span class="w">      </span><span class="nt">&quot;ENGINE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 </span><span id="1-7"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Engine&quot;</span>
 </span><span id="1-8"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-9"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-10"><span class="w">   </span><span class="nt">&quot;additionalProperties&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
-</span><span id="1-11"><span class="p">}</span>
+</span><span id="1-9"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-10"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
 <dt class="field-odd">Config<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
 <li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
 <li><p><strong>env_prefix</strong>: <em>str = TEMPLATE_</em></p></li>
 <li><p><strong>env_file</strong>: <em>str = .env</em></p></li>

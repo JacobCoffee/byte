@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>admin - Docs</title>
-    <link rel="shortcut icon" href="../../../_static/badge.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="astral" href="astral.html" /><link rel="prev" title="plugins" href="index.html" />
+      <title>astral - Docs</title>
+    <link rel="shortcut icon" href="../../../_static/badge.svg"/><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="events" href="events.html" /><link rel="prev" title="admin" href="admin.html" />
 
   <script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
@@ -26,7 +26,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/><meta property="og:title" content="admin"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="astral"/>
 <meta name="twitter:card" content="summary"/></head>
 <body><div class="document"><div class="announcement">
     <div class="announcement-inner">
@@ -97,8 +97,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../bot.html">bot</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">plugins</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">admin</a></li>
-<li class="toctree-l3"><a class="reference internal" href="astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="admin.html">admin</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">astral</a></li>
 <li class="toctree-l3"><a class="reference internal" href="events.html">events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="general.html">general</a></li>
 <li class="toctree-l3"><a class="reference internal" href="github.html">github</a></li>
@@ -192,13 +192,11 @@
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#src.byte.plugins.admin.AdminCommands"><code class="docutils literal notranslate"><span class="pre">AdminCommands</span></code></a><ul>
-<li><a class="reference internal" href="#src.byte.plugins.admin.AdminCommands.__init__"><code class="docutils literal notranslate"><span class="pre">AdminCommands.__init__()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.plugins.admin.AdminCommands.reload_all_cogs"><code class="docutils literal notranslate"><span class="pre">AdminCommands.reload_all_cogs()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.plugins.admin.AdminCommands.reload_single_cog"><code class="docutils literal notranslate"><span class="pre">AdminCommands.reload_single_cog()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.plugins.astral.Astral"><code class="docutils literal notranslate"><span class="pre">Astral</span></code></a><ul>
+<li><a class="reference internal" href="#src.byte.plugins.astral.Astral.__init__"><code class="docutils literal notranslate"><span class="pre">Astral.__init__()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#src.byte.plugins.admin.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.plugins.astral.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -220,7 +218,7 @@
     </span>
   </span>
 </a><div class="edit-this-page">
-  <a href="https://github.com/JacobCoffee/byte/blob/master/docs/byte/api/plugins/admin.rst">Edit this page</a>
+  <a href="https://github.com/JacobCoffee/byte/blob/master/docs/byte/api/plugins/astral.rst">Edit this page</a>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
     </div>
   </aside>
@@ -255,7 +253,7 @@
       </li>
       
       <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">admin</strong>
+        <strong itemprop="name">astral</strong>
         <meta itemprop="position" content="4" />
       </li>
       
@@ -272,53 +270,27 @@
     <div class="flex flex-col break-words justify-between">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
-          <section id="module-src.byte.plugins.admin">
-<span id="admin"></span><h1>admin<a class="headerlink" href="#module-src.byte.plugins.admin" title="Link to this heading">¶</a></h1>
-<p>Plugins for admins.</p>
-<div class="admonition-todo admonition" id="id1">
-<p class="admonition-title">Todo</p>
-<p>add an unload cog command.</p>
-</div>
+          <section id="module-src.byte.plugins.astral">
+<span id="astral"></span><h1>astral<a class="headerlink" href="#module-src.byte.plugins.astral" title="Link to this heading">¶</a></h1>
+<p>Plugins for Astral Inc. related software, including Ruff, uv, etc.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.byte.plugins.admin.AdminCommands">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.plugins.admin.</span></span><span class="sig-name descname"><span class="pre">AdminCommands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/byte/plugins/admin.html#AdminCommands"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.plugins.admin.AdminCommands" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.byte.plugins.astral.Astral">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.plugins.astral.</span></span><span class="sig-name descname"><span class="pre">Astral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/byte/plugins/astral.html#Astral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.plugins.astral.Astral" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Cog" title="(in discord.py v2.3.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cog</span></code></a></p>
-<p>Admin command cog.</p>
+<p>Astral cog.</p>
 <p>Initialize cog.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.byte.plugins.admin.AdminCommands.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Bot" title="(in discord.py v2.3.2)"><span class="pre">Bot</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/plugins/admin.html#AdminCommands.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.plugins.admin.AdminCommands.__init__" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="src.byte.plugins.astral.Astral.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Bot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rules</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">RuffRule</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/plugins/astral.html#Astral.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.plugins.astral.Astral.__init__" title="Link to this definition">¶</a></dt>
 <dd><p>Initialize cog.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.byte.plugins.admin.AdminCommands.reload_all_cogs">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reload_all_cogs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Context" title="(in discord.py v2.3.2)"><span class="pre">Context</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/plugins/admin.html#AdminCommands.reload_all_cogs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.plugins.admin.AdminCommands.reload_all_cogs" title="Link to this definition">¶</a></dt>
-<dd><p>Reload all cogs.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>ctx</strong> – Context object.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.byte.plugins.admin.AdminCommands.reload_single_cog">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reload_single_cog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ctx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Context" title="(in discord.py v2.3.2)"><span class="pre">Context</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cog</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">send_message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/plugins/admin.html#AdminCommands.reload_single_cog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.plugins.admin.AdminCommands.reload_single_cog" title="Link to this definition">¶</a></dt>
-<dd><p>Reload a single cog.</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.plugins.admin.setup">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.plugins.admin.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Bot" title="(in discord.py v2.3.2)"><span class="pre">Bot</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/plugins/admin.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.plugins.admin.setup" title="Link to this definition">¶</a></dt>
-<dd><p>Add cog to bot.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>bot</strong> – Bot object.</p>
-</dd>
-</dl>
+<dt class="sig sig-object py" id="src.byte.plugins.astral.setup">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.plugins.astral.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Bot" title="(in discord.py v2.3.2)"><span class="pre">Bot</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/plugins/astral.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.plugins.astral.setup" title="Link to this definition">¶</a></dt>
+<dd><p>Set up the Astral cog.</p>
 </dd></dl>
 
 </section>
@@ -327,21 +299,21 @@
         
         <div class="navigation flex print:hidden">
   <div class="navigation-prev">
-    <a href="index.html">
+    <a href="admin.html">
       <i class="i-icon chevron"></i>
       <div class="page-info">
         <span>Previous</span>
         
-        <div class="title">plugins</div>
+        <div class="title">admin</div>
         
       </div>
     </a>
   </div>
   <div class="navigation-next">
-    <a href="astral.html">
+    <a href="events.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">astral</div>
+        <div class="title">events</div>
       </div>
       <i class="i-icon chevron"></i>
     </a>
