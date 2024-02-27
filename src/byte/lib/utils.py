@@ -223,7 +223,7 @@ def format_ruff_rule(rule_data: RuffRule) -> FormattedRuffRule:
         rule_data: The ruff rule data.
 
     Returns:
-        The formatted rule data as a string.
+        FormattedRuffRule: The formatted rule data.
     """
     explanation_formatted = re.sub(r"## (.+)", r"**\1**", rule_data["explanation"])
     rule_name = rule_data["code"]
