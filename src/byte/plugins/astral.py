@@ -65,5 +65,5 @@ class Astral(Cog):
 
 
 async def setup(bot: Bot) -> None:
-    """Set up the Events cog."""
+    """Set up the Astral cog."""
     await bot.add_cog(Astral(bot))
