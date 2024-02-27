@@ -9,7 +9,7 @@ from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
 from byte.lib.common import ruff_logo
-from byte.lib.utils import query_all_ruff_rules
+from byte.lib.utils import chunk_sequence, query_all_ruff_rules
 
 if TYPE_CHECKING:
     from byte.lib.utils import RuffRule
@@ -28,6 +28,7 @@ class Astral(Cog):
         self._rules = {rule["code"]: rule for rule in rules}
 
     async def _rule_autocomplete(self, _: Interaction, current_rule: str) -> list[Choice[str]]:
+        # TODO: this can and should be made faster, rn this is slow, slow like the maintainer
         return [
             Choice(name=f'{code} - {rule["name"]}', value=code)
             for code, rule in self._rules.items()
@@ -52,7 +53,9 @@ class Astral(Cog):
 
         embed = Embed(title=f"Ruff Rule: {rule_details['name']}", color=0xD7FF64)
         embed.add_field(name="Summary", value=rule_details["summary"], inline=False)
-        embed.add_field(name="Explanation", value=rule_details["explanation"], inline=False)
+        # TODO: Better chunking
+        for idx, chunk in enumerate(chunk_sequence(rule_details["explanation"], 1000)):
+            embed.add_field(name="Explanation" if not idx else "", value="".join(chunk), inline=False)
         if "fix" in rule_details:
             embed.add_field(name="Fix", value=rule_details["fix"], inline=False)
         if "rule_link" in rule_details:
