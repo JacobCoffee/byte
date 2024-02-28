@@ -85,7 +85,7 @@ class RuffView(View):
 
     @button(label="Learn More", style=ButtonStyle.green, custom_id="learn_more_button")
     async def learn_more_button(self, interaction: Interaction, _: Button[Self]) -> None:
-        """Button to expand the embed to show full information.
+        """Button to privately message the requesting user the full embed.
 
         Args:
             interaction: Interaction object.
