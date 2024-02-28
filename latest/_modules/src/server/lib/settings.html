@@ -390,8 +390,8 @@ html.dark {
 </span><span id="1-122">
 <div class="viewcode-block" id="ProjectSettings.assemble_cors_origins">
 <a class="viewcode-back" href="../../../../web/api/lib/settings.html#src.server.lib.settings.ProjectSettings.assemble_cors_origins">[docs]</a>
-</span><span id="1-123">    <span class="nd">@classmethod</span>
-</span><span id="1-124">    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;BACKEND_CORS_ORIGINS&quot;</span><span class="p">)</span>
+</span><span id="1-123">    <span class="nd">@field_validator</span><span class="p">(</span><span class="s2">&quot;BACKEND_CORS_ORIGINS&quot;</span><span class="p">)</span>
+</span><span id="1-124">    <span class="nd">@classmethod</span>
 </span><span id="1-125">    <span class="k">def</span> <span class="nf">assemble_cors_origins</span><span class="p">(</span>
 </span><span id="1-126">        <span class="bp">cls</span><span class="p">,</span>
 </span><span id="1-127">        <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
@@ -694,7 +694,7 @@ html.dark {
 </span><span id="1-397"><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="1-398">        <span class="k">try</span><span class="p">:</span>
 </span><span id="1-399">            <span class="n">decoded_key</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-</span><span id="1-400">        <span class="k">except</span> <span class="n">base64</span><span class="o">.</span><span class="n">binascii</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="1-400">        <span class="k">except</span> <span class="n">binascii</span><span class="o">.</span><span class="n">Error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 </span><span id="1-401">            <span class="n">environment</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;ENVIRONMENT&quot;</span><span class="p">,</span> <span class="s2">&quot;dev&quot;</span><span class="p">)</span>
 </span><span id="1-402">            <span class="k">if</span> <span class="n">environment</span> <span class="o">!=</span> <span class="s2">&quot;dev&quot;</span><span class="p">:</span>
 </span><span id="1-403">                <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;The GitHub private key must be a valid base64 encoded string&quot;</span>

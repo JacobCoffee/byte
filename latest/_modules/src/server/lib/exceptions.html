@@ -271,15 +271,15 @@ html.dark {
 </span><span id="1-8"><span class="kn">import</span> <span class="nn">sys</span>
 </span><span id="1-9"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 </span><span id="1-10">
-</span><span id="1-11"><span class="kn">from</span> <span class="nn">litestar.contrib.repository.exceptions</span> <span class="kn">import</span> <span class="n">ConflictError</span><span class="p">,</span> <span class="n">NotFoundError</span><span class="p">,</span> <span class="n">RepositoryError</span>
-</span><span id="1-12"><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
-</span><span id="1-13">    <span class="n">HTTPException</span><span class="p">,</span>
-</span><span id="1-14">    <span class="n">InternalServerException</span><span class="p">,</span>
-</span><span id="1-15">    <span class="n">NotFoundException</span><span class="p">,</span>
-</span><span id="1-16">    <span class="n">PermissionDeniedException</span><span class="p">,</span>
-</span><span id="1-17"><span class="p">)</span>
-</span><span id="1-18"><span class="kn">from</span> <span class="nn">litestar.middleware.exceptions._debug_response</span> <span class="kn">import</span> <span class="n">create_debug_response</span>
-</span><span id="1-19"><span class="kn">from</span> <span class="nn">litestar.middleware.exceptions.middleware</span> <span class="kn">import</span> <span class="n">create_exception_response</span>
+</span><span id="1-11"><span class="kn">from</span> <span class="nn">litestar.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span id="1-12">    <span class="n">HTTPException</span><span class="p">,</span>
+</span><span id="1-13">    <span class="n">InternalServerException</span><span class="p">,</span>
+</span><span id="1-14">    <span class="n">NotFoundException</span><span class="p">,</span>
+</span><span id="1-15">    <span class="n">PermissionDeniedException</span><span class="p">,</span>
+</span><span id="1-16"><span class="p">)</span>
+</span><span id="1-17"><span class="kn">from</span> <span class="nn">litestar.middleware.exceptions._debug_response</span> <span class="kn">import</span> <span class="n">create_debug_response</span>
+</span><span id="1-18"><span class="kn">from</span> <span class="nn">litestar.middleware.exceptions.middleware</span> <span class="kn">import</span> <span class="n">create_exception_response</span>
+</span><span id="1-19"><span class="kn">from</span> <span class="nn">litestar.repository.exceptions</span> <span class="kn">import</span> <span class="n">ConflictError</span><span class="p">,</span> <span class="n">NotFoundError</span><span class="p">,</span> <span class="n">RepositoryError</span>
 </span><span id="1-20"><span class="kn">from</span> <span class="nn">litestar.status_codes</span> <span class="kn">import</span> <span class="n">HTTP_409_CONFLICT</span><span class="p">,</span> <span class="n">HTTP_500_INTERNAL_SERVER_ERROR</span>
 </span><span id="1-21"><span class="kn">from</span> <span class="nn">structlog.contextvars</span> <span class="kn">import</span> <span class="n">bind_contextvars</span>
 </span><span id="1-22">
@@ -386,18 +386,18 @@ html.dark {
 </span><span id="1-105"><span class="sd">    Returns:</span>
 </span><span id="1-106"><span class="sd">        Exception response appropriate to the type of original exception.</span>
 </span><span id="1-107"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-108">    <span class="n">http_exc</span><span class="p">:</span> <span class="nb">type</span><span class="p">[</span><span class="n">HTTPException</span><span class="p">]</span>
-</span><span id="1-109">    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">NotFoundError</span><span class="p">):</span>
-</span><span id="1-110">        <span class="n">http_exc</span> <span class="o">=</span> <span class="n">NotFoundException</span>
-</span><span id="1-111">    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">ConflictError</span> <span class="o">|</span> <span class="n">RepositoryError</span><span class="p">):</span>
-</span><span id="1-112">        <span class="n">http_exc</span> <span class="o">=</span> <span class="n">_HTTPConflictException</span>
-</span><span id="1-113">    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">AuthorizationError</span><span class="p">):</span>
-</span><span id="1-114">        <span class="n">http_exc</span> <span class="o">=</span> <span class="n">PermissionDeniedException</span>
-</span><span id="1-115">    <span class="k">else</span><span class="p">:</span>
-</span><span id="1-116">        <span class="n">http_exc</span> <span class="o">=</span> <span class="n">InternalServerException</span>
+</span><span id="1-108">    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">NotFoundError</span><span class="p">):</span>
+</span><span id="1-109">        <span class="n">http_exc</span> <span class="o">=</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+</span><span id="1-110">    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">ConflictError</span> <span class="o">|</span> <span class="n">RepositoryError</span><span class="p">):</span>
+</span><span id="1-111">        <span class="n">http_exc</span> <span class="o">=</span> <span class="n">_HTTPConflictException</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+</span><span id="1-112">    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">AuthorizationError</span><span class="p">):</span>
+</span><span id="1-113">        <span class="n">http_exc</span> <span class="o">=</span> <span class="n">PermissionDeniedException</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+</span><span id="1-114">    <span class="k">else</span><span class="p">:</span>
+</span><span id="1-115">        <span class="n">http_exc</span> <span class="o">=</span> <span class="n">InternalServerException</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+</span><span id="1-116">
 </span><span id="1-117">    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
 </span><span id="1-118">        <span class="k">return</span> <span class="n">create_debug_response</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-</span><span id="1-119">    <span class="k">return</span> <span class="n">create_exception_response</span><span class="p">(</span><span class="n">http_exc</span><span class="p">(</span><span class="n">detail</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="o">.</span><span class="n">__cause__</span><span class="p">)))</span>
+</span><span id="1-119">    <span class="k">return</span> <span class="n">create_exception_response</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">http_exc</span><span class="p">)</span>
 </span></pre></div>
         </article>
         

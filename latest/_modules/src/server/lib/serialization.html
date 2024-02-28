@@ -423,16 +423,16 @@ html.dark {
 </span><span id="1-137">
 <div class="viewcode-block" id="UUIDEncoder.default">
 <a class="viewcode-back" href="../../../../web/api/lib/serialization.html#src.server.lib.serialization.UUIDEncoder.default">[docs]</a>
-</span><span id="1-138">    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+</span><span id="1-138">    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
 </span><span id="1-139"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle UUIDs.</span>
 </span><span id="1-140">
 </span><span id="1-141"><span class="sd">        Args:</span>
-</span><span id="1-142"><span class="sd">            obj: The object to encode</span>
+</span><span id="1-142"><span class="sd">            o: The object to encode</span>
 </span><span id="1-143">
 </span><span id="1-144"><span class="sd">        Returns:</span>
 </span><span id="1-145"><span class="sd">            str: The encoded object</span>
 </span><span id="1-146"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-147">        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">UUID</span><span class="p">)</span> <span class="k">else</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span></div>
+</span><span id="1-147">        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">UUID</span><span class="p">)</span> <span class="k">else</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">default</span><span class="p">(</span><span class="n">o</span><span class="p">)</span></div>
 </div>
 
 </span></pre></div>

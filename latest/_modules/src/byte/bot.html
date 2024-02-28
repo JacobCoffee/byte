@@ -285,158 +285,171 @@ html.dark {
 </span><span id="1-22"><span class="n">load_dotenv</span><span class="p">()</span>
 </span><span id="1-23">
 </span><span id="1-24">
+</span><span id="1-25"><span class="k">async</span> <span class="k">def</span> <span class="nf">on_member_join</span><span class="p">(</span><span class="n">member</span><span class="p">:</span> <span class="n">Member</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-26"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle member join event.</span>
+</span><span id="1-27">
+</span><span id="1-28"><span class="sd">    Args:</span>
+</span><span id="1-29"><span class="sd">        member: Member object.</span>
+</span><span id="1-30"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-31">    <span class="k">await</span> <span class="n">member</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+</span><span id="1-32">        <span class="sa">f</span><span class="s2">&quot;Welcome to </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">! Please make sure to read the rules if you haven&#39;t already. &quot;</span>
+</span><span id="1-33">        <span class="sa">f</span><span class="s2">&quot;Feel free to ask any questions you have in the help channel.&quot;</span>
+</span><span id="1-34">    <span class="p">)</span>
+</span><span id="1-35">
+</span><span id="1-36">
 <div class="viewcode-block" id="Byte">
 <a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte">[docs]</a>
-</span><span id="1-25"><span class="k">class</span> <span class="nc">Byte</span><span class="p">(</span><span class="n">Bot</span><span class="p">):</span>
-</span><span id="1-26"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Byte Bot Base Class.&quot;&quot;&quot;</span>
-</span><span id="1-27">
+</span><span id="1-37"><span class="k">class</span> <span class="nc">Byte</span><span class="p">(</span><span class="n">Bot</span><span class="p">):</span>
+</span><span id="1-38"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Byte Bot Base Class.&quot;&quot;&quot;</span>
+</span><span id="1-39">
 <div class="viewcode-block" id="Byte.__init__">
 <a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.__init__">[docs]</a>
-</span><span id="1-28">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command_prefix</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">intents</span><span class="p">:</span> <span class="n">Intents</span><span class="p">,</span> <span class="n">activity</span><span class="p">:</span> <span class="n">Activity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-29"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the bot.</span>
-</span><span id="1-30">
-</span><span id="1-31"><span class="sd">        Args:</span>
-</span><span id="1-32"><span class="sd">            command_prefix (str): Command prefix for the bot.</span>
-</span><span id="1-33"><span class="sd">            intents (discord.Intents): Intents for the bot.</span>
-</span><span id="1-34"><span class="sd">            activity (discord.Activity): Activity for the bot.</span>
-</span><span id="1-35"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-36">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">command_prefix</span><span class="o">=</span><span class="n">command_prefix</span><span class="p">,</span> <span class="n">intents</span><span class="o">=</span><span class="n">intents</span><span class="p">,</span> <span class="n">activity</span><span class="o">=</span><span class="n">activity</span><span class="p">)</span></div>
+</span><span id="1-40">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command_prefix</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">intents</span><span class="p">:</span> <span class="n">Intents</span><span class="p">,</span> <span class="n">activity</span><span class="p">:</span> <span class="n">Activity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-41"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the bot.</span>
+</span><span id="1-42">
+</span><span id="1-43"><span class="sd">        Args:</span>
+</span><span id="1-44"><span class="sd">            command_prefix (str): Command prefix for the bot.</span>
+</span><span id="1-45"><span class="sd">            intents (discord.Intents): Intents for the bot.</span>
+</span><span id="1-46"><span class="sd">            activity (discord.Activity): Activity for the bot.</span>
+</span><span id="1-47"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-48">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">command_prefix</span><span class="o">=</span><span class="n">command_prefix</span><span class="p">,</span> <span class="n">intents</span><span class="o">=</span><span class="n">intents</span><span class="p">,</span> <span class="n">activity</span><span class="o">=</span><span class="n">activity</span><span class="p">)</span></div>
 
-</span><span id="1-37">
+</span><span id="1-49">
 <div class="viewcode-block" id="Byte.setup_hook">
 <a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.setup_hook">[docs]</a>
-</span><span id="1-38">    <span class="k">async</span> <span class="k">def</span> <span class="nf">setup_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-39"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Any setup we need can be here.&quot;&quot;&quot;</span>
-</span><span id="1-40">        <span class="c1"># Load cogs before syncing the tree.</span>
-</span><span id="1-41">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_cogs</span><span class="p">()</span>
-</span><span id="1-42">        <span class="n">dev_guild</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Object</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">DEV_GUILD_ID</span><span class="p">)</span>
-</span><span id="1-43">        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">copy_global_to</span><span class="p">(</span><span class="n">guild</span><span class="o">=</span><span class="n">dev_guild</span><span class="p">)</span>
-</span><span id="1-44">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">guild</span><span class="o">=</span><span class="n">dev_guild</span><span class="p">)</span></div>
+</span><span id="1-50">    <span class="k">async</span> <span class="k">def</span> <span class="nf">setup_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-51"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Any setup we need can be here.&quot;&quot;&quot;</span>
+</span><span id="1-52">        <span class="c1"># Load cogs before syncing the tree.</span>
+</span><span id="1-53">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_cogs</span><span class="p">()</span>
+</span><span id="1-54">        <span class="n">dev_guild</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Object</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">DEV_GUILD_ID</span><span class="p">)</span>
+</span><span id="1-55">        <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">copy_global_to</span><span class="p">(</span><span class="n">guild</span><span class="o">=</span><span class="n">dev_guild</span><span class="p">)</span>
+</span><span id="1-56">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">guild</span><span class="o">=</span><span class="n">dev_guild</span><span class="p">)</span></div>
 
-</span><span id="1-45">
+</span><span id="1-57">
 <div class="viewcode-block" id="Byte.load_cogs">
 <a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.load_cogs">[docs]</a>
-</span><span id="1-46">    <span class="k">async</span> <span class="k">def</span> <span class="nf">load_cogs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-47"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Load cogs.&quot;&quot;&quot;</span>
-</span><span id="1-48">        <span class="n">cogs</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="1-49">            <span class="n">cog</span>
-</span><span id="1-50">            <span class="k">for</span> <span class="n">plugins_dir</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">PLUGINS_DIRS</span>
-</span><span id="1-51">            <span class="k">for</span> <span class="n">cog</span> <span class="ow">in</span> <span class="n">plugins_dir</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*.py&quot;</span><span class="p">)</span>
-</span><span id="1-52">            <span class="k">if</span> <span class="n">cog</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s2">&quot;__init__&quot;</span>
-</span><span id="1-53">        <span class="p">]</span>
-</span><span id="1-54">
-</span><span id="1-55">        <span class="n">cogs_import_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cog</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="n">cog</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">)</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">cog</span><span class="o">.</span><span class="n">stem</span> <span class="k">for</span> <span class="n">cog</span> <span class="ow">in</span> <span class="n">cogs</span><span class="p">]</span>
-</span><span id="1-56">
-</span><span id="1-57">        <span class="k">for</span> <span class="n">cog</span> <span class="ow">in</span> <span class="n">cogs_import_path</span><span class="p">:</span>
-</span><span id="1-58">            <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="n">ExtensionAlreadyLoaded</span><span class="p">):</span>
-</span><span id="1-59">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="n">cog</span><span class="p">)</span></div>
-
-</span><span id="1-60">
-<div class="viewcode-block" id="Byte.on_ready">
-<a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.on_ready">[docs]</a>
-</span><span id="1-61">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-62"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle bot ready event.&quot;&quot;&quot;</span>
-</span><span id="1-63">        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> has connected to Discord!&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span></div>
-
-</span><span id="1-64">
-<div class="viewcode-block" id="Byte.on_message">
-<a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.on_message">[docs]</a>
-</span><span id="1-65">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-66"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle message events.</span>
-</span><span id="1-67">
-</span><span id="1-68"><span class="sd">        Args:</span>
-</span><span id="1-69"><span class="sd">            message: Message object.</span>
-</span><span id="1-70"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-71">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_commands</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+</span><span id="1-58">    <span class="k">async</span> <span class="k">def</span> <span class="nf">load_cogs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-59"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Load cogs.&quot;&quot;&quot;</span>
+</span><span id="1-60">        <span class="n">cogs</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="1-61">            <span class="n">cog</span>
+</span><span id="1-62">            <span class="k">for</span> <span class="n">plugins_dir</span> <span class="ow">in</span> <span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">PLUGINS_DIRS</span>
+</span><span id="1-63">            <span class="k">for</span> <span class="n">cog</span> <span class="ow">in</span> <span class="n">plugins_dir</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*.py&quot;</span><span class="p">)</span>
+</span><span id="1-64">            <span class="k">if</span> <span class="n">cog</span><span class="o">.</span><span class="n">stem</span> <span class="o">!=</span> <span class="s2">&quot;__init__&quot;</span>
+</span><span id="1-65">        <span class="p">]</span>
+</span><span id="1-66">
+</span><span id="1-67">        <span class="n">cogs_import_path</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cog</span><span class="o">.</span><span class="n">parts</span><span class="p">[</span><span class="n">cog</span><span class="o">.</span><span class="n">parts</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">)</span> <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="n">cog</span><span class="o">.</span><span class="n">stem</span> <span class="k">for</span> <span class="n">cog</span> <span class="ow">in</span> <span class="n">cogs</span><span class="p">]</span>
+</span><span id="1-68">
+</span><span id="1-69">        <span class="k">for</span> <span class="n">cog</span> <span class="ow">in</span> <span class="n">cogs_import_path</span><span class="p">:</span>
+</span><span id="1-70">            <span class="k">with</span> <span class="n">contextlib</span><span class="o">.</span><span class="n">suppress</span><span class="p">(</span><span class="n">ExtensionAlreadyLoaded</span><span class="p">):</span>
+</span><span id="1-71">                <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_extension</span><span class="p">(</span><span class="n">cog</span><span class="p">)</span></div>
 
 </span><span id="1-72">
+<div class="viewcode-block" id="Byte.on_ready">
+<a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.on_ready">[docs]</a>
+</span><span id="1-73">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-74"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle bot ready event.&quot;&quot;&quot;</span>
+</span><span id="1-75">        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> has connected to Discord!&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span></div>
+
+</span><span id="1-76">
+<div class="viewcode-block" id="Byte.on_message">
+<a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.on_message">[docs]</a>
+</span><span id="1-77">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-78"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle message events.</span>
+</span><span id="1-79">
+</span><span id="1-80"><span class="sd">        Args:</span>
+</span><span id="1-81"><span class="sd">            message: Message object.</span>
+</span><span id="1-82"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-83">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_commands</span><span class="p">(</span><span class="n">message</span><span class="p">)</span></div>
+
+</span><span id="1-84">
 <div class="viewcode-block" id="Byte.on_command_error">
 <a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.on_command_error">[docs]</a>
-</span><span id="1-73">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_command_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">CommandError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-74"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle command errors.</span>
-</span><span id="1-75">
-</span><span id="1-76"><span class="sd">        Args:</span>
-</span><span id="1-77"><span class="sd">            ctx: Context object.</span>
-</span><span id="1-78"><span class="sd">            error: Error object.</span>
-</span><span id="1-79"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-80">        <span class="n">err</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">original</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s2">&quot;original&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">error</span>
-</span><span id="1-81">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">Forbidden</span> <span class="o">|</span> <span class="n">NotFound</span><span class="p">):</span>
-</span><span id="1-82">            <span class="k">return</span>
-</span><span id="1-83">
-</span><span id="1-84">        <span class="n">embed</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Embed</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Command Error&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">Color</span><span class="o">.</span><span class="n">red</span><span class="p">())</span>
-</span><span id="1-85">        <span class="n">embed</span><span class="o">.</span><span class="n">set_thumbnail</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">avatar</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-</span><span id="1-86">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Command&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">command</span><span class="p">)</span>
-</span><span id="1-87">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-</span><span id="1-88">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Channel&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">mention</span><span class="p">)</span>
-</span><span id="1-89">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Author&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">mention</span><span class="p">)</span>
-</span><span id="1-90">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Guild&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</span><span id="1-91">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Location&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;[Jump](</span><span class="si">{</span><span class="n">ctx</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">jump_url</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-</span><span id="1-92">        <span class="n">embed</span><span class="o">.</span><span class="n">set_footer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Time: </span><span class="si">{</span><span class="n">ctx</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="1-93">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">embed</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+</span><span id="1-85">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_command_error</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="n">CommandError</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-86"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle command errors.</span>
+</span><span id="1-87">
+</span><span id="1-88"><span class="sd">        Args:</span>
+</span><span id="1-89"><span class="sd">            ctx: Context object.</span>
+</span><span id="1-90"><span class="sd">            error: Error object.</span>
+</span><span id="1-91"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-92">        <span class="n">err</span> <span class="o">=</span> <span class="n">error</span><span class="o">.</span><span class="n">original</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="s2">&quot;original&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">error</span>
+</span><span id="1-93">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">Forbidden</span> <span class="o">|</span> <span class="n">NotFound</span><span class="p">):</span>
+</span><span id="1-94">            <span class="k">return</span>
+</span><span id="1-95">
+</span><span id="1-96">        <span class="n">embed</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Embed</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Command Error&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">error</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">Color</span><span class="o">.</span><span class="n">red</span><span class="p">())</span>
+</span><span id="1-97">        <span class="n">embed</span><span class="o">.</span><span class="n">set_thumbnail</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">avatar</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+</span><span id="1-98">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Command&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">command</span><span class="p">)</span>
+</span><span id="1-99">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Message&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</span><span id="1-100">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Channel&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">channel</span><span class="o">.</span><span class="n">mention</span><span class="p">)</span>
+</span><span id="1-101">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Author&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">mention</span><span class="p">)</span>
+</span><span id="1-102">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Guild&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">ctx</span><span class="o">.</span><span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</span><span id="1-103">        <span class="n">embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Location&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;[Jump](</span><span class="si">{</span><span class="n">ctx</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">jump_url</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</span><span id="1-104">        <span class="n">embed</span><span class="o">.</span><span class="n">set_footer</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Time: </span><span class="si">{</span><span class="n">ctx</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">created_at</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="1-105">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">embed</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-</span><span id="1-94">
+</span><span id="1-106">
 <div class="viewcode-block" id="Byte.on_member_join">
 <a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.on_member_join">[docs]</a>
-</span><span id="1-95">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_member_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">member</span><span class="p">:</span> <span class="n">Member</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-96"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle member join event.</span>
-</span><span id="1-97">
-</span><span id="1-98"><span class="sd">        Args:</span>
-</span><span id="1-99"><span class="sd">            member: Member object.</span>
-</span><span id="1-100"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-101">        <span class="k">await</span> <span class="n">member</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
-</span><span id="1-102">            <span class="sa">f</span><span class="s2">&quot;Welcome to </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">! Please make sure to read the rules if you haven&#39;t already. &quot;</span>
-</span><span id="1-103">            <span class="sa">f</span><span class="s2">&quot;Feel free to ask any questions you have in the help channel.&quot;</span>
-</span><span id="1-104">        <span class="p">)</span></div>
+</span><span id="1-107">    <span class="nd">@staticmethod</span>
+</span><span id="1-108">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_member_join</span><span class="p">(</span><span class="n">member</span><span class="p">:</span> <span class="n">Member</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-109"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle member join event.</span>
+</span><span id="1-110">
+</span><span id="1-111"><span class="sd">        Args:</span>
+</span><span id="1-112"><span class="sd">            member: Member object.</span>
+</span><span id="1-113"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-114">        <span class="k">await</span> <span class="n">member</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+</span><span id="1-115">            <span class="sa">f</span><span class="s2">&quot;Welcome to </span><span class="si">{</span><span class="n">member</span><span class="o">.</span><span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">! Please make sure to read the rules if you haven&#39;t already. &quot;</span>
+</span><span id="1-116">            <span class="sa">f</span><span class="s2">&quot;Feel free to ask any questions you have in the help channel.&quot;</span>
+</span><span id="1-117">        <span class="p">)</span></div>
 
-</span><span id="1-105">
+</span><span id="1-118">
 <div class="viewcode-block" id="Byte.on_guild_join">
 <a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.Byte.on_guild_join">[docs]</a>
-</span><span id="1-106">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_guild_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guild</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Guild</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-107"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle guild join event.</span>
-</span><span id="1-108">
-</span><span id="1-109"><span class="sd">        Args:</span>
-</span><span id="1-110"><span class="sd">            guild: Guild object.</span>
-</span><span id="1-111"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-112">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">guild</span><span class="o">=</span><span class="n">guild</span><span class="p">)</span>
-</span><span id="1-113">        <span class="n">api_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://0.0.0.0:8000/api/guilds/create?guild_id=</span><span class="si">{</span><span class="n">guild</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&amp;guild_name=</span><span class="si">{</span><span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="1-114">
-</span><span id="1-115">        <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="1-116">            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_url</span><span class="p">)</span>
-</span><span id="1-117">
-</span><span id="1-118">            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">httpx</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">CREATED</span><span class="p">:</span>
-</span><span id="1-119">                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;successfully added guild </span><span class="si">%s</span><span class="s2"> (ID: </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">guild</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
-</span><span id="1-120">            <span class="k">else</span><span class="p">:</span>
-</span><span id="1-121">                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> joined guild &#39;</span><span class="si">%s</span><span class="s2">&#39; but was not added to database&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
+</span><span id="1-119">    <span class="k">async</span> <span class="k">def</span> <span class="nf">on_guild_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">guild</span><span class="p">:</span> <span class="n">discord</span><span class="o">.</span><span class="n">Guild</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-120"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle guild join event.</span>
+</span><span id="1-121">
+</span><span id="1-122"><span class="sd">        Args:</span>
+</span><span id="1-123"><span class="sd">            guild: Guild object.</span>
+</span><span id="1-124"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-125">        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">guild</span><span class="o">=</span><span class="n">guild</span><span class="p">)</span>
+</span><span id="1-126">        <span class="n">api_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;http://0.0.0.0:8000/api/guilds/create?guild_id=</span><span class="si">{</span><span class="n">guild</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&amp;guild_name=</span><span class="si">{</span><span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="1-127">
+</span><span id="1-128">        <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span id="1-129">            <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">api_url</span><span class="p">)</span>
+</span><span id="1-130">
+</span><span id="1-131">            <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">httpx</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">CREATED</span><span class="p">:</span>
+</span><span id="1-132">                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;successfully added guild </span><span class="si">%s</span><span class="s2"> (ID: </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">guild</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span id="1-133">            <span class="k">else</span><span class="p">:</span>
+</span><span id="1-134">                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> joined guild &#39;</span><span class="si">%s</span><span class="s2">&#39; but was not added to database&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="p">)</span></div>
 </div>
 
-</span><span id="1-122">
-</span><span id="1-123">
+</span><span id="1-135">
+</span><span id="1-136">
 <div class="viewcode-block" id="run_bot">
 <a class="viewcode-back" href="../../../byte/api/bot.html#src.byte.bot.run_bot">[docs]</a>
-</span><span id="1-124"><span class="k">def</span> <span class="nf">run_bot</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-125"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the bot.&quot;&quot;&quot;</span>
-</span><span id="1-126">    <span class="n">intents</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Intents</span><span class="o">.</span><span class="n">default</span><span class="p">()</span>
-</span><span id="1-127">    <span class="n">intents</span><span class="o">.</span><span class="n">message_content</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="1-128">    <span class="n">intents</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span id="1-129">    <span class="n">presence</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Activity</span><span class="p">(</span>
-</span><span id="1-130">        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;!help&quot;</span><span class="p">,</span>
-</span><span id="1-131">        <span class="nb">type</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">ActivityType</span><span class="o">.</span><span class="n">custom</span><span class="p">,</span>
-</span><span id="1-132">        <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Serving Developers&quot;</span><span class="p">,</span>
-</span><span id="1-133">        <span class="n">details</span><span class="o">=</span><span class="s2">&quot;!help&quot;</span><span class="p">,</span>
-</span><span id="1-134">        <span class="n">url</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">PRESENCE_URL</span><span class="p">,</span>
-</span><span id="1-135">    <span class="p">)</span>
-</span><span id="1-136">    <span class="n">bot</span> <span class="o">=</span> <span class="n">Byte</span><span class="p">(</span><span class="n">command_prefix</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">COMMAND_PREFIX</span><span class="p">,</span> <span class="n">intents</span><span class="o">=</span><span class="n">intents</span><span class="p">,</span> <span class="n">activity</span><span class="o">=</span><span class="n">presence</span><span class="p">)</span>
-</span><span id="1-137">
-</span><span id="1-138">    <span class="k">async</span> <span class="k">def</span> <span class="nf">start_bot</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="1-139"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Start the bot.&quot;&quot;&quot;</span>
-</span><span id="1-140">        <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">TOKEN</span><span class="p">)</span>
-</span><span id="1-141">
-</span><span id="1-142">    <span class="n">run</span><span class="p">(</span><span class="n">start_bot</span><span class="p">)</span></div>
+</span><span id="1-137"><span class="k">def</span> <span class="nf">run_bot</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-138"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Run the bot.&quot;&quot;&quot;</span>
+</span><span id="1-139">    <span class="n">intents</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Intents</span><span class="o">.</span><span class="n">default</span><span class="p">()</span>
+</span><span id="1-140">    <span class="n">intents</span><span class="o">.</span><span class="n">message_content</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="1-141">    <span class="n">intents</span><span class="o">.</span><span class="n">members</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span id="1-142">    <span class="n">presence</span> <span class="o">=</span> <span class="n">discord</span><span class="o">.</span><span class="n">Activity</span><span class="p">(</span>
+</span><span id="1-143">        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;!help&quot;</span><span class="p">,</span>
+</span><span id="1-144">        <span class="nb">type</span><span class="o">=</span><span class="n">discord</span><span class="o">.</span><span class="n">ActivityType</span><span class="o">.</span><span class="n">custom</span><span class="p">,</span>
+</span><span id="1-145">        <span class="n">state</span><span class="o">=</span><span class="s2">&quot;Serving Developers&quot;</span><span class="p">,</span>
+</span><span id="1-146">        <span class="n">details</span><span class="o">=</span><span class="s2">&quot;!help&quot;</span><span class="p">,</span>
+</span><span id="1-147">        <span class="n">url</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">PRESENCE_URL</span><span class="p">,</span>
+</span><span id="1-148">    <span class="p">)</span>
+</span><span id="1-149">    <span class="n">bot</span> <span class="o">=</span> <span class="n">Byte</span><span class="p">(</span><span class="n">command_prefix</span><span class="o">=</span><span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">COMMAND_PREFIX</span><span class="p">,</span> <span class="n">intents</span><span class="o">=</span><span class="n">intents</span><span class="p">,</span> <span class="n">activity</span><span class="o">=</span><span class="n">presence</span><span class="p">)</span>
+</span><span id="1-150">
+</span><span id="1-151">    <span class="k">async</span> <span class="k">def</span> <span class="nf">start_bot</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-152"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Start the bot.&quot;&quot;&quot;</span>
+</span><span id="1-153">        <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">TOKEN</span><span class="p">)</span>
+</span><span id="1-154">
+</span><span id="1-155">    <span class="n">run</span><span class="p">(</span><span class="n">start_bot</span><span class="p">)</span></div>
 
-</span><span id="1-143">
-</span><span id="1-144">
-</span><span id="1-145"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-</span><span id="1-146">    <span class="n">run_bot</span><span class="p">()</span>
+</span><span id="1-156">
+</span><span id="1-157">
+</span><span id="1-158"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span id="1-159">    <span class="n">run_bot</span><span class="p">()</span>
 </span></pre></div>
         </article>
         

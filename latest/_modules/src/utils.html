@@ -449,8 +449,8 @@ html.dark {
 </span><span id="1-168"><span class="sd">    Returns:</span>
 </span><span id="1-169"><span class="sd">        The encoded contents of the PEM file.</span>
 </span><span id="1-170"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-171">    <span class="k">with</span> <span class="n">Path</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
-</span><span id="1-172">        <span class="n">pem_contents</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span><span id="1-171">    <span class="k">with</span> <span class="n">file</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file_handle</span><span class="p">:</span>
+</span><span id="1-172">        <span class="n">pem_contents</span> <span class="o">=</span> <span class="n">file_handle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </span><span id="1-173">
 </span><span id="1-174">    <span class="n">encoded_contents</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">pem_contents</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
 </span><span id="1-175">    <span class="k">return</span> <span class="n">encoded_contents</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
