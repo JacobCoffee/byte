@@ -168,8 +168,6 @@ def encode_to_base64(file: Path) -> str:
     Returns:
         The encoded contents of the PEM file.
     """
-    with file.open("r") as file_handle:
-        pem_contents = file_handle.read()
-
-    encoded_contents = base64.b64encode(pem_contents.encode("utf-8"))
+    pem_contents = file.read_bytes()
+    encoded_contents = base64.b64encode(pem_contents)
     return encoded_contents.decode("utf-8")
