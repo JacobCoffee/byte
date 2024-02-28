@@ -4,7 +4,6 @@ import discord
 from discord import Embed, Interaction, Member, Thread
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog, Context, command, hybrid_command
-from discord.types.channel import ForumChannel
 
 from byte.lib.common import litestar_logo_yellow, mcve
 from byte.lib.utils import linker

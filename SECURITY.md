@@ -12,7 +12,8 @@ We will ensure that your finding gets escalated to the appropriate maintainer(s)
 
 **Please do not report security vulnerabilities through public GitHub issues, discussions, or pull requests.**
 
-If you believe you have found a security vulnerability in any of my repositories, please report it to us through coordinated disclosure:
+If you believe you have found a security vulnerability in any of my repositories, please report it to us through
+coordinated disclosure:
 
 - In the affected repository, browse to the **Security** tab, select **Advisories**, select "Report a vulnerability"
   - ![image](https://user-images.githubusercontent.com/45884264/217041010-8fd6b96b-329d-4d8e-8838-9b5bf4e1a78d.png)

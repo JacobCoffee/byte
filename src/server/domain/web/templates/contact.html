@@ -1,27 +1,20 @@
-{% extends 'base/base.html' %} {% block extrahead %}{% endblock extrahead %} {%
-block extrastyle %}{% endblock extrastyle %} {% block title %}Home{% endblock %}
+<!-- prettier-ignore -->
+{% extends 'base/base.html' %}
+{% block extrahead %}{% endblock extrahead %}
+{% block extrastyle %} {% endblock extrastyle %}
+{% block title %}Home{% endblock %}
 {% block body %}
+
 <form>
   <div class="flex flex-col items-center">
     <div class="border-b border-white/10 pb-12 w-full max-w-md">
-      <h2
-        class="text-base font-semibold leading-7 text-base-content dark:text-base-100/80"
-      >
-        Contact
-      </h2>
-      <p class="mt-1 text-sm leading-6 text-gray-400">
-        What would you like to say?
-      </p>
+      <h2 class="text-base font-semibold leading-7 text-base-content dark:text-base-100/80">Contact</h2>
+      <p class="mt-1 text-sm leading-6 text-gray-400">What would you like to say?</p>
 
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-4">
-          <label
-            for="email"
-            class="label"
-          >
-            <span class="label-text text-base-content dark:text-base-100/80"
-              >What is your email?</span
-            >
+          <label for="email" class="label">
+            <span class="label-text text-base-content dark:text-base-100/80">What is your email?</span>
           </label>
           <div class="mt-2">
             <input
@@ -30,20 +23,14 @@ block extrastyle %}{% endblock extrastyle %} {% block title %}Home{% endblock %}
               type="email"
               autocomplete="email"
               placeholder="byte@litestar.app"
-              class="input input-bordered input-primary w-full max-w-xs focus:ring-byte-teal dark:bg-byte-dark dark:text-white"
-            />
+              class="input input-bordered input-primary w-full max-w-xs focus:ring-byte-teal dark:bg-byte-dark dark:text-white" />
           </div>
         </div>
       </div>
       <br />
       <div class="col-span-full">
-        <label
-          for="about"
-          class="label"
-        >
-          <span class="label-text text-base-content dark:text-base-100/80"
-            >Message</span
-          >
+        <label for="about" class="label">
+          <span class="label-text text-base-content dark:text-base-100/80">Message</span>
         </label>
         <div class="mt-2">
           <textarea
@@ -51,8 +38,7 @@ block extrastyle %}{% endblock extrastyle %} {% block title %}Home{% endblock %}
             name="about"
             rows="3"
             class="textarea textarea-primary textarea-bordered h-24 w-full max-w-xs focus:ring-byte-teal dark:bg-byte-dark dark:text-white"
-            placeholder="This service needs more cowbell!"
-          ></textarea>
+            placeholder="This service needs more cowbell!"></textarea>
         </div>
         <p class="mt-3 text-sm leading-6 text-gray-400"></p>
       </div>
@@ -62,14 +48,12 @@ block extrastyle %}{% endblock extrastyle %} {% block title %}Home{% endblock %}
   <div class="mt-6 flex items-center justify-end gap-x-6">
     <button
       type="button"
-      class="rounded-md px-3 py-2 text-sm font-semibold leading-6 text-base-content dark:text-base-100/80 hover:bg-error"
-    >
+      class="rounded-md px-3 py-2 text-sm font-semibold leading-6 text-base-content dark:text-base-100/80 hover:bg-error">
       Cancel
     </button>
     <button
       type="submit"
-      class="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white dark:text-base-100/80 shadow-sm hover:bg-success focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
-    >
+      class="rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white dark:text-base-100/80 shadow-sm hover:bg-success focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
       Save
     </button>
   </div>
