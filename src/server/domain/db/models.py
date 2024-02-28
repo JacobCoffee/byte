@@ -23,7 +23,7 @@ class Guild(UUIDAuditBase):
     Here, a guild should be able to configure their own GitHub organization, StackOverflow tags, etc.
     """
 
-    __tablename__ = "guild"
+    __tablename__ = "guild"  # type: ignore[reportAssignmentType]
     __table_args__ = {"comment": "Configuration for a Discord guild."}
 
     guild_id: Mapped[int] = mapped_column(BigInteger, unique=True, index=True)
@@ -63,8 +63,9 @@ class GitHubConfig(UUIDAuditBase):
     discussions with forum posts.
     """
 
-    __tablename__ = "github_config"
+    __tablename__ = "github_config"  # type: ignore[reportAssignmentType]
     __table_args__ = {"comment": "GitHub configuration for a guild."}
+
     guild_id: Mapped[UUID] = mapped_column(ForeignKey("guild.id", ondelete="cascade"))
     discussion_sync: Mapped[bool] = mapped_column(default=False)
     github_organization: Mapped[str | None]
@@ -84,7 +85,7 @@ class GitHubConfig(UUIDAuditBase):
 class SOTagsConfig(UUIDAuditBase):
     """SQLAlchemy association model for a guild's Stack Overflow tags config."""
 
-    __tablename__ = "so_tags"
+    __tablename__ = "so_tags"  # type: ignore[reportAssignmentType]
     __table_args__ = (
         UniqueConstraint("guild_id", "tag_name"),
         {"comment": "Configuration for a Discord guild's Stack Overflow tags."},
@@ -115,7 +116,7 @@ class AllowedUsersConfig(UUIDAuditBase):
     actions on Byte specifically without giving them full administrative access to the Discord guild.
     """
 
-    __tablename__ = "allowed_users"
+    __tablename__ = "allowed_users"  # type: ignore[reportAssignmentType]
     __table_args__ = (
         UniqueConstraint("guild_id", "user_id"),
         {"comment": "Configuration for allowed users in a Discord guild."},
@@ -155,7 +156,7 @@ class User(UUIDAuditBase):
     In the future we may want to expand this to allow for more granular permissions.
     """
 
-    __tablename__ = "user"
+    __tablename__ = "user"  # type: ignore[reportAssignmentType]
     __table_args__ = {"comment": "A user."}
 
     name: Mapped[str] = mapped_column(String(100))

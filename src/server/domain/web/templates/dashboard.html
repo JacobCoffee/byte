@@ -1,5 +1,6 @@
-{% extends 'base/base.html' %} {% block extrahead %}{% endblock extrahead %} {% block nav %} {% set navbar_color =
-'bg-primary dark:text-base-content' %} {% include 'base/nav.html' %} {% endblock nav %} {% block title %}Dashboard{%
+{% extends 'base/base.html' %} {% block extrahead %}{% endblock extrahead %} {%
+block nav %} {% set navbar_color = 'bg-primary dark:text-base-content' %} {%
+include 'base/nav.html' %} {% endblock nav %} {% block title %}Dashboard{%
 endblock %} {% block headercontent %}
 <div class="min-h-full bg-primary pb-32">
   <header>
@@ -77,7 +78,9 @@ endblock %} {% block headercontent %}
             stroke-linejoin="round"
             stroke-width="2"
           >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            <path
+              d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            ></path>
           </svg>
         </div>
         <div class="stat-title text-base-content">Messages Sent</div>
@@ -101,8 +104,12 @@ endblock %} {% block headercontent %}
         <div class="stat-desc text-warning">2 issues in the last 24 hours</div>
       </div>
     </div>
-    <div class="mt-10 p-4 rounded-lg shadow-2xl bg-base-100/60 dark:bg-neutral/60">
-      <h1 class="text-5xl font-bold text-base-content dark:text-base-100/80">Activity</h1>
+    <div
+      class="mt-10 p-4 rounded-lg shadow-2xl bg-base-100/60 dark:bg-neutral/60"
+    >
+      <h1 class="text-5xl font-bold text-base-content dark:text-base-100/80">
+        Activity
+      </h1>
       <div class="h-[calc(50vh-10em)] overflow-y-auto">
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -113,10 +120,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             Service started 26 hours ago!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 29th at 15:30 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 29th at 15:30
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -127,10 +139,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             Connected to 1 servers
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 29th at 15:31 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 29th at 15:31
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -141,10 +158,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -156,10 +178,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -170,10 +197,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -185,10 +217,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -199,10 +236,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             Connected to 1 servers
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 29th at 15:31 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 29th at 15:31
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -213,10 +255,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -228,10 +275,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -242,10 +294,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -257,10 +314,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -271,10 +333,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             Connected to 1 servers
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 29th at 15:31 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 29th at 15:31
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -285,10 +352,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -300,10 +372,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -314,10 +391,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -329,10 +411,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -343,10 +430,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             Connected to 1 servers
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 29th at 15:31 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 29th at 15:31
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -357,10 +449,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -372,10 +469,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -386,10 +488,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -401,10 +508,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -415,10 +527,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             Connected to 1 servers
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 29th at 15:31 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 29th at 15:31
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -429,10 +546,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -444,10 +566,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -458,10 +585,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -473,10 +605,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -487,10 +624,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             Connected to 1 servers
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 29th at 15:31 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 29th at 15:31
+          </time>
         </div>
         <div class="chat chat-start">
           <div class="chat-image avatar">
@@ -501,39 +643,15 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
-        </div>
-
-        <div class="chat chat-start">
-          <div class="chat-image avatar">
-            <div class="w-10 rounded-full">
-              <img
-                src="static/logo.svg"
-                alt="Byte Logo"
-              />
-            </div>
-          </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
-            User invited Byte to <b>Furry Dev Convention</b>!
-          </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
-        </div>
-        <div class="chat chat-start">
-          <div class="chat-image avatar">
-            <div class="w-10 rounded-full">
-              <img
-                src="static/logo.svg"
-                alt="Byte Logo"
-              />
-            </div>
-          </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
-            User invited Byte to <b>Furry Dev Convention</b>!
-          </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
 
         <div class="chat chat-start">
@@ -545,10 +663,54 @@ endblock %} {% block headercontent %}
               />
             </div>
           </div>
-          <div class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral">
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
             User invited Byte to <b>Furry Dev Convention</b>!
           </div>
-          <time class="text-xs opacity-50 text-base-content dark:text-base-100/80">July 30th at 04:20 </time>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
+        </div>
+        <div class="chat chat-start">
+          <div class="chat-image avatar">
+            <div class="w-10 rounded-full">
+              <img
+                src="static/logo.svg"
+                alt="Byte Logo"
+              />
+            </div>
+          </div>
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
+            User invited Byte to <b>Furry Dev Convention</b>!
+          </div>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
+        </div>
+
+        <div class="chat chat-start">
+          <div class="chat-image avatar">
+            <div class="w-10 rounded-full">
+              <img
+                src="static/logo.svg"
+                alt="Byte Logo"
+              />
+            </div>
+          </div>
+          <div
+            class="chat-bubble text-base-content dark:text-base-100/80 bg-byte-white dark:bg-neutral"
+          >
+            User invited Byte to <b>Furry Dev Convention</b>!
+          </div>
+          <time
+            class="text-xs opacity-50 text-base-content dark:text-base-100/80"
+            >July 30th at 04:20
+          </time>
         </div>
       </div>
     </div>

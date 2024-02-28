@@ -1,10 +1,17 @@
-{% extends 'base/base.html' %} {% block extrahead %}{% endblock extrahead %} {% block extrastyle %}{% endblock
-extrastyle %} {% block title %}Home{% endblock %} {% block body %}
+{% extends 'base/base.html' %} {% block extrahead %}{% endblock extrahead %} {%
+block extrastyle %}{% endblock extrastyle %} {% block title %}Home{% endblock %}
+{% block body %}
 <form>
   <div class="flex flex-col items-center">
     <div class="border-b border-white/10 pb-12 w-full max-w-md">
-      <h2 class="text-base font-semibold leading-7 text-base-content dark:text-base-100/80">Contact</h2>
-      <p class="mt-1 text-sm leading-6 text-gray-400">What would you like to say?</p>
+      <h2
+        class="text-base font-semibold leading-7 text-base-content dark:text-base-100/80"
+      >
+        Contact
+      </h2>
+      <p class="mt-1 text-sm leading-6 text-gray-400">
+        What would you like to say?
+      </p>
 
       <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
         <div class="sm:col-span-4">
@@ -12,7 +19,9 @@ extrastyle %} {% block title %}Home{% endblock %} {% block body %}
             for="email"
             class="label"
           >
-            <span class="label-text text-base-content dark:text-base-100/80">What is your email?</span>
+            <span class="label-text text-base-content dark:text-base-100/80"
+              >What is your email?</span
+            >
           </label>
           <div class="mt-2">
             <input
@@ -32,7 +41,9 @@ extrastyle %} {% block title %}Home{% endblock %} {% block body %}
           for="about"
           class="label"
         >
-          <span class="label-text text-base-content dark:text-base-100/80">Message</span>
+          <span class="label-text text-base-content dark:text-base-100/80"
+            >Message</span
+          >
         </label>
         <div class="mt-2">
           <textarea

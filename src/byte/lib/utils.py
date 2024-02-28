@@ -22,7 +22,6 @@ if TYPE_CHECKING:
     from discord.ext.commands import Context
     from discord.ext.commands._types import Check
 
-
 _T = TypeVar("_T")
 
 
@@ -296,7 +295,7 @@ async def paste(code: str) -> str:
 
 
 def chunk_sequence(sequence: Iterable[_T], size: int) -> Iterable[tuple[_T, ...]]:
-    """Naïve chunking of an iterable
+    """Naïve chunking of an iterable.
 
     Args:
         sequence (Iterable[_T]): Iterable to chunk

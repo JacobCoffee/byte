@@ -22,6 +22,18 @@ logger = get_logger()
 load_dotenv()
 
 
+async def on_member_join(member: Member) -> None:
+    """Handle member join event.
+
+    Args:
+        member: Member object.
+    """
+    await member.send(
+        f"Welcome to {member.guild.name}! Please make sure to read the rules if you haven't already. "
+        f"Feel free to ask any questions you have in the help channel."
+    )
+
+
 class Byte(Bot):
     """Byte Bot Base Class."""
 
@@ -92,7 +104,8 @@ class Byte(Bot):
         embed.set_footer(text=f"Time: {ctx.message.created_at.strftime('%Y-%m-%d %H:%M:%S')}")
         await ctx.send(embed=embed, ephemeral=True)
 
-    async def on_member_join(self, member: Member) -> None:
+    @staticmethod
+    async def on_member_join(member: Member) -> None:
         """Handle member join event.
 
         Args:

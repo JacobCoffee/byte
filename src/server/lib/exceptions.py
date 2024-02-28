@@ -8,7 +8,6 @@ from __future__ import annotations
 import sys
 from typing import TYPE_CHECKING
 
-from litestar.contrib.repository.exceptions import ConflictError, NotFoundError, RepositoryError
 from litestar.exceptions import (
     HTTPException,
     InternalServerException,
@@ -17,6 +16,7 @@ from litestar.exceptions import (
 )
 from litestar.middleware.exceptions._debug_response import create_debug_response
 from litestar.middleware.exceptions.middleware import create_exception_response
+from litestar.repository.exceptions import ConflictError, NotFoundError, RepositoryError
 from litestar.status_codes import HTTP_409_CONFLICT, HTTP_500_INTERNAL_SERVER_ERROR
 from structlog.contextvars import bind_contextvars
 
@@ -105,15 +105,15 @@ def exception_to_http_response(
     Returns:
         Exception response appropriate to the type of original exception.
     """
-    http_exc: type[HTTPException]
     if isinstance(exc, NotFoundError):
-        http_exc = NotFoundException
+        http_exc = NotFoundException(detail=str(exc))
     elif isinstance(exc, ConflictError | RepositoryError):
-        http_exc = _HTTPConflictException
+        http_exc = _HTTPConflictException(detail=str(exc))
     elif isinstance(exc, AuthorizationError):
-        http_exc = PermissionDeniedException
+        http_exc = PermissionDeniedException(detail=str(exc))
     else:
-        http_exc = InternalServerException
+        http_exc = InternalServerException(detail=str(exc))
+
     if request.app.debug:
         return create_debug_response(request, exc)
-    return create_exception_response(http_exc(detail=str(exc.__cause__)))
+    return create_exception_response(request, http_exc)

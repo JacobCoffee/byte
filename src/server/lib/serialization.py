@@ -135,13 +135,13 @@ def convert_camel_to_snake_case(string: str) -> str:
 class UUIDEncoder(JSONEncoder):
     """JSON Encoder for UUIDs."""
 
-    def default(self, obj: Any) -> Any:
+    def default(self, o: Any) -> Any:
         """Handle UUIDs.
 
         Args:
-            obj: The object to encode
+            o: The object to encode
 
         Returns:
             str: The encoded object
         """
-        return str(obj) if isinstance(obj, UUID) else super().default(obj)
+        return str(o) if isinstance(o, UUID) else super().default(o)
