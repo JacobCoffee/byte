@@ -72,18 +72,9 @@ class RuffView(View):
         """
         await interaction.response.edit_message(embed=self.minified_embed, view=self)
 
-    async def expand_button_callback(self, interaction: Interaction) -> None:
-        """Expand the message to show full information.
-
-        Args:
-            interaction: Interaction object.
-            button: Button object.
-        """
-        await interaction.message.edit(embed=self.original_embed, view=self)
-
     # Define buttons using decorators
     @button(label="Delete", style=ButtonStyle.red, custom_id="delete_button")
-    async def delete_button(self, interaction: Interaction, button: Button[Self]) -> None:
+    async def delete_button(self, interaction: Interaction, _: Button[Self]) -> None:
         """Button to delete the message this view is attached to.
 
         Args:
@@ -92,22 +83,12 @@ class RuffView(View):
         """
         await self.delete_button_callback(interaction)
 
-    @button(label="Collapse", style=ButtonStyle.grey, custom_id="collapse_button")
-    async def collapse_button(self, interaction: Interaction, button: Button[Self]) -> None:
-        """Button to minify the embed to show less information but not none.
+    @button(label="Learn More", style=ButtonStyle.green, custom_id="learn_more_button")
+    async def learn_more_button(self, interaction: Interaction, _: Button[Self]) -> None:
+        """Button to privately message the requesting user the full embed.
 
         Args:
             interaction: Interaction object.
-            button: Button object.
+            _: Button object.
         """
-        await self.collapse_button_callback(interaction)
-
-    @button(label="Expand", style=ButtonStyle.green, custom_id="expand_button", disabled=True)
-    async def expand_button(self, interaction: Interaction, button: Button[Self]) -> None:
-        """Button to expand the embed to show full information.
-
-        Args:
-            interaction: Interaction object.
-            button: Button object.
-        """
-        await self.expand_button_callback(interaction, button)
+        await interaction.response.send_message(embed=self.original_embed, ephemeral=True)
