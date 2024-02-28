@@ -76,7 +76,7 @@ class Astral(Cog):
         embed.set_thumbnail(url=ruff_logo)
 
         view = RuffView(author=interaction.user.id, bot=self.bot, original_embed=embed, minified_embed=minified_embed)
-        await interaction.followup.send(embed=embed, view=view)
+        await interaction.followup.send(embed=minified_embed, view=view)
 
     @app_command(name="format")
     async def format_code(self, interaction: Interaction, code_block: str) -> None:  # noqa: ARG002
