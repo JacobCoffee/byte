@@ -304,317 +304,321 @@ html.dark {
 </span><span id="1-41">
 </span><span id="1-42"><span class="k">class</span> <span class="nc">FormattedRuffRule</span><span class="p">(</span><span class="n">BaseRuffRule</span><span class="p">):</span>
 </span><span id="1-43">    <span class="n">rule_link</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="1-44">
+</span><span id="1-44">    <span class="n">rule_anchor_link</span><span class="p">:</span> <span class="nb">str</span>
 </span><span id="1-45">
-</span><span id="1-46"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="1-47">    <span class="s2">&quot;is_byte_dev&quot;</span><span class="p">,</span>
-</span><span id="1-48">    <span class="s2">&quot;linker&quot;</span><span class="p">,</span>
-</span><span id="1-49">    <span class="s2">&quot;mention_user&quot;</span><span class="p">,</span>
-</span><span id="1-50">    <span class="s2">&quot;mention_user_nickname&quot;</span><span class="p">,</span>
-</span><span id="1-51">    <span class="s2">&quot;mention_channel&quot;</span><span class="p">,</span>
-</span><span id="1-52">    <span class="s2">&quot;mention_role&quot;</span><span class="p">,</span>
-</span><span id="1-53">    <span class="s2">&quot;mention_slash_command&quot;</span><span class="p">,</span>
-</span><span id="1-54">    <span class="s2">&quot;mention_custom_emoji&quot;</span><span class="p">,</span>
-</span><span id="1-55">    <span class="s2">&quot;mention_custom_emoji_animated&quot;</span><span class="p">,</span>
-</span><span id="1-56">    <span class="s2">&quot;mention_timestamp&quot;</span><span class="p">,</span>
-</span><span id="1-57">    <span class="s2">&quot;mention_guild_navigation&quot;</span><span class="p">,</span>
-</span><span id="1-58">    <span class="s2">&quot;format_ruff_rule&quot;</span><span class="p">,</span>
-</span><span id="1-59">    <span class="s2">&quot;query_all_ruff_rules&quot;</span><span class="p">,</span>
-</span><span id="1-60">    <span class="s2">&quot;run_ruff_format&quot;</span><span class="p">,</span>
-</span><span id="1-61">    <span class="s2">&quot;paste&quot;</span><span class="p">,</span>
-</span><span id="1-62"><span class="p">)</span>
-</span><span id="1-63">
+</span><span id="1-46">
+</span><span id="1-47"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="1-48">    <span class="s2">&quot;is_byte_dev&quot;</span><span class="p">,</span>
+</span><span id="1-49">    <span class="s2">&quot;linker&quot;</span><span class="p">,</span>
+</span><span id="1-50">    <span class="s2">&quot;mention_user&quot;</span><span class="p">,</span>
+</span><span id="1-51">    <span class="s2">&quot;mention_user_nickname&quot;</span><span class="p">,</span>
+</span><span id="1-52">    <span class="s2">&quot;mention_channel&quot;</span><span class="p">,</span>
+</span><span id="1-53">    <span class="s2">&quot;mention_role&quot;</span><span class="p">,</span>
+</span><span id="1-54">    <span class="s2">&quot;mention_slash_command&quot;</span><span class="p">,</span>
+</span><span id="1-55">    <span class="s2">&quot;mention_custom_emoji&quot;</span><span class="p">,</span>
+</span><span id="1-56">    <span class="s2">&quot;mention_custom_emoji_animated&quot;</span><span class="p">,</span>
+</span><span id="1-57">    <span class="s2">&quot;mention_timestamp&quot;</span><span class="p">,</span>
+</span><span id="1-58">    <span class="s2">&quot;mention_guild_navigation&quot;</span><span class="p">,</span>
+</span><span id="1-59">    <span class="s2">&quot;format_ruff_rule&quot;</span><span class="p">,</span>
+</span><span id="1-60">    <span class="s2">&quot;query_all_ruff_rules&quot;</span><span class="p">,</span>
+</span><span id="1-61">    <span class="s2">&quot;run_ruff_format&quot;</span><span class="p">,</span>
+</span><span id="1-62">    <span class="s2">&quot;paste&quot;</span><span class="p">,</span>
+</span><span id="1-63"><span class="p">)</span>
 </span><span id="1-64">
+</span><span id="1-65">
 <div class="viewcode-block" id="is_byte_dev">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.is_byte_dev">[docs]</a>
-</span><span id="1-65"><span class="k">def</span> <span class="nf">is_byte_dev</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Check</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
-</span><span id="1-66"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the user is a Byte developer.</span>
-</span><span id="1-67">
-</span><span id="1-68"><span class="sd">    Returns:</span>
-</span><span id="1-69"><span class="sd">        A check function.</span>
-</span><span id="1-70"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-71">
-</span><span id="1-72">    <span class="k">async</span> <span class="k">def</span> <span class="nf">predicate</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-</span><span id="1-73"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the user is a Byte Dev or Owner.</span>
-</span><span id="1-74">
-</span><span id="1-75"><span class="sd">        Args:</span>
-</span><span id="1-76"><span class="sd">            ctx: Context object.</span>
-</span><span id="1-77">
-</span><span id="1-78"><span class="sd">        Returns:</span>
-</span><span id="1-79"><span class="sd">            True if the user is a Byte Dev or Owner, False otherwise.</span>
-</span><span id="1-80"><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="1-81">        <span class="k">if</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">is_owner</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">DEV_USER_ID</span><span class="p">:</span>
-</span><span id="1-82">            <span class="k">return</span> <span class="kc">True</span>
-</span><span id="1-83">
-</span><span id="1-84">        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;byte-dev&quot;</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">roles</span><span class="p">)</span>  <span class="c1"># type: ignore[reportAttributeAccessIssue]</span>
-</span><span id="1-85">
-</span><span id="1-86">    <span class="k">return</span> <span class="n">commands</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span></div>
+</span><span id="1-66"><span class="k">def</span> <span class="nf">is_byte_dev</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Check</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+</span><span id="1-67"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the user is a Byte developer.</span>
+</span><span id="1-68">
+</span><span id="1-69"><span class="sd">    Returns:</span>
+</span><span id="1-70"><span class="sd">        A check function.</span>
+</span><span id="1-71"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-72">
+</span><span id="1-73">    <span class="k">async</span> <span class="k">def</span> <span class="nf">predicate</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="1-74"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if the user is a Byte Dev or Owner.</span>
+</span><span id="1-75">
+</span><span id="1-76"><span class="sd">        Args:</span>
+</span><span id="1-77"><span class="sd">            ctx: Context object.</span>
+</span><span id="1-78">
+</span><span id="1-79"><span class="sd">        Returns:</span>
+</span><span id="1-80"><span class="sd">            True if the user is a Byte Dev or Owner, False otherwise.</span>
+</span><span id="1-81"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-82">        <span class="k">if</span> <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">bot</span><span class="o">.</span><span class="n">is_owner</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="p">)</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">settings</span><span class="o">.</span><span class="n">discord</span><span class="o">.</span><span class="n">DEV_USER_ID</span><span class="p">:</span>
+</span><span id="1-83">            <span class="k">return</span> <span class="kc">True</span>
+</span><span id="1-84">
+</span><span id="1-85">        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">role</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;byte-dev&quot;</span> <span class="k">for</span> <span class="n">role</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">roles</span><span class="p">)</span>  <span class="c1"># type: ignore[reportAttributeAccessIssue]</span>
+</span><span id="1-86">
+</span><span id="1-87">    <span class="k">return</span> <span class="n">commands</span><span class="o">.</span><span class="n">check</span><span class="p">(</span><span class="n">predicate</span><span class="p">)</span></div>
 
-</span><span id="1-87">
 </span><span id="1-88">
+</span><span id="1-89">
 <div class="viewcode-block" id="linker">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.linker">[docs]</a>
-</span><span id="1-89"><span class="k">def</span> <span class="nf">linker</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show_embed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-90"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Markdown link, optionally with an embed.</span>
-</span><span id="1-91">
-</span><span id="1-92"><span class="sd">    Args:</span>
-</span><span id="1-93"><span class="sd">        title: The title of the link.</span>
-</span><span id="1-94"><span class="sd">        link: The URL of the link.</span>
-</span><span id="1-95"><span class="sd">        show_embed: Whether to show the embed or not.</span>
-</span><span id="1-96">
-</span><span id="1-97"><span class="sd">    Returns:</span>
-</span><span id="1-98"><span class="sd">        A Markdown link.</span>
-</span><span id="1-99"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-100">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">show_embed</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](&lt;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&gt;)&quot;</span></div>
+</span><span id="1-90"><span class="k">def</span> <span class="nf">linker</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show_embed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-91"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Markdown link, optionally with an embed.</span>
+</span><span id="1-92">
+</span><span id="1-93"><span class="sd">    Args:</span>
+</span><span id="1-94"><span class="sd">        title: The title of the link.</span>
+</span><span id="1-95"><span class="sd">        link: The URL of the link.</span>
+</span><span id="1-96"><span class="sd">        show_embed: Whether to show the embed or not.</span>
+</span><span id="1-97">
+</span><span id="1-98"><span class="sd">    Returns:</span>
+</span><span id="1-99"><span class="sd">        A Markdown link.</span>
+</span><span id="1-100"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-101">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">show_embed</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](&lt;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&gt;)&quot;</span></div>
 
-</span><span id="1-101">
 </span><span id="1-102">
+</span><span id="1-103">
 <div class="viewcode-block" id="mention_user">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_user">[docs]</a>
-</span><span id="1-103"><span class="k">def</span> <span class="nf">mention_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-104"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a user by ID.</span>
-</span><span id="1-105">
-</span><span id="1-106"><span class="sd">    Args:</span>
-</span><span id="1-107"><span class="sd">        user_id: The unique identifier for the user.</span>
-</span><span id="1-108">
-</span><span id="1-109"><span class="sd">    Returns:</span>
-</span><span id="1-110"><span class="sd">        A formatted string that mentions the user.</span>
-</span><span id="1-111"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-112">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-104"><span class="k">def</span> <span class="nf">mention_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-105"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a user by ID.</span>
+</span><span id="1-106">
+</span><span id="1-107"><span class="sd">    Args:</span>
+</span><span id="1-108"><span class="sd">        user_id: The unique identifier for the user.</span>
+</span><span id="1-109">
+</span><span id="1-110"><span class="sd">    Returns:</span>
+</span><span id="1-111"><span class="sd">        A formatted string that mentions the user.</span>
+</span><span id="1-112"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-113">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-113">
 </span><span id="1-114">
+</span><span id="1-115">
 <div class="viewcode-block" id="mention_user_nickname">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_user_nickname">[docs]</a>
-</span><span id="1-115"><span class="k">def</span> <span class="nf">mention_user_nickname</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-116"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a user by ID with a nickname.</span>
-</span><span id="1-117">
-</span><span id="1-118"><span class="sd">    Args:</span>
-</span><span id="1-119"><span class="sd">        user_id: The unique identifier for the user.</span>
-</span><span id="1-120">
-</span><span id="1-121"><span class="sd">    Returns:</span>
-</span><span id="1-122"><span class="sd">        A formatted string that mentions the user with a nickname.</span>
-</span><span id="1-123"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-124">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@!</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-116"><span class="k">def</span> <span class="nf">mention_user_nickname</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-117"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a user by ID with a nickname.</span>
+</span><span id="1-118">
+</span><span id="1-119"><span class="sd">    Args:</span>
+</span><span id="1-120"><span class="sd">        user_id: The unique identifier for the user.</span>
+</span><span id="1-121">
+</span><span id="1-122"><span class="sd">    Returns:</span>
+</span><span id="1-123"><span class="sd">        A formatted string that mentions the user with a nickname.</span>
+</span><span id="1-124"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-125">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@!</span><span class="si">{</span><span class="n">user_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-125">
 </span><span id="1-126">
+</span><span id="1-127">
 <div class="viewcode-block" id="mention_channel">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_channel">[docs]</a>
-</span><span id="1-127"><span class="k">def</span> <span class="nf">mention_channel</span><span class="p">(</span><span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-128"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a channel by ID.</span>
-</span><span id="1-129">
-</span><span id="1-130"><span class="sd">    Args:</span>
-</span><span id="1-131"><span class="sd">        channel_id: The unique identifier for the channel.</span>
-</span><span id="1-132">
-</span><span id="1-133"><span class="sd">    Returns:</span>
-</span><span id="1-134"><span class="sd">        A formatted string that mentions the channel.</span>
-</span><span id="1-135"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-136">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;#</span><span class="si">{</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-128"><span class="k">def</span> <span class="nf">mention_channel</span><span class="p">(</span><span class="n">channel_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-129"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a channel by ID.</span>
+</span><span id="1-130">
+</span><span id="1-131"><span class="sd">    Args:</span>
+</span><span id="1-132"><span class="sd">        channel_id: The unique identifier for the channel.</span>
+</span><span id="1-133">
+</span><span id="1-134"><span class="sd">    Returns:</span>
+</span><span id="1-135"><span class="sd">        A formatted string that mentions the channel.</span>
+</span><span id="1-136"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-137">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;#</span><span class="si">{</span><span class="n">channel_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-137">
 </span><span id="1-138">
+</span><span id="1-139">
 <div class="viewcode-block" id="mention_role">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_role">[docs]</a>
-</span><span id="1-139"><span class="k">def</span> <span class="nf">mention_role</span><span class="p">(</span><span class="n">role_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-140"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a role by ID.</span>
-</span><span id="1-141">
-</span><span id="1-142"><span class="sd">    Args:</span>
-</span><span id="1-143"><span class="sd">        role_id: The unique identifier for the role.</span>
-</span><span id="1-144">
-</span><span id="1-145"><span class="sd">    Returns:</span>
-</span><span id="1-146"><span class="sd">        A formatted string that mentions the role.</span>
-</span><span id="1-147"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-148">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@&amp;</span><span class="si">{</span><span class="n">role_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-140"><span class="k">def</span> <span class="nf">mention_role</span><span class="p">(</span><span class="n">role_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-141"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a role by ID.</span>
+</span><span id="1-142">
+</span><span id="1-143"><span class="sd">    Args:</span>
+</span><span id="1-144"><span class="sd">        role_id: The unique identifier for the role.</span>
+</span><span id="1-145">
+</span><span id="1-146"><span class="sd">    Returns:</span>
+</span><span id="1-147"><span class="sd">        A formatted string that mentions the role.</span>
+</span><span id="1-148"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-149">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;@&amp;</span><span class="si">{</span><span class="n">role_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-149">
 </span><span id="1-150">
+</span><span id="1-151">
 <div class="viewcode-block" id="mention_slash_command">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_slash_command">[docs]</a>
-</span><span id="1-151"><span class="k">def</span> <span class="nf">mention_slash_command</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">command_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-152"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a slash command by name and ID.</span>
-</span><span id="1-153">
-</span><span id="1-154"><span class="sd">    Args:</span>
-</span><span id="1-155"><span class="sd">        name: The name of the slash command.</span>
-</span><span id="1-156"><span class="sd">        command_id: The unique identifier for the slash command.</span>
-</span><span id="1-157">
-</span><span id="1-158"><span class="sd">    Returns:</span>
-</span><span id="1-159"><span class="sd">        A formatted string that mentions the slash command.</span>
-</span><span id="1-160"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-161">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">command_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-152"><span class="k">def</span> <span class="nf">mention_slash_command</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">command_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-153"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a slash command by name and ID.</span>
+</span><span id="1-154">
+</span><span id="1-155"><span class="sd">    Args:</span>
+</span><span id="1-156"><span class="sd">        name: The name of the slash command.</span>
+</span><span id="1-157"><span class="sd">        command_id: The unique identifier for the slash command.</span>
+</span><span id="1-158">
+</span><span id="1-159"><span class="sd">    Returns:</span>
+</span><span id="1-160"><span class="sd">        A formatted string that mentions the slash command.</span>
+</span><span id="1-161"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-162">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">command_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-162">
 </span><span id="1-163">
+</span><span id="1-164">
 <div class="viewcode-block" id="mention_custom_emoji">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_custom_emoji">[docs]</a>
-</span><span id="1-164"><span class="k">def</span> <span class="nf">mention_custom_emoji</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">emoji_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-165"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a custom emoji by name and ID.</span>
-</span><span id="1-166">
-</span><span id="1-167"><span class="sd">    Args:</span>
-</span><span id="1-168"><span class="sd">        name: The name of the emoji.</span>
-</span><span id="1-169"><span class="sd">        emoji_id: The unique identifier for the emoji.</span>
-</span><span id="1-170">
-</span><span id="1-171"><span class="sd">    Returns:</span>
-</span><span id="1-172"><span class="sd">        A formatted string that mentions the custom emoji.</span>
-</span><span id="1-173"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-174">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;:</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">emoji_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-165"><span class="k">def</span> <span class="nf">mention_custom_emoji</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">emoji_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-166"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a custom emoji by name and ID.</span>
+</span><span id="1-167">
+</span><span id="1-168"><span class="sd">    Args:</span>
+</span><span id="1-169"><span class="sd">        name: The name of the emoji.</span>
+</span><span id="1-170"><span class="sd">        emoji_id: The unique identifier for the emoji.</span>
+</span><span id="1-171">
+</span><span id="1-172"><span class="sd">    Returns:</span>
+</span><span id="1-173"><span class="sd">        A formatted string that mentions the custom emoji.</span>
+</span><span id="1-174"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-175">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;:</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">emoji_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-175">
 </span><span id="1-176">
+</span><span id="1-177">
 <div class="viewcode-block" id="mention_custom_emoji_animated">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_custom_emoji_animated">[docs]</a>
-</span><span id="1-177"><span class="k">def</span> <span class="nf">mention_custom_emoji_animated</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">emoji_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-178"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention an animated custom emoji by name and ID.</span>
-</span><span id="1-179">
-</span><span id="1-180"><span class="sd">    Args:</span>
-</span><span id="1-181"><span class="sd">        name: The name of the animated emoji.</span>
-</span><span id="1-182"><span class="sd">        emoji_id: The unique identifier for the animated emoji.</span>
-</span><span id="1-183">
-</span><span id="1-184"><span class="sd">    Returns:</span>
-</span><span id="1-185"><span class="sd">        A formatted string that mentions the animated custom emoji.</span>
-</span><span id="1-186"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-187">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;a:</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">emoji_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-178"><span class="k">def</span> <span class="nf">mention_custom_emoji_animated</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">emoji_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-179"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention an animated custom emoji by name and ID.</span>
+</span><span id="1-180">
+</span><span id="1-181"><span class="sd">    Args:</span>
+</span><span id="1-182"><span class="sd">        name: The name of the animated emoji.</span>
+</span><span id="1-183"><span class="sd">        emoji_id: The unique identifier for the animated emoji.</span>
+</span><span id="1-184">
+</span><span id="1-185"><span class="sd">    Returns:</span>
+</span><span id="1-186"><span class="sd">        A formatted string that mentions the animated custom emoji.</span>
+</span><span id="1-187"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-188">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;a:</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">emoji_id</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-188">
 </span><span id="1-189">
+</span><span id="1-190">
 <div class="viewcode-block" id="mention_timestamp">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_timestamp">[docs]</a>
-</span><span id="1-190"><span class="k">def</span> <span class="nf">mention_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-191"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a timestamp, optionally with a style.</span>
-</span><span id="1-192">
-</span><span id="1-193"><span class="sd">    Args:</span>
-</span><span id="1-194"><span class="sd">        timestamp: The Unix timestamp to format.</span>
-</span><span id="1-195"><span class="sd">        style: An optional string representing the timestamp style.</span>
-</span><span id="1-196"><span class="sd">               (Default `` ``, valid styles: ``t``, ``T``, ``d``, ``D``, ``f``, ``F``, ``R``)</span>
-</span><span id="1-197">
-</span><span id="1-198"><span class="sd">    Returns:</span>
-</span><span id="1-199"><span class="sd">        A formatted string that represents the timestamp.</span>
-</span><span id="1-200"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-201">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;t:</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">&gt;&quot;</span> <span class="k">if</span> <span class="n">style</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;&lt;t:</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-191"><span class="k">def</span> <span class="nf">mention_timestamp</span><span class="p">(</span><span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-192"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a timestamp, optionally with a style.</span>
+</span><span id="1-193">
+</span><span id="1-194"><span class="sd">    Args:</span>
+</span><span id="1-195"><span class="sd">        timestamp: The Unix timestamp to format.</span>
+</span><span id="1-196"><span class="sd">        style: An optional string representing the timestamp style.</span>
+</span><span id="1-197"><span class="sd">               (Default `` ``, valid styles: ``t``, ``T``, ``d``, ``D``, ``f``, ``F``, ``R``)</span>
+</span><span id="1-198">
+</span><span id="1-199"><span class="sd">    Returns:</span>
+</span><span id="1-200"><span class="sd">        A formatted string that represents the timestamp.</span>
+</span><span id="1-201"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-202">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;t:</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s2">&gt;&quot;</span> <span class="k">if</span> <span class="n">style</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;&lt;t:</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-202">
 </span><span id="1-203">
+</span><span id="1-204">
 <div class="viewcode-block" id="mention_guild_navigation">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.mention_guild_navigation">[docs]</a>
-</span><span id="1-204"><span class="k">def</span> <span class="nf">mention_guild_navigation</span><span class="p">(</span><span class="n">guild_nav_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">guild_element_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-205"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a guild navigation element by type and ID.</span>
-</span><span id="1-206">
-</span><span id="1-207"><span class="sd">    Args:</span>
-</span><span id="1-208"><span class="sd">        guild_nav_type: The type of the guild navigation element.</span>
-</span><span id="1-209"><span class="sd">        guild_element_id: The unique identifier for the element.</span>
-</span><span id="1-210">
-</span><span id="1-211"><span class="sd">    Returns:</span>
-</span><span id="1-212"><span class="sd">        A formatted string that mentions the guild navigation element.</span>
-</span><span id="1-213"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-214">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="n">guild_element_id</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">guild_nav_type</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
+</span><span id="1-205"><span class="k">def</span> <span class="nf">mention_guild_navigation</span><span class="p">(</span><span class="n">guild_nav_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">guild_element_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-206"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Mention a guild navigation element by type and ID.</span>
+</span><span id="1-207">
+</span><span id="1-208"><span class="sd">    Args:</span>
+</span><span id="1-209"><span class="sd">        guild_nav_type: The type of the guild navigation element.</span>
+</span><span id="1-210"><span class="sd">        guild_element_id: The unique identifier for the element.</span>
+</span><span id="1-211">
+</span><span id="1-212"><span class="sd">    Returns:</span>
+</span><span id="1-213"><span class="sd">        A formatted string that mentions the guild navigation element.</span>
+</span><span id="1-214"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-215">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="n">guild_element_id</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">guild_nav_type</span><span class="si">}</span><span class="s2">&gt;&quot;</span></div>
 
-</span><span id="1-215">
 </span><span id="1-216">
+</span><span id="1-217">
 <div class="viewcode-block" id="format_ruff_rule">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.format_ruff_rule">[docs]</a>
-</span><span id="1-217"><span class="k">def</span> <span class="nf">format_ruff_rule</span><span class="p">(</span><span class="n">rule_data</span><span class="p">:</span> <span class="n">RuffRule</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FormattedRuffRule</span><span class="p">:</span>
-</span><span id="1-218"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Format ruff rule data for embed-friendly output and append rule link.</span>
-</span><span id="1-219">
-</span><span id="1-220"><span class="sd">    Args:</span>
-</span><span id="1-221"><span class="sd">        rule_data: The ruff rule data.</span>
-</span><span id="1-222">
-</span><span id="1-223"><span class="sd">    Returns:</span>
-</span><span id="1-224"><span class="sd">        FormattedRuffRule: The formatted rule data.</span>
-</span><span id="1-225"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-226">    <span class="n">explanation_formatted</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;## (.+)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;**\1**&quot;</span><span class="p">,</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;explanation&quot;</span><span class="p">])</span>
-</span><span id="1-227">    <span class="n">rule_name</span> <span class="o">=</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span>
-</span><span id="1-228">    <span class="n">rule_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://docs.astral.sh/ruff/rules/#</span><span class="si">{</span><span class="n">rule_name</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="1-229">
-</span><span id="1-230">    <span class="k">return</span> <span class="p">{</span>
-</span><span id="1-231">        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;No name available&quot;</span><span class="p">),</span>
-</span><span id="1-232">        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="s2">&quot;No summary available&quot;</span><span class="p">),</span>
-</span><span id="1-233">        <span class="s2">&quot;explanation&quot;</span><span class="p">:</span> <span class="n">explanation_formatted</span><span class="p">,</span>
-</span><span id="1-234">        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fix&quot;</span><span class="p">,</span> <span class="s2">&quot;No fix available&quot;</span><span class="p">),</span>
-</span><span id="1-235">        <span class="s2">&quot;rule_link&quot;</span><span class="p">:</span> <span class="n">rule_link</span><span class="p">,</span>
-</span><span id="1-236">    <span class="p">}</span></div>
+</span><span id="1-218"><span class="k">def</span> <span class="nf">format_ruff_rule</span><span class="p">(</span><span class="n">rule_data</span><span class="p">:</span> <span class="n">RuffRule</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FormattedRuffRule</span><span class="p">:</span>
+</span><span id="1-219"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Format ruff rule data for embed-friendly output and append rule link.</span>
+</span><span id="1-220">
+</span><span id="1-221"><span class="sd">    Args:</span>
+</span><span id="1-222"><span class="sd">        rule_data: The ruff rule data.</span>
+</span><span id="1-223">
+</span><span id="1-224"><span class="sd">    Returns:</span>
+</span><span id="1-225"><span class="sd">        FormattedRuffRule: The formatted rule data.</span>
+</span><span id="1-226"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-227">    <span class="n">explanation_formatted</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;## (.+)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;**\1**&quot;</span><span class="p">,</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;explanation&quot;</span><span class="p">])</span>
+</span><span id="1-228">    <span class="n">rule_code</span> <span class="o">=</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span>
+</span><span id="1-229">    <span class="n">rule_name</span> <span class="o">=</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+</span><span id="1-230">    <span class="n">rule_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://docs.astral.sh/ruff/rules/</span><span class="si">{</span><span class="n">rule_name</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="1-231">    <span class="n">rule_anchor_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://docs.astral.sh/ruff/rules/#</span><span class="si">{</span><span class="n">rule_code</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="1-232">
+</span><span id="1-233">    <span class="k">return</span> <span class="p">{</span>
+</span><span id="1-234">        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;No name available&quot;</span><span class="p">),</span>
+</span><span id="1-235">        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="s2">&quot;No summary available&quot;</span><span class="p">),</span>
+</span><span id="1-236">        <span class="s2">&quot;explanation&quot;</span><span class="p">:</span> <span class="n">explanation_formatted</span><span class="p">,</span>
+</span><span id="1-237">        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fix&quot;</span><span class="p">,</span> <span class="s2">&quot;No fix available&quot;</span><span class="p">),</span>
+</span><span id="1-238">        <span class="s2">&quot;rule_link&quot;</span><span class="p">:</span> <span class="n">rule_link</span><span class="p">,</span>
+</span><span id="1-239">        <span class="s2">&quot;rule_anchor_link&quot;</span><span class="p">:</span> <span class="n">rule_anchor_link</span><span class="p">,</span>
+</span><span id="1-240">    <span class="p">}</span></div>
 
-</span><span id="1-237">
-</span><span id="1-238">
+</span><span id="1-241">
+</span><span id="1-242">
 <div class="viewcode-block" id="query_all_ruff_rules">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.query_all_ruff_rules">[docs]</a>
-</span><span id="1-239"><span class="k">async</span> <span class="k">def</span> <span class="nf">query_all_ruff_rules</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RuffRule</span><span class="p">]:</span>
-</span><span id="1-240"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Query all Ruff linting rules.</span>
-</span><span id="1-241">
-</span><span id="1-242"><span class="sd">    Returns:</span>
-</span><span id="1-243"><span class="sd">        list[RuffRule]: All ruff rules</span>
-</span><span id="1-244"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-245">    <span class="n">_ruff</span> <span class="o">=</span> <span class="n">find_ruff_bin</span><span class="p">()</span>
-</span><span id="1-246">    <span class="k">try</span><span class="p">:</span>
-</span><span id="1-247">        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">run_process</span><span class="p">([</span><span class="n">_ruff</span><span class="p">,</span> <span class="s2">&quot;rule&quot;</span><span class="p">,</span> <span class="s2">&quot;--all&quot;</span><span class="p">,</span> <span class="s2">&quot;--output-format&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">])</span>
-</span><span id="1-248">    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-</span><span id="1-249">        <span class="n">stderr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&quot;stderr&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
-</span><span id="1-250">        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error while querying all rules: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="1-251">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
-</span><span id="1-252">    <span class="k">else</span><span class="p">:</span>
-</span><span id="1-253">        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span></div>
+</span><span id="1-243"><span class="k">async</span> <span class="k">def</span> <span class="nf">query_all_ruff_rules</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RuffRule</span><span class="p">]:</span>
+</span><span id="1-244"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Query all Ruff linting rules.</span>
+</span><span id="1-245">
+</span><span id="1-246"><span class="sd">    Returns:</span>
+</span><span id="1-247"><span class="sd">        list[RuffRule]: All ruff rules</span>
+</span><span id="1-248"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-249">    <span class="n">_ruff</span> <span class="o">=</span> <span class="n">find_ruff_bin</span><span class="p">()</span>
+</span><span id="1-250">    <span class="k">try</span><span class="p">:</span>
+</span><span id="1-251">        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">run_process</span><span class="p">([</span><span class="n">_ruff</span><span class="p">,</span> <span class="s2">&quot;rule&quot;</span><span class="p">,</span> <span class="s2">&quot;--all&quot;</span><span class="p">,</span> <span class="s2">&quot;--output-format&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">])</span>
+</span><span id="1-252">    <span class="k">except</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">CalledProcessError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span id="1-253">        <span class="n">stderr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s2">&quot;stderr&quot;</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span><span id="1-254">        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error while querying all rules: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="1-255">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+</span><span id="1-256">    <span class="k">else</span><span class="p">:</span>
+</span><span id="1-257">        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span></div>
 
-</span><span id="1-254">
-</span><span id="1-255">
+</span><span id="1-258">
+</span><span id="1-259">
 <div class="viewcode-block" id="run_ruff_format">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.run_ruff_format">[docs]</a>
-</span><span id="1-256"><span class="k">def</span> <span class="nf">run_ruff_format</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-257"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats code using Ruff.</span>
-</span><span id="1-258">
-</span><span id="1-259"><span class="sd">    Args:</span>
-</span><span id="1-260"><span class="sd">        code: The code to format.</span>
-</span><span id="1-261">
-</span><span id="1-262"><span class="sd">    Returns:</span>
-</span><span id="1-263"><span class="sd">        str: The formatted code.</span>
-</span><span id="1-264"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-265">    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-</span><span id="1-266">        <span class="p">[</span><span class="s2">&quot;ruff&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">],</span>  <span class="c1"># noqa: S603, S607</span>
-</span><span id="1-267">        <span class="nb">input</span><span class="o">=</span><span class="n">code</span><span class="p">,</span>
-</span><span id="1-268">        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-269">        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-270">        <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="1-271">    <span class="p">)</span>
-</span><span id="1-272">    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">code</span></div>
+</span><span id="1-260"><span class="k">def</span> <span class="nf">run_ruff_format</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-261"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats code using Ruff.</span>
+</span><span id="1-262">
+</span><span id="1-263"><span class="sd">    Args:</span>
+</span><span id="1-264"><span class="sd">        code: The code to format.</span>
+</span><span id="1-265">
+</span><span id="1-266"><span class="sd">    Returns:</span>
+</span><span id="1-267"><span class="sd">        str: The formatted code.</span>
+</span><span id="1-268"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-269">    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span><span id="1-270">        <span class="p">[</span><span class="s2">&quot;ruff&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">],</span>  <span class="c1"># noqa: S603, S607</span>
+</span><span id="1-271">        <span class="nb">input</span><span class="o">=</span><span class="n">code</span><span class="p">,</span>
+</span><span id="1-272">        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-273">        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-274">        <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="1-275">    <span class="p">)</span>
+</span><span id="1-276">    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">code</span></div>
 
-</span><span id="1-273">
-</span><span id="1-274">
+</span><span id="1-277">
+</span><span id="1-278">
 <div class="viewcode-block" id="paste">
 <a class="viewcode-back" href="../../../../byte/api/lib/utils.html#src.byte.lib.utils.paste">[docs]</a>
-</span><span id="1-275"><span class="k">async</span> <span class="k">def</span> <span class="nf">paste</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-276"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Uploads the given code to paste.pythondiscord.com.</span>
-</span><span id="1-277">
-</span><span id="1-278"><span class="sd">    Args:</span>
-</span><span id="1-279"><span class="sd">        code: The formatted code to upload.</span>
-</span><span id="1-280">
-</span><span id="1-281"><span class="sd">    Returns:</span>
-</span><span id="1-282"><span class="sd">        str: The URL of the uploaded paste.</span>
-</span><span id="1-283"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-284">    <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="1-285">        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-</span><span id="1-286">            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pastebin</span><span class="si">}</span><span class="s2">/api/v1/paste&quot;</span><span class="p">,</span>
-</span><span id="1-287">            <span class="n">json</span><span class="o">=</span><span class="p">{</span>
-</span><span id="1-288">                <span class="s2">&quot;expiry&quot;</span><span class="p">:</span> <span class="s2">&quot;1day&quot;</span><span class="p">,</span>
-</span><span id="1-289">                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;byte-bot_formatted_code.py&quot;</span><span class="p">,</span> <span class="s2">&quot;lexer&quot;</span><span class="p">:</span> <span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">code</span><span class="p">}],</span>
-</span><span id="1-290">            <span class="p">},</span>
-</span><span id="1-291">        <span class="p">)</span>
-</span><span id="1-292">        <span class="n">response_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</span><span id="1-293">        <span class="n">paste_link</span> <span class="o">=</span> <span class="n">response_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;link&quot;</span><span class="p">)</span>
-</span><span id="1-294">        <span class="k">return</span> <span class="n">paste_link</span> <span class="ow">or</span> <span class="s2">&quot;Failed to upload formatted code.&quot;</span></div>
+</span><span id="1-279"><span class="k">async</span> <span class="k">def</span> <span class="nf">paste</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-280"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Uploads the given code to paste.pythondiscord.com.</span>
+</span><span id="1-281">
+</span><span id="1-282"><span class="sd">    Args:</span>
+</span><span id="1-283"><span class="sd">        code: The formatted code to upload.</span>
+</span><span id="1-284">
+</span><span id="1-285"><span class="sd">    Returns:</span>
+</span><span id="1-286"><span class="sd">        str: The URL of the uploaded paste.</span>
+</span><span id="1-287"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-288">    <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span id="1-289">        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span><span id="1-290">            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pastebin</span><span class="si">}</span><span class="s2">/api/v1/paste&quot;</span><span class="p">,</span>
+</span><span id="1-291">            <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+</span><span id="1-292">                <span class="s2">&quot;expiry&quot;</span><span class="p">:</span> <span class="s2">&quot;1day&quot;</span><span class="p">,</span>
+</span><span id="1-293">                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;byte-bot_formatted_code.py&quot;</span><span class="p">,</span> <span class="s2">&quot;lexer&quot;</span><span class="p">:</span> <span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">code</span><span class="p">}],</span>
+</span><span id="1-294">            <span class="p">},</span>
+</span><span id="1-295">        <span class="p">)</span>
+</span><span id="1-296">        <span class="n">response_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span><span id="1-297">        <span class="n">paste_link</span> <span class="o">=</span> <span class="n">response_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;link&quot;</span><span class="p">)</span>
+</span><span id="1-298">        <span class="k">return</span> <span class="n">paste_link</span> <span class="ow">or</span> <span class="s2">&quot;Failed to upload formatted code.&quot;</span></div>
 
-</span><span id="1-295">
-</span><span id="1-296">
-</span><span id="1-297"><span class="k">def</span> <span class="nf">chunk_sequence</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">_T</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
-</span><span id="1-298"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Naïve chunking of an iterable.</span>
 </span><span id="1-299">
-</span><span id="1-300"><span class="sd">    Args:</span>
-</span><span id="1-301"><span class="sd">        sequence (Iterable[_T]): Iterable to chunk</span>
-</span><span id="1-302"><span class="sd">        size (int): Size of chunk</span>
+</span><span id="1-300">
+</span><span id="1-301"><span class="k">def</span> <span class="nf">chunk_sequence</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">_T</span><span class="p">],</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">_T</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
+</span><span id="1-302"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Naïve chunking of an iterable.</span>
 </span><span id="1-303">
-</span><span id="1-304"><span class="sd">    Yields:</span>
-</span><span id="1-305"><span class="sd">        Iterable[tuple[_T, ...]]: An n-tuple that contains chunked data</span>
-</span><span id="1-306"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-307">    <span class="n">_sequence</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
-</span><span id="1-308">    <span class="k">while</span> <span class="n">chunk</span> <span class="o">:=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">_sequence</span><span class="p">,</span> <span class="n">size</span><span class="p">)):</span>
-</span><span id="1-309">        <span class="k">yield</span> <span class="n">chunk</span>
+</span><span id="1-304"><span class="sd">    Args:</span>
+</span><span id="1-305"><span class="sd">        sequence (Iterable[_T]): Iterable to chunk</span>
+</span><span id="1-306"><span class="sd">        size (int): Size of chunk</span>
+</span><span id="1-307">
+</span><span id="1-308"><span class="sd">    Yields:</span>
+</span><span id="1-309"><span class="sd">        Iterable[tuple[_T, ...]]: An n-tuple that contains chunked data</span>
+</span><span id="1-310"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-311">    <span class="n">_sequence</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+</span><span id="1-312">    <span class="k">while</span> <span class="n">chunk</span> <span class="o">:=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">_sequence</span><span class="p">,</span> <span class="n">size</span><span class="p">)):</span>
+</span><span id="1-313">        <span class="k">yield</span> <span class="n">chunk</span>
 </span></pre></div>
         </article>
         
