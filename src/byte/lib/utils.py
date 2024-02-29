@@ -41,6 +41,7 @@ class RuffRule(BaseRuffRule):
 
 class FormattedRuffRule(BaseRuffRule):
     rule_link: str
+    rule_anchor_link: str
 
 
 __all__ = (
@@ -224,8 +225,10 @@ def format_ruff_rule(rule_data: RuffRule) -> FormattedRuffRule:
         FormattedRuffRule: The formatted rule data.
     """
     explanation_formatted = re.sub(r"## (.+)", r"**\1**", rule_data["explanation"])
-    rule_name = rule_data["code"]
-    rule_link = f"https://docs.astral.sh/ruff/rules/#{rule_name}"
+    rule_code = rule_data["code"]
+    rule_name = rule_data["name"]
+    rule_link = f"https://docs.astral.sh/ruff/rules/{rule_name}"
+    rule_anchor_link = f"https://docs.astral.sh/ruff/rules/#{rule_code}"
 
     return {
         "name": rule_data.get("name", "No name available"),
@@ -233,6 +236,7 @@ def format_ruff_rule(rule_data: RuffRule) -> FormattedRuffRule:
         "explanation": explanation_formatted,
         "fix": rule_data.get("fix", "No fix available"),
         "rule_link": rule_link,
+        "rule_anchor_link": rule_anchor_link,
     }
 
 

@@ -1,4 +1,4 @@
-"""Discord UI Views."""
+"""Discord UI views used in forums."""
 
 from discord import ButtonStyle, Interaction
 from discord.ext.commands import Bot
