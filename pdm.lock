@@ -5,7 +5,7 @@
 groups = ["default", "docs", "lint", "test"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:7098b3193b937e135dd887069755130b9528dc064cdd068424cf78340e091281"
+content_hash = "sha256:14f8129662e9236268f43ba1658ebf5548efce0ff45321b27eea03f689537e95"
 
 [[package]]
 name = "accessible-pygments"
@@ -789,7 +789,7 @@ revision = "5d88fdc2349496a696d000ea31fef30efcae5e55"
 summary = "GitHub SDK for Python"
 groups = ["default"]
 dependencies = [
-    "hishel<1.0.0,>=0.0.21",
+    "hishel<0.0.22,>=0.0.21",
     "httpx<1.0.0,>=0.23.0",
     "pydantic!=2.5.0,!=2.5.1,<3.0.0,>=1.9.1",
     "typing-extensions<5.0.0,>=4.3.0",
@@ -805,7 +805,8 @@ revision = "5d88fdc2349496a696d000ea31fef30efcae5e55"
 summary = "GitHub SDK for Python"
 groups = ["default"]
 dependencies = [
-    "githubkit @ git+https://github.com/yanyongyu/githubkit.git",
+    "PyJWT[crypto]<3.0.0,>=2.4.0",
+    "githubkit @ git+https://github.com/yanyongyu/githubkit.git@5d88fdc2349496a696d000ea31fef30efcae5e55",
 ]
 
 [[package]]
@@ -850,17 +851,16 @@ files = [
 
 [[package]]
 name = "hishel"
-version = "0.0.24"
+version = "0.0.21"
 requires_python = ">=3.8"
 summary = "Persistent cache implementation for httpx and httpcore"
 groups = ["default"]
 dependencies = [
     "httpx>=0.22.0",
-    "typing-extensions>=4.8.0",
 ]
 files = [
-    {file = "hishel-0.0.24-py3-none-any.whl", hash = "sha256:8b6e43481485e1938d78bd35c0bcb38646fe8f2e090fedb64b4dc1d6015ffe49"},
-    {file = "hishel-0.0.24.tar.gz", hash = "sha256:4ac494c6bfedc431e480ab85d3435d4710230b2ad6092766b6ccf82b1d7e4152"},
+    {file = "hishel-0.0.21-py3-none-any.whl", hash = "sha256:2347180fb2396700f0616cdfd4bb9d04ba0c543694d19f2d0156226dfa5a511d"},
+    {file = "hishel-0.0.21.tar.gz", hash = "sha256:62de30930e7fc02551d17d0f653f6e79499eaeffe32be9e36664ea7e0c0b82bd"},
 ]
 
 [[package]]
@@ -1635,6 +1635,22 @@ files = [
 ]
 
 [[package]]
+name = "pyjwt"
+version = "2.8.0"
+extras = ["crypto"]
+requires_python = ">=3.7"
+summary = "JSON Web Token implementation in Python"
+groups = ["default"]
+dependencies = [
+    "PyJWT==2.8.0",
+    "cryptography>=3.4.0",
+]
+files = [
+    {file = "PyJWT-2.8.0-py3-none-any.whl", hash = "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"},
+    {file = "PyJWT-2.8.0.tar.gz", hash = "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"},
+]
+
+[[package]]
 name = "pyright"
 version = "1.1.351"
 requires_python = ">=3.7"
@@ -1786,6 +1802,16 @@ dependencies = [
 files = [
     {file = "python-jose-3.3.0.tar.gz", hash = "sha256:55779b5e6ad599c6336191246e95eb2293a9ddebd555f796a65f838f07e5d78a"},
     {file = "python_jose-3.3.0-py2.py3-none-any.whl", hash = "sha256:9b1376b023f8b298536eedd47ae1089bcdb848f1535ab30555cd92002d78923a"},
+]
+
+[[package]]
+name = "pytz"
+version = "2024.1"
+summary = "World timezone definitions, modern and historical"
+groups = ["default"]
+files = [
+    {file = "pytz-2024.1-py2.py3-none-any.whl", hash = "sha256:328171f4e3623139da4983451950b28e95ac706e13f3f2630a879749e7a8b319"},
+    {file = "pytz-2024.1.tar.gz", hash = "sha256:2a29735ea9c18baf14b448846bde5a48030ed267578472d8955cd0e7443a9812"},
 ]
 
 [[package]]

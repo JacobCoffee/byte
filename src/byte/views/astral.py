@@ -3,14 +3,12 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from discord import ButtonStyle, Embed, Interaction
-from discord.ui import Button, View, button
+from discord.ui import View
 
 from byte.lib.log import get_logger
 
 if TYPE_CHECKING:
-    from typing import Self
-
+    from discord import Embed, Interaction
     from discord.ext.commands import Bot
 
 __all__ = ("RuffView",)
@@ -53,42 +51,3 @@ class RuffView(View):
             "You do not have permission to interact with this message.", ephemeral=True
         )
         return False
-
-    @staticmethod
-    async def delete_button_callback(interaction: Interaction) -> None:
-        """Delete the message this view is attached to.
-
-        Args:
-            interaction: Interaction object.
-        """
-        await interaction.message.delete()
-
-    async def collapse_button_callback(self, interaction: Interaction) -> None:
-        """Minify the message to show less information but not none.
-
-        Args:
-            interaction: Interaction object.
-            button: Button object.
-        """
-        await interaction.response.edit_message(embed=self.minified_embed, view=self)
-
-    # Define buttons using decorators
-    @button(label="Delete", style=ButtonStyle.red, custom_id="delete_button")
-    async def delete_button(self, interaction: Interaction, _: Button[Self]) -> None:
-        """Button to delete the message this view is attached to.
-
-        Args:
-            interaction: Interaction object.
-            button: Button object.
-        """
-        await self.delete_button_callback(interaction)
-
-    @button(label="Learn More", style=ButtonStyle.green, custom_id="learn_more_button")
-    async def learn_more_button(self, interaction: Interaction, _: Button[Self]) -> None:
-        """Button to privately message the requesting user the full embed.
-
-        Args:
-            interaction: Interaction object.
-            _: Button object.
-        """
-        await interaction.response.send_message(embed=self.original_embed, ephemeral=True)

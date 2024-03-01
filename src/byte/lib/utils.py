@@ -4,10 +4,13 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+from datetime import datetime
+from enum import StrEnum
 from itertools import islice
 from typing import TYPE_CHECKING, TypedDict, TypeVar
 
 import httpx
+import pytz
 from anyio import run_process
 from discord.ext import commands
 from ruff.__main__ import find_ruff_bin  # type: ignore[import-untyped]
@@ -22,29 +25,11 @@ if TYPE_CHECKING:
     from discord.ext.commands import Context
     from discord.ext.commands._types import Check
 
-_T = TypeVar("_T")
-
-
-class BaseRuffRule(TypedDict):
-    name: str
-    summary: str
-    fix: str
-    explanation: str
-
-
-class RuffRule(BaseRuffRule):
-    code: str
-    linter: str
-    message_formats: list[str]
-    preview: bool
-
-
-class FormattedRuffRule(BaseRuffRule):
-    rule_link: str
-    rule_anchor_link: str
-
-
 __all__ = (
+    "BaseRuffRule",
+    "RuffRule",
+    "FormattedRuffRule",
+    "PEP",
     "is_byte_dev",
     "linker",
     "mention_user",
@@ -60,7 +45,102 @@ __all__ = (
     "query_all_ruff_rules",
     "run_ruff_format",
     "paste",
+    "chunk_sequence",
+    "query_all_peps",
 )
+
+_T = TypeVar("_T")
+
+
+class BaseRuffRule(TypedDict):
+    """Base Ruff rule data."""
+
+    name: str
+    summary: str
+    fix: str
+    explanation: str
+
+
+class RuffRule(BaseRuffRule):
+    """Ruff rule data."""
+
+    code: str
+    linter: str
+    message_formats: list[str]
+    preview: bool
+
+
+class FormattedRuffRule(BaseRuffRule):
+    """Formatted Ruff rule data."""
+
+    rule_link: str
+    rule_anchor_link: str
+
+
+class PEPType(StrEnum):
+    """Type of PEP.
+
+    Based off of `PEP Types in PEP1 <https://peps.python.org/#pep-types-key>`_.
+    """
+
+    I = "Informational"  # noqa: E741
+    P = "Process"
+    S = "Standards Track"
+
+
+class PEPStatus(StrEnum):
+    """Status of a PEP.
+
+    .. note:: ``Active`` and ``Accepted`` both traditionally use ``A``,
+        but are differentiated here for clarity.
+
+    Based off of `PEP Status in PEP1 <https://peps.python.org/#pep-status-key>`_.
+    """
+
+    A = "Active"
+    AA = "Accepted"
+    D = "Deferred"
+    __ = "Draft"
+    F = "Final"
+    P = "Provisional"
+    R = "Rejected"
+    S = "Superseded"
+    W = "Withdrawn"
+
+
+class PEPHistoryItem(TypedDict, total=False):
+    """PEP history item.
+
+    Sometimes these include a list of ``datetime`` objects,
+    other times they are a list of datetime and str
+    because they contain a date and an rST link.
+    """
+
+    date: str
+    link: str
+
+
+class PEP(TypedDict):
+    """PEP data.
+
+    Based off of the `PEPS API <https://peps.python.org/api/peps.json>`_.
+    """
+
+    number: int
+    title: str
+    authors: list[str] | str
+    discussions_to: str
+    status: PEPStatus
+    type: PEPType
+    topic: str
+    created: datetime
+    python_version: list[float] | float
+    post_history: list[str]
+    resolution: str | None
+    requires: str | None
+    replaces: str | None
+    superseded_by: str | None
+    url: str
 
 
 def is_byte_dev() -> Check[Any]:
@@ -311,3 +391,37 @@ def chunk_sequence(sequence: Iterable[_T], size: int) -> Iterable[tuple[_T, ...]
     _sequence = iter(sequence)
     while chunk := tuple(islice(_sequence, size)):
         yield chunk
+
+
+async def query_all_peps() -> list[PEP]:
+    """Query all PEPs from the PEPs Python.org API.
+
+    Returns:
+        List[PEP]: All PEPs
+    """
+    url = "https://peps.python.org/api/peps.json"
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url)
+        response.raise_for_status()
+        data = response.json()
+
+    return [
+        {
+            "number": pep_info["number"],
+            "title": pep_info["title"],
+            "authors": pep_info["authors"].split(", "),
+            "discussions_to": pep_info["discussions_to"],
+            "status": PEPStatus(pep_info["status"]),
+            "type": PEPType(pep_info["type"]),
+            "topic": pep_info.get("topic", ""),
+            "created": datetime.strptime(pep_info["created"], "%d-%b-%Y").replace(tzinfo=pytz.utc),
+            "python_version": pep_info.get("python_version"),
+            "post_history": pep_info.get("post_history", []),
+            "resolution": pep_info.get("resolution"),
+            "requires": pep_info.get("requires"),
+            "replaces": pep_info.get("replaces"),
+            "superseded_by": pep_info.get("superseded_by"),
+            "url": pep_info["url"],
+        }
+        for pep_info in data.values()
+    ]
