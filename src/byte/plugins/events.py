@@ -5,7 +5,8 @@ from typing import cast
 from discord import Embed
 from discord.ext.commands import Bot, Cog
 
-from byte.lib.common import litestar_logo_yellow, mcve
+from byte.lib.common.assets import litestar_logo_yellow
+from byte.lib.common.links import mcve
 from byte.lib.utils import linker
 from byte.views.forums import HelpThreadView
 

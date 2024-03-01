@@ -6,7 +6,8 @@ from discord.app_commands import Choice, autocomplete
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
-from byte.lib.common import python_blue, python_logo, python_yellow
+from byte.lib.common.assets import python_logo
+from byte.lib.common.colors import python_blue, python_yellow
 from byte.lib.utils import PEP, query_all_peps
 from byte.views.python import PEPView
 
@@ -28,10 +29,10 @@ class Python(Cog):
         .. warning:: ``interaction`` is not used, but is required.
         """
         return [
-            Choice(name=f'PEP {number} - {pep["title"]}', value=str(number))
-            for number, pep in self._peps.items()
-            if current_pep.lower() in str(number) or current_pep.lower() in pep["title"].lower()
-        ][:25]
+                   Choice(name=f'PEP {number} - {pep["title"]}', value=str(number))
+                   for number, pep in self._peps.items()
+                   if current_pep.lower() in str(number) or current_pep.lower() in pep["title"].lower()
+               ][:25]
 
     @app_command(name="pep")
     @autocomplete(pep=_pep_autocomplete)
