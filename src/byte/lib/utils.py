@@ -397,7 +397,7 @@ async def query_all_peps() -> list[PEP]:
     """Query all PEPs from the PEPs Python.org API.
 
     Returns:
-        List[PEP]: All PEPs
+        list[PEP]: All PEPs
     """
     url = "https://peps.python.org/api/peps.json"
     async with httpx.AsyncClient() as client:
