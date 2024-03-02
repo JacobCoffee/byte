@@ -789,7 +789,7 @@ revision = "5d88fdc2349496a696d000ea31fef30efcae5e55"
 summary = "GitHub SDK for Python"
 groups = ["default"]
 dependencies = [
-    "hishel<1.0.0,>=0.0.21",
+    "hishel<0.0.22,>=0.0.21",
     "httpx<1.0.0,>=0.23.0",
     "pydantic!=2.5.0,!=2.5.1,<3.0.0,>=1.9.1",
     "typing-extensions<5.0.0,>=4.3.0",
@@ -805,7 +805,8 @@ revision = "5d88fdc2349496a696d000ea31fef30efcae5e55"
 summary = "GitHub SDK for Python"
 groups = ["default"]
 dependencies = [
-    "githubkit @ git+https://github.com/yanyongyu/githubkit.git",
+    "PyJWT[crypto]<3.0.0,>=2.4.0",
+    "githubkit @ git+https://github.com/yanyongyu/githubkit.git@5d88fdc2349496a696d000ea31fef30efcae5e55",
 ]
 
 [[package]]
@@ -850,17 +851,16 @@ files = [
 
 [[package]]
 name = "hishel"
-version = "0.0.24"
+version = "0.0.21"
 requires_python = ">=3.8"
 summary = "Persistent cache implementation for httpx and httpcore"
 groups = ["default"]
 dependencies = [
     "httpx>=0.22.0",
-    "typing-extensions>=4.8.0",
 ]
 files = [
-    {file = "hishel-0.0.24-py3-none-any.whl", hash = "sha256:8b6e43481485e1938d78bd35c0bcb38646fe8f2e090fedb64b4dc1d6015ffe49"},
-    {file = "hishel-0.0.24.tar.gz", hash = "sha256:4ac494c6bfedc431e480ab85d3435d4710230b2ad6092766b6ccf82b1d7e4152"},
+    {file = "hishel-0.0.21-py3-none-any.whl", hash = "sha256:2347180fb2396700f0616cdfd4bb9d04ba0c543694d19f2d0156226dfa5a511d"},
+    {file = "hishel-0.0.21.tar.gz", hash = "sha256:62de30930e7fc02551d17d0f653f6e79499eaeffe32be9e36664ea7e0c0b82bd"},
 ]
 
 [[package]]
@@ -1629,6 +1629,22 @@ version = "2.8.0"
 requires_python = ">=3.7"
 summary = "JSON Web Token implementation in Python"
 groups = ["default"]
+files = [
+    {file = "PyJWT-2.8.0-py3-none-any.whl", hash = "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"},
+    {file = "PyJWT-2.8.0.tar.gz", hash = "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"},
+]
+
+[[package]]
+name = "pyjwt"
+version = "2.8.0"
+extras = ["crypto"]
+requires_python = ">=3.7"
+summary = "JSON Web Token implementation in Python"
+groups = ["default"]
+dependencies = [
+    "PyJWT==2.8.0",
+    "cryptography>=3.4.0",
+]
 files = [
     {file = "PyJWT-2.8.0-py3-none-any.whl", hash = "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"},
     {file = "PyJWT-2.8.0.tar.gz", hash = "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"},

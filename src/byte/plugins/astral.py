@@ -8,7 +8,8 @@ from discord.app_commands import Choice, autocomplete
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
-from byte.lib.common import ruff_logo
+from byte.lib.common.assets import ruff_logo
+from byte.lib.common.colors import astral_purple, astral_yellow
 from byte.lib.utils import chunk_sequence, format_ruff_rule, query_all_ruff_rules
 from byte.views.astral import RuffView
 
@@ -31,10 +32,10 @@ class Astral(Cog):
     async def _rule_autocomplete(self, _: Interaction, current_rule: str) -> list[Choice[str]]:
         # TODO: this can and should be made faster, rn this is slow, slow like the maintainer
         return [
-            Choice(name=f'{code} - {rule["name"]}', value=code)
-            for code, rule in self._rules.items()
-            if current_rule.lower() in code.lower()
-        ][:25]
+                   Choice(name=f'{code} - {rule["name"]}', value=code)
+                   for code, rule in self._rules.items()
+                   if current_rule.lower() in code.lower()
+               ][:25]
 
     @app_command(name="ruff")
     @autocomplete(rule=_rule_autocomplete)
@@ -48,7 +49,7 @@ class Astral(Cog):
         await interaction.response.send_message("Querying Ruff rule...", ephemeral=True)
 
         if (rule_details := self._rules.get(rule)) is None:
-            embed = Embed(title=f"Rule '{rule}' not found.", color=0x261230)
+            embed = Embed(title=f"Rule '{rule}' not found.", color=astral_purple)
             await interaction.followup.send(embed=embed)
             return
 
@@ -59,12 +60,12 @@ class Astral(Cog):
         )
 
         # TODO: investigate if we can clean this up
-        minified_embed = Embed(title=f"Ruff Rule: {formatted_rule_details['name']}", color=0xD7FF64)
+        minified_embed = Embed(title=f"Ruff Rule: {formatted_rule_details['name']}", color=astral_yellow)
         minified_embed.add_field(name="Summary", value=formatted_rule_details["summary"], inline=False)
         minified_embed.add_field(name="Documentation", value=docs_field, inline=False)
         minified_embed.set_thumbnail(url=ruff_logo)
 
-        embed = Embed(title=f"Ruff Rule: {formatted_rule_details['name']}", color=0xD7FF64)
+        embed = Embed(title=f"Ruff Rule: {formatted_rule_details['name']}", color=astral_yellow)
         embed.add_field(name="Summary", value=formatted_rule_details["summary"], inline=False)
 
         # TODO: Better chunking

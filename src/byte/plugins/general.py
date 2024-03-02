@@ -5,7 +5,8 @@ from discord import Embed, Interaction
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
-from byte.lib.common import litestar_logo_yellow, markdown_guide, pastebin
+from byte.lib.common.assets import litestar_logo_yellow
+from byte.lib.common.links import markdown_guide, pastebin
 from byte.lib.utils import linker
 
 __all__ = ("GeneralCommands", "setup")
@@ -35,7 +36,7 @@ class GeneralCommands(Cog):
         embed.add_field(
             name="Syntax Highlighting",
             value="You can also use backticks to format your code. Read about it in the "
-            f"{linker('Discord Markdown Guide', markdown_guide)}.",
+                  f"{linker('Discord Markdown Guide', markdown_guide)}.",
         )
         embed.set_thumbnail(url=litestar_logo_yellow)
 

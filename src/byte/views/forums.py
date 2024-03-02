@@ -4,7 +4,7 @@ from discord import ButtonStyle, Interaction
 from discord.ext.commands import Bot
 from discord.ui import Button, View, button
 
-from byte.lib.common import litestar_issues
+from byte.lib.common.links import litestar_issues
 from byte.lib.log import get_logger
 
 __all__ = ("HelpThreadView",)
