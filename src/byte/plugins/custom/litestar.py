@@ -1,7 +1,6 @@
 """Custom plugins for the Litestar Discord."""
 from __future__ import annotations
 
-from textwrap import dedent
 from typing import Self
 
 from discord import Embed, Interaction, Message, TextStyle, app_commands
@@ -17,7 +16,8 @@ __all__ = ("LitestarCommands", "setup")
 
 
 class GitHubIssue(Modal, title="Create GitHub Issue"):
-    # NOTE: ``title`` conflicts with an existing attribute, renaming to ``title_``
+    """Modal for GitHub issue creation."""
+
     title_ = TextInput[Self](label="title", placeholder="Title")
     description = TextInput[Self](
         label="Description",
@@ -51,19 +51,23 @@ class GitHubIssue(Modal, title="Create GitHub Issue"):
 
     async def on_submit(self, interaction: Interaction) -> None:
         issue_reporter = interaction.user
-        issue_body = dedent(
-            f"""
-            ### Reported by
-            {issue_reporter.display_name} in Discord: {interaction.channel.name}
-            ### Description
-            {self.description}
-            ### MCVE
-            {self.mcve}
-            ### Logs
-            {self.logs}
-            ### Litestar Version
-            {self.version}"""
-        ).strip()
+        issue_body_lines = [
+            "### Reported by",
+            f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id}) in Discord: {interaction.channel.name}",  # noqa: E501
+            "",
+            "### Description",
+            f"{self.description.value.strip()}",
+            "",
+            "### MCVE",
+            f"{self.mcve.value.strip()}",
+            "",
+            "### Logs",
+            f"{self.logs.value.strip()}",
+            "",
+            "### Litestar Version",
+            f"{self.version.value.strip()}",
+        ]
+        issue_body = "\n".join(issue_body_lines)
         try:
             response_wrapper = await github_client.rest.issues.async_create(
                 owner="litestar-org", repo="litestar", data={"title": self.title_.value, "body": issue_body}
@@ -88,7 +92,7 @@ class LitestarCommands(Cog):
         self.__cog_name__ = "Litestar Commands"  # type: ignore[misc]
         self.context_menu = app_commands.ContextMenu(
             # TODO: Name changed to not conflict with the other one, discord shows both
-            name="Create GitHub Modal",
+            name="Create GitHub Issue",
             callback=self.create_github_issue_modal,
         )
         bot.tree.add_command(self.context_menu)
@@ -160,7 +164,6 @@ class LitestarCommands(Cog):
 
         await ctx.send(embed=embed)
 
-    # TODO: change name
     async def create_github_issue_modal(self, interaction: Interaction, message: Message) -> None:
         """Context menu command to create a GitHub issue from a Discord message.
 
