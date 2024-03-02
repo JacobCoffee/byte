@@ -4,13 +4,12 @@ from __future__ import annotations
 import json
 import re
 import subprocess
-from datetime import datetime
+from datetime import UTC, datetime
 from enum import StrEnum
 from itertools import islice
 from typing import TYPE_CHECKING, TypedDict, TypeVar
 
 import httpx
-import pytz
 from anyio import run_process
 from discord.ext import commands
 from ruff.__main__ import find_ruff_bin  # type: ignore[import-untyped]
@@ -414,7 +413,7 @@ async def query_all_peps() -> list[PEP]:
             "status": PEPStatus(pep_info["status"]),
             "type": PEPType(pep_info["type"]),
             "topic": pep_info.get("topic", ""),
-            "created": datetime.strptime(pep_info["created"], "%d-%b-%Y").replace(tzinfo=pytz.utc),
+            "created": datetime.strptime(pep_info["created"], "%d-%b-%Y").replace(tzinfo=UTC),
             "python_version": pep_info.get("python_version"),
             "post_history": pep_info.get("post_history", []),
             "resolution": pep_info.get("resolution"),
