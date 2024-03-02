@@ -392,6 +392,24 @@ def chunk_sequence(sequence: Iterable[_T], size: int) -> Iterable[tuple[_T, ...]
         yield chunk
 
 
+def format_resolution_link(resolution: str | None) -> str:
+    """Formats the resolution URL into a markdown link.
+
+    Args:
+        resolution (str): The resolution URL.
+
+    Returns:
+        str: The formatted markdown link.
+    """
+    if not resolution:
+        return "N/A"
+    if "discuss.python.org" in resolution:
+        return f"[via Discussion Forum]({resolution})"
+    if "mail.python.org" in resolution:
+        return f"[via Mailist]({resolution})"
+    return resolution
+
+
 async def query_all_peps() -> list[PEP]:
     """Query all PEPs from the PEPs Python.org API.
 
@@ -404,7 +422,7 @@ async def query_all_peps() -> list[PEP]:
         response.raise_for_status()
         data = response.json()
 
-    return [
+    return [  # type: ignore[reportReturnType]
         {
             "number": pep_info["number"],
             "title": pep_info["title"],
@@ -413,10 +431,10 @@ async def query_all_peps() -> list[PEP]:
             "status": PEPStatus(pep_info["status"]),
             "type": PEPType(pep_info["type"]),
             "topic": pep_info.get("topic", ""),
-            "created": datetime.strptime(pep_info["created"], "%d-%b-%Y").replace(tzinfo=UTC),
+            "created": datetime.strptime(pep_info["created"], "%d-%b-%Y").replace(tzinfo=UTC).strftime("%Y-%m-%d"),
             "python_version": pep_info.get("python_version"),
             "post_history": pep_info.get("post_history", []),
-            "resolution": pep_info.get("resolution"),
+            "resolution": format_resolution_link(pep_info.get("resolution", "N/A")),
             "requires": pep_info.get("requires"),
             "replaces": pep_info.get("replaces"),
             "superseded_by": pep_info.get("superseded_by"),

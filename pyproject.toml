@@ -157,10 +157,10 @@ exclude = [
 pythonVersion = "3.11"
 reportOptionalMemberAccess = false
 reportUnknownMemberType = false
-reportGeneralTypeIssues = false
+reportGeneralTypeIssues = true
 
 [tool.mypy]
-namespace_packages = true # discord.py
+namespace_packages = true # discord.Githupy
 disallow_any_generics = false
 disallow_incomplete_defs = true
 disallow_untyped_decorators = false

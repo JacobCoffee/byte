@@ -47,27 +47,39 @@ class Python(Cog):
         await interaction.response.send_message(f"Querying PEP {pep}...", ephemeral=True)
 
         if (pep_details := self._peps.get(pep)) is None:
-            embed = Embed(title=f"PEP #{pep} not found... Maybe you should submit it!", color=python_yellow)
+            embed = Embed(title=f"PEP {pep} not found... Maybe you should submit it!", color=python_yellow)
             await interaction.followup.send(embed=embed, ephemeral=True)
             return
 
-        docs_field = f"- [PEP Documentation]({pep_details['url']})\n"
-
-        fields = [
-            Field(name="Summary", value=pep_details["title"], inline=False),
-            Field(name="Status", value=pep_details["status"], inline=True),
-            Field(name="Type", value=pep_details["type"], inline=True),
-            Field(name="Authors", value=", ".join(pep_details["authors"]), inline=False),
-            Field(name="Created", value=str(pep_details["created"]), inline=True),
-            Field(name="Python Version", value=pep_details["python_version"], inline=True),
-            Field(name="Documentation", value=docs_field, inline=False),
+        fields: list[Field] = [
+            {"name": "Status", "value": pep_details["status"], "inline": True},
+            {"name": "Python Version", "value": pep_details["python_version"], "inline": True},
+            {"name": "Created", "value": str(pep_details["created"]), "inline": True},
+            {"name": "Resolution", "value": pep_details.get("resolution", "N/A"), "inline": False},
+            {"name": "Type", "value": pep_details["type"], "inline": True},
+            {"name": "Topic", "value": pep_details.get("topic", "N/A"), "inline": True},
+            {"name": "Requires", "value": pep_details.get("requires", "N/A"), "inline": True},
+            {"name": "Replaces", "value": pep_details.get("replaces", "N/A"), "inline": True},
+            {"name": "Superseded By", "value": pep_details.get("superseded_by", "N/A"), "inline": True},
+            {"name": "Authors", "value": ", ".join(pep_details.get("authors", ["N/A"])), "inline": False},
+            {"name": "Discussions To", "value": pep_details.get("discussions_to", "N/A"), "inline": False},
+            {"name": "Post History", "value": pep_details.get("post_history", "N/A"), "inline": False},
         ]
+
         minified_embed = ExtendedEmbed.from_field_dicts(
-            title=f"PEP #{pep_details['number']}", color=python_blue, fields=fields
+            title=f"PEP {pep_details['number']}: {pep_details['title']}", color=python_blue, fields=fields[:4]
         )
         minified_embed.set_thumbnail(url=python_logo)
-        embed = minified_embed.deepcopy()
-        view = PEPView(author=interaction.user.id, bot=self.bot, original_embed=embed, minified_embed=minified_embed)
+        full_embed = minified_embed.deepcopy()
+        full_embed.add_field_dicts(fields[4:])
+
+        # Ensure the Documentation field is always last
+        minified_embed.add_field(name="Documentation", value=f"[PEP Documentation]({pep_details['url']})", inline=False)
+        full_embed.add_field(name="Documentation", value=f"[PEP Documentation]({pep_details['url']})", inline=False)
+
+        view = PEPView(
+            author=interaction.user.id, bot=self.bot, original_embed=full_embed, minified_embed=minified_embed
+        )
         await interaction.followup.send(embed=minified_embed, view=view)
 
 
