@@ -9,6 +9,7 @@ from discord.ext.commands import Bot, Cog
 from byte.lib.common.assets import python_logo
 from byte.lib.common.colors import python_blue, python_yellow
 from byte.lib.utils import PEP, query_all_peps
+from byte.views.embed import ExtendedEmbed, Field
 from byte.views.python import PEPView
 
 __all__ = ("Python", "setup")
@@ -29,10 +30,10 @@ class Python(Cog):
         .. warning:: ``interaction`` is not used, but is required.
         """
         return [
-                   Choice(name=f'PEP {number} - {pep["title"]}', value=str(number))
-                   for number, pep in self._peps.items()
-                   if current_pep.lower() in str(number) or current_pep.lower() in pep["title"].lower()
-               ][:25]
+            Choice(name=f'PEP {number} - {pep["title"]}', value=str(number))
+            for number, pep in self._peps.items()
+            if current_pep.lower() in str(number) or current_pep.lower() in pep["title"].lower()
+        ][:25]
 
     @app_command(name="pep")
     @autocomplete(pep=_pep_autocomplete)
@@ -52,26 +53,20 @@ class Python(Cog):
 
         docs_field = f"- [PEP Documentation]({pep_details['url']})\n"
 
-        minified_embed = Embed(title=f"PEP #{pep_details['number']}", color=python_blue)
-        minified_embed.add_field(name="Summary", value=pep_details["title"], inline=False)
-        minified_embed.add_field(name="Status", value=pep_details["status"], inline=True)
-        minified_embed.add_field(name="Type", value=pep_details["type"], inline=True)
-        minified_embed.add_field(name="Authors", value=", ".join(pep_details["authors"]), inline=False)
-        minified_embed.add_field(name="Created", value=pep_details["created"], inline=True)
-        minified_embed.add_field(name="Python Version", value=pep_details["python_version"], inline=True)
-        minified_embed.add_field(name="Documentation", value=docs_field, inline=False)
+        fields = [
+            Field(name="Summary", value=pep_details["title"], inline=False),
+            Field(name="Status", value=pep_details["status"], inline=True),
+            Field(name="Type", value=pep_details["type"], inline=True),
+            Field(name="Authors", value=", ".join(pep_details["authors"]), inline=False),
+            Field(name="Created", value=str(pep_details["created"]), inline=True),
+            Field(name="Python Version", value=pep_details["python_version"], inline=True),
+            Field(name="Documentation", value=docs_field, inline=False),
+        ]
+        minified_embed = ExtendedEmbed.from_field_dicts(
+            title=f"PEP #{pep_details['number']}", color=python_blue, fields=fields
+        )
         minified_embed.set_thumbnail(url=python_logo)
-
-        embed = Embed(title=f"PEP #{pep_details['number']}", color=python_blue)
-        embed.add_field(name="Summary", value=pep_details["title"], inline=False)
-        embed.add_field(name="Status", value=pep_details["status"], inline=True)
-        embed.add_field(name="Type", value=pep_details["type"], inline=True)
-        embed.add_field(name="Authors", value=", ".join(pep_details["authors"]), inline=False)
-        embed.add_field(name="Created", value=pep_details["created"], inline=True)
-        embed.add_field(name="Python Version", value=pep_details["python_version"], inline=True)
-        embed.add_field(name="Documentation", value=docs_field, inline=False)
-        embed.set_thumbnail(url=python_logo)
-
+        embed = minified_embed.deepcopy()
         view = PEPView(author=interaction.user.id, bot=self.bot, original_embed=embed, minified_embed=minified_embed)
         await interaction.followup.send(embed=minified_embed, view=view)
 

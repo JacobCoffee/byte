@@ -142,7 +142,6 @@ repos:
             asyncpg-stubs,
             polyfactory,
             discord-py,
-            types-pytz,
           ]
   - repo: https://github.com/sphinx-contrib/sphinx-lint
     rev: "v0.9.1"
