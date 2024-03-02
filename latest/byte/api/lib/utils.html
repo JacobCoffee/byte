@@ -212,6 +212,10 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
+<li><a class="reference internal" href="#src.byte.lib.utils.BaseRuffRule"><code class="docutils literal notranslate"><span class="pre">BaseRuffRule</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.RuffRule"><code class="docutils literal notranslate"><span class="pre">RuffRule</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.FormattedRuffRule"><code class="docutils literal notranslate"><span class="pre">FormattedRuffRule</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.PEP"><code class="docutils literal notranslate"><span class="pre">PEP</span></code></a></li>
 <li><a class="reference internal" href="#src.byte.lib.utils.is_byte_dev"><code class="docutils literal notranslate"><span class="pre">is_byte_dev()</span></code></a></li>
 <li><a class="reference internal" href="#src.byte.lib.utils.linker"><code class="docutils literal notranslate"><span class="pre">linker()</span></code></a></li>
 <li><a class="reference internal" href="#src.byte.lib.utils.mention_user"><code class="docutils literal notranslate"><span class="pre">mention_user()</span></code></a></li>
@@ -227,6 +231,8 @@ html.dark {
 <li><a class="reference internal" href="#src.byte.lib.utils.query_all_ruff_rules"><code class="docutils literal notranslate"><span class="pre">query_all_ruff_rules()</span></code></a></li>
 <li><a class="reference internal" href="#src.byte.lib.utils.run_ruff_format"><code class="docutils literal notranslate"><span class="pre">run_ruff_format()</span></code></a></li>
 <li><a class="reference internal" href="#src.byte.lib.utils.paste"><code class="docutils literal notranslate"><span class="pre">paste()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.chunk_sequence"><code class="docutils literal notranslate"><span class="pre">chunk_sequence()</span></code></a></li>
+<li><a class="reference internal" href="#src.byte.lib.utils.query_all_peps"><code class="docutils literal notranslate"><span class="pre">query_all_peps()</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -289,6 +295,35 @@ html.dark {
 <h1>utils<a class="headerlink" href="#utils" title="Link to this heading">¶</a></h1>
 <p>Utilities to be used by the other modules.</p>
 <p id="module-src.byte.lib.utils">Byte utilities.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.byte.lib.utils.BaseRuffRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">BaseRuffRule</span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#BaseRuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.BaseRuffRule" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypedDict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></a></p>
+<p>Base Ruff rule data.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.byte.lib.utils.RuffRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">RuffRule</span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#RuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.RuffRule" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<p>Ruff rule data.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.byte.lib.utils.FormattedRuffRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">FormattedRuffRule</span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#FormattedRuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.FormattedRuffRule" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<p>Formatted Ruff rule data.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="src.byte.lib.utils.PEP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">PEP</span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#PEP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.PEP" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypedDict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></a></p>
+<p>PEP data.</p>
+<p>Based off of the <a class="reference external" href="https://peps.python.org/api/peps.json">PEPS API</a>.</p>
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="src.byte.lib.utils.is_byte_dev">
 <span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">is_byte_dev</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Check</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#is_byte_dev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.is_byte_dev" title="Link to this definition">¶</a></dt>
@@ -462,7 +497,7 @@ html.dark {
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.byte.lib.utils.format_ruff_rule">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">format_ruff_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">RuffRule</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">FormattedRuffRule</span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#format_ruff_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.format_ruff_rule" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">format_ruff_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.byte.lib.utils.RuffRule" title="src.byte.lib.utils.RuffRule"><span class="pre">RuffRule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.byte.lib.utils.FormattedRuffRule" title="src.byte.lib.utils.FormattedRuffRule"><span class="pre">FormattedRuffRule</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#format_ruff_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.format_ruff_rule" title="Link to this definition">¶</a></dt>
 <dd><p>Format ruff rule data for embed-friendly output and append rule link.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -472,21 +507,21 @@ html.dark {
 <dd class="field-even"><p>The formatted rule data.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>FormattedRuffRule</p>
+<dd class="field-odd"><p><a class="reference internal" href="#src.byte.lib.utils.FormattedRuffRule" title="src.byte.lib.utils.FormattedRuffRule">FormattedRuffRule</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.byte.lib.utils.query_all_ruff_rules">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">query_all_ruff_rules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">RuffRule</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#query_all_ruff_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.query_all_ruff_rules" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">query_all_ruff_rules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#src.byte.lib.utils.RuffRule" title="src.byte.lib.utils.RuffRule"><span class="pre">RuffRule</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#query_all_ruff_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.query_all_ruff_rules" title="Link to this definition">¶</a></dt>
 <dd><p>Query all Ruff linting rules.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>All ruff rules</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[RuffRule]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="#src.byte.lib.utils.RuffRule" title="src.byte.lib.utils.RuffRule">RuffRule</a>]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -521,6 +556,37 @@ html.dark {
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.chunk_sequence">
+<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">chunk_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">_T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">_T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#chunk_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.chunk_sequence" title="Link to this definition">¶</a></dt>
+<dd><p>Naïve chunking of an iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>Iterable</em><em>[</em><em>_T</em><em>]</em>) – Iterable to chunk</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Size of chunk</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Iterable[tuple[_T, …]]</em> – An n-tuple that contains chunked data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.byte.lib.utils.query_all_peps">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">query_all_peps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#src.byte.lib.utils.PEP" title="src.byte.lib.utils.PEP"><span class="pre">PEP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#query_all_peps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.query_all_peps" title="Link to this definition">¶</a></dt>
+<dd><p>Query all PEPs from the PEPs Python.org API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All PEPs</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="#src.byte.lib.utils.PEP" title="src.byte.lib.utils.PEP">PEP</a>]</p>
 </dd>
 </dl>
 </dd></dl>
