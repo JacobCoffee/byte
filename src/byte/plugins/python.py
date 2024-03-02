@@ -47,8 +47,8 @@ class Python(Cog):
         await interaction.response.send_message(f"Querying PEP {pep}...", ephemeral=True)
 
         if (pep_details := self._peps.get(pep)) is None:
-            embed = Embed(title=f"PEP '{pep}' not found.", color=python_yellow)
-            await interaction.followup.send(embed=embed)
+            embed = Embed(title=f"PEP #{pep} not found... Maybe you should submit it!", color=python_yellow)
+            await interaction.followup.send(embed=embed, ephemeral=True)
             return
 
         docs_field = f"- [PEP Documentation]({pep_details['url']})\n"
