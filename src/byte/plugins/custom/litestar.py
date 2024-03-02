@@ -1,13 +1,82 @@
 """Custom plugins for the Litestar Discord."""
 from __future__ import annotations
 
-from discord import Embed, Interaction, Message, app_commands
+from textwrap import dedent
+from typing import Self
+
+from discord import Embed, Interaction, Message, TextStyle, app_commands
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
+from discord.ui import Modal, TextInput
+from discord.utils import MISSING
+from httpx import codes
 
 from byte.lib.utils import is_byte_dev, mention_role, mention_user
 from server.domain.github.helpers import github_client
 
 __all__ = ("LitestarCommands", "setup")
+
+
+class GitHubIssue(Modal, title="Create GitHub Issue"):
+    # NOTE: ``title`` conflicts with an existing attribute, renaming to ``title_``
+    title_ = TextInput[Self](label="title", placeholder="Title")
+    description = TextInput[Self](
+        label="Description",
+        style=TextStyle.paragraph,
+        placeholder="Please enter an description of the bug you are encountering.",
+    )
+    mcve = TextInput[Self](
+        label="MCVE",
+        style=TextStyle.paragraph,
+        placeholder="Please provide a minimal, complete, and verifiable example of the issue.",
+    )
+    logs = TextInput[Self](
+        label="Logs", style=TextStyle.paragraph, placeholder="Please copy and paste any relevant log output."
+    )
+    version = TextInput[Self](
+        label="Litestar Version", placeholder="What version of Litestar are you using when encountering this issue?"
+    )
+
+    def __init__(
+        self,
+        *,
+        title: str = MISSING,
+        timeout: float | None = None,
+        custom_id: str = MISSING,
+        message: Message | None = None,
+    ) -> None:
+        # NOTE: check how else to set default
+        super().__init__(title=title, timeout=timeout, custom_id=custom_id)
+        if message:
+            self.description.default = message.content
+
+    async def on_submit(self, interaction: Interaction) -> None:
+        issue_reporter = interaction.user
+        issue_body = dedent(
+            f"""
+            ### Reported by
+            {issue_reporter.display_name} in Discord: {interaction.channel.name}
+            ### Description
+            {self.description}
+            ### MCVE
+            {self.mcve}
+            ### Logs
+            {self.logs}
+            ### Litestar Version
+            {self.version}"""
+        ).strip()
+        try:
+            response_wrapper = await github_client.rest.issues.async_create(
+                owner="litestar-org", repo="litestar", data={"title": self.title_.value, "body": issue_body}
+            )
+            if codes.is_success(response_wrapper.status_code):
+                await interaction.response.send_message(
+                    f"GitHub Issue created: {response_wrapper.parsed_data.html_url}", ephemeral=False
+                )
+            else:
+                await interaction.response.send_message("Issue creation failed.", ephemeral=True)
+
+        except Exception as e:  # noqa: BLE001
+            await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=True)
 
 
 class LitestarCommands(Cog):
@@ -17,12 +86,16 @@ class LitestarCommands(Cog):
         """Initialize cog."""
         self.bot = bot
         self.__cog_name__ = "Litestar Commands"  # type: ignore[misc]
-        self.context_menu = app_commands.ContextMenu(name="Create GitHub Issue", callback=self.create_github_issue)
+        self.context_menu = app_commands.ContextMenu(
+            # TODO: Name changed to not conflict with the other one, discord shows both
+            name="Create GitHub Modal",
+            callback=self.create_github_issue_modal,
+        )
         bot.tree.add_command(self.context_menu)
 
     @group(name="litestar")
     @is_byte_dev()
-    async def litestar(self, ctx: Context) -> None:
+    async def litestar(self, ctx: Context[Bot]) -> None:
         """Commands for the Litestar guild."""
         if ctx.invoked_subcommand is None:
             await ctx.send("Invalid Litestar command passed...")
@@ -35,7 +108,7 @@ class LitestarCommands(Cog):
         hidden=True,
     )
     @is_owner()
-    async def apply_role_embed(self, ctx: Context) -> None:
+    async def apply_role_embed(self, ctx: Context[Bot]) -> None:
         """Apply the role information embed to a channel.
 
         Args:
@@ -87,33 +160,15 @@ class LitestarCommands(Cog):
 
         await ctx.send(embed=embed)
 
-    async def create_github_issue(self, interaction: Interaction, message: Message) -> None:
+    # TODO: change name
+    async def create_github_issue_modal(self, interaction: Interaction, message: Message) -> None:
         """Context menu command to create a GitHub issue from a Discord message.
 
         Args:
             interaction: Interaction object.
             message: Message object.
         """
-        issue_title = "Issue from Discord"
-        issue_reporter = message.author
-        issue_body = (
-            f"Reported by {issue_reporter.display_name} in Discord: {message.channel.mention}:\n\n{message.content}"
-        )
-
-        try:
-            response_wrapper = await github_client.rest.issues.async_create(
-                owner="litestar-org", repo="litestar", data={"title": issue_title, "body": issue_body}
-            )
-
-            if response_wrapper._response.is_success:
-                issue_data = response_wrapper._data_model.parse_obj(response_wrapper._response.json())
-                issue_url = issue_data.html_url
-                await interaction.response.send_message(f"GitHub Issue created: {issue_url}", ephemeral=False)
-            else:
-                await interaction.response.send_message("Issue creation failed.", ephemeral=True)
-
-        except Exception as e:  # noqa: BLE001
-            await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=True)
+        await interaction.response.send_modal(GitHubIssue(message=message))
 
 
 async def setup(bot: Bot) -> None:
