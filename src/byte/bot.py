@@ -90,16 +90,17 @@ class Byte(Bot):
             ctx: Context object.
             error: Error object.
         """
-        err = error.original if hasattr(error, "original") else error
+        err = getattr(error, "original", error)
         if isinstance(err, Forbidden | NotFound):
             return
 
         embed = discord.Embed(title="Command Error", description=str(error), color=discord.Color.red())
-        embed.set_thumbnail(url=ctx.author.avatar.url)
+        embed.set_thumbnail(url=ctx.author.avatar.url if ctx.author.avatar else ctx.author.display_avatar.url)
         embed.add_field(name="Command", value=ctx.command)
         embed.add_field(name="Message", value=ctx.message.content)
         embed.add_field(name="Channel", value=ctx.channel.mention)
         embed.add_field(name="Author", value=ctx.author.mention)
+        assert ctx.guild, "Can this be None?"
         embed.add_field(name="Guild", value=ctx.guild.name)
         embed.add_field(name="Location", value=f"[Jump]({ctx.message.jump_url})")
         embed.set_footer(text=f"Time: {ctx.message.created_at.strftime('%Y-%m-%d %H:%M:%S')}")

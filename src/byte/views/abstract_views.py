@@ -4,12 +4,12 @@ from __future__ import annotations
 from copy import deepcopy
 from typing import TYPE_CHECKING, Any, Literal, TypedDict
 
-from discord import ButtonStyle, Colour, Embed, Interaction
+from discord import ButtonStyle, Colour, Embed, Interaction, Member
 from discord.ui import Button, View, button
 
 if TYPE_CHECKING:
     from datetime import datetime
-    from typing import Self, NotRequired
+    from typing import NotRequired, Self
 
     from discord.ext.commands import Bot
 
@@ -45,8 +45,10 @@ class ButtonEmbedView(View):
         Returns:
             True if the user is the author or a guild admin, False otherwise.
         """
-        if interaction.user.id == self.author_id or interaction.user.guild_permissions.administrator:
+        if interaction.user.id == self.author_id:
             return True
+        if isinstance(interaction.user, Member):
+            return interaction.user.guild_permissions.administrator
         await interaction.response.send_message(
             "You do not have permission to interact with this message.", ephemeral=True
         )
@@ -58,6 +60,7 @@ class ButtonEmbedView(View):
         Args:
             interaction: Interaction object.
         """
+        assert interaction.message, "Can this be None?"
         if await self.interaction_check(interaction):
             await interaction.message.delete()
 

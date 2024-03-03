@@ -26,6 +26,7 @@ class TestCog(Cog, name="Ping"):
     )
     async def ping(self, ctx: Context) -> None:
         """Responds with 'pong'."""
+        assert ctx.guild, "Can this be None?"
         await ctx.send(f"pong to the {ctx.guild.name} guild!")
 
 

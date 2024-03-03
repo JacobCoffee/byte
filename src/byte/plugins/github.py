@@ -50,6 +50,7 @@ class GitHubIssue(Modal, title="Create GitHub Issue"):
 
     async def on_submit(self, interaction: Interaction) -> None:
         issue_reporter = interaction.user
+        assert interaction.channel, "Can this be None?"
         issue_body_lines = [
             "### Reported by",
             f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id}) in Discord: {interaction.channel.name}",  # noqa: E501

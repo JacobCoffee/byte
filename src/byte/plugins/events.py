@@ -1,8 +1,7 @@
 """Plugins for events."""
-from threading import Thread
 from typing import cast
 
-from discord import Embed
+from discord import Embed, Thread
 from discord.ext.commands import Bot, Cog
 
 from byte.lib.common.assets import litestar_logo_yellow
@@ -30,8 +29,10 @@ class Events(Cog):
         Args:
             thread (discord.Thread): Thread that was created.
         """
+        assert thread.parent, "Can this be None?"
         if thread.parent.name == "help":
             embed = Embed(title=f"Notes for {thread.name}", color=0x42B1A8)
+            assert thread.owner, "Can this be None?"
             embed.add_field(name="At your assistance", value=f"{thread.owner.mention}", inline=False)
             embed.add_field(
                 name="No Response?", value="If no response in a reasonable time, ping @Member.", inline=True
@@ -46,6 +47,7 @@ class Events(Cog):
                 inline=False,
             )
             embed.set_thumbnail(url=litestar_logo_yellow)
+            assert thread.owner, "Can thread owner be None?"
             view = HelpThreadView(author=thread.owner, guild_id=thread.guild.id, bot=self.bot)
             await view.setup()
             await thread.send(embed=embed, view=view)

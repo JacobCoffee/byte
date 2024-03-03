@@ -1,6 +1,8 @@
 """Discord UI views used in forums."""
 
-from discord import ButtonStyle, Interaction
+from typing import Self
+
+from discord import ButtonStyle, Interaction, Member, User
 from discord.ext.commands import Bot
 from discord.ui import Button, View, button
 
@@ -16,7 +18,7 @@ logger = get_logger()
 class HelpThreadView(View):
     """View for the help thread."""
 
-    def __init__(self, author: Interaction.user, guild_id: int, bot: Bot, *args: list, **kwargs: dict) -> None:
+    def __init__(self, author: User | Member, guild_id: int, bot: Bot, *args: str, **kwargs: str) -> None:
         """Initialize the view."""
         super().__init__(*args, **kwargs)
         self.author = author
@@ -54,10 +56,15 @@ class HelpThreadView(View):
         Returns:
             bool: True if the user is the author or an admin, False otherwise.
         """
-        return interaction.user == self.author or interaction.user.guild_permissions.administrator
+        # return interaction.user == self.author or interaction.user.guild_permissions.administrator
+        if interaction.user == self.author:
+            return True
+        if isinstance(interaction.user, Member):
+            return interaction.user.guild_permissions.administrator
+        return False
 
     @button(label="Solve", style=ButtonStyle.green, custom_id="solve_button")
-    async def solve_button_callback(self, interaction: Interaction, button: Button) -> None:  # noqa: ARG002
+    async def solve_button_callback(self, interaction: Interaction, button: Button[Self]) -> None:  # noqa: ARG002
         """Mark the thread as solved.
 
         Args:
@@ -65,7 +72,7 @@ class HelpThreadView(View):
             button: Button object.
         """
         await interaction.response.defer()
-
+        assert interaction.message, "Can this be None?"
         ctx = await self.bot.get_context(interaction.message)
         solve_command = self.bot.get_command("solve")
         if solve_command is not None:
@@ -92,6 +99,7 @@ class HelpThreadView(View):
             interaction: Interaction object.
             button: Button object.
         """
+        assert interaction.message, "Can this be None?"
         content = interaction.message.content or "\u200b"
         logger.info("removing view for %s by %s", interaction.channel, interaction.user)
         await interaction.message.edit(content=content, embed=None, view=None)

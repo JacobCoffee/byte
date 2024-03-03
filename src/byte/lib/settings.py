@@ -45,13 +45,13 @@ class DiscordSettings(BaseSettings):
     """Internal channel ID for the development guild."""
     PLUGINS_LOC: Path = PLUGINS_DIR
     """Base Path to plugins directory."""
-    PLUGINS_DIRS: list[Path] = [f"{PLUGINS_DIR}"]
+    PLUGINS_DIRS: list[Path] = [PLUGINS_DIR]
     """Directories to search for plugins."""
     PRESENCE_URL: str = ""
 
     @field_validator("COMMAND_PREFIX")
     @classmethod
-    def assemble_command_prefix(cls, value: str) -> list[str]:
+    def assemble_command_prefix(cls, value: list[str]) -> list[str]:
         """Assembles the bot command prefix based on the environment.
 
         Args:

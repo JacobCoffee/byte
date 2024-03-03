@@ -40,6 +40,8 @@ class ForumCommands(Cog):
         """
         _solved_tag = "Solved"
         _tags_per_post = 5
+        assert ctx.channel, "Can this be None?"
+        assert ctx.channel.parent, "Can this be None?"
         if isinstance(ctx.channel, Thread) and ctx.channel.parent.name == "help":
             if solved_tag := discord.utils.find(lambda t: t.name == _solved_tag, ctx.channel.parent.available_tags):
                 if len(ctx.channel.applied_tags) == _tags_per_post and solved_tag not in ctx.channel.applied_tags:
