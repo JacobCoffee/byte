@@ -58,9 +58,9 @@ class GuildsController(Controller):
         path=urls.GUILD_LIST,
     )
     async def list_guilds(
-        self,
-        guilds_service: GuildsService,
-        filters: list[FilterTypes] = Dependency(skip_validation=True),
+            self,
+            guilds_service: GuildsService,
+            filters: list[FilterTypes] = Dependency(skip_validation=True),
     ) -> OffsetPagination[GuildSchema]:
         """List guilds.
 
@@ -81,16 +81,16 @@ class GuildsController(Controller):
         path=urls.GUILD_CREATE,
     )
     async def create_guild(
-        self,
-        guilds_service: GuildsService,
-        guild_id: int = Parameter(
-            title="Guild ID",
-            description="The guild ID.",
-        ),
-        guild_name: str = Parameter(
-            title="Guild Name",
-            description="The guild name.",
-        ),
+            self,
+            guilds_service: GuildsService,
+            guild_id: int = Parameter(
+                title="Guild ID",
+                description="The guild ID.",
+            ),
+            guild_name: str = Parameter(
+                title="Guild Name",
+                description="The guild name.",
+            ),
     ) -> str:
         """Create a guild.
 
