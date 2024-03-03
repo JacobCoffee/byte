@@ -10,6 +10,8 @@ from byte_bot.server.domain import urls
 
 __all__ = ["WebController"]
 
+from server.domain.guilds.helpers import get_byte_server_count
+
 
 class WebController(Controller):
     """Web Controller."""
@@ -26,7 +28,8 @@ class WebController(Controller):
     )
     async def index(self) -> Template:
         """Serve site root."""
-        return Template(template_name="index.html")
+        server_count = await get_byte_server_count()
+        return Template(template_name="index.html", context={"server_count": server_count})
 
     # add dashboard
     @get(
