@@ -11,10 +11,9 @@ async def get_byte_server_count() -> int:
     """Get the server count for Byte.
 
     Returns:
-        int: The server count for Byte.
+        int: The server counts for Byte or 0 if there are none.
     """
     async with config.get_session() as session:
         guilds_service = await anext(provides_guilds_service(db_session=session))
-        _, total = await guilds_service.list_and_count()
-
+        total = await guilds_service.count()
         return total or 0
