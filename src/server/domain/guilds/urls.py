@@ -14,7 +14,7 @@ GUILD_LIST: Final = f"{OPENAPI_SCHEMA}/guilds/list"
 """Guild list URL."""
 
 # -- Specific
-GUILD_UPDATE: Final = f"{OPENAPI_SCHEMA}/guilds/{{guild_id}}/update"
+GUILD_UPDATE: Final = f"{OPENAPI_SCHEMA}/guilds/{{guild_id:int}}/update"
 """Update guild URL."""
-GUILD_DETAIL: Final = f"{OPENAPI_SCHEMA}/guilds/{{guild_id}}/info"
+GUILD_DETAIL: Final = f"{OPENAPI_SCHEMA}/guilds/{{guild_id:int}}/info"
 """Guild detail URL."""
