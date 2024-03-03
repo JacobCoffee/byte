@@ -3,12 +3,15 @@
 from discord import ButtonStyle, Interaction, Member
 from discord.ext.commands import Bot
 from discord.ui import Button, View, button
+from sqlalchemy import select
 
 from byte_bot.byte.lib.common.links import litestar_issues
 from byte_bot.byte.lib.log import get_logger
+from byte_bot.lib.log import get_logger
+from byte_bot.server.domain.db.models import Guild
+from byte_bot.server.lib.db import config
 
 __all__ = ("HelpThreadView",)
-
 
 logger = get_logger()
 
@@ -16,13 +19,36 @@ logger = get_logger()
 class HelpThreadView(View):
     """View for the help thread."""
 
-    def __init__(self, author: Member, bot: Bot, *args: list, **kwargs: dict) -> None:
+    def __init__(self, author: Member, guild_id: int, bot: Bot, *args: list, **kwargs: dict) -> None:
         """Initialize the view."""
         super().__init__(*args, **kwargs)
         self.author = author
         self.bot = bot
+        self.guild_id = guild_id
 
-        self.add_item(Button(label="Open GitHub Issue", style=ButtonStyle.blurple, url=f"{litestar_issues}/new/choose"))
+    async def setup(self) -> None:
+        """Asynchronously setup guild details and add button.
+
+        .. todo:: Think about this more - If we plan on decoupling this
+            should be a call to an endpoint like we do in ``byte.bot.Byte.on_guild_join``.
+        """
+        # noinspection PyBroadException
+        try:
+            async with config.get_session() as session:
+                stmt = select(Guild).where(Guild.guild_id == self.guild_id)
+                result = await session.execute(stmt)
+                guild_settings = result.scalars().first()
+
+            if guild_settings and guild_settings.github_config:
+                guild_repo = guild_settings.github_config.github_repository
+                self.add_item(
+                    Button(label="Open GitHub Issue", style=ButtonStyle.blurple, url=f"{guild_repo}/new/choose")
+                )
+            else:
+                logger.warning("no github configuration found for guild %s", self.guild_id)
+                await self.author.send("No GitHub configuration found for this guild. Please contact an admin.")
+        except Exception:
+            logger.exception("failed to setup view for guild %s", self.guild_id)
 
     async def interaction_check(self, interaction: Interaction) -> bool:
         """Check if the user is the author or an admin.
