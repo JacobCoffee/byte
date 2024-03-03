@@ -46,7 +46,8 @@ class Events(Cog):
                 inline=False,
             )
             embed.set_thumbnail(url=litestar_logo_yellow)
-            view = HelpThreadView(author=thread.owner, bot=self.bot)
+            view = HelpThreadView(author=thread.owner, guild_id=thread.guild.id, bot=self.bot)
+            await view.setup()
             await thread.send(embed=embed, view=view)
         elif thread.parent.name == "forum":
             reply = f"Thanks for posting, {thread.owner.mention}!"
