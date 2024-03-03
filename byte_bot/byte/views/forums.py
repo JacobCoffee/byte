@@ -3,12 +3,9 @@
 from discord import ButtonStyle, Interaction, Member
 from discord.ext.commands import Bot
 from discord.ui import Button, View, button
-from sqlalchemy import select
 
-from byte_bot.byte.lib.common.links import litestar_issues
 from byte_bot.byte.lib.log import get_logger
-from byte_bot.lib.log import get_logger
-from byte_bot.server.domain.db.models import Guild
+from byte_bot.server.domain.guilds.dependencies import provides_guilds_service
 from byte_bot.server.lib.db import config
 
 __all__ = ("HelpThreadView",)
@@ -35,9 +32,8 @@ class HelpThreadView(View):
         # noinspection PyBroadException
         try:
             async with config.get_session() as session:
-                stmt = select(Guild).where(Guild.guild_id == self.guild_id)
-                result = await session.execute(stmt)
-                guild_settings = result.scalars().first()
+                guilds_service = await anext(provides_guilds_service(db_session=session))
+                guild_settings = await guilds_service.get(self.guild_id, id_attribute="guild_id")
 
             if guild_settings and guild_settings.github_config:
                 guild_repo = guild_settings.github_config.github_repository
@@ -46,7 +42,6 @@ class HelpThreadView(View):
                 )
             else:
                 logger.warning("no github configuration found for guild %s", self.guild_id)
-                await self.author.send("No GitHub configuration found for this guild. Please contact an admin.")
         except Exception:
             logger.exception("failed to setup view for guild %s", self.guild_id)
 
@@ -87,12 +82,13 @@ class HelpThreadView(View):
                     interaction.channel,
                 )
 
-                try:
-                    await solve_command.invoke(ctx)
-                    await interaction.followup.send("Marked as solved and closed the help forum!", ephemeral=True)
-                except Exception:
-                    logger.exception("failed to invoke solve command")
-                    await interaction.followup.send("Failed to mark as solved. Please try again.", ephemeral=True)
+            # noinspection PyBroadException
+            try:
+                await solve_command.invoke(ctx)
+                await interaction.followup.send("Marked as solved and closed the help forum!", ephemeral=True)
+            except Exception:
+                logger.exception("failed to invoke solve command")
+                await interaction.followup.send("Failed to mark as solved. Please try again.", ephemeral=True)
 
     @button(label="Remove", style=ButtonStyle.red, custom_id="remove_button")
     async def remove_button_callback(self, interaction: Interaction, button: Button) -> None:  # noqa: ARG002

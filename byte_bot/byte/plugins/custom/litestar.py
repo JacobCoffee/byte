@@ -2,16 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Self
-
-from discord import Embed, Interaction, Message, TextStyle, app_commands
+from discord import Embed
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
-from discord.ui import Modal, TextInput
-from discord.utils import MISSING
-from httpx import codes
 
 from byte_bot.byte.lib.utils import is_byte_dev, mention_role, mention_user
 from byte_bot.server.domain.github.helpers import github_client
+from byte_bot.byte.lib.common.colors import litestar_yellow
 
 __all__ = ("LitestarCommands", "setup")
 
@@ -94,12 +90,6 @@ class LitestarCommands(Cog):
         """Initialize cog."""
         self.bot = bot
         self.__cog_name__ = "Litestar Commands"  # type: ignore[misc]
-        self.context_menu = app_commands.ContextMenu(
-            # TODO: Name changed to not conflict with the other one, discord shows both
-            name="Create GitHub Issue",
-            callback=self.create_github_issue_modal,
-        )
-        bot.tree.add_command(self.context_menu)
 
     @group(name="litestar")
     @is_byte_dev()
@@ -122,7 +112,7 @@ class LitestarCommands(Cog):
         Args:
             ctx: Context object.
         """
-        embed = Embed(title="Litestar Roles", color=0x42B1A8)
+        embed = Embed(title="Litestar Roles", color=litestar_yellow)
 
         embed.add_field(name="Organization Roles", value="\u200b", inline=False)
         embed.add_field(
@@ -167,15 +157,6 @@ class LitestarCommands(Cog):
         )
 
         await ctx.send(embed=embed)
-
-    async def create_github_issue_modal(self, interaction: Interaction, message: Message) -> None:
-        """Context menu command to create a GitHub issue from a Discord message.
-
-        Args:
-            interaction: Interaction object.
-            message: Message object.
-        """
-        await interaction.response.send_modal(GitHubIssue(message=message))
 
 
 async def setup(bot: Bot) -> None:
