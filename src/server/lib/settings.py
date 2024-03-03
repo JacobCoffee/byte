@@ -71,7 +71,7 @@ class ProjectSettings(BaseSettings):
 
     model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", extra="ignore")
 
-    BUILD_NUMBER: str = ""
+    BUILD_NUMBER: str = version
     """Identifier for CI build."""
     CHECK_DB_READY: bool = True
     """Check for database readiness on startup."""
