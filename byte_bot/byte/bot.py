@@ -10,6 +10,7 @@ from anyio import run
 from discord import Activity, Forbidden, Intents, Member, Message, NotFound
 from discord.ext.commands import Bot, CommandError, Context, ExtensionAlreadyLoaded
 from dotenv import load_dotenv
+from httpx import ConnectError
 
 from byte_bot.byte.lib import settings
 from byte_bot.byte.lib.log import get_logger
@@ -113,10 +114,11 @@ class Byte(Bot):
         Args:
             member: Member object.
         """
-        await member.send(
-            f"Welcome to {member.guild.name}! Please make sure to read the rules if you haven't already. "
-            f"Feel free to ask any questions you have in the help channel."
-        )
+        if not member.bot:
+            await member.send(
+                f"Welcome to {member.guild.name}! Please make sure to read the rules if you haven't already. "
+                f"Feel free to ask any questions you have in the help channel."
+            )
 
     async def on_guild_join(self, guild: discord.Guild) -> None:
         """Handle guild join event.
@@ -127,17 +129,33 @@ class Byte(Bot):
         await self.tree.sync(guild=guild)
         api_url = f"http://0.0.0.0:8000/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
 
-        async with httpx.AsyncClient() as client:
-            response = await client.post(api_url)
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.post(api_url)
 
-            if response.status_code == httpx.codes.CREATED:
-                logger.info("successfully added guild %s (ID: %s)", guild.name, guild.id)
-            else:
-                logger.error(
-                    "%s joined guild '%s' but was not added to database",
-                    self.user.name if self.user else "Bot",
-                    guild.name,
-                )
+                if response.status_code == httpx.codes.CREATED:
+                    logger.info("successfully added guild %s (id: %s)", guild.name, guild.id)
+                    embed = discord.Embed(
+                        title="Guild Joined",
+                        description=f"Joined guild {guild.name} (ID: {guild.id})",
+                        color=discord.Color.green(),
+                    )
+                else:
+                    embed = discord.Embed(
+                        title="Guild Join Failed",
+                        description=f"Joined guild, but failed to add guild {guild.name} (ID: {guild.id}) to database",
+                        color=discord.Color.red(),
+                    )
+
+                if dev_guild := self.get_guild(settings.discord.DEV_GUILD_ID):
+                    if dev_channel := dev_guild.get_channel(settings.discord.DEV_GUILD_INTERNAL_ID):
+                        await dev_channel.send(embed=embed)
+                    else:
+                        logger.error("dev channel not found.")
+                else:
+                    logger.error("dev guild not found.")
+        except ConnectError:
+            logger.exception("failed to connect to api to add guild %s (id: %s)", guild.name, guild.id)
 
 
 def run_bot() -> None:
