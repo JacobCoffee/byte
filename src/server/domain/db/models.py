@@ -114,6 +114,8 @@ class AllowedUsersConfig(UUIDAuditBase):
 
     This model allows us to configure which users are allowed to perform administrative
     actions on Byte specifically without giving them full administrative access to the Discord guild.
+
+    .. todo:: More preferably, this should be more generalized to a user OR role ID.
     """
 
     __tablename__ = "allowed_users"  # type: ignore[reportAssignmentType]
