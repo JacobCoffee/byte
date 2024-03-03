@@ -97,17 +97,15 @@
                 url(&quot;static/splash-bg.png&quot;);
               background-position: top center;
             ">
-            <div class="flex flex-col justify-between items-center h-full px-5 pb-5 py-36">
+            <div class="flex flex-col justify-between items-center h-full px-5 pb-5 py-24 pt-12">
               <div class="flex flex-col justify-center items-center">
-                <img class="h-12 w-auto align-middle" src="static/logo.svg" alt="Byte Logo" />
+                <img class="h-24 w-auto align-middle" src="static/logo.svg" alt="Byte Logo" />
                 <p class="text-center">
                   Byte:
                   <span class="{{ 'text-success' if byte_status == 'online' else 'text-warning' }}">
-                    <b>{{ byte_status | default('Unknown') }}</b>
+                    <b>{{ overall_status | default('Unknown') | upper }}</b>
                   </span>
-                  .
                 </p>
-                <!-- TODO: Make this dynamic with a /health healthckeck! -->
                 <p class="text-center py-5">
                   Currently in
                   <br />
