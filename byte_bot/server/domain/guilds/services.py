@@ -26,7 +26,7 @@ class GuildsService(SQLAlchemyAsyncRepositoryService[Guild]):
     """Handles basic operations for a guild."""
 
     repository_type = GuildsRepository
-    match_fields = ["name"]
+    match_fields = ["guild_id"]
 
     async def to_model(self, data: Guild | dict[str, Any], operation: str | None = None) -> Guild:
         """Convert data to a model.
