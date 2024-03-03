@@ -9,7 +9,7 @@ from discord.ext.commands import Bot, Cog
 from byte.lib.common.assets import python_logo
 from byte.lib.common.colors import python_blue, python_yellow
 from byte.lib.utils import PEP, query_all_peps
-from byte.views.embed import ExtendedEmbed, Field
+from byte.views.abstract_views import ExtendedEmbed, Field
 from byte.views.python import PEPView
 
 __all__ = ("Python", "setup")
