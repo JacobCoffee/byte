@@ -4,13 +4,14 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from litestar import Controller, get, post
+from litestar import Controller, get, patch, post
 from litestar.di import Provide
 from litestar.params import Dependency, Parameter
 
-from byte_bot.server.domain import urls
+from byte_bot.server.domain.db.models import Guild
+from byte_bot.server.domain.guilds import urls
 from byte_bot.server.domain.guilds.dependencies import provides_guilds_service
-from byte_bot.server.domain.guilds.schemas import GuildSchema
+from byte_bot.server.domain.guilds.schemas import GuildSchema, UpdateableGuildSetting
 from byte_bot.server.domain.guilds.services import GuildsService  # noqa: TCH001
 
 if TYPE_CHECKING:
@@ -33,9 +34,9 @@ class GuildController(Controller):
         path=urls.GUILD_LIST,
     )
     async def list_guilds(
-        self,
-        guilds_service: GuildsService,
-        filters: list[FilterTypes] = Dependency(skip_validation=True),
+            self,
+            guilds_service: GuildsService,
+            filters: list[FilterTypes] = Dependency(skip_validation=True),
     ) -> OffsetPagination[GuildSchema]:
         """List guilds.
 
@@ -56,16 +57,16 @@ class GuildController(Controller):
         path=urls.GUILD_CREATE,
     )
     async def create_guild(
-        self,
-        guilds_service: GuildsService,
-        guild_id: int = Parameter(
-            title="Guild ID",
-            description="The guild ID.",
-        ),
-        guild_name: str = Parameter(
-            title="Guild Name",
-            description="The guild name.",
-        ),
+            self,
+            guilds_service: GuildsService,
+            guild_id: int = Parameter(
+                title="Guild ID",
+                description="The guild ID.",
+            ),
+            guild_name: str = Parameter(
+                title="Guild Name",
+                description="The guild name.",
+            ),
     ) -> str:
         """Create a guild.
 
@@ -80,3 +81,39 @@ class GuildController(Controller):
         new_guild = {"guild_id": guild_id, "guild_name": guild_name}
         await guilds_service.create(new_guild)
         return f"Guild {guild_name} created."
+
+    @patch(
+        operation_id="UpdateGuild",
+        name="guilds:update",
+        summary="Update a guild.",
+        path=urls.GUILD_UPDATE,
+    )
+    async def update_guild(
+            self,
+            guilds_service: GuildsService,
+            guild_id: Guild.guild_id = Parameter(
+                title="Guild ID",
+                description="The guild ID.",
+            ),
+            setting: UpdateableGuildSetting = Parameter(
+                title="Setting",
+                description="The setting to update.",
+            ),
+            value: str | int = Parameter(
+                title="Value",
+                description="The new value for the setting.",
+            ),
+    ) -> str:
+        """Update a guild by ID.
+
+        Args:
+            guilds_service (GuildsService): Guilds service
+            guild_id (Guild.guild_id): Guild ID
+            setting (UpdateableGuildSetting): Setting to update
+            value (str | int): New value for the setting
+
+        Returns:
+            Guild: Updated guild object
+        """
+        await guilds_service.update(guild_id, setting, {"some-config-thing": value})
+        return f"Guild {guild_id} updated."

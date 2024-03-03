@@ -8,7 +8,7 @@ from pydantic import Field
 
 from byte_bot.server.lib.schema import CamelizedBaseModel
 
-__all__ = ("GuildCreate", "GuildSchema", "GuildUpdate")
+__all__ = ("GuildCreate", "GuildSchema", "GuildUpdate", "UpdateableGuildSetting")
 
 
 class GuildSchema(CamelizedBaseModel):
@@ -49,3 +49,28 @@ class GuildUpdate(CamelizedBaseModel):
     issue_linking: bool | None = Field(title="Issue Linking", description="Is issue linking enabled.")
     comment_linking: bool | None = Field(title="Comment Linking", description="Is comment linking enabled.")
     pep_linking: bool | None = Field(title="PEP Linking", description="Is PEP linking enabled.")
+
+
+class UpdateableGuildSetting(CamelizedBaseModel):
+    """An allowed setting that admins can update for their guild."""
+
+    """Guild Model Settings"""
+    prefix: str = Field(title="Prefix", description="The prefix for the guild.")
+    help_channel_id: int = Field(title="Help Channel ID", description="The channel ID for the help channel.")
+    sync_label: str = Field(
+        title="Sync Label", description="The forum label to use for GitHub discussion syncs."
+    )
+    issue_linking: bool = Field(title="Issue Linking", description="Is issue linking enabled.")
+    comment_linking: bool = Field(title="Comment Linking", description="Is comment linking enabled.")
+    pep_linking: bool = Field(title="PEP Linking", description="Is PEP linking enabled.")
+
+    """GitHub Config Settings"""
+    discussion_sync: bool = Field(title="Discussion Sync", description="Is GitHub discussion sync enabled.")
+    github_organization: str = Field(title="GitHub Organization", description="The GitHub organization to sync.")
+    github_repository: str = Field(title="GitHub Repository", description="The GitHub repository to sync.")
+
+    """StackOverflow Tags Config Settings"""
+    tag_name: str = Field(title="StackOverflow Tag", description="The StackOverflow tag to sync.")
+
+    """Allowed Users Config Settings"""
+    user_id: int = Field(title="User ID", description="The user or role ID to allow.")
