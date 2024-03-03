@@ -41,6 +41,8 @@ class DiscordSettings(BaseSettings):
     """Discord Guild ID for development."""
     DEV_USER_ID: int
     """Discord User ID for development."""
+    DEV_GUILD_INTERNAL_ID: int = 1136100160510902272
+    """Internal channel ID for the development guild."""
     PLUGINS_LOC: Path = PLUGINS_DIR
     """Base Path to plugins directory."""
     PLUGINS_DIRS: list[Path] = [f"{PLUGINS_DIR}"]
