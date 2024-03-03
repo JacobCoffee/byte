@@ -16,3 +16,4 @@ This includes things like commands, event handlers, and other features.
     github
     guild
     testing
+    python
