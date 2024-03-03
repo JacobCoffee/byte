@@ -9,7 +9,7 @@ from discord.ui import Button, View, button
 
 if TYPE_CHECKING:
     from datetime import datetime
-    from typing import Self
+    from typing import Self, NotRequired
 
     from discord.ext.commands import Bot
 
@@ -98,7 +98,7 @@ class Field(TypedDict):
 
     name: Any
     value: Any
-    inline: bool
+    inline: NotRequired[bool]
 
 
 class ExtendedEmbed(Embed):
