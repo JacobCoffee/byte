@@ -26,7 +26,7 @@ __all__ = [
 routes: list[ControllerRouterHandler] = [
     system.controllers.system.SystemController,
     web.controllers.web.WebController,
-    guilds.controllers.GuildController,
+    guilds.controllers.GuildsController,
 ]
 """Routes for the application."""
 

@@ -3,13 +3,12 @@ from __future__ import annotations
 
 from typing import Any
 
-from server.domain.db.models import Guild
+from server.domain.db.models import AllowedUsersConfig, GitHubConfig, Guild, SOTagsConfig
 from server.lib import log
-from server.lib.repository import SQLAlchemyAsyncSlugRepository
+from server.lib.repository import SQLAlchemyAsyncRepository, SQLAlchemyAsyncSlugRepository
 from server.lib.service import SQLAlchemyAsyncRepositoryService
 
 __all__ = ("GuildsRepository", "GuildsService")
-
 
 logger = log.get_logger()
 
@@ -37,3 +36,39 @@ class GuildsService(SQLAlchemyAsyncRepositoryService[Guild]):
             Project: Converted model
         """
         return await super().to_model(data, operation)
+
+
+class GitHubConfigRepository(SQLAlchemyAsyncRepository[GitHubConfig]):
+    """GitHubConfig SQLAlchemy Repository."""
+
+    model_type = GitHubConfig
+
+
+class GitHubConfigService(SQLAlchemyAsyncRepositoryService[GitHubConfig]):
+    """Handles basic operations for the guilds' GitHub config."""
+
+    repository_type = GitHubConfigRepository
+
+
+class SOTagsConfigRepository(SQLAlchemyAsyncRepository[SOTagsConfig]):
+    """SOTagsConfig SQLAlchemy Repository."""
+
+    model_type = SOTagsConfig
+
+
+class SOTagsConfigService(SQLAlchemyAsyncRepositoryService[SOTagsConfig]):
+    """Handles basic operations for the guilds' StackOverflow tags config."""
+
+    repository_type = SOTagsConfigRepository
+
+
+class AllowedUsersConfigRepository(SQLAlchemyAsyncRepository[AllowedUsersConfig]):
+    """AllowedUsersConfig SQLAlchemy Repository."""
+
+    model_type = AllowedUsersConfig
+
+
+class AllowedUsersConfigService(SQLAlchemyAsyncRepositoryService[AllowedUsersConfig]):
+    """Handles basic operations for the guilds' Allowed Users config."""
+
+    repository_type = AllowedUsersConfigRepository

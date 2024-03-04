@@ -4,8 +4,9 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from sqlalchemy import select
+from sqlalchemy.orm import joinedload, noload, selectinload
 
-from server.domain.db.models import Guild
+from server.domain.db.models import AllowedUsersConfig, GitHubConfig, Guild, SOTagsConfig
 from server.domain.guilds.services import GuildsService
 from server.lib import log
 
@@ -20,7 +21,7 @@ logger = log.get_logger()
 
 
 async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[GuildsService, None]:
-    """Construct GuildConfig-based repository and service objects for the request.
+    """Construct Guilds-based repository and service objects for the request.
 
     Args:
         db_session (AsyncSession): SQLAlchemy AsyncSession
@@ -28,7 +29,22 @@ async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[Gu
     Yields:
         GuildsService: GuildConfig-based service
     """
-    async with GuildsService.new(session=db_session, statement=select(Guild).order_by(Guild.guild_id)) as service:
+    async with GuildsService.new(
+        session=db_session,
+        statement=select(Guild)
+        .order_by(Guild.guild_name)
+        .options(
+            selectinload(Guild.github_config).options(
+                joinedload(GitHubConfig.guild, innerjoin=True).options(noload("*")),
+            ),
+            selectinload(Guild.sotags_configs).options(
+                joinedload(SOTagsConfig.guild, innerjoin=True).options(noload("*")),
+            ),
+            selectinload(Guild.allowed_users).options(
+                joinedload(AllowedUsersConfig.guild, innerjoin=True).options(noload("*")),
+            ),
+        ),
+    ) as service:
         try:
             yield service
         finally:
