@@ -76,12 +76,20 @@ async def provides_github_config_service(db_session: AsyncSession) -> AsyncGener
     Yields:
         GitHubConfigService: GitHubConfig-based service
     """
-    async with GitHubConfigService.new(
+    async with GuildsService.new(
         session=db_session,
-        statement=select(GitHubConfig)
-        .order_by(GitHubConfig.github_organization)
+        statement=select(Guild)
+        .order_by(Guild.guild_name)
         .options(
-            selectinload(GitHubConfig.guild).options(noload("*")),
+            selectinload(Guild.github_config).options(
+                joinedload(GitHubConfig.guild, innerjoin=True).options(noload("*")),
+            ),
+            selectinload(Guild.sotags_configs).options(
+                joinedload(SOTagsConfig.guild, innerjoin=True).options(noload("*")),
+            ),
+            selectinload(Guild.allowed_users).options(
+                joinedload(AllowedUsersConfig.guild, innerjoin=True).options(noload("*")),
+            ),
         ),
     ) as service:
         try:

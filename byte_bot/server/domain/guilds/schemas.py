@@ -63,6 +63,23 @@ class ForumConfigSchema(CamelizedBaseModel):
     showcase_thread_auto_close_days: int
 
 
+class GitHubConfigSchema(CamelizedBaseModel):
+    guild_id: UUID
+    discussion_sync: bool
+    github_organization: str | None
+    github_repository: str | None
+
+
+class SOTagsConfigSchema(CamelizedBaseModel):
+    guild_id: UUID
+    tag_name: str
+
+
+class AllowedUsersConfigSchema(CamelizedBaseModel):
+    guild_id: int
+    user_id: UUID
+
+
 class GuildSchema(CamelizedBaseModel):
     """Schema representing an existing guild."""
 

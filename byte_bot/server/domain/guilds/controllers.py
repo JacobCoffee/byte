@@ -58,9 +58,9 @@ class GuildsController(Controller):
         path=urls.GUILD_LIST,
     )
     async def list_guilds(
-            self,
-            guilds_service: GuildsService,
-            filters: list[FilterTypes] = Dependency(skip_validation=True),
+        self,
+        guilds_service: GuildsService,
+        filters: list[FilterTypes] = Dependency(skip_validation=True),
     ) -> OffsetPagination[GuildSchema]:
         """List guilds.
 
@@ -81,16 +81,16 @@ class GuildsController(Controller):
         path=urls.GUILD_CREATE,
     )
     async def create_guild(
-            self,
-            guilds_service: GuildsService,
-            guild_id: int = Parameter(
-                title="Guild ID",
-                description="The guild ID.",
-            ),
-            guild_name: str = Parameter(
-                title="Guild Name",
-                description="The guild name.",
-            ),
+        self,
+        guilds_service: GuildsService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+        guild_name: str = Parameter(
+            title="Guild Name",
+            description="The guild name.",
+        ),
     ) -> str:
         """Create a guild.
 
@@ -276,3 +276,29 @@ class GuildsController(Controller):
         """
         result = await forum_service.get(guild_id, id_attribute="guild_id")
         return forum_service.to_schema(schema_type=ForumConfigSchema, data=result)
+
+    @get(
+        operation_id="GuildDetail",
+        name="guilds:detail",
+        summary="Get guild details.",
+        path=urls.GUILD_DETAIL,
+    )
+    async def get_guild(
+        self,
+        guilds_service: GuildsService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+    ) -> GuildSchema:
+        """Get a guild by ID.
+
+        Args:
+            guilds_service (GuildsService): Guilds service
+            guild_id (int): Guild ID
+
+        Returns:
+            Guild: Guild object
+        """
+        result = await guilds_service.get(guild_id, id_attribute="guild_id")
+        return guilds_service.to_schema(GuildSchema, result)
