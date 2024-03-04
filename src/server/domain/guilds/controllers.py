@@ -7,7 +7,6 @@ from litestar import Controller, get, patch, post
 from litestar.di import Provide
 from litestar.params import Dependency, Parameter
 
-from server.domain.db.models import Guild
 from server.domain.guilds import urls
 from server.domain.guilds.dependencies import provides_guilds_service
 from server.domain.guilds.schemas import GuildSchema, UpdateableGuildSetting
@@ -17,10 +16,10 @@ if TYPE_CHECKING:
     from advanced_alchemy import FilterTypes
     from litestar.pagination import OffsetPagination
 
-__all__ = ("GuildController",)
+__all__ = ("GuildsController",)
 
 
-class GuildController(Controller):
+class GuildsController(Controller):
     """Controller for guild-based routes."""
 
     tags = ["Guilds"]
@@ -33,9 +32,9 @@ class GuildController(Controller):
         path=urls.GUILD_LIST,
     )
     async def list_guilds(
-            self,
-            guilds_service: GuildsService,
-            filters: list[FilterTypes] = Dependency(skip_validation=True),
+        self,
+        guilds_service: GuildsService,
+        filters: list[FilterTypes] = Dependency(skip_validation=True),
     ) -> OffsetPagination[GuildSchema]:
         """List guilds.
 
@@ -56,16 +55,16 @@ class GuildController(Controller):
         path=urls.GUILD_CREATE,
     )
     async def create_guild(
-            self,
-            guilds_service: GuildsService,
-            guild_id: int = Parameter(
-                title="Guild ID",
-                description="The guild ID.",
-            ),
-            guild_name: str = Parameter(
-                title="Guild Name",
-                description="The guild name.",
-            ),
+        self,
+        guilds_service: GuildsService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+        guild_name: str = Parameter(
+            title="Guild Name",
+            description="The guild name.",
+        ),
     ) -> str:
         """Create a guild.
 
@@ -88,20 +87,20 @@ class GuildController(Controller):
         path=urls.GUILD_UPDATE,
     )
     async def update_guild(
-            self,
-            guilds_service: GuildsService,
-            guild_id: Guild.guild_id = Parameter(
-                title="Guild ID",
-                description="The guild ID.",
-            ),
-            setting: UpdateableGuildSetting = Parameter(
-                title="Setting",
-                description="The setting to update.",
-            ),
-            value: str | int = Parameter(
-                title="Value",
-                description="The new value for the setting.",
-            ),
+        self,
+        guilds_service: GuildsService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+        setting: UpdateableGuildSetting = Parameter(
+            title="Setting",
+            description="The setting to update.",
+        ),
+        value: str | int = Parameter(
+            title="Value",
+            description="The new value for the setting.",
+        ),
     ) -> str:
         """Update a guild by ID.
 
@@ -114,5 +113,32 @@ class GuildController(Controller):
         Returns:
             Guild: Updated guild object
         """
+        # todo: this is a placeholder, update
         await guilds_service.update(guild_id, setting, {"some-config-thing": value})
         return f"Guild {guild_id} updated."
+
+    @get(
+        operation_id="GuildDetail",
+        name="guilds:detail",
+        summary="Get guild details.",
+        path=urls.GUILD_DETAIL,
+    )
+    async def get_guild(
+        self,
+        guilds_service: GuildsService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+    ) -> GuildSchema:
+        """Get a guild by ID.
+
+        Args:
+            guilds_service (GuildsService): Guilds service
+            guild_id (int): Guild ID
+
+        Returns:
+            Guild: Guild object
+        """
+        result = await guilds_service.get(guild_id, id_attribute="guild_id")
+        return guilds_service.to_schema(GuildSchema, result)
