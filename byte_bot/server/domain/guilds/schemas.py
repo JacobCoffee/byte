@@ -11,6 +11,23 @@ from byte_bot.server.lib.schema import CamelizedBaseModel
 __all__ = ("GuildCreate", "GuildSchema", "GuildUpdate", "UpdateableGuildSetting")
 
 
+class GitHubConfigSchema(CamelizedBaseModel):
+    guild_id: UUID
+    discussion_sync: bool
+    github_organization: str | None
+    github_repository: str | None
+
+
+class SOTagsConfigSchema(CamelizedBaseModel):
+    guild_id: UUID
+    tag_name: str
+
+
+class AllowedUsersConfigSchema(CamelizedBaseModel):
+    guild_id: int
+    user_id: UUID
+
+
 class GuildSchema(CamelizedBaseModel):
     """Schema representing an existing guild."""
 
@@ -25,6 +42,15 @@ class GuildSchema(CamelizedBaseModel):
     issue_linking: bool | None = Field(title="Issue Linking", description="Is issue linking enabled.")
     comment_linking: bool | None = Field(title="Comment Linking", description="Is comment linking enabled.")
     pep_linking: bool | None = Field(title="PEP Linking", description="Is PEP linking enabled.")
+    github_config: GitHubConfigSchema | None = Field(
+        title="GitHub Config", description="The GitHub configuration for the guild."
+    )
+    sotags_configs: list[SOTagsConfigSchema] = Field(
+        title="StackOverflow Tags Configs", description="The StackOverflow tags configuration for the guild."
+    )
+    allowed_users: list[AllowedUsersConfigSchema] = Field(
+        title="Allowed Users", description="The allowed users configuration for the guild."
+    )
 
 
 class GuildCreate(CamelizedBaseModel):
@@ -57,9 +83,7 @@ class UpdateableGuildSetting(CamelizedBaseModel):
     """Guild Model Settings"""
     prefix: str = Field(title="Prefix", description="The prefix for the guild.")
     help_channel_id: int = Field(title="Help Channel ID", description="The channel ID for the help channel.")
-    sync_label: str = Field(
-        title="Sync Label", description="The forum label to use for GitHub discussion syncs."
-    )
+    sync_label: str = Field(title="Sync Label", description="The forum label to use for GitHub discussion syncs.")
     issue_linking: bool = Field(title="Issue Linking", description="Is issue linking enabled.")
     comment_linking: bool = Field(title="Comment Linking", description="Is comment linking enabled.")
     pep_linking: bool = Field(title="PEP Linking", description="Is PEP linking enabled.")

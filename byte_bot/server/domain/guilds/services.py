@@ -4,14 +4,14 @@ from __future__ import annotations
 
 from typing import Any
 
+from byte_bot.server.domain.db.models import AllowedUsersConfig, GitHubConfig, Guild, SOTagsConfig
+from byte_bot.server.lib import log
+from byte_bot.server.lib.repository import SQLAlchemyAsyncRepository, SQLAlchemyAsyncSlugRepository
+from byte_bot.server.lib.service import SQLAlchemyAsyncRepositoryService
 from advanced_alchemy.repository import SQLAlchemyAsyncSlugRepository
 from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
 
-from byte_bot.server.domain.db.models import Guild
-from byte_bot.server.lib import log
-
 __all__ = ("GuildsRepository", "GuildsService")
-
 
 logger = log.get_logger()
 
