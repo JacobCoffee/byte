@@ -32,6 +32,11 @@ __all__ = (
     "RuffRule",
     "chunk_sequence",
     "format_ruff_rule",
+    "PEP",
+    "PEPType",
+    "PEPStatus",
+    "PEPHistoryItem",
+    "is_guild_admin",
     "is_byte_dev",
     "linker",
     "mention_channel",
@@ -141,6 +146,27 @@ class PEP(TypedDict):
     replaces: str | None
     superseded_by: str | None
     url: str
+
+
+def is_guild_admin() -> Check[Any]:
+    """Check if the user is a guild admin.
+
+    Returns:
+        A check function.
+    """
+
+    async def predicate(ctx: Context) -> bool:
+        """Check if the user is a guild admin.
+
+        Args:
+            ctx: Context object.
+
+        Returns:
+            True if the user is a guild admin, False otherwise.
+        """
+        return ctx.author.guild_permissions.administrator
+
+    return commands.check(predicate)
 
 
 def is_byte_dev() -> Check[Any]:
