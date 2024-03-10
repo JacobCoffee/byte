@@ -10,4 +10,14 @@ __all__ = (
     "colors",
     "guilds",
     "links",
+    "config_options",
 )
+
+config_options: list[dict[str, str]] = [
+    {"label": "Server Settings", "description": "Configure overall server settings"},
+    {"label": "Forum Settings", "description": "Configure help and showcase forum settings"},
+    {"label": "GitHub Settings", "description": "Configure GitHub settings"},
+    {"label": "StackOverflow Settings", "description": "Configure StackOverflow settings"},
+    {"label": "Allowed Users", "description": "Configure allowed users"},
+    {"label": "Byte", "description": "Configure meta Byte features and settings"},
+]
