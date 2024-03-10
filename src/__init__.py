@@ -1,4 +1,5 @@
 """Byte Bot."""
+
 from __future__ import annotations
 
 from rich import get_console

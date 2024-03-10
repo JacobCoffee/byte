@@ -1,4 +1,5 @@
 """System domain helper functions."""
+
 from __future__ import annotations
 
 from time import time

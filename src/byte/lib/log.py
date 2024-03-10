@@ -1,4 +1,5 @@
 """Centralized logging configuration."""
+
 import logging
 import logging.config
 import logging.handlers

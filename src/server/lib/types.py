@@ -1,4 +1,5 @@
 """Library module for type definitions to be used in the application."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Literal, TypeAlias, TypeVar

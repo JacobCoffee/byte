@@ -1,4 +1,5 @@
 """Plugins for events."""
+
 from threading import Thread
 from typing import cast
 

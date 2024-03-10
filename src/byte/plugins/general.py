@@ -1,4 +1,5 @@
 """General plugins to be used wherever."""
+
 from __future__ import annotations
 
 from discord import Embed, Interaction

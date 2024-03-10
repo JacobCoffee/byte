@@ -1,4 +1,5 @@
 """CORS config."""
+
 from litestar.config.cors import CORSConfig
 
 from server.lib import settings

@@ -3,6 +3,7 @@
 Also, defines functions that translate service and repository exceptions
 into HTTP exceptions.
 """
+
 from __future__ import annotations
 
 import sys

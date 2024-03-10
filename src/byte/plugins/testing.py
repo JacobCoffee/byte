@@ -1,4 +1,5 @@
 """Plugins for testing purposes."""
+
 from discord.ext.commands import Bot, Cog, Context, command, group
 
 

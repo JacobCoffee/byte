@@ -1,4 +1,5 @@
 """Helper functions for use within the GitHub domain."""
+
 from __future__ import annotations
 
 from githubkit import AppInstallationAuthStrategy, GitHub  # type: ignore[reportMissingImports]

@@ -1,4 +1,5 @@
 """Byte Bot Bot."""
+
 from __future__ import annotations
 
 from byte import bot, lib, plugins, views
