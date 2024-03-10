@@ -1,6 +1,7 @@
 """Byte utilities."""
 from __future__ import annotations
 
+import datetime as dt
 import json
 import re
 import subprocess
@@ -12,6 +13,7 @@ from typing import TYPE_CHECKING, TypedDict, TypeVar
 import httpx
 from anyio import run_process
 from discord.ext import commands
+from discord.ext.commands import CheckFailure
 from ruff.__main__ import find_ruff_bin  # type: ignore[import-untyped]
 
 from byte.lib import settings
@@ -50,6 +52,7 @@ __all__ = (
     "paste",
     "chunk_sequence",
     "query_all_peps",
+    "get_next_friday",
 )
 
 _T = TypeVar("_T")
@@ -162,7 +165,12 @@ def is_guild_admin() -> Check[Any]:
         Returns:
             True if the user is a guild admin, False otherwise.
         """
-        return ctx.author.guild_permissions.administrator
+        member = ctx.guild.get_member(ctx.author.id)
+        if not member:
+            msg = "Member not found in the guild."
+            raise CheckFailure(msg)
+
+        return member.guild_permissions.administrator
 
     return commands.check(predicate)
 
@@ -467,3 +475,25 @@ async def query_all_peps() -> list[PEP]:
         }
         for pep_info in data.values()
     ]
+
+
+def get_next_friday(now: datetime, delay: int | None = None) -> tuple[datetime, datetime]:
+    """Calculate the next Friday from ``now``.
+
+    If ``delay``, calculate the Friday for ``delay`` weeks from now.
+
+    Args:
+        now: The current date and time.
+        delay: The number of weeks to delay the calculation.
+
+    Returns:
+        datetime: The next Friday, optionally for the week after next.
+    """
+    days_ahead = 4 - now.weekday()
+    if days_ahead < 0:
+        days_ahead += 7
+    if delay:
+        days_ahead += 7 * delay
+    start_dt = (now + dt.timedelta(days=days_ahead)).replace(hour=11, minute=0, second=0, microsecond=0)
+    end_dt = start_dt + dt.timedelta(hours=1)
+    return start_dt, end_dt
