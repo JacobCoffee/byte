@@ -82,7 +82,8 @@ class UpdateableGuildSetting(CamelizedBaseModel):
 
     """Guild Model Settings"""
     prefix: str = Field(title="Prefix", description="The prefix for the guild.")
-    help_channel_id: int = Field(title="Help Channel ID", description="The channel ID for the help channel.")
+    help_channel_id: int = Field(title="Help Channel ID", description="The channel ID for the help forum.")
+    showcase_channel_id: int = Field(title="Showcase Channel ID", description="The channel ID for the showcase forum.")
     sync_label: str = Field(title="Sync Label", description="The forum label to use for GitHub discussion syncs.")
     issue_linking: bool = Field(title="Issue Linking", description="Is issue linking enabled.")
     comment_linking: bool = Field(title="Comment Linking", description="Is comment linking enabled.")
@@ -94,7 +95,44 @@ class UpdateableGuildSetting(CamelizedBaseModel):
     github_repository: str = Field(title="GitHub Repository", description="The GitHub repository to sync.")
 
     """StackOverflow Tags Config Settings"""
-    tag_name: str = Field(title="StackOverflow Tag", description="The StackOverflow tag to sync.")
+    tag_name: list[str] = Field(
+        title="StackOverflow Tag(s)",
+        description="The StackOverflow tag(s) to sync.",
+        examples=["litestar", "byte", "python"],
+    )
 
     """Allowed Users Config Settings"""
     user_id: int = Field(title="User ID", description="The user or role ID to allow.")
+
+    """Forum Config Settings"""
+    """Help Forum"""
+    help_forum: bool = Field(title="Help Forum", description="Is the help forum enabled.")
+    help_forum_category: str = Field(title="Help Forum Category", description="The help forum category.")
+    help_thread_auto_close: bool = Field(
+        title="Help Thread Auto Close", description="Is the help thread auto close enabled."
+    )
+    help_thread_auto_close_days: int = Field(
+        title="Help Thread Auto Close Days", description="The days to auto close help threads after inactivity."
+    )
+    help_thread_notify: bool = Field(
+        title="Help Thread Notify", description="Whether to notify roles for unresponded help threads."
+    )
+    help_thread_notify_roles: list[int] = Field(
+        title="Help Thread Notify Roles", description="The roles to notify for unresponded help threads."
+    )
+    help_thread_notify_days: int = Field(
+        title="Help Thread Notify Days", description="The days to notify `notify_roles` after not receiving a response."
+    )
+    help_thread_sync: bool = Field(
+        title="Help Thread Sync", description="Is the help thread GitHub discussions sync enabled."
+    )
+
+    """Showcase forum"""
+    showcase_forum: bool = Field(title="Showcase Forum", description="Is the showcase forum enabled.")
+    showcase_forum_category: str = Field(title="Showcase Forum Category", description="The showcase forum category.")
+    showcase_thread_auto_close: bool = Field(
+        title="Showcase Thread Auto Close", description="Is the showcase thread auto close enabled."
+    )
+    showcase_thread_auto_close_days: int = Field(
+        title="Showcase Thread Auto Close Days", description="The days to auto close showcase threads after inactivity."
+    )
