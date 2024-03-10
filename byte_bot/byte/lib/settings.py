@@ -107,6 +107,10 @@ class LogSettings(BaseSettings):
     """Sets the log level for the websockets library."""
     ASYNCIO_LEVEL: int = 20
     """Sets the log level for the asyncio library."""
+    HTTP_CORE_LEVEL: int = 20
+    """Sets the log level for the httpcore library. (Used in cert. validation)"""
+    HTTPX_LEVEL: int = 30
+    """Sets the log level for the httpx library."""
     FORMAT: str = "[[ %(asctime)s ]] - [[ %(name)s ]] - [[ %(levelname)s ]] - %(message)s"
     """Log format string."""
     FILE: Path = BASE_DIR / "logs" / "byte.log"

@@ -8,9 +8,9 @@ from discord.app_commands import command as app_command
 from discord.ext import commands
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
-from byte_bot.byte.lib.utils import is_byte_dev
-
 __all__ = ("AdminCommands", "setup")
+
+from byte.lib.checks import is_byte_dev
 
 
 class AdminCommands(Cog):
