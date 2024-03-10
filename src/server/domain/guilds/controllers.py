@@ -102,7 +102,7 @@ class GuildsController(Controller):
             title="Value",
             description="The new value for the setting.",
         ),
-    ) -> str:
+    ) -> GuildSchema | OffsetPagination[GuildSchema]:
         """Update a guild by ID.
 
         Args:
@@ -114,9 +114,11 @@ class GuildsController(Controller):
         Returns:
             Guild: Updated guild object
         """
-        # todo: this is a placeholder, update
-        await guilds_service.update(guild_id, setting, {"some-config-thing": value})
-        return f"Guild {guild_id} updated."
+        _guild = guilds_service.get(guild_id, id_attribute="guild_id")
+        # todo: this is a placeholder, update to grab whichever setting is being update, and update the corresponding
+        #       tables value
+        await guilds_service.update(_guild, setting, {"some-config-thing": value})
+        return guilds_service.to_schema(GuildSchema, _guild)
 
     @get(
         operation_id="GuildDetail",
