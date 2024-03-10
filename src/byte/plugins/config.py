@@ -1,4 +1,5 @@
 """Plugins for guild admins to configure Byte and its features."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -42,8 +43,25 @@ class Config(Cog):
             interaction: Interaction object.
             setting: The setting to configure.
         """
-        view = ConfigView(preselected=setting)
-        await interaction.response.send_message("Select a configuration option:", view=view, ephemeral=True)
+        if setting:
+            if selected_option := next(
+                (option for option in config_options if option["label"] == setting),
+                None,
+            ):
+                view = ConfigView(preselected=selected_option["label"])
+                await interaction.response.send_message(
+                    f"Configure {selected_option['label']}:",
+                    view=view,
+                    ephemeral=True,
+                )
+            else:
+                await interaction.response.send_message(
+                    f"Invalid setting: {setting}. Please select a valid setting.",
+                    ephemeral=True,
+                )
+        else:
+            view = ConfigView()
+            await interaction.response.send_message("Select a configuration option:", view=view, ephemeral=True)
 
 
 async def setup(bot: Bot) -> None:
