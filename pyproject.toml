@@ -254,7 +254,7 @@ known-first-party = ["src", "tests"]
 ]
 "src/**/*.*" = ["PLR0913", "SLF001"]
 "src/server/lib/db/base.py" = ["E501"]
-"src/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"src/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH", "N999"]
 "tests/**/*.*" = [
     "S101",
     "D",
