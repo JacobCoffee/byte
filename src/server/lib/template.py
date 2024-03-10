@@ -2,6 +2,7 @@
 
 See TemplateSettings for configuration.
 """
+
 from __future__ import annotations
 
 from litestar.template.config import TemplateConfig

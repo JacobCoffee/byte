@@ -4,6 +4,7 @@ Ensures that the app and uvicorn loggers all log through the queue listener.
 
 Adds a filter for health check route logs.
 """
+
 from __future__ import annotations
 
 import logging

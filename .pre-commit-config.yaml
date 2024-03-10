@@ -18,7 +18,7 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/charliermarsh/ruff-pre-commit
-    rev: "v0.2.2"
+    rev: "v0.3.2"
     hooks:
       - id: ruff
         args: ["--fix"]
@@ -88,7 +88,7 @@ repos:
   #             discord-py,
   #           ]
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.351
+    rev: v1.1.353
     hooks:
       - id: pyright
         additional_dependencies:
@@ -142,6 +142,7 @@ repos:
             asyncpg-stubs,
             polyfactory,
             discord-py,
+            types-python-dateutil,
           ]
   - repo: https://github.com/sphinx-contrib/sphinx-lint
     rev: "v0.9.1"

@@ -15,11 +15,11 @@ dependencies = [
     "advanced-alchemy>=0.6.1",
     "certifi>=2023.11.17",
     "asyncpg>=0.29.0",
-    "githubkit[auth-app] @ git+https://github.com/yanyongyu/githubkit.git",
     "PyJWT>=2.8.0",
     "alembic>=1.13.0",
     "pre-commit>=3.6.2",
     "ruff>=0.1.7",
+    "githubkit[auth-app]>=0.11.2",
 ]
 requires-python = ">=3.11,<4.0"
 readme = "README.md"
@@ -82,7 +82,7 @@ changelog = "git cliff -c pyproject.toml -o docs/changelog.rst"
 # TODO: Move more from makefile here
 ci = { composite = ["lint", "test"] }
 
-[tool.pdm.dev-dependencies]
+[project.optional-dependencies]
 test = [
     "pytest>=7.4.3",
     "coverage>=7.3.2",

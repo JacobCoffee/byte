@@ -1,4 +1,5 @@
 """Centralized logging configuration."""
+
 import logging
 import logging.config
 import logging.handlers
@@ -69,6 +70,16 @@ def setup_logging() -> None:
         "loggers": {
             "discord": {
                 "level": settings.log.DISCORD_LEVEL,
+                "handlers": ["console", "file"],
+                "propagate": False,
+            },
+            "httpcore": {
+                "level": settings.log.HTTP_CORE_LEVEL,
+                "handlers": ["console", "file"],
+                "propagate": False,
+            },
+            "httpx": {
+                "level": settings.log.HTTPX_LEVEL,
                 "handlers": ["console", "file"],
                 "propagate": False,
             },

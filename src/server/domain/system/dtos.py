@@ -1,4 +1,5 @@
 """System domain DTOS."""
+
 from dataclasses import dataclass
 from typing import Annotated, Literal
 

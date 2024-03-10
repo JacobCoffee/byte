@@ -1,4 +1,5 @@
 """Project CLI."""
+
 from __future__ import annotations
 
 import multiprocessing

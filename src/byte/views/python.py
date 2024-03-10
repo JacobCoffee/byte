@@ -1,4 +1,5 @@
 """Discord UI views used in Python commands."""
+
 from __future__ import annotations
 
 from byte.lib.log import get_logger

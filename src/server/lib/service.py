@@ -3,6 +3,7 @@
 RepositoryService object is generic on the domain model type, which
 should be an SQLAlchemy model.
 """
+
 from __future__ import annotations
 
 import contextlib
@@ -41,8 +42,7 @@ class SQLAlchemyAsyncRepositoryService(_SQLAlchemyAsyncRepositoryService[ModelT]
     """
 
     @overload
-    def to_dto(self, data: ModelT) -> ModelT:
-        ...
+    def to_dto(self, data: ModelT) -> ModelT: ...
 
     @overload
     def to_dto(
@@ -50,8 +50,7 @@ class SQLAlchemyAsyncRepositoryService(_SQLAlchemyAsyncRepositoryService[ModelT]
         data: Sequence[ModelT],
         total: int | None = None,
         *filters: FilterTypes | ColumnElement[bool],
-    ) -> OffsetPagination[ModelT]:
-        ...
+    ) -> OffsetPagination[ModelT]: ...
 
     def to_dto(
         self,
@@ -82,8 +81,7 @@ class SQLAlchemyAsyncRepositoryService(_SQLAlchemyAsyncRepositoryService[ModelT]
         )
 
     @overload
-    def to_schema(self, dto: type[ModelDTOT], data: ModelT) -> ModelDTOT:
-        ...
+    def to_schema(self, dto: type[ModelDTOT], data: ModelT) -> ModelDTOT: ...
 
     @overload
     def to_schema(
@@ -92,8 +90,7 @@ class SQLAlchemyAsyncRepositoryService(_SQLAlchemyAsyncRepositoryService[ModelT]
         data: Sequence[ModelT],
         total: int | None = None,
         *filters: FilterTypes,
-    ) -> OffsetPagination[ModelDTOT]:
-        ...
+    ) -> OffsetPagination[ModelDTOT]: ...
 
     def to_schema(
         self,

@@ -1,11 +1,18 @@
 """Custom plugins for the Litestar Discord."""
+
 from __future__ import annotations
 
-from discord import Embed
+import datetime
+
+from dateutil.zoneinfo import gettz
+from discord import Embed, EntityType, Interaction, Object, PrivacyLevel
+from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
+from byte.lib.checks import is_byte_dev
 from byte.lib.common.colors import litestar_yellow
-from byte.lib.utils import is_byte_dev, mention_role, mention_user
+from byte.lib.common.mention import mention_role, mention_user
+from byte.lib.utils import get_next_friday
 
 __all__ = ("LitestarCommands", "setup")
 
@@ -84,6 +91,50 @@ class LitestarCommands(Cog):
         )
 
         await ctx.send(embed=embed)
+
+    @app_command(
+        name="schedule-office-hours",
+        description="Schedule Office Hours event for the upcoming or the week after next Friday.",
+    )
+    async def schedule_office_hours(self, interaction: Interaction, delay: int | None = None) -> None:
+        """Schedule Office Hours event for the upcoming or ``delay`` weeks after next Friday.
+
+        Args:
+            interaction: Interaction object.
+            delay: Optional. Number of weeks to delay the event.
+        """
+        now_cst = datetime.datetime.now(gettz("America/Chicago"))
+        start_dt, end_dt = get_next_friday(now_cst, delay)
+        existing_events = interaction.guild.scheduled_events
+
+        for event in existing_events:
+            if (
+                event.name == "Office Hours"
+                and event.start_time.astimezone(gettz("America/Chicago")).date() == start_dt.date()
+            ):
+                await interaction.response.send_message(
+                    "An Office Hours event is already scheduled for that day.", ephemeral=True
+                )
+                return
+
+        await interaction.guild.create_scheduled_event(
+            name="Office Hours",
+            start_time=start_dt,
+            end_time=end_dt,
+            description="Join us for our weekly office hours!",
+            entity_type=EntityType.stage_instance,
+            privacy_level=PrivacyLevel.guild_only,
+            reason=f"Scheduled by {interaction.user} via /schedule-office-hours",
+            channel=Object(id=1215926860144443502),
+        )
+
+        formatted_date = f"<t:{int(start_dt.timestamp())}:D>"
+        start_time_formatted = f"<t:{int(start_dt.timestamp())}:t>"
+        end_time_formatted = f"<t:{int(end_dt.timestamp())}:t>"
+
+        await interaction.response.send_message(
+            f"Office Hours event scheduled: {formatted_date} from {start_time_formatted} - {end_time_formatted}."
+        )
 
 
 async def setup(bot: Bot) -> None:

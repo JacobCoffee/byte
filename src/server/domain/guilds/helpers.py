@@ -1,4 +1,5 @@
 """Helper functions to be used for interacting with Guild data."""
+
 from __future__ import annotations
 
 from server.domain.guilds.dependencies import provides_guilds_service
