@@ -72,6 +72,16 @@ def setup_logging() -> None:
                 "handlers": ["console", "file"],
                 "propagate": False,
             },
+            "httpcore": {
+                "level": settings.log.HTTP_CORE_LEVEL,
+                "handlers": ["console", "file"],
+                "propagate": False,
+            },
+            "httpx": {
+                "level": settings.log.HTTPX_LEVEL,
+                "handlers": ["console", "file"],
+                "propagate": False,
+            },
             "websockets": {
                 "level": settings.log.WEBSOCKETS_LEVEL,
                 "handlers": ["console", "file"],

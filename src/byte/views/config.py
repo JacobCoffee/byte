@@ -56,8 +56,7 @@ class ConfigSelect(Select):
         selected_option = self.values[0]
         modal = ConfigModal(title=f"Configure {selected_option}")
         await interaction.response.send_modal(modal)
-        await interaction.followup.send_message("Select another setting or click 'Finished' when done.", ephemeral=True)
-        self.view.stop()
+        await interaction.followup.send("Select another setting or click 'Finished' when done.", ephemeral=True)
 
 
 class ConfigView(View):
@@ -99,9 +98,13 @@ class ConfigModal(Modal):
         Args:
             interaction: Interaction object.
         """
+        logger.info("ConfigModal callback entered")
         config_value = self.children[0].value
-        await interaction.response.send_message(f"Configuration value received!: {config_value}", ephemeral=True)
+        logger.info(f"Config value received: {config_value}")
+        await interaction.response.defer(ephemeral=True)
+        await interaction.followup.send(f"Configuration value received!: {config_value}", ephemeral=True)
+        logger.info("ConfigModal callback exited")
         view = ConfigView()
-        await interaction.followup.send_message(
+        await interaction.followup.send(
             "Select another setting or click 'Finished' when done.", view=view, ephemeral=True
         )
