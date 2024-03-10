@@ -1,25 +1,30 @@
 """Inheritable views that include extra functionality for base Views classes."""
+
 from __future__ import annotations
 
 from copy import deepcopy
-from typing import TYPE_CHECKING, Any, Literal, TypedDict
+from typing import TYPE_CHECKING, Any, Literal, ParamSpec, TypedDict
 
 from discord import ButtonStyle, Colour, Embed, Interaction
 from discord.ui import Button, View, button
 
 if TYPE_CHECKING:
     from datetime import datetime
-    from typing import Self, NotRequired
+    from typing import NotRequired, Self
 
     from discord.ext.commands import Bot
 
 __all__ = ("ExtendedEmbed", "Field", "ButtonEmbedView")
 
+P = ParamSpec("P")
+
 
 class ButtonEmbedView(View):
     """Base view including common buttons."""
 
-    def __init__(self, author: int, bot: Bot, original_embed: Embed, minified_embed: Embed, *args, **kwargs) -> None:
+    def __init__(
+        self, author: int, bot: Bot, original_embed: Embed, minified_embed: Embed, *args: P.args, **kwargs: P.kwargs
+    ) -> None:
         """Initialize the view.
 
         Args:

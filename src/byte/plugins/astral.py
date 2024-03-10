@@ -1,4 +1,5 @@
 """Plugins for Astral Inc. related software, including Ruff, uv, etc."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -14,7 +15,7 @@ from byte.lib.utils import chunk_sequence, format_ruff_rule, query_all_ruff_rule
 from byte.views.astral import RuffView
 
 if TYPE_CHECKING:
-    from byte.lib.utils import RuffRule
+    from byte.lib.types.astral import RuffRule
 
 __all__ = ("Astral", "setup")
 

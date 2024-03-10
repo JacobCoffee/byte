@@ -3,7 +3,7 @@
 .. todo:: temporary, these are not multi-guild friendly.
 """
 
-from byte.lib.common import assets, colors, guilds, links
+from byte.lib.common import assets, colors, guilds, links, mention
 
 __all__ = (
     "assets",
@@ -11,6 +11,7 @@ __all__ = (
     "guilds",
     "links",
     "config_options",
+    "mention",
 )
 
 config_options: list[dict[str, str]] = [
