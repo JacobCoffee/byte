@@ -1,4 +1,5 @@
 """DTO Library layer module."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Literal, overload
@@ -23,8 +24,7 @@ def config(
     rename_strategy: RenameStrategy | None = None,
     max_nested_depth: int | None = None,
     partial: bool | None = None,
-) -> SQLAlchemyDTOConfig:
-    ...
+) -> SQLAlchemyDTOConfig: ...
 
 
 @overload
@@ -35,8 +35,7 @@ def config(
     rename_strategy: RenameStrategy | None = None,
     max_nested_depth: int | None = None,
     partial: bool | None = None,
-) -> DTOConfig:
-    ...
+) -> DTOConfig: ...
 
 
 # noinspection PyUnusedLocal

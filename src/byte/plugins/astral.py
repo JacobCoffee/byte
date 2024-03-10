@@ -1,4 +1,5 @@
 """Plugins for Astral Inc. related software, including Ruff, uv, etc."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -14,7 +15,7 @@ from byte.lib.utils import chunk_sequence, format_ruff_rule, query_all_ruff_rule
 from byte.views.astral import RuffView
 
 if TYPE_CHECKING:
-    from byte.lib.utils import RuffRule
+    from byte.lib.types.astral import RuffRule
 
 __all__ = ("Astral", "setup")
 
@@ -32,10 +33,10 @@ class Astral(Cog):
     async def _rule_autocomplete(self, _: Interaction, current_rule: str) -> list[Choice[str]]:
         # TODO: this can and should be made faster, rn this is slow, slow like the maintainer
         return [
-                   Choice(name=f'{code} - {rule["name"]}', value=code)
-                   for code, rule in self._rules.items()
-                   if current_rule.lower() in code.lower()
-               ][:25]
+            Choice(name=f'{code} - {rule["name"]}', value=code)
+            for code, rule in self._rules.items()
+            if current_rule.lower() in code.lower()
+        ][:25]
 
     @app_command(name="ruff")
     @autocomplete(rule=_rule_autocomplete)

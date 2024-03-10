@@ -1,4 +1,5 @@
 """Plugins for Python related things, including PyPI, PEPs, etc."""
+
 from __future__ import annotations
 
 from discord import Embed, Interaction

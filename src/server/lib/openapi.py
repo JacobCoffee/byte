@@ -1,4 +1,5 @@
 """OpenAPI Config."""
+
 from __future__ import annotations
 
 from litestar.openapi.config import OpenAPIConfig

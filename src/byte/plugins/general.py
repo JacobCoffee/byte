@@ -1,4 +1,5 @@
 """General plugins to be used wherever."""
+
 from __future__ import annotations
 
 from discord import Embed, Interaction
@@ -36,7 +37,7 @@ class GeneralCommands(Cog):
         embed.add_field(
             name="Syntax Highlighting",
             value="You can also use backticks to format your code. Read about it in the "
-                  f"{linker('Discord Markdown Guide', markdown_guide)}.",
+            f"{linker('Discord Markdown Guide', markdown_guide)}.",
         )
         embed.set_thumbnail(url=litestar_logo_yellow)
 
