@@ -78,6 +78,14 @@ load-container: migrate ## Perform database migrations and load test data into t
 
 	@echo "=> Loaded database migrations and test data"
 
+.PHONY: refresh-lockfiles
+refresh-lockfiles:                                 ## Sync lockfiles with requirements files.
+	$(PDM) update --update-reuse -G:all
+
+.PHONY: lock
+lock:                                             ## Rebuild lockfiles from scratch, updating all dependencies
+	$(PDM) update --update-eager -G:all
+
 # =============================================================================
 # Tests, Linting, Coverage
 # =============================================================================
