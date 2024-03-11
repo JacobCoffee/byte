@@ -41,8 +41,11 @@ class ButtonEmbedView(View):
         self.original_embed = original_embed
         self.minified_embed = minified_embed
 
-    async def interaction_check(self, interaction: Interaction) -> bool:
-        """Check if the user is the author or a guild admin.
+    async def delete_interaction_check(self, interaction: Interaction) -> bool:
+        """Check if the user is the author or a guild admin
+
+        .. note:: Only checks for the ``delete`` button, as we want to expose
+            the ``learn more`` button to anyone.
 
         Args:
             interaction: Interaction object.
@@ -63,7 +66,7 @@ class ButtonEmbedView(View):
         Args:
             interaction: Interaction object.
         """
-        if await self.interaction_check(interaction):
+        if await self.delete_interaction_check(interaction):
             await interaction.message.delete()
 
     async def learn_more_button_callback(self, interaction: Interaction) -> None:
