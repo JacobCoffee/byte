@@ -9,9 +9,28 @@ from litestar.di import Provide
 from litestar.params import Dependency, Parameter
 
 from server.domain.guilds import urls
-from server.domain.guilds.dependencies import provides_guilds_service
-from server.domain.guilds.schemas import GuildSchema, UpdateableGuildSetting
-from server.domain.guilds.services import GuildsService  # noqa: TCH001
+from server.domain.guilds.dependencies import (
+    provides_allowed_users_config_service,
+    provides_forum_config_service,
+    provides_github_config_service,
+    provides_guilds_service,
+    provides_sotags_config_service,
+)
+from server.domain.guilds.schemas import (
+    AllowedUsersConfigSchema,
+    ForumConfigSchema,
+    GitHubConfigSchema,
+    GuildSchema,
+    SOTagsConfigSchema,
+    UpdateableGuildSetting,
+)
+from server.domain.guilds.services import (
+    AllowedUsersConfigService,  # noqa: TCH001
+    ForumConfigService,  # noqa: TCH001
+    GitHubConfigService,  # noqa: TCH001
+    GuildsService,  # noqa: TCH001
+    SOTagsConfigService,  # noqa: TCH001
+)
 
 if TYPE_CHECKING:
     from advanced_alchemy import FilterTypes
@@ -24,7 +43,13 @@ class GuildsController(Controller):
     """Controller for guild-based routes."""
 
     tags = ["Guilds"]
-    dependencies = {"guilds_service": Provide(provides_guilds_service)}
+    dependencies = {
+        "guilds_service": Provide(provides_guilds_service),
+        "github_service": Provide(provides_github_config_service),
+        "sotags_service": Provide(provides_sotags_config_service),
+        "allowed_users_service": Provide(provides_allowed_users_config_service),
+        "forum_service": Provide(provides_forum_config_service),
+    }
 
     @get(
         operation_id="Guilds",
@@ -145,3 +170,107 @@ class GuildsController(Controller):
         """
         result = await guilds_service.get(guild_id, id_attribute="guild_id")
         return guilds_service.to_schema(GuildSchema, result)
+
+    @get(
+        operation_id="GitHubDetail",
+        name="guilds:github-config",
+        summary="Get GitHub config for a guild.",
+        path=urls.GUILD_GITHUB_DETAIL,
+    )
+    async def get_guild_github_config(
+        self,
+        github_service: GitHubConfigService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+    ) -> GitHubConfigSchema | OffsetPagination[GitHubConfigSchema]:
+        """Get a guild's GitHub config by ID.
+
+        Args:
+            github_service (GitHubConfigService): GitHub config service
+            guild_id (int): Guild ID
+
+        Returns:
+            GitHubConfig: GitHub config object
+        """
+        result = await github_service.get(guild_id, id_attribute="guild_id")
+        return github_service.to_schema(GitHubConfigSchema, result)
+
+    @get(
+        operation_id="SOTagsDetail",
+        name="guilds:sotags-config",
+        summary="Get StackOverflow tags config for a guild.",
+        path=urls.GUILD_SOTAGS_DETAIL,
+    )
+    async def get_guild_sotags_config(
+        self,
+        sotags_service: SOTagsConfigService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+    ) -> SOTagsConfigSchema | OffsetPagination[SOTagsConfigSchema]:
+        """Get a guild's StackOverflow tags config by ID.
+
+        Args:
+            sotags_service (SOTagsConfigService): StackOverflow tags config service
+            guild_id (int): Guild ID
+
+        Returns:
+            SOTagsConfig: StackOverflow tags config object
+        """
+        result = await sotags_service.get(guild_id, id_attribute="guild_id")
+        return sotags_service.to_schema(SOTagsConfigSchema, result)
+
+    @get(
+        operation_id="AllowedUsersDetail",
+        name="guilds:allowed-users-config",
+        summary="Get allowed users config for a guild.",
+        path=urls.GUILD_ALLOWED_USERS_DETAIL,
+    )
+    async def get_guild_allowed_users_config(
+        self,
+        allowed_users_service: AllowedUsersConfigService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+    ) -> AllowedUsersConfigSchema | OffsetPagination[AllowedUsersConfigSchema]:
+        """Get a guild's allowed users config by ID.
+
+        Args:
+            allowed_users_service (AllowedUsersConfigService): Allowed users config service
+            guild_id (int): Guild ID
+
+        Returns:
+            AllowedUsersConfig: Allowed users config object
+        """
+        result = await allowed_users_service.get(guild_id, id_attribute="guild_id")
+        return allowed_users_service.to_schema(AllowedUsersConfigSchema, result)
+
+    @get(
+        operation_id="ForumDetail",
+        name="guilds:forum-config",
+        summary="Get forum config for a guild.",
+        path=urls.GUILD_FORUM_DETAIL,
+    )
+    async def get_guild_forum_config(
+        self,
+        forum_service: ForumConfigService,
+        guild_id: int = Parameter(
+            title="Guild ID",
+            description="The guild ID.",
+        ),
+    ) -> ForumConfigSchema | OffsetPagination[ForumConfigSchema]:
+        """Get a guild's forum config by ID.
+
+        Args:
+            forum_service (ForumConfigService): Forum config service
+            guild_id (int): Guild ID
+
+        Returns:
+            ForumConfig: Forum config object
+        """
+        result = await forum_service.get(guild_id, id_attribute="guild_id")
+        return forum_service.to_schema(ForumConfigSchema, result)
