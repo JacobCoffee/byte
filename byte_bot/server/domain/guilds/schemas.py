@@ -64,6 +64,8 @@ class ForumConfigSchema(CamelizedBaseModel):
 
 
 class GitHubConfigSchema(CamelizedBaseModel):
+    """Schema for validating GitHub configuration."""
+
     guild_id: UUID
     discussion_sync: bool
     github_organization: str | None
@@ -71,13 +73,35 @@ class GitHubConfigSchema(CamelizedBaseModel):
 
 
 class SOTagsConfigSchema(CamelizedBaseModel):
+    """Schema for validating StackOverflow tags configuration."""
+
     guild_id: UUID
     tag_name: str
 
 
 class AllowedUsersConfigSchema(CamelizedBaseModel):
-    guild_id: int
+    """Schema for validating allowed users for certain admin actions within a guild."""
+
+    guild_id: UUID
     user_id: UUID
+
+
+class ForumConfigSchema(CamelizedBaseModel):
+    """Schema for validating forum configuration."""
+
+    guild_id: UUID
+    help_forum: bool = Field(title="Help Forum", description="Is the help forum enabled.")
+    help_forum_category: str
+    help_thread_auto_close: bool
+    help_thread_auto_close_days: int
+    help_thread_notify: bool
+    help_thread_notify_roles: list[int]
+    help_thread_notify_days: int
+    help_thread_sync: bool
+    showcase_forum: bool
+    showcase_forum_category: str
+    showcase_thread_auto_close: bool
+    showcase_thread_auto_close_days: int
 
 
 class GuildSchema(CamelizedBaseModel):
