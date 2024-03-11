@@ -1,13 +1,14 @@
 """Custom plugins for the Litestar Discord."""
 from __future__ import annotations
 
-from typing import Self
+from typing import Literal, Self, cast
 
 from discord import Embed, Interaction, Message, TextStyle, app_commands
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 from discord.ui import Modal, TextInput
 from discord.utils import MISSING
 from httpx import codes
+from pydantic import AnyUrl, TypeAdapter, ValidationError
 
 from byte.lib.utils import is_byte_dev, mention_role, mention_user
 from server.domain.github.helpers import github_client
@@ -172,6 +173,50 @@ class LitestarCommands(Cog):
             message: Message object.
         """
         await interaction.response.send_modal(GitHubIssue(message=message))
+
+    @Cog.listener(name="on_message")
+    async def link_github(self, message: Message):
+        if message.author.bot:
+            # Do not respond to bot messages
+            return
+
+        try:
+            url = TypeAdapter(AnyUrl).validate_python(message.content)
+        except ValidationError:
+            # Not a valid URL
+            return
+
+        if url.host != "github.com":
+            # Not a GitHub URL
+            return
+
+        match url.path.strip("/").split("/"):
+            case (owner, repo, namespace, number):
+                match cast(Literal["issues", "pull"], namespace):
+                    # TODO: Add other cases and exception handling
+                    case "issues":
+                        embed = Embed(title="GitHub Issue", color=0)
+                        embed.add_field(name="Issue Summary", value="Some summary", inline=False)
+                        issue = (await github_client.rest.issues.async_get(owner, repo, int(number))).parsed_data
+                        embed.add_field(
+                            name="Assignee", value=issue.assignee if issue.assignee else "None", inline=False
+                        )
+                    case "pull":
+                        embed = Embed(title="GitHub Pull", color=0)
+                        pull = (await github_client.rest.pulls.async_get(owner, repo, int(number))).parsed_data
+                        embed.add_field(name="Associated Issue", value=pull.issue_url, inline=False)
+                        embed.add_field(name="PR", value=pull.html_url, inline=False)
+                        embed.add_field(name="Body", value=pull.body if pull.body else "None", inline=False)
+                        embed.add_field(name="Created at", value=pull.created_at, inline=False)
+
+                embed.insert_field_at(1, name="Organization", value=owner, inline=False)
+                embed.insert_field_at(2, name="Repository", value=repo, inline=False)
+                embed.insert_field_at(3, name="Number", value=number, inline=False)
+
+                await message.channel.send(embed=embed)
+            case _:
+                # Invalid GitHub URL
+                return
 
 
 async def setup(bot: Bot) -> None:
