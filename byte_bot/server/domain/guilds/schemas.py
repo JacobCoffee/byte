@@ -8,7 +8,16 @@ from pydantic import Field
 
 from byte_bot.server.lib.schema import CamelizedBaseModel
 
-__all__ = ("AllowedUsersConfigSchema", "ForumConfigSchema", "GitHubConfigSchema", "GuildCreate", "GuildSchema", "GuildUpdate", "SOTagsConfigSchema", "UpdateableGuildSetting", )
+__all__ = (
+    "AllowedUsersConfigSchema",
+    "ForumConfigSchema",
+    "GitHubConfigSchema",
+    "GuildCreate",
+    "GuildSchema",
+    "GuildUpdate",
+    "SOTagsConfigSchema",
+    "UpdateableGuildSetting",
+)
 
 
 class GitHubConfigSchema(CamelizedBaseModel):
