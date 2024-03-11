@@ -44,6 +44,9 @@ async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[Gu
             selectinload(Guild.allowed_users).options(
                 joinedload(AllowedUsersConfig.guild, innerjoin=True).options(noload("*")),
             ),
+            selectinload(Guild.forum_config).options(
+                joinedload(Guild.forum_config, innerjoin=True).options(noload("*")),
+            ),
         ),
     ) as service:
         try:
