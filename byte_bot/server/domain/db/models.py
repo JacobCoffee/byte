@@ -73,7 +73,7 @@ class GitHubConfig(UUIDAuditBase):
     __tablename__ = "github_config"  # type: ignore[reportAssignmentType]
     __table_args__ = {"comment": "GitHub configuration for a guild."}
 
-    guild_id: Mapped[UUID] = mapped_column(ForeignKey("guild.id", ondelete="cascade"))
+    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guild.guild_id", ondelete="cascade"))
     discussion_sync: Mapped[bool] = mapped_column(default=False)
     github_organization: Mapped[str | None]
     github_repository: Mapped[str | None]
@@ -92,13 +92,13 @@ class GitHubConfig(UUIDAuditBase):
 class SOTagsConfig(UUIDAuditBase):
     """SQLAlchemy association model for a guild's Stack Overflow tags config."""
 
-    __tablename__ = "so_tags"  # type: ignore[reportAssignmentType]
+    __tablename__ = "so_tags_config"  # type: ignore[reportAssignmentType]
     __table_args__ = (
         UniqueConstraint("guild_id", "tag_name"),
         {"comment": "Configuration for a Discord guild's Stack Overflow tags."},
     )
 
-    guild_id: Mapped[UUID] = mapped_column(ForeignKey("guild.id", ondelete="cascade"))
+    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guild.guild_id", ondelete="cascade"))
     guild_name: AssociationProxy[str] = association_proxy("guild", "guild_name")
     tag_name: Mapped[str] = mapped_column(String(50))
 
@@ -131,7 +131,7 @@ class AllowedUsersConfig(UUIDAuditBase):
         {"comment": "Configuration for allowed users in a Discord guild."},
     )
 
-    guild_id: Mapped[int] = mapped_column(ForeignKey("guild.guild_id", ondelete="cascade"))
+    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guild.guild_id", ondelete="cascade"))
     user_id: Mapped[UUID] = mapped_column(ForeignKey("user.id", ondelete="cascade"))
 
     guild_name: AssociationProxy[str] = association_proxy("guild", "guild_name")
@@ -210,7 +210,7 @@ class ForumConfig(UUIDAuditBase):
     __tablename__ = "forum_config"  # type: ignore[reportAssignmentType]
     __table_args__ = {"comment": "Forum configuration for a guild."}
 
-    guild_id: Mapped[UUID] = mapped_column(ForeignKey("guild.id", ondelete="cascade"))
+    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guild.guild_id", ondelete="cascade"))
 
     """Help forum settings."""
     help_forum: Mapped[bool] = mapped_column(default=False)
