@@ -8,10 +8,12 @@ from pydantic import Field
 
 from byte_bot.server.lib.schema import CamelizedBaseModel
 
-__all__ = ("GuildCreate", "GuildSchema", "GuildUpdate", "UpdateableGuildSetting")
+__all__ = ("AllowedUsersConfigSchema", "ForumConfigSchema", "GitHubConfigSchema", "GuildCreate", "GuildSchema", "GuildUpdate", "SOTagsConfigSchema", "UpdateableGuildSetting", )
 
 
 class GitHubConfigSchema(CamelizedBaseModel):
+    """Schema for validating GitHub configuration."""
+
     guild_id: UUID
     discussion_sync: bool
     github_organization: str | None
@@ -19,13 +21,35 @@ class GitHubConfigSchema(CamelizedBaseModel):
 
 
 class SOTagsConfigSchema(CamelizedBaseModel):
+    """Schema for validating StackOverflow tags configuration."""
+
     guild_id: UUID
     tag_name: str
 
 
 class AllowedUsersConfigSchema(CamelizedBaseModel):
-    guild_id: int
+    """Schema for validating allowed users for certain admin actions within a guild."""
+
+    guild_id: UUID
     user_id: UUID
+
+
+class ForumConfigSchema(CamelizedBaseModel):
+    """Schema for validating forum configuration."""
+
+    guild_id: UUID
+    help_forum: bool = Field(title="Help Forum", description="Is the help forum enabled.")
+    help_forum_category: str
+    help_thread_auto_close: bool
+    help_thread_auto_close_days: int
+    help_thread_notify: bool
+    help_thread_notify_roles: list[int]
+    help_thread_notify_days: int
+    help_thread_sync: bool
+    showcase_forum: bool
+    showcase_forum_category: str
+    showcase_thread_auto_close: bool
+    showcase_thread_auto_close_days: int
 
 
 class GuildSchema(CamelizedBaseModel):
@@ -50,6 +74,9 @@ class GuildSchema(CamelizedBaseModel):
     )
     allowed_users: list[AllowedUsersConfigSchema] = Field(
         title="Allowed Users", description="The allowed users configuration for the guild."
+    )
+    forum_config: ForumConfigSchema | None = Field(
+        title="Forum Config", description="The forum configuration for the guild."
     )
 
 
@@ -78,7 +105,7 @@ class GuildUpdate(CamelizedBaseModel):
 
 
 class UpdateableGuildSetting(CamelizedBaseModel):
-    """An allowed setting that admins can update for their guild."""
+    """Allowed settings that admins can update for their guild."""
 
     """Guild Model Settings"""
     prefix: str = Field(title="Prefix", description="The prefix for the guild.")
