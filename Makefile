@@ -74,9 +74,11 @@ clean-container: ## Stop, remove, and wipe the Byte database container and volum
 
 load-container: migrate ## Perform database migrations and load test data into the Byte database container
 	@echo "=> Loading database migrations and test data"
-	# load data, we already run migrate
-
+	@echo "not yet implemented"
 	@echo "=> Loaded database migrations and test data"
+
+refresh-container: clean-container up-container load-container ## Refresh the Byte database container
+
 
 .PHONY: refresh-lockfiles
 refresh-lockfiles:                                 ## Sync lockfiles with requirements files.
