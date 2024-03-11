@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 from sqlalchemy import select
 from sqlalchemy.orm import joinedload, noload, selectinload
 
-from byte_bot.server.domain.db.models import AllowedUsersConfig, GitHubConfig, Guild, SOTagsConfig
+from byte_bot.server.domain.db.models import AllowedUsersConfig, ForumConfig, GitHubConfig, Guild, SOTagsConfig
 from byte_bot.server.domain.guilds.services import GuildsService
 from byte_bot.server.lib import log
 
@@ -45,7 +45,7 @@ async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[Gu
                 joinedload(AllowedUsersConfig.guild, innerjoin=True).options(noload("*")),
             ),
             selectinload(Guild.forum_config).options(
-                joinedload(Guild.forum_config, innerjoin=True).options(noload("*")),
+                joinedload(ForumConfig.guild, innerjoin=True).options(noload("*")),
             ),
         ),
     ) as service:
