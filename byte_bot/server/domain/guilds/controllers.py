@@ -120,7 +120,7 @@ class GuildsController(Controller):
             title="Guild ID",
             description="The guild ID.",
         ),
-        setting: UpdateableGuildSetting = Parameter(
+        setting: UpdateableGuildSetting.as_enum() = Parameter(
             title="Setting",
             description="The setting to update.",
         ),
