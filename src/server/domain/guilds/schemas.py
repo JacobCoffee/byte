@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from enum import StrEnum, Enum
+from typing import Type
 from uuid import UUID  # noqa: TCH003
 
 from pydantic import Field
@@ -18,6 +20,8 @@ __all__ = (
     "SOTagsConfigSchema",
     "UpdateableGuildSetting",
 )
+
+from server.lib.serialization import convert_camel_to_snake_case
 
 
 class GitHubConfigSchema(CamelizedBaseModel):
@@ -138,7 +142,7 @@ class UpdateableGuildSetting(CamelizedBaseModel):
     )
 
     """Allowed Users Config Settings"""
-    user_id: int = Field(title="User ID", description="The user or role ID to allow.")
+    allowed_user_id: int = Field(title="User ID", description="The user or role ID to allow.")
 
     """Forum Config Settings"""
     """Help Forum"""
@@ -172,3 +176,14 @@ class UpdateableGuildSetting(CamelizedBaseModel):
     showcase_thread_auto_close_days: int = Field(
         title="Showcase Thread Auto Close Days", description="The days to auto close showcase threads after inactivity."
     )
+
+    @classmethod
+    def as_enum(cls) -> type[Enum]:
+        """Helper to dynamically create an enum from the class fields."""
+        return StrEnum(
+            cls.__name__,
+            {
+                convert_camel_to_snake_case(field.alias): convert_camel_to_snake_case(field.alias)
+                for field in cls.__fields__.values()
+            },
+        )
