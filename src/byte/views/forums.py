@@ -45,7 +45,7 @@ class HelpThreadView(View):
         except Exception:
             logger.exception("failed to setup view for guild %s", self.guild_id)
 
-    async def interaction_check(self, interaction: Interaction) -> bool:
+    async def delete_interaction_check(self, interaction: Interaction) -> bool:
         """Check if the user is the author or an admin.
 
         Args:
