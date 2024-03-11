@@ -62,6 +62,8 @@ class ForumConfigSchema(CamelizedBaseModel):
     showcase_thread_auto_close: bool
     showcase_thread_auto_close_days: int
 
+from server.lib.serialization import convert_camel_to_snake_case
+
 
 class GitHubConfigSchema(CamelizedBaseModel):
     """Schema for validating GitHub configuration."""
