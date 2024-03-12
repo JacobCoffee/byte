@@ -442,3 +442,21 @@ async def query_all_peps() -> list[PEP]:
         }
         for pep_info in data.values()
     ]
+
+def check_plurality(noun: str, count: int) -> str:
+    """Check if a string should be pluralized based on confusing English rules.
+
+    Args:
+        noun (str): The noun to pluralize.
+        count (int): The count to check against.
+
+    Returns:
+        str: The pluralized noun.
+    """
+    if count == 1:
+        return noun
+    if noun.endswith("y"):
+        return f"{noun[:-1]}ies"
+    if noun.endswith(("s", "sh", "ch", "x", "z")):
+        return f"{noun}es"
+    return f"{noun}s"

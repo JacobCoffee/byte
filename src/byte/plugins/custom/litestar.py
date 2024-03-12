@@ -1,6 +1,7 @@
 """Custom plugins for the Litestar Discord."""
 from __future__ import annotations
 
+import re
 from typing import Literal, Self, cast
 
 from discord import Embed, Interaction, Message, TextStyle, app_commands
@@ -10,7 +11,8 @@ from discord.utils import MISSING
 from httpx import codes
 from pydantic import AnyUrl, TypeAdapter, ValidationError
 
-from byte.lib.utils import is_byte_dev, mention_role, mention_user
+from byte.lib.common.assets import byte_logo
+from byte.lib.utils import is_byte_dev, mention_role, mention_user, check_plurality
 from server.domain.github.helpers import github_client
 
 __all__ = ("LitestarCommands", "setup")
@@ -196,8 +198,24 @@ class LitestarCommands(Cog):
                     # TODO: Add other cases and exception handling
                     case "issues":
                         issue = (await github_client.rest.issues.async_get(owner, repo, int(number))).parsed_data
-                        embed = Embed(title="Summary", color=0, url=issue.html_url, description=f'[Summary]({issue.html_url})\n{issue.body}'[:4096])
-                        embed.set_author(name=f"GitHub Issue: {issue.title[:242]}", url=issue.html_url)
+                        print(issue.json())
+                        # TODO: only show like the first paragraph? maybe that will look okay. Not sure.
+                        #       This doesnt really work well.
+                        if intro_text_match := re.search(r"(.*?)(?=\n\s*\n|\n#+)", issue.body, re.DOTALL):
+                            intro_text = intro_text_match[0].strip()
+                        else:
+                            intro_text = issue.body
+
+                        embed = Embed(
+                            title=f"{repo}#{issue.number}",
+                            color=0,
+                            url=issue.html_url,
+                            description=f'[Summary]({issue.html_url}) - {issue.title[:242]}\n{intro_text}',
+                        )
+                        # TODO: we should use emojis here to show state like closed, merged, etc.
+                        embed.set_thumbnail(url="https://idkWhatToPutHereButIdLikeTheOwnersAvatarToBeHere.com")
+                        embed.set_author(name=f"Reported by {issue.user.login}", url=issue.html_url, icon_url=issue.user.avatar_url)
+
                         from byte.lib.utils import chunk_sequence
                         from githubkit.utils import UNSET
 
@@ -205,33 +223,46 @@ class LitestarCommands(Cog):
                             # embed.add_field(name="Summary" if not idx else "", value=''.join(i), inline=False)
                             # embed.add_field(name="", value=''.join(i), inline=False)
 
-                        embed.add_field(name="Organization", value=owner, inline=True)
-                        embed.add_field(name="Repository", value=repo, inline=True)
-                        embed.add_field(name="Issue Number", value=number, inline=True)
+                        # TODO: only show these on Learn More embed
+                        embed.add_field(name="Organization", value=f"[{owner}](https://github.com/{owner})", inline=True)
+                        embed.add_field(name="Repository", value=f"[{repo}](https://github.com/{owner}/{repo})", inline=True)
+                        embed.add_field(name="Issue Number", value=f"[#{issue.number}]({issue.html_url})", inline=True)
 
-                        embed.add_field(name="Comments", value=issue.comments)
-                        embed.add_field(name="Created", value=issue.created_at, inline=False)
-                        embed.add_field(name="Last Updated", value=issue.updated_at, inline=False)
-                        embed.add_field(name="State", value=issue.state, inline=False)
-                        embed.add_field(name="Closed at", value=issue.closed_at, inline=False)
-                        embed.add_field(name="Draft", value=issue.draft, inline=False)
-                        embed.add_field(name='Labels', value=','.join(label.name for label in issue.labels))
+                        embed.add_field(name="Created", value=issue.created_at, inline=True)
+                        embed.add_field(name="Last Updated", value=issue.updated_at, inline=True)
+                        embed.add_field(name="State", value=issue.state.capitalize(), inline=True)
+                        # TODO: add state_reason if it exists
+
+                        if issue.closed_at:
+                            embed.add_field(name="Closed at", value=issue.closed_at, inline=True)
+                        embed.add_field(name='Labels', value=', '.join(label.name for label in issue.labels), inline=False)
                         if issue.milestone:
-                            embed.add_field(name='Milestone', value=issue.milestone.title)
+                            embed.add_field(name='Milestone', value=issue.milestone.title, inline=True)
                         if issue.pull_request:
-                            embed.add_field(name="PR Merged At", value=issue.pull_request.merged_at, inline=False)
-                            embed.add_field(name="PR HTML URL", value=issue.pull_request.html_url, inline=False)
+                            if issue.pull_request.merged_at:
+                                embed.add_field(name="Merged At", value=issue.pull_request.merged_at, inline=True)
+                            embed.add_field(name="PR URL", value=issue.pull_request.html_url, inline=True)
                         issue = (await github_client.rest.issues.async_get(owner, repo, int(number))).parsed_data
-                        embed.add_field(
-                            name="Assignee", value=','.join(i.login for i in issue.assignees), inline=False
-                        )
-                        embed.add_field(name="Assignee", value=issue.assignee.login if issue.assignee else f'Unassigned - Want to try? {issue.html_url}')
+                        # TODO: May need to bump to 3.12 to be able to nest string literals?
+                        # embed.add_field(name=f"{check_plurality("assignee", issue.assignees)}" if issue.assignee else "Unassigned", value=issue.assignee.login if issue.assignee else f'[Want to try?]({issue.html_url})')
+                        assignee = check_plurality("assignee", issue.assignees)
+                        embed.add_field(name=assignee if issue.assignees else "Unassigned", value=", ".join(assignee.login for assignee in issue.assignees) if issue.assignees else f'[Want to try?]({issue.html_url})')
+                        # add reactions in some way w/ counts?
+                        # plus_one :heavy_plus_sign:
+                        # minus_one :heavy_minus_sign:
+                        # laugh :rofl:
+                        # confused :
+                        # heart :heart
+                        # hooray :clap:
+                        # eyes :eyes:
+                        # rocket :rocket:
+                        embed.set_footer(text="GitHub Issue gathered by the Byte Bot App on GitHub!", icon_url=byte_logo)
                     case "pull":
                         embed = Embed(title="GitHub Pull", color=0)
                         pull = (await github_client.rest.pulls.async_get(owner, repo, int(number))).parsed_data
                         embed.add_field(name="Associated Issue", value=pull.issue_url, inline=False)
                         embed.add_field(name="PR", value=pull.html_url, inline=False)
-                        embed.add_field(name="Body", value=pull.body if pull.body else "None", inline=False)
+                        embed.add_field(name="Body", value=pull.body or "None", inline=False)
                         embed.add_field(name="Created at", value=pull.created_at, inline=False)
 
                 await message.channel.send(embed=embed)
