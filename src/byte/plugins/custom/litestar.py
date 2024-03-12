@@ -195,12 +195,37 @@ class LitestarCommands(Cog):
                 match cast(Literal["issues", "pull"], namespace):
                     # TODO: Add other cases and exception handling
                     case "issues":
-                        embed = Embed(title="GitHub Issue", color=0)
-                        embed.add_field(name="Issue Summary", value="Some summary", inline=False)
+                        issue = (await github_client.rest.issues.async_get(owner, repo, int(number))).parsed_data
+                        embed = Embed(title="Summary", color=0, url=issue.html_url, description=f'[Summary]({issue.html_url})\n{issue.body}'[:4096])
+                        embed.set_author(name=f"GitHub Issue: {issue.title[:242]}", url=issue.html_url)
+                        from byte.lib.utils import chunk_sequence
+                        from githubkit.utils import UNSET
+
+                        # for idx, i in enumerate(chunk_sequence(f'[Summary]({issue.html_url})\n{issue.body}' or "" if issue.body is not UNSET else "", 1000)):
+                            # embed.add_field(name="Summary" if not idx else "", value=''.join(i), inline=False)
+                            # embed.add_field(name="", value=''.join(i), inline=False)
+
+                        embed.add_field(name="Organization", value=owner, inline=True)
+                        embed.add_field(name="Repository", value=repo, inline=True)
+                        embed.add_field(name="Issue Number", value=number, inline=True)
+
+                        embed.add_field(name="Comments", value=issue.comments)
+                        embed.add_field(name="Created", value=issue.created_at, inline=False)
+                        embed.add_field(name="Last Updated", value=issue.updated_at, inline=False)
+                        embed.add_field(name="State", value=issue.state, inline=False)
+                        embed.add_field(name="Closed at", value=issue.closed_at, inline=False)
+                        embed.add_field(name="Draft", value=issue.draft, inline=False)
+                        embed.add_field(name='Labels', value=','.join(label.name for label in issue.labels))
+                        if issue.milestone:
+                            embed.add_field(name='Milestone', value=issue.milestone.title)
+                        if issue.pull_request:
+                            embed.add_field(name="PR Merged At", value=issue.pull_request.merged_at, inline=False)
+                            embed.add_field(name="PR HTML URL", value=issue.pull_request.html_url, inline=False)
                         issue = (await github_client.rest.issues.async_get(owner, repo, int(number))).parsed_data
                         embed.add_field(
-                            name="Assignee", value=issue.assignee if issue.assignee else "None", inline=False
+                            name="Assignee", value=','.join(i.login for i in issue.assignees), inline=False
                         )
+                        embed.add_field(name="Assignee", value=issue.assignee.login if issue.assignee else f'Unassigned - Want to try? {issue.html_url}')
                     case "pull":
                         embed = Embed(title="GitHub Pull", color=0)
                         pull = (await github_client.rest.pulls.async_get(owner, repo, int(number))).parsed_data
@@ -208,10 +233,6 @@ class LitestarCommands(Cog):
                         embed.add_field(name="PR", value=pull.html_url, inline=False)
                         embed.add_field(name="Body", value=pull.body if pull.body else "None", inline=False)
                         embed.add_field(name="Created at", value=pull.created_at, inline=False)
-
-                embed.insert_field_at(1, name="Organization", value=owner, inline=False)
-                embed.insert_field_at(2, name="Repository", value=repo, inline=False)
-                embed.insert_field_at(3, name="Number", value=number, inline=False)
 
                 await message.channel.send(embed=embed)
             case _:
