@@ -20,7 +20,7 @@ dependencies = [
     "ruff>=0.1.7",
     "githubkit[auth-app]>=0.11.2",
 ]
-requires-python = ">=3.12,<4.0"
+requires-python = ">=3.11,<4.0"
 readme = "README.md"
 license = { text = "MIT" }
 classifiers = [
@@ -28,6 +28,7 @@ classifiers = [
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3 :: Only',
+    'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
     'Intended Audience :: Developers',
     'Intended Audience :: Information Technology',
@@ -207,7 +208,7 @@ strict-imports = false
 [tool.ruff]
 line-length = 120
 src = ["src", "tests"]
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["ALL"]
