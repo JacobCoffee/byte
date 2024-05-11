@@ -1,10 +1,11 @@
 """Byte library module."""
 
-from byte.lib import common, log, settings, utils
+from byte.lib import common, log, settings, types, utils
 
 __all__ = [
     "settings",
     "utils",
     "log",
     "common",
+    "types",
 ]

@@ -51,6 +51,34 @@ install: ## Install all dependencies
 	@command -v $(PDM) > /dev/null || (echo "PDM not found. Installing..." && $(MAKE) install-pdm)
 	$(MAKE) install-pre-commit
 
+up-container: ## Start the Byte database container
+	@echo "=> Starting Byte database container"
+	@docker compose -f docker-compose.infra.yml up -d
+	@echo "=> Started Byte database container"
+
+clean-container: ## Stop, remove, and wipe the Byte database container and volume
+	@echo "=> Stopping and removing Byte database container"
+	@docker stop byte-db-1
+	@docker rm byte-db-1
+	@docker volume rm byte_db-data
+	@echo "=> Stopped and removed Byte database container"
+
+load-container: migrate ## Perform database migrations and load test data into the Byte database container
+	@echo "=> Loading database migrations and test data"
+	@echo "not yet implemented"
+	@echo "=> Loaded database migrations and test data"
+
+refresh-container: clean-container up-container load-container ## Refresh the Byte database container
+
+
+.PHONY: refresh-lockfiles
+refresh-lockfiles:                                 ## Sync lockfiles with requirements files.
+	$(PDM) update --update-reuse -G:all
+
+.PHONY: lock
+lock:                                             ## Rebuild lockfiles from scratch, updating all dependencies
+	$(PDM) update --update-eager -G:all
+
 # =============================================================================
 # Tests, Linting, Coverage
 # =============================================================================

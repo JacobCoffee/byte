@@ -7,6 +7,7 @@ which is required for :class:`Structlog's JSONRenderer <structlog.processors.JSO
 
 :class:`EventFilter` - A structlog processor that removes keys from the log event if they exist.
 """
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING

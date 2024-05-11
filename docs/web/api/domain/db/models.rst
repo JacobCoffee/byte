@@ -13,7 +13,7 @@ API Reference
 Model Reference
 ---------------
 
-.. sqla-model:: server.domain.db.models.GuildConfig
+.. sqla-model:: server.domain.db.models.Guild
 
 .. sqla-model:: server.domain.db.models.GitHubConfig
 

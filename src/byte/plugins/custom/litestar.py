@@ -1,86 +1,20 @@
 """Custom plugins for the Litestar Discord."""
+
 from __future__ import annotations
 
-from typing import Self
+import datetime
 
-from discord import Embed, Interaction, Message, TextStyle, app_commands
+from dateutil.zoneinfo import gettz
+from discord import Embed, EntityType, Interaction, Object, PrivacyLevel
+from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
-from discord.ui import Modal, TextInput
-from discord.utils import MISSING
-from httpx import codes
 
-from byte.lib.utils import is_byte_dev, mention_role, mention_user
-from server.domain.github.helpers import github_client
+from byte.lib.checks import is_byte_dev
+from byte.lib.common.colors import litestar_yellow
+from byte.lib.common.mention import mention_role, mention_user
+from byte.lib.utils import get_next_friday
 
 __all__ = ("LitestarCommands", "setup")
-
-
-class GitHubIssue(Modal, title="Create GitHub Issue"):
-    """Modal for GitHub issue creation."""
-
-    title_ = TextInput[Self](label="title", placeholder="Title")
-    description = TextInput[Self](
-        label="Description",
-        style=TextStyle.paragraph,
-        placeholder="Please enter an description of the bug you are encountering.",
-    )
-    mcve = TextInput[Self](
-        label="MCVE",
-        style=TextStyle.paragraph,
-        placeholder="Please provide a minimal, complete, and verifiable example of the issue.",
-    )
-    logs = TextInput[Self](
-        label="Logs", style=TextStyle.paragraph, placeholder="Please copy and paste any relevant log output."
-    )
-    version = TextInput[Self](
-        label="Litestar Version", placeholder="What version of Litestar are you using when encountering this issue?"
-    )
-
-    def __init__(
-        self,
-        *,
-        title: str = MISSING,
-        timeout: float | None = None,
-        custom_id: str = MISSING,
-        message: Message | None = None,
-    ) -> None:
-        # NOTE: check how else to set default
-        super().__init__(title=title, timeout=timeout, custom_id=custom_id)
-        if message:
-            self.description.default = message.content
-
-    async def on_submit(self, interaction: Interaction) -> None:
-        issue_reporter = interaction.user
-        issue_body_lines = [
-            "### Reported by",
-            f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id}) in Discord: {interaction.channel.name}",  # noqa: E501
-            "",
-            "### Description",
-            f"{self.description.value.strip()}",
-            "",
-            "### MCVE",
-            f"{self.mcve.value.strip()}",
-            "",
-            "### Logs",
-            f"{self.logs.value.strip()}",
-            "",
-            "### Litestar Version",
-            f"{self.version.value.strip()}",
-        ]
-        issue_body = "\n".join(issue_body_lines)
-        try:
-            response_wrapper = await github_client.rest.issues.async_create(
-                owner="litestar-org", repo="litestar", data={"title": self.title_.value, "body": issue_body}
-            )
-            if codes.is_success(response_wrapper.status_code):
-                await interaction.response.send_message(
-                    f"GitHub Issue created: {response_wrapper.parsed_data.html_url}", ephemeral=False
-                )
-            else:
-                await interaction.response.send_message("Issue creation failed.", ephemeral=True)
-
-        except Exception as e:  # noqa: BLE001
-            await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=True)
 
 
 class LitestarCommands(Cog):
@@ -90,12 +24,6 @@ class LitestarCommands(Cog):
         """Initialize cog."""
         self.bot = bot
         self.__cog_name__ = "Litestar Commands"  # type: ignore[misc]
-        self.context_menu = app_commands.ContextMenu(
-            # TODO: Name changed to not conflict with the other one, discord shows both
-            name="Create GitHub Issue",
-            callback=self.create_github_issue_modal,
-        )
-        bot.tree.add_command(self.context_menu)
 
     @group(name="litestar")
     @is_byte_dev()
@@ -118,7 +46,7 @@ class LitestarCommands(Cog):
         Args:
             ctx: Context object.
         """
-        embed = Embed(title="Litestar Roles", color=0x42B1A8)
+        embed = Embed(title="Litestar Roles", color=litestar_yellow)
 
         embed.add_field(name="Organization Roles", value="\u200b", inline=False)
         embed.add_field(
@@ -164,14 +92,49 @@ class LitestarCommands(Cog):
 
         await ctx.send(embed=embed)
 
-    async def create_github_issue_modal(self, interaction: Interaction, message: Message) -> None:
-        """Context menu command to create a GitHub issue from a Discord message.
+    @app_command(
+        name="schedule-office-hours",
+        description="Schedule Office Hours event for the upcoming or the week after next Friday.",
+    )
+    async def schedule_office_hours(self, interaction: Interaction, delay: int | None = None) -> None:
+        """Schedule Office Hours event for the upcoming or ``delay`` weeks after next Friday.
 
         Args:
             interaction: Interaction object.
-            message: Message object.
+            delay: Optional. Number of weeks to delay the event.
         """
-        await interaction.response.send_modal(GitHubIssue(message=message))
+        now_cst = datetime.datetime.now(gettz("America/Chicago"))
+        start_dt, end_dt = get_next_friday(now_cst, delay)
+        existing_events = interaction.guild.scheduled_events
+
+        for event in existing_events:
+            if (
+                event.name == "Office Hours"
+                and event.start_time.astimezone(gettz("America/Chicago")).date() == start_dt.date()
+            ):
+                await interaction.response.send_message(
+                    "An Office Hours event is already scheduled for that day.", ephemeral=True
+                )
+                return
+
+        await interaction.guild.create_scheduled_event(
+            name="Office Hours",
+            start_time=start_dt,
+            end_time=end_dt,
+            description="Join us for our weekly office hours!",
+            entity_type=EntityType.stage_instance,
+            privacy_level=PrivacyLevel.guild_only,
+            reason=f"Scheduled by {interaction.user} via /schedule-office-hours",
+            channel=Object(id=1215926860144443502),
+        )
+
+        formatted_date = f"<t:{int(start_dt.timestamp())}:D>"
+        start_time_formatted = f"<t:{int(start_dt.timestamp())}:t>"
+        end_time_formatted = f"<t:{int(end_dt.timestamp())}:t>"
+
+        await interaction.response.send_message(
+            f"Office Hours event scheduled: {formatted_date} from {start_time_formatted} - {end_time_formatted}."
+        )
 
 
 async def setup(bot: Bot) -> None:

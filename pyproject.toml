@@ -12,14 +12,13 @@ dependencies = [
     "litestar[jwt,opentelemetry,prometheus,standard,structlog]>=2.4.3",
     "pydantic-settings>=2.1.0",
     "anyio>=4.1.0",
-    "advanced-alchemy>=0.6.1",
+    "advanced-alchemy>=0.6.1, <0.9.0",
     "certifi>=2023.11.17",
     "asyncpg>=0.29.0",
-    "githubkit[auth-app] @ git+https://github.com/yanyongyu/githubkit.git",
     "PyJWT>=2.8.0",
     "alembic>=1.13.0",
-    "pre-commit>=3.6.2",
     "ruff>=0.1.7",
+    "githubkit[auth-app]>=0.11.2",
 ]
 requires-python = ">=3.11,<4.0"
 readme = "README.md"
@@ -30,6 +29,7 @@ classifiers = [
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3 :: Only',
     'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
     'Intended Audience :: Developers',
     'Intended Audience :: Information Technology',
     'Intended Audience :: System Administrators',
@@ -82,7 +82,7 @@ changelog = "git cliff -c pyproject.toml -o docs/changelog.rst"
 # TODO: Move more from makefile here
 ci = { composite = ["lint", "test"] }
 
-[tool.pdm.dev-dependencies]
+[project.optional-dependencies]
 test = [
     "pytest>=7.4.3",
     "coverage>=7.3.2",
@@ -154,7 +154,7 @@ exclude = [
     "tools",
     "docs",
 ]
-pythonVersion = "3.11"
+pythonVersion = "3.12"
 reportOptionalMemberAccess = false
 reportUnknownMemberType = false
 reportGeneralTypeIssues = true
@@ -208,7 +208,7 @@ strict-imports = false
 [tool.ruff]
 line-length = 120
 src = ["src", "tests"]
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["ALL"]
@@ -236,7 +236,7 @@ classmethod-decorators = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["src", "tests"]
+known-first-party = ["src", "tests", "byte", "server", "app", "utils"]
 
 [tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
@@ -254,7 +254,7 @@ known-first-party = ["src", "tests"]
 ]
 "src/**/*.*" = ["PLR0913", "SLF001"]
 "src/server/lib/db/base.py" = ["E501"]
-"src/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"src/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH", "N999"]
 "tests/**/*.*" = [
     "S101",
     "D",

@@ -1,6 +1,6 @@
 """Pluggable modules for Byte."""
 
-from byte.plugins import admin, custom, events, forums, general, testing
+from byte.plugins import admin, astral, custom, events, forums, general, github, python, testing
 
 __all__ = [
     "custom",
@@ -9,4 +9,7 @@ __all__ = [
     "forums",
     "general",
     "testing",
+    "astral",
+    "python",
+    "github",
 ]

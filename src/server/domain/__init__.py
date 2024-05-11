@@ -1,4 +1,5 @@
 """Application Modules."""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -26,7 +27,7 @@ __all__ = [
 routes: list[ControllerRouterHandler] = [
     system.controllers.system.SystemController,
     web.controllers.web.WebController,
-    guilds.controllers.GuildController,
+    guilds.controllers.GuildsController,
 ]
 """Routes for the application."""
 
