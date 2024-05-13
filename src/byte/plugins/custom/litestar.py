@@ -44,16 +44,19 @@ class GitHubIssue(Modal, title="Create GitHub Issue"):
         custom_id: str = MISSING,
         message: Message | None = None,
     ) -> None:
+        self.jump_url: str | None = None
         # NOTE: check how else to set default
         super().__init__(title=title, timeout=timeout, custom_id=custom_id)
         if message:
             self.description.default = message.content
+            self.jump_url = message.jump_url
 
     async def on_submit(self, interaction: Interaction) -> None:
         issue_reporter = interaction.user
         issue_body_lines = [
             "### Reported by",
-            f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id}) in Discord: {interaction.channel.name}",  # noqa: E501
+            f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id})"
+            f" in Discord: [#{interaction.channel.name}]({self.jump_url})",
             "",
             "### Description",
             f"{self.description.value.strip()}",
