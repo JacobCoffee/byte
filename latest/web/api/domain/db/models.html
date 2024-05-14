@@ -314,7 +314,7 @@ html.dark {
 <dl class="py class">
 <dt class="sig sig-object py" id="server.domain.db.models.GitHubConfig">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">server.domain.db.models.</span></span><span class="sig-name descname"><span class="pre">GitHubConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/server/domain/db/models.html#GitHubConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#server.domain.db.models.GitHubConfig" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.litestar.dev/2/reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.litestar.dev/2/reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
 <p>GitHub configuration.</p>
 <p>A guild will be able to configure which organization or user they want as a default
 base, which repository they want as a default, and whether they would like to sync
@@ -359,7 +359,7 @@ for example, any mapped columns or relationships.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="server.domain.db.models.Guild">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">server.domain.db.models.</span></span><span class="sig-name descname"><span class="pre">Guild</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/server/domain/db/models.html#Guild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#server.domain.db.models.Guild" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.litestar.dev/2/reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.litestar.dev/2/reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
 <p>Guild configuration.</p>
 <p>A single guild will contain base defaults (e.g., <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, boolean flags for linking, etc.)
 with configurable options that can be set by the guild owner or <code class="docutils literal notranslate"><span class="pre">allowed_users</span></code>.</p>
@@ -406,7 +406,7 @@ for example, any mapped columns or relationships.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="server.domain.db.models.SOTagsConfig">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">server.domain.db.models.</span></span><span class="sig-name descname"><span class="pre">SOTagsConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/server/domain/db/models.html#SOTagsConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#server.domain.db.models.SOTagsConfig" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.litestar.dev/2/reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.litestar.dev/2/reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
 <p>SQLAlchemy association model for a guild’s Stack Overflow tags config.</p>
 <p>A simple constructor that allows initialization from kwargs.</p>
 <p>Sets attributes on the constructed instance using the names and
@@ -448,7 +448,7 @@ for example, any mapped columns or relationships.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="server.domain.db.models.User">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">server.domain.db.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/server/domain/db/models.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#server.domain.db.models.User" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.litestar.dev/2/reference/contrib/sqlalchemy/base.html#litestar.contrib.sqlalchemy.base.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.litestar.dev/2/reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
 <p>SQLAlchemy model representing a user.</p>
 <div class="admonition-todo admonition" id="id1">
 <p class="admonition-title">Todo</p>
