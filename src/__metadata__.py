@@ -1,6 +1,12 @@
 """Source of truth for project metadata."""
 
-__version__ = "0.2.0"
-"""Project version."""
-__project__ = "byte-bot"
-"""Project name."""
+from __future__ import annotations
+
+import importlib.metadata
+
+__all__ = ("__version__", "__project__")
+
+__version__ = importlib.metadata.version("byte-bot")
+"""Version of the app."""
+__project__ = importlib.metadata.metadata("byte-bot")["Name"]
+"""Name of the app."""
