@@ -54,7 +54,7 @@ Reddit = 'https://reddit.com/monorepo'
 Youtube = 'https://www.youtube.com/@monorepo'
 
 [build-system]
-requires = ["hatchling<=1.18.0", "nodeenv"]
+requires = ["hatchling", "nodeenv"]
 build-backend = "hatchling.build"
 
 [tool.hatch.metadata]
@@ -62,10 +62,10 @@ allow-direct-references = true
 
 [tool.hatch.build]
 dev-mode-dirs = ["src/", "."]
-packages = ["src/", "."]
+include = ["README.md"]
+packages = ["src/byte", "src/server"]
 
-[tool.hatch.build.targets.sdist]
-include = ["src/"]
+[tool.hatch.build.targets.app]
 
 #[tool.pdm.scripts]
 #lint = "pre-commit run --all-files"

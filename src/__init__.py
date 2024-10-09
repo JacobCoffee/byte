@@ -5,7 +5,7 @@ from rich import get_console
 from rich.traceback import install as rich_tracebacks
 
 from __metadata__ import __version__
-from src import app, byte, cli, server, utils
+import app, byte, cli, server, utils
 
 __all__ = (
     "__version__",
