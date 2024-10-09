@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, TypeAlias, TypeVar
 
-from advanced_alchemy import FilterTypes
+from advanced_alchemy.filters import FilterTypes
 from advanced_alchemy.extensions.litestar import SQLAlchemyDTO
 from litestar.dto import DataclassDTO, DTOData
 from litestar.types import DataclassProtocol

@@ -67,3 +67,6 @@ def create_bot() -> None:
 
     .. todo:: Move into this file.
     """
+
+app = create_app()
+bot = create_bot()

@@ -13,7 +13,7 @@ from server.domain.guilds.schemas import GuildSchema
 from server.domain.guilds.services import GuildsService  # noqa: TCH001
 
 if TYPE_CHECKING:
-    from advanced_alchemy import FilterTypes
+    from advanced_alchemy.filters import FilterTypes
     from litestar.pagination import OffsetPagination
 
 __all__ = ("GuildController",)
