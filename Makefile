@@ -29,6 +29,7 @@ upgrade:       ## Upgrade all dependencies to the latest stable versions
 # =============================================================================
 
 install-uv: 										## Install latest version of UV
+	@echo "=> Installing uv"
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
 
 install-pre-commit: ## Install pre-commit and install hooks
@@ -39,12 +40,13 @@ install-pre-commit: ## Install pre-commit and install hooks
 
 .PHONY: install
 install: clean										## Install the project, dependencies, and pre-commit for local development
-	@if ! $(UV) --version > /dev/null; then echo '=> Installing uv'; $(MAKE) install-uv; fi
-	@if [ "$(VENV_EXISTS)" ]; then echo "=> Removing existing virtual environment"; fi
-	if [ "$(VENV_EXISTS)" ]; then $(MAKE) destroy; fi
-	if [ "$(VENV_EXISTS)" ]; then $(MAKE) clean; fi
-	@if [ "$(USING_UV)" ]; then $(UV) venv && $(UV) pip install --quiet -U wheel setuptools cython mypy pip; fi
-	@if [ "$(USING_UV)" ]; then $(UV) sync --all-extras --dev; fi
+	@if ! $(UV) --version > /dev/null; then $(MAKE) install-uv; fi
+	$(MAKE) destroy
+	$(MAKE) clean
+	@$(UV) venv && $(UV) pip install --quiet -U wheel setuptools cython mypy pip
+	@$(UV) sync --all-extras --force-reinstall --dev
+	@nodeenv --python-virtualenv
+	@npm install
 	@echo "=> Install complete! Note: If you want to re-install re-run 'make install'"
 
 # =============================================================================
@@ -101,6 +103,10 @@ migrations:       ## Generate database migrations
 migrate:          ## Apply database migrations
 	@echo "ATTENTION: Will apply all database migrations."
 	@$(UV) run app database upgrade --no-prompt
+
+.PHONY: db
+db: ## Run the database
+	@docker compose -f "docker-compose.infra.yml" up -d --build 
 
 # =============================================================================
 # Main

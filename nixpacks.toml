@@ -2,3 +2,14 @@ providers = ['python']
 
 [variables]
     PIP_DISABLE_PIP_VERSION_CHECK = '1'
+
+[phases.setup]
+nixPkgs = ['...']
+
+[phases.install]
+cmds = [
+    "pip install -U uv && uv sync",
+]
+
+[start]
+cmd = 'uv run app database upgrade --no-prompt && uv app run --wc 2 --host 0.0.0.0 --port $PORT'
