@@ -62,7 +62,7 @@ allow-direct-references = true
 
 [tool.hatch.build]
 dev-mode-dirs = ["src/", "."]
-include = ["README.md"]
+#include = ["README.md"]
 packages = ["src/byte", "src/server"]
 
 [tool.hatch.build.targets.app]
