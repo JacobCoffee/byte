@@ -67,6 +67,9 @@ packages = ["src/byte", "src/server"]
 
 [tool.hatch.build.targets.app]
 
+[tool.hatch.build.targets.sdist]
+include = ["src/"]
+
 #[tool.pdm.scripts]
 #lint = "pre-commit run --all-files"
 #test = "pytest"
