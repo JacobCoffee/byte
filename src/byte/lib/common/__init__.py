@@ -3,7 +3,7 @@
 .. todo:: temporary, these are not multi-guild friendly.
 """
 
-from byte.lib.common import assets, colors, guilds, links
+from src.byte.lib.common import assets, colors, guilds, links
 
 __all__ = (
     "assets",

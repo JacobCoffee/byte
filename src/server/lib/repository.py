@@ -9,7 +9,7 @@ from advanced_alchemy.repository import SQLAlchemyAsyncRepository
 from advanced_alchemy.repository.typing import ModelT
 from litestar.repository.handlers import on_app_init as _on_app_init
 
-from utils import slugify
+from src.utils import slugify
 
 if TYPE_CHECKING:
     from litestar.config.app import AppConfig

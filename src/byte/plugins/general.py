@@ -5,9 +5,9 @@ from discord import Embed, Interaction
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
-from byte.lib.common.assets import litestar_logo_yellow
-from byte.lib.common.links import markdown_guide, pastebin
-from byte.lib.utils import linker
+from src.byte.lib.common.assets import litestar_logo_yellow
+from src.byte.lib.common.links import markdown_guide, pastebin
+from src.byte.lib.utils import linker
 
 __all__ = ("GeneralCommands", "setup")
 

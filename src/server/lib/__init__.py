@@ -1,7 +1,7 @@
 """Server Lib."""
 from __future__ import annotations
 
-from server.lib import (
+from src.server.lib import (
     cors,
     db,
     dependencies,

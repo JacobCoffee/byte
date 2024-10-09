@@ -9,8 +9,8 @@ from discord.ui import Modal, TextInput
 from discord.utils import MISSING
 from httpx import codes
 
-from byte.lib.utils import is_byte_dev, mention_role, mention_user
-from server.domain.github.helpers import github_client
+from src.byte.lib.utils import is_byte_dev, mention_role, mention_user
+from src.server.domain.github.helpers import github_client
 
 __all__ = ("LitestarCommands", "setup")
 

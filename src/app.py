@@ -19,8 +19,8 @@ def create_app() -> Litestar:
     from litestar import Litestar
     from pydantic import SecretStr
 
-    from server import domain
-    from server.lib import (
+    from src.server import domain
+    from src.server.lib import (
         cors,
         db,
         exceptions,
@@ -30,7 +30,7 @@ def create_app() -> Litestar:
         static_files,
         template,
     )
-    from server.lib.dependencies import create_collection_dependencies
+    from src.server.lib.dependencies import create_collection_dependencies
 
     dependencies = create_collection_dependencies()
 

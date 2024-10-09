@@ -12,7 +12,7 @@ from sqlalchemy.orm import DeclarativeBase
 if TYPE_CHECKING:
     from pydantic import BaseModel
 
-    from server.lib.service import SQLAlchemyAsyncRepositoryService
+    from src.server.lib.service import SQLAlchemyAsyncRepositoryService
 
 # -- Database Types
 SQLAlchemyModelT = TypeVar("SQLAlchemyModelT", bound=DeclarativeBase)

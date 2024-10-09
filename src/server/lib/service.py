@@ -18,7 +18,7 @@ from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService as _SQLAlc
 from litestar.pagination import OffsetPagination
 from pydantic.type_adapter import TypeAdapter
 
-from server.lib.db import async_session_factory
+from src.server.lib.db import async_session_factory
 
 if TYPE_CHECKING:
     from collections.abc import AsyncIterator
@@ -27,7 +27,7 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
     from sqlalchemy.sql import ColumnElement
 
-    from server.lib.types import ModelDTOT, SQLAlchemyAsyncRepoServiceT
+    from src.server.lib.types import ModelDTOT, SQLAlchemyAsyncRepoServiceT
 
 __all__ = ["SQLAlchemyAsyncRepositoryService"]
 

@@ -4,7 +4,7 @@ from __future__ import annotations
 from litestar.openapi.config import OpenAPIConfig
 from litestar.openapi.spec import Contact
 
-from server.lib import settings
+from src.server.lib import settings
 
 __all__ = ("config",)
 
