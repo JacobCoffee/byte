@@ -39,7 +39,7 @@ Byte is currently deployed to [Railway][railway] for both the bot and the web se
 ## Development
 
 You can use the provided [nixpack][nixpacks] config [file](./nixpacks.toml) config, or set up your environment using
-PDM[pdm].
+[uv][uv].
 
 ## Contributing
 
@@ -61,7 +61,7 @@ All contributions are welcome! Please see [CONTRIBUTING](./CONTRIBUTING.rst) for
 [feather]: https://feathericons.com/
 [railway]: https://railway.app?referralCode=BMcs0x
 [nixpacks]: https://nixpacks.com/docs/getting-started
-[pdm]: https://pdm.fming.dev/latest/
+[uv]: https://docs.astral.sh/uv/
 
 ## Contributors ✨
 

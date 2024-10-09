@@ -70,20 +70,17 @@ packages = ["src/", "."]
 [tool.hatch.build.targets.sdist]
 include = ["src/"]
 
-[tool.pdm.build]
-include = ["src"]
-package-dir = "src"
+#[tool.pdm.scripts]
+#lint = "pre-commit run --all-files"
+#test = "pytest"
+#docs-serve = "sphinx-autobuild docs docs/_build/ -j auto --watch app --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002"
+#changelog = "git cliff -c pyproject.toml -o docs/changelog.rst"
+## TODO: Move more from makefile here
+#ci = { composite = ["lint", "test"] }
 
-[tool.pdm.scripts]
-lint = "pre-commit run --all-files"
-test = "pytest"
-docs-serve = "sphinx-autobuild docs docs/_build/ -j auto --watch app --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002"
-changelog = "git cliff -c pyproject.toml -o docs/changelog.rst"
-# TODO: Move more from makefile here
-ci = { composite = ["lint", "test"] }
-
-[tool.pdm.dev-dependencies]
-test = [
+[tool.uv]
+dev-dependencies = [
+    # - Testing
     "pytest>=7.4.3",
     "coverage>=7.3.2",
     "pytest-benchmark>=4.0.0",
@@ -92,8 +89,7 @@ test = [
     "pytest-mock>=3.12.0",
     "hypothesis>=6.92.0",
     "pytest-asyncio>=0.23.2",
-]
-docs = [
+    # - Documentation
     "sphinx>=7.2.6",
     "sphinx-autobuild>=2021.3.14",
     "sphinx-copybutton>=0.5.2",
@@ -105,8 +101,7 @@ docs = [
     "sphinxcontrib-mermaid>=0.9.2",
     "sphinx-design>=0.5.0",
     "sphinx-sqlalchemy>=0.2.0",
-]
-lint = [
+    # - Linting
     "codespell>=2.2.6",
     "mypy>=1.7.1",
     "pre-commit>=3.6.0",
@@ -127,7 +122,7 @@ run-all = "src.cli:run_all"
 [tool.codespell]
 quiet-level = 3
 ignore-words-list = "selectin, alog"
-skip = "pdm.lock, package-lock.json, *.svg, docs/changelog.rst"
+skip = "uv.lock, package-lock.json, *.svg, docs/changelog.rst"
 
 [tool.coverage.run]
 omit = ["*/tests/*"]
