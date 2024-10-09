@@ -38,7 +38,7 @@ Byte is currently deployed to [Railway][railway] for both the bot and the web se
 
 ## Development
 
-You can use the provided [nixpack][nixpacks] config [file](./nixpacks.toml) config, or set up your environment using
+You can use the provided [nixpack][nixpacks] [file](./nixpacks.toml), or set up your environment using
 [uv][uv].
 
 ## Contributing
