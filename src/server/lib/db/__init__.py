@@ -1,8 +1,8 @@
 """Core DB Package."""
 from __future__ import annotations
 
-from src.server.lib.db import orm
-from src.server.lib.db.base import (
+from server.lib.db import orm
+from server.lib.db.base import (
     async_session_factory,
     config,
     engine,

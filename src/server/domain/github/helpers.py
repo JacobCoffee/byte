@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from githubkit import AppInstallationAuthStrategy, GitHub  # type: ignore[reportMissingImports]
 
-from src.server.lib import settings
+from server.lib import settings
 
 __all__ = ("github_client",)
 

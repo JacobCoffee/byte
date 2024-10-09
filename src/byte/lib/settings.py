@@ -9,8 +9,8 @@ from dotenv import load_dotenv
 from pydantic import ValidationError, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from src import utils
-from src.__metadata__ import __version__ as version
+import utils
+from __metadata__ import __version__ as version
 
 __all__ = [
     "discord",
@@ -25,7 +25,7 @@ load_dotenv()
 
 DEFAULT_MODULE_NAME: str = "src"
 BASE_DIR: Final = utils.module_to_os_path(DEFAULT_MODULE_NAME)
-PLUGINS_DIR: Final = utils.module_to_os_path("src.byte.plugins")
+PLUGINS_DIR: Final = utils.module_to_os_path("byte.plugins")
 
 
 class DiscordSettings(BaseSettings):

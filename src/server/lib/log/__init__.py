@@ -9,9 +9,9 @@ from typing import TYPE_CHECKING
 import structlog
 from litestar.logging.config import LoggingConfig
 
-from src.server.lib import settings
-from src.server.lib.log import controller
-from src.server.lib.log.utils import EventFilter, msgspec_json_renderer
+from server.lib import settings
+from server.lib.log import controller
+from server.lib.log.utils import EventFilter, msgspec_json_renderer
 
 if TYPE_CHECKING:
     from collections.abc import Sequence

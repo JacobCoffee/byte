@@ -3,10 +3,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from src.server.domain.db.models import Guild
-from src.server.lib import log
-from src.server.lib.repository import SQLAlchemyAsyncSlugRepository
-from src.server.lib.service import SQLAlchemyAsyncRepositoryService
+from server.domain.db.models import Guild
+from server.lib import log
+from server.lib.repository import SQLAlchemyAsyncSlugRepository
+from server.lib.service import SQLAlchemyAsyncRepositoryService
 
 __all__ = ("GuildsRepository", "GuildsService")
 

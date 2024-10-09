@@ -10,8 +10,8 @@ from discord import Activity, Forbidden, Intents, Member, Message, NotFound
 from discord.ext.commands import Bot, CommandError, Context, ExtensionAlreadyLoaded
 from dotenv import load_dotenv
 
-from src.byte.lib import settings
-from src.byte.lib.log import get_logger
+from byte.lib import settings
+from byte.lib.log import get_logger
 
 __all__ = [
     "Byte",

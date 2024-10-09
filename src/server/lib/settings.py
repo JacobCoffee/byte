@@ -15,8 +15,8 @@ from pydantic import ValidationError, field_validator
 from pydantic.types import SecretBytes
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from src import utils
-from src.__metadata__ import __version__ as version
+import utils
+from __metadata__ import __version__ as version
 
 __all__ = (
     "APISettings",

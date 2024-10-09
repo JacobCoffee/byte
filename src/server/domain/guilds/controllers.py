@@ -7,10 +7,10 @@ from litestar import Controller, get, post
 from litestar.di import Provide
 from litestar.params import Dependency, Parameter
 
-from src.server.domain import urls
-from src.server.domain.guilds.dependencies import provides_guilds_service
-from src.server.domain.guilds.schemas import GuildSchema
-from src.server.domain.guilds.services import GuildsService  # noqa: TCH001
+from server.domain import urls
+from server.domain.guilds.dependencies import provides_guilds_service
+from server.domain.guilds.schemas import GuildSchema
+from server.domain.guilds.services import GuildsService  # noqa: TCH001
 
 if TYPE_CHECKING:
     from advanced_alchemy.filters import FilterTypes
