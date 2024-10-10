@@ -22,7 +22,7 @@ dependencies = [
     "ruff>=0.1.7",
 ]
 requires-python = ">=3.11,<4.0"
-readme = "README.md"
+#readme = "README.md"
 license = { text = "MIT" }
 classifiers = [
     'Development Status :: 2 - Pre-Alpha',
@@ -53,6 +53,14 @@ Twitter = 'https://twitter.com/_scriptr'
 Reddit = 'https://reddit.com/monorepo'
 Youtube = 'https://www.youtube.com/@monorepo'
 
+[project.scripts]
+app = "byte_bot.__main__:run_cli"
+
+[project.entry-points."litestar.commands"]
+run-bot = "byte_bot.cli:run_bot"
+run-web = "byte_bot.cli:run_web"
+run-all = "byte_bot.cli:run_all"
+
 [build-system]
 requires = ["hatchling", "nodeenv"]
 build-backend = "hatchling.build"
@@ -60,12 +68,22 @@ build-backend = "hatchling.build"
 [tool.hatch.metadata]
 allow-direct-references = true
 
-[tool.hatch.build]
-dev-mode-dirs = ["byte_bot/", "."]
-include = ["README.md"]
-packages = ["byte_bot/byte", "byte_bot/server"]
-
-[tool.hatch.build.targets.app]
+#[tool.hatch.build]
+#dev-mode-dirs = ["byte_bot/", "."]
+#include = ["../README.md"]
+#packages = ["byte_bot/byte", "byte_bot/server"]
+#
+#[tool.hatch.build.targets.byte_bot]
+#include = [
+#  "*"
+#]
+#
+#[tool.hatch.build.targets.sdist]
+#include = [
+#  "byte_bot",
+#  "*.md",
+#    "*",
+#]
 
 #[tool.pdm.scripts]
 #lint = "pre-commit run --all-files"
@@ -107,14 +125,6 @@ dev-dependencies = [
     "pre-commit>=3.3.3",
     "pyright>=1.1.339",
 ]
-
-[project.scripts]
-app = "byte_bot.__main__:run_cli"
-
-[project.entry-points."litestar.commands"]
-run-bot = "byte_bot.cli:run_bot"
-run-web = "byte_bot.cli:run_web"
-run-all = "byte_bot.cli:run_all"
 
 [tool.codespell]
 quiet-level = 3
