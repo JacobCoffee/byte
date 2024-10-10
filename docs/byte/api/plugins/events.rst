@@ -2,5 +2,5 @@
 events
 ======
 
-.. automodule:: src.byte.plugins.events
+.. automodule:: byte_bot.byte.plugins.events
    :members:

@@ -4,5 +4,5 @@ urls
 
 URL patterns for the app.
 
-.. automodule:: src.server.domain.urls
+.. automodule:: byte_bot.server.domain.urls
      :members:

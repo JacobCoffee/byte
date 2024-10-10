@@ -4,5 +4,5 @@ controllers
 
 Controllers for the application web interface.
 
-.. automodule:: src.server.domain.web.controllers.web
+.. automodule:: byte_bot.server.domain.web.controllers.web
     :members:

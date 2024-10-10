@@ -26,7 +26,7 @@
 next-env.d.ts
 
 # project
-!/src/byte_bot/lib/
-!/src/server/lib/
-!/src/server/lib/
+!/byte_bot/byte_bot/lib/
+!/byte_bot/server/lib/
+!/byte_bot/server/lib/
 !/docs/web/api/lib/

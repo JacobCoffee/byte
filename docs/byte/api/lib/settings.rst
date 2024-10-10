@@ -4,5 +4,5 @@ settings
 
 Settings for the Byte portion of the application.
 
-.. automodule:: src.byte.lib.settings
+.. automodule:: byte_bot.byte.lib.settings
      :members:

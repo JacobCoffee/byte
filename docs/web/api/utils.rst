@@ -4,5 +4,5 @@ utils
 
 Utilities for the application.
 
-.. automodule:: src.utils
+.. automodule:: byte_bot.utils
      :members:

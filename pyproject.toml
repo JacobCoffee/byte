@@ -61,9 +61,9 @@ build-backend = "hatchling.build"
 allow-direct-references = true
 
 [tool.hatch.build]
-dev-mode-dirs = ["src/", "."]
+dev-mode-dirs = ["byte_bot/", "."]
 include = ["README.md"]
-packages = ["src/byte", "src/server"]
+packages = ["byte_bot/byte", "byte_bot/server"]
 
 [tool.hatch.build.targets.app]
 
@@ -109,12 +109,12 @@ dev-dependencies = [
 ]
 
 [project.scripts]
-app = "src.__main__:run_cli"
+app = "byte_bot.__main__:run_cli"
 
 [project.entry-points."litestar.commands"]
-run-bot = "src.cli:run_bot"
-run-web = "src.cli:run_web"
-run-all = "src.cli:run_all"
+run-bot = "byte_bot.cli:run_bot"
+run-web = "byte_bot.cli:run_web"
+run-all = "byte_bot.cli:run_all"
 
 [tool.codespell]
 quiet-level = 3
@@ -140,7 +140,7 @@ filterwarnings = [
 ]
 
 [tool.pyright]
-include = ["src/", "tests"]
+include = ["byte_bot/", "tests"]
 disableBytesTypePromotions = true
 exclude = [
     "tools",
@@ -244,9 +244,9 @@ known-first-party = ["src", "tests"]
     "FBT003", # Boolean Boolean default positional argument in function definition
     "B008", # Do not perform function calls in argument defaults
 ]
-"src/**/*.*" = ["PLR0913", "SLF001"]
-"src/server/lib/db/base.py" = ["E501"]
-"src/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"byte_bot/**/*.*" = ["PLR0913", "SLF001"]
+"byte_bot/server/lib/db/base.py" = ["E501"]
+"byte_bot/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
 "tests/**/*.*" = [
     "S101",
     "D",

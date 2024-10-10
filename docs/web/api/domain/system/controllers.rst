@@ -4,5 +4,5 @@ controllers
 
 Controllers for the application system.
 
-.. automodule:: src.server.domain.system.controllers
+.. automodule:: byte_bot.server.domain.system.controllers
     :members:
