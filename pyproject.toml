@@ -68,10 +68,10 @@ build-backend = "hatchling.build"
 [tool.hatch.metadata]
 allow-direct-references = true
 
-#[tool.hatch.build]
-#dev-mode-dirs = ["byte_bot/", "."]
-#include = ["../README.md"]
-#packages = ["byte_bot/byte", "byte_bot/server"]
+[tool.hatch.build]
+dev-mode-dirs = ["byte_bot/", "."]
+include = ["../README.md"]
+packages = ["byte_bot/byte", "byte_bot/server"]
 #
 #[tool.hatch.build.targets.byte_bot]
 #include = [
