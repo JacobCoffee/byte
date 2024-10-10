@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from server.lib.db import orm
-from server.lib.db.base import (
+from byte_bot.server.lib.db import orm
+from byte_bot.server.lib.db.base import (
     async_session_factory,
     config,
     engine,

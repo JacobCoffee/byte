@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 from litestar.contrib.repository.filters import FilterTypes
 from advanced_alchemy.service import OffsetPagination
 
-from server.domain import db, guilds, system, urls, web
+from byte_bot.server.domain import db, guilds, system, urls, web
 
 if TYPE_CHECKING:
     from collections.abc import Mapping

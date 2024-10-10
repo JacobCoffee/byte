@@ -6,9 +6,9 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import select
 
-from server.domain.db.models import Guild
-from server.domain.guilds.services import GuildsService
-from server.lib import log
+from byte_bot.server.domain.db.models import Guild
+from byte_bot.server.domain.guilds.services import GuildsService
+from byte_bot.server.lib import log
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator

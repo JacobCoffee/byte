@@ -15,8 +15,8 @@ from anyio import run_process
 from discord.ext import commands
 from ruff.__main__ import find_ruff_bin  # type: ignore[import-untyped]
 
-from byte.lib import settings
-from byte.lib.common.links import pastebin
+from byte_bot.byte.lib import settings
+from byte_bot.byte.lib.common.links import pastebin
 
 if TYPE_CHECKING:
     from collections.abc import Iterable

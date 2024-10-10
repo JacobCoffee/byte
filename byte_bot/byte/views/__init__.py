@@ -1,6 +1,6 @@
 """Views for the bot."""
 
-from byte.views import forums
+from byte_bot.byte.views import forums
 
 __all__ = [
     "forums",

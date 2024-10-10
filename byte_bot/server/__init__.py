@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from server import domain, lib
+from byte_bot.server import domain, lib
 
 __all__ = (
     "domain",

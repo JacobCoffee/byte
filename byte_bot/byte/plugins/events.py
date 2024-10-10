@@ -6,10 +6,10 @@ from typing import cast
 from discord import Embed
 from discord.ext.commands import Bot, Cog
 
-from byte.lib.common.assets import litestar_logo_yellow
-from byte.lib.common.links import mcve
-from byte.lib.utils import linker
-from byte.views.forums import HelpThreadView
+from byte_bot.byte.lib.common.assets import litestar_logo_yellow
+from byte_bot.byte.lib.common.links import mcve
+from byte_bot.byte.lib.utils import linker
+from byte_bot.byte.views.forums import HelpThreadView
 
 __all__ = ("Events", "setup")
 

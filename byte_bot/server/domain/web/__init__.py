@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from server.domain.web import controllers
+from byte_bot.server.domain.web import controllers
 
 __all__ = [
     "controllers",

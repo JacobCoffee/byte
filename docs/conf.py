@@ -8,7 +8,7 @@ import warnings
 
 from sqlalchemy.exc import SAWarning
 
-from __metadata__ import __project__
+from byte_bot.__metadata__ import __project__
 
 # -- Environmental Data ------------------------------------------------------
 warnings.filterwarnings("ignore", category=SAWarning)

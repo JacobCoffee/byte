@@ -6,7 +6,7 @@ from pathlib import Path
 
 from litestar.static_files.config import StaticFilesConfig
 
-from server.lib import settings
+from byte_bot.server.lib import settings
 
 STATIC_DIRS = [settings.project.STATIC_DIR]
 if settings.project.DEBUG:

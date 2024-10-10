@@ -7,8 +7,8 @@ from typing import Any
 from advanced_alchemy.repository import SQLAlchemyAsyncSlugRepository
 from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
 
-from server.domain.db.models import Guild
-from server.lib import log
+from byte_bot.server.domain.db.models import Guild
+from byte_bot.server.lib import log
 
 
 __all__ = ("GuildsRepository", "GuildsService")

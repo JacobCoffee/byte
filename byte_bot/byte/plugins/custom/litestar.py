@@ -10,8 +10,8 @@ from discord.ui import Modal, TextInput
 from discord.utils import MISSING
 from httpx import codes
 
-from byte.lib.utils import is_byte_dev, mention_role, mention_user
-from server.domain.github.helpers import github_client
+from byte_bot.byte.lib.utils import is_byte_dev, mention_role, mention_user
+from byte_bot.server.domain.github.helpers import github_client
 
 __all__ = ("LitestarCommands", "setup")
 

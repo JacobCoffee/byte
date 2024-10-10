@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from server.lib import (
+from byte_bot.server.lib import (
     cors,
     db,
     dependencies,

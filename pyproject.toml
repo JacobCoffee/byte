@@ -69,8 +69,10 @@ build-backend = "hatchling.build"
 allow-direct-references = true
 
 [tool.hatch.build]
-dev-mode-dirs = ["byte_bot/"]
-packages = ["byte_bot/byte", "byte_bot/server"]
+#dev-mode-dirs = ["byte_bot/"]
+#packages = ["byte_bot/byte", "byte_bot/server"]
+
+[tool.hatch.build.targets.app]
 
 [tool.uv]
 dev-dependencies = [

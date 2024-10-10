@@ -10,7 +10,7 @@ from rich.console import Console
 from rich.logging import RichHandler  # noqa: F401
 from rich.traceback import install
 
-from byte.lib import settings
+from byte_bot.byte.lib import settings
 
 __all__ = [
     "setup_logging",

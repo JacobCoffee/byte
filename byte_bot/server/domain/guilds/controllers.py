@@ -13,10 +13,10 @@ from litestar.connection import ASGIConnection
 from litestar.handlers import BaseRouteHandler
 from litestar.exceptions import NotAuthorizedException
 
-from server.domain import urls
-from server.domain.guilds.dependencies import provides_guilds_service
-from server.domain.guilds.schemas import GuildSchema
-from server.domain.guilds.services import GuildsService  # noqa: TCH001
+from byte_bot.server.domain import urls
+from byte_bot.server.domain.guilds.dependencies import provides_guilds_service
+from byte_bot.server.domain.guilds.schemas import GuildSchema
+from byte_bot.server.domain.guilds.services import GuildsService  # noqa: TCH001
 
 if TYPE_CHECKING:
     from advanced_alchemy.filters import FilterTypes

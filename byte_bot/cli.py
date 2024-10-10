@@ -10,7 +10,7 @@ from typing import Any
 import click
 from rich import get_console
 
-from server.lib import log, settings
+from byte_bot.server.lib import log, settings
 
 __all__ = [
     "run_bot",

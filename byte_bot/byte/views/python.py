@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from byte.lib.log import get_logger
-from byte.views.abstract_views import BaseEmbedView
+from byte_bot.byte.lib.log import get_logger
+from byte_bot.byte.views.abstract_views import BaseEmbedView
 
 __all__ = ("PEPView",)
 

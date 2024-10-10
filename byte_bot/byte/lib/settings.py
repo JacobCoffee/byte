@@ -12,7 +12,7 @@ from pydantic import ValidationError, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-from __metadata__ import __version__ as version
+from byte_bot.__metadata__ import __version__ as version
 
 __all__ = [
     "discord",
@@ -27,7 +27,7 @@ load_dotenv()
 
 DEFAULT_MODULE_NAME: str = "byte_bot"
 BASE_DIR: Final = module_to_os_path(DEFAULT_MODULE_NAME)
-PLUGINS_DIR: Final = module_to_os_path("byte.plugins")
+PLUGINS_DIR: Final = module_to_os_path("byte_bot.byte.plugins")
 
 
 class DiscordSettings(BaseSettings):

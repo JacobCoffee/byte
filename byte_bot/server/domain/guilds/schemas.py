@@ -6,7 +6,7 @@ from uuid import UUID  # noqa: TCH003
 
 from pydantic import Field
 
-from server.lib.schema import CamelizedBaseModel
+from byte_bot.server.lib.schema import CamelizedBaseModel
 
 __all__ = ("GuildCreate", "GuildSchema", "GuildUpdate")
 

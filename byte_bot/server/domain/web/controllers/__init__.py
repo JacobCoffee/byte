@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from server.domain.web.controllers import web
+from byte_bot.server.domain.web.controllers import web
 
 __all__ = [
     "web",

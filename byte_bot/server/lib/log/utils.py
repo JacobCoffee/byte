@@ -14,7 +14,7 @@ from typing import TYPE_CHECKING
 
 __all__ = ["EventFilter", "msgspec_json_renderer"]
 
-from server.lib import serialization
+from byte_bot.server.lib import serialization
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
