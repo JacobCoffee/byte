@@ -79,7 +79,7 @@ test:  ## Run the tests
 	@$(UV) run pytest tests
 
 coverage:  ## Run the tests and generate coverage report
-	@$(UV) run pytest tests --cov=src
+	@$(UV) run pytest tests --cov=byte_bot
 	@$(UV) run coverage html
 	@$(UV) run coverage xml
 
@@ -95,7 +95,7 @@ docs-clean: 										## Dump the existing built docs
 
 docs-serve: docs-clean 								## Serve the docs locally
 	@echo "=> Serving documentation"
-	$(UV) run sphinx-autobuild docs docs/_build/ -j auto --watch src --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002
+	$(UV) run sphinx-autobuild docs docs/_build/ -j auto --watch byte_bot --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002
 
 docs: docs-clean 									## Dump the existing built docs and rebuild them
 	@echo "=> Building documentation"

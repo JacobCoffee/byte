@@ -69,29 +69,8 @@ build-backend = "hatchling.build"
 allow-direct-references = true
 
 [tool.hatch.build]
-dev-mode-dirs = ["byte_bot/", "."]
-include = ["../README.md"]
+dev-mode-dirs = ["byte_bot/"]
 packages = ["byte_bot/byte", "byte_bot/server"]
-#
-#[tool.hatch.build.targets.byte_bot]
-#include = [
-#  "*"
-#]
-#
-#[tool.hatch.build.targets.sdist]
-#include = [
-#  "byte_bot",
-#  "*.md",
-#    "*",
-#]
-
-#[tool.pdm.scripts]
-#lint = "pre-commit run --all-files"
-#test = "pytest"
-#docs-serve = "sphinx-autobuild docs docs/_build/ -j auto --watch app --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002"
-#changelog = "git cliff -c pyproject.toml -o docs/changelog.rst"
-## TODO: Move more from makefile here
-#ci = { composite = ["lint", "test"] }
 
 [tool.uv]
 dev-dependencies = [
@@ -209,7 +188,7 @@ strict-imports = false
 
 [tool.ruff]
 line-length = 120
-src = ["src", "tests"]
+src = ["byte_bot", "tests"]
 target-version = "py311"
 
 [tool.ruff.lint]
@@ -238,7 +217,7 @@ classmethod-decorators = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["src", "tests"]
+known-first-party = ["byte_bot", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
