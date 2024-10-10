@@ -72,7 +72,8 @@ allow-direct-references = true
 #dev-mode-dirs = ["byte_bot/"]
 #packages = ["byte_bot/byte", "byte_bot/server"]
 
-#[tool.hatch.build.targets.app]
+[tool.hatch.build.targets.wheel]
+packages = ["byte_bot/"]
 
 [tool.uv]
 dev-dependencies = [
