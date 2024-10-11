@@ -110,7 +110,7 @@ dev-dependencies = [
 
 [tool.codespell]
 quiet-level = 3
-ignore-words-list = "selectin, alog"
+ignore-words-list = "selectin, alog, thirdparty"
 skip = "uv.lock, package-lock.json, *.svg, docs/changelog.rst"
 
 [tool.coverage.run]

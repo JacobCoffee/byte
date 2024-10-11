@@ -2,13 +2,20 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from litestar import Controller, get
 from litestar.response import Template
 from litestar.status_codes import HTTP_200_OK
 
 from byte_bot.server.domain import urls
+from byte_bot.server.domain.guilds.helpers import get_byte_server_count
+from byte_bot.server.domain.system.helpers import check_byte_status, check_database_status
 
-__all__ = ["WebController"]
+if TYPE_CHECKING:
+    from sqlalchemy.ext.asyncio import AsyncSession
+
+__all__ = ("WebController",)
 
 
 class WebController(Controller):
@@ -24,9 +31,23 @@ class WebController(Controller):
         include_in_schema=False,
         opt={"exclude_from_auth": True},
     )
-    async def index(self) -> Template:
+    async def index(self, db_session: AsyncSession) -> Template:
         """Serve site root."""
-        return Template(template_name="index.html")
+        server_count = await get_byte_server_count()
+        byte_status = await check_byte_status()
+        database_status = await check_database_status(db_session)
+        statuses = [database_status, byte_status]
+
+        if all(status == "offline" for status in statuses):
+            overall_status = "offline"
+        elif "offline" in statuses or "degraded" in statuses:
+            overall_status = "degraded"
+        else:
+            overall_status = "healthy"
+
+        return Template(
+            template_name="index.html", context={"server_count": server_count, "overall_status": overall_status}
+        )
 
     # add dashboard
     @get(

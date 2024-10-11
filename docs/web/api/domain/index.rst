@@ -11,5 +11,7 @@ domain
     init
     urls
     system/index
+    guilds/index
+    github/index
     web/index
     db/index
