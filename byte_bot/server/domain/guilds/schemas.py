@@ -8,6 +8,7 @@ from uuid import UUID  # noqa: TC003
 from pydantic import Field
 
 from byte_bot.server.lib.schema import CamelizedBaseModel
+from byte_bot.server.lib.serialization import convert_camel_to_snake_case
 
 __all__ = (
     "AllowedUsersConfigSchema",
@@ -61,8 +62,6 @@ class ForumConfigSchema(CamelizedBaseModel):
     showcase_forum_category: str
     showcase_thread_auto_close: bool
     showcase_thread_auto_close_days: int
-
-from server.lib.serialization import convert_camel_to_snake_case
 
 
 class GitHubConfigSchema(CamelizedBaseModel):
