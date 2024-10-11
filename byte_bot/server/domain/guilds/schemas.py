@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-from enum import StrEnum, Enum
-from typing import Type
+from enum import Enum, StrEnum
 from uuid import UUID  # noqa: TCH003
 
 from pydantic import Field
 
 from byte_bot.server.lib.schema import CamelizedBaseModel
+from byte_bot.server.lib.serialization import convert_camel_to_snake_case
 
 __all__ = (
     "AllowedUsersConfigSchema",
@@ -20,8 +20,6 @@ __all__ = (
     "SOTagsConfigSchema",
     "UpdateableGuildSetting",
 )
-
-from server.lib.serialization import convert_camel_to_snake_case
 
 
 class GitHubConfigSchema(CamelizedBaseModel):

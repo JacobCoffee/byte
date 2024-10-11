@@ -8,7 +8,6 @@ from litestar import Controller, get, patch, post
 from litestar.di import Provide
 from litestar.params import Dependency, Parameter
 
-from byte_bot.server.domain.db.models import Guild
 from byte_bot.server.domain.guilds import urls
 from byte_bot.server.domain.guilds.dependencies import (
     provides_allowed_users_config_service,

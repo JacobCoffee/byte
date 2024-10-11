@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Final
 
-from server.domain.urls import OPENAPI_SCHEMA
+from byte_bot.server.domain.urls import OPENAPI_SCHEMA
 
 # --- API
 

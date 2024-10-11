@@ -10,7 +10,7 @@ from typing import Any, Final, Literal
 
 from dotenv import load_dotenv
 from litestar.contrib.jinja import JinjaTemplateEngine
-from litestar.data_extractors import RequestExtractorField, ResponseExtractorField  # noqa: TCH002
+from litestar.data_extractors import RequestExtractorField, ResponseExtractorField
 from litestar.openapi.spec import Server
 from litestar.utils.module_loader import module_to_os_path
 from pydantic import ValidationError, field_validator
