@@ -301,7 +301,7 @@ class GuildsController(Controller):
             Guild: Guild object
         """
         result = await guilds_service.get(guild_id, id_attribute="guild_id")
-        return guilds_service.to_schema(GuildSchema, result)
+        return guilds_service.to_schema(schema_type=GuildSchema, data=result)
 
     @get(
         operation_id="GitHubDetail",
@@ -327,7 +327,7 @@ class GuildsController(Controller):
             GitHubConfig: GitHub config object
         """
         result = await github_service.get(guild_id, id_attribute="guild_id")
-        return github_service.to_schema(GitHubConfigSchema, result)
+        return github_service.to_schema(schema_type=GitHubConfigSchema, data=result)
 
     @get(
         operation_id="SOTagsDetail",
@@ -353,7 +353,7 @@ class GuildsController(Controller):
             SOTagsConfig: StackOverflow tags config object
         """
         result = await sotags_service.get(guild_id, id_attribute="guild_id")
-        return sotags_service.to_schema(SOTagsConfigSchema, result)
+        return sotags_service.to_schema(schema_type=SOTagsConfigSchema, data=result)
 
     @get(
         operation_id="AllowedUsersDetail",
@@ -379,7 +379,7 @@ class GuildsController(Controller):
             AllowedUsersConfig: Allowed users config object
         """
         result = await allowed_users_service.get(guild_id, id_attribute="guild_id")
-        return allowed_users_service.to_schema(AllowedUsersConfigSchema, result)
+        return allowed_users_service.to_schema(schema_type=AllowedUsersConfigSchema, data=result)
 
     @get(
         operation_id="ForumDetail",
@@ -405,4 +405,4 @@ class GuildsController(Controller):
             ForumConfig: Forum config object
         """
         result = await forum_service.get(guild_id, id_attribute="guild_id")
-        return forum_service.to_schema(ForumConfigSchema, result)
+        return forum_service.to_schema(schema_type=ForumConfigSchema, data=result)
