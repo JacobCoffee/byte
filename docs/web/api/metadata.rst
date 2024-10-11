@@ -4,5 +4,5 @@ metadata
 
 Metadata for the application.
 
-.. automodule:: src.__metadata__
+.. automodule:: byte_bot.__metadata__
      :members:

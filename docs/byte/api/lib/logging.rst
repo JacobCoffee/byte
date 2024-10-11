@@ -4,5 +4,5 @@ logging
 
 Logging configuration for Byte
 
-.. automodule:: src.byte.lib.logging
+.. automodule:: byte_bot.byte.lib.logging
      :members:

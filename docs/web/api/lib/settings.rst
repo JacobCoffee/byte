@@ -4,5 +4,5 @@ settings
 
 Application settings
 
-.. automodule:: src.server.lib.settings
+.. automodule:: byte_bot.server.lib.settings
      :members:

@@ -4,5 +4,5 @@ Domain Initializer
 
 Initializes the domain module.
 
-.. automodule:: src.server.domain.__init__
+.. automodule:: byte_bot.server.domain.__init__
      :members:

@@ -10,8 +10,9 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > [!WARNING]\
-> This repository holds very broken code. It is not recommended to use this code in any way. It is currently being used to
-> learn the creation of a Discord bot, used by developers to enhance their community/guild experience with features like
+> This repository holds very broken code. It is not recommended to use this code in any way. It is currently being used
+> to learn the creation of a Discord bot, used by developers to enhance their community/guild experience with features
+> like
 >
 > - GitHub integration
 > - Upload Threads/Forum Posts to GitHub discussions
@@ -38,8 +39,7 @@ Byte is currently deployed to [Railway][railway] for both the bot and the web se
 
 ## Development
 
-You can use the provided [nixpack][nixpacks] config [file](./nixpacks.toml) config, or set up your environment using
-PDM[pdm].
+You can use the provided [nixpack][nixpacks] [file](./nixpacks.toml), or set up your environment using [uv][uv].
 
 ## Contributing
 
@@ -61,7 +61,7 @@ All contributions are welcome! Please see [CONTRIBUTING](./CONTRIBUTING.rst) for
 [feather]: https://feathericons.com/
 [railway]: https://railway.app?referralCode=BMcs0x
 [nixpacks]: https://nixpacks.com/docs/getting-started
-[pdm]: https://pdm.fming.dev/latest/
+[uv]: https://docs.astral.sh/uv/
 
 ## Contributors ✨
 

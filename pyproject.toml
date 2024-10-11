@@ -1,6 +1,6 @@
 [project]
 name = "byte-bot"
-dynamic = ['version']
+version = "0.2.0"
 description = "Byte is a bot destined to serve in developer-oriented servers."
 authors = [
     { name = "Jacob Coffee", email = "jacob@z7x.org" },
@@ -22,7 +22,7 @@ dependencies = [
     "ruff>=0.1.7",
 ]
 requires-python = ">=3.11,<4.0"
-readme = "README.md"
+#readme = "README.md"
 license = { text = "MIT" }
 classifiers = [
     'Development Status :: 2 - Pre-Alpha',
@@ -53,37 +53,31 @@ Twitter = 'https://twitter.com/_scriptr'
 Reddit = 'https://reddit.com/monorepo'
 Youtube = 'https://www.youtube.com/@monorepo'
 
+[project.scripts]
+app = "byte_bot.__main__:run_cli"
+
+[project.entry-points."litestar.commands"]
+run-bot = "byte_bot.cli:run_bot"
+run-web = "byte_bot.cli:run_web"
+run-all = "byte_bot.cli:run_all"
+
 [build-system]
-requires = ["hatchling<=1.18.0", "nodeenv"]
+requires = ["hatchling", "nodeenv"]
 build-backend = "hatchling.build"
 
 [tool.hatch.metadata]
 allow-direct-references = true
 
-[tool.hatch.version]
-path = 'src/__metadata__.py'
+#[tool.hatch.build]
+#dev-mode-dirs = ["byte_bot/"]
+#packages = ["byte_bot/byte", "byte_bot/server"]
 
-[tool.hatch.build]
-dev-mode-dirs = ["src/", "."]
-packages = ["src/", "."]
+[tool.hatch.build.targets.wheel]
+packages = ["byte_bot/"]
 
-[tool.hatch.build.targets.sdist]
-include = ["src/"]
-
-[tool.pdm.build]
-include = ["src"]
-package-dir = "src"
-
-[tool.pdm.scripts]
-lint = "pre-commit run --all-files"
-test = "pytest"
-docs-serve = "sphinx-autobuild docs docs/_build/ -j auto --watch app --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002"
-changelog = "git cliff -c pyproject.toml -o docs/changelog.rst"
-# TODO: Move more from makefile here
-ci = { composite = ["lint", "test"] }
-
-[tool.pdm.dev-dependencies]
-test = [
+[tool.uv]
+dev-dependencies = [
+    # - Testing
     "pytest>=7.4.3",
     "coverage>=7.3.2",
     "pytest-benchmark>=4.0.0",
@@ -92,8 +86,7 @@ test = [
     "pytest-mock>=3.12.0",
     "hypothesis>=6.92.0",
     "pytest-asyncio>=0.23.2",
-]
-docs = [
+    # - Documentation
     "sphinx>=7.2.6",
     "sphinx-autobuild>=2021.3.14",
     "sphinx-copybutton>=0.5.2",
@@ -105,8 +98,7 @@ docs = [
     "sphinxcontrib-mermaid>=0.9.2",
     "sphinx-design>=0.5.0",
     "sphinx-sqlalchemy>=0.2.0",
-]
-lint = [
+    # - Linting
     "codespell>=2.2.6",
     "mypy>=1.7.1",
     "pre-commit>=3.6.0",
@@ -116,18 +108,10 @@ lint = [
     "pyright>=1.1.339",
 ]
 
-[project.scripts]
-app = "src.__main__:run_cli"
-
-[project.entry-points."litestar.commands"]
-run-bot = "src.cli:run_bot"
-run-web = "src.cli:run_web"
-run-all = "src.cli:run_all"
-
 [tool.codespell]
 quiet-level = 3
 ignore-words-list = "selectin, alog"
-skip = "pdm.lock, package-lock.json, *.svg, docs/changelog.rst"
+skip = "uv.lock, package-lock.json, *.svg, docs/changelog.rst"
 
 [tool.coverage.run]
 omit = ["*/tests/*"]
@@ -148,7 +132,7 @@ filterwarnings = [
 ]
 
 [tool.pyright]
-include = ["src/", "tests"]
+include = ["byte_bot/", "tests"]
 disableBytesTypePromotions = true
 exclude = [
     "tools",
@@ -207,7 +191,7 @@ strict-imports = false
 
 [tool.ruff]
 line-length = 120
-src = ["src", "tests"]
+src = ["byte_bot", "tests"]
 target-version = "py311"
 
 [tool.ruff.lint]
@@ -236,7 +220,7 @@ classmethod-decorators = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["src", "tests"]
+known-first-party = ["byte_bot", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
@@ -244,6 +228,8 @@ known-first-party = ["src", "tests"]
     "ANN101",
     "ANN401",
     "ANN102",
+    "ANN002",
+    "ANN003",
     "TD",
     "FIX002",
     "RUF012", # ClassVar Annotations - # TODO: Investigate/Fix
@@ -252,9 +238,9 @@ known-first-party = ["src", "tests"]
     "FBT003", # Boolean Boolean default positional argument in function definition
     "B008", # Do not perform function calls in argument defaults
 ]
-"src/**/*.*" = ["PLR0913", "SLF001"]
-"src/server/lib/db/base.py" = ["E501"]
-"src/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"byte_bot/**/*.*" = ["PLR0913", "SLF001"]
+"byte_bot/server/lib/db/base.py" = ["E501"]
+"byte_bot/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
 "tests/**/*.*" = [
     "S101",
     "D",

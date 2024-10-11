@@ -5,6 +5,6 @@ schema
 Schema for the API and application.
 
 
-.. automodule:: src.server.lib.schema
+.. automodule:: byte_bot.server.lib.schema
     :members:
     :noindex:

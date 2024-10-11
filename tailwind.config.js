@@ -3,7 +3,7 @@ const defaultTheme = require("tailwindcss/defaultTheme")
 
 module.exports = {
   darkMode: "class",
-  content: ["./src/server/domain/web/**/*.{html,js,ts,jsx,tsx,j2,jinja2}"],
+  content: ["./byte_bot/server/domain/web/**/*.{html,js,ts,jsx,tsx,j2,jinja2}"],
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
