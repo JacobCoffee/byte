@@ -319,6 +319,8 @@ class GuildsController(Controller):
     ) -> GitHubConfigSchema | OffsetPagination[GitHubConfigSchema]:
         """Get a guild's GitHub config by ID.
 
+        TODO(#88): a helper method that we can use outside of routes would be nice.
+
         Args:
             github_service (GitHubConfigService): GitHub config service
             guild_id (int): Guild ID
