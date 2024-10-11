@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from discord.ext.commands import CheckFailure, Context, check
 
-from byte.lib import settings
+from byte_bot.byte.lib import settings
 
 if TYPE_CHECKING:
     from collections.abc import Callable

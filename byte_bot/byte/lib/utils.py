@@ -20,7 +20,7 @@ from byte_bot.byte.lib.types.python import PEP, PEPStatus, PEPType
 if TYPE_CHECKING:
     from collections.abc import Iterable
 
-    from byte.lib.types.astral import FormattedRuffRule, RuffRule
+    from byte_bot.byte.lib.types.astral import FormattedRuffRule, RuffRule
 
 __all__ = (
     "chunk_sequence",
