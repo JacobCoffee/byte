@@ -10,7 +10,7 @@ from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 
 __all__ = ("AdminCommands", "setup")
 
-from byte.lib.checks import is_byte_dev
+from byte_bot.byte.lib.checks import is_byte_dev
 
 
 class AdminCommands(Cog):
