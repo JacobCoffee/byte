@@ -80,13 +80,6 @@ load-container: migrate ## Perform database migrations and load test data into t
 refresh-container: clean-container up-container load-container ## Refresh the Byte database container
 
 
-.PHONY: refresh-lockfiles
-refresh-lockfiles:                                 ## Sync lockfiles with requirements files.
-	$(PDM) update --update-reuse -G:all
-
-.PHONY: lock
-lock:                                             ## Rebuild lockfiles from scratch, updating all dependencies
-	$(PDM) update --update-eager -G:all
 
 # =============================================================================
 # Tests, Linting, Coverage
