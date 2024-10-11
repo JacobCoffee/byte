@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from litestar.contrib.repository.filters import FilterTypes
 from advanced_alchemy.service import OffsetPagination
+from litestar.contrib.repository.filters import FilterTypes
 
 from byte_bot.server.domain import db, guilds, system, urls, web
 

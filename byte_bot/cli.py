@@ -29,8 +29,8 @@ def frontend() -> None:
     log.config.configure()
     logger.info("🎨 Starting Tailwind Compiler.")
     try:
-        subprocess.run(
-            [  # noqa: S603, S607
+        subprocess.run(  # noqa: S603
+            [  # noqa: S607
                 "tailwindcss",
                 "-i",
                 "byte_bot/server/domain/web/resources/input.css",
@@ -100,8 +100,8 @@ def web(
         }
         if reload_dirs:
             process_args["reload-dir"] = " ".join(reload_dirs)
-        subprocess.run(
-            ["uvicorn", settings.server.APP_LOC, *_convert_uvicorn_args(process_args)],  # noqa: S603, S607
+        subprocess.run(  # noqa: S603
+            ["uvicorn", settings.server.APP_LOC, *_convert_uvicorn_args(process_args)],  # noqa: S607
             check=True,
         )
     finally:

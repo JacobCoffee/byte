@@ -35,7 +35,7 @@ def _default(value: Any) -> str:
         return str(value.dict(by_alias=True))
     try:
         val = str(value)
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         raise TypeError from exc
     else:
         return val

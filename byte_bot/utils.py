@@ -8,8 +8,11 @@ import re
 import sys
 import unicodedata
 from importlib import import_module
-from pathlib import Path
 from typing import TYPE_CHECKING, Any
+
+if TYPE_CHECKING:
+    from pathlib import Path
+    from types import ModuleType
 
 __all__ = [
     "camel_case",
@@ -18,9 +21,6 @@ __all__ = [
     "import_string",
     "slugify",
 ]
-
-if TYPE_CHECKING:
-    from types import ModuleType
 
 
 def slugify(value: str, allow_unicode: bool = False, separator: str | None = None) -> str:

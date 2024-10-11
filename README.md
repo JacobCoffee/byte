@@ -10,8 +10,9 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 > [!WARNING]\
-> This repository holds very broken code. It is not recommended to use this code in any way. It is currently being used to
-> learn the creation of a Discord bot, used by developers to enhance their community/guild experience with features like
+> This repository holds very broken code. It is not recommended to use this code in any way. It is currently being used
+> to learn the creation of a Discord bot, used by developers to enhance their community/guild experience with features
+> like
 >
 > - GitHub integration
 > - Upload Threads/Forum Posts to GitHub discussions
@@ -38,8 +39,7 @@ Byte is currently deployed to [Railway][railway] for both the bot and the web se
 
 ## Development
 
-You can use the provided [nixpack][nixpacks] [file](./nixpacks.toml), or set up your environment using
-[uv][uv].
+You can use the provided [nixpack][nixpacks] [file](./nixpacks.toml), or set up your environment using [uv][uv].
 
 ## Contributing
 

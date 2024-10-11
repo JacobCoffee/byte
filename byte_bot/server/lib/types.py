@@ -4,16 +4,15 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, TypeAlias, TypeVar
 
-from advanced_alchemy.filters import FilterTypes
 from advanced_alchemy.extensions.litestar import SQLAlchemyDTO
+from advanced_alchemy.filters import FilterTypes
 from litestar.dto import DataclassDTO, DTOData
 from litestar.types import DataclassProtocol
 from sqlalchemy.orm import DeclarativeBase
 
 if TYPE_CHECKING:
-    from pydantic import BaseModel
-
     from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
+    from pydantic import BaseModel
 
 # -- Database Types
 SQLAlchemyModelT = TypeVar("SQLAlchemyModelT", bound=DeclarativeBase)

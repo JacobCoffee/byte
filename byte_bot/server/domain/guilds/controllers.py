@@ -2,16 +2,11 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
-from datetime import timedelta
+from typing import TYPE_CHECKING
 
 from litestar import Controller, get, post
 from litestar.di import Provide
 from litestar.params import Dependency, Parameter
-from litestar.security.jwt import JWTAuth, Token
-from litestar.connection import ASGIConnection
-from litestar.handlers import BaseRouteHandler
-from litestar.exceptions import NotAuthorizedException
 
 from byte_bot.server.domain import urls
 from byte_bot.server.domain.guilds.dependencies import provides_guilds_service

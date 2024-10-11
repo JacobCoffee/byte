@@ -11,7 +11,6 @@ from litestar.utils.module_loader import module_to_os_path
 from pydantic import ValidationError, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
 from byte_bot.__metadata__ import __version__ as version
 
 __all__ = [

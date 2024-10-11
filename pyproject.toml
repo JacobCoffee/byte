@@ -228,6 +228,8 @@ known-first-party = ["byte_bot", "tests"]
     "ANN101",
     "ANN401",
     "ANN102",
+    "ANN002",
+    "ANN003",
     "TD",
     "FIX002",
     "RUF012", # ClassVar Annotations - # TODO: Investigate/Fix

@@ -10,7 +10,6 @@ from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
 from byte_bot.server.domain.db.models import Guild
 from byte_bot.server.lib import log
 
-
 __all__ = ("GuildsRepository", "GuildsService")
 
 

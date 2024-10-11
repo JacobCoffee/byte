@@ -31,6 +31,7 @@ upgrade:       ## Upgrade all dependencies to the latest stable versions
 install-uv: 										## Install latest version of UV
 	@echo "=> Installing uv"
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
+	@echo "=> uv installed"
 
 install-pre-commit: ## Install pre-commit and install hooks
 	@echo "Installing pre-commit hooks"
@@ -64,24 +65,24 @@ install: clean destroy										## Install the project, dependencies, and pre-co
 # =============================================================================
 
 lint: ## Runs pre-commit hooks; includes ruff linting, codespell, black
-	@$(UV) run pre-commit run --all-files
+	@$(UV) run --no-sync pre-commit run --all-files
 
 fmt-check: ## Runs Ruff format in check mode (no changes)
-	@$(UV) run ruff format --check .
+	@$(UV) run --no-sync ruff format --check .
 
 fmt: ## Runs Ruff format, makes changes where necessary
-	@$(UV) run ruff format .
+	@$(UV) run --no-sync ruff format .
 
 ruff: ## Runs Ruff
-	@$(UV) run ruff check . --unsafe-fixes --fix
+	@$(UV) run --no-sync ruff check . --unsafe-fixes --fix
 
 test:  ## Run the tests
-	@$(UV) run pytest tests
+	@$(UV) run --no-sync pytest tests
 
 coverage:  ## Run the tests and generate coverage report
-	@$(UV) run pytest tests --cov=byte_bot
-	@$(UV) run coverage html
-	@$(UV) run coverage xml
+	@$(UV) run --no-sync pytest tests --cov=byte_bot
+	@$(UV) run --no-sync coverage html
+	@$(UV) run --no-sync coverage xml
 
 check-all: lint test fmt-check coverage ## Run all linting, tests, and coverage checks
 
@@ -116,7 +117,7 @@ migrate:          ## Apply database migrations
 
 .PHONY: db
 db: ## Run the database
-	@docker compose -f "docker-compose.infra.yml" up -d --build 
+	@docker compose -f "docker-compose.infra.yml" up -d --build
 
 # =============================================================================
 # Main
