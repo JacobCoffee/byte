@@ -12,4 +12,4 @@ cmds = [
 ]
 
 [start]
-cmd = 'uv run app database upgrade --no-prompt && uv app run --wc 2 --host 0.0.0.0 --port $PORT'
+cmd = 'uv run app database upgrade --no-prompt && uv run app run --wc 2 --host 0.0.0.0 --port $PORT'

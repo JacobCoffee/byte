@@ -60,6 +60,28 @@ install: clean destroy										## Install the project, dependencies, and pre-co
 	@$(MAKE) install-frontend
 	@echo "=> Install complete! Note: If you want to re-install re-run 'make install'"
 
+up-container: ## Start the Byte database container
+	@echo "=> Starting Byte database container"
+	@docker compose -f docker-compose.infra.yml up -d
+	@echo "=> Started Byte database container"
+
+clean-container: ## Stop, remove, and wipe the Byte database container and volume
+	@echo "=> Stopping and removing Byte database container"
+	@docker stop byte-db-1
+	@docker rm byte-db-1
+	@docker volume rm byte_db-data
+	@echo "=> Stopped and removed Byte database container"
+
+load-container: migrate ## Perform database migrations and load test data into the Byte database container
+	@echo "=> Loading database migrations and test data"
+	@$(UV) run app database upgrade --no-prompt
+	@echo "rest not yet implemented"
+	@echo "=> Loaded database migrations and test data"
+
+refresh-container: clean-container up-container load-container ## Refresh the Byte database container
+
+
+
 # =============================================================================
 # Tests, Linting, Coverage
 # =============================================================================
