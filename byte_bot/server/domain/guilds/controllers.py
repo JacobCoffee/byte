@@ -22,7 +22,6 @@ from byte_bot.server.domain.guilds.schemas import (
     GitHubConfigSchema,
     GuildSchema,
     SOTagsConfigSchema,
-    UpdateableGuildSettingEnum,
 )
 from byte_bot.server.domain.guilds.services import (
     AllowedUsersConfigService,  # noqa: TC001
@@ -119,7 +118,7 @@ class GuildsController(Controller):
             title="Guild ID",
             description="The guild ID.",
         ),
-        setting: UpdateableGuildSettingEnum = Parameter(
+        setting: str = Parameter(
             title="Setting",
             description="The setting to update.",
         ),
@@ -133,7 +132,7 @@ class GuildsController(Controller):
         Args:
             guilds_service (GuildsService): Guilds service
             guild_id (Guild.guild_id): Guild ID
-            setting (UpdateableGuildSettingEnum): Setting to update
+            setting (str): Setting to update
             value (str | int): New value for the setting
 
         Returns:
@@ -142,7 +141,7 @@ class GuildsController(Controller):
         result = await guilds_service.get(guild_id, id_attribute="guild_id")
         # todo: this is a placeholder, update to grab whichever setting is being update, and update the corresponding
         #       tables value based on the setting parameter
-        await guilds_service.update({str(setting): value}, item_id=guild_id)
+        await guilds_service.update({setting: value}, item_id=guild_id)
         return guilds_service.to_schema(schema_type=GuildSchema, data=result)
 
     @get(
