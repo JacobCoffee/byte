@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path
+from pathlib import Path  # noqa: TC003
 from typing import Final
 
 from dotenv import load_dotenv
@@ -127,13 +127,11 @@ class ProjectSettings(BaseSettings):
 
 
 # noinspection PyShadowingNames
-def load_settings() -> (
-    tuple[
-        DiscordSettings,
-        LogSettings,
-        ProjectSettings,
-    ]
-):
+def load_settings() -> tuple[
+    DiscordSettings,
+    LogSettings,
+    ProjectSettings,
+]:
     """Load Settings file.
 
     Returns:

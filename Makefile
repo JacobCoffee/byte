@@ -96,6 +96,12 @@ fmt: ## Runs Ruff format, makes changes where necessary
 ruff: ## Runs Ruff
 	@$(UV) run --no-sync ruff check . --unsafe-fixes --fix
 
+ruff-check: ## Runs Ruff without changing files
+	@$(UV) run --no-sync ruff check .
+
+ruff-noqa: ## Runs Ruff, adding noqa comments to disable warnings
+	@$(UV) run --no-sync ruff check . --add-noqa
+
 test:  ## Run the tests
 	@$(UV) run --no-sync pytest tests
 

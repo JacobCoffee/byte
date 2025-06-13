@@ -197,7 +197,7 @@ def provide_filter_dependencies(
         list[FilterTypes]: List of filters parsed from connection.
     """
     filters: list[FilterTypes] = []
-    if id_filter.values:  # noqa: PD011
+    if id_filter.values:
         filters.append(id_filter)
     filters.extend([created_filter, limit_offset, updated_filter])
 

@@ -1,17 +1,17 @@
 """Project Settings."""
 
-from __future__ import annotations
+from __future__ import annotations  # noqa: I001
 
 import base64
 import binascii
 import os
 from pathlib import Path
 from typing import Any, Final, Literal
-from collections.abc import Sequence
+from collections.abc import Sequence  # noqa: TC003
 
 from dotenv import load_dotenv
 from litestar.contrib.jinja import JinjaTemplateEngine
-from litestar.data_extractors import RequestExtractorField, ResponseExtractorField
+from litestar.data_extractors import RequestExtractorField, ResponseExtractorField  # noqa: TC002
 from litestar.openapi.spec import Server
 from litestar.utils.module_loader import module_to_os_path
 from pydantic import ValidationError, field_validator
@@ -351,7 +351,7 @@ class DatabaseSettings(BaseSettings):
     """Database engine."""
     USER: str = "byte"
     """Database user."""
-    PASSWORD: str = "bot"
+    PASSWORD: str = "bot"  # noqa: S105
     """Database password."""
     HOST: str = "localhost"
     """Database host."""
@@ -419,18 +419,16 @@ class GitHubSettings(BaseSettings):
 
 
 # noinspection PyShadowingNames
-def load_settings() -> (
-    tuple[
-        ProjectSettings,
-        APISettings,
-        OpenAPISettings,
-        TemplateSettings,
-        ServerSettings,
-        LogSettings,
-        DatabaseSettings,
-        GitHubSettings,
-    ]
-):
+def load_settings() -> tuple[
+    ProjectSettings,
+    APISettings,
+    OpenAPISettings,
+    TemplateSettings,
+    ServerSettings,
+    LogSettings,
+    DatabaseSettings,
+    GitHubSettings,
+]:
     """Load Settings file.
 
     Returns:
