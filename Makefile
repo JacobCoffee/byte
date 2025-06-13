@@ -70,7 +70,7 @@ clean-container: ## Stop, remove, and wipe the Byte database container, volume, 
 	@docker compose -f docker-compose.infra.yml down -v --remove-orphans
 	@echo "=> Stopped and removed Byte database container, volumes, networks, and orphans"
 
-load-container: migrate ## Perform database migrations and load test data into the Byte database container
+load-container: up-container migrate ## Perform database migrations and load test data into the Byte database container
 	@echo "=> Loading database migrations and test data"
 	@$(UV) run app database upgrade --no-prompt
 	@echo "rest not yet implemented"
