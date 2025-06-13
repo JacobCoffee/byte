@@ -9,7 +9,7 @@ from sqlalchemy import BigInteger, ForeignKey, String, UniqueConstraint
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-__all__ = ("GitHubConfig", "Guild", "SOTagsConfig", "User", "AllowedUsersConfig", "ForumConfig")
+__all__ = ("AllowedUsersConfig", "ForumConfig", "GitHubConfig", "Guild", "SOTagsConfig", "User")
 
 
 class Guild(UUIDAuditBase):
@@ -215,18 +215,18 @@ class ForumConfig(UUIDAuditBase):
     """Help forum settings."""
     help_forum: Mapped[bool] = mapped_column(default=False)
     help_forum_category: Mapped[str | None]
-    help_channel_id: Mapped[int | None] = association_proxy("guild", "help_channel_id")
+    help_channel_id: AssociationProxy[int | None] = association_proxy("guild", "help_channel_id")
     help_thread_auto_close: Mapped[bool] = mapped_column(default=False)
     help_thread_auto_close_days: Mapped[int | None]
     help_thread_notify: Mapped[bool] = mapped_column(default=False)
     help_thread_notify_roles: Mapped[str | None]
     help_thread_notify_days: Mapped[int | None]
-    help_thread_sync: Mapped[bool] = association_proxy("guild", "github_config.discussion_sync")
+    help_thread_sync: AssociationProxy[bool] = association_proxy("guild", "github_config.discussion_sync")
 
     """Showcase forum settings."""
     showcase_forum: Mapped[bool] = mapped_column(default=False)
     showcase_forum_category: Mapped[str | None]
-    showcase_channel_id: Mapped[int | None] = association_proxy("guild", "showcase_channel_Id")
+    showcase_channel_id: AssociationProxy[int | None] = association_proxy("guild", "showcase_channel_Id")
     showcase_thread_auto_close: Mapped[bool] = mapped_column(default=False)
     showcase_thread_auto_close_days: Mapped[int | None]
 

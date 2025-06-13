@@ -16,7 +16,7 @@ from advanced_alchemy.types import GUID, ORA_JSONB, DateTimeUTC
 from alembic import op
 from sqlalchemy import Text  # noqa: F401
 
-__all__ = ["downgrade", "upgrade", "schema_upgrades", "schema_downgrades", "data_upgrades", "data_downgrades"]
+__all__ = ["data_downgrades", "data_upgrades", "downgrade", "schema_downgrades", "schema_upgrades", "upgrade"]
 
 sa.GUID = GUID
 sa.DateTimeUTC = DateTimeUTC
