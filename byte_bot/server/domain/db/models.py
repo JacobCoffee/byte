@@ -9,7 +9,7 @@ from sqlalchemy import BigInteger, ForeignKey, String, UniqueConstraint
 from sqlalchemy.ext.associationproxy import AssociationProxy, association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-__all__ = ("GitHubConfig", "Guild", "SOTagsConfig", "User")
+__all__ = ("AllowedUsersConfig", "ForumConfig", "GitHubConfig", "Guild", "SOTagsConfig", "User")
 
 
 class Guild(UUIDAuditBase):
@@ -31,6 +31,7 @@ class Guild(UUIDAuditBase):
     guild_name: Mapped[str] = mapped_column(String(100))
     prefix: Mapped[str] = mapped_column(String(5), server_default="!", default="!")
     help_channel_id: Mapped[int | None] = mapped_column(BigInteger)
+    showcase_channel_id: Mapped[int | None] = mapped_column(BigInteger)
     sync_label: Mapped[str | None]
     issue_linking: Mapped[bool] = mapped_column(default=False)
     comment_linking: Mapped[bool] = mapped_column(default=False)
@@ -54,6 +55,11 @@ class Guild(UUIDAuditBase):
         back_populates="guild",
         cascade="save-update, merge, delete",
     )
+    forum_config: Mapped[ForumConfig | None] = relationship(
+        lazy="noload",
+        back_populates="guild",
+        cascade="save-update, merge, delete",
+    )
 
 
 class GitHubConfig(UUIDAuditBase):
@@ -67,7 +73,7 @@ class GitHubConfig(UUIDAuditBase):
     __tablename__ = "github_config"  # type: ignore[reportAssignmentType]
     __table_args__ = {"comment": "GitHub configuration for a guild."}
 
-    guild_id: Mapped[UUID] = mapped_column(ForeignKey("guild.id", ondelete="cascade"))
+    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guild.guild_id", ondelete="cascade"))
     discussion_sync: Mapped[bool] = mapped_column(default=False)
     github_organization: Mapped[str | None]
     github_repository: Mapped[str | None]
@@ -86,13 +92,13 @@ class GitHubConfig(UUIDAuditBase):
 class SOTagsConfig(UUIDAuditBase):
     """SQLAlchemy association model for a guild's Stack Overflow tags config."""
 
-    __tablename__ = "so_tags"  # type: ignore[reportAssignmentType]
+    __tablename__ = "so_tags_config"  # type: ignore[reportAssignmentType]
     __table_args__ = (
         UniqueConstraint("guild_id", "tag_name"),
         {"comment": "Configuration for a Discord guild's Stack Overflow tags."},
     )
 
-    guild_id: Mapped[UUID] = mapped_column(ForeignKey("guild.id", ondelete="cascade"))
+    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guild.guild_id", ondelete="cascade"))
     guild_name: AssociationProxy[str] = association_proxy("guild", "guild_name")
     tag_name: Mapped[str] = mapped_column(String(50))
 
@@ -115,6 +121,8 @@ class AllowedUsersConfig(UUIDAuditBase):
 
     This model allows us to configure which users are allowed to perform administrative
     actions on Byte specifically without giving them full administrative access to the Discord guild.
+
+    .. todo:: More preferably, this should be more generalized to a user OR role ID.
     """
 
     __tablename__ = "allowed_users"  # type: ignore[reportAssignmentType]
@@ -123,7 +131,7 @@ class AllowedUsersConfig(UUIDAuditBase):
         {"comment": "Configuration for allowed users in a Discord guild."},
     )
 
-    guild_id: Mapped[int] = mapped_column(ForeignKey("guild.guild_id", ondelete="cascade"))
+    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guild.guild_id", ondelete="cascade"))
     user_id: Mapped[UUID] = mapped_column(ForeignKey("user.id", ondelete="cascade"))
 
     guild_name: AssociationProxy[str] = association_proxy("guild", "guild_name")
@@ -169,6 +177,65 @@ class User(UUIDAuditBase):
     # =================
     guilds_allowed: Mapped[list[AllowedUsersConfig]] = relationship(
         back_populates="user",
+        lazy="noload",
+        cascade="save-update, merge, delete",
+    )
+
+
+class ForumConfig(UUIDAuditBase):
+    """Forum configuration.
+
+    A guild will be able to set whether they want help and/or showcase forums.
+        * If they already have them set up, they can configure the channel IDs for them.
+        * If they don't have them set up, they can configure the category and channel names for them
+          Byte will then create the channels for them.
+        * If they don't want them, they can disable them.
+
+    Help forum settings include:
+        * Respond with help embed, including a link to 'Open a GitHub Issue'
+          if the `GitHubConfig:github_organization` and `GitHubConfig:github_repository` are set.
+          Also includes `Solve` button to mark as solved and close the thread.
+        * Automatic thread closing after a certain period of inactivity.
+        * Uploading of threads into GitHub discussions.
+        * Pinging of defined roles when a thread has not received a response from someone with those roles
+          after a certain period of time.
+
+    Showcase forum settings include:
+        * Respond with showcase embed, including a link to 'Add to awesome-$repo'
+          if the `GitHubConfig:github_organization` and `GitHubConfig:github_awesome` are set.
+        * Automatic thread closing after a certain period of inactivity.
+        * Uploading of threads into GitHub discussions.
+    """
+
+    __tablename__ = "forum_config"  # type: ignore[reportAssignmentType]
+    __table_args__ = {"comment": "Forum configuration for a guild."}
+
+    guild_id: Mapped[int] = mapped_column(BigInteger, ForeignKey("guild.guild_id", ondelete="cascade"))
+
+    """Help forum settings."""
+    help_forum: Mapped[bool] = mapped_column(default=False)
+    help_forum_category: Mapped[str | None]
+    help_channel_id: AssociationProxy[int | None] = association_proxy("guild", "help_channel_id")
+    help_thread_auto_close: Mapped[bool] = mapped_column(default=False)
+    help_thread_auto_close_days: Mapped[int | None]
+    help_thread_notify: Mapped[bool] = mapped_column(default=False)
+    help_thread_notify_roles: Mapped[str | None]
+    help_thread_notify_days: Mapped[int | None]
+    help_thread_sync: AssociationProxy[bool] = association_proxy("guild", "github_config.discussion_sync")
+
+    """Showcase forum settings."""
+    showcase_forum: Mapped[bool] = mapped_column(default=False)
+    showcase_forum_category: Mapped[str | None]
+    showcase_channel_id: AssociationProxy[int | None] = association_proxy("guild", "showcase_channel_Id")
+    showcase_thread_auto_close: Mapped[bool] = mapped_column(default=False)
+    showcase_thread_auto_close_days: Mapped[int | None]
+
+    # =================
+    # ORM Relationships
+    # =================
+    guild: Mapped[Guild] = relationship(
+        back_populates="forum_config",
+        innerjoin=True,
         lazy="noload",
         cascade="save-update, merge, delete",
     )
