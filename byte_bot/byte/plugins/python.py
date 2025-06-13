@@ -31,7 +31,7 @@ class Python(Cog):
         .. warning:: ``interaction`` is not used, but is required.
         """
         return [
-            Choice(name=f'PEP {number} - {pep["title"]}', value=str(number))
+            Choice(name=f"PEP {number} - {pep['title']}", value=str(number))
             for number, pep in self._peps.items()
             if current_pep.lower() in str(number) or current_pep.lower() in pep["title"].lower()
         ][:25]

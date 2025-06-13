@@ -175,11 +175,11 @@ destroy: ## Destroy the virtual environment
 run-dev-bot: ## Run the bot in dev mode
 	@$(UV) run app run-bot
 
-run-dev-server: ## Run the app in dev mode
+run-dev-server: up-container ## Run the app in dev mode
 	@$(UV) run app run-web --http-workers 1 --reload
 
 run-dev-frontend: ## Run the app frontend in dev mode
 	@$(UV) run tailwindcss -i byte_bot/server/domain/web/resources/input.css -o byte_bot/server/domain/web/resources/style.css --watch
 
-run-dev: ## Run the bot, web, and front end in dev mode
+run-dev: up-container ## Run the bot, web, and front end in dev mode
 	@$(UV) run app run-all --http-workers 1 -d -v --reload

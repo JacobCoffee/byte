@@ -18,16 +18,16 @@ from byte_bot.server.lib import (
 )
 
 __all__ = [
-    "settings",
-    "schema",
-    "log",
-    "template",
-    "static_files",
-    "openapi",
     "cors",
-    "exceptions",
-    "serialization",
-    "types",
     "db",
     "dependencies",
+    "exceptions",
+    "log",
+    "openapi",
+    "schema",
+    "serialization",
+    "settings",
+    "static_files",
+    "template",
+    "types",
 ]

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from pathlib import Path  # noqa: TCH003
+from pathlib import Path
 from typing import Final
 
 from dotenv import load_dotenv
@@ -14,12 +14,12 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 from byte_bot.__metadata__ import __version__ as version
 
 __all__ = [
-    "discord",
-    "log",
-    "project",
     "DiscordSettings",
     "LogSettings",
     "ProjectSettings",
+    "discord",
+    "log",
+    "project",
 ]
 
 load_dotenv()
@@ -44,13 +44,13 @@ class DiscordSettings(BaseSettings):
     """Discord User ID for development."""
     PLUGINS_LOC: Path = PLUGINS_DIR
     """Base Path to plugins directory."""
-    PLUGINS_DIRS: list[Path] = [f"{PLUGINS_DIR}"]
+    PLUGINS_DIRS: list[Path] = [PLUGINS_DIR]
     """Directories to search for plugins."""
     PRESENCE_URL: str = ""
 
     @field_validator("COMMAND_PREFIX")
     @classmethod
-    def assemble_command_prefix(cls, value: str) -> list[str]:
+    def assemble_command_prefix(cls, value: list[str]) -> list[str]:
         """Assembles the bot command prefix based on the environment.
 
         Args:
@@ -66,7 +66,9 @@ class DiscordSettings(BaseSettings):
         }
         environment = os.getenv("ENVIRONMENT", "dev")
         # Add env specific command prefix in addition to the default "!"
-        value.append(os.getenv("COMMAND_PREFIX", env_urls[environment]))
+        env_prefix = os.getenv("COMMAND_PREFIX", env_urls[environment])
+        if env_prefix not in value:
+            value.append(env_prefix)
         return value
 
     @field_validator("PRESENCE_URL")

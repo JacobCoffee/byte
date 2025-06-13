@@ -57,7 +57,7 @@ class GitHubIssue(Modal, title="Create GitHub Issue"):
         issue_body_lines = [
             "### Reported by",
             f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id})"
-            f" in Discord: [#{interaction.channel.name}]({self.jump_url})",
+            f" in Discord: [#{getattr(interaction.channel, 'name', 'DM')}]({self.jump_url})",
             "",
             "### Description",
             f"{self.description.value.strip()}",
@@ -145,7 +145,7 @@ class LitestarCommands(Cog):
         )
         embed.add_field(
             name=f"{mention_role(919261960921546815)}",
-            value=f"Programs providing services within the community. " f"(like {mention_user(1132179951567786015)}!)",
+            value=f"Programs providing services within the community. (like {mention_user(1132179951567786015)}!)",
             inline=False,
         )
 

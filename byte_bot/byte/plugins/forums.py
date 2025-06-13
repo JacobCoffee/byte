@@ -40,12 +40,16 @@ class ForumCommands(Cog):
         """
         _solved_tag = "Solved"
         _tags_per_post = 5
-        if isinstance(ctx.channel, Thread) and ctx.channel.parent.name == "help":
-            if solved_tag := discord.utils.find(lambda t: t.name == _solved_tag, ctx.channel.parent.available_tags):
-                if len(ctx.channel.applied_tags) == _tags_per_post and solved_tag not in ctx.channel.applied_tags:
-                    # Tags per post are limited to 5
-                    # Remove a tag to make room for "Solved"
-                    await ctx.channel.remove_tags(ctx.channel.applied_tags[-1])
+        if isinstance(ctx.channel, Thread) and ctx.channel.parent and ctx.channel.parent.name == "help":
+            if solved_tag := discord.utils.find(
+                lambda t: t.name == _solved_tag, getattr(ctx.channel.parent, "available_tags", [])
+            ):
+                if (
+                    len(getattr(ctx.channel, "applied_tags", [])) == _tags_per_post
+                    and solved_tag not in getattr(ctx.channel, "applied_tags", [])
+                    and (applied_tags := getattr(ctx.channel, "applied_tags", []))
+                ):
+                    await ctx.channel.remove_tags(applied_tags[-1])
                 await ctx.channel.add_tags(solved_tag, reason="Marked as solved.")
                 await ctx.send("Marked as solved and closed the help forum!", ephemeral=True)
                 await ctx.channel.edit(archived=True)
@@ -61,7 +65,7 @@ class ForumCommands(Cog):
         Args:
             ctx: Context object.
         """
-        tags = ctx.channel.applied_tags
+        tags = getattr(ctx.channel, "applied_tags", [])
         await ctx.send(f"Tags in this channel: {', '.join([tag.name for tag in tags])}")
 
     @app_command(name="mcve")

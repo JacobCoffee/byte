@@ -21,12 +21,12 @@ if TYPE_CHECKING:
     from structlog.types import Processor
 
 __all__ = (
-    "default_processors",
-    "stdlib_processors",
     "config",
     "configure",
     "controller",
+    "default_processors",
     "get_logger",
+    "stdlib_processors",
 )
 
 

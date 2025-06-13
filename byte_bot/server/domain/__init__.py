@@ -16,12 +16,12 @@ if TYPE_CHECKING:
     from litestar.types import ControllerRouterHandler
 
 __all__ = [
-    "system",
-    "web",
     "db",
-    "urls",
     "routes",
     "signature_namespace",
+    "system",
+    "urls",
+    "web",
 ]
 
 routes: list[ControllerRouterHandler] = [

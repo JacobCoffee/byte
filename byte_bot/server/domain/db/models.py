@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from uuid import UUID  # noqa: TCH003
+from uuid import UUID
 
 from advanced_alchemy.base import UUIDAuditBase
 from sqlalchemy import BigInteger, ForeignKey, String, UniqueConstraint

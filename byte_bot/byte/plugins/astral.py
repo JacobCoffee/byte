@@ -33,7 +33,7 @@ class Astral(Cog):
     async def _rule_autocomplete(self, _: Interaction, current_rule: str) -> list[Choice[str]]:
         # TODO: this can and should be made faster, rn this is slow, slow like the maintainer
         return [
-            Choice(name=f'{code} - {rule["name"]}', value=code)
+            Choice(name=f"{code} - {rule['name']}", value=code)
             for code, rule in self._rules.items()
             if current_rule.lower() in code.lower()
         ][:25]
