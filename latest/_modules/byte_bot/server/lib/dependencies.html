@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>byte_bot.server.lib.dependencies - Docs</title>
+    <link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="shortcut icon" href="../../../../_static/badge.svg"/><link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=aecf457f" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/shibuya.css?v=28c32440" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../../_static/print.css?v=ee381b95" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=80d31e7b" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:56px;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));--sy-c-link-weak:rgba(var(--sy-rc-theme), 0.86);
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+  }
+}
+html.light {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+html.dark {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="byte_bot.server.lib.dependencies"/>
+<meta name="twitter:card" content="summary"/></head>
+<body><div class="document"><div class="announcement">
+    <div class="announcement-inner">
+      <p>This documentation is currently under development.</p>
+      <button class="announcement-close" aria-label="Close announcement">
+        <i class="i-icon close"></i>
+      </button>
+    </div>
+  </div><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand mr-4" href="/">
+      <img class="light-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
+      <img class="dark-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
+      <strong>byte-bot</strong>
+    </a>
+    <div class="sy-head-links" id="NavLinks">
+      <nav class="sy-head-nav">
+
+<ul><li class="link">
+          <a href="https://byte-bot.app/"><span>Dashboard</span><i class="i-icon external-link"></i></a>
+        </li><li class="link">
+          <a href="https://github.com/sponsors/JacobCoffee"><span>Sponsor me</span><i class="i-icon external-link"></i></a>
+        </li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+        
+        
+        <div class="sy-head-social flex items-center">
+            <a class="flex items-center" href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub">
+              <i class="i-icon github"></i>
+            </a>
+            <a class="flex items-center" href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord">
+              <i class="i-icon discord"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden">
+      <button class="js-theme theme-switch flex items-center" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading"><span class="caption-text">Byte Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../byte/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../byte/usage/byte.html">About Byte</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../byte/usage/starting.html">Starting Byte</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../byte/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../byte/api/bot.html">bot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../byte/api/plugins/index.html">plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/events.html">events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/general.html">general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/plugins/python.html">python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../byte/api/views/index.html">views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/views/forums.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/views/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/views/python.html">python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/views/abstract.html">abstract</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../byte/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/lib/common.html">common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/lib/logging.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../byte/api/lib/utils.html">utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Web Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../web/usage/server.html">About the Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../web/usage/starting.html">Starting Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../web/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../web/api/app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../web/api/cli.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../web/api/metadata.html">metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../web/api/utils.html">utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../web/api/domain/index.html">domain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/domain/init.html">Domain Initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/domain/urls.html">urls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/domain/system/index.html">system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/system/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/system/dtos.html">dtos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/system/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/domain/guilds/index.html">guilds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/guilds/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/guilds/dependencies.html">dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/guilds/helpers.html">helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/guilds/schemas.html">schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/guilds/services.html">services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/guilds/urls.html">urls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/domain/github/index.html">github</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/github/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/domain/web/index.html">web</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/web/controllers.html">controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/domain/db/index.html">Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/domain/db/models.html">models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../web/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/constants.html">constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/dependencies.html">dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/dtos.html">dtos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/schema.html">schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/serialization.html">serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/static_files.html">static files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/types.html">types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/template.html">template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/log/index.html">logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/lib/log/controller.html">controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/lib/log/init.html">init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/lib/log/utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../web/api/lib/db/index.html">Database Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/lib/db/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../web/api/lib/db/orm.html">orm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribution-guide.html">Contribution guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-icon close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+  data-type="github" data-user="JacobCoffee" data-repo="byte">
+  <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
+    <i class="i-icon github"></i>
+  </span>
+  <span class="flex-grow px-2">
+    <span>JacobCoffee/byte</span>
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <i class="i-icon star"></i>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <i class="i-icon git-fork"></i>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
+    </div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+    <div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-icon menu"></i>
+      </button>
+    </div>
+    <ul class="flex-1">
+      
+      
+      <li><a href="../../../../index.html">byte-bot</a><span>/</span></li>
+      
+      <li><a href="../../../index.html">Module code</a><span>/</span></li>
+      
+      <li><strong>byte_bot.server.lib.dependencies</strong></li>
+      
+      
+    </ul>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-icon outdent"></i>
+      </button>
+    </div>
+  </div>
+</div>
+    <div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <h1>Source code for byte_bot.server.lib.dependencies</h1><div class="highlight"><pre>
+<span></span><span id="1-1"><span class="sd">&quot;&quot;&quot;Application dependency providers.&quot;&quot;&quot;</span>
+</span><span id="1-2">
+</span><span id="1-3"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span id="1-4">
+</span><span id="1-5"><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+</span><span id="1-6"><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+</span><span id="1-7"><span class="kn">from</span><span class="w"> </span><span class="nn">uuid</span><span class="w"> </span><span class="kn">import</span> <span class="n">UUID</span>
+</span><span id="1-8">
+</span><span id="1-9"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.filters</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+</span><span id="1-10">    <span class="n">BeforeAfter</span><span class="p">,</span>
+</span><span id="1-11">    <span class="n">CollectionFilter</span><span class="p">,</span>
+</span><span id="1-12">    <span class="n">FilterTypes</span><span class="p">,</span>
+</span><span id="1-13">    <span class="n">LimitOffset</span><span class="p">,</span>
+</span><span id="1-14">    <span class="n">OrderBy</span><span class="p">,</span>
+</span><span id="1-15">    <span class="n">SearchFilter</span><span class="p">,</span>
+</span><span id="1-16"><span class="p">)</span>
+</span><span id="1-17"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.di</span><span class="w"> </span><span class="kn">import</span> <span class="n">Provide</span>
+</span><span id="1-18"><span class="kn">from</span><span class="w"> </span><span class="nn">litestar.params</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dependency</span><span class="p">,</span> <span class="n">Parameter</span>
+</span><span id="1-19">
+</span><span id="1-20"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_bot.server.lib</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+</span><span id="1-21">
+</span><span id="1-22"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="1-23">    <span class="s2">&quot;BeforeAfter&quot;</span><span class="p">,</span>
+</span><span id="1-24">    <span class="s2">&quot;CollectionFilter&quot;</span><span class="p">,</span>
+</span><span id="1-25">    <span class="s2">&quot;FilterTypes&quot;</span><span class="p">,</span>
+</span><span id="1-26">    <span class="s2">&quot;LimitOffset&quot;</span><span class="p">,</span>
+</span><span id="1-27">    <span class="s2">&quot;OrderBy&quot;</span><span class="p">,</span>
+</span><span id="1-28">    <span class="s2">&quot;SearchFilter&quot;</span><span class="p">,</span>
+</span><span id="1-29">    <span class="s2">&quot;create_collection_dependencies&quot;</span><span class="p">,</span>
+</span><span id="1-30">    <span class="s2">&quot;provide_created_filter&quot;</span><span class="p">,</span>
+</span><span id="1-31">    <span class="s2">&quot;provide_filter_dependencies&quot;</span><span class="p">,</span>
+</span><span id="1-32">    <span class="s2">&quot;provide_id_filter&quot;</span><span class="p">,</span>
+</span><span id="1-33">    <span class="s2">&quot;provide_limit_offset_pagination&quot;</span><span class="p">,</span>
+</span><span id="1-34">    <span class="s2">&quot;provide_order_by&quot;</span><span class="p">,</span>
+</span><span id="1-35">    <span class="s2">&quot;provide_search_filter&quot;</span><span class="p">,</span>
+</span><span id="1-36">    <span class="s2">&quot;provide_updated_filter&quot;</span><span class="p">,</span>
+</span><span id="1-37"><span class="p">]</span>
+</span><span id="1-38">
+</span><span id="1-39"><span class="n">DTorNone</span> <span class="o">=</span> <span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="1-40"><span class="sd">&quot;&quot;&quot;Aggregate type alias of the types supported for datetime filtering.&quot;&quot;&quot;</span>
+</span><span id="1-41"><span class="n">StringOrNone</span> <span class="o">=</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="1-42"><span class="sd">&quot;&quot;&quot;Aggregate type alias of the types supported for string filtering.&quot;&quot;&quot;</span>
+</span><span id="1-43"><span class="n">UuidOrNone</span> <span class="o">=</span> <span class="n">UUID</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="1-44"><span class="sd">&quot;&quot;&quot;Aggregate type alias of the types supported for UUID filtering.&quot;&quot;&quot;</span>
+</span><span id="1-45"><span class="n">BooleanOrNone</span> <span class="o">=</span> <span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="1-46"><span class="sd">&quot;&quot;&quot;Aggregate type alias of the types supported for boolean filtering.&quot;&quot;&quot;</span>
+</span><span id="1-47"><span class="n">SortOrderOrNone</span> <span class="o">=</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;asc&quot;</span><span class="p">,</span> <span class="s2">&quot;desc&quot;</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span>
+</span><span id="1-48"><span class="sd">&quot;&quot;&quot;Aggregate type alias of the types supported for collection filtering.&quot;&quot;&quot;</span>
+</span><span id="1-49">
+</span><span id="1-50"><span class="n">FILTERS_DEPENDENCY_KEY</span> <span class="o">=</span> <span class="s2">&quot;filters&quot;</span>
+</span><span id="1-51"><span class="sd">&quot;&quot;&quot;Dependency key for filters.&quot;&quot;&quot;</span>
+</span><span id="1-52"><span class="n">CREATED_FILTER_DEPENDENCY_KEY</span> <span class="o">=</span> <span class="s2">&quot;created_filter&quot;</span>
+</span><span id="1-53"><span class="sd">&quot;&quot;&quot;Dependency key for created filter.&quot;&quot;&quot;</span>
+</span><span id="1-54"><span class="n">ID_FILTER_DEPENDENCY_KEY</span> <span class="o">=</span> <span class="s2">&quot;id_filter&quot;</span>
+</span><span id="1-55"><span class="sd">&quot;&quot;&quot;Dependency key for id filter.&quot;&quot;&quot;</span>
+</span><span id="1-56"><span class="n">LIMIT_OFFSET_DEPENDENCY_KEY</span> <span class="o">=</span> <span class="s2">&quot;limit_offset&quot;</span>
+</span><span id="1-57"><span class="sd">&quot;&quot;&quot;Dependency key for limit/offset pagination.&quot;&quot;&quot;</span>
+</span><span id="1-58"><span class="n">UPDATED_FILTER_DEPENDENCY_KEY</span> <span class="o">=</span> <span class="s2">&quot;updated_filter&quot;</span>
+</span><span id="1-59"><span class="sd">&quot;&quot;&quot;Dependency key for updated filter.&quot;&quot;&quot;</span>
+</span><span id="1-60"><span class="n">ORDER_BY_DEPENDENCY_KEY</span> <span class="o">=</span> <span class="s2">&quot;order_by&quot;</span>
+</span><span id="1-61"><span class="sd">&quot;&quot;&quot;Dependency key for order by.&quot;&quot;&quot;</span>
+</span><span id="1-62"><span class="n">SEARCH_FILTER_DEPENDENCY_KEY</span> <span class="o">=</span> <span class="s2">&quot;search_filter&quot;</span>
+</span><span id="1-63"><span class="sd">&quot;&quot;&quot;Dependency key for search filter.&quot;&quot;&quot;</span>
+</span><span id="1-64"><span class="n">ACTIVE_FILTER_DEPENDENCY_KEY</span> <span class="o">=</span> <span class="s2">&quot;active_filter&quot;</span>
+</span><span id="1-65"><span class="sd">&quot;&quot;&quot;Dependency key for active filter.&quot;&quot;&quot;</span>
+</span><span id="1-66">
+</span><span id="1-67">
+</span><span id="1-68"><span class="k">def</span><span class="w"> </span><span class="nf">provide_active_filter</span><span class="p">(</span>
+</span><span id="1-69">    <span class="n">is_active</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Is active filter&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;Active&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-70"><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="1-71"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type consumed by ``Repository.filter_on_field()``.</span>
+</span><span id="1-72">
+</span><span id="1-73"><span class="sd">    Arguments:</span>
+</span><span id="1-74"><span class="sd">        is_active(bool): Filter for active records.</span>
+</span><span id="1-75">
+</span><span id="1-76"><span class="sd">    Returns:</span>
+</span><span id="1-77"><span class="sd">        bool</span>
+</span><span id="1-78"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-79">    <span class="k">return</span> <span class="n">is_active</span>
+</span><span id="1-80">
+</span><span id="1-81">
+<div class="viewcode-block" id="provide_id_filter">
+<a class="viewcode-back" href="../../../../web/api/lib/dependencies.html#byte_bot.server.lib.dependencies.provide_id_filter">[docs]</a>
+</span><span id="1-82"><span class="k">def</span><span class="w"> </span><span class="nf">provide_id_filter</span><span class="p">(</span>
+</span><span id="1-83">    <span class="n">ids</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">UUID</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;ids&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-84"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CollectionFilter</span><span class="p">[</span><span class="n">UUID</span><span class="p">]:</span>
+</span><span id="1-85"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type consumed by ``Repository.filter_in_collection()``.</span>
+</span><span id="1-86">
+</span><span id="1-87"><span class="sd">    Arguments:</span>
+</span><span id="1-88"><span class="sd">        ids(list[UUID] | None): List of IDs to filter on.</span>
+</span><span id="1-89">
+</span><span id="1-90"><span class="sd">    Returns:</span>
+</span><span id="1-91"><span class="sd">        CollectionFilter[UUID]</span>
+</span><span id="1-92"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-93">    <span class="k">return</span> <span class="n">CollectionFilter</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">ids</span> <span class="ow">or</span> <span class="p">[])</span></div>
+
+</span><span id="1-94">
+</span><span id="1-95">
+<div class="viewcode-block" id="provide_created_filter">
+<a class="viewcode-back" href="../../../../web/api/lib/dependencies.html#byte_bot.server.lib.dependencies.provide_created_filter">[docs]</a>
+</span><span id="1-96"><span class="k">def</span><span class="w"> </span><span class="nf">provide_created_filter</span><span class="p">(</span>
+</span><span id="1-97">    <span class="n">before</span><span class="p">:</span> <span class="n">DTorNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;createdBefore&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-98">    <span class="n">after</span><span class="p">:</span> <span class="n">DTorNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;createdAfter&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-99"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BeforeAfter</span><span class="p">:</span>
+</span><span id="1-100"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Return type consumed by ``Repository.filter_on_datetime_field()``.</span>
+</span><span id="1-101">
+</span><span id="1-102"><span class="sd">    Arguments:</span>
+</span><span id="1-103"><span class="sd">        before(datetime | None): Filter for records created before this date/time.</span>
+</span><span id="1-104"><span class="sd">        after(datetime | None): Filter for records created after this date/time.</span>
+</span><span id="1-105">
+</span><span id="1-106"><span class="sd">    Returns:</span>
+</span><span id="1-107"><span class="sd">        BeforeAfter</span>
+</span><span id="1-108"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-109">    <span class="k">return</span> <span class="n">BeforeAfter</span><span class="p">(</span><span class="s2">&quot;created_at&quot;</span><span class="p">,</span> <span class="n">before</span><span class="p">,</span> <span class="n">after</span><span class="p">)</span></div>
+
+</span><span id="1-110">
+</span><span id="1-111">
+<div class="viewcode-block" id="provide_search_filter">
+<a class="viewcode-back" href="../../../../web/api/lib/dependencies.html#byte_bot.server.lib.dependencies.provide_search_filter">[docs]</a>
+</span><span id="1-112"><span class="k">def</span><span class="w"> </span><span class="nf">provide_search_filter</span><span class="p">(</span>
+</span><span id="1-113">    <span class="n">field</span><span class="p">:</span> <span class="n">StringOrNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Field to search&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;searchField&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-114">    <span class="n">search</span><span class="p">:</span> <span class="n">StringOrNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Field to search&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;searchString&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-115">    <span class="n">ignore_case</span><span class="p">:</span> <span class="n">BooleanOrNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span>
+</span><span id="1-116">        <span class="nb">bool</span><span class="p">,</span>
+</span><span id="1-117">        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Search should be case sensitive&quot;</span><span class="p">,</span>
+</span><span id="1-118">        <span class="n">query</span><span class="o">=</span><span class="s2">&quot;searchIgnoreCase&quot;</span><span class="p">,</span>
+</span><span id="1-119">        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="1-120">        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="1-121">    <span class="p">),</span>
+</span><span id="1-122"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SearchFilter</span><span class="p">:</span>
+</span><span id="1-123"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add offset/limit pagination.</span>
+</span><span id="1-124">
+</span><span id="1-125"><span class="sd">    Return type consumed by ``Repository.apply_search_filter()``.</span>
+</span><span id="1-126">
+</span><span id="1-127"><span class="sd">    Arguments:</span>
+</span><span id="1-128"><span class="sd">        field (str | None): Field to search.</span>
+</span><span id="1-129"><span class="sd">        search (str | None): String to search for.</span>
+</span><span id="1-130"><span class="sd">        ignore_case (bool | None): Whether to ignore case when searching.</span>
+</span><span id="1-131"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-132">    <span class="k">return</span> <span class="n">SearchFilter</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">search</span><span class="p">,</span> <span class="n">ignore_case</span><span class="o">=</span><span class="n">ignore_case</span> <span class="ow">or</span> <span class="kc">False</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span></div>
+
+</span><span id="1-133">
+</span><span id="1-134">
+<div class="viewcode-block" id="provide_order_by">
+<a class="viewcode-back" href="../../../../web/api/lib/dependencies.html#byte_bot.server.lib.dependencies.provide_order_by">[docs]</a>
+</span><span id="1-135"><span class="k">def</span><span class="w"> </span><span class="nf">provide_order_by</span><span class="p">(</span>
+</span><span id="1-136">    <span class="n">field_name</span><span class="p">:</span> <span class="n">StringOrNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Order by field&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;orderBy&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-137">    <span class="n">sort_order</span><span class="p">:</span> <span class="n">SortOrderOrNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;Field to search&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;sortOrder&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;desc&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-138"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrderBy</span><span class="p">:</span>
+</span><span id="1-139"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add offset/limit pagination.</span>
+</span><span id="1-140">
+</span><span id="1-141"><span class="sd">    Return type consumed by ``Repository.apply_order_by()``.</span>
+</span><span id="1-142">
+</span><span id="1-143"><span class="sd">    Arguments:</span>
+</span><span id="1-144"><span class="sd">        field_name(int): LIMIT to apply to select.</span>
+</span><span id="1-145"><span class="sd">        sort_order(int): OFFSET to apply to select.</span>
+</span><span id="1-146">
+</span><span id="1-147"><span class="sd">    Returns:</span>
+</span><span id="1-148"><span class="sd">        OrderBy</span>
+</span><span id="1-149"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-150">    <span class="k">return</span> <span class="n">OrderBy</span><span class="p">(</span><span class="n">field_name</span><span class="o">=</span><span class="n">field_name</span><span class="p">,</span> <span class="n">sort_order</span><span class="o">=</span><span class="n">sort_order</span><span class="p">)</span>  <span class="c1"># type: ignore[arg-type]</span></div>
+
+</span><span id="1-151">
+</span><span id="1-152">
+<div class="viewcode-block" id="provide_updated_filter">
+<a class="viewcode-back" href="../../../../web/api/lib/dependencies.html#byte_bot.server.lib.dependencies.provide_updated_filter">[docs]</a>
+</span><span id="1-153"><span class="k">def</span><span class="w"> </span><span class="nf">provide_updated_filter</span><span class="p">(</span>
+</span><span id="1-154">    <span class="n">before</span><span class="p">:</span> <span class="n">DTorNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;updatedBefore&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-155">    <span class="n">after</span><span class="p">:</span> <span class="n">DTorNone</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">query</span><span class="o">=</span><span class="s2">&quot;updatedAfter&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-156"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BeforeAfter</span><span class="p">:</span>
+</span><span id="1-157"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add updated filter.</span>
+</span><span id="1-158">
+</span><span id="1-159"><span class="sd">    Return type consumed by `Repository.filter_on_datetime_field()`.</span>
+</span><span id="1-160">
+</span><span id="1-161"><span class="sd">    Arguments:</span>
+</span><span id="1-162"><span class="sd">        before(datetime | None): Filter for records updated before this date/time.</span>
+</span><span id="1-163"><span class="sd">        after(datetime | None): Filter for records updated after this date/time.</span>
+</span><span id="1-164">
+</span><span id="1-165"><span class="sd">    Returns:</span>
+</span><span id="1-166"><span class="sd">        BeforeAfter</span>
+</span><span id="1-167"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-168">    <span class="k">return</span> <span class="n">BeforeAfter</span><span class="p">(</span><span class="s2">&quot;updated_at&quot;</span><span class="p">,</span> <span class="n">before</span><span class="p">,</span> <span class="n">after</span><span class="p">)</span></div>
+
+</span><span id="1-169">
+</span><span id="1-170">
+<div class="viewcode-block" id="provide_limit_offset_pagination">
+<a class="viewcode-back" href="../../../../web/api/lib/dependencies.html#byte_bot.server.lib.dependencies.provide_limit_offset_pagination">[docs]</a>
+</span><span id="1-171"><span class="k">def</span><span class="w"> </span><span class="nf">provide_limit_offset_pagination</span><span class="p">(</span>
+</span><span id="1-172">    <span class="n">current_page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="s2">&quot;currentPage&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-173">    <span class="n">page_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span>
+</span><span id="1-174">        <span class="n">query</span><span class="o">=</span><span class="s2">&quot;pageSize&quot;</span><span class="p">,</span>
+</span><span id="1-175">        <span class="n">ge</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="1-176">        <span class="n">default</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DEFAULT_PAGINATION_SIZE</span><span class="p">,</span>
+</span><span id="1-177">        <span class="n">required</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="1-178">    <span class="p">),</span>
+</span><span id="1-179"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LimitOffset</span><span class="p">:</span>
+</span><span id="1-180"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add offset/limit pagination.</span>
+</span><span id="1-181">
+</span><span id="1-182"><span class="sd">    Return type consumed by ``Repository.apply_limit_offset_pagination()``.</span>
+</span><span id="1-183">
+</span><span id="1-184"><span class="sd">    Arguments:</span>
+</span><span id="1-185"><span class="sd">        current_page(int): Current page of results.</span>
+</span><span id="1-186"><span class="sd">        page_size(int): Number of results per page.</span>
+</span><span id="1-187">
+</span><span id="1-188"><span class="sd">    Returns:</span>
+</span><span id="1-189"><span class="sd">        LimitOffset</span>
+</span><span id="1-190"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-191">    <span class="k">return</span> <span class="n">LimitOffset</span><span class="p">(</span><span class="n">page_size</span><span class="p">,</span> <span class="n">page_size</span> <span class="o">*</span> <span class="p">(</span><span class="n">current_page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span></div>
+
+</span><span id="1-192">
+</span><span id="1-193">
+<div class="viewcode-block" id="provide_filter_dependencies">
+<a class="viewcode-back" href="../../../../web/api/lib/dependencies.html#byte_bot.server.lib.dependencies.provide_filter_dependencies">[docs]</a>
+</span><span id="1-194"><span class="k">def</span><span class="w"> </span><span class="nf">provide_filter_dependencies</span><span class="p">(</span>
+</span><span id="1-195">    <span class="n">created_filter</span><span class="p">:</span> <span class="n">BeforeAfter</span> <span class="o">=</span> <span class="n">Dependency</span><span class="p">(</span><span class="n">skip_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span><span id="1-196">    <span class="n">updated_filter</span><span class="p">:</span> <span class="n">BeforeAfter</span> <span class="o">=</span> <span class="n">Dependency</span><span class="p">(</span><span class="n">skip_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span><span id="1-197">    <span class="n">id_filter</span><span class="p">:</span> <span class="n">CollectionFilter</span> <span class="o">=</span> <span class="n">Dependency</span><span class="p">(</span><span class="n">skip_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span><span id="1-198">    <span class="n">limit_offset</span><span class="p">:</span> <span class="n">LimitOffset</span> <span class="o">=</span> <span class="n">Dependency</span><span class="p">(</span><span class="n">skip_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span><span id="1-199">    <span class="n">search_filter</span><span class="p">:</span> <span class="n">SearchFilter</span> <span class="o">=</span> <span class="n">Dependency</span><span class="p">(</span><span class="n">skip_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span><span id="1-200">    <span class="n">order_by</span><span class="p">:</span> <span class="n">OrderBy</span> <span class="o">=</span> <span class="n">Dependency</span><span class="p">(</span><span class="n">skip_validation</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+</span><span id="1-201"><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FilterTypes</span><span class="p">]:</span>
+</span><span id="1-202"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Provide common collection route filtering dependencies.</span>
+</span><span id="1-203">
+</span><span id="1-204"><span class="sd">    Add all filters to any route by including this function as a dependency, e.g.:</span>
+</span><span id="1-205">
+</span><span id="1-206"><span class="sd">    .. code-block:: python</span>
+</span><span id="1-207">
+</span><span id="1-208"><span class="sd">        @get</span>
+</span><span id="1-209"><span class="sd">        def get_collection_handler(filters: Filters) -&gt; ...: ...</span>
+</span><span id="1-210">
+</span><span id="1-211"><span class="sd">    The dependency is provided in the application layer, so only need to inject the dependency where</span>
+</span><span id="1-212"><span class="sd">    necessary.</span>
+</span><span id="1-213">
+</span><span id="1-214"><span class="sd">    Arguments:</span>
+</span><span id="1-215"><span class="sd">        created_filter(BeforeAfter): Filter for records created before/after a certain date/time.</span>
+</span><span id="1-216"><span class="sd">        updated_filter(BeforeAfter): Filter for records updated before/after a certain date/time.</span>
+</span><span id="1-217"><span class="sd">        id_filter(CollectionFilter): Filter for records with a certain ID.</span>
+</span><span id="1-218"><span class="sd">        limit_offset(LimitOffset): Pagination filter.</span>
+</span><span id="1-219"><span class="sd">        search_filter(SearchFilter): Search filter.</span>
+</span><span id="1-220"><span class="sd">        order_by(OrderBy): Order by filter.</span>
+</span><span id="1-221">
+</span><span id="1-222"><span class="sd">    Returns:</span>
+</span><span id="1-223"><span class="sd">        list[repository.FilterTypes]: List of filters to apply to query.</span>
+</span><span id="1-224"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-225">    <span class="n">filters</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">FilterTypes</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="1-226">    <span class="k">if</span> <span class="n">id_filter</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
+</span><span id="1-227">        <span class="n">filters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">id_filter</span><span class="p">)</span>
+</span><span id="1-228">    <span class="n">filters</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">created_filter</span><span class="p">,</span> <span class="n">limit_offset</span><span class="p">,</span> <span class="n">updated_filter</span><span class="p">])</span>
+</span><span id="1-229">
+</span><span id="1-230">    <span class="k">if</span> <span class="n">search_filter</span><span class="o">.</span><span class="n">field_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">search_filter</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-231">        <span class="n">filters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">search_filter</span><span class="p">)</span>
+</span><span id="1-232">    <span class="k">if</span> <span class="n">order_by</span><span class="o">.</span><span class="n">field_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-233">        <span class="n">filters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">order_by</span><span class="p">)</span>
+</span><span id="1-234">    <span class="k">return</span> <span class="n">filters</span></div>
+
+</span><span id="1-235">
+</span><span id="1-236">
+<div class="viewcode-block" id="create_collection_dependencies">
+<a class="viewcode-back" href="../../../../web/api/lib/dependencies.html#byte_bot.server.lib.dependencies.create_collection_dependencies">[docs]</a>
+</span><span id="1-237"><span class="k">def</span><span class="w"> </span><span class="nf">create_collection_dependencies</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Provide</span><span class="p">]:</span>
+</span><span id="1-238"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create ORM dependencies.</span>
+</span><span id="1-239">
+</span><span id="1-240"><span class="sd">    Creates a dictionary of ``provides`` for pagination endpoints.</span>
+</span><span id="1-241">
+</span><span id="1-242"><span class="sd">    Returns:</span>
+</span><span id="1-243"><span class="sd">        dict[str, Provide]: Dictionary of ``provides``.</span>
+</span><span id="1-244"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-245">    <span class="k">return</span> <span class="p">{</span>
+</span><span id="1-246">        <span class="n">ACTIVE_FILTER_DEPENDENCY_KEY</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_active_filter</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-247">        <span class="n">LIMIT_OFFSET_DEPENDENCY_KEY</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_limit_offset_pagination</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-248">        <span class="n">UPDATED_FILTER_DEPENDENCY_KEY</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_updated_filter</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-249">        <span class="n">CREATED_FILTER_DEPENDENCY_KEY</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_created_filter</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-250">        <span class="n">ID_FILTER_DEPENDENCY_KEY</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_id_filter</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-251">        <span class="n">SEARCH_FILTER_DEPENDENCY_KEY</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_search_filter</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-252">        <span class="n">ORDER_BY_DEPENDENCY_KEY</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_order_by</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-253">        <span class="n">FILTERS_DEPENDENCY_KEY</span><span class="p">:</span> <span class="n">Provide</span><span class="p">(</span><span class="n">provide_filter_dependencies</span><span class="p">,</span> <span class="n">sync_to_thread</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+</span><span id="1-254">    <span class="p">}</span></div>
+
+</span></pre></div>
+        </article>
+        
+        <div class="navigation flex print:hidden">
+  
+  
+</div>
+        
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2023, Jacob Coffee</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+          <a href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub"><i class="i-icon github"></i></a>
+          <a href="https://twitter.com/_scriptr" aria-label="X (Twitter)"><i class="i-icon x-twitter"></i></a>
+          <a href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord"><i class="i-icon discord"></i></a>
+          <a href="https://youtube.com/@monorepo" aria-label="YouTube"><i class="i-icon youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script src="../../../../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../../../../_static/shibuya.js?v=3e5c8598"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
+    
+</body>
+</html>

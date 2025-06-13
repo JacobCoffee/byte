@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>types - Docs</title>
+    <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="template" href="template.html" /><link rel="prev" title="static files" href="static_files.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="shortcut icon" href="../../../_static/badge.svg"/><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=aecf457f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=28c32440" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=ee381b95" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=80d31e7b" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:56px;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));--sy-c-link-weak:rgba(var(--sy-rc-theme), 0.86);
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+  }
+}
+html.light {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+html.dark {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="types"/>
+<meta name="twitter:card" content="summary"/></head>
+<body><div class="document"><div class="announcement">
+    <div class="announcement-inner">
+      <p>This documentation is currently under development.</p>
+      <button class="announcement-close" aria-label="Close announcement">
+        <i class="i-icon close"></i>
+      </button>
+    </div>
+  </div><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand mr-4" href="/">
+      <img class="light-logo" src="../../../_static/badge.svg" alt="byte-bot" height="28" />
+      <img class="dark-logo" src="../../../_static/badge.svg" alt="byte-bot" height="28" />
+      <strong>byte-bot</strong>
+    </a>
+    <div class="sy-head-links" id="NavLinks">
+      <nav class="sy-head-nav">
+
+<ul><li class="link">
+          <a href="https://byte-bot.app/"><span>Dashboard</span><i class="i-icon external-link"></i></a>
+        </li><li class="link">
+          <a href="https://github.com/sponsors/JacobCoffee"><span>Sponsor me</span><i class="i-icon external-link"></i></a>
+        </li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+        
+        
+        <div class="sy-head-social flex items-center">
+            <a class="flex items-center" href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub">
+              <i class="i-icon github"></i>
+            </a>
+            <a class="flex items-center" href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord">
+              <i class="i-icon discord"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden">
+      <button class="js-theme theme-switch flex items-center" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading"><span class="caption-text">Byte Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../byte/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/usage/byte.html">About Byte</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/usage/starting.html">Starting Byte</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../byte/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/api/bot.html">bot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/api/plugins/index.html">plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/events.html">events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/general.html">general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/python.html">python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/api/views/index.html">views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/views/forums.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/views/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/views/python.html">python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/views/abstract.html">abstract</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/lib/common.html">common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/lib/logging.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/lib/utils.html">utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Web Docs</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../usage/server.html">About the Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../usage/starting.html">Starting Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cli.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../metadata.html">metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../domain/index.html">domain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../domain/init.html">Domain Initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../domain/urls.html">urls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../domain/system/index.html">system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../domain/system/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../domain/system/dtos.html">dtos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../domain/system/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../domain/guilds/index.html">guilds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../domain/guilds/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../domain/guilds/dependencies.html">dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../domain/guilds/helpers.html">helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../domain/guilds/schemas.html">schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../domain/guilds/services.html">services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../domain/guilds/urls.html">urls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../domain/github/index.html">github</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../domain/github/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../domain/web/index.html">web</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../domain/web/controllers.html">controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../domain/db/index.html">Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../domain/db/models.html">models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">lib</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="constants.html">constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dependencies.html">dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dtos.html">dtos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema.html">schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="serialization.html">serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="static_files.html">static files</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="template.html">template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log/index.html">logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="log/controller.html">controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="log/init.html">init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="log/utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="db/index.html">Database Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="db/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="db/orm.html">orm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution-guide.html">Contribution guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-icon close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.SQLAlchemyModelT"><code class="docutils literal notranslate"><span class="pre">SQLAlchemyModelT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.SQLAlchemyAsyncRepoServiceT"><code class="docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepoServiceT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.DataclassModelT"><code class="docutils literal notranslate"><span class="pre">DataclassModelT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.ModelT"><code class="docutils literal notranslate"><span class="pre">ModelT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.FilterTypeT"><code class="docutils literal notranslate"><span class="pre">FilterTypeT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.ModelDTOT"><code class="docutils literal notranslate"><span class="pre">ModelDTOT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.DTOT"><code class="docutils literal notranslate"><span class="pre">DTOT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.DTOFactoryT"><code class="docutils literal notranslate"><span class="pre">DTOFactoryT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.ModelDictDTOT"><code class="docutils literal notranslate"><span class="pre">ModelDictDTOT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.ModelDictListDTOT"><code class="docutils literal notranslate"><span class="pre">ModelDictListDTOT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.types.Status"><code class="docutils literal notranslate"><span class="pre">Status</span></code></a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+  data-type="github" data-user="JacobCoffee" data-repo="byte">
+  <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
+    <i class="i-icon github"></i>
+  </span>
+  <span class="flex-grow px-2">
+    <span>JacobCoffee/byte</span>
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <i class="i-icon star"></i>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <i class="i-icon git-fork"></i>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/JacobCoffee/byte/blob/master/docs/web/api/lib/types.rst">Edit this page</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
+    </div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+    <div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-icon menu"></i>
+      </button>
+    </div>
+    <ul class="flex-1">
+      
+      
+      <li><a href="../../../index.html">byte-bot</a><span>/</span></li>
+      
+      <li><a href="../index.html">API Reference</a><span>/</span></li>
+      
+      <li><a href="index.html">lib</a><span>/</span></li>
+      
+      <li><strong>types</strong></li>
+      
+      
+    </ul>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-icon outdent"></i>
+      </button>
+    </div>
+  </div>
+</div>
+    <div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="types">
+<h1>types<a class="headerlink" href="#types" title="Link to this heading">¶</a></h1>
+<p>Application types</p>
+<p id="module-byte_bot.server.lib.types">Library module for type definitions to be used in the application.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.SQLAlchemyModelT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">SQLAlchemyModelT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.SQLAlchemyModelT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for SQLAlchemy models.</p>
+<p>alias of TypeVar(‘SQLAlchemyModelT’, bound=<a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase" title="(in SQLAlchemy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeclarativeBase</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.SQLAlchemyAsyncRepoServiceT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">SQLAlchemyAsyncRepoServiceT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.SQLAlchemyAsyncRepoServiceT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for SQLAlchemy async repository services.</p>
+<p>alias of TypeVar(‘SQLAlchemyAsyncRepoServiceT’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepositoryService</span></code>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.DataclassModelT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">DataclassModelT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.DataclassModelT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for dataclass models.</p>
+<p>alias of TypeVar(‘DataclassModelT’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">DataclassProtocol</span></code>)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.ModelT">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">ModelT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.ModelT" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for models.</p>
+<p>alias of <a class="reference internal" href="#byte_bot.server.lib.types.SQLAlchemyModelT" title="byte_bot.server.lib.types.SQLAlchemyModelT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SQLAlchemyModelT</span></code></a> | <a class="reference internal" href="#byte_bot.server.lib.types.DataclassModelT" title="byte_bot.server.lib.types.DataclassModelT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataclassModelT</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.FilterTypeT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">FilterTypeT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.FilterTypeT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for filter types.</p>
+<p>alias of TypeVar(‘FilterTypeT’, bound=<a class="reference internal" href="dependencies.html#byte_bot.server.lib.dependencies.BeforeAfter" title="advanced_alchemy.filters.BeforeAfter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BeforeAfter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.OnBeforeAfter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OnBeforeAfter</span></code></a> | <a class="reference internal" href="dependencies.html#byte_bot.server.lib.dependencies.CollectionFilter" title="advanced_alchemy.filters.CollectionFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollectionFilter</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>] | <a class="reference internal" href="dependencies.html#byte_bot.server.lib.dependencies.LimitOffset" title="advanced_alchemy.filters.LimitOffset"><code class="xref py py-class docutils literal notranslate"><span class="pre">LimitOffset</span></code></a> | <a class="reference internal" href="dependencies.html#byte_bot.server.lib.dependencies.OrderBy" title="advanced_alchemy.filters.OrderBy"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderBy</span></code></a> | <a class="reference internal" href="dependencies.html#byte_bot.server.lib.dependencies.SearchFilter" title="advanced_alchemy.filters.SearchFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.NotInCollectionFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotInCollectionFilter</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>] | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.NotInSearchFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotInSearchFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.ExistsFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExistsFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.NotExistsFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotExistsFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.ComparisonFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComparisonFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.MultiFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.FilterGroup" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroup</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.ModelDTOT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">ModelDTOT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.ModelDTOT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for models.</p>
+<p>alias of TypeVar(‘ModelDTOT’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.DTOT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">DTOT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.DTOT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for DTOs.</p>
+<p>alias of TypeVar(‘DTOT’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">DataclassProtocol</span></code> | <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase" title="(in SQLAlchemy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeclarativeBase</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.DTOFactoryT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">DTOFactoryT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.DTOFactoryT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for DTO factories.</p>
+<p>alias of TypeVar(‘DTOFactoryT’, bound=<a class="reference external" href="https://docs.litestar.dev/2/reference/dto/dataclass_dto.html#litestar.dto.dataclass_dto.DataclassDTO" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataclassDTO</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/dto.html#advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyDTO</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.ModelDictDTOT">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">ModelDictDTOT</span></span><a class="headerlink" href="#byte_bot.server.lib.types.ModelDictDTOT" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for model or dict DTOs.</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>] | <a class="reference internal" href="#byte_bot.server.lib.types.SQLAlchemyModelT" title="byte_bot.server.lib.types.SQLAlchemyModelT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SQLAlchemyModelT</span></code></a> | <a class="reference internal" href="#byte_bot.server.lib.types.DataclassModelT" title="byte_bot.server.lib.types.DataclassModelT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataclassModelT</span></code></a> | <a class="reference external" href="https://docs.litestar.dev/2/reference/dto/data_structures.html#litestar.dto.data_structures.DTOData" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DTOData</span></code></a></p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.ModelDictListDTOT">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">ModelDictListDTOT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeAlias" title="(in Python v3.13)"><span class="pre">TypeAlias</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">list[typing.Union[~SQLAlchemyModelT,</span> <span class="pre">~DataclassModelT,</span> <span class="pre">dict[str,</span> <span class="pre">typing.Any]]]</span> <span class="pre">|</span> <span class="pre">list[dict[str,</span> <span class="pre">typing.Any]]</span> <span class="pre">|</span> <span class="pre">litestar.dto.data_structures.DTOData</span></em><a class="headerlink" href="#byte_bot.server.lib.types.ModelDictListDTOT" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for model or dict DTOs.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_bot.server.lib.types.Status">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.types.</span></span><span class="sig-name descname"><span class="pre">Status</span></span><a class="headerlink" href="#byte_bot.server.lib.types.Status" title="Link to this definition">¶</a></dt>
+<dd><p>Type alias for health check status.</p>
+<p>alias of <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.13)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Literal</span></code></a>[‘online’, ‘offline’, ‘degraded’]</p>
+</dd></dl>
+
+</section>
+
+        </article>
+        
+        <div class="navigation flex print:hidden">
+  <div class="navigation-prev">
+    <a href="static_files.html">
+      <i class="i-icon chevron"></i>
+      <div class="page-info">
+        <span>Previous</span>
+        
+        <div class="title">static files</div>
+        
+      </div>
+    </a>
+  </div>
+  <div class="navigation-next">
+    <a href="template.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">template</div>
+      </div>
+      <i class="i-icon chevron"></i>
+    </a>
+  </div>
+</div>
+        
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2023, Jacob Coffee</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+          <a href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub"><i class="i-icon github"></i></a>
+          <a href="https://twitter.com/_scriptr" aria-label="X (Twitter)"><i class="i-icon x-twitter"></i></a>
+          <a href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord"><i class="i-icon discord"></i></a>
+          <a href="https://youtube.com/@monorepo" aria-label="YouTube"><i class="i-icon youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script src="../../../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../../../_static/shibuya.js?v=3e5c8598"></script>
+    
+</body>
+</html>

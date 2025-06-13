@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Usage - Docs</title>
-    <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="API Reference" href="../api/index.html" /><link rel="prev" title="Byte Bot API" href="../../index.html" />
+    <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="About Byte" href="byte.html" /><link rel="prev" title="Byte Bot API" href="../../index.html" />
   <script>
     const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const sessionTheme = sessionStorage['_theme']
@@ -111,7 +111,9 @@ html.dark {
       <div class="sy-scrollbar p-6">
         <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading"><span class="caption-text">Byte Docs</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="byte.html">About Byte</a></li>
+<li class="toctree-l2"><a class="reference internal" href="starting.html">Starting Byte</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
@@ -122,12 +124,15 @@ html.dark {
 <li class="toctree-l3"><a class="reference internal" href="../api/plugins/events.html">events</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/plugins/general.html">general</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/plugins/github.html">github</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../api/plugins/guild.html">guild</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../api/plugins/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/plugins/python.html">python</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/views/index.html">views</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api/views/forums.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/views/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/views/python.html">python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/views/abstract.html">abstract</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../api/lib/index.html">lib</a><ul>
@@ -142,7 +147,9 @@ html.dark {
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Web Docs</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../web/usage/index.html">Usage</a><ul class="simple">
+<li class="toctree-l1"><a class="reference internal" href="../../web/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../web/usage/server.html">About the Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../web/usage/starting.html">Starting Server</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../web/api/index.html">API Reference</a><ul>
@@ -155,6 +162,21 @@ html.dark {
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/domain/urls.html">urls</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/domain/system/index.html">system</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/system/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/system/dtos.html">dtos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/system/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../web/api/domain/guilds/index.html">guilds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/guilds/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/guilds/dependencies.html">dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/guilds/helpers.html">helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/guilds/schemas.html">schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/guilds/services.html">services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/guilds/urls.html">urls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../web/api/domain/github/index.html">github</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../web/api/domain/github/helpers.html">helpers</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/domain/web/index.html">web</a><ul>
@@ -168,13 +190,17 @@ html.dark {
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../web/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/constants.html">constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/dependencies.html">dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/dtos.html">dtos</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/exceptions.html">exceptions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/openapi.html">openapi</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/schema.html">schema</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/serialization.html">serialization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/settings.html">settings</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/static_files.html">static files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/types.html">types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/template.html">template</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../web/api/lib/log/index.html">logging</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../../web/api/lib/log/controller.html">controller</a></li>
@@ -263,6 +289,11 @@ html.dark {
           <section id="usage">
 <h1>Usage<a class="headerlink" href="#usage" title="Link to this heading">¶</a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Byte Usage Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="byte.html">About Byte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="starting.html">Starting Byte</a></li>
+</ul>
 </div>
 </section>
 
@@ -281,10 +312,10 @@ html.dark {
     </a>
   </div>
   <div class="navigation-next">
-    <a href="../api/index.html">
+    <a href="byte.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">API Reference</div>
+        <div class="title">About Byte</div>
       </div>
       <i class="i-icon chevron"></i>
     </a>
