@@ -2,14 +2,11 @@
 
 from __future__ import annotations
 
-from enum import StrEnum
-from typing import TYPE_CHECKING, cast
 from uuid import UUID  # noqa: TC003
 
 from pydantic import Field
 
 from byte_bot.server.lib.schema import CamelizedBaseModel
-from byte_bot.server.lib.serialization import convert_camel_to_snake_case
 
 __all__ = (
     "AllowedUsersConfigSchema",
@@ -20,7 +17,6 @@ __all__ = (
     "GuildUpdate",
     "SOTagsConfigSchema",
     "UpdateableGuildSetting",
-    "UpdateableGuildSettingEnum",
 )
 
 
@@ -176,21 +172,3 @@ class UpdateableGuildSetting(CamelizedBaseModel):
     showcase_thread_auto_close_days: int = Field(
         title="Showcase Thread Auto Close Days", description="The days to auto close showcase threads after inactivity."
     )
-
-    @classmethod
-    def as_enum(cls) -> type[StrEnum]:
-        """Helper to dynamically create an enum from the class fields."""
-        enum_items = {
-            convert_camel_to_snake_case(field.alias or field_name): convert_camel_to_snake_case(
-                field.alias or field_name
-            )
-            for field_name, field in cls.model_fields.items()
-        }
-        return cast("type[StrEnum]", type(cls.__name__, (StrEnum,), enum_items))
-
-
-# what the fuck
-if TYPE_CHECKING:
-    UpdateableGuildSettingEnum = type[StrEnum]
-else:
-    UpdateableGuildSettingEnum = UpdateableGuildSetting.as_enum()

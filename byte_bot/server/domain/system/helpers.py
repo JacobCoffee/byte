@@ -46,19 +46,20 @@ async def check_byte_status() -> Status:
     .. todo:: This is a stub. Need to figure out how to call the current bot instance from here.
 
     .. code-block:: python
-        :caption: Example usage of ``check_byte_status``
-        async def healthcheck(self) -> Status:
-            latency = round(self.bot.latency * 1000, 2)
-            ratelimited = self.bot.is_ws_ratelimited()
-            ready = self.bot.is_ready()
-            if closed := self.bot.is_closed():
-                return "offline"
-            latency_threshold = 1000
-            return (
-                "degraded"
-                if not ready or ratelimited or latency > latency_threshold
-                else "online"
-            )
+       :caption: Example usage of ``check_byte_status``
+
+       async def healthcheck(self) -> Status:
+           latency = round(self.bot.latency * 1000, 2)
+           ratelimited = self.bot.is_ws_ratelimited()
+           ready = self.bot.is_ready()
+           if closed := self.bot.is_closed():
+               return "offline"
+           latency_threshold = 1000
+           return (
+               "degraded"
+               if not ready or ratelimited or latency > latency_threshold
+               else "online"
+           )
 
     Returns:
         Status: Byte status.
