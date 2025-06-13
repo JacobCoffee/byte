@@ -14,10 +14,8 @@ lib
     dtos
     exceptions
     openapi
-    repository
     schema
     serialization
-    service
     settings
     static_files
     types

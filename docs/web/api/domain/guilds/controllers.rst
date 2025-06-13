@@ -4,5 +4,5 @@ controllers
 
 Controllers for the guilds domain.
 
-.. automodule:: src.server.domain.guilds.controllers
+.. automodule:: byte_bot.server.domain.guilds.controllers
     :members:

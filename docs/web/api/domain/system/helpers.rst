@@ -4,5 +4,5 @@ helpers
 
 Helper functions for the system domain.
 
-.. automodule:: src.server.domain.system.helpers
+.. automodule:: byte_bot.server.domain.system.helpers
     :members:

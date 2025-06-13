@@ -4,5 +4,5 @@ helpers
 
 Helper functions for the GitHub domain.
 
-.. automodule:: src.server.domain.github.helpers
+.. automodule:: byte_bot.server.domain.github.helpers
     :members:

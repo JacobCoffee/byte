@@ -2,5 +2,5 @@
 constants
 =========
 
-.. automodule:: src.server.lib.constants
+.. automodule:: byte_bot.server.lib.constants
      :members:

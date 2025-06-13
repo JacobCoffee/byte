@@ -5,7 +5,7 @@ About Byte
 The Discord side of Byte is utilizing the `discord.py <https://discordpy.readthedocs.io/en/latest/>`_. framework.
 
 The structure of Byte is not too complex. There exists a ``bot.py`` file containing the main
-:ref:`Byte` bot class, which includes some on-start utilities like loading cogs and ingesting
+:class:`~byte_bot.byte.bot.Byte` bot class, which includes some on-start utilities like loading cogs and ingesting
 new guilds as they join into the database. The class is called via the :func:`run_bot` function
 to start the bot.
 

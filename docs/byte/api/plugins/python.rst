@@ -2,5 +2,5 @@
 python
 ======
 
-.. automodule:: src.byte.plugins.python
+.. automodule:: byte_bot.byte.plugins.python
    :members:

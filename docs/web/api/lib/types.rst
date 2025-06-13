@@ -4,5 +4,5 @@ types
 
 Application types
 
-.. automodule:: src.server.lib.types
+.. automodule:: byte_bot.server.lib.types
      :members:

@@ -4,5 +4,5 @@ services
 
 Service declaration for the guilds domain.
 
-.. automodule:: src.server.domain.guilds.services
+.. automodule:: byte_bot.server.domain.guilds.services
     :members:

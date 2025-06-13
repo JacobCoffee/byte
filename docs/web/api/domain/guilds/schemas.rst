@@ -4,5 +4,5 @@ schemas
 
 Schemas for the system domain.
 
-.. automodule:: src.server.domain.guilds.schemas
+.. automodule:: byte_bot.server.domain.guilds.schemas
     :members:

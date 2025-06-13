@@ -4,5 +4,5 @@ astral
 
 Astral Inc. views, for things like Ruff embeds
 
-.. automodule:: src.byte.views.astral
+.. automodule:: byte_bot.byte.views.astral
      :members:
