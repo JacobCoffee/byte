@@ -213,6 +213,22 @@ html.dark {
     <h3>On this page</h3>
     <ul>
 <li><a class="reference internal" href="#module-byte_bot.server.domain.db.models">API Reference</a><ul>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.AllowedUsersConfig"><code class="docutils literal notranslate"><span class="pre">AllowedUsersConfig</span></code></a><ul>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.AllowedUsersConfig.__init__"><code class="docutils literal notranslate"><span class="pre">AllowedUsersConfig.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.AllowedUsersConfig.created_at"><code class="docutils literal notranslate"><span class="pre">AllowedUsersConfig.created_at</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.AllowedUsersConfig.id"><code class="docutils literal notranslate"><span class="pre">AllowedUsersConfig.id</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.AllowedUsersConfig.updated_at"><code class="docutils literal notranslate"><span class="pre">AllowedUsersConfig.updated_at</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.ForumConfig"><code class="docutils literal notranslate"><span class="pre">ForumConfig</span></code></a><ul>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.ForumConfig.guild_id"><code class="docutils literal notranslate"><span class="pre">ForumConfig.guild_id</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.ForumConfig.help_thread_sync"><code class="docutils literal notranslate"><span class="pre">ForumConfig.help_thread_sync</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.ForumConfig.__init__"><code class="docutils literal notranslate"><span class="pre">ForumConfig.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.ForumConfig.created_at"><code class="docutils literal notranslate"><span class="pre">ForumConfig.created_at</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.ForumConfig.id"><code class="docutils literal notranslate"><span class="pre">ForumConfig.id</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.db.models.ForumConfig.updated_at"><code class="docutils literal notranslate"><span class="pre">ForumConfig.updated_at</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#byte_bot.server.domain.db.models.GitHubConfig"><code class="docutils literal notranslate"><span class="pre">GitHubConfig</span></code></a><ul>
 <li><a class="reference internal" href="#byte_bot.server.domain.db.models.GitHubConfig.__init__"><code class="docutils literal notranslate"><span class="pre">GitHubConfig.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.server.domain.db.models.GitHubConfig.created_at"><code class="docutils literal notranslate"><span class="pre">GitHubConfig.created_at</span></code></a></li>
@@ -311,6 +327,136 @@ html.dark {
 <section id="module-byte_bot.server.domain.db.models">
 <span id="api-reference"></span><h2>API Reference<a class="headerlink" href="#module-byte_bot.server.domain.db.models" title="Link to this heading">¶</a></h2>
 <p>Shared models.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.AllowedUsersConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.db.models.</span></span><span class="sig-name descname"><span class="pre">AllowedUsersConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/byte_bot/server/domain/db/models.html#AllowedUsersConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.domain.db.models.AllowedUsersConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></p>
+<p>SQLAlchemy association model for a guild’s allowed users’ config.</p>
+<p>A guild normally has a set of users to perform administrative actions, but sometimes
+we don’t want to give full administrative access to a user.</p>
+<p>This model allows us to configure which users are allowed to perform administrative
+actions on Byte specifically without giving them full administrative access to the Discord guild.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>More preferably, this should be more generalized to a user OR role ID.</p>
+</div>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+<p>Only keys that are present as
+attributes of the instance’s class are allowed. These could be,
+for example, any mapped columns or relationships.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.AllowedUsersConfig.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#byte_bot.server.domain.db.models.AllowedUsersConfig.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+<p>Only keys that are present as
+attributes of the instance’s class are allowed. These could be,
+for example, any mapped columns or relationships.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.AllowedUsersConfig.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime.datetime</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#byte_bot.server.domain.db.models.AllowedUsersConfig.created_at" title="Link to this definition">¶</a></dt>
+<dd><p>Date/time of instance creation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.AllowedUsersConfig.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">UUID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#byte_bot.server.domain.db.models.AllowedUsersConfig.id" title="Link to this definition">¶</a></dt>
+<dd><p>UUID Primary key column.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.AllowedUsersConfig.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime.datetime</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#byte_bot.server.domain.db.models.AllowedUsersConfig.updated_at" title="Link to this definition">¶</a></dt>
+<dd><p>Date/time of instance last update.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.ForumConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.db.models.</span></span><span class="sig-name descname"><span class="pre">ForumConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/byte_bot/server/domain/db/models.html#ForumConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.domain.db.models.ForumConfig" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></p>
+<p>Forum configuration.</p>
+<dl class="simple">
+<dt>A guild will be able to set whether they want help and/or showcase forums.</dt><dd><ul class="simple">
+<li><p>If they already have them set up, they can configure the channel IDs for them.</p></li>
+<li><p>If they don’t have them set up, they can configure the category and channel names for them
+Byte will then create the channels for them.</p></li>
+<li><p>If they don’t want them, they can disable them.</p></li>
+</ul>
+</dd>
+<dt>Help forum settings include:</dt><dd><ul class="simple">
+<li><p>Respond with help embed, including a link to ‘Open a GitHub Issue’
+if the <cite>GitHubConfig:github_organization</cite> and <cite>GitHubConfig:github_repository</cite> are set.
+Also includes <cite>Solve</cite> button to mark as solved and close the thread.</p></li>
+<li><p>Automatic thread closing after a certain period of inactivity.</p></li>
+<li><p>Uploading of threads into GitHub discussions.</p></li>
+<li><p>Pinging of defined roles when a thread has not received a response from someone with those roles
+after a certain period of time.</p></li>
+</ul>
+</dd>
+<dt>Showcase forum settings include:</dt><dd><ul class="simple">
+<li><p>Respond with showcase embed, including a link to ‘Add to awesome-$repo’
+if the <cite>GitHubConfig:github_organization</cite> and <cite>GitHubConfig:github_awesome</cite> are set.</p></li>
+<li><p>Automatic thread closing after a certain period of inactivity.</p></li>
+<li><p>Uploading of threads into GitHub discussions.</p></li>
+</ul>
+</dd>
+</dl>
+<p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+<p>Only keys that are present as
+attributes of the instance’s class are allowed. These could be,
+for example, any mapped columns or relationships.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.ForumConfig.guild_id">
+<span class="sig-name descname"><span class="pre">guild_id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#byte_bot.server.domain.db.models.ForumConfig.guild_id" title="Link to this definition">¶</a></dt>
+<dd><p>Help forum settings.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.ForumConfig.help_thread_sync">
+<span class="sig-name descname"><span class="pre">help_thread_sync</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">AssociationProxy</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">AmbiguousAssociationProxyInstance(AssociationProxy('guild',</span> <span class="pre">'github_config.discussion_sync'))</span></em><a class="headerlink" href="#byte_bot.server.domain.db.models.ForumConfig.help_thread_sync" title="Link to this definition">¶</a></dt>
+<dd><p>Showcase forum settings.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.ForumConfig.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#byte_bot.server.domain.db.models.ForumConfig.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>A simple constructor that allows initialization from kwargs.</p>
+<p>Sets attributes on the constructed instance using the names and
+values in <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+<p>Only keys that are present as
+attributes of the instance’s class are allowed. These could be,
+for example, any mapped columns or relationships.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.ForumConfig.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime.datetime</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#byte_bot.server.domain.db.models.ForumConfig.created_at" title="Link to this definition">¶</a></dt>
+<dd><p>Date/time of instance creation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.ForumConfig.id">
+<span class="sig-name descname"><span class="pre">id</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><span class="pre">UUID</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#byte_bot.server.domain.db.models.ForumConfig.id" title="Link to this definition">¶</a></dt>
+<dd><p>UUID Primary key column.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.domain.db.models.ForumConfig.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapped</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime.datetime</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#byte_bot.server.domain.db.models.ForumConfig.updated_at" title="Link to this definition">¶</a></dt>
+<dd><p>Date/time of instance last update.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="byte_bot.server.domain.db.models.GitHubConfig">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.db.models.</span></span><span class="sig-name descname"><span class="pre">GitHubConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/byte_bot/server/domain/db/models.html#GitHubConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.domain.db.models.GitHubConfig" title="Link to this definition">¶</a></dt>
@@ -450,7 +596,7 @@ for example, any mapped columns or relationships.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.db.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/byte_bot/server/domain/db/models.html#User"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.domain.db.models.User" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></p>
 <p>SQLAlchemy model representing a user.</p>
-<div class="admonition-todo admonition" id="id1">
+<div class="admonition-todo admonition" id="id2">
 <p class="admonition-title">Todo</p>
 <p>This may not really be needed?</p>
 </div>
@@ -520,28 +666,31 @@ StackOverflow, Discord forums, and other external services.</p>
 <tr class="row-even"><td><p>help_channel_id</p></td>
 <td><p>BIGINT?</p></td>
 </tr>
-<tr class="row-odd"><td><p>sync_label</p></td>
+<tr class="row-odd"><td><p>showcase_channel_id</p></td>
+<td><p>BIGINT?</p></td>
+</tr>
+<tr class="row-even"><td><p>sync_label</p></td>
 <td><p>VARCHAR?</p></td>
 </tr>
-<tr class="row-even"><td><p>issue_linking</p></td>
+<tr class="row-odd"><td><p>issue_linking</p></td>
 <td><p>BOOLEAN</p></td>
 </tr>
-<tr class="row-odd"><td><p>comment_linking</p></td>
+<tr class="row-even"><td><p>comment_linking</p></td>
 <td><p>BOOLEAN</p></td>
 </tr>
-<tr class="row-even"><td><p>pep_linking</p></td>
+<tr class="row-odd"><td><p>pep_linking</p></td>
 <td><p>BOOLEAN</p></td>
 </tr>
-<tr class="row-odd"><td><p><em>id*</em></p></td>
+<tr class="row-even"><td><p><em>id*</em></p></td>
 <td><p>BINARY(16)</p></td>
 </tr>
-<tr class="row-even"><td><p>sa_orm_sentinel</p></td>
+<tr class="row-odd"><td><p>sa_orm_sentinel</p></td>
 <td><p>INTEGER?</p></td>
 </tr>
-<tr class="row-odd"><td><p>created_at</p></td>
+<tr class="row-even"><td><p>created_at</p></td>
 <td><p>DATETIME</p></td>
 </tr>
-<tr class="row-even"><td><p>updated_at</p></td>
+<tr class="row-odd"><td><p>updated_at</p></td>
 <td><p>DATETIME</p></td>
 </tr>
 </tbody>
@@ -567,7 +716,7 @@ discussions with forum posts.</p>
 <table class="docutils align-left">
 <tbody>
 <tr class="row-odd"><td><p>→ guild_id</p></td>
-<td><p>BINARY(16)</p></td>
+<td><p>BIGINT</p></td>
 </tr>
 <tr class="row-even"><td><p>discussion_sync</p></td>
 <td><p>BOOLEAN</p></td>
@@ -595,19 +744,19 @@ discussions with forum posts.</p>
 </div>
 <p class="rubric">Constraints:</p>
 <ul class="simple">
-<li><p>FOREIGN KEY (guild.id → guild_id)</p></li>
+<li><p>FOREIGN KEY (guild.guild_id → guild_id)</p></li>
 <li><p>PRIMARY KEY (id)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="simple sqla">
-<dt>byte_bot.server.domain.db.models.SOTagsConfig (<em>so_tags</em>)</dt><dd><p>SQLAlchemy association model for a guild’s Stack Overflow tags config.</p>
+<dt>byte_bot.server.domain.db.models.SOTagsConfig (<em>so_tags_config</em>)</dt><dd><p>SQLAlchemy association model for a guild’s Stack Overflow tags config.</p>
 <p class="rubric">Columns:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-left">
 <tbody>
 <tr class="row-odd"><td><p>→ guild_id</p></td>
-<td><p>BINARY(16)</p></td>
+<td><p>BIGINT</p></td>
 </tr>
 <tr class="row-even"><td><p>tag_name</p></td>
 <td><p>VARCHAR(50)</p></td>
@@ -629,7 +778,7 @@ discussions with forum posts.</p>
 </div>
 <p class="rubric">Constraints:</p>
 <ul class="simple">
-<li><p>FOREIGN KEY (guild.id → guild_id)</p></li>
+<li><p>FOREIGN KEY (guild.guild_id → guild_id)</p></li>
 <li><p>PRIMARY KEY (id)</p></li>
 <li><p>UNIQUE (guild_id, tag_name)</p></li>
 </ul>
@@ -641,6 +790,10 @@ discussions with forum posts.</p>
 we don’t want to give full administrative access to a user.</p>
 <p>This model allows us to configure which users are allowed to perform administrative
 actions on Byte specifically without giving them full administrative access to the Discord guild.</p>
+<div class="admonition-todo admonition" id="id3">
+<p class="admonition-title">Todo</p>
+<p>More preferably, this should be more generalized to a user OR role ID.</p>
+</div>
 <p class="rubric">Columns:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-left">
@@ -677,7 +830,7 @@ actions on Byte specifically without giving them full administrative access to t
 </dl>
 <dl class="simple sqla">
 <dt>byte_bot.server.domain.db.models.User (<em>user</em>)</dt><dd><p>SQLAlchemy model representing a user.</p>
-<div class="admonition-todo admonition" id="id2">
+<div class="admonition-todo admonition" id="id4">
 <p class="admonition-title">Todo</p>
 <p>This may not really be needed?</p>
 </div>
@@ -739,6 +892,7 @@ guild’s allowed users config.</p>
   SchemaItem &lt;|-- ForeignKey
   TypeEngine &lt;|-- String
   UUIDAuditBase &lt;|-- AllowedUsersConfig
+  UUIDAuditBase &lt;|-- ForumConfig
   UUIDAuditBase &lt;|-- GitHubConfig
   UUIDAuditBase &lt;|-- Guild
   UUIDAuditBase &lt;|-- SOTagsConfig

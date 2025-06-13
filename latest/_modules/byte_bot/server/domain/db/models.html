@@ -272,7 +272,7 @@ html.dark {
 </span><span id="1-9"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.ext.associationproxy</span><span class="w"> </span><span class="kn">import</span> <span class="n">AssociationProxy</span><span class="p">,</span> <span class="n">association_proxy</span>
 </span><span id="1-10"><span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapped</span><span class="p">,</span> <span class="n">mapped_column</span><span class="p">,</span> <span class="n">relationship</span>
 </span><span id="1-11">
-</span><span id="1-12"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;GitHubConfig&quot;</span><span class="p">,</span> <span class="s2">&quot;Guild&quot;</span><span class="p">,</span> <span class="s2">&quot;SOTagsConfig&quot;</span><span class="p">,</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span>
+</span><span id="1-12"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;AllowedUsersConfig&quot;</span><span class="p">,</span> <span class="s2">&quot;ForumConfig&quot;</span><span class="p">,</span> <span class="s2">&quot;GitHubConfig&quot;</span><span class="p">,</span> <span class="s2">&quot;Guild&quot;</span><span class="p">,</span> <span class="s2">&quot;SOTagsConfig&quot;</span><span class="p">,</span> <span class="s2">&quot;User&quot;</span><span class="p">)</span>
 </span><span id="1-13">
 </span><span id="1-14">
 <div class="viewcode-block" id="Guild">
@@ -296,156 +296,229 @@ html.dark {
 </span><span id="1-31">    <span class="n">guild_name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 </span><span id="1-32">    <span class="n">prefix</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">server_default</span><span class="o">=</span><span class="s2">&quot;!&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;!&quot;</span><span class="p">)</span>
 </span><span id="1-33">    <span class="n">help_channel_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">)</span>
-</span><span id="1-34">    <span class="n">sync_label</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
-</span><span id="1-35">    <span class="n">issue_linking</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="1-36">    <span class="n">comment_linking</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="1-37">    <span class="n">pep_linking</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="1-38">
-</span><span id="1-39">    <span class="c1"># =================</span>
-</span><span id="1-40">    <span class="c1"># ORM Relationships</span>
-</span><span id="1-41">    <span class="c1"># =================</span>
-</span><span id="1-42">    <span class="n">github_config</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">GitHubConfig</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
-</span><span id="1-43">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
-</span><span id="1-44">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span>
-</span><span id="1-45">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
-</span><span id="1-46">    <span class="p">)</span>
-</span><span id="1-47">    <span class="n">sotags_configs</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">SOTagsConfig</span><span class="p">]]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
-</span><span id="1-48">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
-</span><span id="1-49">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span>
-</span><span id="1-50">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;all, delete-orphan&quot;</span><span class="p">,</span>
-</span><span id="1-51">    <span class="p">)</span>
-</span><span id="1-52">    <span class="n">allowed_users</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">AllowedUsersConfig</span><span class="p">]]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
-</span><span id="1-53">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
-</span><span id="1-54">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span>
-</span><span id="1-55">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
-</span><span id="1-56">    <span class="p">)</span></div>
+</span><span id="1-34">    <span class="n">showcase_channel_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">)</span>
+</span><span id="1-35">    <span class="n">sync_label</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-36">    <span class="n">issue_linking</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-37">    <span class="n">comment_linking</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-38">    <span class="n">pep_linking</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-39">
+</span><span id="1-40">    <span class="c1"># =================</span>
+</span><span id="1-41">    <span class="c1"># ORM Relationships</span>
+</span><span id="1-42">    <span class="c1"># =================</span>
+</span><span id="1-43">    <span class="n">github_config</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">GitHubConfig</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-44">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-45">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span>
+</span><span id="1-46">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
+</span><span id="1-47">    <span class="p">)</span>
+</span><span id="1-48">    <span class="n">sotags_configs</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">SOTagsConfig</span><span class="p">]]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-49">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-50">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span>
+</span><span id="1-51">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;all, delete-orphan&quot;</span><span class="p">,</span>
+</span><span id="1-52">    <span class="p">)</span>
+</span><span id="1-53">    <span class="n">allowed_users</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">AllowedUsersConfig</span><span class="p">]]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-54">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-55">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span>
+</span><span id="1-56">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
+</span><span id="1-57">    <span class="p">)</span>
+</span><span id="1-58">    <span class="n">forum_config</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">ForumConfig</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-59">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-60">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span>
+</span><span id="1-61">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
+</span><span id="1-62">    <span class="p">)</span></div>
 
-</span><span id="1-57">
-</span><span id="1-58">
+</span><span id="1-63">
+</span><span id="1-64">
 <div class="viewcode-block" id="GitHubConfig">
 <a class="viewcode-back" href="../../../../../web/api/domain/db/models.html#byte_bot.server.domain.db.models.GitHubConfig">[docs]</a>
-</span><span id="1-59"><span class="k">class</span><span class="w"> </span><span class="nc">GitHubConfig</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
-</span><span id="1-60"><span class="w">    </span><span class="sd">&quot;&quot;&quot;GitHub configuration.</span>
-</span><span id="1-61">
-</span><span id="1-62"><span class="sd">    A guild will be able to configure which organization or user they want as a default</span>
-</span><span id="1-63"><span class="sd">    base, which repository they want as a default, and whether they would like to sync</span>
-</span><span id="1-64"><span class="sd">    discussions with forum posts.</span>
-</span><span id="1-65"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-66">
-</span><span id="1-67">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;github_config&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
-</span><span id="1-68">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;GitHub configuration for a guild.&quot;</span><span class="p">}</span>
-</span><span id="1-69">
-</span><span id="1-70">    <span class="n">guild_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;guild.id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
-</span><span id="1-71">    <span class="n">discussion_sync</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="1-72">    <span class="n">github_organization</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
-</span><span id="1-73">    <span class="n">github_repository</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
-</span><span id="1-74">
-</span><span id="1-75">    <span class="c1"># =================</span>
-</span><span id="1-76">    <span class="c1"># ORM Relationships</span>
-</span><span id="1-77">    <span class="c1"># =================</span>
-</span><span id="1-78">    <span class="n">guild</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Guild</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
-</span><span id="1-79">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;github_config&quot;</span><span class="p">,</span>
-</span><span id="1-80">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-81">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
-</span><span id="1-82">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
-</span><span id="1-83">    <span class="p">)</span></div>
+</span><span id="1-65"><span class="k">class</span><span class="w"> </span><span class="nc">GitHubConfig</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
+</span><span id="1-66"><span class="w">    </span><span class="sd">&quot;&quot;&quot;GitHub configuration.</span>
+</span><span id="1-67">
+</span><span id="1-68"><span class="sd">    A guild will be able to configure which organization or user they want as a default</span>
+</span><span id="1-69"><span class="sd">    base, which repository they want as a default, and whether they would like to sync</span>
+</span><span id="1-70"><span class="sd">    discussions with forum posts.</span>
+</span><span id="1-71"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-72">
+</span><span id="1-73">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;github_config&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
+</span><span id="1-74">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;GitHub configuration for a guild.&quot;</span><span class="p">}</span>
+</span><span id="1-75">
+</span><span id="1-76">    <span class="n">guild_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;guild.guild_id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
+</span><span id="1-77">    <span class="n">discussion_sync</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-78">    <span class="n">github_organization</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-79">    <span class="n">github_repository</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-80">
+</span><span id="1-81">    <span class="c1"># =================</span>
+</span><span id="1-82">    <span class="c1"># ORM Relationships</span>
+</span><span id="1-83">    <span class="c1"># =================</span>
+</span><span id="1-84">    <span class="n">guild</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Guild</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-85">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;github_config&quot;</span><span class="p">,</span>
+</span><span id="1-86">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-87">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-88">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
+</span><span id="1-89">    <span class="p">)</span></div>
 
-</span><span id="1-84">
-</span><span id="1-85">
+</span><span id="1-90">
+</span><span id="1-91">
 <div class="viewcode-block" id="SOTagsConfig">
 <a class="viewcode-back" href="../../../../../web/api/domain/db/models.html#byte_bot.server.domain.db.models.SOTagsConfig">[docs]</a>
-</span><span id="1-86"><span class="k">class</span><span class="w"> </span><span class="nc">SOTagsConfig</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
-</span><span id="1-87"><span class="w">    </span><span class="sd">&quot;&quot;&quot;SQLAlchemy association model for a guild&#39;s Stack Overflow tags config.&quot;&quot;&quot;</span>
-</span><span id="1-88">
-</span><span id="1-89">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;so_tags&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
-</span><span id="1-90">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="1-91">        <span class="n">UniqueConstraint</span><span class="p">(</span><span class="s2">&quot;guild_id&quot;</span><span class="p">,</span> <span class="s2">&quot;tag_name&quot;</span><span class="p">),</span>
-</span><span id="1-92">        <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Configuration for a Discord guild&#39;s Stack Overflow tags.&quot;</span><span class="p">},</span>
-</span><span id="1-93">    <span class="p">)</span>
+</span><span id="1-92"><span class="k">class</span><span class="w"> </span><span class="nc">SOTagsConfig</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
+</span><span id="1-93"><span class="w">    </span><span class="sd">&quot;&quot;&quot;SQLAlchemy association model for a guild&#39;s Stack Overflow tags config.&quot;&quot;&quot;</span>
 </span><span id="1-94">
-</span><span id="1-95">    <span class="n">guild_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;guild.id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
-</span><span id="1-96">    <span class="n">guild_name</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span> <span class="s2">&quot;guild_name&quot;</span><span class="p">)</span>
-</span><span id="1-97">    <span class="n">tag_name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
-</span><span id="1-98">
-</span><span id="1-99">    <span class="c1"># =================</span>
-</span><span id="1-100">    <span class="c1"># ORM Relationships</span>
-</span><span id="1-101">    <span class="c1"># =================</span>
-</span><span id="1-102">    <span class="n">guild</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Guild</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
-</span><span id="1-103">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;sotags_configs&quot;</span><span class="p">,</span>
-</span><span id="1-104">        <span class="n">foreign_keys</span><span class="o">=</span><span class="s2">&quot;SOTagsConfig.guild_id&quot;</span><span class="p">,</span>
-</span><span id="1-105">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-106">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
-</span><span id="1-107">    <span class="p">)</span></div>
+</span><span id="1-95">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;so_tags_config&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
+</span><span id="1-96">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="1-97">        <span class="n">UniqueConstraint</span><span class="p">(</span><span class="s2">&quot;guild_id&quot;</span><span class="p">,</span> <span class="s2">&quot;tag_name&quot;</span><span class="p">),</span>
+</span><span id="1-98">        <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Configuration for a Discord guild&#39;s Stack Overflow tags.&quot;</span><span class="p">},</span>
+</span><span id="1-99">    <span class="p">)</span>
+</span><span id="1-100">
+</span><span id="1-101">    <span class="n">guild_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;guild.guild_id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
+</span><span id="1-102">    <span class="n">guild_name</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span> <span class="s2">&quot;guild_name&quot;</span><span class="p">)</span>
+</span><span id="1-103">    <span class="n">tag_name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
+</span><span id="1-104">
+</span><span id="1-105">    <span class="c1"># =================</span>
+</span><span id="1-106">    <span class="c1"># ORM Relationships</span>
+</span><span id="1-107">    <span class="c1"># =================</span>
+</span><span id="1-108">    <span class="n">guild</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Guild</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-109">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;sotags_configs&quot;</span><span class="p">,</span>
+</span><span id="1-110">        <span class="n">foreign_keys</span><span class="o">=</span><span class="s2">&quot;SOTagsConfig.guild_id&quot;</span><span class="p">,</span>
+</span><span id="1-111">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-112">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-113">    <span class="p">)</span></div>
 
-</span><span id="1-108">
-</span><span id="1-109">
-</span><span id="1-110"><span class="k">class</span><span class="w"> </span><span class="nc">AllowedUsersConfig</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
-</span><span id="1-111"><span class="w">    </span><span class="sd">&quot;&quot;&quot;SQLAlchemy association model for a guild&#39;s allowed users&#39; config.</span>
-</span><span id="1-112">
-</span><span id="1-113"><span class="sd">    A guild normally has a set of users to perform administrative actions, but sometimes</span>
-</span><span id="1-114"><span class="sd">    we don&#39;t want to give full administrative access to a user.</span>
+</span><span id="1-114">
 </span><span id="1-115">
-</span><span id="1-116"><span class="sd">    This model allows us to configure which users are allowed to perform administrative</span>
-</span><span id="1-117"><span class="sd">    actions on Byte specifically without giving them full administrative access to the Discord guild.</span>
-</span><span id="1-118"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-119">
-</span><span id="1-120">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;allowed_users&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
-</span><span id="1-121">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="1-122">        <span class="n">UniqueConstraint</span><span class="p">(</span><span class="s2">&quot;guild_id&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">),</span>
-</span><span id="1-123">        <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Configuration for allowed users in a Discord guild.&quot;</span><span class="p">},</span>
-</span><span id="1-124">    <span class="p">)</span>
-</span><span id="1-125">
-</span><span id="1-126">    <span class="n">guild_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;guild.guild_id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
-</span><span id="1-127">    <span class="n">user_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;user.id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
-</span><span id="1-128">
-</span><span id="1-129">    <span class="n">guild_name</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span> <span class="s2">&quot;guild_name&quot;</span><span class="p">)</span>
-</span><span id="1-130">    <span class="n">user_name</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
-</span><span id="1-131">
-</span><span id="1-132">    <span class="c1"># =================</span>
-</span><span id="1-133">    <span class="c1"># ORM Relationships</span>
-</span><span id="1-134">    <span class="c1"># =================</span>
-</span><span id="1-135">    <span class="n">guild</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Guild</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
-</span><span id="1-136">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;allowed_users&quot;</span><span class="p">,</span>
-</span><span id="1-137">        <span class="n">foreign_keys</span><span class="o">=</span><span class="s2">&quot;AllowedUsersConfig.guild_id&quot;</span><span class="p">,</span>
-</span><span id="1-138">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-139">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
-</span><span id="1-140">    <span class="p">)</span>
-</span><span id="1-141">    <span class="n">user</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">User</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
-</span><span id="1-142">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guilds_allowed&quot;</span><span class="p">,</span>
-</span><span id="1-143">        <span class="n">foreign_keys</span><span class="o">=</span><span class="s2">&quot;AllowedUsersConfig.user_id&quot;</span><span class="p">,</span>
-</span><span id="1-144">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-145">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
-</span><span id="1-146">    <span class="p">)</span>
-</span><span id="1-147">
-</span><span id="1-148">
+<div class="viewcode-block" id="AllowedUsersConfig">
+<a class="viewcode-back" href="../../../../../web/api/domain/db/models.html#byte_bot.server.domain.db.models.AllowedUsersConfig">[docs]</a>
+</span><span id="1-116"><span class="k">class</span><span class="w"> </span><span class="nc">AllowedUsersConfig</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
+</span><span id="1-117"><span class="w">    </span><span class="sd">&quot;&quot;&quot;SQLAlchemy association model for a guild&#39;s allowed users&#39; config.</span>
+</span><span id="1-118">
+</span><span id="1-119"><span class="sd">    A guild normally has a set of users to perform administrative actions, but sometimes</span>
+</span><span id="1-120"><span class="sd">    we don&#39;t want to give full administrative access to a user.</span>
+</span><span id="1-121">
+</span><span id="1-122"><span class="sd">    This model allows us to configure which users are allowed to perform administrative</span>
+</span><span id="1-123"><span class="sd">    actions on Byte specifically without giving them full administrative access to the Discord guild.</span>
+</span><span id="1-124">
+</span><span id="1-125"><span class="sd">    .. todo:: More preferably, this should be more generalized to a user OR role ID.</span>
+</span><span id="1-126"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-127">
+</span><span id="1-128">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;allowed_users&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
+</span><span id="1-129">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="1-130">        <span class="n">UniqueConstraint</span><span class="p">(</span><span class="s2">&quot;guild_id&quot;</span><span class="p">,</span> <span class="s2">&quot;user_id&quot;</span><span class="p">),</span>
+</span><span id="1-131">        <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Configuration for allowed users in a Discord guild.&quot;</span><span class="p">},</span>
+</span><span id="1-132">    <span class="p">)</span>
+</span><span id="1-133">
+</span><span id="1-134">    <span class="n">guild_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;guild.guild_id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
+</span><span id="1-135">    <span class="n">user_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">UUID</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;user.id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
+</span><span id="1-136">
+</span><span id="1-137">    <span class="n">guild_name</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span> <span class="s2">&quot;guild_name&quot;</span><span class="p">)</span>
+</span><span id="1-138">    <span class="n">user_name</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">)</span>
+</span><span id="1-139">
+</span><span id="1-140">    <span class="c1"># =================</span>
+</span><span id="1-141">    <span class="c1"># ORM Relationships</span>
+</span><span id="1-142">    <span class="c1"># =================</span>
+</span><span id="1-143">    <span class="n">guild</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Guild</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-144">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;allowed_users&quot;</span><span class="p">,</span>
+</span><span id="1-145">        <span class="n">foreign_keys</span><span class="o">=</span><span class="s2">&quot;AllowedUsersConfig.guild_id&quot;</span><span class="p">,</span>
+</span><span id="1-146">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-147">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-148">    <span class="p">)</span>
+</span><span id="1-149">    <span class="n">user</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">User</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-150">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;guilds_allowed&quot;</span><span class="p">,</span>
+</span><span id="1-151">        <span class="n">foreign_keys</span><span class="o">=</span><span class="s2">&quot;AllowedUsersConfig.user_id&quot;</span><span class="p">,</span>
+</span><span id="1-152">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-153">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-154">    <span class="p">)</span></div>
+
+</span><span id="1-155">
+</span><span id="1-156">
 <div class="viewcode-block" id="User">
 <a class="viewcode-back" href="../../../../../web/api/domain/db/models.html#byte_bot.server.domain.db.models.User">[docs]</a>
-</span><span id="1-149"><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
-</span><span id="1-150"><span class="w">    </span><span class="sd">&quot;&quot;&quot;SQLAlchemy model representing a user.</span>
-</span><span id="1-151">
-</span><span id="1-152"><span class="sd">    .. todo:: This may not really be needed?</span>
-</span><span id="1-153">
-</span><span id="1-154"><span class="sd">    Currently, a user in the Byte context is an individual user assigned to the</span>
-</span><span id="1-155"><span class="sd">    guild&#39;s allowed users config.</span>
-</span><span id="1-156">
-</span><span id="1-157"><span class="sd">    In the future we may want to expand this to allow for more granular permissions.</span>
-</span><span id="1-158"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-157"><span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
+</span><span id="1-158"><span class="w">    </span><span class="sd">&quot;&quot;&quot;SQLAlchemy model representing a user.</span>
 </span><span id="1-159">
-</span><span id="1-160">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;user&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
-</span><span id="1-161">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;A user.&quot;</span><span class="p">}</span>
-</span><span id="1-162">
-</span><span id="1-163">    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
-</span><span id="1-164">    <span class="n">avatar_url</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
-</span><span id="1-165">    <span class="n">discriminator</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
-</span><span id="1-166">
-</span><span id="1-167">    <span class="c1"># =================</span>
-</span><span id="1-168">    <span class="c1"># ORM Relationships</span>
-</span><span id="1-169">    <span class="c1"># =================</span>
-</span><span id="1-170">    <span class="n">guilds_allowed</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">AllowedUsersConfig</span><span class="p">]]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
-</span><span id="1-171">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
-</span><span id="1-172">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
-</span><span id="1-173">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
-</span><span id="1-174">    <span class="p">)</span></div>
+</span><span id="1-160"><span class="sd">    .. todo:: This may not really be needed?</span>
+</span><span id="1-161">
+</span><span id="1-162"><span class="sd">    Currently, a user in the Byte context is an individual user assigned to the</span>
+</span><span id="1-163"><span class="sd">    guild&#39;s allowed users config.</span>
+</span><span id="1-164">
+</span><span id="1-165"><span class="sd">    In the future we may want to expand this to allow for more granular permissions.</span>
+</span><span id="1-166"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-167">
+</span><span id="1-168">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;user&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
+</span><span id="1-169">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;A user.&quot;</span><span class="p">}</span>
+</span><span id="1-170">
+</span><span id="1-171">    <span class="n">name</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</span><span id="1-172">    <span class="n">avatar_url</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-173">    <span class="n">discriminator</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</span><span id="1-174">
+</span><span id="1-175">    <span class="c1"># =================</span>
+</span><span id="1-176">    <span class="c1"># ORM Relationships</span>
+</span><span id="1-177">    <span class="c1"># =================</span>
+</span><span id="1-178">    <span class="n">guilds_allowed</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">AllowedUsersConfig</span><span class="p">]]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-179">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;user&quot;</span><span class="p">,</span>
+</span><span id="1-180">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-181">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
+</span><span id="1-182">    <span class="p">)</span></div>
+
+</span><span id="1-183">
+</span><span id="1-184">
+<div class="viewcode-block" id="ForumConfig">
+<a class="viewcode-back" href="../../../../../web/api/domain/db/models.html#byte_bot.server.domain.db.models.ForumConfig">[docs]</a>
+</span><span id="1-185"><span class="k">class</span><span class="w"> </span><span class="nc">ForumConfig</span><span class="p">(</span><span class="n">UUIDAuditBase</span><span class="p">):</span>
+</span><span id="1-186"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Forum configuration.</span>
+</span><span id="1-187">
+</span><span id="1-188"><span class="sd">    A guild will be able to set whether they want help and/or showcase forums.</span>
+</span><span id="1-189"><span class="sd">        * If they already have them set up, they can configure the channel IDs for them.</span>
+</span><span id="1-190"><span class="sd">        * If they don&#39;t have them set up, they can configure the category and channel names for them</span>
+</span><span id="1-191"><span class="sd">          Byte will then create the channels for them.</span>
+</span><span id="1-192"><span class="sd">        * If they don&#39;t want them, they can disable them.</span>
+</span><span id="1-193">
+</span><span id="1-194"><span class="sd">    Help forum settings include:</span>
+</span><span id="1-195"><span class="sd">        * Respond with help embed, including a link to &#39;Open a GitHub Issue&#39;</span>
+</span><span id="1-196"><span class="sd">          if the `GitHubConfig:github_organization` and `GitHubConfig:github_repository` are set.</span>
+</span><span id="1-197"><span class="sd">          Also includes `Solve` button to mark as solved and close the thread.</span>
+</span><span id="1-198"><span class="sd">        * Automatic thread closing after a certain period of inactivity.</span>
+</span><span id="1-199"><span class="sd">        * Uploading of threads into GitHub discussions.</span>
+</span><span id="1-200"><span class="sd">        * Pinging of defined roles when a thread has not received a response from someone with those roles</span>
+</span><span id="1-201"><span class="sd">          after a certain period of time.</span>
+</span><span id="1-202">
+</span><span id="1-203"><span class="sd">    Showcase forum settings include:</span>
+</span><span id="1-204"><span class="sd">        * Respond with showcase embed, including a link to &#39;Add to awesome-$repo&#39;</span>
+</span><span id="1-205"><span class="sd">          if the `GitHubConfig:github_organization` and `GitHubConfig:github_awesome` are set.</span>
+</span><span id="1-206"><span class="sd">        * Automatic thread closing after a certain period of inactivity.</span>
+</span><span id="1-207"><span class="sd">        * Uploading of threads into GitHub discussions.</span>
+</span><span id="1-208"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-209">
+</span><span id="1-210">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s2">&quot;forum_config&quot;</span>  <span class="c1"># type: ignore[reportAssignmentType]</span>
+</span><span id="1-211">    <span class="n">__table_args__</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Forum configuration for a guild.&quot;</span><span class="p">}</span>
+</span><span id="1-212">
+</span><span id="1-213">    <span class="n">guild_id</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">BigInteger</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;guild.guild_id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;cascade&quot;</span><span class="p">))</span>
+</span><span id="1-214">
+</span><span id="1-215"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Help forum settings.&quot;&quot;&quot;</span>
+</span><span id="1-216">    <span class="n">help_forum</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-217">    <span class="n">help_forum_category</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-218">    <span class="n">help_channel_id</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span> <span class="s2">&quot;help_channel_id&quot;</span><span class="p">)</span>
+</span><span id="1-219">    <span class="n">help_thread_auto_close</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-220">    <span class="n">help_thread_auto_close_days</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-221">    <span class="n">help_thread_notify</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-222">    <span class="n">help_thread_notify_roles</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-223">    <span class="n">help_thread_notify_days</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-224">    <span class="n">help_thread_sync</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span> <span class="s2">&quot;github_config.discussion_sync&quot;</span><span class="p">)</span>
+</span><span id="1-225">
+</span><span id="1-226"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Showcase forum settings.&quot;&quot;&quot;</span>
+</span><span id="1-227">    <span class="n">showcase_forum</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-228">    <span class="n">showcase_forum_category</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-229">    <span class="n">showcase_channel_id</span><span class="p">:</span> <span class="n">AssociationProxy</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="n">association_proxy</span><span class="p">(</span><span class="s2">&quot;guild&quot;</span><span class="p">,</span> <span class="s2">&quot;showcase_channel_Id&quot;</span><span class="p">)</span>
+</span><span id="1-230">    <span class="n">showcase_thread_auto_close</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapped_column</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-231">    <span class="n">showcase_thread_auto_close_days</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span>
+</span><span id="1-232">
+</span><span id="1-233">    <span class="c1"># =================</span>
+</span><span id="1-234">    <span class="c1"># ORM Relationships</span>
+</span><span id="1-235">    <span class="c1"># =================</span>
+</span><span id="1-236">    <span class="n">guild</span><span class="p">:</span> <span class="n">Mapped</span><span class="p">[</span><span class="n">Guild</span><span class="p">]</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span>
+</span><span id="1-237">        <span class="n">back_populates</span><span class="o">=</span><span class="s2">&quot;forum_config&quot;</span><span class="p">,</span>
+</span><span id="1-238">        <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-239">        <span class="n">lazy</span><span class="o">=</span><span class="s2">&quot;noload&quot;</span><span class="p">,</span>
+</span><span id="1-240">        <span class="n">cascade</span><span class="o">=</span><span class="s2">&quot;save-update, merge, delete&quot;</span><span class="p">,</span>
+</span><span id="1-241">    <span class="p">)</span></div>
 
 </span></pre></div>
         </article>
