@@ -10,3 +10,6 @@ components for your bot.
     :caption: Views
 
     forums
+    astral
+    python
+    abstract
