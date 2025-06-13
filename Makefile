@@ -21,6 +21,8 @@ help: ## Display this help text for Makefile
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
 upgrade:       ## Upgrade all dependencies to the latest stable versions
+	@echo "=> Upgrading pre-commit"
+	@(UV_RUN_BIN) run pre-commit autoupdate
 	@if [ "$(USING_UV)" ]; then $(UV) lock --upgrade
 	@echo "Dependencies Updated"
 
@@ -37,6 +39,8 @@ install-pre-commit: ## Install pre-commit and install hooks
 	@echo "Installing pre-commit hooks"
 	@(UV_RUN_BIN) run pre-commit install --install-hooks --all
 	@(UV_RUN_BIN) run pre-commit install --hook-type commit-msg
+	@echo "=> pre-commit hooks installed, updating pre-commit hooks"
+	@(UV_RUN_BIN) run pre-commit autoupdate
 	@echo "pre-commit installed"
 
 .PHONY: install-frontend
