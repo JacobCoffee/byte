@@ -20,7 +20,7 @@ UV 			    ?= 	uv $(UV_OPTS)
 help: ## Display this help text for Makefile
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
-upgrade:       ## Upgrade all dependencies to the latest stable versions
+upgrade: ## Upgrade all dependencies to the latest stable versions
 	@echo "=> Upgrading pre-commit"
 	@(UV_RUN_BIN) run pre-commit autoupdate
 	@if [ "$(USING_UV)" ]; then $(UV) lock --upgrade
@@ -30,7 +30,7 @@ upgrade:       ## Upgrade all dependencies to the latest stable versions
 # Developer Utils
 # =============================================================================
 
-install-uv: 										## Install latest version of UV
+install-uv: ## Install latest version of UV
 	@echo "=> Installing uv"
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
 	@echo "=> uv installed"
@@ -44,21 +44,21 @@ install-pre-commit: ## Install pre-commit and install hooks
 	@echo "pre-commit installed"
 
 .PHONY: install-frontend
-install-frontend: 									## Install the frontend dependencies
+install-frontend: ## Install the frontend dependencies
 	@echo "=> Installing frontend dependencies"
 	@nodeenv --python-virtualenv
 	@npm install
 	@echo "=> Frontend dependencies installed"
 
 .PHONY: install-backend
-install-backend: 									## Install the backend dependencies
+install-backend: ## Install the backend dependencies
 	@echo "=> Installing backend dependencies"
 	@$(UV) venv && $(UV) pip install --quiet -U wheel setuptools cython mypy pip
 	@$(UV) sync --all-extras --force-reinstall --dev
 	@echo "=> Backend dependencies installed"
 
 .PHONY: install
-install: clean destroy										## Install the project, dependencies, and pre-commit for local development
+install: clean destroy ## Install the project, dependencies, and pre-commit for local development
 	@if ! $(UV) --version > /dev/null; then $(MAKE) install-uv; fi
 	@$(MAKE) install-backend
 	@$(MAKE) install-frontend
@@ -119,29 +119,29 @@ check-all: lint test fmt-check coverage ## Run all linting, tests, and coverage 
 # =============================================================================
 # Docs
 # =============================================================================
-docs-clean: 										## Dump the existing built docs
+docs-clean: ## Dump the existing built docs
 	@echo "=> Cleaning documentation build assets"
 	@rm -rf docs/_build
 	@echo "=> Removed existing documentation build assets"
 
-docs-serve: docs-clean 								## Serve the docs locally
+docs-serve: docs-clean ## Serve the docs locally
 	@echo "=> Serving documentation"
 	$(UV) run sphinx-autobuild docs docs/_build/ -j auto --watch byte_bot --watch docs --watch tests --watch CONTRIBUTING.rst --port 8002
 
-docs: docs-clean 									## Dump the existing built docs and rebuild them
+docs: docs-clean ## Dump the existing built docs and rebuild them
 	@echo "=> Building documentation"
 	@$(UV) run sphinx-build -M html docs docs/_build/ -E -a -j auto --keep-going
 
 # =============================================================================
 # Database
 # =============================================================================
-migrations:       ## Generate database migrations
+migrations: ## Generate database migrations
 	@echo "ATTENTION: This operation will create a new database migration for any defined models changes."
 	@while [ -z "$$MIGRATION_MESSAGE" ]; do read -r -p "Migration message: " MIGRATION_MESSAGE; done ;
 	@$(UV) run app database make-migrations --autogenerate -m "$${MIGRATION_MESSAGE}"
 
 .PHONY: migrate
-migrate:          ## Apply database migrations
+migrate: ## Apply database migrations
 	@echo "ATTENTION: Will apply all database migrations."
 	@$(UV) run app database upgrade --no-prompt
 
