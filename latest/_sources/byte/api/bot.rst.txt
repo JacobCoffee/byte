@@ -4,5 +4,5 @@ bot
 
 Entry point for the Byte Discord bot.
 
-.. automodule:: src.byte.bot
+.. automodule:: byte_bot.byte.bot
      :members:

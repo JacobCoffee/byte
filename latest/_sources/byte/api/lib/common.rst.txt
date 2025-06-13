@@ -4,5 +4,5 @@ common
 
 Common functions and classes used by the other modules.
 
-.. automodule:: src.byte.lib.common
+.. automodule:: byte_bot.byte.lib.common
      :members:

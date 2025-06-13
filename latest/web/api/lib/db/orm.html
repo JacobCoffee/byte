@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/shibuya.css?v=28c32440" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../../_static/print.css?v=ee381b95" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=80d31e7b" />
     <style>
@@ -212,16 +212,16 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#module-src.server.lib.db.orm">API Reference</a><ul>
-<li><a class="reference internal" href="#src.server.lib.db.orm.DatabaseModel"><code class="docutils literal notranslate"><span class="pre">DatabaseModel</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.db.orm.TimestampedDatabaseModel"><code class="docutils literal notranslate"><span class="pre">TimestampedDatabaseModel</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.db.orm.model_from_dict"><code class="docutils literal notranslate"><span class="pre">model_from_dict()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.db.orm.AuditColumns"><code class="docutils literal notranslate"><span class="pre">AuditColumns</span></code></a><ul>
-<li><a class="reference internal" href="#src.server.lib.db.orm.AuditColumns.created_at"><code class="docutils literal notranslate"><span class="pre">AuditColumns.created_at</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.db.orm.AuditColumns.updated_at"><code class="docutils literal notranslate"><span class="pre">AuditColumns.updated_at</span></code></a></li>
+<li><a class="reference internal" href="#module-byte_bot.server.lib.db.orm">API Reference</a><ul>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.orm.AuditColumns"><code class="docutils literal notranslate"><span class="pre">AuditColumns</span></code></a><ul>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.orm.AuditColumns.created_at"><code class="docutils literal notranslate"><span class="pre">AuditColumns.created_at</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.orm.AuditColumns.updated_at"><code class="docutils literal notranslate"><span class="pre">AuditColumns.updated_at</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#src.server.lib.db.orm.SlugKey"><code class="docutils literal notranslate"><span class="pre">SlugKey</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.orm.DatabaseModel"><code class="docutils literal notranslate"><span class="pre">DatabaseModel</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.orm.SlugKey"><code class="docutils literal notranslate"><span class="pre">SlugKey</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.orm.TimestampedDatabaseModel"><code class="docutils literal notranslate"><span class="pre">TimestampedDatabaseModel</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.orm.model_from_dict"><code class="docutils literal notranslate"><span class="pre">model_from_dict()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -286,51 +286,51 @@ html.dark {
         <article class="yue" role="main">
           <section id="orm">
 <h1>orm<a class="headerlink" href="#orm" title="Link to this heading">¶</a></h1>
-<section id="module-src.server.lib.db.orm">
-<span id="api-reference"></span><h2>API Reference<a class="headerlink" href="#module-src.server.lib.db.orm" title="Link to this heading">¶</a></h2>
+<section id="module-byte_bot.server.lib.db.orm">
+<span id="api-reference"></span><h2>API Reference<a class="headerlink" href="#module-byte_bot.server.lib.db.orm" title="Link to this heading">¶</a></h2>
 <p>Application ORM configuration.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.server.lib.db.orm.DatabaseModel">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">DatabaseModel</span></span><a class="headerlink" href="#src.server.lib.db.orm.DatabaseModel" title="Link to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.litestar.dev/2/reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDBase</span></code></a></p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.server.lib.db.orm.TimestampedDatabaseModel">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">TimestampedDatabaseModel</span></span><a class="headerlink" href="#src.server.lib.db.orm.TimestampedDatabaseModel" title="Link to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.litestar.dev/2/reference/plugins/sqlalchemy.html#litestar.plugins.sqlalchemy.UUIDAuditBase" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></a></p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.db.orm.model_from_dict">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">model_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ModelT</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ModelT</span></span></span><a class="reference internal" href="../../../../_modules/src/server/lib/db/orm.html#model_from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.db.orm.model_from_dict" title="Link to this definition">¶</a></dt>
-<dd><p>Return ORM Object from Dictionary.</p>
-</dd></dl>
-
 <dl class="py class">
-<dt class="sig sig-object py" id="src.server.lib.db.orm.AuditColumns">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">AuditColumns</span></span><a class="reference internal" href="../../../../_modules/advanced_alchemy/base.html#AuditColumns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.db.orm.AuditColumns" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.orm.AuditColumns">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">AuditColumns</span></span><a class="reference internal" href="../../../../_modules/advanced_alchemy/mixins/audit.html#AuditColumns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.db.orm.AuditColumns" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Created/Updated At Fields Mixin.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.server.lib.db.orm.AuditColumns.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;sqlalchemy.orm.properties.MappedColumn</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#src.server.lib.db.orm.AuditColumns.created_at" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.orm.AuditColumns.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;sqlalchemy.orm.properties.MappedColumn</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#byte_bot.server.lib.db.orm.AuditColumns.created_at" title="Link to this definition">¶</a></dt>
 <dd><p>Date/time of instance creation.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.server.lib.db.orm.AuditColumns.updated_at">
-<span class="sig-name descname"><span class="pre">updated_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;sqlalchemy.orm.properties.MappedColumn</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#src.server.lib.db.orm.AuditColumns.updated_at" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.orm.AuditColumns.updated_at">
+<span class="sig-name descname"><span class="pre">updated_at</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/internals.html#sqlalchemy.orm.Mapped" title="(in SQLAlchemy v2.0)"><span class="pre">Mapped</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;sqlalchemy.orm.properties.MappedColumn</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#byte_bot.server.lib.db.orm.AuditColumns.updated_at" title="Link to this definition">¶</a></dt>
 <dd><p>Date/time of instance last update.</p>
 </dd></dl>
 
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.orm.DatabaseModel">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">DatabaseModel</span></span><a class="headerlink" href="#byte_bot.server.lib.db.orm.DatabaseModel" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDBase</span></code></p>
+</dd></dl>
+
 <dl class="py class">
-<dt class="sig sig-object py" id="src.server.lib.db.orm.SlugKey">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">SlugKey</span></span><a class="reference internal" href="../../../../_modules/src/server/lib/db/orm.html#SlugKey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.db.orm.SlugKey" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.orm.SlugKey">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">SlugKey</span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/db/orm.html#SlugKey"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.db.orm.SlugKey" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Slug unique Field Model Mixin.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.orm.TimestampedDatabaseModel">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">TimestampedDatabaseModel</span></span><a class="headerlink" href="#byte_bot.server.lib.db.orm.TimestampedDatabaseModel" title="Link to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">UUIDAuditBase</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.orm.model_from_dict">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.orm.</span></span><span class="sig-name descname"><span class="pre">model_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ModelT</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ModelT</span></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/db/orm.html#model_from_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.db.orm.model_from_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Return ORM Object from Dictionary.</p>
 </dd></dl>
 
 </section>
@@ -389,11 +389,11 @@ html.dark {
   </div>
 </footer></div>
       <script src="../../../../_static/documentation_options.js?v=8dde47fa"></script>
-      <script src="../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
       <script src="../../../../_static/shibuya.js?v=3e5c8598"></script>
     
 </body>

@@ -4,5 +4,5 @@ cors
 
 CORS config
 
-.. automodule:: src.server.lib.cors
+.. automodule:: byte_bot.server.lib.cors
      :members:

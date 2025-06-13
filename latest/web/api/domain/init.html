@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=28c32440" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=ee381b95" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=80d31e7b" />
     <style>
@@ -212,8 +212,8 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#src.server.domain.__init__.routes"><code class="docutils literal notranslate"><span class="pre">routes</span></code></a></li>
-<li><a class="reference internal" href="#src.server.domain.__init__.signature_namespace"><code class="docutils literal notranslate"><span class="pre">signature_namespace</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.__init__.routes"><code class="docutils literal notranslate"><span class="pre">routes</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.__init__.signature_namespace"><code class="docutils literal notranslate"><span class="pre">signature_namespace</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -275,16 +275,16 @@ html.dark {
           <section id="domain-initializer">
 <h1>Domain Initializer<a class="headerlink" href="#domain-initializer" title="Link to this heading">¶</a></h1>
 <p>Initializes the domain module.</p>
-<p id="module-src.server.domain.__init__">Application Modules.</p>
+<p id="module-byte_bot.server.domain.__init__">Application Modules.</p>
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.__init__.routes">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.__init__.</span></span><span class="sig-name descname"><span class="pre">routes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ControllerRouterHandler</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'server.domain.system.controllers.system.SystemController'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'server.domain.web.controllers.web.WebController'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'server.domain.guilds.controllers.GuildController'&gt;]</span></em><a class="headerlink" href="#src.server.domain.__init__.routes" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.__init__.routes">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.__init__.</span></span><span class="sig-name descname"><span class="pre">routes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ControllerRouterHandler</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'byte_bot.server.domain.system.controllers.system.SystemController'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'byte_bot.server.domain.web.controllers.web.WebController'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'byte_bot.server.domain.guilds.controllers.GuildController'&gt;]</span></em><a class="headerlink" href="#byte_bot.server.domain.__init__.routes" title="Link to this definition">¶</a></dt>
 <dd><p>Routes for the application.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.__init__.signature_namespace">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.__init__.</span></span><span class="sig-name descname"><span class="pre">signature_namespace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'FilterTypes':</span> <span class="pre">'BeforeAfter</span> <span class="pre">|</span> <span class="pre">OnBeforeAfter</span> <span class="pre">|</span> <span class="pre">CollectionFilter[Any]</span> <span class="pre">|</span> <span class="pre">LimitOffset</span> <span class="pre">|</span> <span class="pre">OrderBy</span> <span class="pre">|</span> <span class="pre">SearchFilter</span> <span class="pre">|</span> <span class="pre">NotInCollectionFilter[Any]</span> <span class="pre">|</span> <span class="pre">NotInSearchFilter',</span> <span class="pre">'OffsetPagination':</span> <span class="pre">&lt;class</span> <span class="pre">'litestar.pagination.OffsetPagination'&gt;}</span></em><a class="headerlink" href="#src.server.domain.__init__.signature_namespace" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.__init__.signature_namespace">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.__init__.</span></span><span class="sig-name descname"><span class="pre">signature_namespace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'FilterTypes':</span> <span class="pre">typing.Union[advanced_alchemy.filters.BeforeAfter,</span> <span class="pre">advanced_alchemy.filters.OnBeforeAfter,</span> <span class="pre">advanced_alchemy.filters.CollectionFilter[typing.Any],</span> <span class="pre">advanced_alchemy.filters.LimitOffset,</span> <span class="pre">advanced_alchemy.filters.OrderBy,</span> <span class="pre">advanced_alchemy.filters.SearchFilter,</span> <span class="pre">advanced_alchemy.filters.NotInCollectionFilter[typing.Any],</span> <span class="pre">advanced_alchemy.filters.NotInSearchFilter,</span> <span class="pre">advanced_alchemy.filters.ExistsFilter,</span> <span class="pre">advanced_alchemy.filters.NotExistsFilter,</span> <span class="pre">advanced_alchemy.filters.ComparisonFilter,</span> <span class="pre">advanced_alchemy.filters.MultiFilter,</span> <span class="pre">advanced_alchemy.filters.FilterGroup],</span> <span class="pre">'OffsetPagination':</span> <span class="pre">&lt;class</span> <span class="pre">'advanced_alchemy.service.pagination.OffsetPagination'&gt;}</span></em><a class="headerlink" href="#byte_bot.server.domain.__init__.signature_namespace" title="Link to this definition">¶</a></dt>
 <dd><p>Namespace for the application signature.</p>
 </dd></dl>
 
@@ -343,11 +343,11 @@ html.dark {
   </div>
 </footer></div>
       <script src="../../../_static/documentation_options.js?v=8dde47fa"></script>
-      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
       <script src="../../../_static/shibuya.js?v=3e5c8598"></script>
     
 </body>

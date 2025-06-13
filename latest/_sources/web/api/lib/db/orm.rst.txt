@@ -5,5 +5,5 @@ orm
 API Reference
 -------------
 
-.. automodule:: src.server.lib.db.orm
+.. automodule:: byte_bot.server.lib.db.orm
      :members:

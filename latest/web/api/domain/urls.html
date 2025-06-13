@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=28c32440" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=ee381b95" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=80d31e7b" />
     <style>
@@ -212,14 +212,14 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#src.server.domain.urls.INDEX"><code class="docutils literal notranslate"><span class="pre">INDEX</span></code></a></li>
-<li><a class="reference internal" href="#src.server.domain.urls.SITE_ROOT"><code class="docutils literal notranslate"><span class="pre">SITE_ROOT</span></code></a></li>
-<li><a class="reference internal" href="#src.server.domain.urls.OPENAPI_SCHEMA"><code class="docutils literal notranslate"><span class="pre">OPENAPI_SCHEMA</span></code></a></li>
-<li><a class="reference internal" href="#src.server.domain.urls.SYSTEM_HEALTH"><code class="docutils literal notranslate"><span class="pre">SYSTEM_HEALTH</span></code></a></li>
-<li><a class="reference internal" href="#src.server.domain.urls.GUILD_CREATE"><code class="docutils literal notranslate"><span class="pre">GUILD_CREATE</span></code></a></li>
-<li><a class="reference internal" href="#src.server.domain.urls.GUILD_UPDATE"><code class="docutils literal notranslate"><span class="pre">GUILD_UPDATE</span></code></a></li>
-<li><a class="reference internal" href="#src.server.domain.urls.GUILD_DETAIL"><code class="docutils literal notranslate"><span class="pre">GUILD_DETAIL</span></code></a></li>
-<li><a class="reference internal" href="#src.server.domain.urls.GUILD_LIST"><code class="docutils literal notranslate"><span class="pre">GUILD_LIST</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.urls.INDEX"><code class="docutils literal notranslate"><span class="pre">INDEX</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.urls.SITE_ROOT"><code class="docutils literal notranslate"><span class="pre">SITE_ROOT</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.urls.OPENAPI_SCHEMA"><code class="docutils literal notranslate"><span class="pre">OPENAPI_SCHEMA</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.urls.SYSTEM_HEALTH"><code class="docutils literal notranslate"><span class="pre">SYSTEM_HEALTH</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.urls.GUILD_CREATE"><code class="docutils literal notranslate"><span class="pre">GUILD_CREATE</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.urls.GUILD_UPDATE"><code class="docutils literal notranslate"><span class="pre">GUILD_UPDATE</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.urls.GUILD_DETAIL"><code class="docutils literal notranslate"><span class="pre">GUILD_DETAIL</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.domain.urls.GUILD_LIST"><code class="docutils literal notranslate"><span class="pre">GUILD_LIST</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -281,52 +281,52 @@ html.dark {
           <section id="urls">
 <h1>urls<a class="headerlink" href="#urls" title="Link to this heading">¶</a></h1>
 <p>URL patterns for the app.</p>
-<p id="module-src.server.domain.urls">Domain URLs.</p>
+<p id="module-byte_bot.server.domain.urls">Domain URLs.</p>
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.urls.INDEX">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">INDEX</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/'</span></em><a class="headerlink" href="#src.server.domain.urls.INDEX" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.urls.INDEX">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">INDEX</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/'</span></em><a class="headerlink" href="#byte_bot.server.domain.urls.INDEX" title="Link to this definition">¶</a></dt>
 <dd><p>Index URL.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.urls.SITE_ROOT">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">SITE_ROOT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/{path:str}'</span></em><a class="headerlink" href="#src.server.domain.urls.SITE_ROOT" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.urls.SITE_ROOT">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">SITE_ROOT</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/{path:str}'</span></em><a class="headerlink" href="#byte_bot.server.domain.urls.SITE_ROOT" title="Link to this definition">¶</a></dt>
 <dd><p>Site root URL.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.urls.OPENAPI_SCHEMA">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">OPENAPI_SCHEMA</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api'</span></em><a class="headerlink" href="#src.server.domain.urls.OPENAPI_SCHEMA" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.urls.OPENAPI_SCHEMA">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">OPENAPI_SCHEMA</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api'</span></em><a class="headerlink" href="#byte_bot.server.domain.urls.OPENAPI_SCHEMA" title="Link to this definition">¶</a></dt>
 <dd><p>OpenAPI schema URL.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.urls.SYSTEM_HEALTH">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">SYSTEM_HEALTH</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/health'</span></em><a class="headerlink" href="#src.server.domain.urls.SYSTEM_HEALTH" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.urls.SYSTEM_HEALTH">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">SYSTEM_HEALTH</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/health'</span></em><a class="headerlink" href="#byte_bot.server.domain.urls.SYSTEM_HEALTH" title="Link to this definition">¶</a></dt>
 <dd><p>System health URL.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.urls.GUILD_CREATE">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_CREATE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/create'</span></em><a class="headerlink" href="#src.server.domain.urls.GUILD_CREATE" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.urls.GUILD_CREATE">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_CREATE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/create'</span></em><a class="headerlink" href="#byte_bot.server.domain.urls.GUILD_CREATE" title="Link to this definition">¶</a></dt>
 <dd><p>Create guild URL.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.urls.GUILD_UPDATE">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_UPDATE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/update'</span></em><a class="headerlink" href="#src.server.domain.urls.GUILD_UPDATE" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.urls.GUILD_UPDATE">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_UPDATE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/update'</span></em><a class="headerlink" href="#byte_bot.server.domain.urls.GUILD_UPDATE" title="Link to this definition">¶</a></dt>
 <dd><p>Update guild URL.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.urls.GUILD_DETAIL">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_DETAIL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/{guild_id}'</span></em><a class="headerlink" href="#src.server.domain.urls.GUILD_DETAIL" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.urls.GUILD_DETAIL">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_DETAIL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/{guild_id}'</span></em><a class="headerlink" href="#byte_bot.server.domain.urls.GUILD_DETAIL" title="Link to this definition">¶</a></dt>
 <dd><p>Guild detail URL.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt class="sig sig-object py" id="src.server.domain.urls.GUILD_LIST">
-<span class="sig-prename descclassname"><span class="pre">src.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_LIST</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/list'</span></em><a class="headerlink" href="#src.server.domain.urls.GUILD_LIST" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.domain.urls.GUILD_LIST">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_LIST</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/list'</span></em><a class="headerlink" href="#byte_bot.server.domain.urls.GUILD_LIST" title="Link to this definition">¶</a></dt>
 <dd><p>Guild list URL.</p>
 </dd></dl>
 
@@ -385,11 +385,11 @@ html.dark {
   </div>
 </footer></div>
       <script src="../../../_static/documentation_options.js?v=8dde47fa"></script>
-      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
       <script src="../../../_static/shibuya.js?v=3e5c8598"></script>
     
 </body>

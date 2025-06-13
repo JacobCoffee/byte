@@ -2,5 +2,5 @@
 admin
 =====
 
-.. automodule:: src.byte.plugins.admin
+.. automodule:: byte_bot.byte.plugins.admin
    :members:

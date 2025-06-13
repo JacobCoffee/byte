@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=28c32440" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=ee381b95" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=80d31e7b" />
     <style>
@@ -212,27 +212,27 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#src.byte.lib.utils.BaseRuffRule"><code class="docutils literal notranslate"><span class="pre">BaseRuffRule</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.RuffRule"><code class="docutils literal notranslate"><span class="pre">RuffRule</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.FormattedRuffRule"><code class="docutils literal notranslate"><span class="pre">FormattedRuffRule</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.PEP"><code class="docutils literal notranslate"><span class="pre">PEP</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.is_byte_dev"><code class="docutils literal notranslate"><span class="pre">is_byte_dev()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.linker"><code class="docutils literal notranslate"><span class="pre">linker()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_user"><code class="docutils literal notranslate"><span class="pre">mention_user()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_user_nickname"><code class="docutils literal notranslate"><span class="pre">mention_user_nickname()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_channel"><code class="docutils literal notranslate"><span class="pre">mention_channel()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_role"><code class="docutils literal notranslate"><span class="pre">mention_role()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_slash_command"><code class="docutils literal notranslate"><span class="pre">mention_slash_command()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_custom_emoji"><code class="docutils literal notranslate"><span class="pre">mention_custom_emoji()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_custom_emoji_animated"><code class="docutils literal notranslate"><span class="pre">mention_custom_emoji_animated()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_timestamp"><code class="docutils literal notranslate"><span class="pre">mention_timestamp()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.mention_guild_navigation"><code class="docutils literal notranslate"><span class="pre">mention_guild_navigation()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.format_ruff_rule"><code class="docutils literal notranslate"><span class="pre">format_ruff_rule()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.query_all_ruff_rules"><code class="docutils literal notranslate"><span class="pre">query_all_ruff_rules()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.run_ruff_format"><code class="docutils literal notranslate"><span class="pre">run_ruff_format()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.paste"><code class="docutils literal notranslate"><span class="pre">paste()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.chunk_sequence"><code class="docutils literal notranslate"><span class="pre">chunk_sequence()</span></code></a></li>
-<li><a class="reference internal" href="#src.byte.lib.utils.query_all_peps"><code class="docutils literal notranslate"><span class="pre">query_all_peps()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.PEP"><code class="docutils literal notranslate"><span class="pre">PEP</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.BaseRuffRule"><code class="docutils literal notranslate"><span class="pre">BaseRuffRule</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.FormattedRuffRule"><code class="docutils literal notranslate"><span class="pre">FormattedRuffRule</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.RuffRule"><code class="docutils literal notranslate"><span class="pre">RuffRule</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.chunk_sequence"><code class="docutils literal notranslate"><span class="pre">chunk_sequence()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.format_ruff_rule"><code class="docutils literal notranslate"><span class="pre">format_ruff_rule()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.is_byte_dev"><code class="docutils literal notranslate"><span class="pre">is_byte_dev()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.linker"><code class="docutils literal notranslate"><span class="pre">linker()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_channel"><code class="docutils literal notranslate"><span class="pre">mention_channel()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_custom_emoji"><code class="docutils literal notranslate"><span class="pre">mention_custom_emoji()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_custom_emoji_animated"><code class="docutils literal notranslate"><span class="pre">mention_custom_emoji_animated()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_guild_navigation"><code class="docutils literal notranslate"><span class="pre">mention_guild_navigation()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_role"><code class="docutils literal notranslate"><span class="pre">mention_role()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_slash_command"><code class="docutils literal notranslate"><span class="pre">mention_slash_command()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_timestamp"><code class="docutils literal notranslate"><span class="pre">mention_timestamp()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_user"><code class="docutils literal notranslate"><span class="pre">mention_user()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.mention_user_nickname"><code class="docutils literal notranslate"><span class="pre">mention_user_nickname()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.paste"><code class="docutils literal notranslate"><span class="pre">paste()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.query_all_peps"><code class="docutils literal notranslate"><span class="pre">query_all_peps()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.query_all_ruff_rules"><code class="docutils literal notranslate"><span class="pre">query_all_ruff_rules()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.utils.run_ruff_format"><code class="docutils literal notranslate"><span class="pre">run_ruff_format()</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -294,39 +294,73 @@ html.dark {
           <section id="utils">
 <h1>utils<a class="headerlink" href="#utils" title="Link to this heading">¶</a></h1>
 <p>Utilities to be used by the other modules.</p>
-<p id="module-src.byte.lib.utils">Byte utilities.</p>
+<p id="module-byte_bot.byte.lib.utils">Byte utilities.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.byte.lib.utils.BaseRuffRule">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">BaseRuffRule</span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#BaseRuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.BaseRuffRule" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypedDict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></a></p>
-<p>Base Ruff rule data.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.byte.lib.utils.RuffRule">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">RuffRule</span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#RuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.RuffRule" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
-<p>Ruff rule data.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.byte.lib.utils.FormattedRuffRule">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">FormattedRuffRule</span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#FormattedRuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.FormattedRuffRule" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
-<p>Formatted Ruff rule data.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.byte.lib.utils.PEP">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">PEP</span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#PEP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.PEP" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypedDict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></a></p>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.PEP">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">PEP</span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#PEP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.PEP" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypedDict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></a></p>
 <p>PEP data.</p>
 <p>Based off of the <a class="reference external" href="https://peps.python.org/api/peps.json">PEPS API</a>.</p>
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.BaseRuffRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">BaseRuffRule</span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#BaseRuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.BaseRuffRule" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypedDict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypedDict</span></code></a></p>
+<p>Base Ruff rule data.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.FormattedRuffRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">FormattedRuffRule</span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#FormattedRuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.FormattedRuffRule" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<p>Formatted Ruff rule data.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.RuffRule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">RuffRule</span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#RuffRule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.RuffRule" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+<p>Ruff rule data.</p>
+</dd></dl>
+
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.is_byte_dev">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">is_byte_dev</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Check</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#is_byte_dev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.is_byte_dev" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.chunk_sequence">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">chunk_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">_T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.13)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">_T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#chunk_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.chunk_sequence" title="Link to this definition">¶</a></dt>
+<dd><p>Naïve chunking of an iterable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sequence</strong> (<em>Iterable</em><em>[</em><em>_T</em><em>]</em>) – Iterable to chunk</p></li>
+<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><em>int</em></a>) – Size of chunk</p></li>
+</ul>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Iterable[tuple[_T, …]]</em> – An n-tuple that contains chunked data</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.format_ruff_rule">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">format_ruff_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#byte_bot.byte.lib.utils.RuffRule" title="byte_bot.byte.lib.utils.RuffRule"><span class="pre">RuffRule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#byte_bot.byte.lib.utils.FormattedRuffRule" title="byte_bot.byte.lib.utils.FormattedRuffRule"><span class="pre">FormattedRuffRule</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#format_ruff_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.format_ruff_rule" title="Link to this definition">¶</a></dt>
+<dd><p>Format ruff rule data for embed-friendly output and append rule link.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rule_data</strong> – The ruff rule data.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The formatted rule data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#byte_bot.byte.lib.utils.FormattedRuffRule" title="byte_bot.byte.lib.utils.FormattedRuffRule">FormattedRuffRule</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.is_byte_dev">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">is_byte_dev</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Check</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#is_byte_dev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.is_byte_dev" title="Link to this definition">¶</a></dt>
 <dd><p>Check if the user is a Byte developer.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
@@ -336,8 +370,8 @@ html.dark {
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.linker">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">linker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_embed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#linker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.linker" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.linker">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">linker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">link</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_embed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#linker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.linker" title="Link to this definition">¶</a></dt>
 <dd><p>Create a Markdown link, optionally with an embed.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -354,36 +388,8 @@ html.dark {
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_user">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_user" title="Link to this definition">¶</a></dt>
-<dd><p>Mention a user by ID.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user_id</strong> – The unique identifier for the user.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A formatted string that mentions the user.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_user_nickname">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_user_nickname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_user_nickname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_user_nickname" title="Link to this definition">¶</a></dt>
-<dd><p>Mention a user by ID with a nickname.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>user_id</strong> – The unique identifier for the user.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A formatted string that mentions the user with a nickname.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_channel">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_channel" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_channel">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">channel_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_channel" title="Link to this definition">¶</a></dt>
 <dd><p>Mention a channel by ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -396,39 +402,8 @@ html.dark {
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_role">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_role" title="Link to this definition">¶</a></dt>
-<dd><p>Mention a role by ID.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>role_id</strong> – The unique identifier for the role.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A formatted string that mentions the role.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_slash_command">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_slash_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">command_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_slash_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_slash_command" title="Link to this definition">¶</a></dt>
-<dd><p>Mention a slash command by name and ID.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – The name of the slash command.</p></li>
-<li><p><strong>command_id</strong> – The unique identifier for the slash command.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A formatted string that mentions the slash command.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_custom_emoji">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_custom_emoji</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_custom_emoji"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_custom_emoji" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_custom_emoji">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_custom_emoji</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_custom_emoji"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_custom_emoji" title="Link to this definition">¶</a></dt>
 <dd><p>Mention a custom emoji by name and ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -444,8 +419,8 @@ html.dark {
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_custom_emoji_animated">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_custom_emoji_animated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_custom_emoji_animated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_custom_emoji_animated" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_custom_emoji_animated">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_custom_emoji_animated</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">emoji_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_custom_emoji_animated"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_custom_emoji_animated" title="Link to this definition">¶</a></dt>
 <dd><p>Mention an animated custom emoji by name and ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -461,8 +436,56 @@ html.dark {
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_timestamp">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_timestamp" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_guild_navigation">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_guild_navigation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guild_nav_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">guild_element_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_guild_navigation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_guild_navigation" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a guild navigation element by type and ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>guild_nav_type</strong> – The type of the guild navigation element.</p></li>
+<li><p><strong>guild_element_id</strong> – The unique identifier for the element.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the guild navigation element.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_role">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">role_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_role"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_role" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a role by ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>role_id</strong> – The unique identifier for the role.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the role.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_slash_command">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_slash_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">command_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_slash_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_slash_command" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a slash command by name and ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the slash command.</p></li>
+<li><p><strong>command_id</strong> – The unique identifier for the slash command.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A formatted string that mentions the slash command.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_timestamp">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_timestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_timestamp" title="Link to this definition">¶</a></dt>
 <dd><p>Mention a timestamp, optionally with a style.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -479,73 +502,36 @@ html.dark {
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.mention_guild_navigation">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_guild_navigation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guild_nav_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">guild_element_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#mention_guild_navigation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.mention_guild_navigation" title="Link to this definition">¶</a></dt>
-<dd><p>Mention a guild navigation element by type and ID.</p>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_user">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_user</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_user"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_user" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a user by ID.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>guild_nav_type</strong> – The type of the guild navigation element.</p></li>
-<li><p><strong>guild_element_id</strong> – The unique identifier for the element.</p></li>
-</ul>
+<dd class="field-odd"><p><strong>user_id</strong> – The unique identifier for the user.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A formatted string that mentions the guild navigation element.</p>
+<dd class="field-even"><p>A formatted string that mentions the user.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.format_ruff_rule">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">format_ruff_rule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#src.byte.lib.utils.RuffRule" title="src.byte.lib.utils.RuffRule"><span class="pre">RuffRule</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#src.byte.lib.utils.FormattedRuffRule" title="src.byte.lib.utils.FormattedRuffRule"><span class="pre">FormattedRuffRule</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#format_ruff_rule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.format_ruff_rule" title="Link to this definition">¶</a></dt>
-<dd><p>Format ruff rule data for embed-friendly output and append rule link.</p>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.mention_user_nickname">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">mention_user_nickname</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#mention_user_nickname"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.mention_user_nickname" title="Link to this definition">¶</a></dt>
+<dd><p>Mention a user by ID with a nickname.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>rule_data</strong> – The ruff rule data.</p>
+<dd class="field-odd"><p><strong>user_id</strong> – The unique identifier for the user.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The formatted rule data.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="#src.byte.lib.utils.FormattedRuffRule" title="src.byte.lib.utils.FormattedRuffRule">FormattedRuffRule</a></p>
+<dd class="field-even"><p>A formatted string that mentions the user with a nickname.</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.query_all_ruff_rules">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">query_all_ruff_rules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#src.byte.lib.utils.RuffRule" title="src.byte.lib.utils.RuffRule"><span class="pre">RuffRule</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#query_all_ruff_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.query_all_ruff_rules" title="Link to this definition">¶</a></dt>
-<dd><p>Query all Ruff linting rules.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>All ruff rules</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="#src.byte.lib.utils.RuffRule" title="src.byte.lib.utils.RuffRule">RuffRule</a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.run_ruff_format">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">run_ruff_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#run_ruff_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.run_ruff_format" title="Link to this definition">¶</a></dt>
-<dd><p>Formats code using Ruff.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>code</strong> – The code to format.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The formatted code.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.paste">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">paste</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#paste"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.paste" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.paste">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">paste</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#paste"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.paste" title="Link to this definition">¶</a></dt>
 <dd><p>Uploads the given code to paste.pythondiscord.com.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -555,38 +541,52 @@ html.dark {
 <dd class="field-even"><p>The URL of the uploaded paste.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.chunk_sequence">
-<span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">chunk_sequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">_T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.12)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">_T</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#chunk_sequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.chunk_sequence" title="Link to this definition">¶</a></dt>
-<dd><p>Naïve chunking of an iterable.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>sequence</strong> (<em>Iterable</em><em>[</em><em>_T</em><em>]</em>) – Iterable to chunk</p></li>
-<li><p><strong>size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><em>int</em></a>) – Size of chunk</p></li>
-</ul>
-</dd>
-<dt class="field-even">Yields<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Iterable[tuple[_T, …]]</em> – An n-tuple that contains chunked data</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.byte.lib.utils.query_all_peps">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">query_all_peps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#src.byte.lib.utils.PEP" title="src.byte.lib.utils.PEP"><span class="pre">PEP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/src/byte/lib/utils.html#query_all_peps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.byte.lib.utils.query_all_peps" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.query_all_peps">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">query_all_peps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#byte_bot.byte.lib.utils.PEP" title="byte_bot.byte.lib.utils.PEP"><span class="pre">PEP</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#query_all_peps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.query_all_peps" title="Link to this definition">¶</a></dt>
 <dd><p>Query all PEPs from the PEPs Python.org API.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>All PEPs</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.12)">list</a>[<a class="reference internal" href="#src.byte.lib.utils.PEP" title="src.byte.lib.utils.PEP">PEP</a>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[<a class="reference internal" href="#byte_bot.byte.lib.utils.PEP" title="byte_bot.byte.lib.utils.PEP">PEP</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.query_all_ruff_rules">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">query_all_ruff_rules</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#byte_bot.byte.lib.utils.RuffRule" title="byte_bot.byte.lib.utils.RuffRule"><span class="pre">RuffRule</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#query_all_ruff_rules"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.query_all_ruff_rules" title="Link to this definition">¶</a></dt>
+<dd><p>Query all Ruff linting rules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All ruff rules</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.13)">list</a>[<a class="reference internal" href="#byte_bot.byte.lib.utils.RuffRule" title="byte_bot.byte.lib.utils.RuffRule">RuffRule</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.utils.run_ruff_format">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.byte.lib.utils.</span></span><span class="sig-name descname"><span class="pre">run_ruff_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/byte/lib/utils.html#run_ruff_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.byte.lib.utils.run_ruff_format" title="Link to this definition">¶</a></dt>
+<dd><p>Formats code using Ruff.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>code</strong> – The code to format.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The formatted code.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -646,11 +646,11 @@ html.dark {
   </div>
 </footer></div>
       <script src="../../../_static/documentation_options.js?v=8dde47fa"></script>
-      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
       <script src="../../../_static/shibuya.js?v=3e5c8598"></script>
     
 </body>

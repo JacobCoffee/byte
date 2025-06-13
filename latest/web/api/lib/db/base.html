@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/shibuya.css?v=28c32440" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../../_static/print.css?v=ee381b95" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=80d31e7b" />
     <style>
@@ -212,9 +212,9 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#module-src.server.lib.db.base">API Reference</a><ul>
-<li><a class="reference internal" href="#src.server.lib.db.base.session"><code class="docutils literal notranslate"><span class="pre">session()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.db.base.async_session_factory"><code class="docutils literal notranslate"><span class="pre">async_session_factory</span></code></a></li>
+<li><a class="reference internal" href="#module-byte_bot.server.lib.db.base">API Reference</a><ul>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.base.async_session_factory"><code class="docutils literal notranslate"><span class="pre">async_session_factory</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.db.base.session"><code class="docutils literal notranslate"><span class="pre">session()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -279,15 +279,22 @@ html.dark {
         <article class="yue" role="main">
           <section id="base">
 <h1>base<a class="headerlink" href="#base" title="Link to this heading">¶</a></h1>
-<section id="module-src.server.lib.db.base">
-<span id="api-reference"></span><h2>API Reference<a class="headerlink" href="#module-src.server.lib.db.base" title="Link to this heading">¶</a></h2>
+<section id="module-byte_bot.server.lib.db.base">
+<span id="api-reference"></span><h2>API Reference<a class="headerlink" href="#module-byte_bot.server.lib.db.base" title="Link to this heading">¶</a></h2>
 <p>Database session and engine.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.base.async_session_factory">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.base.</span></span><span class="sig-name descname"><span class="pre">async_session_factory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">async_sessionmaker</span><span class="p"><span class="pre">[</span></span><span class="pre">AsyncSession</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">async_sessionmaker(class_='AsyncSession',</span> <span class="pre">bind=&lt;sqlalchemy.ext.asyncio.engine.AsyncEngine</span> <span class="pre">object&gt;,</span> <span class="pre">autoflush=True,</span> <span class="pre">expire_on_commit=False)</span></em><a class="headerlink" href="#byte_bot.server.lib.db.base.async_session_factory" title="Link to this definition">¶</a></dt>
+<dd><p>Database session factory.</p>
+<p>See <a class="reference external" href="sqlalchemy.ext.asyncio.async_sessionmaker">async_sessionmaker</a>.</p>
+</dd></dl>
+
 <dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.db.base.session">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.db.base.</span></span><span class="sig-name descname"><span class="pre">session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncIterator</span><span class="p"><span class="pre">[</span></span><span class="pre">AsyncSession</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/src/server/lib/db/base.html#session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.db.base.session" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.lib.db.base.session">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.base.</span></span><span class="sig-name descname"><span class="pre">session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncIterator</span><span class="p"><span class="pre">[</span></span><span class="pre">AsyncSession</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/db/base.html#session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.db.base.session" title="Link to this definition">¶</a></dt>
 <dd><p>Use this to get a database session where you can’t in Litestar.</p>
 <div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version Use: </span><code class="xref py py-meth docutils literal notranslate"><span class="pre">config.get_session</span></code>
+<p><span class="versionmodified deprecated">Deprecated since version Use: </span><a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/config/asyncio.html#advanced_alchemy.config.asyncio.SQLAlchemyAsyncConfig.get_session" title="(in advanced_alchemy)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">config.get_session</span></code></a>
 instead. Introduced in <a class="reference external" href="https://github.com/jolt-org/advanced-alchemy/releases/tag/v0.5.2">Advanced Alchemy v0.5.2</a>.</p>
 </div>
 <dl class="field-list simple">
@@ -295,13 +302,6 @@ instead. Introduced in <a class="reference external" href="https://github.com/jo
 <dd class="field-odd"><p>AsyncIterator[AsyncSession]</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="src.server.lib.db.base.async_session_factory">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.db.base.</span></span><span class="sig-name descname"><span class="pre">async_session_factory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">async_sessionmaker</span><span class="p"><span class="pre">[</span></span><span class="pre">AsyncSession</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">async_sessionmaker(class_='AsyncSession',</span> <span class="pre">bind=&lt;sqlalchemy.ext.asyncio.engine.AsyncEngine</span> <span class="pre">object&gt;,</span> <span class="pre">autoflush=True,</span> <span class="pre">expire_on_commit=False)</span></em><a class="headerlink" href="#src.server.lib.db.base.async_session_factory" title="Link to this definition">¶</a></dt>
-<dd><p>Database session factory.</p>
-<p>See <a class="reference external" href="sqlalchemy.ext.asyncio.async_sessionmaker">async_sessionmaker</a>.</p>
 </dd></dl>
 
 </section>
@@ -360,11 +360,11 @@ instead. Introduced in <a class="reference external" href="https://github.com/jo
   </div>
 </footer></div>
       <script src="../../../../_static/documentation_options.js?v=8dde47fa"></script>
-      <script src="../../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
       <script src="../../../../_static/shibuya.js?v=3e5c8598"></script>
     
 </body>

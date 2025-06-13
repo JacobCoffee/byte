@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=28c32440" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=ee381b95" />
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=80d31e7b" />
     <style>
@@ -212,17 +212,17 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#src.server.lib.serialization.convert_datetime_to_gmt"><code class="docutils literal notranslate"><span class="pre">convert_datetime_to_gmt()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.serialization.convert_string_to_camel_case"><code class="docutils literal notranslate"><span class="pre">convert_string_to_camel_case()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.serialization.convert_camel_to_snake_case"><code class="docutils literal notranslate"><span class="pre">convert_camel_to_snake_case()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.serialization.from_json"><code class="docutils literal notranslate"><span class="pre">from_json()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.serialization.from_msgpack"><code class="docutils literal notranslate"><span class="pre">from_msgpack()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.serialization.to_json"><code class="docutils literal notranslate"><span class="pre">to_json()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.serialization.to_msgpack"><code class="docutils literal notranslate"><span class="pre">to_msgpack()</span></code></a></li>
-<li><a class="reference internal" href="#src.server.lib.serialization.UUIDEncoder"><code class="docutils literal notranslate"><span class="pre">UUIDEncoder</span></code></a><ul>
-<li><a class="reference internal" href="#src.server.lib.serialization.UUIDEncoder.default"><code class="docutils literal notranslate"><span class="pre">UUIDEncoder.default()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.UUIDEncoder"><code class="docutils literal notranslate"><span class="pre">UUIDEncoder</span></code></a><ul>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.UUIDEncoder.default"><code class="docutils literal notranslate"><span class="pre">UUIDEncoder.default()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.convert_camel_to_snake_case"><code class="docutils literal notranslate"><span class="pre">convert_camel_to_snake_case()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.convert_datetime_to_gmt"><code class="docutils literal notranslate"><span class="pre">convert_datetime_to_gmt()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.convert_string_to_camel_case"><code class="docutils literal notranslate"><span class="pre">convert_string_to_camel_case()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.from_json"><code class="docutils literal notranslate"><span class="pre">from_json()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.from_msgpack"><code class="docutils literal notranslate"><span class="pre">from_msgpack()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.to_json"><code class="docutils literal notranslate"><span class="pre">to_json()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.server.lib.serialization.to_msgpack"><code class="docutils literal notranslate"><span class="pre">to_msgpack()</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -284,129 +284,10 @@ html.dark {
           <section id="serialization">
 <h1>serialization<a class="headerlink" href="#serialization" title="Link to this heading">¶</a></h1>
 <p>Application serialization utilities.</p>
-<p id="module-src.server.lib.serialization">Serialization Helpers.</p>
-<dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.serialization.convert_datetime_to_gmt">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">convert_datetime_to_gmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.12)"><span class="pre">datetime</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#convert_datetime_to_gmt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.convert_datetime_to_gmt" title="Link to this definition">¶</a></dt>
-<dd><p>Handle datetime serialization for nested timestamps.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>dt</strong> – The datetime to convert</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The datetime converted to GMT</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.serialization.convert_string_to_camel_case">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">convert_string_to_camel_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#convert_string_to_camel_case"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.convert_string_to_camel_case" title="Link to this definition">¶</a></dt>
-<dd><p>Convert a string to camel case.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>string</strong> – The string to convert</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The string converted to camel case</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.serialization.convert_camel_to_snake_case">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">convert_camel_to_snake_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#convert_camel_to_snake_case"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.convert_camel_to_snake_case" title="Link to this definition">¶</a></dt>
-<dd><p>Convert a string to snake case.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>string</strong> – The string to convert</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The string converted to snake case</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.serialization.from_json">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.from_json" title="Link to this definition">¶</a></dt>
-<dd><p>Decode to an object with the optimized <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> package.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> – The value to decode</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The decoded value</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Any</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.serialization.from_msgpack">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">from_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#from_msgpack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.from_msgpack" title="Link to this definition">¶</a></dt>
-<dd><p>Decode to an object with the optimized <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> package.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> – The value to decode</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The decoded value</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Any</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.serialization.to_json">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.to_json" title="Link to this definition">¶</a></dt>
-<dd><p>Encode json with the optimized <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> package.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> – The value to encode</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The encoded value</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)">bytes</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.server.lib.serialization.to_msgpack">
-<span class="sig-prename descclassname"><span class="pre">src.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">to_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#to_msgpack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.to_msgpack" title="Link to this definition">¶</a></dt>
-<dd><p>Encode json with the optimized <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> package.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> – The value to encode</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The encoded value</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.12)">bytes</a></p>
-</dd>
-</dl>
-</dd></dl>
-
+<p id="module-byte_bot.server.lib.serialization">Serialization Helpers.</p>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.server.lib.serialization.UUIDEncoder">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">UUIDEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipkeys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_circular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#UUIDEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.UUIDEncoder" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.UUIDEncoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">UUIDEncoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipkeys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_ascii</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check_circular</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_nan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">separators</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#UUIDEncoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.UUIDEncoder" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">JSONEncoder</span></code></p>
 <p>JSON Encoder for UUIDs.</p>
 <p>Constructor for JSONEncoder, with sensible defaults.</p>
@@ -439,8 +320,8 @@ you should specify (‘,’, ‘:’) to eliminate whitespace.</p>
 that can’t otherwise be serialized.  It should return a JSON encodable
 version of the object or raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.server.lib.serialization.UUIDEncoder.default">
-<span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../../../_modules/src/server/lib/serialization.html#UUIDEncoder.default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.server.lib.serialization.UUIDEncoder.default" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.UUIDEncoder.default">
+<span class="sig-name descname"><span class="pre">default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#UUIDEncoder.default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.UUIDEncoder.default" title="Link to this definition">¶</a></dt>
 <dd><p>Handle UUIDs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -450,11 +331,130 @@ version of the object or raise a <code class="docutils literal notranslate"><spa
 <dd class="field-even"><p>The encoded object</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)">str</a></p>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
 </dd>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.convert_camel_to_snake_case">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">convert_camel_to_snake_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#convert_camel_to_snake_case"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.convert_camel_to_snake_case" title="Link to this definition">¶</a></dt>
+<dd><p>Convert a string to snake case.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string</strong> – The string to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The string converted to snake case</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.convert_datetime_to_gmt">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">convert_datetime_to_gmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/datetime.html#datetime.datetime" title="(in Python v3.13)"><span class="pre">datetime</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#convert_datetime_to_gmt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.convert_datetime_to_gmt" title="Link to this definition">¶</a></dt>
+<dd><p>Handle datetime serialization for nested timestamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dt</strong> – The datetime to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The datetime converted to GMT</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.convert_string_to_camel_case">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">convert_string_to_camel_case</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#convert_string_to_camel_case"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.convert_string_to_camel_case" title="Link to this definition">¶</a></dt>
+<dd><p>Convert a string to camel case.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>string</strong> – The string to convert</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The string converted to camel case</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.from_json">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">from_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#from_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.from_json" title="Link to this definition">¶</a></dt>
+<dd><p>Decode to an object with the optimized <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to decode</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.from_msgpack">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">from_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#from_msgpack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.from_msgpack" title="Link to this definition">¶</a></dt>
+<dd><p>Decode to an object with the optimized <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to decode</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decoded value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.to_json">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.to_json" title="Link to this definition">¶</a></dt>
+<dd><p>Encode json with the optimized <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to encode</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encoded value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)">bytes</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.server.lib.serialization.to_msgpack">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.serialization.</span></span><span class="sig-name descname"><span class="pre">to_msgpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/serialization.html#to_msgpack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.serialization.to_msgpack" title="Link to this definition">¶</a></dt>
+<dd><p>Encode json with the optimized <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> package.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – The value to encode</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The encoded value</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.13)">bytes</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
@@ -512,11 +512,11 @@ version of the object or raise a <code class="docutils literal notranslate"><spa
   </div>
 </footer></div>
       <script src="../../../_static/documentation_options.js?v=8dde47fa"></script>
-      <script src="../../../_static/doctools.js?v=888ff710"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../../../_static/copybutton.js?v=f281be69"></script>
-      <script src="../../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
       <script src="../../../_static/shibuya.js?v=3e5c8598"></script>
     
 </body>
