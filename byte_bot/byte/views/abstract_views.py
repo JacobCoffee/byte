@@ -44,7 +44,9 @@ class BaseEmbedView(View):
         Returns:
             True if the user is the author or a guild admin, False otherwise.
         """
-        if interaction.user.id == self.author_id or interaction.user.guild_permissions.administrator:
+        if interaction.user.id == self.author_id or (
+            getattr(interaction.user, "guild_permissions", None) and interaction.user.guild_permissions.administrator  # type: ignore[attr-defined]
+        ):
             return True
         await interaction.response.send_message(
             "You do not have permission to interact with this message.", ephemeral=True

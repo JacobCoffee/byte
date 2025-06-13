@@ -13,9 +13,9 @@ from rich import get_console
 from byte_bot.server.lib import log, settings
 
 __all__ = [
+    "run_all",
     "run_bot",
     "run_web",
-    "run_all",
 ]
 
 console = get_console()

@@ -13,8 +13,8 @@ from rich.traceback import install
 from byte_bot.byte.lib import settings
 
 __all__ = [
-    "setup_logging",
     "get_logger",
+    "setup_logging",
 ]
 
 install(show_locals=True, theme="dracula")

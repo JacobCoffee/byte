@@ -31,14 +31,15 @@ class Events(Cog):
         Args:
             thread (discord.Thread): Thread that was created.
         """
-        if thread.parent.name == "help":
+        if thread.parent and thread.parent.name == "help":  # type: ignore[attr-defined]
             embed = Embed(title=f"Notes for {thread.name}", color=0x42B1A8)
-            embed.add_field(name="At your assistance", value=f"{thread.owner.mention}", inline=False)
+            if thread.owner:  # type: ignore[attr-defined]
+                embed.add_field(name="At your assistance", value=f"{thread.owner.mention}", inline=False)  # type: ignore[attr-defined]
             embed.add_field(
                 name="No Response?", value="If no response in a reasonable time, ping @Member.", inline=True
             )
             commands_to_solve = " or ".join(
-                f"`{command_prefix}solve`" for command_prefix in cast(list[str], self.bot.command_prefix)
+                f"`{command_prefix}solve`" for command_prefix in cast("list[str]", self.bot.command_prefix)
             )
             embed.add_field(name="Closing", value=f"To close, type {commands_to_solve}.", inline=True)
             embed.add_field(
@@ -47,11 +48,13 @@ class Events(Cog):
                 inline=False,
             )
             embed.set_thumbnail(url=litestar_logo_yellow)
-            view = HelpThreadView(author=thread.owner, bot=self.bot)
-            await thread.send(embed=embed, view=view)
-        elif thread.parent.name == "forum":
-            reply = f"Thanks for posting, {thread.owner.mention}!"
-            await thread.send(reply)
+            if thread.owner:  # type: ignore[attr-defined]
+                view = HelpThreadView(author=thread.owner, bot=self.bot)  # type: ignore[attr-defined]
+                await thread.send(embed=embed, view=view)  # type: ignore[attr-defined]
+        elif thread.parent and thread.parent.name == "forum":  # type: ignore[attr-defined]
+            if thread.owner:  # type: ignore[attr-defined]
+                reply = f"Thanks for posting, {thread.owner.mention}!"  # type: ignore[attr-defined]
+                await thread.send(reply)  # type: ignore[attr-defined]
 
 
 async def setup(bot: Bot) -> None:

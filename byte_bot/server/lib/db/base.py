@@ -15,7 +15,7 @@ from sqlalchemy.pool import NullPool
 
 from byte_bot.server.lib import constants, serialization, settings
 
-__all__ = ["session", "engine", "async_session_factory", "config", "plugin"]
+__all__ = ["async_session_factory", "config", "engine", "plugin", "session"]
 
 if TYPE_CHECKING:
     from collections.abc import AsyncIterator

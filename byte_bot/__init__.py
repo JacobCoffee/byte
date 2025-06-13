@@ -11,10 +11,10 @@ from byte_bot.__metadata__ import __version__
 __all__ = (
     "__version__",
     "app",
-    "cli",
-    "utils",
     "byte",
+    "cli",
     "server",
+    "utils",
 )
 
 rich_tracebacks(

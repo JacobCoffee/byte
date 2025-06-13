@@ -47,7 +47,7 @@ intersphinx_mapping = {
     "opentelemetry": ("https://opentelemetry-python.readthedocs.io/en/latest/", None),
     "litestar": ("https://docs.litestar.dev/2/", None),
     "msgspec": ("https://jcristharif.com/msgspec/", None),
-    "advanced-alchemy": ("https://docs.advanced-alchemy.jolt.rs/latest/", None),
+    "advanced-alchemy": ("https://docs.advanced-alchemy.litestar.dev/latest/", None),
     "sqlalchemy": ("https://docs.sqlalchemy.org/en/20/", None),
     "discord.py": ("https://discordpy.readthedocs.io/en/stable/", None),
 }

@@ -11,7 +11,7 @@ from litestar.params import Dependency, Parameter
 from byte_bot.server.domain import urls
 from byte_bot.server.domain.guilds.dependencies import provides_guilds_service
 from byte_bot.server.domain.guilds.schemas import GuildSchema
-from byte_bot.server.domain.guilds.services import GuildsService  # noqa: TCH001
+from byte_bot.server.domain.guilds.services import GuildsService  # noqa: TC001
 
 if TYPE_CHECKING:
     from advanced_alchemy.filters import FilterTypes

@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 __all__ = [
-    "DB_SESSION_DEPENDENCY_KEY",
-    "USER_DEPENDENCY_KEY",
-    "DTO_INFO_KEY",
-    "DEFAULT_PAGINATION_SIZE",
     "CACHE_EXPIRATION",
+    "DB_SESSION_DEPENDENCY_KEY",
+    "DEFAULT_PAGINATION_SIZE",
+    "DTO_INFO_KEY",
+    "USER_DEPENDENCY_KEY",
 ]
 
 DB_SESSION_DEPENDENCY_KEY = "db_session"
