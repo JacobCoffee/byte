@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
+from typing import TYPE_CHECKING, cast
 from uuid import UUID  # noqa: TC003
 
 from pydantic import Field
@@ -19,6 +20,7 @@ __all__ = (
     "GuildUpdate",
     "SOTagsConfigSchema",
     "UpdateableGuildSetting",
+    "UpdateableGuildSettingEnum",
 )
 
 
@@ -184,4 +186,11 @@ class UpdateableGuildSetting(CamelizedBaseModel):
             )
             for field_name, field in cls.model_fields.items()
         }
-        return type(cls.__name__, (StrEnum,), enum_items)
+        return cast("type[StrEnum]", type(cls.__name__, (StrEnum,), enum_items))
+
+
+# what the fuck
+if TYPE_CHECKING:
+    UpdateableGuildSettingEnum = type[StrEnum]
+else:
+    UpdateableGuildSettingEnum = UpdateableGuildSetting.as_enum()
