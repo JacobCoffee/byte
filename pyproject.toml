@@ -21,7 +21,7 @@ dependencies = [
     "pre-commit>=3.6.2",
     "ruff>=0.1.7",
 ]
-requires-python = ">=3.11,<4.0"
+requires-python = ">=3.12,<4.0"
 #readme = "README.md"
 license = { text = "MIT" }
 classifiers = [
@@ -29,7 +29,7 @@ classifiers = [
     'Programming Language :: Python',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3 :: Only',
-    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
     'Intended Audience :: Developers',
     'Intended Audience :: Information Technology',
     'Intended Audience :: System Administrators',
@@ -138,7 +138,7 @@ exclude = [
     "tools",
     "docs",
 ]
-pythonVersion = "3.11"
+pythonVersion = "3.12"
 reportOptionalMemberAccess = false
 reportUnknownMemberType = false
 reportGeneralTypeIssues = true

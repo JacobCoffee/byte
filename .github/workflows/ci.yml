@@ -16,7 +16,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
 
       - name: Set up Python
-        run: uv python install 3.11
+        run: uv python install 3.12
 
       - name: Create virtual environment
         run: uv sync --all-extras --dev
@@ -50,7 +50,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
 
       - name: Set up Python
-        run: uv python install 3.11
+        run: uv python install 3.12
 
       - name: Create virtual environment
         run: uv sync --all-extras --dev
@@ -76,7 +76,7 @@ jobs:
         uses: astral-sh/setup-uv@v3
 
       - name: Set up Python
-        run: uv python install 3.11
+        run: uv python install 3.12
 
       - name: Create virtual environment
         run: uv sync --all-extras --dev
