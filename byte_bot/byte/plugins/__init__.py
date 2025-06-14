@@ -4,12 +4,12 @@ from byte_bot.byte.plugins import admin, astral, custom, events, forums, general
 
 __all__ = [
     "admin",
+    "astral",
     "custom",
     "events",
     "forums",
     "general",
-    "testing",
-    "astral",
-    "python",
     "github",
+    "python",
+    "testing",
 ]

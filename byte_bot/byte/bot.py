@@ -137,7 +137,8 @@ class Byte(Bot):
 
                 if dev_guild := self.get_guild(settings.discord.DEV_GUILD_ID):
                     if dev_channel := dev_guild.get_channel(settings.discord.DEV_GUILD_INTERNAL_ID):
-                        await dev_channel.send(embed=embed)
+                        if hasattr(dev_channel, "send"):
+                            await dev_channel.send(embed=embed)  # type: ignore[attr-defined]
                     else:
                         logger.error("dev channel not found.")
                 else:

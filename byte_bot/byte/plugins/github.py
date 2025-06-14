@@ -53,7 +53,7 @@ class GitHubIssue(Modal, title="Create GitHub Issue"):
         issue_reporter = interaction.user
         issue_body_lines = [
             "### Reported by",
-            f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id}) in Discord: {interaction.channel.name}",  # noqa: E501
+            f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id}) in Discord: {getattr(interaction.channel, 'name', 'DM')}",  # noqa: E501
             "",
             "### Description",
             f"{self.description.value.strip()}",

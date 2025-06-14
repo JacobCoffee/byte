@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
     from discord.ext.commands import Bot
 
-__all__ = ("ExtendedEmbed", "Field", "ButtonEmbedView")
+__all__ = ("ButtonEmbedView", "ExtendedEmbed", "Field")
 
 P = ParamSpec("P")
 
@@ -23,7 +23,13 @@ class ButtonEmbedView(View):
     """Base view including common buttons."""
 
     def __init__(
-        self, author: int, bot: Bot, original_embed: Embed, minified_embed: Embed, *args: P.args, **kwargs: P.kwargs
+        self,
+        author: int,
+        bot: Bot,
+        original_embed: Embed,
+        minified_embed: Embed,
+        *args,
+        **kwargs,  # type: ignore[misc]
     ) -> None:
         """Initialize the view.
 

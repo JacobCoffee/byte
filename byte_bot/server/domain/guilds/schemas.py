@@ -8,7 +8,6 @@ from uuid import UUID  # noqa: TC003
 from pydantic import Field
 
 from byte_bot.server.lib.schema import CamelizedBaseModel
-from byte_bot.server.lib.serialization import convert_camel_to_snake_case
 
 __all__ = (
     "AllowedUsersConfigSchema",
@@ -21,47 +20,6 @@ __all__ = (
     "UpdateableGuildSetting",
     "UpdateableGuildSettingEnum",
 )
-
-
-class GitHubConfigSchema(CamelizedBaseModel):
-    """Schema for validating GitHub configuration."""
-
-    guild_id: UUID
-    discussion_sync: bool
-    github_organization: str | None
-    github_repository: str | None
-
-
-class SOTagsConfigSchema(CamelizedBaseModel):
-    """Schema for validating StackOverflow tags configuration."""
-
-    guild_id: UUID
-    tag_name: str
-
-
-class AllowedUsersConfigSchema(CamelizedBaseModel):
-    """Schema for validating allowed users for certain admin actions within a guild."""
-
-    guild_id: UUID
-    user_id: UUID
-
-
-class ForumConfigSchema(CamelizedBaseModel):
-    """Schema for validating forum configuration."""
-
-    guild_id: UUID
-    help_forum: bool = Field(title="Help Forum", description="Is the help forum enabled.")
-    help_forum_category: str
-    help_thread_auto_close: bool
-    help_thread_auto_close_days: int
-    help_thread_notify: bool
-    help_thread_notify_roles: list[int]
-    help_thread_notify_days: int
-    help_thread_sync: bool
-    showcase_forum: bool
-    showcase_forum_category: str
-    showcase_thread_auto_close: bool
-    showcase_thread_auto_close_days: int
 
 
 class GitHubConfigSchema(CamelizedBaseModel):
@@ -223,36 +181,3 @@ UpdateableGuildSettingEnum = Enum(  # type: ignore[misc]
     "UpdateableGuildSettingEnum",
     {field_name.upper(): field_name for field_name in UpdateableGuildSetting.model_fields},
 )
-
-    """Forum Config Settings"""
-    """Help Forum"""
-    help_forum: bool = Field(title="Help Forum", description="Is the help forum enabled.")
-    help_forum_category: str = Field(title="Help Forum Category", description="The help forum category.")
-    help_thread_auto_close: bool = Field(
-        title="Help Thread Auto Close", description="Is the help thread auto close enabled."
-    )
-    help_thread_auto_close_days: int = Field(
-        title="Help Thread Auto Close Days", description="The days to auto close help threads after inactivity."
-    )
-    help_thread_notify: bool = Field(
-        title="Help Thread Notify", description="Whether to notify roles for unresponded help threads."
-    )
-    help_thread_notify_roles: list[int] = Field(
-        title="Help Thread Notify Roles", description="The roles to notify for unresponded help threads."
-    )
-    help_thread_notify_days: int = Field(
-        title="Help Thread Notify Days", description="The days to notify `notify_roles` after not receiving a response."
-    )
-    help_thread_sync: bool = Field(
-        title="Help Thread Sync", description="Is the help thread GitHub discussions sync enabled."
-    )
-
-    """Showcase forum"""
-    showcase_forum: bool = Field(title="Showcase Forum", description="Is the showcase forum enabled.")
-    showcase_forum_category: str = Field(title="Showcase Forum Category", description="The showcase forum category.")
-    showcase_thread_auto_close: bool = Field(
-        title="Showcase Thread Auto Close", description="Is the showcase thread auto close enabled."
-    )
-    showcase_thread_auto_close_days: int = Field(
-        title="Showcase Thread Auto Close Days", description="The days to auto close showcase threads after inactivity."
-    )

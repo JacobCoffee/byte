@@ -236,7 +236,7 @@ class ConfigModal(Modal):
         Args:
             interaction: Interaction object.
         """
-        config_values = {item.custom_id: item.value for item in self.children if hasattr(item, "custom_id")}
+        config_values = {item.custom_id: item.value for item in self.children if hasattr(item, "custom_id")}  # type: ignore[attr-defined]
         await interaction.response.send_message(f"Configuration values received: {config_values}", ephemeral=True)
 
         if self.option:

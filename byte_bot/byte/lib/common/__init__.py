@@ -10,9 +10,9 @@ from byte_bot.byte.lib.common import assets, colors, guilds, links, mention
 __all__ = (
     "assets",
     "colors",
+    "config_options",
     "guilds",
     "links",
-    "config_options",
     "mention",
 )
 

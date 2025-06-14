@@ -3,19 +3,22 @@
 from __future__ import annotations
 
 import datetime
+from typing import Self
 
 from dateutil.zoneinfo import gettz
-from discord import Embed, EntityType, Interaction, Object, PrivacyLevel
+from discord import Embed, EntityType, Interaction, Message, Object, PrivacyLevel
 from discord.app_commands import command as app_command
+from discord.enums import TextStyle
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
+from discord.ui import Modal, TextInput
+from discord.utils import MISSING
+from httpx import codes
 
 from byte_bot.byte.lib.checks import is_byte_dev
 from byte_bot.byte.lib.common.colors import litestar_yellow
 from byte_bot.byte.lib.common.mention import mention_role, mention_user
 from byte_bot.byte.lib.utils import get_next_friday
-from byte_bot.byte.lib.utils import is_byte_dev, mention_role, mention_user
 from byte_bot.server.domain.github.helpers import github_client
-from byte_bot.byte.lib.common.colors import litestar_yellow
 
 __all__ = ("LitestarCommands", "setup")
 

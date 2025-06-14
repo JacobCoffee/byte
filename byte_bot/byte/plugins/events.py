@@ -49,7 +49,7 @@ class Events(Cog):
             )
             embed.set_thumbnail(url=litestar_logo_yellow)
             if thread.owner:  # type: ignore[attr-defined]
-                view = HelpThreadView(author=thread.owner,  guild_id=thread.guild.id, bot=self.bot)  # type: ignore[attr-defined]
+                view = HelpThreadView(author=thread.owner, guild_id=thread.guild.id, bot=self.bot)  # type: ignore[attr-defined]
                 await view.setup()
                 await thread.send(embed=embed, view=view)  # type: ignore[attr-defined]
         elif thread.parent and thread.parent.name == "forum":  # type: ignore[attr-defined]

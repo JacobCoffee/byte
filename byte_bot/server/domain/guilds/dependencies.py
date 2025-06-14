@@ -62,12 +62,12 @@ async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[Gu
         ),
     ) as service:
         try:
-            yield service
+            yield service  # type: ignore[misc]
         finally:
             ...
 
 
-async def provides_github_config_service(db_session: AsyncSession) -> AsyncGenerator[GitHubConfigService, None]:
+async def provides_github_config_service(db_session: AsyncSession) -> AsyncGenerator[GitHubConfigService, None]:  # type: ignore[misc]
     """Construct GitHubConfig-based repository and service objects for the request.
 
     Args:
@@ -93,7 +93,7 @@ async def provides_github_config_service(db_session: AsyncSession) -> AsyncGener
         ),
     ) as service:
         try:
-            yield service
+            yield service  # type: ignore[misc]
         finally:
             ...
 
@@ -116,7 +116,7 @@ async def provides_sotags_config_service(db_session: AsyncSession) -> AsyncGener
         ),
     ) as service:
         try:
-            yield service
+            yield service  # type: ignore[misc]
         finally:
             ...
 
@@ -141,7 +141,7 @@ async def provides_allowed_users_config_service(
         ),
     ) as service:
         try:
-            yield service
+            yield service  # type: ignore[misc]
         finally:
             ...
 
@@ -164,6 +164,6 @@ async def provides_forum_config_service(db_session: AsyncSession) -> AsyncGenera
         ),
     ) as service:
         try:
-            yield service
+            yield service  # type: ignore[misc]
         finally:
             ...

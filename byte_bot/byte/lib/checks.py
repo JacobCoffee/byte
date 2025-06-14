@@ -9,14 +9,12 @@ from discord.ext.commands import CheckFailure, Context, check
 from byte_bot.byte.lib import settings
 
 if TYPE_CHECKING:
-    from collections.abc import Callable
-
     from discord.ext.commands._types import Check
 
 __all__ = ("is_byte_dev", "is_guild_admin")
 
 
-def is_guild_admin() -> Callable[[Context], Check]:
+def is_guild_admin() -> Check:
     """Check if the user is a guild admin.
 
     Returns:
@@ -32,6 +30,9 @@ def is_guild_admin() -> Callable[[Context], Check]:
         Returns:
             True if the user is a guild admin, False otherwise.
         """
+        if not ctx.guild:
+            msg = "Command can only be used in a guild."
+            raise CheckFailure(msg)
         if not (member := ctx.guild.get_member(ctx.author.id)):
             msg = "Member not found in the guild."
             raise CheckFailure(msg)
@@ -40,7 +41,7 @@ def is_guild_admin() -> Callable[[Context], Check]:
     return check(predicate)
 
 
-def is_byte_dev() -> Callable[[Context], Check]:
+def is_byte_dev() -> Check:
     """Determines if the user is a Byte developer or owner.
 
     Returns:
@@ -56,10 +57,16 @@ def is_byte_dev() -> Callable[[Context], Check]:
         Returns:
             True if the user is a Byte developer or owner, False otherwise.
         """
-        return (
-            await ctx.bot.is_owner(ctx.author)
-            or ctx.author.id == settings.discord.DEV_USER_ID
-            or any(role.name == "byte-dev" for role in ctx.author.roles)
-        )
+        if await ctx.bot.is_owner(ctx.author) or ctx.author.id == settings.discord.DEV_USER_ID:
+            return True
+
+        if not ctx.guild:
+            return False
+
+        member = ctx.guild.get_member(ctx.author.id)
+        if not member:
+            return False
+
+        return any(role.name == "byte-dev" for role in member.roles)
 
     return check(predicate)
