@@ -1,2 +1,3 @@
 *.min.*
 .git/COMMIT_EDITMSG
+style.css

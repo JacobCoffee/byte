@@ -13,8 +13,8 @@ from httpx import ConnectError
 
 __all__ = ("AdminCommands", "setup")
 
-from byte_bot.byte.lib.checks import is_byte_dev
 from byte_bot.byte.lib import settings
+from byte_bot.byte.lib.checks import is_byte_dev
 from byte_bot.byte.lib.log import get_logger
 from byte_bot.server.lib.settings import ServerSettings
 
@@ -101,7 +101,7 @@ class AdminCommands(Cog):
     @is_byte_dev()
     async def bootstrap_guild(self, ctx: Context, guild_id: int | None = None) -> None:
         """Bootstrap an existing guild to the database.
-        
+
         Args:
             ctx: Context object.
             guild_id: Guild ID to bootstrap. If not provided, uses current guild.
@@ -109,25 +109,25 @@ class AdminCommands(Cog):
         guild = await self._get_target_guild(ctx, guild_id)
         if not guild:
             return
-            
+
         await ctx.send(f"🔄 Bootstrapping guild {guild.name} (ID: {guild.id})...")
-        
+
         await self._sync_guild_commands(guild)
         await self._register_guild_in_database(ctx, guild)
 
     async def _get_target_guild(self, ctx: Context, guild_id: int | None) -> discord.Guild | None:
         """Get the target guild for bootstrapping."""
         target_guild_id = guild_id or (ctx.guild.id if ctx.guild else None)
-        
+
         if not target_guild_id:
             await ctx.send("❌ No guild ID provided and command not used in a guild.")
             return None
-            
+
         guild = self.bot.get_guild(target_guild_id)
         if not guild:
             await ctx.send(f"❌ Bot is not in guild with ID {target_guild_id}")
             return None
-            
+
         return guild
 
     async def _sync_guild_commands(self, guild: discord.Guild) -> None:
@@ -135,13 +135,13 @@ class AdminCommands(Cog):
         try:
             await self.bot.tree.sync(guild=guild)
             logger.info("Commands synced to guild %s (id: %s)", guild.name, guild.id)
-        except Exception as e:
-            logger.error("Failed to sync commands to guild %s: %s", guild.name, e)
+        except Exception:  # noqa: BLE001
+            logger.exception("Failed to sync commands to guild %s", guild.name)
 
     async def _register_guild_in_database(self, ctx: Context, guild: discord.Guild) -> None:
         """Register guild in database via API."""
         api_url = f"http://{server_settings.HOST}:{server_settings.PORT}/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
-        
+
         try:
             async with httpx.AsyncClient() as client:
                 response = await client.post(api_url)
@@ -180,11 +180,11 @@ class AdminCommands(Cog):
         dev_guild = self.bot.get_guild(settings.discord.DEV_GUILD_ID)
         if not dev_guild:
             return
-            
+
         dev_channel = dev_guild.get_channel(settings.discord.DEV_GUILD_INTERNAL_ID)
         if not dev_channel or not hasattr(dev_channel, "send"):
             return
-            
+
         embed = discord.Embed(
             title="Guild Bootstrapped",
             description=f"Guild {guild.name} (ID: {guild.id}) was manually bootstrapped",
