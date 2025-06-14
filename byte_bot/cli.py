@@ -26,6 +26,10 @@ logger = log.get_logger()
 
 def frontend() -> None:
     """Run the tailwind compiler."""
+    if settings.project.ENVIRONMENT == "prod" or not settings.project.DEV_MODE:
+        logger.info("🎨 Skipping Tailwind Compiler in production environment.")
+        return
+        
     log.config.configure()
     logger.info("🎨 Starting Tailwind Compiler.")
     try:
@@ -198,15 +202,18 @@ def run_all(
     """Runs both the bot and the web server."""
     bot_process = multiprocessing.Process(target=bot)
     web_process = multiprocessing.Process(target=web, args=(host, port, http_workers, reload, verbose, debug))
-    frontend_process = multiprocessing.Process(target=frontend)
+    
+    processes = [bot_process, web_process]
+    
+    if settings.project.ENVIRONMENT != "prod" and settings.project.DEV_MODE:
+        frontend_process = multiprocessing.Process(target=frontend)
+        processes.append(frontend_process)
 
-    bot_process.start()
-    web_process.start()
-    frontend_process.start()
+    for process in processes:
+        process.start()
 
-    bot_process.join()
-    web_process.join()
-    frontend_process.join()
+    for process in processes:
+        process.join()
 
 
 def _convert_uvicorn_args(args: dict[str, Any]) -> list[str]:
