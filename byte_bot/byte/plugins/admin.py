@@ -135,7 +135,7 @@ class AdminCommands(Cog):
         try:
             await self.bot.tree.sync(guild=guild)
             logger.info("Commands synced to guild %s (id: %s)", guild.name, guild.id)
-        except Exception:  # noqa: BLE001
+        except Exception:
             logger.exception("Failed to sync commands to guild %s", guild.name)
 
     async def _register_guild_in_database(self, ctx: Context, guild: discord.Guild) -> None:
