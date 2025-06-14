@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from enum import Enum
 from uuid import UUID  # noqa: TC003
 
 from pydantic import Field
@@ -17,6 +18,7 @@ __all__ = (
     "GuildUpdate",
     "SOTagsConfigSchema",
     "UpdateableGuildSetting",
+    "UpdateableGuildSettingEnum",
 )
 
 
@@ -172,3 +174,10 @@ class UpdateableGuildSetting(CamelizedBaseModel):
     showcase_thread_auto_close_days: int = Field(
         title="Showcase Thread Auto Close Days", description="The days to auto close showcase threads after inactivity."
     )
+
+
+# idk
+UpdateableGuildSettingEnum = Enum(  # type: ignore[misc]
+    "UpdateableGuildSettingEnum",
+    {field_name.upper(): field_name for field_name in UpdateableGuildSetting.model_fields},
+)
