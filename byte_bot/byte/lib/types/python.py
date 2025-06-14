@@ -27,6 +27,7 @@ class PEPStatus(StrEnum):
 
     .. note:: ``Active`` and ``Accepted`` both traditionally use ``A``,
         but are differentiated here for clarity.
+
     Based off of `PEP Status in PEP1 <https://peps.python.org/#pep-status-key>`_.
     """
 
