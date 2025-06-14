@@ -177,7 +177,7 @@ class UpdateableGuildSetting(CamelizedBaseModel):
 
 
 # idk
-UpdateableGuildSettingEnum = Enum(
-    "UpdateableGuildSettingEnum", 
-    {field_name.upper(): field_name for field_name in UpdateableGuildSetting.model_fields.keys()}
+UpdateableGuildSettingEnum = Enum(  # type: ignore[misc]
+    "UpdateableGuildSettingEnum",
+    {field_name.upper(): field_name for field_name in UpdateableGuildSetting.model_fields},
 )
