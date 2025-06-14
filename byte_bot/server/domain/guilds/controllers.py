@@ -119,7 +119,7 @@ class GuildsController(Controller):
             title="Guild ID",
             description="The guild ID.",
         ),
-        setting: UpdateableGuildSettingEnum = Parameter(  # type: ignore[valid-type]
+        setting: UpdateableGuildSettingEnum = Parameter(  # type: ignore[name-defined]
             title="Setting",
             description="The setting to update.",
         ),

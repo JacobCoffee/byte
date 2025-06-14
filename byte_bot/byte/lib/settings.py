@@ -42,6 +42,8 @@ class DiscordSettings(BaseSettings):
     """Discord Guild ID for development."""
     DEV_USER_ID: int
     """Discord User ID for development."""
+    DEV_GUILD_INTERNAL_ID: int = 1136100160510902272
+    """Internal channel ID for the development guild."""
     PLUGINS_LOC: Path = PLUGINS_DIR
     """Base Path to plugins directory."""
     PLUGINS_DIRS: list[Path] = [PLUGINS_DIR]
@@ -107,6 +109,10 @@ class LogSettings(BaseSettings):
     """Sets the log level for the websockets library."""
     ASYNCIO_LEVEL: int = 20
     """Sets the log level for the asyncio library."""
+    HTTP_CORE_LEVEL: int = 20
+    """Sets the log level for the httpcore library. (Used in cert. validation)"""
+    HTTPX_LEVEL: int = 30
+    """Sets the log level for the httpx library."""
     FORMAT: str = "[[ %(asctime)s ]] - [[ %(name)s ]] - [[ %(levelname)s ]] - %(message)s"
     """Log format string."""
     FILE: Path = BASE_DIR / "logs" / "byte.log"

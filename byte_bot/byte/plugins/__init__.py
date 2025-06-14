@@ -1,12 +1,15 @@
 """Pluggable modules for Byte."""
 
-from byte_bot.byte.plugins import admin, custom, events, forums, general, testing
+from byte_bot.byte.plugins import admin, astral, custom, events, forums, general, github, python, testing
 
 __all__ = [
     "admin",
+    "astral",
     "custom",
     "events",
     "forums",
     "general",
+    "github",
+    "python",
     "testing",
 ]

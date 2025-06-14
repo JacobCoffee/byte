@@ -15,7 +15,7 @@ from byte_bot.byte.lib.utils import chunk_sequence, format_ruff_rule, query_all_
 from byte_bot.byte.views.astral import RuffView
 
 if TYPE_CHECKING:
-    from byte_bot.byte.lib.utils import RuffRule
+    from byte_bot.byte.lib.types.astral import RuffRule
 
 __all__ = ("Astral", "setup")
 
@@ -77,7 +77,7 @@ class Astral(Cog):
         embed.add_field(name="Documentation", value=docs_field, inline=False)
         embed.set_thumbnail(url=ruff_logo)
 
-        view = RuffView(author=interaction.user.id, bot=self.bot, original_embed=embed, minified_embed=minified_embed)
+        view = RuffView(author=interaction.user.id, bot=self.bot, original_embed=embed, minified_embed=minified_embed)  # type: ignore[call-arg]
         await interaction.followup.send(embed=minified_embed, view=view)
 
     @app_command(name="format")

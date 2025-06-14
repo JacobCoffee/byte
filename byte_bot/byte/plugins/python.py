@@ -10,7 +10,7 @@ from discord.ext.commands import Bot, Cog
 from byte_bot.byte.lib.common.assets import python_logo
 from byte_bot.byte.lib.common.colors import python_blue, python_yellow
 from byte_bot.byte.lib.utils import PEP, query_all_peps
-from byte_bot.byte.views.embed import ExtendedEmbed, Field
+from byte_bot.byte.views.abstract_views import ExtendedEmbed, Field
 from byte_bot.byte.views.python import PEPView
 
 __all__ = ("Python", "setup")
@@ -78,7 +78,7 @@ class Python(Cog):
         minified_embed.add_field(name="Documentation", value=f"[PEP Documentation]({pep_details['url']})", inline=False)
         full_embed.add_field(name="Documentation", value=f"[PEP Documentation]({pep_details['url']})", inline=False)
 
-        view = PEPView(
+        view = PEPView(  # type: ignore[call-arg]
             author=interaction.user.id, bot=self.bot, original_embed=full_embed, minified_embed=minified_embed
         )
         await interaction.followup.send(embed=minified_embed, view=view)

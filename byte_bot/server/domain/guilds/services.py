@@ -2,18 +2,11 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 from advanced_alchemy.repository import SQLAlchemyAsyncRepository, SQLAlchemyAsyncSlugRepository
-from advanced_alchemy.service import SQLAlchemyAsyncRepositoryService
+from advanced_alchemy.service import ModelDictT, SQLAlchemyAsyncRepositoryService
 
 from byte_bot.server.domain.db.models import AllowedUsersConfig, ForumConfig, GitHubConfig, Guild, SOTagsConfig
 from byte_bot.server.lib import log
-
-if TYPE_CHECKING:
-    from advanced_alchemy.service.typing import ModelDictT
-
-__all__ = ("GuildsRepository", "GuildsService")
 
 __all__ = (
     "AllowedUsersConfigRepository",
