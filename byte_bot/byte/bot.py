@@ -14,6 +14,7 @@ from httpx import ConnectError
 
 from byte_bot.byte.lib import settings
 from byte_bot.byte.lib.log import get_logger
+from byte_bot.server.lib.settings import ServerSettings
 
 __all__ = [
     "Byte",
@@ -22,6 +23,7 @@ __all__ = [
 
 logger = get_logger()
 load_dotenv()
+server_settings = ServerSettings()
 
 
 class Byte(Bot):
@@ -115,7 +117,7 @@ class Byte(Bot):
             guild: Guild object.
         """
         await self.tree.sync(guild=guild)
-        api_url = f"http://0.0.0.0:8000/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
+        api_url = f"http://{server_settings.HOST}:{server_settings.PORT}/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
 
         try:
             async with httpx.AsyncClient() as client:
