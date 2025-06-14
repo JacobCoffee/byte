@@ -353,7 +353,7 @@ html.dark {
 </span><span id="1-62">        <span class="p">),</span>
 </span><span id="1-63">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
 </span><span id="1-64">        <span class="k">try</span><span class="p">:</span>
-</span><span id="1-65">            <span class="k">yield</span> <span class="n">service</span>
+</span><span id="1-65">            <span class="k">yield</span> <span class="n">service</span>  <span class="c1"># type: ignore[misc]</span>
 </span><span id="1-66">        <span class="k">finally</span><span class="p">:</span>
 </span><span id="1-67">            <span class="o">...</span></div>
 
@@ -361,7 +361,7 @@ html.dark {
 </span><span id="1-69">
 <div class="viewcode-block" id="provides_github_config_service">
 <a class="viewcode-back" href="../../../../../web/api/domain/guilds/dependencies.html#byte_bot.server.domain.guilds.dependencies.provides_github_config_service">[docs]</a>
-</span><span id="1-70"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provides_github_config_service</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">GitHubConfigService</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="1-70"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provides_github_config_service</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">GitHubConfigService</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>  <span class="c1"># type: ignore[misc]</span>
 </span><span id="1-71"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct GitHubConfig-based repository and service objects for the request.</span>
 </span><span id="1-72">
 </span><span id="1-73"><span class="sd">    Args:</span>
@@ -370,98 +370,106 @@ html.dark {
 </span><span id="1-76"><span class="sd">    Yields:</span>
 </span><span id="1-77"><span class="sd">        GitHubConfigService: GitHubConfig-based service</span>
 </span><span id="1-78"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-79">    <span class="k">async</span> <span class="k">with</span> <span class="n">GitHubConfigService</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+</span><span id="1-79">    <span class="k">async</span> <span class="k">with</span> <span class="n">GuildsService</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
 </span><span id="1-80">        <span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span>
-</span><span id="1-81">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">GitHubConfig</span><span class="p">)</span>
-</span><span id="1-82">        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">GitHubConfig</span><span class="o">.</span><span class="n">github_organization</span><span class="p">)</span>
+</span><span id="1-81">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">Guild</span><span class="p">)</span>
+</span><span id="1-82">        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Guild</span><span class="o">.</span><span class="n">guild_name</span><span class="p">)</span>
 </span><span id="1-83">        <span class="o">.</span><span class="n">options</span><span class="p">(</span>
-</span><span id="1-84">            <span class="n">selectinload</span><span class="p">(</span><span class="n">GitHubConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
-</span><span id="1-85">        <span class="p">),</span>
-</span><span id="1-86">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
-</span><span id="1-87">        <span class="k">try</span><span class="p">:</span>
-</span><span id="1-88">            <span class="k">yield</span> <span class="n">service</span>
-</span><span id="1-89">        <span class="k">finally</span><span class="p">:</span>
-</span><span id="1-90">            <span class="o">...</span></div>
+</span><span id="1-84">            <span class="n">selectinload</span><span class="p">(</span><span class="n">Guild</span><span class="o">.</span><span class="n">github_config</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="1-85">                <span class="n">joinedload</span><span class="p">(</span><span class="n">GitHubConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">,</span> <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
+</span><span id="1-86">            <span class="p">),</span>
+</span><span id="1-87">            <span class="n">selectinload</span><span class="p">(</span><span class="n">Guild</span><span class="o">.</span><span class="n">sotags_configs</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="1-88">                <span class="n">joinedload</span><span class="p">(</span><span class="n">SOTagsConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">,</span> <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
+</span><span id="1-89">            <span class="p">),</span>
+</span><span id="1-90">            <span class="n">selectinload</span><span class="p">(</span><span class="n">Guild</span><span class="o">.</span><span class="n">allowed_users</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="1-91">                <span class="n">joinedload</span><span class="p">(</span><span class="n">AllowedUsersConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">,</span> <span class="n">innerjoin</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
+</span><span id="1-92">            <span class="p">),</span>
+</span><span id="1-93">        <span class="p">),</span>
+</span><span id="1-94">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
+</span><span id="1-95">        <span class="k">try</span><span class="p">:</span>
+</span><span id="1-96">            <span class="k">yield</span> <span class="n">service</span>  <span class="c1"># type: ignore[misc]</span>
+</span><span id="1-97">        <span class="k">finally</span><span class="p">:</span>
+</span><span id="1-98">            <span class="o">...</span></div>
 
-</span><span id="1-91">
-</span><span id="1-92">
+</span><span id="1-99">
+</span><span id="1-100">
 <div class="viewcode-block" id="provides_sotags_config_service">
 <a class="viewcode-back" href="../../../../../web/api/domain/guilds/dependencies.html#byte_bot.server.domain.guilds.dependencies.provides_sotags_config_service">[docs]</a>
-</span><span id="1-93"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provides_sotags_config_service</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">SOTagsConfigService</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-</span><span id="1-94"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct SOTagsConfig-based repository and service objects for the request.</span>
-</span><span id="1-95">
-</span><span id="1-96"><span class="sd">    Args:</span>
-</span><span id="1-97"><span class="sd">        db_session (AsyncSession): SQLAlchemy AsyncSession</span>
-</span><span id="1-98">
-</span><span id="1-99"><span class="sd">    Yields:</span>
-</span><span id="1-100"><span class="sd">        SOTagsConfigService: SOTagsConfig-based service</span>
-</span><span id="1-101"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-102">    <span class="k">async</span> <span class="k">with</span> <span class="n">SOTagsConfigService</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span id="1-103">        <span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span>
-</span><span id="1-104">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">SOTagsConfig</span><span class="p">)</span>
-</span><span id="1-105">        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">SOTagsConfig</span><span class="o">.</span><span class="n">tag_name</span><span class="p">)</span>
-</span><span id="1-106">        <span class="o">.</span><span class="n">options</span><span class="p">(</span>
-</span><span id="1-107">            <span class="n">selectinload</span><span class="p">(</span><span class="n">SOTagsConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
-</span><span id="1-108">        <span class="p">),</span>
-</span><span id="1-109">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
-</span><span id="1-110">        <span class="k">try</span><span class="p">:</span>
-</span><span id="1-111">            <span class="k">yield</span> <span class="n">service</span>
-</span><span id="1-112">        <span class="k">finally</span><span class="p">:</span>
-</span><span id="1-113">            <span class="o">...</span></div>
+</span><span id="1-101"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provides_sotags_config_service</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">SOTagsConfigService</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="1-102"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct SOTagsConfig-based repository and service objects for the request.</span>
+</span><span id="1-103">
+</span><span id="1-104"><span class="sd">    Args:</span>
+</span><span id="1-105"><span class="sd">        db_session (AsyncSession): SQLAlchemy AsyncSession</span>
+</span><span id="1-106">
+</span><span id="1-107"><span class="sd">    Yields:</span>
+</span><span id="1-108"><span class="sd">        SOTagsConfigService: SOTagsConfig-based service</span>
+</span><span id="1-109"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-110">    <span class="k">async</span> <span class="k">with</span> <span class="n">SOTagsConfigService</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+</span><span id="1-111">        <span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span>
+</span><span id="1-112">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">SOTagsConfig</span><span class="p">)</span>
+</span><span id="1-113">        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">SOTagsConfig</span><span class="o">.</span><span class="n">tag_name</span><span class="p">)</span>
+</span><span id="1-114">        <span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="1-115">            <span class="n">selectinload</span><span class="p">(</span><span class="n">SOTagsConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
+</span><span id="1-116">        <span class="p">),</span>
+</span><span id="1-117">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
+</span><span id="1-118">        <span class="k">try</span><span class="p">:</span>
+</span><span id="1-119">            <span class="k">yield</span> <span class="n">service</span>  <span class="c1"># type: ignore[misc]</span>
+</span><span id="1-120">        <span class="k">finally</span><span class="p">:</span>
+</span><span id="1-121">            <span class="o">...</span></div>
 
-</span><span id="1-114">
-</span><span id="1-115">
+</span><span id="1-122">
+</span><span id="1-123">
 <div class="viewcode-block" id="provides_allowed_users_config_service">
 <a class="viewcode-back" href="../../../../../web/api/domain/guilds/dependencies.html#byte_bot.server.domain.guilds.dependencies.provides_allowed_users_config_service">[docs]</a>
-</span><span id="1-116"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provides_allowed_users_config_service</span><span class="p">(</span>
-</span><span id="1-117">    <span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">,</span>
-</span><span id="1-118"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AllowedUsersConfigService</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-</span><span id="1-119"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct AllowedUsersConfig-based repository and service objects for the request.</span>
-</span><span id="1-120">
-</span><span id="1-121"><span class="sd">    Args:</span>
-</span><span id="1-122"><span class="sd">        db_session (AsyncSession): SQLAlchemy AsyncSession</span>
-</span><span id="1-123">
-</span><span id="1-124"><span class="sd">    Yields:</span>
-</span><span id="1-125"><span class="sd">        AllowedUsersConfigService: AllowedUsersConfig-based service</span>
-</span><span id="1-126"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-127">    <span class="k">async</span> <span class="k">with</span> <span class="n">AllowedUsersConfigService</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span id="1-128">        <span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span>
-</span><span id="1-129">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">AllowedUsersConfig</span><span class="p">)</span>
-</span><span id="1-130">        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">AllowedUsersConfig</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span>
-</span><span id="1-131">        <span class="o">.</span><span class="n">options</span><span class="p">(</span>
-</span><span id="1-132">            <span class="n">selectinload</span><span class="p">(</span><span class="n">AllowedUsersConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
-</span><span id="1-133">        <span class="p">),</span>
-</span><span id="1-134">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
-</span><span id="1-135">        <span class="k">try</span><span class="p">:</span>
-</span><span id="1-136">            <span class="k">yield</span> <span class="n">service</span>
-</span><span id="1-137">        <span class="k">finally</span><span class="p">:</span>
-</span><span id="1-138">            <span class="o">...</span></div>
+</span><span id="1-124"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provides_allowed_users_config_service</span><span class="p">(</span>
+</span><span id="1-125">    <span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">,</span>
+</span><span id="1-126"><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">AllowedUsersConfigService</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="1-127"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct AllowedUsersConfig-based repository and service objects for the request.</span>
+</span><span id="1-128">
+</span><span id="1-129"><span class="sd">    Args:</span>
+</span><span id="1-130"><span class="sd">        db_session (AsyncSession): SQLAlchemy AsyncSession</span>
+</span><span id="1-131">
+</span><span id="1-132"><span class="sd">    Yields:</span>
+</span><span id="1-133"><span class="sd">        AllowedUsersConfigService: AllowedUsersConfig-based service</span>
+</span><span id="1-134"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-135">    <span class="k">async</span> <span class="k">with</span> <span class="n">AllowedUsersConfigService</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+</span><span id="1-136">        <span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span>
+</span><span id="1-137">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">AllowedUsersConfig</span><span class="p">)</span>
+</span><span id="1-138">        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">AllowedUsersConfig</span><span class="o">.</span><span class="n">user_id</span><span class="p">)</span>
+</span><span id="1-139">        <span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="1-140">            <span class="n">selectinload</span><span class="p">(</span><span class="n">AllowedUsersConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
+</span><span id="1-141">        <span class="p">),</span>
+</span><span id="1-142">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
+</span><span id="1-143">        <span class="k">try</span><span class="p">:</span>
+</span><span id="1-144">            <span class="k">yield</span> <span class="n">service</span>  <span class="c1"># type: ignore[misc]</span>
+</span><span id="1-145">        <span class="k">finally</span><span class="p">:</span>
+</span><span id="1-146">            <span class="o">...</span></div>
 
-</span><span id="1-139">
-</span><span id="1-140">
+</span><span id="1-147">
+</span><span id="1-148">
 <div class="viewcode-block" id="provides_forum_config_service">
 <a class="viewcode-back" href="../../../../../web/api/domain/guilds/dependencies.html#byte_bot.server.domain.guilds.dependencies.provides_forum_config_service">[docs]</a>
-</span><span id="1-141"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provides_forum_config_service</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">ForumConfigService</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
-</span><span id="1-142"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct ForumConfig-based repository and service objects for the request.</span>
-</span><span id="1-143">
-</span><span id="1-144"><span class="sd">    Args:</span>
-</span><span id="1-145"><span class="sd">        db_session (AsyncSession): SQLAlchemy AsyncSession</span>
-</span><span id="1-146">
-</span><span id="1-147"><span class="sd">    Yields:</span>
-</span><span id="1-148"><span class="sd">        ForumConfigService: ForumConfig-based service</span>
-</span><span id="1-149"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-150">    <span class="k">async</span> <span class="k">with</span> <span class="n">ForumConfigService</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
-</span><span id="1-151">        <span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span>
-</span><span id="1-152">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">ForumConfig</span><span class="p">)</span>
-</span><span id="1-153">        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">ForumConfig</span><span class="o">.</span><span class="n">help_forum</span><span class="p">)</span>
-</span><span id="1-154">        <span class="o">.</span><span class="n">options</span><span class="p">(</span>
-</span><span id="1-155">            <span class="n">selectinload</span><span class="p">(</span><span class="n">ForumConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
-</span><span id="1-156">        <span class="p">),</span>
-</span><span id="1-157">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
-</span><span id="1-158">        <span class="k">try</span><span class="p">:</span>
-</span><span id="1-159">            <span class="k">yield</span> <span class="n">service</span>
-</span><span id="1-160">        <span class="k">finally</span><span class="p">:</span>
-</span><span id="1-161">            <span class="o">...</span></div>
+</span><span id="1-149"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">provides_forum_config_service</span><span class="p">(</span><span class="n">db_session</span><span class="p">:</span> <span class="n">AsyncSession</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AsyncGenerator</span><span class="p">[</span><span class="n">ForumConfigService</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+</span><span id="1-150"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct ForumConfig-based repository and service objects for the request.</span>
+</span><span id="1-151">
+</span><span id="1-152"><span class="sd">    Args:</span>
+</span><span id="1-153"><span class="sd">        db_session (AsyncSession): SQLAlchemy AsyncSession</span>
+</span><span id="1-154">
+</span><span id="1-155"><span class="sd">    Yields:</span>
+</span><span id="1-156"><span class="sd">        ForumConfigService: ForumConfig-based service</span>
+</span><span id="1-157"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-158">    <span class="k">async</span> <span class="k">with</span> <span class="n">ForumConfigService</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+</span><span id="1-159">        <span class="n">session</span><span class="o">=</span><span class="n">db_session</span><span class="p">,</span>
+</span><span id="1-160">        <span class="n">statement</span><span class="o">=</span><span class="n">select</span><span class="p">(</span><span class="n">ForumConfig</span><span class="p">)</span>
+</span><span id="1-161">        <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">ForumConfig</span><span class="o">.</span><span class="n">help_forum</span><span class="p">)</span>
+</span><span id="1-162">        <span class="o">.</span><span class="n">options</span><span class="p">(</span>
+</span><span id="1-163">            <span class="n">selectinload</span><span class="p">(</span><span class="n">ForumConfig</span><span class="o">.</span><span class="n">guild</span><span class="p">)</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">noload</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)),</span>
+</span><span id="1-164">        <span class="p">),</span>
+</span><span id="1-165">    <span class="p">)</span> <span class="k">as</span> <span class="n">service</span><span class="p">:</span>
+</span><span id="1-166">        <span class="k">try</span><span class="p">:</span>
+</span><span id="1-167">            <span class="k">yield</span> <span class="n">service</span>  <span class="c1"># type: ignore[misc]</span>
+</span><span id="1-168">        <span class="k">finally</span><span class="p">:</span>
+</span><span id="1-169">            <span class="o">...</span></div>
 
 </span></pre></div>
         </article>

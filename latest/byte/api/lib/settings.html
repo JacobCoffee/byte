@@ -243,6 +243,7 @@ html.dark {
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.COMMAND_PREFIX"><code class="docutils literal notranslate"><span class="pre">DiscordSettings.COMMAND_PREFIX</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.DEV_GUILD_ID"><code class="docutils literal notranslate"><span class="pre">DiscordSettings.DEV_GUILD_ID</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.DEV_USER_ID"><code class="docutils literal notranslate"><span class="pre">DiscordSettings.DEV_USER_ID</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.DEV_GUILD_INTERNAL_ID"><code class="docutils literal notranslate"><span class="pre">DiscordSettings.DEV_GUILD_INTERNAL_ID</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.PLUGINS_LOC"><code class="docutils literal notranslate"><span class="pre">DiscordSettings.PLUGINS_LOC</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.PLUGINS_DIRS"><code class="docutils literal notranslate"><span class="pre">DiscordSettings.PLUGINS_DIRS</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.PRESENCE_URL"><code class="docutils literal notranslate"><span class="pre">DiscordSettings.PRESENCE_URL</span></code></a></li>
@@ -255,6 +256,8 @@ html.dark {
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.DISCORD_LEVEL"><code class="docutils literal notranslate"><span class="pre">LogSettings.DISCORD_LEVEL</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.WEBSOCKETS_LEVEL"><code class="docutils literal notranslate"><span class="pre">LogSettings.WEBSOCKETS_LEVEL</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.ASYNCIO_LEVEL"><code class="docutils literal notranslate"><span class="pre">LogSettings.ASYNCIO_LEVEL</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.HTTP_CORE_LEVEL"><code class="docutils literal notranslate"><span class="pre">LogSettings.HTTP_CORE_LEVEL</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.HTTPX_LEVEL"><code class="docutils literal notranslate"><span class="pre">LogSettings.HTTPX_LEVEL</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.FORMAT"><code class="docutils literal notranslate"><span class="pre">LogSettings.FORMAT</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.FILE"><code class="docutils literal notranslate"><span class="pre">LogSettings.FILE</span></code></a></li>
 </ul>
@@ -364,35 +367,40 @@ validated to form a valid model.</p>
 </span><span id="1-25"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dev User Id&quot;</span><span class="p">,</span>
 </span><span id="1-26"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
 </span><span id="1-27"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-28"><span class="w">      </span><span class="nt">&quot;PLUGINS_LOC&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-29"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/runner/work/byte/byte/byte_bot/byte/plugins&quot;</span><span class="p">,</span>
-</span><span id="1-30"><span class="w">         </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
-</span><span id="1-31"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Plugins Loc&quot;</span><span class="p">,</span>
-</span><span id="1-32"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-</span><span id="1-33"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-34"><span class="w">      </span><span class="nt">&quot;PLUGINS_DIRS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-35"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="1-36"><span class="w">            </span><span class="s2">&quot;/home/runner/work/byte/byte/byte_bot/byte/plugins&quot;</span>
-</span><span id="1-37"><span class="w">         </span><span class="p">],</span>
-</span><span id="1-38"><span class="w">         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-39"><span class="w">            </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
-</span><span id="1-40"><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-</span><span id="1-41"><span class="w">         </span><span class="p">},</span>
-</span><span id="1-42"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Plugins Dirs&quot;</span><span class="p">,</span>
-</span><span id="1-43"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
-</span><span id="1-44"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-45"><span class="w">      </span><span class="nt">&quot;PRESENCE_URL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-46"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-</span><span id="1-47"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Presence Url&quot;</span><span class="p">,</span>
-</span><span id="1-48"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-</span><span id="1-49"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-50"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-51"><span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="1-52"><span class="w">      </span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span>
-</span><span id="1-53"><span class="w">      </span><span class="s2">&quot;DEV_GUILD_ID&quot;</span><span class="p">,</span>
-</span><span id="1-54"><span class="w">      </span><span class="s2">&quot;DEV_USER_ID&quot;</span>
-</span><span id="1-55"><span class="w">   </span><span class="p">]</span>
-</span><span id="1-56"><span class="p">}</span>
+</span><span id="1-28"><span class="w">      </span><span class="nt">&quot;DEV_GUILD_INTERNAL_ID&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-29"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1136100160510902272</span><span class="p">,</span>
+</span><span id="1-30"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dev Guild Internal Id&quot;</span><span class="p">,</span>
+</span><span id="1-31"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+</span><span id="1-32"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-33"><span class="w">      </span><span class="nt">&quot;PLUGINS_LOC&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-34"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/runner/work/byte/byte/byte_bot/byte/plugins&quot;</span><span class="p">,</span>
+</span><span id="1-35"><span class="w">         </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
+</span><span id="1-36"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Plugins Loc&quot;</span><span class="p">,</span>
+</span><span id="1-37"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-38"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-39"><span class="w">      </span><span class="nt">&quot;PLUGINS_DIRS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-40"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-41"><span class="w">            </span><span class="s2">&quot;/home/runner/work/byte/byte/byte_bot/byte/plugins&quot;</span>
+</span><span id="1-42"><span class="w">         </span><span class="p">],</span>
+</span><span id="1-43"><span class="w">         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-44"><span class="w">            </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
+</span><span id="1-45"><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-46"><span class="w">         </span><span class="p">},</span>
+</span><span id="1-47"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Plugins Dirs&quot;</span><span class="p">,</span>
+</span><span id="1-48"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+</span><span id="1-49"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-50"><span class="w">      </span><span class="nt">&quot;PRESENCE_URL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-51"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+</span><span id="1-52"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Presence Url&quot;</span><span class="p">,</span>
+</span><span id="1-53"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-54"><span class="w">      </span><span class="p">}</span>
+</span><span id="1-55"><span class="w">   </span><span class="p">},</span>
+</span><span id="1-56"><span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-57"><span class="w">      </span><span class="s2">&quot;TOKEN&quot;</span><span class="p">,</span>
+</span><span id="1-58"><span class="w">      </span><span class="s2">&quot;DEV_GUILD_ID&quot;</span><span class="p">,</span>
+</span><span id="1-59"><span class="w">      </span><span class="s2">&quot;DEV_USER_ID&quot;</span>
+</span><span id="1-60"><span class="w">   </span><span class="p">]</span>
+</span><span id="1-61"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
@@ -408,6 +416,7 @@ validated to form a valid model.</p>
 <dd class="field-even"><ul class="simple">
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.COMMAND_PREFIX" title="byte_bot.byte.lib.settings.DiscordSettings.COMMAND_PREFIX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">COMMAND_PREFIX</span> <span class="pre">(list[str])</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.DEV_GUILD_ID" title="byte_bot.byte.lib.settings.DiscordSettings.DEV_GUILD_ID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DEV_GUILD_ID</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.DEV_GUILD_INTERNAL_ID" title="byte_bot.byte.lib.settings.DiscordSettings.DEV_GUILD_INTERNAL_ID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DEV_GUILD_INTERNAL_ID</span> <span class="pre">(int)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.DEV_USER_ID" title="byte_bot.byte.lib.settings.DiscordSettings.DEV_USER_ID"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DEV_USER_ID</span> <span class="pre">(int)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.PLUGINS_DIRS" title="byte_bot.byte.lib.settings.DiscordSettings.PLUGINS_DIRS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PLUGINS_DIRS</span> <span class="pre">(list[pathlib.Path])</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.DiscordSettings.PLUGINS_LOC" title="byte_bot.byte.lib.settings.DiscordSettings.PLUGINS_LOC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PLUGINS_LOC</span> <span class="pre">(pathlib.Path)</span></code></a></p></li>
@@ -451,6 +460,12 @@ validated to form a valid model.</p>
 <dt class="sig sig-object py" id="byte_bot.byte.lib.settings.DiscordSettings.DEV_USER_ID">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DEV_USER_ID</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><em class="property"> <span class="pre">[Required]</span></em><a class="headerlink" href="#byte_bot.byte.lib.settings.DiscordSettings.DEV_USER_ID" title="Link to this definition">¶</a></dt>
 <dd><p>Discord User ID for development.</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.settings.DiscordSettings.DEV_GUILD_INTERNAL_ID">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DEV_GUILD_INTERNAL_ID</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1136100160510902272</span></em><a class="headerlink" href="#byte_bot.byte.lib.settings.DiscordSettings.DEV_GUILD_INTERNAL_ID" title="Link to this definition">¶</a></dt>
+<dd><p>Internal channel ID for the development guild.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
@@ -542,19 +557,29 @@ validated to form a valid model.</p>
 </span><span id="1-23"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Asyncio Level&quot;</span><span class="p">,</span>
 </span><span id="1-24"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
 </span><span id="1-25"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-26"><span class="w">      </span><span class="nt">&quot;FORMAT&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-27"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[[ %(asctime)s ]] - [[ %(name)s ]] - [[ %(levelname)s ]] - %(message)s&quot;</span><span class="p">,</span>
-</span><span id="1-28"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Format&quot;</span><span class="p">,</span>
-</span><span id="1-29"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-26"><span class="w">      </span><span class="nt">&quot;HTTP_CORE_LEVEL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-27"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+</span><span id="1-28"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Http Core Level&quot;</span><span class="p">,</span>
+</span><span id="1-29"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
 </span><span id="1-30"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-31"><span class="w">      </span><span class="nt">&quot;FILE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-32"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/runner/work/byte/byte/byte_bot/logs/byte.log&quot;</span><span class="p">,</span>
-</span><span id="1-33"><span class="w">         </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
-</span><span id="1-34"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File&quot;</span><span class="p">,</span>
-</span><span id="1-35"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-</span><span id="1-36"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-37"><span class="w">   </span><span class="p">}</span>
-</span><span id="1-38"><span class="p">}</span>
+</span><span id="1-31"><span class="w">      </span><span class="nt">&quot;HTTPX_LEVEL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-32"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+</span><span id="1-33"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Httpx Level&quot;</span><span class="p">,</span>
+</span><span id="1-34"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+</span><span id="1-35"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-36"><span class="w">      </span><span class="nt">&quot;FORMAT&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-37"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;[[ %(asctime)s ]] - [[ %(name)s ]] - [[ %(levelname)s ]] - %(message)s&quot;</span><span class="p">,</span>
+</span><span id="1-38"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Format&quot;</span><span class="p">,</span>
+</span><span id="1-39"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-40"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-41"><span class="w">      </span><span class="nt">&quot;FILE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-42"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/runner/work/byte/byte/byte_bot/logs/byte.log&quot;</span><span class="p">,</span>
+</span><span id="1-43"><span class="w">         </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
+</span><span id="1-44"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;File&quot;</span><span class="p">,</span>
+</span><span id="1-45"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-46"><span class="w">      </span><span class="p">}</span>
+</span><span id="1-47"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-48"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
@@ -572,6 +597,8 @@ validated to form a valid model.</p>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.DISCORD_LEVEL" title="byte_bot.byte.lib.settings.LogSettings.DISCORD_LEVEL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DISCORD_LEVEL</span> <span class="pre">(int)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.FILE" title="byte_bot.byte.lib.settings.LogSettings.FILE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FILE</span> <span class="pre">(pathlib.Path)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.FORMAT" title="byte_bot.byte.lib.settings.LogSettings.FORMAT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FORMAT</span> <span class="pre">(str)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.HTTPX_LEVEL" title="byte_bot.byte.lib.settings.LogSettings.HTTPX_LEVEL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HTTPX_LEVEL</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.HTTP_CORE_LEVEL" title="byte_bot.byte.lib.settings.LogSettings.HTTP_CORE_LEVEL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HTTP_CORE_LEVEL</span> <span class="pre">(int)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.LEVEL" title="byte_bot.byte.lib.settings.LogSettings.LEVEL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LEVEL</span> <span class="pre">(int)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_bot.byte.lib.settings.LogSettings.WEBSOCKETS_LEVEL" title="byte_bot.byte.lib.settings.LogSettings.WEBSOCKETS_LEVEL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WEBSOCKETS_LEVEL</span> <span class="pre">(int)</span></code></a></p></li>
 </ul>
@@ -600,6 +627,18 @@ validated to form a valid model.</p>
 <dt class="sig sig-object py" id="byte_bot.byte.lib.settings.LogSettings.ASYNCIO_LEVEL">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ASYNCIO_LEVEL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></em><a class="headerlink" href="#byte_bot.byte.lib.settings.LogSettings.ASYNCIO_LEVEL" title="Link to this definition">¶</a></dt>
 <dd><p>Sets the log level for the asyncio library.</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.settings.LogSettings.HTTP_CORE_LEVEL">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HTTP_CORE_LEVEL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></em><a class="headerlink" href="#byte_bot.byte.lib.settings.LogSettings.HTTP_CORE_LEVEL" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the log level for the httpcore library. (Used in cert. validation)</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_bot.byte.lib.settings.LogSettings.HTTPX_LEVEL">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HTTPX_LEVEL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#byte_bot.byte.lib.settings.LogSettings.HTTPX_LEVEL" title="Link to this definition">¶</a></dt>
+<dd><p>Sets the log level for the httpx library.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
