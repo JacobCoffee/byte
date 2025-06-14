@@ -4,5 +4,5 @@ service
 
 Service layer
 
-.. automodule:: src.server.lib.service
+.. automodule:: byte_bot.server.lib.service
      :members:

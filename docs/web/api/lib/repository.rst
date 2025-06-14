@@ -2,5 +2,5 @@
 repository
 ==========
 
-.. automodule:: src.server.lib.repository
+.. automodule:: byte_bot.server.lib.repository
      :members:
