@@ -29,7 +29,7 @@ def frontend() -> None:
     if settings.project.ENVIRONMENT == "prod" or not settings.project.DEV_MODE:
         logger.info("🎨 Skipping Tailwind Compiler in production environment.")
         return
-        
+
     log.config.configure()
     logger.info("🎨 Starting Tailwind Compiler.")
     try:
@@ -202,9 +202,9 @@ def run_all(
     """Runs both the bot and the web server."""
     bot_process = multiprocessing.Process(target=bot)
     web_process = multiprocessing.Process(target=web, args=(host, port, http_workers, reload, verbose, debug))
-    
+
     processes = [bot_process, web_process]
-    
+
     if settings.project.ENVIRONMENT != "prod" and settings.project.DEV_MODE:
         frontend_process = multiprocessing.Process(target=frontend)
         processes.append(frontend_process)
