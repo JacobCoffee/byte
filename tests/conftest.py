@@ -15,7 +15,7 @@ os.environ["DISCORD_TOKEN"] = "test-token"
 os.environ["DISCORD_DEV_GUILD_ID"] = "123456789"
 os.environ["DISCORD_DEV_USER_ID"] = "987654321"
 
-from collections.abc import AsyncGenerator, Generator
+from collections.abc import AsyncGenerator
 from typing import TYPE_CHECKING, Any
 from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
@@ -25,11 +25,10 @@ from litestar import Litestar
 from litestar.testing import AsyncTestClient
 from sqlalchemy import event
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
-from sqlalchemy.pool import NullPool, StaticPool
+from sqlalchemy.pool import StaticPool
 
 if TYPE_CHECKING:
-    import discord
-    from discord.ext.commands import Bot
+    pass
 
 __all__ = (
     "app",
@@ -68,11 +67,6 @@ async def engine() -> AsyncGenerator[AsyncEngine, None]:
     # Import models first to register them with metadata
     from byte_bot.server.domain.db.models import (
         Guild,
-        GitHubConfig,
-        SOTagsConfig,
-        AllowedUsersConfig,
-        User,
-        ForumConfig,
     )
 
     engine = create_async_engine(
@@ -321,9 +315,7 @@ def mock_discord_message(mock_discord_member: MagicMock, mock_discord_guild: Mag
     Returns:
         MagicMock: Mock Discord message
     """
-    message = MagicMock(
-        spec=["id", "content", "author", "guild", "channel", "created_at", "jump_url", "add_reaction"]
-    )
+    message = MagicMock(spec=["id", "content", "author", "guild", "channel", "created_at", "jump_url", "add_reaction"])
     message.id = 111111111
     message.content = "!test command"
     message.author = mock_discord_member

@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 import pytest
-from httpx import AsyncClient
 from litestar.status_codes import (
     HTTP_200_OK,
     HTTP_201_CREATED,
@@ -14,7 +13,7 @@ from litestar.status_codes import (
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from byte_bot.server.domain.db.models import Guild, GitHubConfig, SOTagsConfig
+from byte_bot.server.domain.db.models import GitHubConfig, Guild, SOTagsConfig
 
 if TYPE_CHECKING:
     from litestar.testing import AsyncTestClient

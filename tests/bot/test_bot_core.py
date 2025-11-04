@@ -15,8 +15,8 @@ if TYPE_CHECKING:
     pass
 
 __all__ = (
-    "TestByteBot",
     "TestBotEventHandlers",
+    "TestByteBot",
 )
 
 
@@ -43,7 +43,7 @@ class TestByteBot:
 
         # Mock the load_cogs method and tree
         with patch.object(bot, "load_cogs", new=AsyncMock()) as mock_load_cogs:
-            with patch.object(bot.tree, "copy_global_to") as mock_copy:
+            with patch.object(bot.tree, "copy_global_to"):
                 with patch.object(bot.tree, "sync", new=AsyncMock()) as mock_sync:
                     await bot.setup_hook()
 

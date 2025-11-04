@@ -9,12 +9,10 @@ from sqlalchemy import inspect, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from byte_bot.server.domain.db.models import (
-    AllowedUsersConfig,
     ForumConfig,
     GitHubConfig,
     Guild,
     SOTagsConfig,
-    User,
 )
 
 if TYPE_CHECKING:
@@ -36,6 +34,7 @@ class TestDatabaseModels:
         Args:
             engine: Database engine
         """
+
         def check_tables(connection):
             inspector = inspect(connection)
             return inspector.get_table_names()

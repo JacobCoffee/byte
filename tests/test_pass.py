@@ -24,6 +24,7 @@ def test_imports():
 @pytest.mark.asyncio
 async def test_async_support():
     """Test that async test support is working."""
+
     # Simple async test to verify pytest-asyncio is configured
     async def async_function():
         return True

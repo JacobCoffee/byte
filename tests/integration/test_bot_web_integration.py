@@ -149,9 +149,6 @@ class TestGuildSyncIntegration:
 
         assert response.status_code == 200
 
-        # Verify update in database
-        result = await async_session.execute(select(Guild).where(Guild.guild_id == sample_guild["guild_id"]))
-        updated_guild = result.scalar_one()
-
-        # Note: The update might not be reflected immediately due to transaction isolation
-        # In a real scenario, you'd want to refresh the session or query again
+        # Note: Verifying the update in database would require refreshing the session
+        # due to transaction isolation. Since this test is skipped (requires full app setup),
+        # we're only validating the API response here.
