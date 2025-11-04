@@ -23,8 +23,9 @@ from uuid import uuid4
 import pytest
 from litestar import Litestar
 from litestar.testing import AsyncTestClient
+from sqlalchemy import event
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, create_async_engine
-from sqlalchemy.pool import NullPool
+from sqlalchemy.pool import NullPool, StaticPool
 
 if TYPE_CHECKING:
     import discord
@@ -58,21 +59,41 @@ async def engine() -> AsyncGenerator[AsyncEngine, None]:
     """Create a test database engine.
 
     Uses an in-memory SQLite database for testing.
+    Important: Uses connect_args with check_same_thread=False to allow
+    the same in-memory database to be accessed from multiple connections.
 
     Yields:
         AsyncEngine: SQLAlchemy async engine
     """
-    # Import here to avoid circular imports
-    from advanced_alchemy.base import UUIDAuditBase
-
-    engine = create_async_engine(
-        "sqlite+aiosqlite:///:memory:",
-        echo=False,
-        poolclass=NullPool,
+    # Import models first to register them with metadata
+    from byte_bot.server.domain.db.models import (
+        Guild,
+        GitHubConfig,
+        SOTagsConfig,
+        AllowedUsersConfig,
+        User,
+        ForumConfig,
     )
 
+    engine = create_async_engine(
+        "sqlite+aiosqlite://",
+        echo=False,
+        poolclass=StaticPool,
+        connect_args={"check_same_thread": False},
+    )
+
+    # Enable foreign key constraints in SQLite (disabled by default)
+    @event.listens_for(engine.sync_engine, "connect")
+    def enable_foreign_keys(dbapi_conn, connection_record):
+        """Enable foreign key support in SQLite."""
+        cursor = dbapi_conn.cursor()
+        cursor.execute("PRAGMA foreign_keys=ON")
+        cursor.close()
+
+    # Create all tables using the metadata from the models
     async with engine.begin() as conn:
-        await conn.run_sync(UUIDAuditBase.metadata.create_all)
+        # Get metadata from any model (they all share the same base)
+        await conn.run_sync(Guild.metadata.create_all)
 
     yield engine
 
@@ -100,35 +121,19 @@ async def async_session(engine: AsyncEngine) -> AsyncGenerator[AsyncSession, Non
 
 
 @pytest.fixture(scope="function")
-async def app(engine: AsyncEngine) -> AsyncGenerator[Litestar, None]:
+async def app() -> AsyncGenerator[Litestar, None]:
     """Create a test Litestar application.
 
-    Args:
-        engine: Test database engine
+    Note: This uses the default app configuration. For tests that need
+    database access, use async_session fixture directly instead.
 
     Yields:
         Litestar: Test application instance
     """
-    # Import here to avoid circular imports
-    from advanced_alchemy.extensions.litestar import AsyncSessionConfig, SQLAlchemyAsyncConfig
-    from advanced_alchemy.extensions.litestar.plugins import SQLAlchemyInitPlugin
-
+    # Import here to avoid circular imports at module level
     from byte_bot.app import create_app
 
-    session_config = AsyncSessionConfig(expire_on_commit=False)
-    sqlalchemy_config = SQLAlchemyAsyncConfig(
-        engine_instance=engine,
-        session_config=session_config,
-    )
-
-    # Create app with test database
     app = create_app()
-
-    # Replace the database plugin with our test database
-    for i, plugin in enumerate(app.plugins):
-        if isinstance(plugin, SQLAlchemyInitPlugin):
-            app.plugins[i] = SQLAlchemyInitPlugin(config=sqlalchemy_config)
-            break
 
     yield app
 

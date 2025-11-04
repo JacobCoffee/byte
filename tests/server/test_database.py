@@ -36,10 +36,13 @@ class TestDatabaseModels:
         Args:
             engine: Database engine
         """
+        def check_tables(connection):
+            inspector = inspect(connection)
+            return inspector.get_table_names()
+
         async with engine.connect() as conn:
-            # Get table names
-            inspector = inspect(engine.sync_engine)
-            table_names = inspector.get_table_names()
+            # Get table names using run_sync to avoid greenlet issues
+            table_names = await conn.run_sync(check_tables)
 
             # Check that core tables exist
             assert "guild" in table_names
