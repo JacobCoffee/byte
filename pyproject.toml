@@ -289,9 +289,9 @@ known-first-party = ["byte_bot", "byte_common", "tests"]
     "FBT003", # Boolean Boolean default positional argument in function definition
     "B008", # Do not perform function calls in argument defaults
 ]
-"byte_bot/**/*.*" = ["PLR0913", "SLF001"]
+"byte_bot/**/*.*" = ["PLR0913", "SLF001", "PLC0415"]  # Imports inside functions in monolith
 "byte_bot/server/lib/db/base.py" = ["E501"]
-"byte_bot/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"byte_bot/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH", "PLC"]
 "tests/**/*.*" = [
     "S101",
     "D",
@@ -309,6 +309,7 @@ known-first-party = ["byte_bot", "byte_common", "tests"]
     "N",
     "SIM",
     "PLR",
+    "PLC",  # pylint convention
     "BLE",
     "RSE",
     "C901",
@@ -346,6 +347,7 @@ known-first-party = ["byte_bot", "byte_common", "tests"]
 ]
 "docs/conf.py" = ["FIX002", "ARG001", "INP001"]
 "tools/**/*.*" = ["D", "ARG", "EM", "TRY", "G", "FBT", "INP"]
+"packages/byte-common/src/byte_common/schemas/**/*.*" = ["TC003"]  # UUID needed at runtime for Pydantic
 "packages/byte-common/tests/**/*.*" = [
     "S101",
     "D",
@@ -363,6 +365,7 @@ known-first-party = ["byte_bot", "byte_common", "tests"]
     "N",
     "SIM",
     "PLR",
+    "PLC",  # pylint convention
     "BLE",
     "RSE",
     "C901",
