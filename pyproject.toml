@@ -76,6 +76,11 @@ allow-direct-references = true
 [tool.hatch.build.targets.wheel]
 packages = ["byte_bot/"]
 
+[tool.uv.workspace]
+members = [
+    "packages/byte-common",
+]
+
 [tool.uv]
 dev-dependencies = [
     # - Testing
@@ -107,6 +112,7 @@ dev-dependencies = [
     "sourcery>=1.14.0",
     "pre-commit>=3.3.3",
     "pyright>=1.1.339",
+    "aiosqlite>=0.21.0",
 ]
 
 [tool.codespell]
@@ -115,25 +121,71 @@ ignore-words-list = "selectin, alog, thirdparty"
 skip = "uv.lock, package-lock.json, *.svg, docs/changelog.rst"
 
 [tool.coverage.run]
-omit = ["*/tests/*"]
+source = ["byte_bot", "packages/byte-common/src/byte_common"]
+omit = [
+    "*/tests/*",
+    "*/__init__.py",
+    "*/migrations/*",
+    "*/.venv/*",
+    "*/site-packages/*",
+]
+branch = true
+parallel = true
 
 [tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
 exclude_lines = [
     'pragma: no cover',
     'if TYPE_CHECKING:',
     'except ImportError as e:',
     'except ImportError:',
+    'def __repr__',
+    'raise NotImplementedError',
+    'raise AssertionError',
+    'if __name__ == "__main__":',
+    '@abstractmethod',
+    '@abc.abstractmethod',
 ]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+pythonpath = "packages/byte-common/src"
+testpaths = ["tests", "packages/byte-common/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+    "--import-mode=importlib",
+    "--cov=byte_bot",
+    "--cov=byte_common",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+markers = [
+    "asyncio: mark test as async",
+    "unit: mark test as unit test",
+    "integration: mark test as integration test",
+]
 filterwarnings = [
     "ignore::DeprecationWarning:pkg_resources.*",
     "ignore::DeprecationWarning:sphinxcontrib",
 ]
 
 [tool.pyright]
-include = ["byte_bot/", "tests"]
+include = ["byte_bot/", "tests", "packages/byte-common/src", "packages/byte-common/tests"]
+extraPaths = ["packages/byte-common/src"]
 disableBytesTypePromotions = true
 exclude = [
     "tools",
@@ -221,7 +273,7 @@ classmethod-decorators = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["byte_bot", "tests"]
+known-first-party = ["byte_bot", "byte_common", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
@@ -237,9 +289,9 @@ known-first-party = ["byte_bot", "tests"]
     "FBT003", # Boolean Boolean default positional argument in function definition
     "B008", # Do not perform function calls in argument defaults
 ]
-"byte_bot/**/*.*" = ["PLR0913", "SLF001"]
+"byte_bot/**/*.*" = ["PLR0913", "SLF001", "PLC0415"]  # Imports inside functions in monolith
 "byte_bot/server/lib/db/base.py" = ["E501"]
-"byte_bot/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH"]
+"byte_bot/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH", "PLC"]
 "tests/**/*.*" = [
     "S101",
     "D",
@@ -257,6 +309,7 @@ known-first-party = ["byte_bot", "tests"]
     "N",
     "SIM",
     "PLR",
+    "PLC",  # pylint convention
     "BLE",
     "RSE",
     "C901",
@@ -294,6 +347,46 @@ known-first-party = ["byte_bot", "tests"]
 ]
 "docs/conf.py" = ["FIX002", "ARG001", "INP001"]
 "tools/**/*.*" = ["D", "ARG", "EM", "TRY", "G", "FBT", "INP"]
+"packages/byte-common/src/byte_common/schemas/**/*.*" = ["TC003"]  # UUID needed at runtime for Pydantic
+"packages/byte-common/tests/**/*.*" = [
+    "S101",
+    "D",
+    "ARG",
+    "PGH",
+    "B",
+    "FBT",
+    "PTH",
+    "A",
+    "TCH",
+    "DTZ",
+    "TRY",
+    "EM",
+    "S",
+    "N",
+    "SIM",
+    "PLR",
+    "PLC",  # pylint convention
+    "BLE",
+    "RSE",
+    "C901",
+    "PLW",
+    "G",
+    "PIE",
+    "RUF012",
+    "FA",
+    "ANN",
+    "SLF",
+    "PT",
+    "INP",
+    "TD",
+    "FIX",
+    "FBT",
+    "PLR0913",
+    "PT",
+    "PLR2004",
+    "TID252",
+    "T",
+]
 
 [tool.git-cliff.changelog]
 header = """

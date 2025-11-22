@@ -33,7 +33,7 @@ def frontend() -> None:
     log.config.configure()
     logger.info("🎨 Starting Tailwind Compiler.")
     try:
-        subprocess.run(  # noqa: S603
+        subprocess.run(
             [  # noqa: S607
                 "tailwindcss",
                 "-i",
@@ -56,7 +56,7 @@ def bot() -> None:
     log.config.configure()
     logger.info("🤖 Starting Byte.")
     try:
-        subprocess.run(["python", "byte_bot/byte/bot.py"], check=True)  # noqa: S603, S607
+        subprocess.run(["python", "byte_bot/byte/bot.py"], check=True)  # noqa: S607
     finally:
         for process in multiprocessing.active_children():
             process.terminate()
