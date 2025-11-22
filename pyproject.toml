@@ -76,6 +76,11 @@ allow-direct-references = true
 [tool.hatch.build.targets.wheel]
 packages = ["byte_bot/"]
 
+[tool.uv.workspace]
+members = [
+    "packages/byte-common",
+]
+
 [tool.uv]
 dev-dependencies = [
     # - Testing
@@ -107,6 +112,7 @@ dev-dependencies = [
     "sourcery>=1.14.0",
     "pre-commit>=3.3.3",
     "pyright>=1.1.339",
+    "aiosqlite>=0.21.0",
 ]
 
 [tool.codespell]
@@ -115,18 +121,61 @@ ignore-words-list = "selectin, alog, thirdparty"
 skip = "uv.lock, package-lock.json, *.svg, docs/changelog.rst"
 
 [tool.coverage.run]
-omit = ["*/tests/*"]
+source = ["byte_bot", "packages/byte-common/src/byte_common"]
+omit = [
+    "*/tests/*",
+    "*/__init__.py",
+    "*/migrations/*",
+    "*/.venv/*",
+    "*/site-packages/*",
+]
+branch = true
+parallel = true
 
 [tool.coverage.report]
+precision = 2
+show_missing = true
+skip_covered = false
 exclude_lines = [
     'pragma: no cover',
     'if TYPE_CHECKING:',
     'except ImportError as e:',
     'except ImportError:',
+    'def __repr__',
+    'raise NotImplementedError',
+    'raise AssertionError',
+    'if __name__ == "__main__":',
+    '@abstractmethod',
+    '@abc.abstractmethod',
 ]
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.coverage.xml]
+output = "coverage.xml"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+testpaths = ["tests", "packages/byte-common/tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+    "--cov=byte_bot",
+    "--cov=byte_common",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+markers = [
+    "asyncio: mark test as async",
+    "unit: mark test as unit test",
+    "integration: mark test as integration test",
+]
 filterwarnings = [
     "ignore::DeprecationWarning:pkg_resources.*",
     "ignore::DeprecationWarning:sphinxcontrib",

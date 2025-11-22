@@ -1,0 +1,37 @@
+# Coverage configuration file
+# This complements the pyproject.toml coverage settings
+
+[run]
+source =
+    byte_bot
+    packages/byte-common/src/byte_common
+omit =
+    */tests/*
+    */__init__.py
+    */migrations/*
+    */.venv/*
+    */site-packages/*
+branch = True
+parallel = True
+
+[report]
+precision = 2
+show_missing = True
+skip_covered = False
+exclude_lines =
+    pragma: no cover
+    if TYPE_CHECKING:
+    except ImportError as e:
+    except ImportError:
+    def __repr__
+    raise NotImplementedError
+    raise AssertionError
+    if __name__ == "__main__":
+    @abstractmethod
+    @abc.abstractmethod
+
+[html]
+directory = htmlcov
+
+[xml]
+output = coverage.xml
