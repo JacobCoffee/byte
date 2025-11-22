@@ -34,7 +34,7 @@ jobs:
           args: "format --check --diff"
 
       - name: Run ty type checker
-        uses: JacobCoffee/ty-action@v1
+        uses: JacobCoffee/ty-action@v0.0.1
         with:
           version: '0.0.1a26'
           args: 'check'
