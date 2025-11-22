@@ -125,6 +125,5 @@ def create_sample_forum_config(guild_id: int | None = None, **kwargs) -> ForumCo
         "showcase_thread_auto_close_days": None,
         "created_at": datetime.now(UTC),
         "updated_at": datetime.now(UTC),
-    }
-    defaults.update(kwargs)
+    } | kwargs
     return ForumConfig(**defaults)
