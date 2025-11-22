@@ -165,6 +165,7 @@ addopts = [
     "-v",
     "--strict-markers",
     "--tb=short",
+    "--import-mode=importlib",
     "--cov=byte_bot",
     "--cov=byte_common",
     "--cov-report=term-missing",
