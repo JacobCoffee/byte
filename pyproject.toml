@@ -157,6 +157,7 @@ output = "coverage.xml"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
+pythonpath = "packages/byte-common/src"
 testpaths = ["tests", "packages/byte-common/tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
