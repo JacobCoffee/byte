@@ -13,10 +13,10 @@ if TYPE_CHECKING:
     from byte_common.models.user import User
 
 __all__ = [
+    "create_sample_forum_config",
+    "create_sample_github_config",
     "create_sample_guild",
     "create_sample_user",
-    "create_sample_github_config",
-    "create_sample_forum_config",
 ]
 
 

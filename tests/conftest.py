@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, AsyncGenerator
+from collections.abc import AsyncGenerator
+from typing import TYPE_CHECKING
 
 import pytest
 from advanced_alchemy.base import UUIDAuditBase
@@ -25,10 +26,10 @@ __all__ = [
     "async_engine",
     "async_session",
     "db_session",
+    "sample_forum_config",
+    "sample_github_config",
     "sample_guild",
     "sample_user",
-    "sample_github_config",
-    "sample_forum_config",
 ]
 
 

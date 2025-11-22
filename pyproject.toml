@@ -272,7 +272,7 @@ classmethod-decorators = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["byte_bot", "tests"]
+known-first-party = ["byte_bot", "byte_common", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
@@ -345,6 +345,44 @@ known-first-party = ["byte_bot", "tests"]
 ]
 "docs/conf.py" = ["FIX002", "ARG001", "INP001"]
 "tools/**/*.*" = ["D", "ARG", "EM", "TRY", "G", "FBT", "INP"]
+"packages/byte-common/tests/**/*.*" = [
+    "S101",
+    "D",
+    "ARG",
+    "PGH",
+    "B",
+    "FBT",
+    "PTH",
+    "A",
+    "TCH",
+    "DTZ",
+    "TRY",
+    "EM",
+    "S",
+    "N",
+    "SIM",
+    "PLR",
+    "BLE",
+    "RSE",
+    "C901",
+    "PLW",
+    "G",
+    "PIE",
+    "RUF012",
+    "FA",
+    "ANN",
+    "SLF",
+    "PT",
+    "INP",
+    "TD",
+    "FIX",
+    "FBT",
+    "PLR0913",
+    "PT",
+    "PLR2004",
+    "TID252",
+    "T",
+]
 
 [tool.git-cliff.changelog]
 header = """

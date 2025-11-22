@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 import pytest
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncEngine
+from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker
 
 from byte_common.models.forum_config import ForumConfig
 from byte_common.models.github_config import GitHubConfig
