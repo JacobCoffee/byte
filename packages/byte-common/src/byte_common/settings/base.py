@@ -7,6 +7,7 @@ import os
 
 from pydantic import field_validator
 from pydantic.types import SecretBytes
+from pydantic_core import PydanticUndefined
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 __all__ = ("BaseAppSettings",)
@@ -35,7 +36,7 @@ class BaseAppSettings(BaseSettings):
 
     @field_validator("SECRET_KEY", mode="before")
     @classmethod
-    def generate_secret_key(cls, value: str | None) -> SecretBytes:
+    def generate_secret_key(cls, value: str | bytes | SecretBytes | None) -> SecretBytes:
         """Generate a secret key if not provided.
 
         Args:
@@ -44,6 +45,10 @@ class BaseAppSettings(BaseSettings):
         Returns:
             A secret key as SecretBytes.
         """
-        if value is None:
+        if value is None or value is PydanticUndefined:
             return SecretBytes(binascii.hexlify(os.urandom(32)))
+        if isinstance(value, SecretBytes):
+            return value
+        if isinstance(value, bytes):
+            return SecretBytes(value)
         return SecretBytes(value.encode())

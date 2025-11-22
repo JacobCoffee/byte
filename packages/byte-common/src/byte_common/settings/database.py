@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 __all__ = ("DatabaseSettings",)
@@ -58,7 +59,7 @@ class DatabaseSettings(BaseSettings):
 
     See :class:`QueuePool <sqlalchemy.pool.QueuePool>`.
     """
-    CONNECT_ARGS: dict[str, Any] = {}
+    CONNECT_ARGS: dict[str, Any] = Field(default_factory=dict)
     """Connection arguments to pass to the database driver."""
     URL: str = "postgresql+asyncpg://byte:bot@localhost:5432/byte"
     """Database connection URL."""

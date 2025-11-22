@@ -59,7 +59,7 @@ class ForumConfig(UUIDAuditBase):
     # Showcase forum settings
     showcase_forum: Mapped[bool] = mapped_column(default=False)
     showcase_forum_category: Mapped[str | None]
-    showcase_channel_id: AssociationProxy[int | None] = association_proxy("guild", "showcase_channel_Id")
+    showcase_channel_id: AssociationProxy[int | None] = association_proxy("guild", "showcase_channel_id")
     showcase_thread_auto_close: Mapped[bool] = mapped_column(default=False)
     showcase_thread_auto_close_days: Mapped[int | None]
 
@@ -70,5 +70,5 @@ class ForumConfig(UUIDAuditBase):
         back_populates="forum_config",
         innerjoin=True,
         lazy="noload",
-        cascade="save-update, merge, delete",
+        cascade="save-update, merge",
     )

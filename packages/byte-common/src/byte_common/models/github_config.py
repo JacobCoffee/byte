@@ -37,5 +37,5 @@ class GitHubConfig(UUIDAuditBase):
         back_populates="github_config",
         innerjoin=True,
         lazy="noload",
-        cascade="save-update, merge, delete",
+        cascade="save-update, merge",
     )
