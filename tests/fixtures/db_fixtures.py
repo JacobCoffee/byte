@@ -92,8 +92,7 @@ def create_sample_github_config(guild_id: int | None = None, **kwargs) -> GitHub
         "github_repository": "test-repo",
         "created_at": datetime.now(UTC),
         "updated_at": datetime.now(UTC),
-    }
-    defaults.update(kwargs)
+    } | kwargs
     return GitHubConfig(**defaults)
 
 
