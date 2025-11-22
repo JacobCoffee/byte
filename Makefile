@@ -12,7 +12,7 @@ UV 			    ?= 	uv $(UV_OPTS)
 
 .EXPORT_ALL_VARIABLES:
 
-.PHONY: help upgrade install-pre-commit install
+.PHONY: help upgrade install-prek install
 .PHONY: fmt-fix test coverage check-all lint fmt-check
 .PHONY: docs-install docs-clean docs-serve docs-build
 .PHONY: clean run-dev-frontend run-dev-server production develop destroy
@@ -21,8 +21,8 @@ help: ## Display this help text for Makefile
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
 upgrade: ## Upgrade all dependencies to the latest stable versions
-	@echo "=> Upgrading pre-commit"
-	@(UV_RUN_BIN) run pre-commit autoupdate
+	@echo "=> Upgrading prek"
+	@(UV_RUN_BIN) run prek autoupdate
 	@if [ "$(USING_UV)" ]; then $(UV) lock --upgrade
 	@echo "Dependencies Updated"
 
@@ -35,13 +35,13 @@ install-uv: ## Install latest version of UV
 	@curl -LsSf https://astral.sh/uv/install.sh | sh
 	@echo "=> uv installed"
 
-install-pre-commit: ## Install pre-commit and install hooks
-	@echo "Installing pre-commit hooks"
-	@(UV_RUN_BIN) run pre-commit install --install-hooks --all
-	@(UV_RUN_BIN) run pre-commit install --hook-type commit-msg
-	@echo "=> pre-commit hooks installed, updating pre-commit hooks"
-	@(UV_RUN_BIN) run pre-commit autoupdate
-	@echo "pre-commit installed"
+install-prek: ## Install prek and install hooks
+	@echo "Installing prek hooks"
+	@(UV_RUN_BIN) run prek install
+	@(UV_RUN_BIN) run prek install --hook-type commit-msg
+	@echo "=> prek hooks installed"
+	@(UV_RUN_BIN) run prek autoupdate
+	@echo "prek installed"
 
 .PHONY: install-frontend
 install-frontend: ## Install the frontend dependencies
@@ -88,8 +88,8 @@ refresh-container: clean-container up-container load-container ## Refresh the By
 # Tests, Linting, Coverage
 # =============================================================================
 
-lint: ## Runs pre-commit hooks; includes ruff linting, codespell, black
-	@$(UV) run --no-sync pre-commit run --all-files
+lint: ## Runs prek hooks; includes ruff linting, codespell, black
+	@$(UV) run --no-sync prek run --all-files
 
 fmt-check: ## Runs Ruff format in check mode (no changes)
 	@$(UV) run --no-sync ruff format --check .

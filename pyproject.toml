@@ -18,7 +18,6 @@ dependencies = [
     "githubkit[auth-app] @ git+https://github.com/yanyongyu/githubkit.git",
     "PyJWT>=2.8.0",
     "alembic>=1.13.0",
-    "pre-commit>=3.6.2",
     "ruff>=0.1.7",
     "python-dateutil>=2.9.0.post0",
 ]
@@ -69,10 +68,6 @@ build-backend = "hatchling.build"
 [tool.hatch.metadata]
 allow-direct-references = true
 
-#[tool.hatch.build]
-#dev-mode-dirs = ["byte_bot/"]
-#packages = ["byte_bot/byte", "byte_bot/server"]
-
 [tool.hatch.build.targets.wheel]
 packages = ["byte_bot/"]
 
@@ -107,10 +102,9 @@ dev-dependencies = [
     # - Linting
     "codespell>=2.2.6",
     "mypy>=1.7.1",
-    "pre-commit>=3.6.0",
+    "prek>=0.2.18",
     "pytailwindcss>=0.2.0",
     "sourcery>=1.14.0",
-    "pre-commit>=3.3.3",
     "pyright>=1.1.339",
     "aiosqlite>=0.21.0",
 ]

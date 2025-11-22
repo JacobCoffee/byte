@@ -18,5 +18,5 @@ readme = "README.md"
 license = { text = "MIT" }
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv>=0.5.11"]
+build-backend = "uv"
