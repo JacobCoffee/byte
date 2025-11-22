@@ -163,9 +163,7 @@ class TestRelationships:
         await db_session.flush()
 
         # Query GitHub config and verify relationship
-        result = await db_session.execute(
-            select(GitHubConfig).where(GitHubConfig.guild_id == sample_guild.guild_id)
-        )
+        result = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == sample_guild.guild_id))
         retrieved_config = result.scalar_one()
 
         assert retrieved_config.guild_id == sample_guild.guild_id

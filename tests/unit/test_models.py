@@ -129,9 +129,7 @@ class TestGuildModel:
         await db_session.flush()
 
         # Verify the relationship exists
-        result = await db_session.execute(
-            select(GitHubConfig).where(GitHubConfig.guild_id == sample_guild.guild_id)
-        )
+        result = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == sample_guild.guild_id))
         config = result.scalar_one()
         assert config.guild_id == sample_guild.guild_id
 
