@@ -3,12 +3,12 @@ default_language_version:
 default_install_hook_types: [commit-msg, pre-commit]
 repos:
   - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v4.2.0
+    rev: v4.3.0
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-ast
       - id: check-case-conflict
@@ -18,13 +18,13 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: "v0.11.13"
+    rev: "v0.14.6"
     hooks:
       - id: ruff-check
         args: ["--fix"]
       - id: ruff-format
   - repo: https://github.com/sourcery-ai/sourcery
-    rev: v1.37.0
+    rev: v1.40.1b10
     hooks:
       - id: sourcery
         args: [--diff=git diff HEAD, --no-summary]
@@ -39,7 +39,7 @@ repos:
               .*\.json |.*\.svg |docs/changelog.rst
           )$
   - repo: https://github.com/asottile/blacken-docs
-    rev: 1.19.1
+    rev: 1.20.0
     hooks:
       - id: blacken-docs
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -88,7 +88,7 @@ repos:
   #             discord-py,
   #           ]
   - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.402
+    rev: v1.1.407
     hooks:
       - id: pyright
         additional_dependencies:
@@ -144,6 +144,6 @@ repos:
             discord-py,
           ]
   - repo: https://github.com/sphinx-contrib/sphinx-lint
-    rev: "v1.0.0"
+    rev: "v1.0.2"
     hooks:
       - id: sphinx-lint

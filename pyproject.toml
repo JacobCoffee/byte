@@ -184,7 +184,8 @@ filterwarnings = [
 ]
 
 [tool.pyright]
-include = ["byte_bot/", "tests"]
+include = ["byte_bot/", "tests", "packages/byte-common/src", "packages/byte-common/tests"]
+extraPaths = ["packages/byte-common/src"]
 disableBytesTypePromotions = true
 exclude = [
     "tools",

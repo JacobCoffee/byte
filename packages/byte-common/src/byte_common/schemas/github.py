@@ -6,6 +6,8 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
+__all__ = ("CreateGitHubConfigRequest", "GitHubConfigSchema", "UpdateGitHubConfigRequest", )
+
 
 class GitHubConfigSchema(BaseModel):
     """GitHub configuration schema for API responses."""

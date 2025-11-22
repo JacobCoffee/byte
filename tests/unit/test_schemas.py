@@ -105,7 +105,7 @@ class TestCreateGuildRequest:
     def test_create_guild_request_missing_required_fields(self) -> None:
         """Test that required fields are validated."""
         with pytest.raises(ValidationError) as exc_info:
-            CreateGuildRequest(guild_name="Test Guild")  # Missing guild_id
+            CreateGuildRequest(guild_name="Test Guild")  # type: ignore[call-arg]  # Missing guild_id intentionally
 
         errors = exc_info.value.errors()
         assert any(error["loc"] == ("guild_id",) for error in errors)

@@ -107,7 +107,7 @@ def run_ruff_format(code: str) -> str:
     Returns:
         str: The formatted code.
     """
-    result = subprocess.run(  # noqa: S603
+    result = subprocess.run(
         ["ruff", "format", "-"],  # noqa: S607
         input=code,
         capture_output=True,
