@@ -6,7 +6,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
-__all__ = ("CreateGitHubConfigRequest", "GitHubConfigSchema", "UpdateGitHubConfigRequest", )
+__all__ = ("CreateGitHubConfigRequest", "GitHubConfigSchema", "UpdateGitHubConfigRequest")
 
 
 class GitHubConfigSchema(BaseModel):

@@ -6,7 +6,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
 
-__all__ = ("CreateGuildRequest", "GuildSchema", "UpdateGuildRequest", )
+__all__ = ("CreateGuildRequest", "GuildSchema", "UpdateGuildRequest")
 
 
 class GuildSchema(BaseModel):
