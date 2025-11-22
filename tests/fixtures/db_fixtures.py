@@ -44,8 +44,7 @@ def create_sample_guild(**kwargs) -> Guild:
         "pep_linking": True,
         "created_at": datetime.now(UTC),
         "updated_at": datetime.now(UTC),
-    }
-    defaults.update(kwargs)
+    } | kwargs
     return Guild(**defaults)
 
 
