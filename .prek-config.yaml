@@ -87,59 +87,14 @@ repos:
   #             polyfactory,
   #             discord-py,
   #           ]
-  - repo: https://github.com/RobertCraigie/pyright-python
-    rev: v1.1.407
+  - repo: local
     hooks:
-      - id: pyright
-        additional_dependencies:
-          [
-            advanced_alchemy,
-            annotated_types,
-            anyio>=3,
-            asyncpg,
-            asyncpg-stubs,
-            brotli,
-            click,
-            cryptography,
-            fast-query-parsers>=1.0.2,
-            fsspec,
-            greenlet,
-            httpx>=0.22,
-            httpx_sse,
-            hypothesis,
-            jinja2>=3.1.2,
-            jsbeautifier,
-            mako>=1.2.4,
-            msgspec>=0.18.2,
-            multidict>=6.0.2,
-            opentelemetry-instrumentation-asgi,
-            opentelemetry-sdk,
-            polyfactory>=2.6.3,
-            prometheus_client,
-            "pydantic>=2",
-            pydantic-extra-types,
-            pydantic-settings,
-            pytest,
-            pytest-asyncio,
-            pytest-cov,
-            pytest-lazy-fixture,
-            pytest-mock,
-            pytest-rerunfailures,
-            pytest-timeout,
-            python-dotenv,
-            pyyaml,
-            rich-click,
-            rich>=13.0.0,
-            structlog,
-            types-pytest-lazy-fixture,
-            types-pyyaml,
-            typing-extensions,
-            "uvicorn[standard]",
-            uvloop>=0.18.0,
-            "litestar[cli,structlog,standard]",
-            types-click,
-            discord-py,
-          ]
+      - id: ty
+        name: ty
+        entry: uvx ty check
+        language: system
+        types: [python]
+        pass_filenames: false
   - repo: https://github.com/sphinx-contrib/sphinx-lint
     rev: "v1.0.2"
     hooks:
