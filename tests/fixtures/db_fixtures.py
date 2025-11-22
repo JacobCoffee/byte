@@ -67,8 +67,7 @@ def create_sample_user(**kwargs) -> User:
         "discriminator": "1234",
         "created_at": datetime.now(UTC),
         "updated_at": datetime.now(UTC),
-    }
-    defaults.update(kwargs)
+    } | kwargs
     return User(**defaults)
 
 
