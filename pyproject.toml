@@ -119,7 +119,6 @@ extra-paths = ["tests/", "packages/byte-common/src/", "packages/byte-common/test
 
 [tool.ty.src]
 exclude = [
-    "services/api/**/*.py",
     "docs/conf.py",
     "tests/unit/api/test_orm.py",
     "tests/unit/bot/**/*.py",  # Mock attributes not recognized by ty
