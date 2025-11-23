@@ -18,13 +18,16 @@ UV 			    ?= 	uv $(UV_OPTS)
 .PHONY: clean run-dev-frontend run-dev-server production develop destroy
 .PHONY: docker-up docker-down docker-logs docker-shell-api docker-shell-bot docker-ps
 .PHONY: docker-restart docker-rebuild infra-up infra-down
+.PHONY: worktree worktree-prune
 
 help: ## Display this help text for Makefile
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
 
+##@ Setup & Installation
+
 upgrade: ## Upgrade all dependencies to the latest stable versions
 	@echo "=> Upgrading prek"
-	@(UV_RUN_BIN) run prek autoupdate
+	@$(UV) run prek autoupdate
 	@if [ "$(USING_UV)" ]; then $(UV) lock --upgrade
 	@echo "Dependencies Updated"
 
@@ -39,10 +42,11 @@ install-uv: ## Install latest version of UV
 
 install-prek: ## Install prek and install hooks
 	@echo "Installing prek hooks"
-	@(UV_RUN_BIN) run prek install
-	@(UV_RUN_BIN) run prek install --hook-type commit-msg
+	@$(UV) run prek install
+	@$(UV) run prek install --hook-type commit-msg
+	@$(UV) run prek install --hook-type pre-push
 	@echo "=> prek hooks installed"
-	@(UV_RUN_BIN) run prek autoupdate
+	@$(UV) run prek autoupdate
 	@echo "prek installed"
 
 .PHONY: install-frontend
@@ -90,6 +94,8 @@ refresh-container: clean-container up-container load-container ## Refresh the By
 # Tests, Linting, Coverage
 # =============================================================================
 
+##@ Code Quality
+
 lint: ## Runs prek hooks; includes ruff linting, codespell, black
 	@$(UV) run --no-sync prek run --all-files
 
@@ -126,6 +132,9 @@ ci: check-all  ## Run all checks for CI
 # =============================================================================
 # Docs
 # =============================================================================
+
+##@ Documentation
+
 docs-clean: ## Dump the existing built docs
 	@echo "=> Cleaning documentation build assets"
 	@rm -rf docs/_build
@@ -142,6 +151,9 @@ docs: docs-clean ## Dump the existing built docs and rebuild them
 # =============================================================================
 # Database
 # =============================================================================
+
+##@ Database Operations
+
 migrations: ## Generate database migrations
 	@echo "ATTENTION: This operation will create a new database migration for any defined models changes."
 	@while [ -z "$$MIGRATION_MESSAGE" ]; do read -r -p "Migration message: " MIGRATION_MESSAGE; done ;
@@ -159,6 +171,8 @@ db: ## Run the database
 # =============================================================================
 # Docker Compose Commands
 # =============================================================================
+
+##@ Docker Development
 
 .PHONY: docker-up
 docker-up: ## Start all services (PostgreSQL, API, Bot) with Docker Compose
@@ -241,6 +255,24 @@ infra-down: ## Stop PostgreSQL infrastructure
 	@echo "=> Stopping PostgreSQL infrastructure"
 	@docker compose -f docker-compose.infra.yml down
 	@echo "=> PostgreSQL stopped"
+
+# =============================================================================
+# Git Worktree Management
+# =============================================================================
+
+##@ Git Worktrees
+
+worktree: ## Create a new git worktree for feature branch
+	@echo "=> Creating git worktree"
+	@read -p "Feature name: " name; \
+	git checkout main && git pull && \
+	git worktree add worktrees/$$name -b feature/$$name && \
+	echo "=> Worktree created at worktrees/$$name on branch feature/$$name"
+
+worktree-prune: ## Clean up stale git worktrees
+	@echo "=> Pruning stale git worktrees"
+	@git worktree prune -v
+	@echo "=> Stale worktrees pruned"
 
 # =============================================================================
 # Main
