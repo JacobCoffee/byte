@@ -88,6 +88,7 @@ testpaths = ["tests", "packages/byte-common/tests"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
+env_files = [".env.test"]
 addopts = [
     "-v",
     "--strict-markers",
@@ -117,6 +118,7 @@ extra-paths = ["tests/", "packages/byte-common/src/", "packages/byte-common/test
 exclude = [
     "services/api/**/*.py",
     "docs/conf.py",
+    "tests/unit/api/test_orm.py",
 ]
 
 [tool.slotscheck]
