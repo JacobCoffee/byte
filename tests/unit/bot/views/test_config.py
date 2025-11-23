@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from unittest.mock import AsyncMock, MagicMock, PropertyMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
@@ -338,27 +338,28 @@ class TestFinishButtonCallbacks:
     async def test_finish_button_callback_sends_message(self, mock_interaction: Interaction) -> None:
         """Test FinishButton callback sends completion message."""
         button = FinishButton()
-        # Create a mock view and attach button to it
-        button._view = MagicMock()
-        button._view.stop = MagicMock()
+        # Create a mock view and patch the view property
+        mock_view = MagicMock()
+        mock_view.stop = MagicMock()
 
-        await button.callback(mock_interaction)
+        with patch.object(type(button), "view", new_callable=lambda: property(lambda self: mock_view)):
+            await button.callback(mock_interaction)
 
-        mock_interaction.response.send_message.assert_called_once()
-        call_args = mock_interaction.response.send_message.call_args
-        assert "complete" in call_args[0][0].lower()
-        assert call_args[1]["ephemeral"] is True
-        button.view.stop.assert_called_once()
+            mock_interaction.response.send_message.assert_called_once()
+            call_args = mock_interaction.response.send_message.call_args
+            assert "complete" in call_args[0][0].lower()
+            assert call_args[1]["ephemeral"] is True
+            mock_view.stop.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_finish_button_callback_no_view(self, mock_interaction: Interaction) -> None:
         """Test FinishButton callback handles missing view gracefully."""
         button = FinishButton()
-        button._view = None
 
-        await button.callback(mock_interaction)
+        with patch.object(type(button), "view", new_callable=lambda: property(lambda self: None)):
+            await button.callback(mock_interaction)
 
-        mock_interaction.response.send_message.assert_called_once()
+            mock_interaction.response.send_message.assert_called_once()
 
 
 class TestCancelButtonCallbacks:
@@ -368,26 +369,27 @@ class TestCancelButtonCallbacks:
     async def test_cancel_button_callback_sends_message(self, mock_interaction: Interaction) -> None:
         """Test CancelButton callback sends cancellation message."""
         button = CancelButton()
-        button._view = MagicMock()
-        button._view.stop = MagicMock()
+        mock_view = MagicMock()
+        mock_view.stop = MagicMock()
 
-        await button.callback(mock_interaction)
+        with patch.object(type(button), "view", new_callable=lambda: property(lambda self: mock_view)):
+            await button.callback(mock_interaction)
 
-        mock_interaction.response.send_message.assert_called_once()
-        call_args = mock_interaction.response.send_message.call_args
-        assert "cancel" in call_args[0][0].lower()
-        assert call_args[1]["ephemeral"] is True
-        button.view.stop.assert_called_once()
+            mock_interaction.response.send_message.assert_called_once()
+            call_args = mock_interaction.response.send_message.call_args
+            assert "cancel" in call_args[0][0].lower()
+            assert call_args[1]["ephemeral"] is True
+            mock_view.stop.assert_called_once()
 
     @pytest.mark.asyncio
     async def test_cancel_button_callback_no_view(self, mock_interaction: Interaction) -> None:
         """Test CancelButton callback handles missing view gracefully."""
         button = CancelButton()
-        button._view = None
 
-        await button.callback(mock_interaction)
+        with patch.object(type(button), "view", new_callable=lambda: property(lambda self: None)):
+            await button.callback(mock_interaction)
 
-        mock_interaction.response.send_message.assert_called_once()
+            mock_interaction.response.send_message.assert_called_once()
 
 
 class TestConfigSelectCallbacks:
@@ -400,16 +402,16 @@ class TestConfigSelectCallbacks:
         """Test ConfigSelect callback opens ConfigKeyView for options with sub_settings."""
         with patch("byte_bot.views.config.config_options", mock_config_options):
             select = ConfigSelect()
-            select._values = ["Server Settings"]
 
             mock_interaction.response.edit_message = AsyncMock()
 
-            await select.callback(mock_interaction)
+            with patch.object(type(select), "values", new_callable=lambda: property(lambda self: ["Server Settings"])):
+                await select.callback(mock_interaction)
 
-            mock_interaction.response.edit_message.assert_called_once()
-            call_kwargs = mock_interaction.response.edit_message.call_args[1]
-            assert isinstance(call_kwargs["view"], ConfigKeyView)
-            assert "server settings" in call_kwargs["content"].lower()
+                mock_interaction.response.edit_message.assert_called_once()
+                call_kwargs = mock_interaction.response.edit_message.call_args[1]
+                assert isinstance(call_kwargs["view"], ConfigKeyView)
+                assert "server settings" in call_kwargs["content"].lower()
 
     @pytest.mark.asyncio
     async def test_config_select_callback_without_sub_settings(
@@ -418,16 +420,16 @@ class TestConfigSelectCallbacks:
         """Test ConfigSelect callback opens modal for options without sub_settings."""
         with patch("byte_bot.views.config.config_options", mock_config_options):
             select = ConfigSelect()
-            select._values = ["GitHub Settings"]
 
             mock_interaction.response.send_modal = AsyncMock()
 
-            await select.callback(mock_interaction)
+            with patch.object(type(select), "values", new_callable=lambda: property(lambda self: ["GitHub Settings"])):
+                await select.callback(mock_interaction)
 
-            mock_interaction.response.send_modal.assert_called_once()
-            modal = mock_interaction.response.send_modal.call_args[0][0]
-            assert isinstance(modal, ConfigModal)
-            assert "GitHub Settings" in modal.title
+                mock_interaction.response.send_modal.assert_called_once()
+                modal = mock_interaction.response.send_modal.call_args[0][0]
+                assert isinstance(modal, ConfigModal)
+                assert "GitHub Settings" in modal.title
 
 
 class TestConfigKeySelectCallbacks:
@@ -440,17 +442,17 @@ class TestConfigKeySelectCallbacks:
         """Test ConfigKeySelect callback opens modal for selected key."""
         option = mock_config_options[0]
         select = ConfigKeySelect(option)
-        select._values = ["Prefix"]
 
         mock_interaction.response.send_modal = AsyncMock()
 
-        await select.callback(mock_interaction)
+        with patch.object(type(select), "values", new_callable=lambda: property(lambda self: ["Prefix"])):
+            await select.callback(mock_interaction)
 
-        mock_interaction.response.send_modal.assert_called_once()
-        modal = mock_interaction.response.send_modal.call_args[0][0]
-        assert isinstance(modal, ConfigModal)
-        assert "Server Settings" in modal.title
-        assert "Prefix" in modal.title
+            mock_interaction.response.send_modal.assert_called_once()
+            modal = mock_interaction.response.send_modal.call_args[0][0]
+            assert isinstance(modal, ConfigModal)
+            assert "Server Settings" in modal.title
+            assert "Prefix" in modal.title
 
     @pytest.mark.asyncio
     async def test_config_key_select_callback_preserves_option(
@@ -459,14 +461,14 @@ class TestConfigKeySelectCallbacks:
         """Test ConfigKeySelect callback preserves option context in modal."""
         option = mock_config_options[0]
         select = ConfigKeySelect(option)
-        type(select).values = PropertyMock(return_value=["Help Channel"])
 
         mock_interaction.response.send_modal = AsyncMock()
 
-        await select.callback(mock_interaction)
+        with patch.object(type(select), "values", new_callable=lambda: property(lambda self: ["Help Channel"])):
+            await select.callback(mock_interaction)
 
-        modal = mock_interaction.response.send_modal.call_args[0][0]
-        assert modal.option == option
+            modal = mock_interaction.response.send_modal.call_args[0][0]
+            assert modal.option == option
 
 
 class TestConfigModalSubmission:
@@ -478,19 +480,22 @@ class TestConfigModalSubmission:
         sub_setting = {"label": "Prefix", "field": "prefix", "data_type": "String"}
         modal = ConfigModal(title="Test", sub_setting=sub_setting)
 
-        # Set custom_id on the text input
-        modal.children[0].custom_id = "prefix"  # type: ignore[attr-defined]
-        modal.children[0]._value = "!"  # type: ignore[attr-defined]
+        # Mock the text input children
+        text_input = modal.children[0]
 
-        mock_interaction.followup = MagicMock()
-        mock_interaction.followup.send = AsyncMock()
+        with (
+            patch.object(type(text_input), "custom_id", new="prefix"),
+            patch.object(type(text_input), "value", new_callable=lambda: property(lambda self: "!")),
+        ):
+            mock_interaction.followup = MagicMock()
+            mock_interaction.followup.send = AsyncMock()
 
-        await modal.on_submit(mock_interaction)
+            await modal.on_submit(mock_interaction)
 
-        # Check that values were extracted
-        mock_interaction.response.send_message.assert_called_once()
-        call_args = mock_interaction.response.send_message.call_args[0][0]
-        assert "prefix" in call_args.lower()
+            # Check that values were extracted
+            mock_interaction.response.send_message.assert_called_once()
+            call_args = mock_interaction.response.send_message.call_args[0][0]
+            assert "prefix" in call_args.lower()
 
     @pytest.mark.asyncio
     async def test_config_modal_submission_returns_to_main(self, mock_interaction: Interaction) -> None:
@@ -516,18 +521,22 @@ class TestConfigModalSubmission:
         ]
         modal = ConfigModal(title="Test", sub_settings=sub_settings)
 
-        # Set custom_ids and values
-        modal.children[0].custom_id = "prefix"  # type: ignore[attr-defined]
-        modal.children[0]._value = "!"  # type: ignore[attr-defined]
-        modal.children[1].custom_id = "channel_id"  # type: ignore[attr-defined]
-        modal.children[1]._value = "123456"  # type: ignore[attr-defined]
+        # Mock the text input children
+        text_input_0 = modal.children[0]
+        text_input_1 = modal.children[1]
 
-        mock_interaction.followup = MagicMock()
-        mock_interaction.followup.send = AsyncMock()
+        with (
+            patch.object(type(text_input_0), "custom_id", new="prefix"),
+            patch.object(type(text_input_0), "value", new_callable=lambda: property(lambda self: "!")),
+            patch.object(type(text_input_1), "custom_id", new="channel_id"),
+            patch.object(type(text_input_1), "value", new_callable=lambda: property(lambda self: "123456")),
+        ):
+            mock_interaction.followup = MagicMock()
+            mock_interaction.followup.send = AsyncMock()
 
-        await modal.on_submit(mock_interaction)
+            await modal.on_submit(mock_interaction)
 
-        mock_interaction.response.send_message.assert_called_once()
+            mock_interaction.response.send_message.assert_called_once()
 
 
 class TestConfigModalErrorHandling:

@@ -97,7 +97,7 @@ refresh-container: clean-container up-container load-container ## Refresh the By
 ##@ Code Quality
 
 lint: ## Runs prek hooks; includes ruff linting, codespell, biome
-	@$(UV) run --no-sync prek run --all-files --skip ty
+	@$(UV) run --no-sync prek run --all-files
 
 fmt-check: ## Runs Ruff format in check mode (no changes)
 	@$(UV) run --no-sync ruff format --check .
@@ -267,7 +267,14 @@ worktree: ## Create a new git worktree for feature branch
 	@read -p "Feature name: " name; \
 	git checkout main && git pull && \
 	git worktree add worktrees/$$name -b feature/$$name && \
-	echo "=> Worktree created at worktrees/$$name on branch feature/$$name"
+	mkdir -p worktrees/$$name/.claude && \
+	cp .claude/settings.local.json worktrees/$$name/.claude/settings.json && \
+	jq '.permissions.defaultMode = "bypassPermissions"' worktrees/$$name/.claude/settings.json > worktrees/$$name/.claude/settings.json.tmp && \
+	mv worktrees/$$name/.claude/settings.json.tmp worktrees/$$name/.claude/settings.json && \
+	if [ -f .env ]; then cp .env worktrees/$$name/.env; fi && \
+	echo "=> Worktree created at worktrees/$$name on branch feature/$$name" && \
+	echo "=> Claude settings copied with bypassPermissions mode enabled" && \
+	if [ -f .env ]; then echo "=> Environment variables copied from .env"; fi
 
 worktree-prune: ## Clean up stale git worktrees
 	@echo "=> Pruning stale git worktrees"
