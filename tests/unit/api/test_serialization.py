@@ -7,10 +7,15 @@ import importlib.util
 import sys
 from json import dumps as json_dumps
 from pathlib import Path
+from typing import TYPE_CHECKING, Any, cast
 from uuid import uuid4
 
 import pytest
 from pydantic import BaseModel
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
+    from json import JSONEncoder
 
 # Import the serialization module directly without triggering __init__.py
 serialization_path = (
@@ -21,14 +26,14 @@ serialization = importlib.util.module_from_spec(spec)  # type: ignore[arg-type]
 sys.modules["serialization"] = serialization
 spec.loader.exec_module(serialization)  # type: ignore[union-attr]
 
-UUIDEncoder = serialization.UUIDEncoder
-convert_camel_to_snake_case = serialization.convert_camel_to_snake_case
-convert_datetime_to_gmt = serialization.convert_datetime_to_gmt
-convert_string_to_camel_case = serialization.convert_string_to_camel_case
-from_json = serialization.from_json
-from_msgpack = serialization.from_msgpack
-to_json = serialization.to_json
-to_msgpack = serialization.to_msgpack
+UUIDEncoder: type[JSONEncoder] = serialization.UUIDEncoder  # type: ignore[attr-defined]
+convert_camel_to_snake_case: Callable[[str], str] = serialization.convert_camel_to_snake_case  # type: ignore[attr-defined]
+convert_datetime_to_gmt: Callable[[datetime.datetime], str] = serialization.convert_datetime_to_gmt  # type: ignore[attr-defined]
+convert_string_to_camel_case: Callable[[str], str] = serialization.convert_string_to_camel_case  # type: ignore[attr-defined]
+from_json: Callable[..., object] = serialization.from_json  # type: ignore[attr-defined]
+from_msgpack: Callable[..., object] = serialization.from_msgpack  # type: ignore[attr-defined]
+to_json: Callable[..., str] = serialization.to_json  # type: ignore[attr-defined]
+to_msgpack: Callable[..., bytes] = serialization.to_msgpack  # type: ignore[attr-defined]
 
 __all__ = [
     "TestCaseConversion",
@@ -82,7 +87,7 @@ class TestJSONSerialization:
         """Test JSON encode/decode roundtrip."""
         original = {"test": "data", "nested": {"value": 123}}
         encoded = to_json(original)
-        decoded = from_json(encoded)
+        decoded = cast(dict[str, Any], from_json(encoded))
 
         assert decoded == original
 
@@ -127,7 +132,7 @@ class TestJSONSerialization:
         result = to_json(nested)
 
         assert isinstance(result, bytes)
-        decoded = from_json(result)
+        decoded = cast(dict[str, Any], from_json(result))
         assert decoded["a"]["b"]["c"]["d"]["e"] == "deep"
 
     def test_to_json_with_mixed_nested_types(self) -> None:
@@ -140,7 +145,7 @@ class TestJSONSerialization:
         result = to_json(data)
 
         assert isinstance(result, bytes)
-        decoded = from_json(result)
+        decoded = cast(dict[str, Any], from_json(result))
         assert decoded == data
 
     def test_to_json_with_empty_structures(self) -> None:
@@ -148,7 +153,7 @@ class TestJSONSerialization:
         data = {"empty_dict": {}, "empty_list": [], "nested_empty": {"a": []}}
         result = to_json(data)
 
-        decoded = from_json(result)
+        decoded = cast(dict[str, Any], from_json(result))
         assert decoded == data
 
     def test_to_json_with_special_characters(self) -> None:
@@ -161,7 +166,7 @@ class TestJSONSerialization:
         }
         result = to_json(data)
 
-        decoded = from_json(result)
+        decoded = cast(dict[str, Any], from_json(result))
         assert decoded == data
 
     def test_to_json_with_boolean_and_null(self) -> None:
@@ -169,7 +174,7 @@ class TestJSONSerialization:
         data = {"true_val": True, "false_val": False, "null_val": None}
         result = to_json(data)
 
-        decoded = from_json(result)
+        decoded = cast(dict[str, Any], from_json(result))
         assert decoded == data
 
     def test_to_json_with_large_numbers(self) -> None:
@@ -181,7 +186,7 @@ class TestJSONSerialization:
         }
         result = to_json(data)
 
-        decoded = from_json(result)
+        decoded = cast(dict[str, Any], from_json(result))
         assert decoded == data
 
 
@@ -207,7 +212,7 @@ class TestMsgPackSerialization:
         """Test MessagePack encode/decode roundtrip."""
         original = {"test": "data", "nested": {"value": 123}, "array": [1, 2, 3]}
         encoded = to_msgpack(original)
-        decoded = from_msgpack(encoded)
+        decoded = cast(dict[str, Any], from_msgpack(encoded))
 
         assert decoded == original
 
@@ -229,7 +234,7 @@ class TestMsgPackSerialization:
         result = to_msgpack(data)
 
         assert isinstance(result, bytes)
-        decoded = from_msgpack(result)
+        decoded = cast(dict[str, Any], from_msgpack(result))
         assert decoded == data
 
     def test_to_msgpack_with_deeply_nested_structures(self) -> None:
@@ -237,7 +242,7 @@ class TestMsgPackSerialization:
         nested = {"a": {"b": {"c": {"d": [1, 2, 3]}}}}
         result = to_msgpack(nested)
 
-        decoded = from_msgpack(result)
+        decoded = cast(dict[str, Any], from_msgpack(result))
         assert decoded == nested
 
     def test_to_msgpack_with_empty_structures(self) -> None:
@@ -245,7 +250,7 @@ class TestMsgPackSerialization:
         data = {"empty": {}, "list": [], "nested": {"a": []}}
         result = to_msgpack(data)
 
-        decoded = from_msgpack(result)
+        decoded = cast(dict[str, Any], from_msgpack(result))
         assert decoded == data
 
     def test_to_msgpack_with_special_characters(self) -> None:
@@ -253,7 +258,7 @@ class TestMsgPackSerialization:
         data = {"unicode": "Hello 世界 🌍", "special": "line1\nline2\ttab"}
         result = to_msgpack(data)
 
-        decoded = from_msgpack(result)
+        decoded = cast(dict[str, Any], from_msgpack(result))
         assert decoded == data
 
     def test_msgpack_handles_encoding_error(self) -> None:
