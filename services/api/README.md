@@ -191,9 +191,9 @@ services/api/
 This service is part of Phase 1 (API Layer Extraction) of the microservices migration. It consolidates functionality
 from:
 
-- `byte_bot/app.py` - Litestar app factory
-- `byte_bot/server/` - Web service logic
-- `byte_bot/server/domain/` - Business domains
+- `byte_api/app.py` - Litestar app factory
+- `byte_api/domain/` - Business domains
+- `byte_api/lib/` - Infrastructure code (database, settings, etc.)
 
 The Discord bot will communicate with this service via HTTP rather than direct database access.
 
