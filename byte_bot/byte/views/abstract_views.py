@@ -74,7 +74,7 @@ class ButtonEmbedView(View):
         Args:
             interaction: Interaction object.
         """
-        if await self.delete_interaction_check(interaction):
+        if await self.delete_interaction_check(interaction) and interaction.message is not None:
             await interaction.message.delete()
 
     async def learn_more_button_callback(self, interaction: Interaction) -> None:

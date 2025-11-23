@@ -29,7 +29,8 @@ class FinishButton(Button):
             interaction: Interaction object.
         """
         await interaction.response.send_message("Configuration complete!", ephemeral=True)
-        self.view.stop()
+        if self.view is not None:
+            self.view.stop()
 
 
 class BackButton(Button):
@@ -63,7 +64,8 @@ class CancelButton(Button):
             interaction: Interaction object.
         """
         await interaction.response.send_message("Configuration cancelled.", ephemeral=True)
-        self.view.stop()
+        if self.view is not None:
+            self.view.stop()
 
 
 class ConfigSelect(Select):
