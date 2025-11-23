@@ -430,8 +430,8 @@ class TestAPIErrorResponseConsistency:
         # Invalid guild_id (negative)
         response = await api_client.post("/api/guilds/create?guild_id=-1&guild_name=Invalid")
 
-        # Should be 400, 422, or 500
-        assert response.status_code in [400, 422, 500]
+        # Should be 400 or 422 (validation error)
+        assert response.status_code in [400, 422]
 
         # In debug mode, errors may be text/plain with traceback
         content_type = response.headers.get("content-type", "").lower()

@@ -15,6 +15,15 @@ from litestar.exceptions import (
     NotFoundException,
     PermissionDeniedException,
 )
+from advanced_alchemy.exceptions import (
+    DuplicateKeyError as AdvancedAlchemyDuplicateKeyError,
+)
+from advanced_alchemy.exceptions import (
+    NotFoundError as AdvancedAlchemyNotFoundError,
+)
+from advanced_alchemy.exceptions import (
+    RepositoryError as AdvancedAlchemyRepositoryError,
+)
 from litestar.middleware.exceptions._debug_response import create_debug_response
 from litestar.middleware.exceptions.middleware import create_exception_response
 from litestar.repository.exceptions import ConflictError, NotFoundError, RepositoryError
@@ -95,7 +104,13 @@ async def after_exception_hook_handler(exc: Exception, _scope: Scope) -> None:
 
 def exception_to_http_response(
     request: Request[Any, Any, Any],
-    exc: ApplicationError | RepositoryError,
+    exc: (
+        ApplicationError
+        | RepositoryError
+        | AdvancedAlchemyNotFoundError
+        | AdvancedAlchemyRepositoryError
+        | AdvancedAlchemyDuplicateKeyError
+    ),
 ) -> Response[ExceptionResponseContent]:
     """Transform repository exceptions to HTTP exceptions.
 
@@ -106,9 +121,9 @@ def exception_to_http_response(
     Returns:
         Exception response appropriate to the type of original exception.
     """
-    if isinstance(exc, NotFoundError):
+    if isinstance(exc, (NotFoundError, AdvancedAlchemyNotFoundError)):
         http_exc = NotFoundException(detail=str(exc))
-    elif isinstance(exc, ConflictError | RepositoryError):
+    elif isinstance(exc, (ConflictError, RepositoryError, AdvancedAlchemyRepositoryError, AdvancedAlchemyDuplicateKeyError)):
         http_exc = _HTTPConflictException(detail=str(exc))
     elif isinstance(exc, AuthorizationError):
         http_exc = PermissionDeniedException(detail=str(exc))
