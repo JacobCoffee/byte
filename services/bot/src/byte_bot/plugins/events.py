@@ -1,15 +1,14 @@
 """Plugins for events."""
 
-from threading import Thread
 from typing import cast
 
-from discord import Embed
+from discord import Embed, Thread
 from discord.ext.commands import Bot, Cog
 
-from byte_bot.byte.lib.common.assets import litestar_logo_yellow
-from byte_bot.byte.lib.common.links import mcve
-from byte_bot.byte.lib.utils import linker
-from byte_bot.byte.views.forums import HelpThreadView
+from byte_bot.lib.common.assets import litestar_logo_yellow
+from byte_bot.lib.common.links import mcve
+from byte_bot.lib.utils import linker
+from byte_bot.views.forums import HelpThreadView
 
 __all__ = ("Events", "setup")
 

@@ -117,7 +117,7 @@ coverage:  ## Run the tests and generate coverage report
 	@$(UV) run --no-sync coverage html
 	@$(UV) run --no-sync coverage xml
 
-check-all: lint type-check fmt test  ## Run all linting, tests, and coverage checks
+check-all: lint type-check fmt test  ## Run all linting, formatting, and tests
 
 ci: check-all  ## Run all checks for CI
 

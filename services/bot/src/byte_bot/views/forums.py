@@ -4,9 +4,7 @@ from discord import ButtonStyle, Interaction, Member
 from discord.ext.commands import Bot
 from discord.ui import Button, View, button
 
-from byte_bot.byte.lib.log import get_logger
-from byte_bot.server.domain.guilds.dependencies import provides_guilds_service
-from byte_bot.server.lib.db import config
+from byte_bot.lib.log import get_logger
 
 __all__ = ("HelpThreadView",)
 
@@ -24,24 +22,23 @@ class HelpThreadView(View):
         self.guild_id = guild_id
 
     async def setup(self) -> None:
-        """Asynchronously setup guild details and add button.
-
-        .. todo:: Think about this more - If we plan on decoupling this
-            should be a call to an endpoint like we do in ``byte.bot.Byte.on_guild_join``.
-        """
+        """Asynchronously setup guild details and add button."""
         # noinspection PyBroadException
         try:
-            async with config.get_session() as session:
-                guilds_service = await anext(provides_guilds_service(db_session=session))
-                guild_settings = await guilds_service.get(self.guild_id, id_attribute="guild_id")
-
-            if guild_settings and guild_settings.github_config:
-                guild_repo = guild_settings.github_config.github_repository
-                self.add_item(
-                    Button(label="Open GitHub Issue", style=ButtonStyle.blurple, url=f"{guild_repo}/new/choose")
-                )
-            else:
-                logger.warning("no github configuration found for guild %s", self.guild_id)
+            # TODO: Guild settings should include github_config relationship
+            # For now, GitHub integration is disabled during service migration
+            # async with ByteAPIClient(base_url=bot_settings.api_service_url) as client:
+            #     guild_settings = await client.get_guild(self.guild_id)
+            #
+            # if guild_settings and hasattr(guild_settings, "github_config"):
+            #     github_config = guild_settings.github_config
+            #     if github_repo := getattr(github_config, "github_repository", None):
+            #         self.add_item(
+            #             Button(label="Open GitHub Issue", style=ButtonStyle.blurple, url=f"{github_repo}/new/choose}")
+            #         )
+            # else:
+            #     logger.warning("no github configuration found for guild %s", self.guild_id)
+            pass  # No GitHub button during migration
         except Exception:
             logger.exception("failed to setup view for guild %s", self.guild_id)
 
@@ -66,6 +63,13 @@ class HelpThreadView(View):
             interaction: Interaction object.
             button: Button object.
         """
+        # Check permissions - only author or admin can solve
+        if not await self.delete_interaction_check(interaction):
+            await interaction.response.send_message(
+                "Only the thread author or an administrator can mark this as solved.", ephemeral=True
+            )
+            return
+
         await interaction.response.defer()
 
         if interaction.message:
@@ -101,6 +105,13 @@ class HelpThreadView(View):
             interaction: Interaction object.
             button: Button object.
         """
+        # Check permissions - only author or admin can remove
+        if not await self.delete_interaction_check(interaction):
+            await interaction.response.send_message(
+                "Only the thread author or an administrator can remove this message.", ephemeral=True
+            )
+            return
+
         if interaction.message:
             content = interaction.message.content or "\u200b"
             logger.info("removing view for %s by %s", interaction.channel, interaction.user)

@@ -7,8 +7,8 @@ from typing import Any
 from discord import ButtonStyle, Interaction, SelectOption, TextStyle
 from discord.ui import Button, Modal, Select, TextInput, View
 
-from byte_bot.byte.lib.common import config_options
-from byte_bot.byte.lib.log import get_logger
+from byte_bot.lib.common import config_options
+from byte_bot.lib.log import get_logger
 
 __all__ = ("ConfigView",)
 

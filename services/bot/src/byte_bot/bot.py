@@ -12,9 +12,8 @@ from discord.ext.commands import Bot, CommandError, Context, ExtensionAlreadyLoa
 from dotenv import load_dotenv
 from httpx import ConnectError
 
-from byte_bot.byte.lib import settings
-from byte_bot.byte.lib.log import get_logger
-from byte_bot.server.lib.settings import ServerSettings
+from byte_bot.config import bot_settings
+from byte_bot.lib.log import get_logger
 
 __all__ = [
     "Byte",
@@ -23,7 +22,6 @@ __all__ = [
 
 logger = get_logger()
 load_dotenv()
-server_settings = ServerSettings()
 
 
 class Byte(Bot):
@@ -43,18 +41,15 @@ class Byte(Bot):
         """Any setup we need can be here."""
         # Load cogs before syncing the tree.
         await self.load_cogs()
-        dev_guild = discord.Object(id=settings.discord.DEV_GUILD_ID)
-        self.tree.copy_global_to(guild=dev_guild)
-        await self.tree.sync(guild=dev_guild)
+        if bot_settings.discord_dev_guild_id:
+            dev_guild = discord.Object(id=bot_settings.discord_dev_guild_id)
+            self.tree.copy_global_to(guild=dev_guild)
+            await self.tree.sync(guild=dev_guild)
 
     async def load_cogs(self) -> None:
         """Load cogs."""
-        cogs = [
-            cog
-            for plugins_dir in settings.discord.PLUGINS_DIRS
-            for cog in plugins_dir.rglob("*.py")
-            if cog.stem != "__init__"
-        ]
+        plugins_dir = bot_settings.plugins_dir
+        cogs = [cog for cog in plugins_dir.rglob("*.py") if cog.stem != "__init__"]
 
         cogs_import_path = [".".join(cog.parts[cog.parts.index("byte_bot") : -1]) + "." + cog.stem for cog in cogs]
 
@@ -95,7 +90,12 @@ class Byte(Bot):
         embed.add_field(name="Guild", value=ctx.guild.name if ctx.guild else "DM")
         embed.add_field(name="Location", value=f"[Jump]({ctx.message.jump_url})")
         embed.set_footer(text=f"Time: {ctx.message.created_at.strftime('%Y-%m-%d %H:%M:%S')}")
-        await ctx.send(embed=embed, ephemeral=True)
+
+        # ephemeral only works with interactions, not prefix commands
+        if ctx.interaction:
+            await ctx.interaction.response.send_message(embed=embed, ephemeral=True)
+        else:
+            await ctx.send(embed=embed)
 
     @staticmethod
     async def on_member_join(member: Member) -> None:
@@ -117,7 +117,7 @@ class Byte(Bot):
             guild: Guild object.
         """
         await self.tree.sync(guild=guild)
-        api_url = f"http://{server_settings.HOST}:{server_settings.PORT}/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
+        api_url = f"{bot_settings.api_service_url}/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
 
         try:
             async with httpx.AsyncClient() as client:
@@ -137,14 +137,8 @@ class Byte(Bot):
                         color=discord.Color.red(),
                     )
 
-                if dev_guild := self.get_guild(settings.discord.DEV_GUILD_ID):
-                    if dev_channel := dev_guild.get_channel(settings.discord.DEV_GUILD_INTERNAL_ID):
-                        if hasattr(dev_channel, "send"):
-                            await dev_channel.send(embed=embed)  # type: ignore[attr-defined]
-                    else:
-                        logger.error("dev channel not found.")
-                else:
-                    logger.error("dev guild not found.")
+                # Log guild join status
+                logger.info("Guild join status: %s", embed.title)
         except ConnectError:
             logger.exception("failed to connect to api to add guild %s (id: %s)", guild.name, guild.id)
 
@@ -159,13 +153,13 @@ def run_bot() -> None:
         type=discord.ActivityType.custom,
         state="Serving Developers",
         details="!help",
-        url=settings.discord.PRESENCE_URL,
+        url=bot_settings.presence_url,
     )
-    bot = Byte(command_prefix=settings.discord.COMMAND_PREFIX, intents=intents, activity=presence)
+    bot = Byte(command_prefix=bot_settings.command_prefix, intents=intents, activity=presence)
 
     async def start_bot() -> None:
         """Start the bot."""
-        await bot.start(settings.discord.TOKEN)
+        await bot.start(bot_settings.discord_token)
 
     run(start_bot)
 

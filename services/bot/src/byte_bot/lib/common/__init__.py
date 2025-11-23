@@ -5,7 +5,7 @@
 
 from typing import Any
 
-from byte_bot.byte.lib.common import assets, colors, guilds, links, mention
+from byte_bot.lib.common import assets, colors, guilds, links, mention
 
 __all__ = (
     "assets",

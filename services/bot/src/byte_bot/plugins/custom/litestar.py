@@ -11,13 +11,11 @@ from discord.enums import TextStyle
 from discord.ext.commands import Bot, Cog, Context, command, group, is_owner
 from discord.ui import Modal, TextInput
 from discord.utils import MISSING
-from httpx import codes
 
-from byte_bot.byte.lib.checks import is_byte_dev
-from byte_bot.byte.lib.common.colors import litestar_yellow
-from byte_bot.byte.lib.common.mention import mention_role, mention_user
-from byte_bot.byte.lib.utils import get_next_friday
-from byte_bot.server.domain.github.helpers import github_client
+from byte_bot.lib.checks import is_byte_dev
+from byte_bot.lib.common.colors import litestar_yellow
+from byte_bot.lib.common.mention import mention_role, mention_user
+from byte_bot.lib.utils import get_next_friday
 
 __all__ = ("LitestarCommands", "setup")
 
@@ -59,36 +57,40 @@ class GitHubIssue(Modal, title="Create GitHub Issue"):
             self.jump_url = message.jump_url
 
     async def on_submit(self, interaction: Interaction) -> None:
-        issue_reporter = interaction.user
-        issue_body_lines = [
-            "### Reported by",
-            f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id})"
-            f" in Discord: [#{getattr(interaction.channel, 'name', 'DM')}]({self.jump_url})",
-            "",
-            "### Description",
-            f"{self.description.value.strip()}",
-            "",
-            "### MCVE",
-            f"{self.mcve.value.strip()}",
-            "",
-            "### Logs",
-            f"{self.logs.value.strip()}",
-            "",
-            "### Litestar Version",
-            f"{self.version.value.strip()}",
-        ]
-        issue_body = "\n".join(issue_body_lines)
+        # issue_reporter = interaction.user
+        # TODO: Uncomment when GitHub client is implemented
+        # issue_body_lines = [
+        #     "### Reported by",
+        #     f"[{issue_reporter.display_name}](https://discord.com/users/{issue_reporter.id})"
+        #     f" in Discord: [#{getattr(interaction.channel, 'name', 'DM')}]({self.jump_url})",
+        #     "",
+        #     "### Description",
+        #     f"{self.description.value.strip()}",
+        #     "",
+        #     "### MCVE",
+        #     f"{self.mcve.value.strip()}",
+        #     "",
+        #     "### Logs",
+        #     f"{self.logs.value.strip()}",
+        #     "",
+        #     "### Litestar Version",
+        #     f"{self.version.value.strip()}",
+        # ]
+        # issue_body = "\n".join(issue_body_lines)
         try:
-            response_wrapper = await github_client.rest.issues.async_create(
-                owner="litestar-org", repo="litestar", data={"title": self.title_.value, "body": issue_body}
+            # TODO: Implement GitHub client for bot service
+            # response_wrapper = await github_client.rest.issues.async_create(
+            #     owner="litestar-org", repo="litestar", data={"title": self.title_.value, "body": issue_body}
+            # )
+            # if codes.is_success(response_wrapper.status_code):
+            #     await interaction.response.send_message(
+            #         f"GitHub Issue created: {response_wrapper.parsed_data.html_url}", ephemeral=False
+            #     )
+            # else:
+            #     await interaction.response.send_message("Issue creation failed.", ephemeral=True)
+            await interaction.response.send_message(
+                "GitHub issue creation is temporarily disabled during service migration.", ephemeral=True
             )
-            if codes.is_success(response_wrapper.status_code):
-                await interaction.response.send_message(
-                    f"GitHub Issue created: {response_wrapper.parsed_data.html_url}", ephemeral=False
-                )
-            else:
-                await interaction.response.send_message("Issue creation failed.", ephemeral=True)
-
         except Exception as e:  # noqa: BLE001
             await interaction.response.send_message(f"An error occurred: {e!s}", ephemeral=True)
 

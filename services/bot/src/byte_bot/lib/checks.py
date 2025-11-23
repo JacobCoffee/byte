@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 from discord.ext.commands import CheckFailure, Context, check
 
-from byte_bot.byte.lib import settings
+from byte_bot.config import bot_settings
 
 if TYPE_CHECKING:
     from discord.ext.commands._types import Check
@@ -57,7 +57,7 @@ def is_byte_dev() -> Check:
         Returns:
             True if the user is a Byte developer or owner, False otherwise.
         """
-        if await ctx.bot.is_owner(ctx.author) or ctx.author.id == settings.discord.DEV_USER_ID:
+        if await ctx.bot.is_owner(ctx.author) or ctx.author.id == bot_settings.discord_dev_user_id:
             return True
 
         if not ctx.guild:
