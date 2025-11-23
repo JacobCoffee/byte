@@ -87,18 +87,21 @@ cp .env.example .env
 ### Running Locally
 
 **Option 1: Via workspace command (recommended)**
+
 ```bash
 # From workspace root
 uv run app run-bot
 ```
 
 **Option 2: Directly via module**
+
 ```bash
 # From workspace root
 uv run python -m byte_bot
 ```
 
 **Option 3: Via entry point**
+
 ```bash
 # From workspace root
 uv run byte-bot
@@ -109,9 +112,11 @@ uv run byte-bot
 The bot service uses environment variables for configuration. See `src/byte_bot/config.py` for all available settings:
 
 **Required:**
+
 - `DISCORD_TOKEN` - Bot token from Discord Developer Portal
 
 **Optional:**
+
 - `DISCORD_COMMAND_PREFIX` - Command prefix (default: `!`)
 - `DISCORD_DEV_GUILD_ID` - Guild ID for slash command sync
 - `DISCORD_DEV_USER_ID` - Your Discord user ID
@@ -129,6 +134,7 @@ Plugins are automatically loaded from `byte_bot/plugins/`. To create a new plugi
 from discord.ext import commands
 from discord import ApplicationContext
 
+
 class MyPlugin(commands.Cog):
     """My custom plugin."""
 
@@ -139,6 +145,7 @@ class MyPlugin(commands.Cog):
     async def my_command(self, ctx: ApplicationContext):
         """Handle command."""
         await ctx.respond("Hello!")
+
 
 def setup(bot: commands.Bot):
     """Required for auto-loading."""
