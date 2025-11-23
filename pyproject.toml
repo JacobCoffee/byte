@@ -182,7 +182,8 @@ extra-paths = ["byte_bot/", "tests/", "packages/byte-common/src/", "packages/byt
 
 # Disable checking for old monolith code that will be removed in Phase 1.2
 [[tool.ty.overrides]]
-disable = ["all"]
+exclude = ["*"]
+include = []
 paths = [
     "byte_bot/__init__.py",
     "byte_bot/app.py",
