@@ -175,23 +175,28 @@ class AdminCommands(Cog):
 
     async def _notify_dev_channel(self, guild: discord.Guild) -> None:
         """Notify dev channel about guild bootstrap."""
-        if not bot_settings.discord_dev_guild_id:
-            return
-
-        dev_guild = self.bot.get_guild(bot_settings.discord_dev_guild_id)
-        if not dev_guild:
-            return
-
         # Note: dev_guild_internal_id not yet in settings, skipping dev channel notification
         # TODO: Add dev_guild_internal_id to bot_settings if needed
-        return
-
-        embed = discord.Embed(
-            title="Guild Bootstrapped",
-            description=f"Guild {guild.name} (ID: {guild.id}) was manually bootstrapped",
-            color=discord.Color.blue(),
-        )
-        await dev_channel.send(embed=embed)  # type: ignore[attr-defined]
+        # Once added, uncomment the code below:
+        #
+        # if not bot_settings.discord_dev_guild_id:
+        #     return
+        #
+        # dev_guild = self.bot.get_guild(bot_settings.discord_dev_guild_id)
+        # if not dev_guild:
+        #     return
+        #
+        # dev_channel = dev_guild.get_channel(bot_settings.dev_guild_internal_id)
+        # if not dev_channel or not hasattr(dev_channel, "send"):
+        #     return
+        #
+        # embed = discord.Embed(
+        #     title="Guild Bootstrapped",
+        #     description=f"Guild {guild.name} (ID: {guild.id}) was manually bootstrapped",
+        #     color=discord.Color.blue(),
+        # )
+        # await dev_channel.send(embed=embed)
+        pass
 
 
 async def setup(bot: Bot) -> None:
