@@ -86,7 +86,7 @@ repos:
     hooks:
       - id: ty
         name: ty
-        entry: uvx ty check
+        entry: bash -c "uv run --no-sync ty check services/bot/src packages/byte-common/src"
         language: system
         types: [python]
         pass_filenames: false

@@ -105,7 +105,10 @@ def test_template_file_exists() -> None:
     """Test template.py file exists in expected location."""
     from pathlib import Path
 
-    template_file = Path("services/api/src/byte_api/lib/template.py")
+    # Anchor path to repo root (3 levels up from this test file: tests/unit/api/)
+    test_file = Path(__file__).resolve()
+    repo_root = test_file.parents[3]
+    template_file = repo_root / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
     assert template_file.exists()
 
 

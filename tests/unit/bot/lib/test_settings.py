@@ -36,7 +36,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
         monkeypatch.setenv("ENVIRONMENT", "dev")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert "!" in settings.COMMAND_PREFIX
         assert "nibble " in settings.COMMAND_PREFIX  # dev environment prefix
@@ -48,7 +48,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
         monkeypatch.setenv("ENVIRONMENT", "prod")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert "byte " in settings.COMMAND_PREFIX
 
@@ -59,7 +59,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
         monkeypatch.setenv("ENVIRONMENT", "test")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert "bit " in settings.COMMAND_PREFIX
 
@@ -70,7 +70,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
         monkeypatch.setenv("COMMAND_PREFIX", "custom>")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert "custom>" in settings.COMMAND_PREFIX
 
@@ -81,7 +81,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
         monkeypatch.setenv("ENVIRONMENT", "dev")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert settings.PRESENCE_URL == "https://dev.byte-bot.app/"
 
@@ -92,7 +92,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
         monkeypatch.setenv("ENVIRONMENT", "prod")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert settings.PRESENCE_URL == "https://byte-bot.app/"
 
@@ -103,7 +103,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
         monkeypatch.setenv("ENVIRONMENT", "test")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert settings.PRESENCE_URL == "https://dev.byte-bot.app/"
 
@@ -114,7 +114,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
         monkeypatch.setenv("PRESENCE_URL", "https://custom.example.com/")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert settings.PRESENCE_URL == "https://custom.example.com/"
 
@@ -124,7 +124,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_GUILD_ID", "123")
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert isinstance(settings.PLUGINS_LOC, Path)
         assert isinstance(settings.PLUGINS_DIRS, list)
@@ -136,13 +136,13 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_GUILD_ID", "123")
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert settings.DEV_GUILD_INTERNAL_ID == 1136100160510902272
 
     def test_discord_settings_token_required(self) -> None:
         """Test TOKEN field is required and populated."""
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         # Token should be populated from .env
         assert hasattr(settings, "TOKEN")
@@ -157,7 +157,7 @@ class TestDiscordSettings:
         monkeypatch.setenv("DISCORD_DEV_GUILD_ID", "123")
         monkeypatch.setenv("DISCORD_DEV_USER_ID", "456")
 
-        settings = DiscordSettings()
+        settings = DiscordSettings()  # type: ignore[call-arg]
 
         assert settings.TOKEN == "UPPERCASE_TOKEN"
 

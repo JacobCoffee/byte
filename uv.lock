@@ -25,6 +25,7 @@ dev = [
     { name = "pytest-cov", specifier = ">=4.1.0" },
     { name = "pytest-dotenv", specifier = ">=0.5.2" },
     { name = "pytest-mock", specifier = ">=3.12.0" },
+    { name = "pytest-sugar", specifier = ">=1.1.1" },
     { name = "respx", specifier = ">=0.22.0" },
     { name = "ruff", specifier = ">=0.14.6" },
     { name = "shibuya", specifier = "==2023.10.26" },
@@ -1771,6 +1772,19 @@ wheels = [
 ]
 
 [[package]]
+name = "pytest-sugar"
+version = "1.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pytest" },
+    { name = "termcolor" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0b/4e/60fed105549297ba1a700e1ea7b828044842ea27d72c898990510b79b0e2/pytest-sugar-1.1.1.tar.gz", hash = "sha256:73b8b65163ebf10f9f671efab9eed3d56f20d2ca68bda83fa64740a92c08f65d", size = 16533, upload-time = "2025-08-23T12:19:35.737Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/87/d5/81d38a91c1fdafb6711f053f5a9b92ff788013b19821257c2c38c1e132df/pytest_sugar-1.1.1-py3-none-any.whl", hash = "sha256:2f8319b907548d5b9d03a171515c1d43d2e38e32bd8182a1781eb20b43344cc8", size = 11440, upload-time = "2025-08-23T12:19:34.894Z" },
+]
+
+[[package]]
 name = "python-dateutil"
 version = "2.9.0.post0"
 source = { registry = "https://pypi.org/simple" }
@@ -2322,6 +2336,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/86/6d/93cd8b2233c4040e2922ff77377ed33817f0370d603e0cc5c9a9c391adda/targ-0.6.0.tar.gz", hash = "sha256:4025476f1528eef963900295c2979b38ba28aadbd3668df9ae6677237b62a1d5", size = 9891, upload-time = "2025-07-09T22:04:01.224Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/90/434ca23854e9d358f8562b51e688760bcc59a1d4be46a91aa37fd0f37d24/targ-0.6.0-py3-none-any.whl", hash = "sha256:75b83a49181d4758c2ef0caf345c8ced78156dee66613bab0a1a614e8e0ec7b6", size = 7308, upload-time = "2025-07-09T22:04:00.373Z" },
+]
+
+[[package]]
+name = "termcolor"
+version = "3.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/87/56/ab275c2b56a5e2342568838f0d5e3e66a32354adcc159b495e374cda43f5/termcolor-3.2.0.tar.gz", hash = "sha256:610e6456feec42c4bcd28934a8c87a06c3fa28b01561d46aa09a9881b8622c58", size = 14423, upload-time = "2025-10-25T19:11:42.586Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/f9/d5/141f53d7c1eb2a80e6d3e9a390228c3222c27705cbe7f048d3623053f3ca/termcolor-3.2.0-py3-none-any.whl", hash = "sha256:a10343879eba4da819353c55cb8049b0933890c2ebf9ad5d3ecd2bb32ea96ea6", size = 7698, upload-time = "2025-10-25T19:11:41.536Z" },
 ]
 
 [[package]]

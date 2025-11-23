@@ -61,7 +61,7 @@ class TestSetupHook:
             mock_settings.discord_dev_guild_id = None
             await bot.setup_hook()
 
-            mock_load_cogs.assert_called_once()
+            mock_load_cogs.assert_called_once()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_setup_hook_syncs_dev_guild(self) -> None:
@@ -79,8 +79,8 @@ class TestSetupHook:
             mock_settings.discord_dev_guild_id = 123456789
             await bot.setup_hook()
 
-            bot.tree.copy_global_to.assert_called_once()
-            bot.tree.sync.assert_called_once()
+            bot.tree.copy_global_to.assert_called_once()  # type: ignore[attr-defined]
+            bot.tree.sync.assert_called_once()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_setup_hook_no_dev_guild(self) -> None:
@@ -98,8 +98,8 @@ class TestSetupHook:
             mock_settings.discord_dev_guild_id = None
             await bot.setup_hook()
 
-            bot.tree.copy_global_to.assert_not_called()
-            bot.tree.sync.assert_not_called()
+            bot.tree.copy_global_to.assert_not_called()  # type: ignore[attr-defined]
+            bot.tree.sync.assert_not_called()  # type: ignore[attr-defined]
 
 
 class TestLoadCogs:
@@ -111,7 +111,7 @@ class TestLoadCogs:
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.load_extension = AsyncMock()
+        bot.load_extension = AsyncMock()  # type: ignore[method-assign]
 
         # Create mock plugin directory
         plugins_dir = tmp_path / "byte_bot" / "plugins"
@@ -133,7 +133,7 @@ class TestLoadCogs:
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.load_extension = AsyncMock()
+        bot.load_extension = AsyncMock()  # type: ignore[method-assign]
 
         plugins_dir = tmp_path / "byte_bot" / "plugins"
         plugins_dir.mkdir(parents=True)
@@ -143,7 +143,7 @@ class TestLoadCogs:
             mock_settings.plugins_dir = plugins_dir
             await bot.load_cogs()
 
-            bot.load_extension.assert_not_called()
+            bot.load_extension.assert_not_called()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_load_cogs_handles_already_loaded(self, tmp_path: Path) -> None:
@@ -170,7 +170,7 @@ class TestLoadCogs:
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.load_extension = AsyncMock()
+        bot.load_extension = AsyncMock()  # type: ignore[method-assign]
 
         plugins_dir = tmp_path / "nonexistent" / "plugins"
 
@@ -179,7 +179,7 @@ class TestLoadCogs:
             # Should not raise exception
             await bot.load_cogs()
 
-            bot.load_extension.assert_not_called()
+            bot.load_extension.assert_not_called()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_load_cogs_recursive_discovery(self, tmp_path: Path) -> None:
@@ -187,7 +187,7 @@ class TestLoadCogs:
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.load_extension = AsyncMock()
+        bot.load_extension = AsyncMock()  # type: ignore[method-assign]
 
         plugins_dir = tmp_path / "byte_bot" / "plugins"
         plugins_dir.mkdir(parents=True)
@@ -225,7 +225,7 @@ class TestOnReady:
         with patch("byte_bot.bot.logger") as mock_logger:
             await bot.on_ready()
 
-            mock_logger.info.assert_called_once()
+            mock_logger.info.assert_called_once()  # type: ignore[attr-defined]
             call_args = mock_logger.info.call_args[0]
             assert "connected" in call_args[0].lower()
 
@@ -239,11 +239,13 @@ class TestOnMessage:
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.process_commands = AsyncMock()
+        bot.process_commands = AsyncMock()  # type: ignore[method-assign]
 
         await bot.on_message(mock_message)
 
-        bot.process_commands.assert_called_once_with(mock_message)
+        bot.process_commands.assert_called_once_with(  # type: ignore[attr-defined]
+            mock_message
+        )
 
 
 class TestOnCommandError:
@@ -278,7 +280,7 @@ class TestOnCommandError:
 
         await bot.on_command_error(context, error)
 
-        context.send.assert_not_called()
+        context.send.assert_not_called()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_on_command_error_ignores_not_found(self, bot: Byte, context: Context) -> None:
@@ -288,7 +290,7 @@ class TestOnCommandError:
 
         await bot.on_command_error(context, error)
 
-        context.send.assert_not_called()
+        context.send.assert_not_called()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_on_command_error_sends_embed(self, bot: Byte, context: Context) -> None:
@@ -297,7 +299,7 @@ class TestOnCommandError:
 
         await bot.on_command_error(context, error)
 
-        context.send.assert_called_once()
+        context.send.assert_called_once()  # type: ignore[attr-defined]
         call_args = context.send.call_args
         assert "embed" in call_args[1]
         embed = call_args[1]["embed"]
@@ -343,7 +345,7 @@ class TestOnCommandError:
 
         await bot.on_command_error(context, error)
 
-        context.interaction.response.send_message.assert_called_once()
+        context.interaction.response.send_message.assert_called_once()  # type: ignore[attr-defined]
         call_args = context.interaction.response.send_message.call_args
         assert call_args[1]["ephemeral"] is True
 
@@ -367,12 +369,13 @@ class TestOnMemberJoin:
     async def test_on_member_join_sends_welcome_message(self, mock_member: Member) -> None:
         """Test on_member_join sends welcome message to non-bot members."""
         mock_member.bot = False
-        mock_member.send = AsyncMock()
+        mock_member.send = AsyncMock(  # type: ignore[method-assign]
+        )
         mock_member.guild.name = "Test Guild"
 
         await Byte.on_member_join(mock_member)
 
-        mock_member.send.assert_called_once()
+        mock_member.send.assert_called_once()  # type: ignore[attr-defined]
         call_args = mock_member.send.call_args[0][0]
         assert "Welcome" in call_args
         assert "Test Guild" in call_args
@@ -381,11 +384,12 @@ class TestOnMemberJoin:
     async def test_on_member_join_ignores_bots(self, mock_member: Member) -> None:
         """Test on_member_join ignores bot members."""
         mock_member.bot = True
-        mock_member.send = AsyncMock()
+        mock_member.send = AsyncMock(  # type: ignore[method-assign]
+        )
 
         await Byte.on_member_join(mock_member)
 
-        mock_member.send.assert_not_called()
+        mock_member.send.assert_not_called()  # type: ignore[attr-defined]
 
 
 class TestOnGuildJoin:
@@ -410,7 +414,9 @@ class TestOnGuildJoin:
 
             await bot.on_guild_join(mock_guild)
 
-            bot.tree.sync.assert_called_once_with(guild=mock_guild)
+            bot.tree.sync.assert_called_once_with(  # type: ignore[attr-defined]
+                guild=mock_guild
+            )
 
     @pytest.mark.asyncio
     async def test_on_guild_join_creates_guild_in_api(self, mock_guild: Guild) -> None:
@@ -433,7 +439,7 @@ class TestOnGuildJoin:
 
             await bot.on_guild_join(mock_guild)
 
-            mock_client.post.assert_called_once()
+            mock_client.post.assert_called_once()  # type: ignore[attr-defined]
             call_args = mock_client.post.call_args[0][0]
             assert "/api/guilds/create" in call_args
             assert str(mock_guild.id) in call_args
@@ -503,7 +509,7 @@ class TestRunBot:
             run_bot()
 
             # Check bot was created
-            mock_byte_class.assert_called_once()
+            mock_byte_class.assert_called_once()  # type: ignore[attr-defined]
             call_kwargs = mock_byte_class.call_args[1]
 
             # Check intents
@@ -547,7 +553,7 @@ class TestRunBot:
             run_bot()
 
             # Verify anyio.run was called
-            mock_run.assert_called_once()
+            mock_run.assert_called_once()  # type: ignore[attr-defined]
 
     @patch("byte_bot.bot.run")
     @patch("byte_bot.bot.Byte")
@@ -576,7 +582,9 @@ class TestRunBot:
             run_bot()
 
             # Verify bot.start was called with the token
-            mock_bot_instance.start.assert_called_once_with("test_token_123")
+            mock_bot_instance.start.assert_called_once_with(  # type: ignore[attr-defined]
+                "test_token_123"
+            )
 
 
 class TestEdgeCases:
@@ -628,7 +636,7 @@ class TestEdgeCases:
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.process_commands = AsyncMock()
+        bot.process_commands = AsyncMock()  # type: ignore[method-assign]
 
         # Bot messages are still processed (bot doesn't filter them out)
         mock_message.author.bot = True
@@ -636,7 +644,9 @@ class TestEdgeCases:
         await bot.on_message(mock_message)
 
         # Should still call process_commands (filtering happens in command handler)
-        bot.process_commands.assert_called_once_with(mock_message)
+        bot.process_commands.assert_called_once_with(  # type: ignore[attr-defined]
+            mock_message
+        )
 
     @pytest.mark.asyncio
     async def test_on_command_error_with_nested_original_error(self) -> None:
@@ -673,7 +683,7 @@ class TestEdgeCases:
         await bot.on_command_error(context, error)
 
         # Should be ignored due to Forbidden
-        context.send.assert_not_called()
+        context.send.assert_not_called()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_on_command_error_channel_without_mention(self) -> None:
@@ -705,7 +715,7 @@ class TestEdgeCases:
         await bot.on_command_error(context, error)
 
         # Should still send embed with str(channel)
-        context.send.assert_called_once()
+        context.send.assert_called_once()  # type: ignore[attr-defined]
         embed = context.send.call_args[1]["embed"]
         channel_field = next(f for f in embed.fields if f.name == "Channel")
         assert channel_field.value == "dm-channel"
@@ -714,7 +724,9 @@ class TestEdgeCases:
     async def test_on_member_join_send_failure(self, mock_member: Member) -> None:
         """Test on_member_join handles send failures gracefully."""
         mock_member.bot = False
-        mock_member.send = AsyncMock(side_effect=Forbidden(MagicMock(), "Cannot send messages"))
+        mock_member.send = AsyncMock(  # type: ignore[method-assign]
+            side_effect=Forbidden(MagicMock(), "Cannot send messages")
+        )
         mock_member.guild.name = "Test Guild"
 
         # Should raise the exception (not caught in the code)
@@ -780,7 +792,7 @@ class TestEdgeCases:
             await bot.on_ready()
 
             # Should still log (with None)
-            mock_logger.info.assert_called_once()
+            mock_logger.info.assert_called_once()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_multiple_command_prefixes(self) -> None:
@@ -824,7 +836,7 @@ class TestEdgeCases:
         await bot.on_command_error(context, error)
 
         # Should send embed with the error message
-        context.send.assert_called_once()
+        context.send.assert_called_once()  # type: ignore[attr-defined]
         embed = context.send.call_args[1]["embed"]
         assert "Direct error" in embed.description
 
@@ -834,7 +846,7 @@ class TestEdgeCases:
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.load_extension = AsyncMock()
+        bot.load_extension = AsyncMock()  # type: ignore[method-assign]
 
         plugins_dir = tmp_path / "byte_bot" / "plugins"
         plugins_dir.mkdir(parents=True)
@@ -844,7 +856,7 @@ class TestEdgeCases:
             await bot.load_cogs()
 
             # Should not attempt to load any cogs
-            bot.load_extension.assert_not_called()
+            bot.load_extension.assert_not_called()  # type: ignore[attr-defined]
 
     @pytest.mark.asyncio
     async def test_load_cogs_complex_path_construction(self, tmp_path: Path) -> None:
@@ -852,7 +864,7 @@ class TestEdgeCases:
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.load_extension = AsyncMock()
+        bot.load_extension = AsyncMock()  # type: ignore[method-assign]
 
         # Create deeply nested plugin
         plugins_dir = tmp_path / "byte_bot" / "plugins"
@@ -866,8 +878,8 @@ class TestEdgeCases:
             await bot.load_cogs()
 
             # Verify correct import path construction
-            bot.load_extension.assert_called_once()
-            call_arg = bot.load_extension.call_args[0][0]
+            bot.load_extension.assert_called_once()  # type: ignore[attr-defined]
+            call_arg = bot.load_extension.call_args[0][0]  # type: ignore[attr-defined]
             assert "byte_bot.plugins.feature.subfeature.deep_plugin" == call_arg
 
     @pytest.mark.asyncio

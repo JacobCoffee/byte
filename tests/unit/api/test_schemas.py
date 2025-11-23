@@ -522,7 +522,7 @@ class TestSchemaValidation:
         with pytest.raises(ValidationError) as exc_info:
             GuildCreate(id=123)  # type: ignore[call-arg]
 
-        errors = exc_info.value.errors()
+        errors = exc_info.value.errors()  # type: ignore[attr-defined]
         assert any(e["loc"] == ("name",) for e in errors)
 
     def test_guild_schema_validates_types(self) -> None:

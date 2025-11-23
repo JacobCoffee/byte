@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock, PropertyMock, patch
 
 import pytest
 
@@ -459,7 +459,7 @@ class TestConfigKeySelectCallbacks:
         """Test ConfigKeySelect callback preserves option context in modal."""
         option = mock_config_options[0]
         select = ConfigKeySelect(option)
-        select._values = ["Help Channel ID"]
+        type(select).values = PropertyMock(return_value=["Help Channel"])
 
         mock_interaction.response.send_modal = AsyncMock()
 
