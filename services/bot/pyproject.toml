@@ -1,5 +1,5 @@
 [project]
-name = "byte-bot-service"
+name = "byte-bot"
 version = "0.2.0"
 description = "Discord bot service for Byte Bot"
 authors = [
@@ -26,9 +26,6 @@ build-backend = "uv_build"
 
 [tool.uv]
 package = true
-
-[tool.uv.build-backend]
-module-root = "src"
 
 [tool.uv.sources]
 byte-common = { workspace = true }
