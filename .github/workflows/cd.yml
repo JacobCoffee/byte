@@ -63,14 +63,9 @@ jobs:
             git checkout -b "$BRANCH_NAME"
 
             # Commit with Claude Code signature
-            git commit -m "$(cat <<'EOF'
-          docs: update changelog
-
-          🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-          Co-Authored-By: Claude <noreply@anthropic.com>
-          EOF
-          )"
+            git commit -m "docs: update changelog" \
+              -m "🤖 Generated with [Claude Code](https://claude.com/claude-code)" \
+              -m "Co-Authored-By: Claude <noreply@anthropic.com>"
 
             # Push and create PR
             git push origin "$BRANCH_NAME"
@@ -90,17 +85,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       - name: Update GitHub release body
-        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/v')
+        if: github.event_name == 'release'
         run: |
-          # Extract version from tag or release
-          if [ "${{ github.event_name }}" = "release" ]; then
-            TAG_NAME="${{ github.event.release.tag_name }}"
-          else
-            TAG_NAME="${GITHUB_REF#refs/tags/}"
-          fi
-
           # Update release body with latest changelog
-          gh release edit "$TAG_NAME" \
+          gh release edit "${{ github.event.release.tag_name }}" \
             --notes "${{ steps.git-cliff-latest.outputs.content }}" \
             --repo ${{ github.repository }}
         env:
