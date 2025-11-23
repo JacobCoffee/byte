@@ -9,6 +9,7 @@ USING_UV		=	$(shell grep "tool.uv" pyproject.toml && echo "yes")
 VENV_EXISTS		=	$(shell python3 -c "if __import__('pathlib').Path('.venv/bin/activate').exists(): print('yes')")
 UV_OPTS 		?=
 UV 			    ?= 	uv $(UV_OPTS)
+PYTHONDONTWRITEBYTECODE = 1
 
 .EXPORT_ALL_VARIABLES:
 

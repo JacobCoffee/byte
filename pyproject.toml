@@ -20,6 +20,8 @@ dev = [
     "pytest-mock>=3.12.0",
     "hypothesis>=6.92.0",
     "pytest-asyncio>=0.23.2",
+    "pytest-socket>=0.7.0",
+    "pytest-xdist>=3.6.1",
     # - Documentation
     "sphinx>=7.2.6",
     "sphinx-autobuild>=2021.3.14",
@@ -92,6 +94,7 @@ python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
 env_files = [".env.test"]
+norecursedirs = [".*", "*.egg-info", ".git", ".tox", "node_modules", "worktrees", "docs", ".venv", "htmlcov"]
 addopts = [
     "-v",
     "--strict-markers",
@@ -101,11 +104,17 @@ addopts = [
     "--cov-report=term-missing",
     "--cov-report=html",
     "--cov-report=xml",
+    "-p", "no:doctest",
+    "-p", "no:pastebin",
+    "-p", "no:legacypath",
+    "--disable-socket",
+    "--allow-unix-socket",
 ]
 markers = [
     "asyncio: mark test as async",
     "unit: mark test as unit test",
     "integration: mark test as integration test",
+    "enable_socket: mark test as needing network access",
 ]
 filterwarnings = [
     "ignore::DeprecationWarning:pkg_resources.*",

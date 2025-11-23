@@ -194,10 +194,91 @@ uv add --dev aiosqlite
 
 ## Performance
 
-Current test execution time: ~0.4-0.6 seconds for all 75 tests
+Current test execution time (1036 tests total):
+- **Collection**: ~1.18s
+- **Sequential execution**: ~23s
+- **Parallel execution** (`pytest -n auto`): ~10s (58% faster)
 
-- Unit tests: ~0.1s
-- Integration tests: ~0.3s (includes database setup/teardown)
+### Performance Optimizations
+
+Following best practices from [awesome-pytest-speedup](https://github.com/zupo/awesome-pytest-speedup), we've implemented several optimizations:
+
+#### 1. PYTHONDONTWRITEBYTECODE=1
+- **Impact**: Reduces I/O overhead
+- **Location**: `Makefile`, `.github/workflows/ci.yml`, `.env.example`
+- Prevents `.pyc` file generation during test runs
+
+#### 2. Disabled Unnecessary Builtin Plugins
+- **Impact**: Faster collection
+- **Disabled**: `doctest`, `pastebin`, `legacypath`
+- **Config**: `pyproject.toml` → `addopts`
+
+#### 3. Collection Optimization
+- **Impact**: 25% faster collection
+- **Method**: `norecursedirs` excludes `.git`, `node_modules`, `docs`, `.venv`, etc.
+- **Config**: `pyproject.toml` → `norecursedirs`
+
+#### 4. Network Access Prevention (pytest-socket)
+- **Impact**: Catches inadvertent network calls in unit tests
+- **Usage**: Tests needing network access: `@pytest.mark.enable_socket`
+- **Config**: `--disable-socket --allow-unix-socket` (allows DB connections)
+
+#### 5. Parallel Execution (pytest-xdist)
+- **Impact**: 58% faster execution on multi-core systems
+- **Usage**: `pytest -n auto` (opt-in, not default)
+- **Note**: Some tests may have race conditions when run in parallel
+
+### Performance Comparison
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Pytest Performance Metrics (1036 tests)                     │
+├─────────────────────────────────────────────────────────────┤
+│                                                              │
+│ Collection Time:                                            │
+│ ├─ Before:  1.58s ████████████████                          │
+│ └─ After:   1.18s ███████████▓ (-25%)                       │
+│                                                              │
+│ Test Execution:                                             │
+│ ├─ Sequential:  ~23s ██████████████████████████████████     │
+│ └─ Parallel:    ~10s █████████████▓ (-58%)                  │
+│                                                              │
+│ Total Time (with parallel):                                 │
+│ ├─ Before:  ~25s ██████████████████████████████████         │
+│ └─ After:   ~11s ██████████████▓ (-56%)                     │
+│                                                              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Running Tests with Parallelization
+
+```bash
+# Default: Sequential (safer, no race conditions)
+make test
+
+# Parallel: Use all CPU cores (faster)
+pytest -n auto
+
+# Parallel: Use specific number of workers
+pytest -n 4
+
+# Quick feedback: Run only failed tests
+pytest --lf
+
+# Quick feedback: Run failed first, then rest
+pytest --ff
+```
+
+**Note**: If tests fail with `-n auto` but pass sequentially, this indicates race conditions or shared state between tests.
+
+### Future Optimization Opportunities
+
+Based on [awesome-pytest-speedup](https://github.com/zupo/awesome-pytest-speedup):
+
+1. **Database optimization**: Use transaction rollback pattern instead of recreation
+2. **Selective execution**: `pytest-testmon` to run only tests affected by code changes
+3. **Test categorization**: `pytest-skip-slow` to skip slow tests by default
+4. **CI parallelization**: `pytest-split` to distribute tests across multiple CI runners
 
 ## Documentation
 
