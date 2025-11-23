@@ -364,7 +364,7 @@ class TestConcurrentOperations:
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         # One should succeed (201), one should fail (409 or 500)
-        status_codes: list[int] = [r.status_code if hasattr(r, "status_code") else 500 for r in results]  # type: ignore[misc]
+        status_codes: list[int] = [r.status_code if hasattr(r, "status_code") else 500 for r in results]
         assert HTTP_201_CREATED in status_codes
         # At least one should indicate a conflict/error
         assert any(code >= 400 for code in status_codes)
