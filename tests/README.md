@@ -204,9 +204,10 @@ Current test execution time (1036 tests total):
 Following best practices from [awesome-pytest-speedup](https://github.com/zupo/awesome-pytest-speedup), we've implemented several optimizations:
 
 #### 1. PYTHONDONTWRITEBYTECODE=1
-- **Impact**: Reduces I/O overhead
-- **Location**: `Makefile`, `.github/workflows/ci.yml`, `.env.example`
-- Prevents `.pyc` file generation during test runs
+- **Impact**: Reduces I/O overhead during test runs
+- **Location**: Scoped to test targets in `Makefile`, set globally in `.github/workflows/ci.yml`
+- Prevents `.pyc` file generation during testing
+- **Note**: NOT set globally to avoid affecting dev servers, Docker builds, and other targets that benefit from .pyc caching
 
 #### 2. Disabled Unnecessary Builtin Plugins
 - **Impact**: Faster collection
