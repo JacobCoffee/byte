@@ -176,6 +176,16 @@ filterwarnings = [
 ]
 
 [tool.ty]
+exclude = [
+    "byte_bot/__init__.py",
+    "byte_bot/app.py",
+    "byte_bot/cli.py",
+    "byte_bot/utils.py",
+    "byte_bot/__metadata__.py",
+    "byte_bot/byte/",
+    "byte_bot/server/",
+    "docs/conf.py",
+]
 
 [tool.ty.environment]
 extra-paths = ["byte_bot/", "tests/", "packages/byte-common/src/", "packages/byte-common/tests/", "services/api/src/", "services/bot/src/"]
