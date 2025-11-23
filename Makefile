@@ -53,7 +53,7 @@ install-prek: ## Install prek and install hooks
 install-frontend: ## Install the frontend dependencies
 	@echo "=> Installing frontend dependencies"
 	@nodeenv --python-virtualenv
-	@npm install
+	@bun install
 	@echo "=> Frontend dependencies installed"
 
 .PHONY: install-backend
@@ -96,7 +96,7 @@ refresh-container: clean-container up-container load-container ## Refresh the By
 
 ##@ Code Quality
 
-lint: ## Runs prek hooks; includes ruff linting, codespell, black
+lint: ## Runs prek hooks; includes ruff linting, codespell, biome
 	@$(UV) run --no-sync prek run --all-files --skip ty
 
 fmt-check: ## Runs Ruff format in check mode (no changes)
