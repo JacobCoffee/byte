@@ -8,17 +8,17 @@ import warnings
 
 from sqlalchemy.exc import SAWarning
 
-from byte_bot.__metadata__ import __project__
-
 # -- Environmental Data ------------------------------------------------------
 warnings.filterwarnings("ignore", category=SAWarning)
 warnings.filterwarnings("ignore", category=DeprecationWarning)  # RemovedInSphinx80Warning
 
 # -- Project information -----------------------------------------------------
-project = __project__
+# NOTE: Hardcoded for now since byte-bot was split into microservices (byte-api, byte-bot, byte-common)
+# TODO: Update docs structure to reflect new microservices architecture
+project = "Byte Bot"
 copyright = "2023, Jacob Coffee"
 author = "Jacob Coffee"
-release = os.getenv("_BYTE_BOT_DOCS_BUILD_VERSION", importlib.metadata.version("byte-bot").rsplit(".")[0])
+release = os.getenv("_BYTE_BOT_DOCS_BUILD_VERSION", "0.2.0")
 
 # -- General configuration ---------------------------------------------------
 extensions = [
