@@ -12,7 +12,7 @@ SITE_ROOT: Final = "/{path:str}"
 """Site root URL."""
 OPENAPI_SCHEMA: Final = "/api"
 """OpenAPI schema URL."""
-SYSTEM_HEALTH: Final = "/health"
+SYSTEM_HEALTH: Final = "/system/health"
 """System health URL."""
 
 # --- Bot
