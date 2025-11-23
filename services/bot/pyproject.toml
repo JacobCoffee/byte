@@ -24,5 +24,8 @@ byte-bot = "byte_bot.__main__:main"
 requires = ["uv_build>=0.9.11,<0.10.0"]
 build-backend = "uv_build"
 
+[tool.uv]
+package = true
+
 [tool.uv.sources]
 byte-common = { workspace = true }
