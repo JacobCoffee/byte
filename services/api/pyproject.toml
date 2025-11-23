@@ -18,7 +18,7 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "PyJWT>=2.8.0",
 ]
-requires-python = ">=3.12,<4.0"
+requires-python = ">=3.14,<4.0"
 license = { text = "MIT" }
 
 [build-system]
