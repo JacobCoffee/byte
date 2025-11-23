@@ -282,7 +282,6 @@ class TestFullGuildLifecycleWithAllConfigs:
         )
         db_session.add(forum_config)
         await db_session.flush()
-        await db_session.commit()
 
         # VERIFY all configs exist in DB
         github_result = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == 9999))
@@ -297,7 +296,6 @@ class TestFullGuildLifecycleWithAllConfigs:
         # DELETE guild (should cascade)
         await db_session.delete(guild)
         await db_session.flush()
-        await db_session.commit()
 
         # VERIFY cascade deleted all configs
         guild_check = await db_session.execute(select(Guild).where(Guild.guild_id == 9999))
@@ -334,7 +332,6 @@ class TestFullGuildLifecycleWithAllConfigs:
             db_session.add(so_tag)
 
         await db_session.flush()
-        await db_session.commit()
 
         # Verify all tags exist
         result = await db_session.execute(select(SOTagsConfig).where(SOTagsConfig.guild_id == 8888))
@@ -532,7 +529,6 @@ class TestDatabaseIntegrity:
         guild1 = Guild(guild_id=5555, guild_name="First Guild")
         db_session.add(guild1)
         await db_session.flush()
-        await db_session.commit()
 
         # Try to create duplicate
         guild2 = Guild(guild_id=5555, guild_name="Duplicate Guild")
@@ -600,12 +596,10 @@ class TestDatabaseIntegrity:
 
         db_session.add_all([github, forum, so_tag])
         await db_session.flush()
-        await db_session.commit()
 
         # Delete guild
         await db_session.delete(guild)
         await db_session.flush()
-        await db_session.commit()
 
         # Verify all configs deleted
         github_check = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == 4444))
