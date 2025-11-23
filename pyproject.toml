@@ -39,6 +39,8 @@ dev = [
     "sourcery>=1.14.0",
     "ty>=0.0.1a26",
     "aiosqlite>=0.21.0",
+    "respx>=0.22.0",
+    "ruff>=0.14.6",
 ]
 
 [tool.codespell]
