@@ -2,5 +2,5 @@
 general
 =======
 
-.. automodule:: byte_bot.byte.plugins.general
+.. automodule:: byte_bot.plugins.general
    :members:

@@ -4,5 +4,5 @@ template
 
 Template engine config
 
-.. automodule:: byte_bot.server.lib.template
+.. automodule:: byte_api.lib.template
      :members:

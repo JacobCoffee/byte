@@ -4,5 +4,5 @@ openapi
 
 OpenAPI config
 
-.. automodule:: byte_bot.server.lib.openapi
+.. automodule:: byte_api.lib.openapi
      :members:

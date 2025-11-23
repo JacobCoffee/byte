@@ -78,7 +78,7 @@ clean-container: ## Stop, remove, and wipe the Byte database container, volume, 
 
 load-container: up-container migrate ## Perform database migrations and load test data into the Byte database container
 	@echo "=> Loading database migrations and test data"
-	@$(UV) run app database upgrade --no-prompt
+	@cd services/api && $(UV) run python -m byte_api.scripts.migrate
 	@echo "rest not yet implemented"
 	@echo "=> Loaded database migrations and test data"
 
@@ -145,12 +145,12 @@ docs: docs-clean ## Dump the existing built docs and rebuild them
 migrations: ## Generate database migrations
 	@echo "ATTENTION: This operation will create a new database migration for any defined models changes."
 	@while [ -z "$$MIGRATION_MESSAGE" ]; do read -r -p "Migration message: " MIGRATION_MESSAGE; done ;
-	@$(UV) run app database make-migrations --autogenerate -m "$${MIGRATION_MESSAGE}"
+	@cd services/api && $(UV) run alembic revision --autogenerate -m "$${MIGRATION_MESSAGE}"
 
 .PHONY: migrate
 migrate: ## Apply database migrations
 	@echo "ATTENTION: Will apply all database migrations."
-	@$(UV) run app database upgrade --no-prompt
+	@cd services/api && $(UV) run python -m byte_api.scripts.migrate
 
 .PHONY: db
 db: ## Run the database
@@ -275,13 +275,16 @@ destroy: ## Destroy the virtual environment
 	@rm -rf .venv
 
 run-dev-bot: ## Run the bot in dev mode
-	@$(UV) run app run-bot
+	@cd services/bot && $(UV) run python -m byte_bot
 
 run-dev-server: up-container ## Run the app in dev mode
-	@$(UV) run app run-web --http-workers 1 --reload
+	@cd services/api && $(UV) run litestar run --app byte_api.app:create_app --reload --debug
 
 run-dev-frontend: ## Run the app frontend in dev mode
-	@$(UV) run tailwindcss -i byte_bot/server/domain/web/resources/input.css -o byte_bot/server/domain/web/resources/style.css --watch
+	@cd services/api && $(UV) run tailwindcss -i src/byte_api/domain/web/resources/input.css -o src/byte_api/domain/web/resources/style.css --watch
 
 run-dev: up-container ## Run the bot, web, and front end in dev mode
-	@$(UV) run app run-all --http-workers 1 -d -v --reload
+	@echo "NOTE: Run each service separately in different terminals:"
+	@echo "  Terminal 1: make run-dev-bot"
+	@echo "  Terminal 2: make run-dev-server"
+	@echo "  Terminal 3: make run-dev-frontend"

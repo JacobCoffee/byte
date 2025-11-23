@@ -33,7 +33,7 @@ __all__ = (
 logger = log.get_logger()
 
 
-async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[GuildsService, None]:
+async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[GuildsService]:
     """Construct Guilds-based repository and service objects for the request.
 
     Args:
@@ -67,7 +67,7 @@ async def provides_guilds_service(db_session: AsyncSession) -> AsyncGenerator[Gu
             ...
 
 
-async def provides_github_config_service(db_session: AsyncSession) -> AsyncGenerator[GitHubConfigService, None]:  # type: ignore[misc]
+async def provides_github_config_service(db_session: AsyncSession) -> AsyncGenerator[GitHubConfigService]:  # type: ignore[misc]
     """Construct GitHubConfig-based repository and service objects for the request.
 
     Args:
@@ -98,7 +98,7 @@ async def provides_github_config_service(db_session: AsyncSession) -> AsyncGener
             ...
 
 
-async def provides_sotags_config_service(db_session: AsyncSession) -> AsyncGenerator[SOTagsConfigService, None]:
+async def provides_sotags_config_service(db_session: AsyncSession) -> AsyncGenerator[SOTagsConfigService]:
     """Construct SOTagsConfig-based repository and service objects for the request.
 
     Args:
@@ -123,7 +123,7 @@ async def provides_sotags_config_service(db_session: AsyncSession) -> AsyncGener
 
 async def provides_allowed_users_config_service(
     db_session: AsyncSession,
-) -> AsyncGenerator[AllowedUsersConfigService, None]:
+) -> AsyncGenerator[AllowedUsersConfigService]:
     """Construct AllowedUsersConfig-based repository and service objects for the request.
 
     Args:
@@ -146,7 +146,7 @@ async def provides_allowed_users_config_service(
             ...
 
 
-async def provides_forum_config_service(db_session: AsyncSession) -> AsyncGenerator[ForumConfigService, None]:
+async def provides_forum_config_service(db_session: AsyncSession) -> AsyncGenerator[ForumConfigService]:
     """Construct ForumConfig-based repository and service objects for the request.
 
     Args:

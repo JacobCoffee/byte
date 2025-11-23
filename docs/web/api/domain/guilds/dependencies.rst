@@ -4,5 +4,5 @@ dependencies
 
 Dependencies for the guilds domain.
 
-.. automodule:: byte_bot.server.domain.guilds.dependencies
+.. automodule:: byte_api.domain.guilds.dependencies
     :members:

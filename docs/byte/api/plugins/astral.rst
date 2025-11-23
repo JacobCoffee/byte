@@ -2,5 +2,5 @@
 astral
 ======
 
-.. automodule:: byte_bot.byte.plugins.astral
+.. automodule:: byte_bot.plugins.astral
    :members:

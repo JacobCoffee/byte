@@ -4,5 +4,5 @@ exceptions
 
 Application exceptions
 
-.. automodule:: byte_bot.server.lib.exceptions
+.. automodule:: byte_api.lib.exceptions
      :members:

@@ -12,8 +12,8 @@ warnings.filterwarnings("ignore", category=SAWarning)
 warnings.filterwarnings("ignore", category=DeprecationWarning)  # RemovedInSphinx80Warning
 
 # -- Project information -----------------------------------------------------
-# NOTE: Hardcoded for now since byte-bot was split into microservices (byte-api, byte-bot, byte-common)
-# TODO: Update docs structure to reflect new microservices architecture
+# NOTE: Microservices architecture (services/api, services/bot, packages/byte-common)
+# autodoc resolves imports via uv workspace editable installs
 project = "Byte Bot"
 copyright = "2023, Jacob Coffee"
 author = "Jacob Coffee"

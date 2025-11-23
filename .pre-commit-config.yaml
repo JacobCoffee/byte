@@ -1,5 +1,5 @@
 default_language_version:
-  python: "3.12"
+  python: "3.13"
 default_install_hook_types: [commit-msg, pre-commit]
 repos:
   - repo: https://github.com/compilerla/conventional-pre-commit
@@ -23,12 +23,6 @@ repos:
       - id: ruff-check
         args: ["--fix"]
       - id: ruff-format
-  - repo: https://github.com/sourcery-ai/sourcery
-    rev: v1.40.0
-    hooks:
-      - id: sourcery
-        args: [--diff=git diff HEAD, --no-summary]
-        stages: [commit]
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:

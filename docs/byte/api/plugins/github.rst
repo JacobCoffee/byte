@@ -2,5 +2,5 @@
 github
 ======
 
-.. automodule:: byte_bot.server.domain.github
+.. automodule:: byte_api.domain.github
    :members:

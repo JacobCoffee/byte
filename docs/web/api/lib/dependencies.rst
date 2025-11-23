@@ -4,5 +4,5 @@ dependencies
 
 Dependency management
 
-.. automodule:: byte_bot.server.lib.dependencies
+.. automodule:: byte_api.lib.dependencies
      :members:

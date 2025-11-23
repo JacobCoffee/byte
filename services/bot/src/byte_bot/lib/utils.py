@@ -8,7 +8,7 @@ import re
 import subprocess
 from datetime import UTC, datetime
 from itertools import islice
-from typing import TYPE_CHECKING, TypeVar
+from typing import TYPE_CHECKING
 
 import httpx
 from anyio import run_process
@@ -38,8 +38,6 @@ __all__ = (
     "query_all_ruff_rules",
     "run_ruff_format",
 )
-
-_T = TypeVar("_T")
 
 
 def linker(title: str, link: str, show_embed: bool = False) -> str:
@@ -140,15 +138,15 @@ async def paste(code: str) -> str:
         return paste_link or "Failed to upload formatted code."
 
 
-def chunk_sequence(sequence: Iterable[_T], size: int) -> Iterable[tuple[_T, ...]]:
+def chunk_sequence[T](sequence: Iterable[T], size: int) -> Iterable[tuple[T, ...]]:
     """Naïve chunking of an iterable.
 
     Args:
-        sequence (Iterable[_T]): Iterable to chunk
+        sequence (Iterable[T]): Iterable to chunk
         size (int): Size of chunk
 
     Yields:
-        Iterable[tuple[_T, ...]]: An n-tuple that contains chunked data
+        Iterable[tuple[T, ...]]: An n-tuple that contains chunked data
     """
     _sequence = iter(sequence)
     while chunk := tuple(islice(_sequence, size)):

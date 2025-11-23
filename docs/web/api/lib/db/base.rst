@@ -5,5 +5,5 @@ base
 API Reference
 -------------
 
-.. automodule:: byte_bot.server.lib.db.base
+.. automodule:: byte_api.lib.db.base
      :members:
