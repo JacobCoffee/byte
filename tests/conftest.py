@@ -46,16 +46,20 @@ async def async_engine() -> AsyncGenerator[AsyncEngine]:
     """Create an async SQLite engine for testing.
 
     Uses in-memory SQLite database that's created fresh for each test.
+    Note: This fixture explicitly avoids PostgreSQL-specific configurations.
     """
     from sqlalchemy import event
+    from sqlalchemy.pool import StaticPool
 
     engine = create_async_engine(
         "sqlite+aiosqlite:///:memory:",
         echo=False,
         future=True,
+        poolclass=StaticPool,  # Required for in-memory SQLite
+        connect_args={"check_same_thread": False},  # Allow multi-thread access
     )
 
-    # Enable foreign key constraints in SQLite
+    # Enable foreign key constraints in SQLite (SQLite-specific, not Postgres)
     @event.listens_for(engine.sync_engine, "connect")
     def set_sqlite_pragma(dbapi_conn, connection_record):
         cursor = dbapi_conn.cursor()

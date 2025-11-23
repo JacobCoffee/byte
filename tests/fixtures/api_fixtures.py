@@ -9,9 +9,10 @@ from unittest.mock import AsyncMock
 import pytest
 from litestar import Litestar
 from litestar.testing import AsyncTestClient
+from sqlalchemy.ext.asyncio import AsyncEngine, async_sessionmaker
 
 if TYPE_CHECKING:
-    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+    from sqlalchemy.ext.asyncio import AsyncSession
 
 __all__ = [
     "api_app",
@@ -21,28 +22,59 @@ __all__ = [
 
 
 @pytest.fixture
-async def api_app(async_session: async_sessionmaker[AsyncSession]) -> Litestar:
+async def api_app(async_engine: AsyncEngine) -> AsyncGenerator[Litestar]:
     """Create Litestar app with test database.
 
     This fixture creates a Litestar application configured to use
     the in-memory test database instead of the production database.
 
+    The key challenge is that the production code registers PostgreSQL-specific
+    event handlers that fail with SQLite. This fixture removes those handlers
+    before creating the app.
+
     Args:
-        async_session: Test database session factory from conftest.
+        async_engine: Test database engine from conftest.
 
     Returns:
         Configured Litestar application for testing.
     """
-    from byte_api.app import create_app
+    import os
+    from unittest.mock import patch
 
-    # Create app with default config (will be overridden by dependency injection)
-    return create_app()
+    from byte_api.app import create_app
+    from byte_api.lib.db import base
+
+    # Remove all event listeners from the sync engine to prevent PostgreSQL-specific
+    # handlers from failing on SQLite connections
+    if hasattr(base.engine.sync_engine, "dispatch"):
+        base.engine.sync_engine.dispatch._clear()  # type: ignore[attr-defined]
+
+    # Temporarily set environment to use test database
+    with patch.dict(os.environ, {"DB_URL": "sqlite+aiosqlite:///:memory:"}):
+        # Replace the production engine and session factory with test versions
+        original_engine = base.engine
+        original_session_factory = base.async_session_factory
+
+        base.engine = async_engine
+        base.async_session_factory = async_sessionmaker(async_engine, expire_on_commit=False)
+
+        # Update the config to use test engine
+        base.config.engine_instance = async_engine
+        base.config.session_maker = base.async_session_factory
+
+        try:
+            app = create_app()
+            yield app
+        finally:
+            # Restore original
+            base.engine = original_engine
+            base.async_session_factory = original_session_factory
 
 
 @pytest.fixture
 async def api_client(
     api_app: Litestar,
-    db_session: AsyncSession,
+    async_session: async_sessionmaker[AsyncSession],
 ) -> AsyncGenerator[AsyncTestClient[Litestar]]:
     """Create async test client with test database.
 
@@ -52,15 +84,24 @@ async def api_client(
 
     Args:
         api_app: Litestar application instance.
-        db_session: Test database session.
+        async_session: Test database session factory.
 
     Yields:
         Configured AsyncTestClient for making API requests.
     """
-    # Override the db_session dependency with our test session
+    from litestar.di import Provide
+
+    # Override the database session provider with test session factory
+    async def provide_test_transaction() -> AsyncGenerator[AsyncSession]:
+        """Provide test database session."""
+        async with async_session() as session:
+            async with session.begin():
+                yield session
+
+    # Replace the db_session dependency in the app
+    api_app.dependencies["db_session"] = Provide(provide_test_transaction)
+
     async with AsyncTestClient(app=api_app) as client:
-        # Store the test session for dependency injection
-        client.app.state.session = db_session
         yield client
 
 
