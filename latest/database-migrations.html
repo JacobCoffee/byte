@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Database Migrations - Docs</title>
+    <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changelog" href="changelog.html" /><link rel="prev" title="Contribution guide" href="contribution-guide.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="shortcut icon" href="_static/badge.svg"/><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=aecf457f" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=28c32440" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=ee381b95" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=80d31e7b" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:56px;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));--sy-c-link-weak:rgba(var(--sy-rc-theme), 0.86);
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+  }
+}
+html.light {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+html.dark {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Database Migrations"/>
+<meta name="twitter:card" content="summary"/></head>
+<body><div class="document"><div class="announcement">
+    <div class="announcement-inner">
+      <p>This documentation is currently under development.</p>
+      <button class="announcement-close" aria-label="Close announcement">
+        <i class="i-icon close"></i>
+      </button>
+    </div>
+  </div><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand mr-4" href="/">
+      <img class="light-logo" src="_static/badge.svg" alt="Byte Bot" height="28" />
+      <img class="dark-logo" src="_static/badge.svg" alt="Byte Bot" height="28" />
+      <strong>Byte Bot</strong>
+    </a>
+    <div class="sy-head-links" id="NavLinks">
+      <nav class="sy-head-nav">
+
+<ul><li class="link">
+          <a href="https://byte-bot.app/"><span>Dashboard</span><i class="i-icon external-link"></i></a>
+        </li><li class="link">
+          <a href="https://github.com/sponsors/JacobCoffee"><span>Sponsor me</span><i class="i-icon external-link"></i></a>
+        </li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+        
+        
+        <div class="sy-head-social flex items-center">
+            <a class="flex items-center" href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub">
+              <i class="i-icon github"></i>
+            </a>
+            <a class="flex items-center" href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord">
+              <i class="i-icon discord"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden">
+      <button class="js-theme theme-switch flex items-center" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading"><span class="caption-text">Byte Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="byte/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="byte/usage/byte.html">About Byte</a></li>
+<li class="toctree-l2"><a class="reference internal" href="byte/usage/starting.html">Starting Byte</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="byte/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="byte/api/bot.html">bot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="byte/api/plugins/index.html">plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/events.html">events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/general.html">general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/python.html">python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="byte/api/views/index.html">views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/views/forums.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/views/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/views/python.html">python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/views/abstract.html">abstract</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="byte/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/lib/common.html">common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/lib/logging.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/lib/utils.html">utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Web Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="web/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="web/usage/server.html">About the Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/usage/starting.html">Starting Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="web/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="web/api/app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/cli.html">cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/metadata.html">metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/utils.html">utils</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/domain/index.html">domain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/init.html">Domain Initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/urls.html">urls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/system/index.html">system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/system/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/system/dtos.html">dtos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/system/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/guilds/index.html">guilds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/dependencies.html">dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/helpers.html">helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/schemas.html">schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/services.html">services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/urls.html">urls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/github/index.html">github</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/github/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/web/index.html">web</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/web/controllers.html">controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/db/index.html">Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/db/models.html">models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/constants.html">constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/dependencies.html">dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/dtos.html">dtos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/schema.html">schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/serialization.html">serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/static_files.html">static files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/types.html">types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/template.html">template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/log/index.html">logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/controller.html">controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/init.html">init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/db/index.html">Database Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/db/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/db/orm.html">orm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contribution-guide.html">Contribution guide</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Database Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-icon close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#location">Location</a></li>
+<li><a class="reference internal" href="#migration-history">Migration History</a></li>
+<li><a class="reference internal" href="#running-migrations">Running Migrations</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#upgrade-to-latest">Upgrade to Latest</a></li>
+<li><a class="reference internal" href="#check-current-version">Check Current Version</a></li>
+<li><a class="reference internal" href="#downgrade">Downgrade</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#creating-new-migrations">Creating New Migrations</a><ul>
+<li><a class="reference internal" href="#auto-generate-from-model-changes">Auto-generate from Model Changes</a></li>
+<li><a class="reference internal" href="#manual-migration">Manual Migration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#migration-file-structure">Migration File Structure</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#alembic-ini">Alembic.ini</a></li>
+<li><a class="reference internal" href="#database-settings">Database Settings</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#model-location">Model Location</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#path-doesn-t-exist-error">&#8220;Path doesn&#8217;t exist&#8221; Error</a></li>
+<li><a class="reference internal" href="#cannot-import-name-get-settings">&#8220;Cannot import name &#8216;get_settings&#8217;&#8221;</a></li>
+<li><a class="reference internal" href="#database-connection-refused">Database Connection Refused</a></li>
+<li><a class="reference internal" href="#import-errors-for-models">Import Errors for Models</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#production-deployment">Production Deployment</a></li>
+<li><a class="reference internal" href="#rollback-plan">Rollback Plan</a></li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+  data-type="github" data-user="JacobCoffee" data-repo="byte">
+  <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
+    <i class="i-icon github"></i>
+  </span>
+  <span class="flex-grow px-2">
+    <span>JacobCoffee/byte</span>
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <i class="i-icon star"></i>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <i class="i-icon git-fork"></i>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/JacobCoffee/byte/blob/master/docs/database-migrations.rst">Edit this page</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
+    </div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+    <div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-icon menu"></i>
+      </button>
+    </div>
+    <ul class="flex-1">
+      
+      
+      <li><a href="index.html">Byte Bot</a><span>/</span></li>
+      
+      <li><strong>Database Migrations</strong></li>
+      
+      
+    </ul>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-icon outdent"></i>
+      </button>
+    </div>
+  </div>
+</div>
+    <div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="database-migrations">
+<h1>Database Migrations<a class="headerlink" href="#database-migrations" title="Link to this heading">¶</a></h1>
+<p>This document describes how to work with database migrations in the Byte Bot project after the microservices migration.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Database migrations are managed using <a class="reference external" href="https://alembic.sqlalchemy.org/">Alembic</a> through
+<a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/">Advanced Alchemy</a>, which provides async-aware migration support integrated
+with SQLAlchemy 2.0.</p>
+</section>
+<section id="location">
+<h2>Location<a class="headerlink" href="#location" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><strong>Migration files</strong>: <code class="docutils literal notranslate"><span class="pre">services/api/src/byte_api/lib/db/migrations/versions/</span></code></p></li>
+<li><p><strong>Alembic config</strong>: <code class="docutils literal notranslate"><span class="pre">services/api/src/byte_api/lib/db/alembic.ini</span></code></p></li>
+<li><p><strong>Environment</strong>: <code class="docutils literal notranslate"><span class="pre">services/api/src/byte_api/lib/db/migrations/env.py</span></code></p></li>
+</ul>
+</section>
+<section id="migration-history">
+<h2>Migration History<a class="headerlink" href="#migration-history" title="Link to this heading">¶</a></h2>
+<p>The project contains the following migrations (in order):</p>
+<ol class="arabic simple">
+<li><p><strong>initial.py</strong> (<code class="docutils literal notranslate"><span class="pre">43165a559e89</span></code>) - Initial schema with guild, user, GitHub, and SO tags configuration</p></li>
+<li><p><strong>002_simplify_models.py</strong> (<code class="docutils literal notranslate"><span class="pre">feebdacfdd91</span></code>) - Simplified model structure, consolidated configuration tables</p></li>
+<li><p><strong>003_forum_models.py</strong> (<code class="docutils literal notranslate"><span class="pre">73a26ceab2c4</span></code>) - Added forum configuration support</p></li>
+<li><p><strong>004_snowflake_fixes.py</strong> (<code class="docutils literal notranslate"><span class="pre">f32ee278015d</span></code>) - Fixed Discord snowflake ID handling and foreign key relationships</p></li>
+</ol>
+</section>
+<section id="running-migrations">
+<h2>Running Migrations<a class="headerlink" href="#running-migrations" title="Link to this heading">¶</a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h3>
+<ol class="arabic">
+<li><p>PostgreSQL database running (use docker-compose):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span id="1-1">docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.infra.yml<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>db
+</span></pre></div>
+</div>
+</li>
+<li><p>Environment variables configured (create <code class="docutils literal notranslate"><span class="pre">.env</span></code> from <code class="docutils literal notranslate"><span class="pre">.env.example</span></code>):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="nv">DB_URL</span><span class="o">=</span>postgresql+asyncpg://byte:bot@localhost:5432/byte
+</span></pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="upgrade-to-latest">
+<h3>Upgrade to Latest<a class="headerlink" href="#upgrade-to-latest" title="Link to this heading">¶</a></h3>
+<p>To apply all pending migrations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.alembic.commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlembicCommands</span>
+</span><span id="1-2"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_api.lib.db.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+</span><span id="1-3">
+</span><span id="1-4"><span class="n">cmds</span> <span class="o">=</span> <span class="n">AlembicCommands</span><span class="p">(</span><span class="n">sqlalchemy_config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span id="1-5"><span class="n">cmds</span><span class="o">.</span><span class="n">upgrade</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>Or from shell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span id="1-1">uv<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span>
+</span><span id="1-2"><span class="s2">from advanced_alchemy.alembic.commands import AlembicCommands</span>
+</span><span id="1-3"><span class="s2">from byte_api.lib.db.base import config</span>
+</span><span id="1-4">
+</span><span id="1-5"><span class="s2">AlembicCommands(sqlalchemy_config=config).upgrade()</span>
+</span><span id="1-6"><span class="s2">&quot;</span>
+</span></pre></div>
+</div>
+</section>
+<section id="check-current-version">
+<h3>Check Current Version<a class="headerlink" href="#check-current-version" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.alembic.commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlembicCommands</span>
+</span><span id="1-2"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_api.lib.db.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+</span><span id="1-3">
+</span><span id="1-4"><span class="n">cmds</span> <span class="o">=</span> <span class="n">AlembicCommands</span><span class="p">(</span><span class="n">sqlalchemy_config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span id="1-5"><span class="n">cmds</span><span class="o">.</span><span class="n">current</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</section>
+<section id="downgrade">
+<h3>Downgrade<a class="headerlink" href="#downgrade" title="Link to this heading">¶</a></h3>
+<p>To rollback one migration:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.alembic.commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlembicCommands</span>
+</span><span id="1-2"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_api.lib.db.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+</span><span id="1-3">
+</span><span id="1-4"><span class="n">cmds</span> <span class="o">=</span> <span class="n">AlembicCommands</span><span class="p">(</span><span class="n">sqlalchemy_config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span id="1-5"><span class="n">cmds</span><span class="o">.</span><span class="n">downgrade</span><span class="p">(</span><span class="n">revision</span><span class="o">=</span><span class="s2">&quot;-1&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>To rollback to a specific version:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">cmds</span><span class="o">.</span><span class="n">downgrade</span><span class="p">(</span><span class="n">revision</span><span class="o">=</span><span class="s2">&quot;&lt;revision_id&gt;&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="creating-new-migrations">
+<h2>Creating New Migrations<a class="headerlink" href="#creating-new-migrations" title="Link to this heading">¶</a></h2>
+<section id="auto-generate-from-model-changes">
+<h3>Auto-generate from Model Changes<a class="headerlink" href="#auto-generate-from-model-changes" title="Link to this heading">¶</a></h3>
+<p>When you modify models in <code class="docutils literal notranslate"><span class="pre">byte-common/src/byte_common/models.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.alembic.commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">AlembicCommands</span>
+</span><span id="1-2"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_api.lib.db.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+</span><span id="1-3">
+</span><span id="1-4"><span class="n">cmds</span> <span class="o">=</span> <span class="n">AlembicCommands</span><span class="p">(</span><span class="n">sqlalchemy_config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+</span><span id="1-5"><span class="n">cmds</span><span class="o">.</span><span class="n">revision</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;description of changes&quot;</span><span class="p">,</span> <span class="n">autogenerate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+<section id="manual-migration">
+<h3>Manual Migration<a class="headerlink" href="#manual-migration" title="Link to this heading">¶</a></h3>
+<p>For data migrations or complex schema changes:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">cmds</span><span class="o">.</span><span class="n">revision</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;description of changes&quot;</span><span class="p">,</span> <span class="n">autogenerate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Then edit the generated file in <code class="docutils literal notranslate"><span class="pre">services/api/src/byte_api/lib/db/migrations/versions/</span></code>.</p>
+</section>
+</section>
+<section id="migration-file-structure">
+<h2>Migration File Structure<a class="headerlink" href="#migration-file-structure" title="Link to this heading">¶</a></h2>
+<p>Each migration file follows this pattern:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="c1"># type: ignore</span>
+</span><span id="1-2"><span class="sd">&quot;&quot;&quot;Revision ID: &lt;id&gt;</span>
+</span><span id="1-3"><span class="sd">Revises: &lt;parent_id&gt;</span>
+</span><span id="1-4"><span class="sd">Create Date: &lt;timestamp&gt;</span>
+</span><span id="1-5"><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="1-6">
+</span><span id="1-7"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span id="1-8">
+</span><span id="1-9"><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+</span><span id="1-10"><span class="kn">import</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sa</span>
+</span><span id="1-11"><span class="kn">from</span><span class="w"> </span><span class="nn">advanced_alchemy.types</span><span class="w"> </span><span class="kn">import</span> <span class="n">GUID</span><span class="p">,</span> <span class="n">ORA_JSONB</span><span class="p">,</span> <span class="n">DateTimeUTC</span>
+</span><span id="1-12"><span class="kn">from</span><span class="w"> </span><span class="nn">alembic</span><span class="w"> </span><span class="kn">import</span> <span class="n">op</span>
+</span><span id="1-13">
+</span><span id="1-14"><span class="c1"># revision identifiers, used by Alembic</span>
+</span><span id="1-15"><span class="n">revision</span> <span class="o">=</span> <span class="s2">&quot;&lt;id&gt;&quot;</span>
+</span><span id="1-16"><span class="n">down_revision</span> <span class="o">=</span> <span class="s2">&quot;&lt;parent_id&gt;&quot;</span>
+</span><span id="1-17"><span class="n">branch_labels</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="1-18"><span class="n">depends_on</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="1-19">
+</span><span id="1-20">
+</span><span id="1-21"><span class="k">def</span><span class="w"> </span><span class="nf">upgrade</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-22">    <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+</span><span id="1-23">        <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
+</span><span id="1-24">        <span class="k">with</span> <span class="n">op</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">autocommit_block</span><span class="p">():</span>
+</span><span id="1-25">            <span class="n">schema_upgrades</span><span class="p">()</span>
+</span><span id="1-26">            <span class="n">data_upgrades</span><span class="p">()</span>
+</span><span id="1-27">
+</span><span id="1-28">
+</span><span id="1-29"><span class="k">def</span><span class="w"> </span><span class="nf">downgrade</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-30">    <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+</span><span id="1-31">        <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">)</span>
+</span><span id="1-32">        <span class="k">with</span> <span class="n">op</span><span class="o">.</span><span class="n">get_context</span><span class="p">()</span><span class="o">.</span><span class="n">autocommit_block</span><span class="p">():</span>
+</span><span id="1-33">            <span class="n">data_downgrades</span><span class="p">()</span>
+</span><span id="1-34">            <span class="n">schema_downgrades</span><span class="p">()</span>
+</span><span id="1-35">
+</span><span id="1-36">
+</span><span id="1-37"><span class="k">def</span><span class="w"> </span><span class="nf">schema_upgrades</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-38"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Schema upgrade migrations go here.&quot;&quot;&quot;</span>
+</span><span id="1-39">    <span class="c1"># ### commands auto generated by Alembic ###</span>
+</span><span id="1-40">    <span class="k">pass</span>
+</span><span id="1-41">
+</span><span id="1-42">
+</span><span id="1-43"><span class="k">def</span><span class="w"> </span><span class="nf">schema_downgrades</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-44"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Schema downgrade migrations go here.&quot;&quot;&quot;</span>
+</span><span id="1-45">    <span class="c1"># ### commands auto generated by Alembic ###</span>
+</span><span id="1-46">    <span class="k">pass</span>
+</span><span id="1-47">
+</span><span id="1-48">
+</span><span id="1-49"><span class="k">def</span><span class="w"> </span><span class="nf">data_upgrades</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-50"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add any optional data upgrade migrations here!&quot;&quot;&quot;</span>
+</span><span id="1-51">    <span class="k">pass</span>
+</span><span id="1-52">
+</span><span id="1-53">
+</span><span id="1-54"><span class="k">def</span><span class="w"> </span><span class="nf">data_downgrades</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-55"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add any optional data downgrade migrations here!&quot;&quot;&quot;</span>
+</span><span id="1-56">    <span class="k">pass</span>
+</span></pre></div>
+</div>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading">¶</a></h2>
+<section id="alembic-ini">
+<h3>Alembic.ini<a class="headerlink" href="#alembic-ini" title="Link to this heading">¶</a></h3>
+<p>The Alembic configuration uses <code class="docutils literal notranslate"><span class="pre">%(here)s</span></code> to resolve paths relative to the config file location:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="k">[alembic]</span>
+</span><span id="1-2"><span class="na">prepend_sys_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">.</span>
+</span><span id="1-3"><span class="na">script_location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">%(here)s/migrations</span>
+</span><span id="1-4"><span class="na">file_template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">%%(year)d-%%(month).2d-%%(day).2d_%%(slug)s_%%(rev)s</span>
+</span><span id="1-5"><span class="na">timezone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">UTC</span>
+</span><span id="1-6"><span class="na">truncate_slug_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">40</span>
+</span></pre></div>
+</div>
+</section>
+<section id="database-settings">
+<h3>Database Settings<a class="headerlink" href="#database-settings" title="Link to this heading">¶</a></h3>
+<p>Migration paths are configured in <code class="docutils literal notranslate"><span class="pre">services/api/src/byte_api/lib/settings.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="k">class</span><span class="w"> </span><span class="nc">DatabaseSettings</span><span class="p">(</span><span class="n">BaseSettings</span><span class="p">):</span>
+</span><span id="1-2">    <span class="n">MIGRATION_CONFIG</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">BASE_DIR</span><span class="si">}</span><span class="s2">/lib/db/alembic.ini&quot;</span>
+</span><span id="1-3">    <span class="n">MIGRATION_PATH</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">BASE_DIR</span><span class="si">}</span><span class="s2">/lib/db/migrations&quot;</span>
+</span><span id="1-4">    <span class="n">MIGRATION_DDL_VERSION_TABLE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ddl_version&quot;</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="model-location">
+<h2>Model Location<a class="headerlink" href="#model-location" title="Link to this heading">¶</a></h2>
+<p>All database models are defined in the <code class="docutils literal notranslate"><span class="pre">byte-common</span></code> package:</p>
+<ul class="simple">
+<li><p><strong>Location</strong>: <code class="docutils literal notranslate"><span class="pre">packages/byte-common/src/byte_common/models.py</span></code></p></li>
+<li><p><strong>Import</strong>: <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">byte_common.models</span> <span class="pre">import</span> <span class="pre">Guild,</span> <span class="pre">User,</span> <span class="pre">GitHubConfig,</span> <span class="pre">etc.</span></code></p></li>
+</ul>
+<p>This allows models to be shared between the API service and bot service.</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="path-doesn-t-exist-error">
+<h3>“Path doesn’t exist” Error<a class="headerlink" href="#path-doesn-t-exist-error" title="Link to this heading">¶</a></h3>
+<p>If you see this error when running alembic commands directly, it’s because alembic.ini uses relative paths. Use the
+Python API shown above instead.</p>
+</section>
+<section id="cannot-import-name-get-settings">
+<h3>“Cannot import name ‘get_settings’”<a class="headerlink" href="#cannot-import-name-get-settings" title="Link to this heading">¶</a></h3>
+<p>Use <code class="docutils literal notranslate"><span class="pre">load_settings()</span></code> instead, which returns a tuple of settings objects.</p>
+</section>
+<section id="database-connection-refused">
+<h3>Database Connection Refused<a class="headerlink" href="#database-connection-refused" title="Link to this heading">¶</a></h3>
+<p>Ensure PostgreSQL is running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span id="1-1">docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.infra.yml<span class="w"> </span>ps
+</span></pre></div>
+</div>
+</section>
+<section id="import-errors-for-models">
+<h3>Import Errors for Models<a class="headerlink" href="#import-errors-for-models" title="Link to this heading">¶</a></h3>
+<p>Ensure you’re importing from <code class="docutils literal notranslate"><span class="pre">byte_common.models</span></code>, not the old <code class="docutils literal notranslate"><span class="pre">byte_bot.server.domain.db.models</span></code> path.</p>
+</section>
+</section>
+<section id="production-deployment">
+<h2>Production Deployment<a class="headerlink" href="#production-deployment" title="Link to this heading">¶</a></h2>
+<p>On Railway, migrations are automatically applied before the service starts via the start command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span id="1-1">uv<span class="w"> </span>run<span class="w"> </span>app<span class="w"> </span>database<span class="w"> </span>upgrade<span class="w"> </span>--no-prompt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>uv<span class="w"> </span>run<span class="w"> </span>app<span class="w"> </span>run-all<span class="w"> </span>...
+</span></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">app</span></code> CLI is currently only available in the monolithic setup. For microservices, migrations should be run
+programmatically as shown above or through a dedicated migration service.</p>
+</div>
+</section>
+<section id="rollback-plan">
+<h2>Rollback Plan<a class="headerlink" href="#rollback-plan" title="Link to this heading">¶</a></h2>
+<p>In case of migration issues:</p>
+<ol class="arabic">
+<li><p><strong>Identify the problem revision</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">cmds</span><span class="o">.</span><span class="n">current</span><span class="p">()</span>  <span class="c1"># Shows current version</span>
+</span></pre></div>
+</div>
+</li>
+<li><p><strong>Downgrade to previous stable version</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">cmds</span><span class="o">.</span><span class="n">downgrade</span><span class="p">(</span><span class="n">revision</span><span class="o">=</span><span class="s2">&quot;&lt;previous_revision_id&gt;&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</li>
+<li><p><strong>For complete rollback</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">cmds</span><span class="o">.</span><span class="n">downgrade</span><span class="p">(</span><span class="n">revision</span><span class="o">=</span><span class="s2">&quot;base&quot;</span><span class="p">)</span>  <span class="c1"># WARNING: Drops all tables</span>
+</span></pre></div>
+</div>
+</li>
+<li><p><strong>Re-apply migrations after fixes</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">cmds</span><span class="o">.</span><span class="n">upgrade</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Always test migrations locally</strong> before deploying to production</p></li>
+<li><p><strong>Use transactions</strong> - Alembic automatically wraps migrations in transactions</p></li>
+<li><p><strong>Backup production data</strong> before running migrations</p></li>
+<li><p><strong>Write reversible migrations</strong> - Always implement both <code class="docutils literal notranslate"><span class="pre">upgrade()</span></code> and <code class="docutils literal notranslate"><span class="pre">downgrade()</span></code></p></li>
+<li><p><strong>Test rollback</strong> - Verify that downgrade works as expected</p></li>
+<li><p><strong>Document data migrations</strong> - Add comments explaining complex transformations</p></li>
+<li><p><strong>Avoid destructive changes</strong> - Use separate migrations for adding and dropping columns</p></li>
+<li><p><strong>Keep migrations small</strong> - One logical change per migration file</p></li>
+</ol>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://alembic.sqlalchemy.org/">Alembic Documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/usage/migrations.html">Advanced Alchemy Migrations</a></p></li>
+<li><p><a class="reference external" href="https://docs.sqlalchemy.org/">SQLAlchemy 2.0 Documentation</a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+        
+        <div class="navigation flex print:hidden">
+  <div class="navigation-prev">
+    <a href="contribution-guide.html">
+      <i class="i-icon chevron"></i>
+      <div class="page-info">
+        <span>Previous</span>
+        
+        <div class="title">Contribution guide</div>
+        
+      </div>
+    </a>
+  </div>
+  <div class="navigation-next">
+    <a href="changelog.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Changelog</div>
+      </div>
+      <i class="i-icon chevron"></i>
+    </a>
+  </div>
+</div>
+        
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2023, Jacob Coffee</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+          <a href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub"><i class="i-icon github"></i></a>
+          <a href="https://twitter.com/_scriptr" aria-label="X (Twitter)"><i class="i-icon x-twitter"></i></a>
+          <a href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord"><i class="i-icon discord"></i></a>
+          <a href="https://youtube.com/@monorepo" aria-label="YouTube"><i class="i-icon youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script src="_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+      <script src="_static/shibuya.js?v=3e5c8598"></script>
+    
+</body>
+</html>
