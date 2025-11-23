@@ -23,12 +23,6 @@ repos:
       - id: ruff-check
         args: ["--fix"]
       - id: ruff-format
-  - repo: https://github.com/sourcery-ai/sourcery
-    rev: v1.40.0
-    hooks:
-      - id: sourcery
-        args: [--diff=git diff HEAD, --no-summary]
-        stages: [commit]
   - repo: https://github.com/codespell-project/codespell
     rev: v2.4.1
     hooks:
