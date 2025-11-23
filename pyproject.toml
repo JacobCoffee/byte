@@ -1,72 +1,6 @@
-[project]
-name = "byte-bot"
-version = "0.2.0"
-description = "Byte is a bot destined to serve in developer-oriented servers."
-authors = [
-    { name = "Jacob Coffee", email = "jacob@z7x.org" },
-]
-dependencies = [
-    "python-dotenv>=1.0.0",
-    "discord-py>=2.3.2",
-    "pydantic>=2.5.2",
-    "litestar[jwt,opentelemetry,prometheus,standard,structlog]>=2.4.3",
-    "pydantic-settings>=2.1.0",
-    "anyio>=4.1.0",
-    "advanced-alchemy>=0.6.1",
-    "certifi>=2023.11.17",
-    "asyncpg>=0.29.0",
-    "githubkit[auth-app] @ git+https://github.com/yanyongyu/githubkit.git",
-    "PyJWT>=2.8.0",
-    "alembic>=1.13.0",
-    "ruff>=0.1.7",
-    "python-dateutil>=2.9.0.post0",
-]
-requires-python = ">=3.12,<4.0"
-#readme = "README.md"
-license = { text = "MIT" }
-classifiers = [
-    'Development Status :: 2 - Pre-Alpha',
-    'Programming Language :: Python',
-    'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3 :: Only',
-    'Programming Language :: Python :: 3.12',
-    'Intended Audience :: Developers',
-    'Intended Audience :: Information Technology',
-    'Intended Audience :: System Administrators',
-    'License :: OSI Approved :: MIT License',
-    'Operating System :: Unix',
-    'Operating System :: POSIX :: Linux',
-    'Environment :: Console',
-    'Topic :: Software Development :: Libraries :: Python Modules',
-    'Topic :: Internet',
-]
-
-[project.urls]
-Homepage = 'https://docs.byte-bot.app/'
-Source = 'https://github.com/JacobCoffee/bytebot'
-Documentation = 'https://docs.byte-bot.app'
-Changelog = 'https://docs.byte-bot.app/latest/changelog/'
-Funding = 'https://github.com/sponsors/JacobCoffee'
-Issue = 'https://github.com/JacobCoffee/bytebot/issues/'
-Discord = 'https://discord.gg/ZVG8hN6RrJ'
-Twitter = 'https://twitter.com/_scriptr'
-Reddit = 'https://reddit.com/monorepo'
-Youtube = 'https://www.youtube.com/@monorepo'
-
-[project.scripts]
-app = "byte_bot.__main__:run_cli"
-
-[project.entry-points."litestar.commands"]
-run-bot = "byte_bot.cli:run_bot"
-run-web = "byte_bot.cli:run_web"
-run-all = "byte_bot.cli:run_all"
-
-[build-system]
-requires = ["uv_build>=0.9.11,<0.10.0"]
-build-backend = "uv_build"
-
-[tool.uv.build-backend]
-module-root = ""  # Flat layout: byte_bot/ at root, not src/byte_bot/
+# Byte Bot Workspace Configuration
+# This is a uv workspace root - individual packages are in services/ and packages/
+# No [project] section needed at workspace level
 
 [tool.uv.workspace]
 members = [
@@ -113,7 +47,7 @@ ignore-words-list = "selectin, alog, thirdparty"
 skip = "uv.lock, package-lock.json, *.svg, docs/changelog.rst"
 
 [tool.coverage.run]
-source = ["byte_bot", "packages/byte-common/src/byte_common"]
+source = ["packages/byte-common/src/byte_common"]
 omit = [
     "*/tests/*",
     "*/__init__.py",
@@ -159,7 +93,6 @@ addopts = [
     "--strict-markers",
     "--tb=short",
     "--import-mode=importlib",
-    "--cov=byte_bot",
     "--cov=byte_common",
     "--cov-report=term-missing",
     "--cov-report=html",
@@ -178,19 +111,10 @@ filterwarnings = [
 [tool.ty]
 
 [tool.ty.environment]
-extra-paths = ["byte_bot/", "tests/", "packages/byte-common/src/", "packages/byte-common/tests/", "services/api/src/", "services/bot/src/"]
+extra-paths = ["tests/", "packages/byte-common/src/", "packages/byte-common/tests/", "services/api/src/", "services/bot/src/"]
 
-# Disable checking for old monolith code that will be removed in Phase 1.2
-# and API service which has separate import issues
 [tool.ty.src]
 exclude = [
-    "byte_bot/__init__.py",
-    "byte_bot/app.py",
-    "byte_bot/cli.py",
-    "byte_bot/utils.py",
-    "byte_bot/__metadata__.py",
-    "byte_bot/byte/**/*.py",
-    "byte_bot/server/**/*.py",
     "services/api/**/*.py",
     "docs/conf.py",
 ]
@@ -200,7 +124,7 @@ strict-imports = false
 
 [tool.ruff]
 line-length = 120
-src = ["byte_bot", "tests"]
+src = ["packages/byte-common/src", "services/api/src", "services/bot/src", "tests"]
 target-version = "py311"
 
 [tool.ruff.lint]
@@ -229,7 +153,7 @@ classmethod-decorators = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = ["byte_bot", "byte_common", "tests"]
+known-first-party = ["byte_common", "byte_api", "tests"]
 
 [tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
@@ -245,9 +169,6 @@ known-first-party = ["byte_bot", "byte_common", "tests"]
     "FBT003", # Boolean Boolean default positional argument in function definition
     "B008", # Do not perform function calls in argument defaults
 ]
-"byte_bot/**/*.*" = ["PLR0913", "SLF001", "PLC0415"]  # Imports inside functions in monolith
-"byte_bot/server/lib/db/base.py" = ["E501"]
-"byte_bot/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH", "PLC"]
 "services/api/src/byte_api/app.py" = ["PLC0415"]  # Imports inside create_app() to avoid circular imports
 "services/api/src/byte_api/lib/db/migrations/env.py" = ["SLF001"]  # Alembic workaround
 "services/api/src/byte_api/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH", "PLC"]  # Alembic-generated

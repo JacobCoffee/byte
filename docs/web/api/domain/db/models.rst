@@ -4,26 +4,29 @@ models
 
 Model definition for the domain.
 
+.. note::
+   Models have been moved to the byte-common shared package in the microservices architecture.
+
 API Reference
 -------------
 
-.. automodule:: byte_bot.server.domain.db.models
+.. automodule:: byte_common.models
     :members:
 
 Model Reference
 ---------------
 
-.. sqla-model:: byte_bot.server.domain.db.models.Guild
+.. sqla-model:: byte_common.models.Guild
 
-.. sqla-model:: byte_bot.server.domain.db.models.GitHubConfig
+.. sqla-model:: byte_common.models.GitHubConfig
 
-.. sqla-model:: byte_bot.server.domain.db.models.SOTagsConfig
+.. sqla-model:: byte_common.models.SOTagsConfig
 
-.. sqla-model:: byte_bot.server.domain.db.models.AllowedUsersConfig
+.. sqla-model:: byte_common.models.AllowedUsersConfig
 
-.. sqla-model:: byte_bot.server.domain.db.models.User
+.. sqla-model:: byte_common.models.User
 
 Mermaid Diagram
 ---------------
 
-.. autoclasstree:: byte_bot.server.domain.db.models
+.. autoclasstree:: byte_common.models

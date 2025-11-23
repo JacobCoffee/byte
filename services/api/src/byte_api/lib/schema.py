@@ -5,7 +5,7 @@ from __future__ import annotations
 from pydantic import BaseModel as _BaseModel
 from pydantic import ConfigDict
 
-from byte_bot.utils import camel_case
+from byte_common.utils.strings import camel_case
 
 __all__ = ["BaseModel", "CamelizedBaseModel"]
 
