@@ -5,9 +5,9 @@ from discord import Embed, Interaction, Member, Thread
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog, Context, command, hybrid_command
 
-from byte_bot.byte.lib.common.assets import litestar_logo_yellow
-from byte_bot.byte.lib.common.links import mcve
-from byte_bot.byte.lib.utils import linker
+from byte_bot.lib.common.assets import litestar_logo_yellow
+from byte_bot.lib.common.links import mcve
+from byte_bot.lib.utils import linker
 
 __all__ = ("ForumCommands", "setup")
 

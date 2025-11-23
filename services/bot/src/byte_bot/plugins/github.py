@@ -8,7 +8,7 @@ from discord.ui import Modal, TextInput
 from discord.utils import MISSING
 from httpx import codes
 
-from byte_bot.server.domain.github.helpers import github_client
+from byte_common.clients.github import github_client
 
 __all__ = ("GitHubCommands", "setup")
 

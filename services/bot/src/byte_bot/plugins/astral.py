@@ -9,13 +9,13 @@ from discord.app_commands import Choice, autocomplete
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
-from byte_bot.byte.lib.common.assets import ruff_logo
-from byte_bot.byte.lib.common.colors import astral_purple, astral_yellow
-from byte_bot.byte.lib.utils import chunk_sequence, format_ruff_rule, query_all_ruff_rules
-from byte_bot.byte.views.astral import RuffView
+from byte_bot.lib.common.assets import ruff_logo
+from byte_bot.lib.common.colors import astral_purple, astral_yellow
+from byte_bot.lib.utils import chunk_sequence, format_ruff_rule, query_all_ruff_rules
+from byte_bot.views.astral import RuffView
 
 if TYPE_CHECKING:
-    from byte_bot.byte.lib.types.astral import RuffRule
+    from byte_bot.lib.types.astral import RuffRule
 
 __all__ = ("Astral", "setup")
 

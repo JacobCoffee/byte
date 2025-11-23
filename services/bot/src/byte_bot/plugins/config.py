@@ -8,8 +8,8 @@ from discord.app_commands import Choice, autocomplete
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
-from byte_bot.byte.lib.common import config_options
-from byte_bot.byte.views.config import ConfigView
+from byte_bot.lib.common import config_options
+from byte_bot.views.config import ConfigView
 
 if TYPE_CHECKING:
     from discord import Interaction

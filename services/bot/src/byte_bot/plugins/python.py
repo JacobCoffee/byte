@@ -7,11 +7,11 @@ from discord.app_commands import Choice, autocomplete
 from discord.app_commands import command as app_command
 from discord.ext.commands import Bot, Cog
 
-from byte_bot.byte.lib.common.assets import python_logo
-from byte_bot.byte.lib.common.colors import python_blue, python_yellow
-from byte_bot.byte.lib.utils import PEP, query_all_peps
-from byte_bot.byte.views.abstract_views import ExtendedEmbed, Field
-from byte_bot.byte.views.python import PEPView
+from byte_bot.lib.common.assets import python_logo
+from byte_bot.lib.common.colors import python_blue, python_yellow
+from byte_bot.lib.utils import PEP, query_all_peps
+from byte_bot.views.abstract_views import ExtendedEmbed, Field
+from byte_bot.views.python import PEPView
 
 __all__ = ("Python", "setup")
 

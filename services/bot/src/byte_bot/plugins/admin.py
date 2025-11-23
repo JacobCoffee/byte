@@ -13,13 +13,11 @@ from httpx import ConnectError
 
 __all__ = ("AdminCommands", "setup")
 
-from byte_bot.byte.lib import settings
-from byte_bot.byte.lib.checks import is_byte_dev
-from byte_bot.byte.lib.log import get_logger
-from byte_bot.server.lib.settings import ServerSettings
+from byte_bot.config import bot_settings
+from byte_bot.lib.checks import is_byte_dev
+from byte_bot.lib.log import get_logger
 
 logger = get_logger()
-server_settings = ServerSettings()
 
 
 class AdminCommands(Cog):
@@ -140,7 +138,7 @@ class AdminCommands(Cog):
 
     async def _register_guild_in_database(self, ctx: Context, guild: discord.Guild) -> None:
         """Register guild in database via API."""
-        api_url = f"http://{server_settings.HOST}:{server_settings.PORT}/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
+        api_url = f"{bot_settings.api_service_url}/api/guilds/create?guild_id={guild.id}&guild_name={guild.name}"
 
         try:
             async with httpx.AsyncClient() as client:
@@ -177,13 +175,16 @@ class AdminCommands(Cog):
 
     async def _notify_dev_channel(self, guild: discord.Guild) -> None:
         """Notify dev channel about guild bootstrap."""
-        dev_guild = self.bot.get_guild(settings.discord.DEV_GUILD_ID)
+        if not bot_settings.discord_dev_guild_id:
+            return
+
+        dev_guild = self.bot.get_guild(bot_settings.discord_dev_guild_id)
         if not dev_guild:
             return
 
-        dev_channel = dev_guild.get_channel(settings.discord.DEV_GUILD_INTERNAL_ID)
-        if not dev_channel or not hasattr(dev_channel, "send"):
-            return
+        # Note: dev_guild_internal_id not yet in settings, skipping dev channel notification
+        # TODO: Add dev_guild_internal_id to bot_settings if needed
+        return
 
         embed = discord.Embed(
             title="Guild Bootstrapped",
