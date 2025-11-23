@@ -4,5 +4,5 @@ dtos
 
 DTOs for the system domain.
 
-.. automodule:: byte_bot.server.domain.system.dtos
+.. automodule:: byte_api.domain.system.dtos
     :members:

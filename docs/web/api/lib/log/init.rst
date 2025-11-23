@@ -4,6 +4,6 @@ init
 
 Log initialization
 
-.. automodule:: byte_bot.server.lib.log.__init__
+.. automodule:: byte_api.lib.log.__init__
     :members:
     :noindex:

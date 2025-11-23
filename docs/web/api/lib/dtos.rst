@@ -5,6 +5,6 @@ dtos
 DTOs for the server.
 
 
-.. automodule:: byte_bot.server.lib.dto
+.. automodule:: byte_api.lib.dto
     :members:
     :noindex:

@@ -4,5 +4,5 @@ serialization
 
 Application serialization utilities.
 
-.. automodule:: byte_bot.server.lib.serialization
+.. automodule:: byte_api.lib.serialization
      :members:
