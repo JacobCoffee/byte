@@ -40,4 +40,5 @@ Usage
     :hidden:
 
     contribution-guide
+    database-migrations
     changelog
