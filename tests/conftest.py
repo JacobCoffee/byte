@@ -10,12 +10,18 @@ import pytest
 from advanced_alchemy.base import UUIDAuditBase
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
 
-# Set required environment variables for bot tests
+# Set required environment variables for bot tests BEFORE dotenv loads
 # These must be set before importing bot modules
 # BotSettings uses BOT_ prefix with case_sensitive=True, so field names must match exactly
-os.environ.setdefault("BOT_discord_token", "test_token_for_pytest")
-os.environ.setdefault("BOT_discord_dev_guild_id", "123456789")
-os.environ.setdefault("BOT_discord_dev_user_id", "987654321")
+os.environ["BOT_discord_token"] = "test_token_for_pytest"
+os.environ["BOT_discord_dev_guild_id"] = "123456789"
+os.environ["BOT_discord_dev_user_id"] = "987654321"
+
+# Also set DISCORD_ prefix for DiscordSettings (used in settings.py)
+# Use assignment (not setdefault) to override .env values
+os.environ["DISCORD_TOKEN"] = "test_token_for_pytest"
+os.environ["DISCORD_DEV_GUILD_ID"] = "123456789"
+os.environ["DISCORD_DEV_USER_ID"] = "987654321"
 
 from tests.fixtures.bot_fixtures import (
     mock_api_client,

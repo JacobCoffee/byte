@@ -26,7 +26,7 @@ load_dotenv()
 
 DEFAULT_MODULE_NAME: str = "byte_bot"
 BASE_DIR: Final = module_to_os_path(DEFAULT_MODULE_NAME)
-PLUGINS_DIR: Final = module_to_os_path("byte_bot.byte.plugins")
+PLUGINS_DIR: Final = module_to_os_path("byte_bot.plugins")
 
 
 class DiscordSettings(BaseSettings):
