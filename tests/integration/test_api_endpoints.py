@@ -296,7 +296,6 @@ class TestFullGuildLifecycleWithAllConfigs:
         # DELETE guild (should cascade)
         await db_session.delete(guild)
         await db_session.flush()
-        await db_session.commit()
 
         # VERIFY cascade deleted all configs
         guild_check = await db_session.execute(select(Guild).where(Guild.guild_id == 9999))
@@ -333,7 +332,6 @@ class TestFullGuildLifecycleWithAllConfigs:
             db_session.add(so_tag)
 
         await db_session.flush()
-        await db_session.commit()
 
         # Verify all tags exist
         result = await db_session.execute(select(SOTagsConfig).where(SOTagsConfig.guild_id == 8888))
@@ -489,10 +487,9 @@ class TestAPIPaginationConsistency:
             db_session.add(guild)
 
         await db_session.flush()
-        await db_session.commit()
 
         # Test with explicit limit
-        response = await api_client.get("/api/guilds/list?pageSize=5")
+        response = await api_client.get("/api/guilds/list?limit=5")
         if response.status_code == HTTP_200_OK:
             data = response.json()
             # Should respect page size limit
@@ -528,7 +525,6 @@ class TestDatabaseIntegrity:
         guild1 = Guild(guild_id=5555, guild_name="First Guild")
         db_session.add(guild1)
         await db_session.flush()
-        await db_session.commit()
 
         # Try to create duplicate - should raise integrity error
         from sqlalchemy.exc import IntegrityError
@@ -538,8 +534,6 @@ class TestDatabaseIntegrity:
 
         with pytest.raises(IntegrityError):
             await db_session.flush()
-
-        await db_session.rollback()
 
     async def test_foreign_key_constraint_enforced(
         self,
@@ -597,12 +591,10 @@ class TestDatabaseIntegrity:
 
         db_session.add_all([github, forum, so_tag])
         await db_session.flush()
-        await db_session.commit()
 
         # Delete guild
         await db_session.delete(guild)
         await db_session.flush()
-        await db_session.commit()
 
         # Verify all configs deleted
         github_check = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == 4444))
