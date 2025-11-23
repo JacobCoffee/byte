@@ -10,7 +10,7 @@ from rich.console import Console
 from rich.logging import RichHandler  # noqa: F401
 from rich.traceback import install
 
-from byte_bot.byte.lib import settings
+from byte_bot.config import bot_settings, log_settings
 
 __all__ = [
     "get_logger",
@@ -23,18 +23,19 @@ console = Console()
 
 def setup_logging() -> None:
     """Set up logging configuration based on the environment."""
-    env = settings.project.ENVIRONMENT
-    log_file_path = settings.log.FILE
-    log_directory = log_file_path.parent
+    env = bot_settings.environment
+    log_file_path = log_settings.file
 
-    if not Path(log_directory).exists():
-        Path(log_directory).mkdir(parents=True, exist_ok=True)
+    if log_file_path:
+        log_directory = log_file_path.parent
+        if not Path(log_directory).exists():
+            Path(log_directory).mkdir(parents=True, exist_ok=True)
 
     handlers = {
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "simple",
-            "filename": settings.BASE_DIR / "logs" / "byte.log",
+            "filename": log_file_path if log_file_path else Path("logs") / "byte.log",
             "maxBytes": 10485760,
             "backupCount": 3,
             "level": "INFO",
@@ -63,38 +64,38 @@ def setup_logging() -> None:
         "disable_existing_loggers": False,
         "formatters": {
             "simple": {
-                "format": settings.log.FORMAT,
+                "format": log_settings.format,
             },
         },
         "handlers": handlers,
         "loggers": {
             "discord": {
-                "level": settings.log.DISCORD_LEVEL,
+                "level": log_settings.discord_level,
                 "handlers": ["console", "file"],
                 "propagate": False,
             },
             "httpcore": {
-                "level": settings.log.HTTP_CORE_LEVEL,
+                "level": log_settings.httpx_level,  # Using httpx_level for httpcore too
                 "handlers": ["console", "file"],
                 "propagate": False,
             },
             "httpx": {
-                "level": settings.log.HTTPX_LEVEL,
+                "level": log_settings.httpx_level,
                 "handlers": ["console", "file"],
                 "propagate": False,
             },
             "websockets": {
-                "level": settings.log.WEBSOCKETS_LEVEL,
+                "level": log_settings.websockets_level,
                 "handlers": ["console", "file"],
                 "propagate": False,
             },
             "asyncio": {
-                "level": settings.log.ASYNCIO_LEVEL,
+                "level": log_settings.asyncio_level,
                 "handlers": ["console", "file"],
                 "propagate": False,
             },
             "root": {
-                "level": "DEBUG" if settings.project.DEBUG else "INFO",
+                "level": "DEBUG" if bot_settings.debug else "INFO",
                 "handlers": ["console", "file"] if env == "dev" else ["file", "syslog"],
                 "propagate": False,
             },

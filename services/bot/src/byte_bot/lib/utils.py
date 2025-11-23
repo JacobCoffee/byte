@@ -14,9 +14,9 @@ import httpx
 from anyio import run_process
 from ruff.__main__ import find_ruff_bin  # type: ignore[import-untyped]
 
-from byte_bot.byte.lib.common.links import pastebin
-from byte_bot.byte.lib.types.astral import FormattedRuffRule, RuffRule
-from byte_bot.byte.lib.types.python import PEP, PEPStatus, PEPType
+from byte_bot.lib.common.links import pastebin
+from byte_bot.lib.types.astral import FormattedRuffRule, RuffRule
+from byte_bot.lib.types.python import PEP, PEPStatus, PEPType
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
