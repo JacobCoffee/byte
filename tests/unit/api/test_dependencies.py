@@ -112,7 +112,7 @@ def test_provide_updated_filter() -> None:
 def test_provide_limit_offset_pagination() -> None:
     """Test pagination filter provider."""
     # Default values
-    filter_default = provide_limit_offset_pagination()
+    filter_default = provide_limit_offset_pagination(current_page=1, page_size=10)
     assert isinstance(filter_default, LimitOffset)
     assert filter_default.limit == 10  # DEFAULT_PAGINATION_SIZE
     assert filter_default.offset == 0
@@ -294,7 +294,7 @@ def test_active_filter_provider() -> None:
     from byte_api.lib.dependencies import provide_active_filter
 
     # Default should be True
-    result = provide_active_filter()
+    result = provide_active_filter(is_active=True)
     assert result is True
 
     # Can be set to False

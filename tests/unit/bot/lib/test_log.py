@@ -6,8 +6,6 @@ import logging
 from pathlib import Path
 from unittest.mock import patch
 
-import pytest
-
 from byte_bot.lib.log import get_logger, setup_logging
 
 

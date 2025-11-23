@@ -339,8 +339,8 @@ class TestFinishButtonCallbacks:
         """Test FinishButton callback sends completion message."""
         button = FinishButton()
         # Create a mock view and attach button to it
-        button.view = MagicMock()
-        button.view.stop = MagicMock()
+        button._view = MagicMock()
+        button._view.stop = MagicMock()
 
         await button.callback(mock_interaction)
 
@@ -354,7 +354,7 @@ class TestFinishButtonCallbacks:
     async def test_finish_button_callback_no_view(self, mock_interaction: Interaction) -> None:
         """Test FinishButton callback handles missing view gracefully."""
         button = FinishButton()
-        button.view = None
+        button._view = None
 
         await button.callback(mock_interaction)
 
@@ -368,8 +368,8 @@ class TestCancelButtonCallbacks:
     async def test_cancel_button_callback_sends_message(self, mock_interaction: Interaction) -> None:
         """Test CancelButton callback sends cancellation message."""
         button = CancelButton()
-        button.view = MagicMock()
-        button.view.stop = MagicMock()
+        button._view = MagicMock()
+        button._view.stop = MagicMock()
 
         await button.callback(mock_interaction)
 
@@ -383,7 +383,7 @@ class TestCancelButtonCallbacks:
     async def test_cancel_button_callback_no_view(self, mock_interaction: Interaction) -> None:
         """Test CancelButton callback handles missing view gracefully."""
         button = CancelButton()
-        button.view = None
+        button._view = None
 
         await button.callback(mock_interaction)
 
@@ -400,7 +400,7 @@ class TestConfigSelectCallbacks:
         """Test ConfigSelect callback opens ConfigKeyView for options with sub_settings."""
         with patch("byte_bot.views.config.config_options", mock_config_options):
             select = ConfigSelect()
-            select.values = ["Server Settings"]
+            select._values = ["Server Settings"]
 
             mock_interaction.response.edit_message = AsyncMock()
 
@@ -418,7 +418,7 @@ class TestConfigSelectCallbacks:
         """Test ConfigSelect callback opens modal for options without sub_settings."""
         with patch("byte_bot.views.config.config_options", mock_config_options):
             select = ConfigSelect()
-            select.values = ["GitHub Settings"]
+            select._values = ["GitHub Settings"]
 
             mock_interaction.response.send_modal = AsyncMock()
 
@@ -440,7 +440,7 @@ class TestConfigKeySelectCallbacks:
         """Test ConfigKeySelect callback opens modal for selected key."""
         option = mock_config_options[0]
         select = ConfigKeySelect(option)
-        select.values = ["Prefix"]
+        select._values = ["Prefix"]
 
         mock_interaction.response.send_modal = AsyncMock()
 
@@ -459,7 +459,7 @@ class TestConfigKeySelectCallbacks:
         """Test ConfigKeySelect callback preserves option context in modal."""
         option = mock_config_options[0]
         select = ConfigKeySelect(option)
-        select.values = ["Help Channel ID"]
+        select._values = ["Help Channel ID"]
 
         mock_interaction.response.send_modal = AsyncMock()
 
@@ -480,7 +480,7 @@ class TestConfigModalSubmission:
 
         # Set custom_id on the text input
         modal.children[0].custom_id = "prefix"  # type: ignore[attr-defined]
-        modal.children[0].value = "!"  # type: ignore[attr-defined]
+        modal.children[0]._value = "!"  # type: ignore[attr-defined]
 
         mock_interaction.followup = MagicMock()
         mock_interaction.followup.send = AsyncMock()
@@ -518,9 +518,9 @@ class TestConfigModalSubmission:
 
         # Set custom_ids and values
         modal.children[0].custom_id = "prefix"  # type: ignore[attr-defined]
-        modal.children[0].value = "!"  # type: ignore[attr-defined]
+        modal.children[0]._value = "!"  # type: ignore[attr-defined]
         modal.children[1].custom_id = "channel_id"  # type: ignore[attr-defined]
-        modal.children[1].value = "123456"  # type: ignore[attr-defined]
+        modal.children[1]._value = "123456"  # type: ignore[attr-defined]
 
         mock_interaction.followup = MagicMock()
         mock_interaction.followup.send = AsyncMock()

@@ -103,10 +103,10 @@ def test_template_config_string_representation() -> None:
 
 def test_template_file_exists() -> None:
     """Test template.py file exists in expected location."""
-    import os
+    from pathlib import Path
 
-    template_file = "/Users/coffee/git/public/JacobCoffee/byte/worktrees/phase3.4-tests-api/services/api/src/byte_api/lib/template.py"
-    assert os.path.exists(template_file)
+    template_file = Path("services/api/src/byte_api/lib/template.py")
+    assert template_file.exists()
 
 
 def test_template_module_docstring() -> None:
