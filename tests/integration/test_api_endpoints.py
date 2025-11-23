@@ -296,7 +296,6 @@ class TestFullGuildLifecycleWithAllConfigs:
         # DELETE guild (should cascade)
         await db_session.delete(guild)
         await db_session.flush()
-        await db_session.commit()
 
         # VERIFY cascade deleted all configs
         guild_check = await db_session.execute(select(Guild).where(Guild.guild_id == 9999))
