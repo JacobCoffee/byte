@@ -122,6 +122,8 @@ exclude = [
     "services/api/**/*.py",
     "docs/conf.py",
     "tests/unit/api/test_orm.py",
+    "tests/unit/bot/**/*.py",  # Mock attributes not recognized by ty
+    "tests/unit/bot/views/**/*.py",
 ]
 
 [tool.slotscheck]
