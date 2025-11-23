@@ -36,12 +36,15 @@ jobs:
       - name: Create worktree for changelog
         run: git worktree add worktree-changelog origin/main
 
-      - name: Generate changelog in worktree
-        working-directory: worktree-changelog
-        uses: orhun/git-cliff-action@main
+      - name: Install git-cliff
+        uses: taiki-e/install-action@v2
         with:
-          config: pyproject.toml
-          args: -vv --latest --strip header --output docs/changelog.rst
+          tool: git-cliff
+
+      - name: Generate changelog in worktree
+        run: |
+          cd worktree-changelog
+          git-cliff --config ../pyproject.toml -vv --latest --strip header --output docs/changelog.rst
 
       - name: Commit and push changelog
         working-directory: worktree-changelog
