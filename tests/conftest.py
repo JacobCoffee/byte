@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from collections.abc import AsyncGenerator
 from typing import TYPE_CHECKING
 
@@ -9,10 +10,36 @@ import pytest
 from advanced_alchemy.base import UUIDAuditBase
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
 
+# Set required environment variables for bot tests BEFORE dotenv loads
+# These must be set before importing bot modules
+# BotSettings uses BOT_ prefix with case_sensitive=True, so field names must match exactly
+os.environ["BOT_discord_token"] = "test_token_for_pytest"
+os.environ["BOT_discord_dev_guild_id"] = "123456789"
+os.environ["BOT_discord_dev_user_id"] = "987654321"
+
+# Also set DISCORD_ prefix for DiscordSettings (used in settings.py)
+# Use assignment (not setdefault) to override .env values
+os.environ["DISCORD_TOKEN"] = "test_token_for_pytest"
+os.environ["DISCORD_DEV_GUILD_ID"] = "123456789"
+os.environ["DISCORD_DEV_USER_ID"] = "987654321"
+
 from tests.fixtures.api_fixtures import (
     api_app,
     api_client,
     mock_db_session,
+)
+from tests.fixtures.bot_fixtures import (
+    mock_api_client,
+    mock_api_responses,
+    mock_bot,
+    mock_channel,
+    mock_context,
+    mock_guild,
+    mock_interaction,
+    mock_member,
+    mock_message,
+    mock_role,
+    mock_user,
 )
 from tests.fixtures.db_fixtures import (
     create_sample_forum_config,
@@ -33,7 +60,18 @@ __all__ = [
     "async_engine",
     "async_session",
     "db_session",
+    "mock_api_client",
+    "mock_api_responses",
+    "mock_bot",
+    "mock_channel",
+    "mock_context",
     "mock_db_session",
+    "mock_guild",
+    "mock_interaction",
+    "mock_member",
+    "mock_message",
+    "mock_role",
+    "mock_user",
     "sample_forum_config",
     "sample_github_config",
     "sample_guild",
