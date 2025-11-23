@@ -62,10 +62,7 @@ jobs:
             BRANCH_NAME="changelog/update-$(git rev-parse --short HEAD)-${{ github.run_id }}"
             git checkout -b "$BRANCH_NAME"
 
-            # Commit with Claude Code signature
-            git commit -m "docs: update changelog" \
-              -m "🤖 Generated with [Claude Code](https://claude.com/claude-code)" \
-              -m "Co-Authored-By: Claude <noreply@anthropic.com>"
+            git commit -m "docs: update changelog"
 
             # Push and create PR
             git push origin "$BRANCH_NAME"
