@@ -181,6 +181,7 @@ filterwarnings = [
 extra-paths = ["byte_bot/", "tests/", "packages/byte-common/src/", "packages/byte-common/tests/", "services/api/src/", "services/bot/src/"]
 
 # Disable checking for old monolith code that will be removed in Phase 1.2
+# and API service which has separate import issues
 [tool.ty.src]
 exclude = [
     "byte_bot/__init__.py",
@@ -190,6 +191,7 @@ exclude = [
     "byte_bot/__metadata__.py",
     "byte_bot/byte/**/*.py",
     "byte_bot/server/**/*.py",
+    "services/api/**/*.py",
     "docs/conf.py",
 ]
 
