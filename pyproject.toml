@@ -180,7 +180,7 @@ filterwarnings = [
 [tool.ty]
 
 [tool.ty.environment]
-extra-paths = ["byte_bot/", "tests/", "packages/byte-common/src/", "packages/byte-common/tests/"]
+extra-paths = ["byte_bot/", "tests/", "packages/byte-common/src/", "packages/byte-common/tests/", "services/api/src/"]
 
 [tool.slotscheck]
 strict-imports = false
