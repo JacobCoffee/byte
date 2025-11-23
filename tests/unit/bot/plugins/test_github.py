@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from unittest.mock import AsyncMock, MagicMock, patch
+from unittest.mock import AsyncMock, MagicMock
 
 import pytest
 from discord import Interaction, Message, TextStyle
@@ -135,10 +135,10 @@ def test_setup() -> None:
     bot.tree = MagicMock()
     bot.tree.add_command = MagicMock()
 
-    from byte_bot.plugins.github import setup
-
     # Call setup synchronously (it's async but we'll patch it)
     import asyncio
+
+    from byte_bot.plugins.github import setup
 
     loop = asyncio.new_event_loop()
     loop.run_until_complete(setup(bot))
@@ -147,3 +147,150 @@ def test_setup() -> None:
     bot.add_cog.assert_called_once()
     cog = bot.add_cog.call_args[0][0]
     assert isinstance(cog, GitHubCommands)
+
+
+class TestGitHubIssueEdgeCases:
+    """Edge case tests for GitHubIssue modal."""
+
+    @pytest.mark.asyncio
+    async def test_modal_with_none_message(self) -> None:
+        """Test modal handles None message gracefully."""
+        modal = GitHubIssue(title="Create GitHub Issue", message=None)
+
+        assert modal.title == "Create GitHub Issue"
+        # Description should not have a default when message is None
+        assert modal.description.default is None
+
+    @pytest.mark.asyncio
+    async def test_modal_with_empty_message_content(self) -> None:
+        """Test modal handles message with empty content."""
+        mock_message = MagicMock(spec=Message)
+        mock_message.content = ""
+
+        modal = GitHubIssue(title="Create GitHub Issue", message=mock_message)
+
+        assert modal.description.default == ""
+
+    @pytest.mark.asyncio
+    async def test_modal_with_very_long_message(self) -> None:
+        """Test modal handles very long message content."""
+        mock_message = MagicMock(spec=Message)
+        mock_message.content = "x" * 5000  # Very long content
+
+        modal = GitHubIssue(title="Create GitHub Issue", message=mock_message)
+
+        assert modal.description.default == "x" * 5000
+
+    @pytest.mark.asyncio
+    async def test_on_submit_interaction_error(self) -> None:
+        """Test on_submit handles interaction.response.send_message failure."""
+        modal = GitHubIssue(title="Create GitHub Issue")
+        mock_interaction = MagicMock(spec=Interaction)
+        mock_interaction.response.send_message = AsyncMock(side_effect=Exception("Network error"))
+
+        with pytest.raises(Exception, match="Network error"):
+            await modal.on_submit(mock_interaction)
+
+    @pytest.mark.asyncio
+    async def test_on_submit_with_disabled_feature(self) -> None:
+        """Test on_submit returns disabled message."""
+        modal = GitHubIssue(title="Create GitHub Issue")
+
+        mock_interaction = MagicMock(spec=Interaction)
+        mock_interaction.response.send_message = AsyncMock()
+
+        await modal.on_submit(mock_interaction)
+
+        mock_interaction.response.send_message.assert_called_once()
+        call_args = mock_interaction.response.send_message.call_args
+        assert "temporarily disabled" in call_args[0][0].lower()
+
+
+class TestGitHubCommandsEdgeCases:
+    """Edge case tests for GitHubCommands cog."""
+
+    @pytest.fixture
+    def bot(self, mock_bot: Bot) -> Bot:
+        """Create mock bot with tree."""
+        mock_bot.tree = MagicMock()
+        mock_bot.tree.add_command = MagicMock()
+        return mock_bot
+
+    @pytest.fixture
+    def cog(self, bot: Bot) -> GitHubCommands:
+        """Create GitHubCommands cog."""
+        return GitHubCommands(bot)
+
+    @pytest.mark.asyncio
+    async def test_create_github_issue_modal_with_very_long_content(self, cog: GitHubCommands) -> None:
+        """Test modal with extremely long message content."""
+        mock_interaction = MagicMock(spec=Interaction)
+        mock_interaction.response.send_modal = AsyncMock()
+        mock_message = MagicMock(spec=Message)
+        mock_message.content = "A" * 10000  # Very long content
+
+        await cog.create_github_issue_modal(mock_interaction, mock_message)
+
+        mock_interaction.response.send_modal.assert_called_once()
+        modal = mock_interaction.response.send_modal.call_args[0][0]
+        assert isinstance(modal, GitHubIssue)
+        assert modal.description.default == "A" * 10000
+
+    @pytest.mark.asyncio
+    async def test_create_github_issue_modal_with_special_characters(self, cog: GitHubCommands) -> None:
+        """Test modal with special characters in message."""
+        mock_interaction = MagicMock(spec=Interaction)
+        mock_interaction.response.send_modal = AsyncMock()
+        mock_message = MagicMock(spec=Message)
+        mock_message.content = "Test with special chars: @#$%^&*()[]{}|\\:;\"'<>,.?/~`"
+
+        await cog.create_github_issue_modal(mock_interaction, mock_message)
+
+        mock_interaction.response.send_modal.assert_called_once()
+        modal = mock_interaction.response.send_modal.call_args[0][0]
+        assert modal.description.default == "Test with special chars: @#$%^&*()[]{}|\\:;\"'<>,.?/~`"
+
+    @pytest.mark.asyncio
+    async def test_create_github_issue_modal_with_unicode(self, cog: GitHubCommands) -> None:
+        """Test modal with unicode characters in message."""
+        mock_interaction = MagicMock(spec=Interaction)
+        mock_interaction.response.send_modal = AsyncMock()
+        mock_message = MagicMock(spec=Message)
+        mock_message.content = "Unicode test: 你好世界 🌍 مرحبا"
+
+        await cog.create_github_issue_modal(mock_interaction, mock_message)
+
+        mock_interaction.response.send_modal.assert_called_once()
+        modal = mock_interaction.response.send_modal.call_args[0][0]
+        assert modal.description.default == "Unicode test: 你好世界 🌍 مرحبا"
+
+    @pytest.mark.asyncio
+    async def test_create_github_issue_modal_send_failure(self, cog: GitHubCommands) -> None:
+        """Test create_github_issue_modal when sending modal fails."""
+        mock_interaction = MagicMock(spec=Interaction)
+        mock_interaction.response.send_modal = AsyncMock(side_effect=Exception("Send failed"))
+        mock_message = MagicMock(spec=Message)
+        mock_message.content = "Test"
+
+        with pytest.raises(Exception, match="Send failed"):
+            await cog.create_github_issue_modal(mock_interaction, mock_message)
+
+    def test_cog_context_menu_properties(self, cog: GitHubCommands) -> None:
+        """Test context menu has correct properties."""
+        assert cog.context_menu.name == "Create GitHub Issue"
+        assert cog.context_menu.callback is not None
+        assert callable(cog.context_menu.callback)
+
+    @pytest.mark.asyncio
+    async def test_create_github_issue_modal_with_whitespace_only(self, cog: GitHubCommands) -> None:
+        """Test modal with whitespace-only message."""
+        mock_interaction = MagicMock(spec=Interaction)
+        mock_interaction.response.send_modal = AsyncMock()
+        mock_message = MagicMock(spec=Message)
+        mock_message.content = "   \n\t\r   "
+
+        await cog.create_github_issue_modal(mock_interaction, mock_message)
+
+        mock_interaction.response.send_modal.assert_called_once()
+        modal = mock_interaction.response.send_modal.call_args[0][0]
+        assert modal.description.default == "   \n\t\r   "

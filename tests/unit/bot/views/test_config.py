@@ -329,3 +329,249 @@ class TestConfigModal:
 
         text_input = modal.children[0]
         assert text_input.max_length == 300  # type: ignore[attr-defined]
+
+
+class TestFinishButtonCallbacks:
+    """Tests for FinishButton callback behavior."""
+
+    @pytest.mark.asyncio
+    async def test_finish_button_callback_sends_message(self, mock_interaction: Interaction) -> None:
+        """Test FinishButton callback sends completion message."""
+        button = FinishButton()
+        # Create a mock view and attach button to it
+        button.view = MagicMock()
+        button.view.stop = MagicMock()
+
+        await button.callback(mock_interaction)
+
+        mock_interaction.response.send_message.assert_called_once()
+        call_args = mock_interaction.response.send_message.call_args
+        assert "complete" in call_args[0][0].lower()
+        assert call_args[1]["ephemeral"] is True
+        button.view.stop.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_finish_button_callback_no_view(self, mock_interaction: Interaction) -> None:
+        """Test FinishButton callback handles missing view gracefully."""
+        button = FinishButton()
+        button.view = None
+
+        await button.callback(mock_interaction)
+
+        mock_interaction.response.send_message.assert_called_once()
+
+
+class TestCancelButtonCallbacks:
+    """Tests for CancelButton callback behavior."""
+
+    @pytest.mark.asyncio
+    async def test_cancel_button_callback_sends_message(self, mock_interaction: Interaction) -> None:
+        """Test CancelButton callback sends cancellation message."""
+        button = CancelButton()
+        button.view = MagicMock()
+        button.view.stop = MagicMock()
+
+        await button.callback(mock_interaction)
+
+        mock_interaction.response.send_message.assert_called_once()
+        call_args = mock_interaction.response.send_message.call_args
+        assert "cancel" in call_args[0][0].lower()
+        assert call_args[1]["ephemeral"] is True
+        button.view.stop.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_cancel_button_callback_no_view(self, mock_interaction: Interaction) -> None:
+        """Test CancelButton callback handles missing view gracefully."""
+        button = CancelButton()
+        button.view = None
+
+        await button.callback(mock_interaction)
+
+        mock_interaction.response.send_message.assert_called_once()
+
+
+class TestConfigSelectCallbacks:
+    """Tests for ConfigSelect callback behavior."""
+
+    @pytest.mark.asyncio
+    async def test_config_select_callback_with_sub_settings(
+        self, mock_interaction: Interaction, mock_config_options: list[dict]
+    ) -> None:
+        """Test ConfigSelect callback opens ConfigKeyView for options with sub_settings."""
+        with patch("byte_bot.views.config.config_options", mock_config_options):
+            select = ConfigSelect()
+            select.values = ["Server Settings"]
+
+            mock_interaction.response.edit_message = AsyncMock()
+
+            await select.callback(mock_interaction)
+
+            mock_interaction.response.edit_message.assert_called_once()
+            call_kwargs = mock_interaction.response.edit_message.call_args[1]
+            assert isinstance(call_kwargs["view"], ConfigKeyView)
+            assert "server settings" in call_kwargs["content"].lower()
+
+    @pytest.mark.asyncio
+    async def test_config_select_callback_without_sub_settings(
+        self, mock_interaction: Interaction, mock_config_options: list[dict]
+    ) -> None:
+        """Test ConfigSelect callback opens modal for options without sub_settings."""
+        with patch("byte_bot.views.config.config_options", mock_config_options):
+            select = ConfigSelect()
+            select.values = ["GitHub Settings"]
+
+            mock_interaction.response.send_modal = AsyncMock()
+
+            await select.callback(mock_interaction)
+
+            mock_interaction.response.send_modal.assert_called_once()
+            modal = mock_interaction.response.send_modal.call_args[0][0]
+            assert isinstance(modal, ConfigModal)
+            assert "GitHub Settings" in modal.title
+
+
+class TestConfigKeySelectCallbacks:
+    """Tests for ConfigKeySelect callback behavior."""
+
+    @pytest.mark.asyncio
+    async def test_config_key_select_callback_opens_modal(
+        self, mock_interaction: Interaction, mock_config_options: list[dict]
+    ) -> None:
+        """Test ConfigKeySelect callback opens modal for selected key."""
+        option = mock_config_options[0]
+        select = ConfigKeySelect(option)
+        select.values = ["Prefix"]
+
+        mock_interaction.response.send_modal = AsyncMock()
+
+        await select.callback(mock_interaction)
+
+        mock_interaction.response.send_modal.assert_called_once()
+        modal = mock_interaction.response.send_modal.call_args[0][0]
+        assert isinstance(modal, ConfigModal)
+        assert "Server Settings" in modal.title
+        assert "Prefix" in modal.title
+
+    @pytest.mark.asyncio
+    async def test_config_key_select_callback_preserves_option(
+        self, mock_interaction: Interaction, mock_config_options: list[dict]
+    ) -> None:
+        """Test ConfigKeySelect callback preserves option context in modal."""
+        option = mock_config_options[0]
+        select = ConfigKeySelect(option)
+        select.values = ["Help Channel ID"]
+
+        mock_interaction.response.send_modal = AsyncMock()
+
+        await select.callback(mock_interaction)
+
+        modal = mock_interaction.response.send_modal.call_args[0][0]
+        assert modal.option == option
+
+
+class TestConfigModalSubmission:
+    """Tests for ConfigModal submission handling."""
+
+    @pytest.mark.asyncio
+    async def test_config_modal_submission_extracts_values(self, mock_interaction: Interaction) -> None:
+        """Test ConfigModal on_submit extracts values from text inputs."""
+        sub_setting = {"label": "Prefix", "field": "prefix", "data_type": "String"}
+        modal = ConfigModal(title="Test", sub_setting=sub_setting)
+
+        # Set custom_id on the text input
+        modal.children[0].custom_id = "prefix"  # type: ignore[attr-defined]
+        modal.children[0].value = "!"  # type: ignore[attr-defined]
+
+        mock_interaction.followup = MagicMock()
+        mock_interaction.followup.send = AsyncMock()
+
+        await modal.on_submit(mock_interaction)
+
+        # Check that values were extracted
+        mock_interaction.response.send_message.assert_called_once()
+        call_args = mock_interaction.response.send_message.call_args[0][0]
+        assert "prefix" in call_args.lower()
+
+    @pytest.mark.asyncio
+    async def test_config_modal_submission_returns_to_main(self, mock_interaction: Interaction) -> None:
+        """Test ConfigModal on_submit returns to main ConfigView when no option."""
+        modal = ConfigModal(title="Test", option=None)
+
+        mock_interaction.followup = MagicMock()
+        mock_interaction.followup.send = AsyncMock()
+
+        await modal.on_submit(mock_interaction)
+
+        # Should send ConfigView
+        call_kwargs = mock_interaction.followup.send.call_args[1]
+        assert isinstance(call_kwargs["view"], ConfigView)
+        assert call_kwargs["ephemeral"] is True
+
+    @pytest.mark.asyncio
+    async def test_config_modal_submission_multiple_inputs(self, mock_interaction: Interaction) -> None:
+        """Test ConfigModal on_submit handles multiple text inputs."""
+        sub_settings = [
+            {"label": "Prefix", "field": "prefix", "data_type": "String"},
+            {"label": "Channel", "field": "channel_id", "data_type": "Integer"},
+        ]
+        modal = ConfigModal(title="Test", sub_settings=sub_settings)
+
+        # Set custom_ids and values
+        modal.children[0].custom_id = "prefix"  # type: ignore[attr-defined]
+        modal.children[0].value = "!"  # type: ignore[attr-defined]
+        modal.children[1].custom_id = "channel_id"  # type: ignore[attr-defined]
+        modal.children[1].value = "123456"  # type: ignore[attr-defined]
+
+        mock_interaction.followup = MagicMock()
+        mock_interaction.followup.send = AsyncMock()
+
+        await modal.on_submit(mock_interaction)
+
+        mock_interaction.response.send_message.assert_called_once()
+
+
+class TestConfigModalErrorHandling:
+    """Tests for ConfigModal error handling."""
+
+    @pytest.mark.asyncio
+    async def test_config_modal_on_error_logs_exception(self, mock_interaction: Interaction) -> None:
+        """Test ConfigModal on_error sends error message."""
+        modal = ConfigModal(title="Test")
+        error = ValueError("Invalid value")
+
+        with patch("byte_bot.views.config.logger") as mock_logger:
+            await modal.on_error(mock_interaction, error)
+
+            mock_logger.exception.assert_called_once()
+            mock_interaction.response.send_message.assert_called_once()
+
+    @pytest.mark.asyncio
+    async def test_config_modal_on_error_message_ephemeral(self, mock_interaction: Interaction) -> None:
+        """Test ConfigModal on_error sends ephemeral message."""
+        modal = ConfigModal(title="Test")
+        error = RuntimeError("Test error")
+
+        await modal.on_error(mock_interaction, error)
+
+        call_args = mock_interaction.response.send_message.call_args
+        assert call_args[1]["ephemeral"] is True
+
+
+class TestConfigViewTimeout:
+    """Tests for ConfigView timeout behavior."""
+
+    @pytest.mark.asyncio
+    async def test_config_view_no_timeout(self, mock_config_options: list[dict]) -> None:
+        """Test ConfigView is created without timeout."""
+        with patch("byte_bot.views.config.config_options", mock_config_options):
+            view = ConfigView()
+
+            assert view.timeout is None
+
+    @pytest.mark.asyncio
+    async def test_config_key_view_no_timeout(self, mock_config_options: list[dict]) -> None:
+        """Test ConfigKeyView is created without timeout."""
+        option = mock_config_options[0]
+        view = ConfigKeyView(option)
+
+        assert view.timeout is None
