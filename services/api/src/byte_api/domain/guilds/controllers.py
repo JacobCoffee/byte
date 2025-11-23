@@ -114,6 +114,7 @@ class GuildsController(Controller):
         guild_name: str = Parameter(
             title="Guild Name",
             description="The guild name.",
+            min_length=1,
         ),
     ) -> str:
         """Create a guild.

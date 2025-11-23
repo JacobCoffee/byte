@@ -16,7 +16,9 @@ def create_app() -> Litestar:
     Returns:
         Litestar: The Litestar application.
     """
-    from advanced_alchemy.exceptions import RepositoryError
+    from advanced_alchemy.exceptions import (
+        RepositoryError as AdvancedAlchemyRepositoryError,
+    )
     from litestar import Litestar
     from pydantic import SecretStr
 
@@ -40,7 +42,7 @@ def create_app() -> Litestar:
         # Handlers
         exception_handlers={
             exceptions.ApplicationError: exceptions.exception_to_http_response,
-            RepositoryError: exceptions.exception_to_http_response,
+            AdvancedAlchemyRepositoryError: exceptions.exception_to_http_response,
         },
         route_handlers=[*domain.routes],
         # Configs

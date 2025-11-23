@@ -18,15 +18,13 @@ def test_template_module_structure() -> None:
     import importlib.util
     import sys
 
-    # Anchor path to repo root (3 levels up from this test file: tests/unit/api/)
-    test_file = Path(__file__).resolve()
-    repo_root = test_file.parents[3]
-    template_file = repo_root / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
-
-    # Load template module directly
+    # Load template module directly using relative path
+    template_path = (
+        Path(__file__).parent.parent.parent.parent / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
+    )
     spec = importlib.util.spec_from_file_location(
         "template",
-        template_file,
+        str(template_path),
     )
     if spec and spec.loader:
         template_module = importlib.util.module_from_spec(spec)
@@ -110,37 +108,26 @@ def test_template_file_exists() -> None:
     """Test template.py file exists in expected location."""
     from pathlib import Path
 
-    # Anchor path to repo root (3 levels up from this test file: tests/unit/api/)
-    test_file = Path(__file__).resolve()
-    repo_root = test_file.parents[3]
-    template_file = repo_root / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
+    template_file = Path("services/api/src/byte_api/lib/template.py")
     assert template_file.exists()
 
 
 def test_template_module_docstring() -> None:
     """Test template.py has docstring."""
-    # Anchor path to repo root (3 levels up from this test file: tests/unit/api/)
-    test_file = Path(__file__).resolve()
-    repo_root = test_file.parents[3]
-    template_file = repo_root / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
-
-    with open(template_file) as f:
-        content = f.read()
-
+    template_path = (
+        Path(__file__).parent.parent.parent.parent / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
+    )
+    content = Path(template_path).read_text()
     # Should have module docstring
     assert '"""' in content or "'''" in content
 
 
 def test_template_module_imports() -> None:
     """Test template.py imports expected modules."""
-    # Anchor path to repo root (3 levels up from this test file: tests/unit/api/)
-    test_file = Path(__file__).resolve()
-    repo_root = test_file.parents[3]
-    template_file = repo_root / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
-
-    with open(template_file) as f:
-        content = f.read()
-
+    template_path = (
+        Path(__file__).parent.parent.parent.parent / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
+    )
+    content = Path(template_path).read_text()
     # Should import TemplateConfig
     assert "TemplateConfig" in content
     # Should import from settings
@@ -149,14 +136,10 @@ def test_template_module_imports() -> None:
 
 def test_template_module_config_variable() -> None:
     """Test template.py defines config variable."""
-    # Anchor path to repo root (3 levels up from this test file: tests/unit/api/)
-    test_file = Path(__file__).resolve()
-    repo_root = test_file.parents[3]
-    template_file = repo_root / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
-
-    with open(template_file) as f:
-        content = f.read()
-
+    template_path = (
+        Path(__file__).parent.parent.parent.parent / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
+    )
+    content = Path(template_path).read_text()
     # Should define config
     assert "config = " in content or "config=" in content
 

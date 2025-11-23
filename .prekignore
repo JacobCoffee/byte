@@ -1,0 +1,3 @@
+# Exclude worktrees from prek workspace discovery
+# This prevents prek from running hooks on all worktrees
+worktrees/

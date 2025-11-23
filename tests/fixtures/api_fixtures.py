@@ -49,8 +49,8 @@ async def api_app(async_engine: AsyncEngine) -> AsyncGenerator[Litestar]:
     if hasattr(base.engine.sync_engine, "dispatch"):
         base.engine.sync_engine.dispatch._clear()  # type: ignore[attr-defined]
 
-    # Temporarily set environment to use test database
-    with patch.dict(os.environ, {"DB_URL": "sqlite+aiosqlite:///:memory:"}):
+    # Temporarily set environment to use test database and disable debug mode
+    with patch.dict(os.environ, {"DB_URL": "sqlite+aiosqlite:///:memory:", "DEBUG": "false"}):
         # Replace the production engine and session factory with test versions
         original_engine = base.engine
         original_session_factory = base.async_session_factory
@@ -64,6 +64,8 @@ async def api_app(async_engine: AsyncEngine) -> AsyncGenerator[Litestar]:
 
         try:
             app = create_app()
+            # Force debug mode off for tests to get proper JSON error responses
+            app.debug = False
             yield app
         finally:
             # Restore original

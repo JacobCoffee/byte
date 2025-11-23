@@ -375,9 +375,9 @@ async def test_openapi_json_response_format(api_client: AsyncTestClient) -> None
         response = await api_client.get("/schema/openapi.json")
 
     if response.status_code == HTTP_200_OK:
-        # Should return JSON (OpenAPI 3 uses application/vnd.oai.openapi+json)
+        # Should return JSON (OpenAPI spec uses application/vnd.oai.openapi+json)
         content_type = response.headers.get("content-type", "")
-        assert "json" in content_type and content_type.startswith("application/")
+        assert "application/json" in content_type or "application/vnd.oai.openapi+json" in content_type
 
 
 @pytest.mark.asyncio
