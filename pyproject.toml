@@ -62,14 +62,11 @@ run-web = "byte_bot.cli:run_web"
 run-all = "byte_bot.cli:run_all"
 
 [build-system]
-requires = ["hatchling", "nodeenv"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.9.11,<0.10.0"]
+build-backend = "uv_build"
 
-[tool.hatch.metadata]
-allow-direct-references = true
-
-[tool.hatch.build.targets.wheel]
-packages = ["byte_bot/"]
+[tool.uv.build-backend]
+module-root = ""  # Flat layout: byte_bot/ at root, not src/byte_bot/
 
 [tool.uv.workspace]
 members = [
