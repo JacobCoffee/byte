@@ -4,8 +4,6 @@ from discord import ButtonStyle, Interaction, Member
 from discord.ext.commands import Bot
 from discord.ui import Button, View, button
 
-from byte_bot.api_client import ByteAPIClient
-from byte_bot.config import bot_settings
 from byte_bot.lib.log import get_logger
 
 __all__ = ("HelpThreadView",)
@@ -27,17 +25,20 @@ class HelpThreadView(View):
         """Asynchronously setup guild details and add button."""
         # noinspection PyBroadException
         try:
-            async with ByteAPIClient(base_url=bot_settings.api_service_url) as client:
-                guild_settings = await client.get_guild(self.guild_id)
-
-            if guild_settings and guild_settings.get("github_config"):
-                github_config = guild_settings["github_config"]
-                if github_repo := github_config.get("github_repository"):
-                    self.add_item(
-                        Button(label="Open GitHub Issue", style=ButtonStyle.blurple, url=f"{github_repo}/new/choose")
-                    )
-            else:
-                logger.warning("no github configuration found for guild %s", self.guild_id)
+            # TODO: Guild settings should include github_config relationship
+            # For now, GitHub integration is disabled during service migration
+            # async with ByteAPIClient(base_url=bot_settings.api_service_url) as client:
+            #     guild_settings = await client.get_guild(self.guild_id)
+            #
+            # if guild_settings and hasattr(guild_settings, "github_config"):
+            #     github_config = guild_settings.github_config
+            #     if github_repo := getattr(github_config, "github_repository", None):
+            #         self.add_item(
+            #             Button(label="Open GitHub Issue", style=ButtonStyle.blurple, url=f"{github_repo}/new/choose}")
+            #         )
+            # else:
+            #     logger.warning("no github configuration found for guild %s", self.guild_id)
+            pass  # No GitHub button during migration
         except Exception:
             logger.exception("failed to setup view for guild %s", self.guild_id)
 

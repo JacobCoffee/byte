@@ -196,7 +196,6 @@ class AdminCommands(Cog):
         #     color=discord.Color.blue(),
         # )
         # await dev_channel.send(embed=embed)
-        pass
 
 
 async def setup(bot: Bot) -> None:
