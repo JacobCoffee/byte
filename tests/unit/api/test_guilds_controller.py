@@ -72,8 +72,8 @@ class TestGuildListEndpoint:
         assert len(data["items"]) == 2
 
         # Verify guild data in response
-        # Note: API returns snake_case, not camelCase
-        guild_names = {item["guild_name"] for item in data["items"]}
+        # Note: API returns camelCase (using CamelizedBaseModel)
+        guild_names = {item["guildName"] for item in data["items"]}
         assert "Test Guild 1" in guild_names
         assert "Test Guild 2" in guild_names
 
@@ -176,9 +176,9 @@ class TestGuildDetailEndpoint:
 
         assert response.status_code == HTTP_200_OK
         data = response.json()
-        # API returns snake_case
-        assert data["guild_id"] == 123
-        assert data["guild_name"] == "Detail Test"
+        # API returns camelCase (using CamelizedBaseModel)
+        assert data["guildId"] == 123
+        assert data["guildName"] == "Detail Test"
         assert data["prefix"] == "$"
 
     async def test_get_guild_not_found(self, api_client: AsyncTestClient) -> None:
