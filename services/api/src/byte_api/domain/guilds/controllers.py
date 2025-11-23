@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from advanced_alchemy.filters import LimitOffset
 from litestar import Controller, get, patch, post
 from litestar.di import Provide
 from litestar.params import Dependency, Parameter
@@ -31,6 +32,7 @@ from byte_api.domain.guilds.services import (
     GuildsService,  # noqa: TC001
     SOTagsConfigService,  # noqa: TC001
 )
+from byte_api.lib import constants
 
 if TYPE_CHECKING:
     from advanced_alchemy.filters import FilterTypes
@@ -60,19 +62,39 @@ class GuildsController(Controller):
     async def list_guilds(
         self,
         guilds_service: GuildsService,
+        limit: int = Parameter(
+            query="limit",
+            ge=1,
+            default=constants.DEFAULT_PAGINATION_SIZE,
+            required=False,
+            description="Maximum number of items to return",
+        ),
+        offset: int = Parameter(
+            query="offset",
+            ge=0,
+            default=0,
+            required=False,
+            description="Number of items to skip",
+        ),
         filters: list[FilterTypes] = Dependency(skip_validation=True),
     ) -> OffsetPagination[GuildSchema]:
         """List guilds.
 
         Args:
             guilds_service (GuildsService): Guilds service
+            limit (int): Maximum number of items to return
+            offset (int): Number of items to skip
             filters (list[FilterTypes]): Filters
 
         Returns:
-            list[Guild]: List of guilds
+            OffsetPagination[GuildSchema]: Paginated list of guilds
         """
-        results, total = await guilds_service.list_and_count(*filters)
-        return guilds_service.to_schema(data=results, total=total, filters=filters, schema_type=GuildSchema)
+        # Create LimitOffset filter with explicit limit and offset parameters
+        # Filter out any existing LimitOffset from the auto-injected filters
+        limit_offset = LimitOffset(limit, offset)
+        filtered_filters = [f for f in filters if not isinstance(f, LimitOffset)]
+        results, total = await guilds_service.list_and_count(limit_offset, *filtered_filters)
+        return guilds_service.to_schema(data=results, total=total, filters=filtered_filters, schema_type=GuildSchema)
 
     @post(
         operation_id="CreateGuild",
@@ -86,6 +108,8 @@ class GuildsController(Controller):
         guild_id: int = Parameter(
             title="Guild ID",
             description="The guild ID.",
+            gt=0,  # Must be positive
+            le=9223372036854775807,  # Max 64-bit signed integer (Discord snowflake)
         ),
         guild_name: str = Parameter(
             title="Guild Name",
