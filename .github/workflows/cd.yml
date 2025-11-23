@@ -58,8 +58,8 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            # Create unique branch name
-            BRANCH_NAME="changelog/update-$(git rev-parse --short HEAD)"
+            # Create unique branch name (includes run ID to avoid collisions on reruns)
+            BRANCH_NAME="changelog/update-$(git rev-parse --short HEAD)-${{ github.run_id }}"
             git checkout -b "$BRANCH_NAME"
 
             # Commit with Claude Code signature
