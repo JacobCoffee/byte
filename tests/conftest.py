@@ -34,7 +34,7 @@ __all__ = [
 
 
 @pytest.fixture(scope="function")
-async def async_engine() -> AsyncGenerator[AsyncEngine, None]:
+async def async_engine() -> AsyncGenerator[AsyncEngine]:
     """Create an async SQLite engine for testing.
 
     Uses in-memory SQLite database that's created fresh for each test.
@@ -68,7 +68,7 @@ async def async_engine() -> AsyncGenerator[AsyncEngine, None]:
 
 
 @pytest.fixture(scope="function")
-async def async_session(async_engine: AsyncEngine) -> AsyncGenerator[async_sessionmaker[AsyncSession], None]:
+async def async_session(async_engine: AsyncEngine) -> AsyncGenerator[async_sessionmaker[AsyncSession]]:
     """Create an async session factory for testing."""
     session_factory = async_sessionmaker(
         bind=async_engine,
@@ -79,7 +79,7 @@ async def async_session(async_engine: AsyncEngine) -> AsyncGenerator[async_sessi
 
 
 @pytest.fixture(scope="function")
-async def db_session(async_session: async_sessionmaker[AsyncSession]) -> AsyncGenerator[AsyncSession, None]:
+async def db_session(async_session: async_sessionmaker[AsyncSession]) -> AsyncGenerator[AsyncSession]:
     """Create a database session for testing.
 
     Automatically rolls back after each test.
