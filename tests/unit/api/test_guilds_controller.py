@@ -24,12 +24,12 @@ if TYPE_CHECKING:
 __all__ = [
     "TestGuildConfigEndpoints",
     "TestGuildCreateEndpoint",
+    "TestGuildDatabaseFailures",
     "TestGuildDetailEndpoint",
+    "TestGuildErrorPaths",
     "TestGuildListEndpoint",
     "TestGuildUpdateEndpoint",
-    "TestGuildErrorPaths",
     "TestGuildValidationBoundaries",
-    "TestGuildDatabaseFailures",
 ]
 
 
@@ -444,7 +444,7 @@ class TestGuildDatabaseFailures:
     ) -> None:
         """Test timeout handling for GitHub config retrieval."""
         # Simulate database timeout
-        mock_get.side_effect = OperationalError("Query timeout", None, None)
+        mock_get.side_effect = OperationalError("Query timeout", None, Exception("timeout"))
 
         response = await api_client.get("/api/guilds/123/github/info")
 
@@ -761,7 +761,7 @@ class TestGuildErrorPaths:
     ) -> None:
         """Test handling of database deadlock during retrieval."""
         # Simulate deadlock exception
-        mock_get.side_effect = OperationalError("Deadlock found", None, None)
+        mock_get.side_effect = OperationalError("Deadlock found", None, Exception("deadlock"))
 
         response = await api_client.get("/api/guilds/123/info")
 
@@ -1057,9 +1057,8 @@ class TestGuildControllerAdvancedErrorPaths:
         api_client: AsyncTestClient,
     ) -> None:
         """Test allowed users when async operation times out."""
-        import asyncio
 
-        mock_get.side_effect = asyncio.TimeoutError("Operation timed out")
+        mock_get.side_effect = TimeoutError("Operation timed out")
 
         response = await api_client.get("/api/guilds/789/allowed_users/info")
 
