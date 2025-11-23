@@ -1,0 +1,28 @@
+[project]
+name = "byte-bot"
+version = "0.2.0"
+description = "Discord bot service for Byte Bot"
+authors = [
+    { name = "Jacob Coffee", email = "jacob@z7x.org" },
+]
+dependencies = [
+    "byte-common",
+    "discord-py>=2.3.2",
+    "httpx>=0.25.0",
+    "pydantic>=2.5.2",
+    "pydantic-settings>=2.1.0",
+    "python-dotenv>=1.0.0",
+    "anyio>=4.1.0",
+]
+requires-python = ">=3.12,<4.0"
+license = { text = "MIT" }
+
+[project.scripts]
+byte-bot = "byte_bot.__main__:main"
+
+[build-system]
+requires = ["uv_build>=0.9.11,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.uv.sources]
+byte-common = { workspace = true }
