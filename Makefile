@@ -19,6 +19,7 @@ UV 			    ?= 	uv $(UV_OPTS)
 .PHONY: docker-up docker-down docker-logs docker-shell-api docker-shell-bot docker-ps
 .PHONY: docker-restart docker-rebuild infra-up infra-down
 .PHONY: worktree worktree-prune
+.PHONY: act-list act-ci act-cd act-docs-preview
 
 help: ## Display this help text for Makefile
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
@@ -292,6 +293,29 @@ worktree-prune: ## Clean up stale git worktrees
 	@echo "=> Pruning stale git worktrees"
 	@git worktree prune -v
 	@echo "=> Stale worktrees pruned"
+
+# =============================================================================
+# GitHub Actions Local Testing (act)
+# =============================================================================
+
+##@ Local GitHub Actions
+
+act-list: ## List all available GitHub Actions workflows
+	@echo "=> Available GitHub Actions workflows:"
+	@act -l
+
+act-ci: ## Test CI workflow locally using act
+	@echo "=> Running CI workflow locally with act"
+	@act -j lint -j type-check -j test -j build --container-architecture linux/amd64
+
+act-cd: ## Test CD workflow locally using act (dry-run, no push)
+	@echo "=> Running CD workflow locally with act (dry-run)"
+	@echo "NOTE: This will not actually push/release, just test the workflow"
+	@act -j generate-changelog --container-architecture linux/amd64
+
+act-docs-preview: ## Test docs-preview workflow locally using act
+	@echo "=> Running docs-preview workflow locally with act"
+	@act pull_request -j build-and-deploy-docs --container-architecture linux/amd64
 
 # =============================================================================
 # Main
