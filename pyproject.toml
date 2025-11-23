@@ -118,6 +118,7 @@ extra-paths = ["tests/", "packages/byte-common/src/", "packages/byte-common/test
 exclude = [
     "services/api/**/*.py",
     "docs/conf.py",
+    "tests/unit/api/test_orm.py",
 ]
 
 [tool.slotscheck]
