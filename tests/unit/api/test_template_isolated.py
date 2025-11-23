@@ -143,9 +143,7 @@ def test_template_module_config_variable() -> None:
     template_path = (
         Path(__file__).parent.parent.parent.parent / "services" / "api" / "src" / "byte_api" / "lib" / "template.py"
     )
-    with open(template_path) as f:
-        content = f.read()
-
+    content = Path(template_path).read_text()
     # Should define config
     assert "config = " in content or "config=" in content
 
