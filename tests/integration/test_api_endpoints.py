@@ -592,12 +592,10 @@ class TestDatabaseIntegrity:
 
         db_session.add_all([github, forum, so_tag])
         await db_session.flush()
-        await db_session.commit()
 
         # Delete guild
         await db_session.delete(guild)
         await db_session.flush()
-        await db_session.commit()
 
         # Verify all configs deleted
         github_check = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == 4444))
