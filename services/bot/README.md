@@ -14,7 +14,7 @@ This service handles all Discord-related functionality including:
 
 ## Technology Stack
 
-- **Python**: 3.14+
+- **Python**: 3.13+
 - **Discord.py**: v2.3.2+
 - **HTTP Client**: httpx (for API calls)
 - **Settings**: pydantic-settings
