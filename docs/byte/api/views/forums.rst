@@ -4,5 +4,5 @@ forums
 
 Forum views
 
-.. automodule:: byte_bot.byte.views.forums
+.. automodule:: byte_bot.views.forums
      :members:
