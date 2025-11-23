@@ -117,12 +117,15 @@ ruff-noqa: ## Runs Ruff, adding noqa comments to disable warnings
 type-check: ## Run ty type checker
 	@$(UV) run --no-sync ty check
 
+# PYTHONDONTWRITEBYTECODE is set inline for test targets to prevent .pyc generation
+# during testing, which reduces I/O overhead. It's NOT set globally to avoid affecting
+# dev servers, docker builds, and other targets that benefit from .pyc caching.
 test:  ## Run the tests
-	@$(UV) run --no-sync pytest
+	@PYTHONDONTWRITEBYTECODE=1 $(UV) run --no-sync pytest
 
 coverage:  ## Run the tests and generate coverage report
-	@$(UV) run --no-sync pytest --cov=byte_bot
-	@$(UV) run --no-sync coverage html
+	@PYTHONDONTWRITEBYTECODE=1 $(UV) run --no-sync pytest --cov=byte_bot
+	@PYTHONDONTWRITEBYTECODE=1 $(UV) run --no-sync coverage html
 	@$(UV) run --no-sync coverage xml
 
 check-all: lint type-check fmt test  ## Run all linting, formatting, and tests

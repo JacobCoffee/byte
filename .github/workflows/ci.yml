@@ -9,6 +9,8 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    env:
+      PYTHONDONTWRITEBYTECODE: 1
     steps:
       - uses: actions/checkout@v5
 
@@ -50,6 +52,8 @@ jobs:
     defaults:
       run:
         shell: bash
+    env:
+      PYTHONDONTWRITEBYTECODE: 1
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
