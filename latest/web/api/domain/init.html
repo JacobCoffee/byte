@@ -154,9 +154,7 @@ html.dark {
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../app.html">app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html">metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">domain</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Domain Initializer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="urls.html">urls</a></li>
@@ -235,7 +233,15 @@ html.dark {
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#byte_api.domain.__init__.routes"><code class="docutils literal notranslate"><span class="pre">routes</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.domain.__init__.signature_namespace"><code class="docutils literal notranslate"><span class="pre">signature_namespace</span></code></a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
@@ -294,6 +300,19 @@ html.dark {
           <section id="domain-initializer">
 <h1>Domain Initializer<a class="headerlink" href="#domain-initializer" title="Link to this heading">¶</a></h1>
 <p>Initializes the domain module.</p>
+<p id="module-byte_api.domain.__init__">Application Modules.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_api.domain.__init__.routes">
+<span class="sig-prename descclassname"><span class="pre">byte_api.domain.__init__.</span></span><span class="sig-name descname"><span class="pre">routes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><span class="pre">ControllerRouterHandler</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[&lt;class</span> <span class="pre">'byte_api.domain.system.controllers.system.SystemController'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'byte_api.domain.web.controllers.web.WebController'&gt;,</span> <span class="pre">&lt;class</span> <span class="pre">'byte_api.domain.guilds.controllers.GuildsController'&gt;]</span></em><a class="headerlink" href="#byte_api.domain.__init__.routes" title="Link to this definition">¶</a></dt>
+<dd><p>Routes for the application.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_api.domain.__init__.signature_namespace">
+<span class="sig-prename descclassname"><span class="pre">byte_api.domain.__init__.</span></span><span class="sig-name descname"><span class="pre">signature_namespace</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Mapping</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'FilterTypes':</span> <span class="pre">typing.Union[advanced_alchemy.filters.BeforeAfter,</span> <span class="pre">advanced_alchemy.filters.OnBeforeAfter,</span> <span class="pre">advanced_alchemy.filters.CollectionFilter[typing.Any],</span> <span class="pre">advanced_alchemy.filters.LimitOffset,</span> <span class="pre">advanced_alchemy.filters.OrderBy,</span> <span class="pre">advanced_alchemy.filters.SearchFilter,</span> <span class="pre">advanced_alchemy.filters.NotInCollectionFilter[typing.Any],</span> <span class="pre">advanced_alchemy.filters.NotInSearchFilter,</span> <span class="pre">advanced_alchemy.filters.ExistsFilter,</span> <span class="pre">advanced_alchemy.filters.NotExistsFilter,</span> <span class="pre">advanced_alchemy.filters.ComparisonFilter,</span> <span class="pre">advanced_alchemy.filters.MultiFilter,</span> <span class="pre">advanced_alchemy.filters.FilterGroup],</span> <span class="pre">'OffsetPagination':</span> <span class="pre">&lt;class</span> <span class="pre">'advanced_alchemy.service.pagination.OffsetPagination'&gt;}</span></em><a class="headerlink" href="#byte_api.domain.__init__.signature_namespace" title="Link to this definition">¶</a></dt>
+<dd><p>Namespace for the application signature.</p>
+</dd></dl>
+
 </section>
 
         </article>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>app - Docs</title>
-    <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="cli" href="cli.html" /><link rel="prev" title="API Reference" href="index.html" />
+    <link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="metadata" href="metadata.html" /><link rel="prev" title="API Reference" href="index.html" />
   <script>
     const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     const sessionTheme = sessionStorage['_theme']
@@ -154,9 +154,7 @@ html.dark {
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metadata.html">metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="domain/index.html">domain</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="domain/init.html">Domain Initializer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="domain/urls.html">urls</a></li>
@@ -235,7 +233,14 @@ html.dark {
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#byte_api.app.create_app"><code class="docutils literal notranslate"><span class="pre">create_app()</span></code></a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
@@ -292,6 +297,21 @@ html.dark {
           <section id="app">
 <h1>app<a class="headerlink" href="#app" title="Link to this heading">¶</a></h1>
 <p>Entry point for ASGI-compatible application.</p>
+<p id="module-byte_api.app">ASGI application factory.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_api.app.create_app">
+<span class="sig-prename descclassname"><span class="pre">byte_api.app.</span></span><span class="sig-name descname"><span class="pre">create_app</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Litestar</span></span></span><a class="reference internal" href="../../_modules/byte_api/app.html#create_app"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.app.create_app" title="Link to this definition">¶</a></dt>
+<dd><p>Application factory to instantiate a Litestar application.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Litestar application.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Litestar</p>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article>
@@ -309,10 +329,10 @@ html.dark {
     </a>
   </div>
   <div class="navigation-next">
-    <a href="cli.html">
+    <a href="metadata.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">cli</div>
+        <div class="title">metadata</div>
       </div>
       <i class="i-icon chevron"></i>
     </a>

@@ -9,8 +9,6 @@ API Reference
     :hidden:
 
     app
-    cli
     metadata
-    utils
     domain/index
     lib/index

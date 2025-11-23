@@ -154,9 +154,7 @@ html.dark {
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../app.html">app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html">metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../domain/index.html">domain</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../domain/init.html">Domain Initializer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../domain/urls.html">urls</a></li>
@@ -235,7 +233,20 @@ html.dark {
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#byte_api.lib.types.SQLAlchemyModelT"><code class="docutils literal notranslate"><span class="pre">SQLAlchemyModelT</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.types.SQLAlchemyAsyncRepoServiceT"><code class="docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepoServiceT</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.types.DataclassModelT"><code class="docutils literal notranslate"><span class="pre">DataclassModelT</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.types.FilterTypeT"><code class="docutils literal notranslate"><span class="pre">FilterTypeT</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.types.ModelDTOT"><code class="docutils literal notranslate"><span class="pre">ModelDTOT</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.types.DTOT"><code class="docutils literal notranslate"><span class="pre">DTOT</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.types.DTOFactoryT"><code class="docutils literal notranslate"><span class="pre">DTOFactoryT</span></code></a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
@@ -294,6 +305,56 @@ html.dark {
           <section id="types">
 <h1>types<a class="headerlink" href="#types" title="Link to this heading">¶</a></h1>
 <p>Application types</p>
+<p id="module-byte_api.lib.types">Library module for type definitions to be used in the application.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_api.lib.types.SQLAlchemyModelT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.types.</span></span><span class="sig-name descname"><span class="pre">SQLAlchemyModelT</span></span><a class="headerlink" href="#byte_api.lib.types.SQLAlchemyModelT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for SQLAlchemy models.</p>
+<p>alias of TypeVar(‘SQLAlchemyModelT’, bound=<a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase" title="(in SQLAlchemy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeclarativeBase</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_api.lib.types.SQLAlchemyAsyncRepoServiceT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.types.</span></span><span class="sig-name descname"><span class="pre">SQLAlchemyAsyncRepoServiceT</span></span><a class="headerlink" href="#byte_api.lib.types.SQLAlchemyAsyncRepoServiceT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for SQLAlchemy async repository services.</p>
+<p>alias of TypeVar(‘SQLAlchemyAsyncRepoServiceT’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyAsyncRepositoryService</span></code>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_api.lib.types.DataclassModelT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.types.</span></span><span class="sig-name descname"><span class="pre">DataclassModelT</span></span><a class="headerlink" href="#byte_api.lib.types.DataclassModelT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for dataclass models.</p>
+<p>alias of TypeVar(‘DataclassModelT’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">DataclassProtocol</span></code>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_api.lib.types.FilterTypeT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.types.</span></span><span class="sig-name descname"><span class="pre">FilterTypeT</span></span><a class="headerlink" href="#byte_api.lib.types.FilterTypeT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for filter types.</p>
+<p>alias of TypeVar(‘FilterTypeT’, bound=<a class="reference internal" href="dependencies.html#byte_api.lib.dependencies.BeforeAfter" title="advanced_alchemy.filters.BeforeAfter"><code class="xref py py-class docutils literal notranslate"><span class="pre">BeforeAfter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.OnBeforeAfter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">OnBeforeAfter</span></code></a> | <a class="reference internal" href="dependencies.html#byte_api.lib.dependencies.CollectionFilter" title="advanced_alchemy.filters.CollectionFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CollectionFilter</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>] | <a class="reference internal" href="dependencies.html#byte_api.lib.dependencies.LimitOffset" title="advanced_alchemy.filters.LimitOffset"><code class="xref py py-class docutils literal notranslate"><span class="pre">LimitOffset</span></code></a> | <a class="reference internal" href="dependencies.html#byte_api.lib.dependencies.OrderBy" title="advanced_alchemy.filters.OrderBy"><code class="xref py py-class docutils literal notranslate"><span class="pre">OrderBy</span></code></a> | <a class="reference internal" href="dependencies.html#byte_api.lib.dependencies.SearchFilter" title="advanced_alchemy.filters.SearchFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">SearchFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.NotInCollectionFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotInCollectionFilter</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></a>] | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.NotInSearchFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotInSearchFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.ExistsFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExistsFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.NotExistsFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotExistsFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.ComparisonFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ComparisonFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.MultiFilter" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">MultiFilter</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/filters.html#advanced_alchemy.filters.FilterGroup" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterGroup</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_api.lib.types.ModelDTOT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.types.</span></span><span class="sig-name descname"><span class="pre">ModelDTOT</span></span><a class="headerlink" href="#byte_api.lib.types.ModelDTOT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for models.</p>
+<p>alias of TypeVar(‘ModelDTOT’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_api.lib.types.DTOT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.types.</span></span><span class="sig-name descname"><span class="pre">DTOT</span></span><a class="headerlink" href="#byte_api.lib.types.DTOT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for DTOs.</p>
+<p>alias of TypeVar(‘DTOT’, bound=<code class="xref py py-class docutils literal notranslate"><span class="pre">DataclassProtocol</span></code> | <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/mapping_api.html#sqlalchemy.orm.DeclarativeBase" title="(in SQLAlchemy v2.0)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeclarativeBase</span></code></a>)</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_api.lib.types.DTOFactoryT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.types.</span></span><span class="sig-name descname"><span class="pre">DTOFactoryT</span></span><a class="headerlink" href="#byte_api.lib.types.DTOFactoryT" title="Link to this definition">¶</a></dt>
+<dd><p>Type variable for DTO factories.</p>
+<p>alias of TypeVar(‘DTOFactoryT’, bound=<a class="reference external" href="https://docs.litestar.dev/2/reference/dto/dataclass_dto.html#litestar.dto.dataclass_dto.DataclassDTO" title="(in Litestar)"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataclassDTO</span></code></a> | <a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/extensions/litestar/dto.html#advanced_alchemy.extensions.litestar.dto.SQLAlchemyDTO" title="(in advanced_alchemy)"><code class="xref py py-class docutils literal notranslate"><span class="pre">SQLAlchemyDTO</span></code></a>)</p>
+</dd></dl>
+
 </section>
 
         </article>

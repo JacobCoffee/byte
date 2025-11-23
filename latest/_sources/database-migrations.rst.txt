@@ -32,19 +32,33 @@ Running Migrations
 ==================
 
 Prerequisites
-~~~~~~~~~~~~~
+=============
 
-1. PostgreSQL database running (use docker-compose):
+Before running migrations, ensure:
 
-   .. code-block:: bash
+1. All required environment variables are configured (see ``.env.example``)
+2. Database connection string is valid (``DB_URL``)
+3. GitHub App credentials are configured (required by settings validation)
 
-      docker compose -f docker-compose.infra.yml up -d db
+Minimal ``.env`` for migrations:
 
-2. Environment variables configured (create ``.env`` from ``.env.example``):
+.. code-block:: bash
 
-   .. code-block:: bash
+   DB_URL=postgresql+asyncpg://byte:bot@localhost:5432/byte
+   SECRET_KEY=your-secret-key-here
+   GITHUB_APP_ID=123456
+   GITHUB_APP_PRIVATE_KEY=/path/to/private-key.pem
+   GITHUB_APP_CLIENT_ID=Iv1.xxxxx
+   GITHUB_APP_CLIENT_SECRET=xxxxx
 
-      DB_URL=postgresql+asyncpg://byte:bot@localhost:5432/byte
+Database Setup
+~~~~~~~~~~~~~~
+
+PostgreSQL database running (use docker-compose):
+
+.. code-block:: bash
+
+   docker compose -f docker-compose.infra.yml up -d db
 
 Upgrade to Latest
 ~~~~~~~~~~~~~~~~~
@@ -225,8 +239,17 @@ Model Location
 
 All database models are defined in the ``byte-common`` package:
 
-- **Location**: ``packages/byte-common/src/byte_common/models.py``
-- **Import**: ``from byte_common.models import Guild, User, GitHubConfig, etc.``
+- **Location**: ``packages/byte-common/src/byte_common/models/`` (directory with separate model files)
+- **Import**: ``from byte_common.models import Guild, User, GitHubConfig, ForumConfig, SOTagsConfig, AllowedUsersConfig``
+
+Models are organized as follows:
+
+- ``guild.py`` - Guild configuration
+- ``user.py`` - User model
+- ``github_config.py`` - GitHub integration settings
+- ``forum_config.py`` - Forum channel configuration
+- ``sotags_config.py`` - Stack Overflow tags
+- ``allowed_users_config.py`` - User permissions
 
 This allows models to be shared between the API service and bot service.
 
@@ -261,16 +284,29 @@ Ensure you're importing from ``byte_common.models``, not the old ``byte_bot.serv
 Production Deployment
 =====================
 
-On Railway, migrations are automatically applied before the service starts via the start command:
+On Railway, migrations are run programmatically before the service starts using the migration script:
 
 .. code-block:: bash
 
-   uv run app database upgrade --no-prompt && uv run app run-all ...
+   # From railway.json or nixpacks.toml
+   uv run python -m byte_api.scripts.migrate && uv run litestar run --app byte_api.app:create_app --host 0.0.0.0 --port $PORT
+
+The migration script (``services/api/src/byte_api/scripts/migrate.py``) uses the Advanced Alchemy Python API:
+
+.. code-block:: python
+
+   from advanced_alchemy.alembic.commands import AlembicCommands
+   from byte_api.lib.db.base import config
+
+   if __name__ == "__main__":
+       print("Running database migrations...")
+       AlembicCommands(sqlalchemy_config=config).upgrade()
+       print("Migrations complete!")
 
 .. note::
 
-   The ``app`` CLI is currently only available in the monolithic setup. For microservices, migrations should be run
-   programmatically as shown above or through a dedicated migration service.
+   The monolithic ``app`` CLI was removed in Phase 1.4 of the microservices migration.
+   All migrations now use the Advanced Alchemy Python API directly.
 
 Rollback Plan
 =============

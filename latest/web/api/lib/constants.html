@@ -154,9 +154,7 @@ html.dark {
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../app.html">app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../cli.html">cli</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../metadata.html">metadata</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../utils.html">utils</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../domain/index.html">domain</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../domain/init.html">Domain Initializer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../domain/urls.html">urls</a></li>
@@ -235,7 +233,18 @@ html.dark {
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#byte_api.lib.constants.CACHE_EXPIRATION"><code class="docutils literal notranslate"><span class="pre">CACHE_EXPIRATION</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.constants.DB_SESSION_DEPENDENCY_KEY"><code class="docutils literal notranslate"><span class="pre">DB_SESSION_DEPENDENCY_KEY</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.constants.DEFAULT_PAGINATION_SIZE"><code class="docutils literal notranslate"><span class="pre">DEFAULT_PAGINATION_SIZE</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.constants.DTO_INFO_KEY"><code class="docutils literal notranslate"><span class="pre">DTO_INFO_KEY</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.constants.USER_DEPENDENCY_KEY"><code class="docutils literal notranslate"><span class="pre">USER_DEPENDENCY_KEY</span></code></a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
@@ -291,8 +300,39 @@ html.dark {
     <div class="flex flex-col break-words justify-between">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
-          <section id="constants">
-<h1>constants<a class="headerlink" href="#constants" title="Link to this heading">¶</a></h1>
+          <section id="module-byte_api.lib.constants">
+<span id="constants"></span><h1>constants<a class="headerlink" href="#module-byte_api.lib.constants" title="Link to this heading">¶</a></h1>
+<p>Byte server constants.</p>
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_api.lib.constants.CACHE_EXPIRATION">
+<span class="sig-prename descclassname"><span class="pre">byte_api.lib.constants.</span></span><span class="sig-name descname"><span class="pre">CACHE_EXPIRATION</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">60</span></em><a class="headerlink" href="#byte_api.lib.constants.CACHE_EXPIRATION" title="Link to this definition">¶</a></dt>
+<dd><p>Default cache key expiration in seconds.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_api.lib.constants.DB_SESSION_DEPENDENCY_KEY">
+<span class="sig-prename descclassname"><span class="pre">byte_api.lib.constants.</span></span><span class="sig-name descname"><span class="pre">DB_SESSION_DEPENDENCY_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'db_session'</span></em><a class="headerlink" href="#byte_api.lib.constants.DB_SESSION_DEPENDENCY_KEY" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the key used for dependency injection of the database session.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_api.lib.constants.DEFAULT_PAGINATION_SIZE">
+<span class="sig-prename descclassname"><span class="pre">byte_api.lib.constants.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_PAGINATION_SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></em><a class="headerlink" href="#byte_api.lib.constants.DEFAULT_PAGINATION_SIZE" title="Link to this definition">¶</a></dt>
+<dd><p>Default page size to use.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_api.lib.constants.DTO_INFO_KEY">
+<span class="sig-prename descclassname"><span class="pre">byte_api.lib.constants.</span></span><span class="sig-name descname"><span class="pre">DTO_INFO_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'info'</span></em><a class="headerlink" href="#byte_api.lib.constants.DTO_INFO_KEY" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the key used for storing DTO information.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="byte_api.lib.constants.USER_DEPENDENCY_KEY">
+<span class="sig-prename descclassname"><span class="pre">byte_api.lib.constants.</span></span><span class="sig-name descname"><span class="pre">USER_DEPENDENCY_KEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'current_user'</span></em><a class="headerlink" href="#byte_api.lib.constants.USER_DEPENDENCY_KEY" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the key used for dependency injection of the database session.</p>
+</dd></dl>
+
 </section>
 
         </article>
