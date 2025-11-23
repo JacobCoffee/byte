@@ -265,9 +265,18 @@ infra-down: ## Stop PostgreSQL infrastructure
 
 ##@ Git Worktrees
 
-worktree: ## Create a new git worktree for feature branch
+worktree: ## Create a new git worktree for feature branch (Usage: make worktree NAME=my-feature)
 	@echo "=> Creating git worktree"
-	@read -p "Feature name: " name; \
+	@if [ -z "$(NAME)" ]; then \
+		read -p "Feature name: " name; \
+	else \
+		name="$(NAME)"; \
+	fi; \
+	if [ -z "$$name" ]; then \
+		echo "ERROR: Feature name cannot be empty"; \
+		echo "Usage: make worktree NAME=my-feature"; \
+		exit 1; \
+	fi; \
 	git checkout main && git pull && \
 	git worktree add worktrees/$$name -b feature/$$name && \
 	mkdir -p worktrees/$$name/.claude && \
