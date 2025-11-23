@@ -24,8 +24,6 @@ jobs:
 
       - name: Create virtual environment
         run: uv sync --all-extras --dev
-        env:
-          PYO3_USE_ABI3_FORWARD_COMPATIBILITY: "1"
 
       - name: Run ruff lint
         uses: astral-sh/ruff-action@v3
@@ -68,8 +66,6 @@ jobs:
 
       - name: Create virtual environment
         run: uv sync --all-extras --dev
-        env:
-          PYO3_USE_ABI3_FORWARD_COMPATIBILITY: "1"
 
       - name: Test
         run: uv run pytest
@@ -100,8 +96,6 @@ jobs:
 
       - name: Create virtual environment
         run: uv sync --all-extras --dev
-        env:
-          PYO3_USE_ABI3_FORWARD_COMPATIBILITY: "1"
 
       - name: Build docs
         run: uv run make docs

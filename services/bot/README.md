@@ -62,7 +62,7 @@ services/bot/
 
 ### Prerequisites
 
-- Python 3.14+
+- Python 3.13+
 - uv package manager
 - Discord bot token (from Discord Developer Portal)
 - Access to Byte API (or run locally)
