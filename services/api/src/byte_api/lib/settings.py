@@ -398,10 +398,14 @@ class GitHubSettings(BaseSettings):
         Returns:
             The validated and loaded GitHub App private key.
         """
+        # Allow placeholder values in dev mode
+        environment = os.getenv("ENVIRONMENT", "dev")
+        if environment == "dev" and (not value or value == "ThisIsNotAProductionToken"):
+            return value
+
         try:
             decoded_key = base64.b64decode(value).decode("utf-8")
         except binascii.Error as e:
-            environment = os.getenv("ENVIRONMENT", "dev")
             if environment != "dev":
                 msg = "The GitHub private key must be a valid base64 encoded string"
                 raise ValueError(msg) from e

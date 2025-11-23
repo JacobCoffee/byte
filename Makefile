@@ -355,7 +355,7 @@ run-dev-bot: ## Run the bot in dev mode
 	@cd services/bot && $(UV) run python -m byte_bot
 
 run-dev-server: up-container ## Run the app in dev mode
-	@cd services/api && $(UV) run litestar run --app byte_api.app:create_app --reload --debug
+	@cd services/api && LITESTAR_APP=byte_api.app:create_app $(UV) run litestar run --reload --debug
 
 run-dev-frontend: ## Run the app frontend in dev mode
 	@cd services/api && $(UV) run tailwindcss -i src/byte_api/domain/web/resources/input.css -o src/byte_api/domain/web/resources/style.css --watch
