@@ -269,6 +269,7 @@ known-first-party = ["byte_common", "byte_api", "tests"]
 ]
 
 [tool.git-cliff.changelog]
+output = "docs/changelog.rst"
 header = """
 =========
 Changelog
