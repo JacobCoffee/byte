@@ -115,6 +115,7 @@ filterwarnings = [
 [tool.ty]
 
 [tool.ty.environment]
+python = ".venv"
 extra-paths = ["packages/byte-common/src/", "services/api/src/", "services/bot/src/"]
 
 [tool.ty.src]

@@ -9,12 +9,6 @@ from __future__ import annotations
 import sys
 from typing import TYPE_CHECKING
 
-from litestar.exceptions import (
-    HTTPException,
-    InternalServerException,
-    NotFoundException,
-    PermissionDeniedException,
-)
 from advanced_alchemy.exceptions import (
     DuplicateKeyError as AdvancedAlchemyDuplicateKeyError,
 )
@@ -23,6 +17,12 @@ from advanced_alchemy.exceptions import (
 )
 from advanced_alchemy.exceptions import (
     RepositoryError as AdvancedAlchemyRepositoryError,
+)
+from litestar.exceptions import (
+    HTTPException,
+    InternalServerException,
+    NotFoundException,
+    PermissionDeniedException,
 )
 from litestar.middleware.exceptions._debug_response import create_debug_response
 from litestar.middleware.exceptions.middleware import create_exception_response
@@ -123,7 +123,9 @@ def exception_to_http_response(
     """
     if isinstance(exc, (NotFoundError, AdvancedAlchemyNotFoundError)):
         http_exc = NotFoundException(detail=str(exc))
-    elif isinstance(exc, (ConflictError, RepositoryError, AdvancedAlchemyRepositoryError, AdvancedAlchemyDuplicateKeyError)):
+    elif isinstance(
+        exc, (ConflictError, RepositoryError, AdvancedAlchemyRepositoryError, AdvancedAlchemyDuplicateKeyError)
+    ):
         http_exc = _HTTPConflictException(detail=str(exc))
     elif isinstance(exc, AuthorizationError):
         http_exc = PermissionDeniedException(detail=str(exc))

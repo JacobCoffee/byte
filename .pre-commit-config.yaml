@@ -53,50 +53,10 @@ repos:
       - id: ensure-dunder-all
         exclude: "test*|examples*|tools"
         args: ["--use-tuple"]
-  #   - repo: https://github.com/pre-commit/mirrors-mypy
-  #     rev: "v1.6.1"
-  #     hooks:
-  #       - id: mypy
-  #         exclude: "tools|docs"
-  #         additional_dependencies:
-  #           [
-  #             annotated_types,
-  #             httpx,
-  #             httpx_sse,
-  #             hypothesis,
-  #             jsbeautifier,
-  #             pydantic>=2,
-  #             pydantic-extra-types,
-  #             pytest,
-  #             pytest-lazy-fixture,
-  #             pytest-mock,
-  #             pytest_docker,
-  #             python-dotenv,
-  #             click,
-  #             rich,
-  #             rich-click,
-  #             structlog,
-  #             uvicorn,
-  #             prometheus_client,
-  #             litestar,
-  #             polyfactory,
-  #             discord-py,
-  #           ]
-  - repo: local
+  - repo: https://github.com/JacobCoffee/ty-pre-commit
+    rev: v0.0.1
     hooks:
       - id: ty
-        name: ty
-        entry: bash -c "uv run --no-sync ty check services/bot/src packages/byte-common/src"
-        language: system
-        types: [python]
-        pass_filenames: false
-      - id: pre-push-ci
-        name: Run CI checks before push
-        entry: make ci
-        language: system
-        stages: [pre-push]
-        pass_filenames: false
-        verbose: true
   - repo: https://github.com/sphinx-contrib/sphinx-lint
     rev: v1.0.2
     hooks:
