@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class",
-  content: ["./byte_bot/server/domain/web/**/*.{html,js,ts,jsx,tsx,j2,jinja2}"],
+  content: ["./services/api/src/byte_api/domain/web/**/*.{html,js,ts,jsx,tsx,j2,jinja2}"],
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
