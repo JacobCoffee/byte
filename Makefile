@@ -58,7 +58,7 @@ install-backend: ## Install the backend dependencies
 	@echo "=> Backend dependencies installed"
 
 .PHONY: install
-install: clean destroy ## Install the project, dependencies, and pre-commit for local development
+install: clean destroy ## Install the project, dependencies, and prek for local development
 	@if ! $(UV) --version > /dev/null; then $(MAKE) install-uv; fi
 	@$(MAKE) install-backend
 	@$(MAKE) install-frontend
