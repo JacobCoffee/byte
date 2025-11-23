@@ -5,8 +5,12 @@ from __future__ import annotations
 import importlib.util
 import sys
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from litestar.dto import DTOConfig
+
+if TYPE_CHECKING:
+    from collections.abc import Callable
 
 # Import the dto module directly without triggering __init__.py
 dto_path = Path(__file__).parent.parent.parent.parent / "services" / "api" / "src" / "byte_api" / "lib" / "dto.py"
@@ -15,7 +19,7 @@ dto = importlib.util.module_from_spec(spec)  # type: ignore[arg-type]
 sys.modules["dto"] = dto
 spec.loader.exec_module(dto)  # type: ignore[union-attr]
 
-config = dto.config
+config: Callable[..., DTOConfig] = dto.config  # type: ignore[attr-defined]
 
 __all__ = [
     "TestDTOConfig",

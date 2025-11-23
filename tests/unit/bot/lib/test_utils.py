@@ -166,7 +166,9 @@ class TestFormatRuffRule:
             "code": "F401",
             "name": "unused-import",
             "summary": "Unused import",
-            "explanation": "## Why this is bad\nBad imports.\n\n## How to fix it\nRemove.\n\n## Edge cases\nSome cases.",
+            "explanation": (
+                "## Why this is bad\nBad imports.\n\n## How to fix it\nRemove.\n\n## Edge cases\nSome cases."
+            ),
             "fix": "Remove import",
             "linter": "pyflakes",
             "message_formats": [],
@@ -855,7 +857,7 @@ class TestGetNextFriday:
         """Test calculating next Friday from Friday (before 11:00)."""
         # Friday 2025-11-21 at 09:00
         now = datetime(2025, 11, 21, 9, 0, tzinfo=UTC)
-        start_dt, end_dt = get_next_friday(now)
+        start_dt, _ = get_next_friday(now)
 
         # Should be same day
         assert start_dt.day == 21
@@ -866,7 +868,7 @@ class TestGetNextFriday:
         """Test calculating next Friday from Saturday."""
         # Saturday 2025-11-22
         now = datetime(2025, 11, 22, 10, 30, tzinfo=UTC)
-        start_dt, end_dt = get_next_friday(now)
+        start_dt, _ = get_next_friday(now)
 
         # Should be next Friday (2025-11-28)
         assert start_dt.day == 28
@@ -876,7 +878,7 @@ class TestGetNextFriday:
         """Test calculating Friday with delay."""
         # Monday 2025-11-17
         now = datetime(2025, 11, 17, 10, 30, tzinfo=UTC)
-        start_dt, end_dt = get_next_friday(now, delay=1)
+        start_dt, _ = get_next_friday(now, delay=1)
 
         # Should be Friday + 1 week = 2025-11-28
         assert start_dt.day == 28
@@ -886,7 +888,7 @@ class TestGetNextFriday:
         """Test calculating Friday with multiple week delay."""
         # Monday 2025-11-17
         now = datetime(2025, 11, 17, 10, 30, tzinfo=UTC)
-        start_dt, end_dt = get_next_friday(now, delay=2)
+        start_dt, _ = get_next_friday(now, delay=2)
 
         # Should be Friday + 2 weeks = 2025-12-05
         assert start_dt.month == 12
@@ -904,7 +906,7 @@ class TestGetNextFriday:
     def test_get_next_friday_resets_time(self) -> None:
         """Test that time is reset to 11:00:00."""
         now = datetime(2025, 11, 17, 23, 59, 59, 999999, tzinfo=UTC)
-        start_dt, end_dt = get_next_friday(now)
+        start_dt, _ = get_next_friday(now)
 
         assert start_dt.hour == 11
         assert start_dt.minute == 0
@@ -916,7 +918,7 @@ class TestGetNextFriday:
         # Friday 2025-11-21 at 15:00
         # Note: function calculates next Friday from current day, not time
         now = datetime(2025, 11, 21, 15, 0, tzinfo=UTC)
-        start_dt, end_dt = get_next_friday(now)
+        start_dt, _ = get_next_friday(now)
 
         # Should be same Friday (2025-11-21) - time doesn't affect the day calculation
         assert start_dt.day == 21
@@ -927,7 +929,7 @@ class TestGetNextFriday:
         """Test calculating next Friday from Thursday."""
         # Thursday 2025-11-20
         now = datetime(2025, 11, 20, 10, 30, tzinfo=UTC)
-        start_dt, end_dt = get_next_friday(now)
+        start_dt, _ = get_next_friday(now)
 
         # Should be next day (Friday 2025-11-21)
         assert start_dt.day == 21

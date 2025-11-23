@@ -8,6 +8,7 @@
     "tailwindcss": "^3.3.3"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.3.7",
     "daisyui": "^3.5.0"
   }
 }

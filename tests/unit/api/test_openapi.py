@@ -126,12 +126,7 @@ async def test_openapi_security_schemes(api_client: AsyncTestClient) -> None:
     schema = response.json()
 
     # Security schemes may be in components.securitySchemes (OpenAPI 3.x)
-    # or securityDefinitions (Swagger 2.0)
-    has_security = (
-        "components" in schema and isinstance(schema["components"], dict) and "securitySchemes" in schema["components"]
-    ) or ("securityDefinitions" in schema)
-
-    # Security schemes are optional - just verify schema structure
+    # or securityDefinitions (Swagger 2.0) - just verify schema structure
     assert "paths" in schema
 
 
@@ -380,8 +375,9 @@ async def test_openapi_json_response_format(api_client: AsyncTestClient) -> None
         response = await api_client.get("/schema/openapi.json")
 
     if response.status_code == HTTP_200_OK:
-        # Should return JSON
-        assert "application/json" in response.headers.get("content-type", "")
+        # Should return JSON (OpenAPI 3 uses application/vnd.oai.openapi+json)
+        content_type = response.headers.get("content-type", "")
+        assert "json" in content_type and content_type.startswith("application/")
 
 
 @pytest.mark.asyncio

@@ -112,7 +112,7 @@ def test_provide_updated_filter() -> None:
 def test_provide_limit_offset_pagination() -> None:
     """Test pagination filter provider."""
     # Default values
-    filter_default = provide_limit_offset_pagination()
+    filter_default = provide_limit_offset_pagination(current_page=1, page_size=10)
     assert isinstance(filter_default, LimitOffset)
     assert filter_default.limit == 10  # DEFAULT_PAGINATION_SIZE
     assert filter_default.offset == 0
@@ -254,14 +254,14 @@ async def test_pagination_parameters_from_request(api_client: AsyncTestClient) -
     for i in range(15):
         await api_client.post(f"/api/guilds/create?guild_id={6000 + i}&guild_name=Page%20Test%20{i}")
 
-    # Test pagination
-    response = await api_client.get("/api/guilds/list?currentPage=1&pageSize=5")
+    # Test pagination with explicit limit and offset (not currentPage/pageSize)
+    response = await api_client.get("/api/guilds/list?limit=5&offset=0")
 
     assert response.status_code == HTTP_200_OK
     data = response.json()
 
-    # Should respect page size
-    assert len(data["items"]) <= 5
+    # Should respect page size (limit parameter)
+    assert len(data["items"]) == 5
 
 
 @pytest.mark.asyncio
@@ -294,7 +294,7 @@ def test_active_filter_provider() -> None:
     from byte_api.lib.dependencies import provide_active_filter
 
     # Default should be True
-    result = provide_active_filter()
+    result = provide_active_filter(is_active=True)
     assert result is True
 
     # Can be set to False

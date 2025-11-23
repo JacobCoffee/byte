@@ -97,7 +97,7 @@ refresh-container: clean-container up-container load-container ## Refresh the By
 ##@ Code Quality
 
 lint: ## Runs prek hooks; includes ruff linting, codespell, black
-	@$(UV) run --no-sync prek run --all-files
+	@$(UV) run --no-sync prek run --all-files --skip ty
 
 fmt-check: ## Runs Ruff format in check mode (no changes)
 	@$(UV) run --no-sync ruff format --check .
@@ -118,10 +118,10 @@ type-check: ## Run ty type checker
 	@$(UV) run --no-sync ty check
 
 test:  ## Run the tests
-	@$(UV) run --no-sync pytest tests
+	@$(UV) run --no-sync pytest
 
 coverage:  ## Run the tests and generate coverage report
-	@$(UV) run --no-sync pytest tests --cov=byte_bot
+	@$(UV) run --no-sync pytest --cov=byte_bot
 	@$(UV) run --no-sync coverage html
 	@$(UV) run --no-sync coverage xml
 

@@ -41,6 +41,7 @@ dev = [
     "aiosqlite>=0.21.0",
     "respx>=0.22.0",
     "ruff>=0.14.6",
+    "pytest-sugar>=1.1.1",
 ]
 
 [tool.codespell]
@@ -118,9 +119,10 @@ extra-paths = ["tests/", "packages/byte-common/src/", "packages/byte-common/test
 
 [tool.ty.src]
 exclude = [
-    "services/api/**/*.py",
     "docs/conf.py",
     "tests/unit/api/test_orm.py",
+    "tests/unit/bot/**/*.py",  # Mock attributes not recognized by ty
+    "tests/unit/bot/views/**/*.py",
 ]
 
 [tool.slotscheck]

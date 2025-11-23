@@ -27,6 +27,7 @@ def create_app() -> Litestar:
         exceptions,
         log,
         openapi,
+        schema,
         settings,
         static_files,
         template,
@@ -58,7 +59,10 @@ def create_app() -> Litestar:
         debug=settings.project.DEBUG,
         middleware=[log.controller.middleware_factory],
         signature_namespace=domain.signature_namespace,
-        type_encoders={SecretStr: str},
+        type_encoders={
+            SecretStr: str,
+            schema.CamelizedBaseModel: schema.serialize_camelized_model,
+        },
         plugins=[db.plugin],
     )
 

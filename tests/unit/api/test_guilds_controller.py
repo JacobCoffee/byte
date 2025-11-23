@@ -72,8 +72,8 @@ class TestGuildListEndpoint:
         assert len(data["items"]) == 2
 
         # Verify guild data in response
-        # Note: API returns snake_case, not camelCase
-        guild_names = {item["guild_name"] for item in data["items"]}
+        # Note: API returns camelCase (using CamelizedBaseModel)
+        guild_names = {item["guildName"] for item in data["items"]}
         assert "Test Guild 1" in guild_names
         assert "Test Guild 2" in guild_names
 
@@ -176,9 +176,9 @@ class TestGuildDetailEndpoint:
 
         assert response.status_code == HTTP_200_OK
         data = response.json()
-        # API returns snake_case
-        assert data["guild_id"] == 123
-        assert data["guild_name"] == "Detail Test"
+        # API returns camelCase (using CamelizedBaseModel)
+        assert data["guildId"] == 123
+        assert data["guildName"] == "Detail Test"
         assert data["prefix"] == "$"
 
     async def test_get_guild_not_found(self, api_client: AsyncTestClient) -> None:
@@ -388,7 +388,7 @@ class TestGuildDatabaseFailures:
     ) -> None:
         """Test 500 when DB query fails during list operation."""
         # Mock service to raise database exception
-        mock_list_and_count.side_effect = DatabaseError("Connection lost", None, None)
+        mock_list_and_count.side_effect = DatabaseError("Connection lost", None, Exception("Connection lost"))
 
         response = await api_client.get("/api/guilds/list")
 
@@ -403,7 +403,9 @@ class TestGuildDatabaseFailures:
     ) -> None:
         """Test create when DB connection drops mid-transaction."""
         # Simulate connection loss during create
-        mock_create.side_effect = OperationalError("Lost connection to MySQL server", None, None)
+        mock_create.side_effect = OperationalError(
+            "Lost connection to MySQL server", None, Exception("Connection lost")
+        )
 
         response = await api_client.post(
             "/api/guilds/create?guild_id=123456&guild_name=TestGuild",
