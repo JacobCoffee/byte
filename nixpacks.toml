@@ -12,4 +12,4 @@ cmds = [
 ]
 
 [start]
-cmd = 'uv run app database upgrade --no-prompt && uv run app run --wc 2 --host 0.0.0.0 --port $PORT'
+cmd = 'uv run python -m byte_api.scripts.migrate && uv run litestar run --app byte_api.app:create_app --host 0.0.0.0 --port $PORT --workers 2'
