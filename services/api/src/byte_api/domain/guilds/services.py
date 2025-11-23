@@ -133,7 +133,7 @@ class ForumConfigRepository(SQLAlchemyAsyncRepository[ForumConfig]):
 class ForumConfigService(SQLAlchemyAsyncRepositoryService[ForumConfig]):
     """Handles basic operations for the guilds' Forum config."""
 
-    repository_type = AllowedUsersConfigRepository
+    repository_type = ForumConfigRepository
     match_fields = ["guild_id"]
 
     async def to_model(self, data: ModelDictT[ForumConfig], operation: str | None = None) -> ForumConfig:
