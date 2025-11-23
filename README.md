@@ -39,7 +39,54 @@ Byte is currently deployed to [Railway][railway] for both the bot and the web se
 
 ## Development
 
-You can use the provided [nixpack][nixpacks] [file](./nixpacks.toml), or set up your environment using [uv][uv].
+Byte Bot uses a microservices architecture with Docker Compose for local development.
+
+### Quick Start with Docker (Recommended)
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/JacobCoffee/byte.git
+cd byte
+
+# 2. Configure environment
+cp .env.docker.example .env
+# Edit .env with your Discord token and other credentials
+
+# 3. Start all services
+make docker-up
+
+# 4. Access the application
+# API: http://localhost:8000
+# API Docs: http://localhost:8000/api/swagger
+```
+
+**📚 Full Docker Guide**: See [docs/docker-setup.md](docs/docker-setup.md) for comprehensive documentation including:
+
+- Configuration options
+- Development workflow with hot-reload
+- Database migrations
+- Troubleshooting
+- Production deployment
+
+### Local Development with uv
+
+For development without Docker:
+
+```bash
+# Install dependencies
+uv sync
+
+# Start PostgreSQL (via Docker)
+make infra-up
+
+# Run database migrations
+uv run app database upgrade
+
+# Start services
+make run-dev  # Runs bot + web + frontend watcher
+```
+
+**Alternative**: Use the provided [nixpack][nixpacks] [file](./nixpacks.toml) for Nixpacks-based deployments.
 
 ## Contributing
 
