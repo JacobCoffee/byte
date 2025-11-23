@@ -29,12 +29,8 @@ jobs:
         with:
           config: pyproject.toml
           args: -vv --latest --strip header
-
-      - name: Generate changelog file
-        uses: orhun/git-cliff-action@main
-        with:
-          config: pyproject.toml
-          args: -vv --latest --strip header --output docs/changelog.rst
+        env:
+          OUTPUT: docs/changelog.rst
 
       - name: Commit and push changelog
         run: |
