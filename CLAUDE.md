@@ -146,18 +146,20 @@ byte/
 
 ## 🔧 Technology Stack
 
-| Component           | Tool                              | Notes                                 |
-| ------------------- | --------------------------------- | ------------------------------------- |
-| **Package Manager** | uv                                | Fast, PEP 517 build backend           |
-| **Linting**         | ruff                              | Replaces black, flake8, isort         |
-| **Type Checking**   | ty                                | Type checks all services and packages |
-| **Testing**         | pytest + pytest-asyncio           | Coverage required                     |
-| **Git Hooks**       | prek                              | NOT pre-commit                        |
-| **Web Framework**   | Litestar 2.4.3+                   | ASGI, OpenAPI, Jinja2                 |
-| **Discord Bot**     | discord.py 2.3.2+                 | Slash commands, views                 |
-| **ORM**             | SQLAlchemy 2.0 + Advanced Alchemy | Async, repository pattern             |
-| **Database**        | PostgreSQL 15+                    | Via Docker or Railway                 |
-| **Frontend**        | TailwindCSS + DaisyUI             | Compiled via separate watcher         |
+| Component                | Tool                              | Notes                                 |
+| ------------------------ | --------------------------------- | ------------------------------------- |
+| **Package Manager (PY)** | uv                                | Fast, PEP 517 build backend           |
+| **Package Manager (JS)** | bun                               | Fast JavaScript runtime & package manager |
+| **Linting (Python)**     | ruff                              | Replaces black, flake8, isort         |
+| **Linting (JS/TS)**      | Biome                             | Fast formatter & linter (replaces Prettier) |
+| **Type Checking**        | ty                                | Type checks all services and packages |
+| **Testing**              | pytest + pytest-asyncio           | Coverage required                     |
+| **Git Hooks**            | prek                              | NOT pre-commit                        |
+| **Web Framework**        | Litestar 2.4.3+                   | ASGI, OpenAPI, Jinja2                 |
+| **Discord Bot**          | discord.py 2.3.2+                 | Slash commands, views                 |
+| **ORM**                  | SQLAlchemy 2.0 + Advanced Alchemy | Async, repository pattern             |
+| **Database**             | PostgreSQL 15+                    | Via Docker or Railway                 |
+| **Frontend**             | TailwindCSS + DaisyUI             | Compiled via separate watcher         |
 
 **Documentation**: Sphinx, Context7 MCP, allowed WebFetch domains:
 

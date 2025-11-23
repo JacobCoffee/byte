@@ -1,6 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require("tailwindcss/defaultTheme")
-
 module.exports = {
   darkMode: "class",
   content: ["./byte_bot/server/domain/web/**/*.{html,js,ts,jsx,tsx,j2,jinja2}"],
