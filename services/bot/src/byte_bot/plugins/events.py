@@ -1,9 +1,8 @@
 """Plugins for events."""
 
-from threading import Thread
 from typing import cast
 
-from discord import Embed
+from discord import Embed, Thread
 from discord.ext.commands import Bot, Cog
 
 from byte_bot.lib.common.assets import litestar_logo_yellow

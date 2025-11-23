@@ -90,7 +90,12 @@ class Byte(Bot):
         embed.add_field(name="Guild", value=ctx.guild.name if ctx.guild else "DM")
         embed.add_field(name="Location", value=f"[Jump]({ctx.message.jump_url})")
         embed.set_footer(text=f"Time: {ctx.message.created_at.strftime('%Y-%m-%d %H:%M:%S')}")
-        await ctx.send(embed=embed, ephemeral=True)
+
+        # ephemeral only works with interactions, not prefix commands
+        if ctx.interaction:
+            await ctx.interaction.response.send_message(embed=embed, ephemeral=True)
+        else:
+            await ctx.send(embed=embed)
 
     @staticmethod
     async def on_member_join(member: Member) -> None:

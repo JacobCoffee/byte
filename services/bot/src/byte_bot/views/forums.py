@@ -63,6 +63,13 @@ class HelpThreadView(View):
             interaction: Interaction object.
             button: Button object.
         """
+        # Check permissions - only author or admin can solve
+        if not await self.delete_interaction_check(interaction):
+            await interaction.response.send_message(
+                "Only the thread author or an administrator can mark this as solved.", ephemeral=True
+            )
+            return
+
         await interaction.response.defer()
 
         if interaction.message:
@@ -98,6 +105,13 @@ class HelpThreadView(View):
             interaction: Interaction object.
             button: Button object.
         """
+        # Check permissions - only author or admin can remove
+        if not await self.delete_interaction_check(interaction):
+            await interaction.response.send_message(
+                "Only the thread author or an administrator can remove this message.", ephemeral=True
+            )
+            return
+
         if interaction.message:
             content = interaction.message.content or "\u200b"
             logger.info("removing view for %s by %s", interaction.channel, interaction.user)

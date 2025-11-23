@@ -78,7 +78,7 @@ class AdminCommands(Cog):
     async def reload_single_cog(self, ctx: Context, cog: str, send_message: bool = True) -> str:
         """Reload a single cog."""
         try:
-            await self.bot.reload_extension(f"plugins.{cog}")
+            await self.bot.reload_extension(f"byte_bot.plugins.{cog}")
             message = f"Cog `{cog}` reloaded!"
         except (commands.ExtensionNotLoaded, commands.ExtensionNotFound) as e:
             message = f"Error with cog `{cog}`: {e!s}"

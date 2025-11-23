@@ -35,7 +35,7 @@ def setup_logging() -> None:
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
             "formatter": "simple",
-            "filename": log_file_path if log_file_path else Path("logs") / "byte.log",
+            "filename": log_file_path or Path("logs") / "byte.log",
             "maxBytes": 10485760,
             "backupCount": 3,
             "level": "INFO",

@@ -88,14 +88,15 @@ async def query_all_ruff_rules() -> list[RuffRule]:
         list[RuffRule]: All ruff rules
     """
     _ruff = find_ruff_bin()
-    try:
-        result = await run_process([_ruff, "rule", "--all", "--output-format", "json"])
-    except subprocess.CalledProcessError as e:
-        stderr = getattr(e, "stderr", b"").decode()
+    result = await run_process([_ruff, "rule", "--all", "--output-format", "json"])
+
+    # Check returncode since anyio.run_process doesn't raise CalledProcessError by default
+    if result.returncode != 0:
+        stderr = result.stderr.decode() if result.stderr else ""
         msg = f"Error while querying all rules: {stderr}"
-        raise ValueError(msg) from e
-    else:
-        return json.loads(result.stdout.decode())
+        raise ValueError(msg)
+
+    return json.loads(result.stdout.decode())
 
 
 def run_ruff_format(code: str) -> str:
