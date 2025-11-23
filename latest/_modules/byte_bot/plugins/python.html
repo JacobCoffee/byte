@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>byte_bot.plugins.python - Docs</title>
+    <link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="shortcut icon" href="../../../_static/badge.svg"/><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=aecf457f" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=28c32440" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=ee381b95" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=80d31e7b" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:56px;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));--sy-c-link-weak:rgba(var(--sy-rc-theme), 0.86);
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+  }
+}
+html.light {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+html.dark {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="byte_bot.plugins.python"/>
+<meta name="twitter:card" content="summary"/></head>
+<body><div class="document"><div class="announcement">
+    <div class="announcement-inner">
+      <p>This documentation is currently under development.</p>
+      <button class="announcement-close" aria-label="Close announcement">
+        <i class="i-icon close"></i>
+      </button>
+    </div>
+  </div><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand mr-4" href="/">
+      <img class="light-logo" src="../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <img class="dark-logo" src="../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <strong>Byte Bot</strong>
+    </a>
+    <div class="sy-head-links" id="NavLinks">
+      <nav class="sy-head-nav">
+
+<ul><li class="link">
+          <a href="https://byte-bot.app/"><span>Dashboard</span><i class="i-icon external-link"></i></a>
+        </li><li class="link">
+          <a href="https://github.com/sponsors/JacobCoffee"><span>Sponsor me</span><i class="i-icon external-link"></i></a>
+        </li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+        
+        
+        <div class="sy-head-social flex items-center">
+            <a class="flex items-center" href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub">
+              <i class="i-icon github"></i>
+            </a>
+            <a class="flex items-center" href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord">
+              <i class="i-icon discord"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden">
+      <button class="js-theme theme-switch flex items-center" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading"><span class="caption-text">Byte Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../byte/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/usage/byte.html">About Byte</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/usage/starting.html">Starting Byte</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../byte/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/api/bot.html">bot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/api/plugins/index.html">plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/events.html">events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/general.html">general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/plugins/python.html">python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/api/views/index.html">views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/views/forums.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/views/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/views/python.html">python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/views/abstract.html">abstract</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../byte/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/lib/common.html">common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/lib/logging.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../byte/api/lib/utils.html">utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Web Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../web/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../web/usage/server.html">About the Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web/usage/starting.html">Starting Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../web/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../web/api/app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web/api/metadata.html">metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web/api/domain/index.html">domain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/domain/init.html">Domain Initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/domain/urls.html">urls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/domain/system/index.html">system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/system/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/system/dtos.html">dtos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/system/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/domain/guilds/index.html">guilds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/guilds/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/guilds/dependencies.html">dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/guilds/helpers.html">helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/guilds/schemas.html">schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/guilds/services.html">services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/guilds/urls.html">urls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/domain/github/index.html">github</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/github/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/domain/web/index.html">web</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/web/controllers.html">controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/domain/db/index.html">Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/domain/db/models.html">models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../web/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/constants.html">constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/dependencies.html">dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/dtos.html">dtos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/schema.html">schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/serialization.html">serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/static_files.html">static files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/types.html">types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/template.html">template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/log/index.html">logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/lib/log/controller.html">controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/lib/log/init.html">init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/lib/log/utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../web/api/lib/db/index.html">Database Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/lib/db/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../web/api/lib/db/orm.html">orm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribution-guide.html">Contribution guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docker-compose.html">Docker Compose Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../database-migrations.html">Database Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-icon close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+  data-type="github" data-user="JacobCoffee" data-repo="byte">
+  <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
+    <i class="i-icon github"></i>
+  </span>
+  <span class="flex-grow px-2">
+    <span>JacobCoffee/byte</span>
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <i class="i-icon star"></i>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <i class="i-icon git-fork"></i>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
+    </div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+    <div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-icon menu"></i>
+      </button>
+    </div>
+    <ul class="flex-1">
+      
+      
+      <li><a href="../../../index.html">Byte Bot</a><span>/</span></li>
+      
+      <li><a href="../../index.html">Module code</a><span>/</span></li>
+      
+      <li><strong>byte_bot.plugins.python</strong></li>
+      
+      
+    </ul>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-icon outdent"></i>
+      </button>
+    </div>
+  </div>
+</div>
+    <div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <h1>Source code for byte_bot.plugins.python</h1><div class="highlight"><pre>
+<span></span><span id="1-1"><span class="sd">&quot;&quot;&quot;Plugins for Python related things, including PyPI, PEPs, etc.&quot;&quot;&quot;</span>
+</span><span id="1-2">
+</span><span id="1-3"><span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
+</span><span id="1-4">
+</span><span id="1-5"><span class="kn">from</span><span class="w"> </span><span class="nn">discord</span><span class="w"> </span><span class="kn">import</span> <span class="n">Embed</span><span class="p">,</span> <span class="n">Interaction</span>
+</span><span id="1-6"><span class="kn">from</span><span class="w"> </span><span class="nn">discord.app_commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">Choice</span><span class="p">,</span> <span class="n">autocomplete</span>
+</span><span id="1-7"><span class="kn">from</span><span class="w"> </span><span class="nn">discord.app_commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">command</span> <span class="k">as</span> <span class="n">app_command</span>
+</span><span id="1-8"><span class="kn">from</span><span class="w"> </span><span class="nn">discord.ext.commands</span><span class="w"> </span><span class="kn">import</span> <span class="n">Bot</span><span class="p">,</span> <span class="n">Cog</span>
+</span><span id="1-9">
+</span><span id="1-10"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_bot.lib.common.assets</span><span class="w"> </span><span class="kn">import</span> <span class="n">python_logo</span>
+</span><span id="1-11"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_bot.lib.common.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">python_blue</span><span class="p">,</span> <span class="n">python_yellow</span>
+</span><span id="1-12"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_bot.lib.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">PEP</span><span class="p">,</span> <span class="n">query_all_peps</span>
+</span><span id="1-13"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_bot.views.abstract_views</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExtendedEmbed</span><span class="p">,</span> <span class="n">Field</span>
+</span><span id="1-14"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_bot.views.python</span><span class="w"> </span><span class="kn">import</span> <span class="n">PEPView</span>
+</span><span id="1-15">
+</span><span id="1-16"><span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Python&quot;</span><span class="p">,</span> <span class="s2">&quot;setup&quot;</span><span class="p">)</span>
+</span><span id="1-17">
+</span><span id="1-18">
+<div class="viewcode-block" id="Python">
+<a class="viewcode-back" href="../../../byte/api/plugins/python.html#byte_bot.plugins.python.Python">[docs]</a>
+</span><span id="1-19"><span class="k">class</span><span class="w"> </span><span class="nc">Python</span><span class="p">(</span><span class="n">Cog</span><span class="p">):</span>
+</span><span id="1-20"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Python cog.&quot;&quot;&quot;</span>
+</span><span id="1-21">
+<div class="viewcode-block" id="Python.__init__">
+<a class="viewcode-back" href="../../../byte/api/plugins/python.html#byte_bot.plugins.python.Python.__init__">[docs]</a>
+</span><span id="1-22">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bot</span><span class="p">:</span> <span class="n">Bot</span><span class="p">,</span> <span class="n">peps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">PEP</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-23"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize cog.&quot;&quot;&quot;</span>
+</span><span id="1-24">        <span class="bp">self</span><span class="o">.</span><span class="n">bot</span> <span class="o">=</span> <span class="n">bot</span>
+</span><span id="1-25">        <span class="bp">self</span><span class="o">.</span><span class="n">__cog_name__</span> <span class="o">=</span> <span class="s2">&quot;Python Commands&quot;</span>
+</span><span id="1-26">        <span class="bp">self</span><span class="o">.</span><span class="n">_peps</span> <span class="o">=</span> <span class="p">{</span><span class="n">pep</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">]:</span> <span class="n">pep</span> <span class="k">for</span> <span class="n">pep</span> <span class="ow">in</span> <span class="n">peps</span><span class="p">}</span></div>
+
+</span><span id="1-27">
+</span><span id="1-28">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_pep_autocomplete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction</span><span class="p">:</span> <span class="n">Interaction</span><span class="p">,</span> <span class="n">current_pep</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Choice</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>  <span class="c1"># noqa: ARG002</span>
+</span><span id="1-29"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Autocomplete for PEP numbers and titles.</span>
+</span><span id="1-30">
+</span><span id="1-31"><span class="sd">        .. warning:: ``interaction`` is not used, but is required.</span>
+</span><span id="1-32"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-33">        <span class="k">return</span> <span class="p">[</span>
+</span><span id="1-34">            <span class="n">Choice</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;PEP </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">pep</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">))</span>
+</span><span id="1-35">            <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">pep</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peps</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span><span id="1-36">            <span class="k">if</span> <span class="n">current_pep</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="ow">or</span> <span class="n">current_pep</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">pep</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="1-37">        <span class="p">][:</span><span class="mi">25</span><span class="p">]</span>
+</span><span id="1-38">
+</span><span id="1-39">    <span class="nd">@app_command</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;pep&quot;</span><span class="p">)</span>
+</span><span id="1-40">    <span class="nd">@autocomplete</span><span class="p">(</span><span class="n">pep</span><span class="o">=</span><span class="n">_pep_autocomplete</span><span class="p">)</span>
+</span><span id="1-41">    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">peps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interaction</span><span class="p">:</span> <span class="n">Interaction</span><span class="p">,</span> <span class="n">pep</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-42"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Slash command to look up and display a Python Enhancement Proposal (PEP).</span>
+</span><span id="1-43">
+</span><span id="1-44"><span class="sd">        Args:</span>
+</span><span id="1-45"><span class="sd">            interaction: Interaction object.</span>
+</span><span id="1-46"><span class="sd">            pep: The PEP number to lookup.</span>
+</span><span id="1-47"><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="1-48">        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Querying PEP </span><span class="si">{</span><span class="n">pep</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="1-49">
+</span><span id="1-50">        <span class="k">if</span> <span class="p">(</span><span class="n">pep_details</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_peps</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pep</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-51">            <span class="n">embed</span> <span class="o">=</span> <span class="n">Embed</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;PEP </span><span class="si">{</span><span class="n">pep</span><span class="si">}</span><span class="s2"> not found... Maybe you should submit it!&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">python_yellow</span><span class="p">)</span>
+</span><span id="1-52">            <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">followup</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">embed</span><span class="p">,</span> <span class="n">ephemeral</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="1-53">            <span class="k">return</span>
+</span><span id="1-54">
+</span><span id="1-55">        <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Field</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="1-56">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Status&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">],</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+</span><span id="1-57">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Python Version&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="p">[</span><span class="s2">&quot;python_version&quot;</span><span class="p">],</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+</span><span id="1-58">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Created&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">pep_details</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">]),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+</span><span id="1-59">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolution&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resolution&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+</span><span id="1-60">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Type&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">],</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+</span><span id="1-61">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Topic&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;topic&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+</span><span id="1-62">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Requires&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;requires&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+</span><span id="1-63">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Replaces&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;replaces&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+</span><span id="1-64">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Superseded By&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;superseded_by&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+</span><span id="1-65">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Authors&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pep_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;authors&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;N/A&quot;</span><span class="p">])),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+</span><span id="1-66">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Discussions To&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;discussions_to&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+</span><span id="1-67">            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Post History&quot;</span><span class="p">,</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">pep_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;post_history&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">),</span> <span class="s2">&quot;inline&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+</span><span id="1-68">        <span class="p">]</span>
+</span><span id="1-69">
+</span><span id="1-70">        <span class="n">minified_embed</span> <span class="o">=</span> <span class="n">ExtendedEmbed</span><span class="o">.</span><span class="n">from_field_dicts</span><span class="p">(</span>
+</span><span id="1-71">            <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;PEP </span><span class="si">{</span><span class="n">pep_details</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">pep_details</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">python_blue</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">fields</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</span><span id="1-72">        <span class="p">)</span>
+</span><span id="1-73">        <span class="n">minified_embed</span><span class="o">.</span><span class="n">set_thumbnail</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">python_logo</span><span class="p">)</span>
+</span><span id="1-74">        <span class="n">full_embed</span> <span class="o">=</span> <span class="n">minified_embed</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+</span><span id="1-75">        <span class="n">full_embed</span><span class="o">.</span><span class="n">add_field_dicts</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>
+</span><span id="1-76">
+</span><span id="1-77">        <span class="c1"># Ensure the Documentation field is always last</span>
+</span><span id="1-78">        <span class="n">minified_embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Documentation&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;[PEP Documentation](</span><span class="si">{</span><span class="n">pep_details</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-79">        <span class="n">full_embed</span><span class="o">.</span><span class="n">add_field</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Documentation&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;[PEP Documentation](</span><span class="si">{</span><span class="n">pep_details</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="1-80">
+</span><span id="1-81">        <span class="n">view</span> <span class="o">=</span> <span class="n">PEPView</span><span class="p">(</span>  <span class="c1"># type: ignore[call-arg]</span>
+</span><span id="1-82">            <span class="n">author</span><span class="o">=</span><span class="n">interaction</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">bot</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">bot</span><span class="p">,</span> <span class="n">original_embed</span><span class="o">=</span><span class="n">full_embed</span><span class="p">,</span> <span class="n">minified_embed</span><span class="o">=</span><span class="n">minified_embed</span>
+</span><span id="1-83">        <span class="p">)</span>
+</span><span id="1-84">        <span class="k">await</span> <span class="n">interaction</span><span class="o">.</span><span class="n">followup</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">embed</span><span class="o">=</span><span class="n">minified_embed</span><span class="p">,</span> <span class="n">view</span><span class="o">=</span><span class="n">view</span><span class="p">)</span></div>
+
+</span><span id="1-85">
+</span><span id="1-86">
+<div class="viewcode-block" id="setup">
+<a class="viewcode-back" href="../../../byte/api/plugins/python.html#byte_bot.plugins.python.setup">[docs]</a>
+</span><span id="1-87"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="n">bot</span><span class="p">:</span> <span class="n">Bot</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="1-88"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Set up the Python cog.&quot;&quot;&quot;</span>
+</span><span id="1-89">    <span class="k">await</span> <span class="n">bot</span><span class="o">.</span><span class="n">add_cog</span><span class="p">(</span><span class="n">Python</span><span class="p">(</span><span class="n">bot</span><span class="p">,</span> <span class="k">await</span> <span class="n">query_all_peps</span><span class="p">()))</span></div>
+
+</span></pre></div>
+        </article>
+        
+        <div class="navigation flex print:hidden">
+  
+  
+</div>
+        
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2023, Jacob Coffee</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+          <a href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub"><i class="i-icon github"></i></a>
+          <a href="https://twitter.com/_scriptr" aria-label="X (Twitter)"><i class="i-icon x-twitter"></i></a>
+          <a href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord"><i class="i-icon discord"></i></a>
+          <a href="https://youtube.com/@monorepo" aria-label="YouTube"><i class="i-icon youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+      <script src="../../../_static/shibuya.js?v=3e5c8598"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
+    
+</body>
+</html>

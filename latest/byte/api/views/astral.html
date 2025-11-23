@@ -234,7 +234,14 @@ html.dark {
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#byte_bot.views.astral.RuffView"><code class="docutils literal notranslate"><span class="pre">RuffView</span></code></a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
@@ -293,6 +300,27 @@ html.dark {
           <section id="astral">
 <h1>astral<a class="headerlink" href="#astral" title="Link to this heading">¶</a></h1>
 <p>Astral Inc. views, for things like Ruff embeds</p>
+<p id="module-byte_bot.views.astral">Discord UI views used in Astral commands.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.views.astral.RuffView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.views.astral.</span></span><span class="sig-name descname"><span class="pre">RuffView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">author</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">bot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Bot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">original_embed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Embed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minified_embed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Embed</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/byte_bot/views/astral.html#RuffView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.views.astral.RuffView" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract.html#byte_bot.views.abstract_views.ButtonEmbedView" title="byte_bot.views.abstract_views.ButtonEmbedView"><code class="xref py py-class docutils literal notranslate"><span class="pre">ButtonEmbedView</span></code></a></p>
+<p>View for the Ruff embed.</p>
+<p>Initialize the view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>author</strong> – Author ID.</p></li>
+<li><p><strong>bot</strong> – Bot object.</p></li>
+<li><p><strong>original_embed</strong> – The original embed to display.</p></li>
+<li><p><strong>minified_embed</strong> – The minified embed to display.</p></li>
+<li><p><strong>*args</strong> – Variable length argument list.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
         </article>

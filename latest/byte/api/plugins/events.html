@@ -234,7 +234,19 @@ html.dark {
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#byte_bot.plugins.events.Events"><code class="docutils literal notranslate"><span class="pre">Events</span></code></a><ul>
+<li><a class="reference internal" href="#byte_bot.plugins.events.Events.__init__"><code class="docutils literal notranslate"><span class="pre">Events.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.plugins.events.Events.on_thread_create"><code class="docutils literal notranslate"><span class="pre">Events.on_thread_create()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#byte_bot.plugins.events.setup"><code class="docutils literal notranslate"><span class="pre">setup()</span></code></a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
@@ -290,8 +302,45 @@ html.dark {
     <div class="flex flex-col break-words justify-between">
       <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
         <article class="yue" role="main">
-          <section id="events">
-<h1>events<a class="headerlink" href="#events" title="Link to this heading">¶</a></h1>
+          <section id="module-byte_bot.plugins.events">
+<span id="events"></span><h1>events<a class="headerlink" href="#module-byte_bot.plugins.events" title="Link to this heading">¶</a></h1>
+<p>Plugins for events.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="byte_bot.plugins.events.Events">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.plugins.events.</span></span><span class="sig-name descname"><span class="pre">Events</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/byte_bot/plugins/events.html#Events"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.plugins.events.Events" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Cog" title="(in discord.py v2.6.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cog</span></code></a></p>
+<p>Events cog.</p>
+<p>Initialize cog.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="byte_bot.plugins.events.Events.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Bot" title="(in discord.py v2.6.4)"><span class="pre">Bot</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/plugins/events.html#Events.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.plugins.events.Events.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize cog.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="byte_bot.plugins.events.Events.on_thread_create">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">on_thread_create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thread</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://discordpy.readthedocs.io/en/stable/api.html#discord.Thread" title="(in discord.py v2.6.4)"><span class="pre">Thread</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/plugins/events.html#Events.on_thread_create"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.plugins.events.Events.on_thread_create" title="Link to this definition">¶</a></dt>
+<dd><p>Handle thread create event.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>parameterize the command prefix per guild, and the
+mention tag per guild.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>thread</strong> (<a class="reference external" href="https://discordpy.readthedocs.io/en/stable/api.html#discord.Thread" title="(in discord.py v2.6.4)"><em>discord.Thread</em></a>) – Thread that was created.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.plugins.events.setup">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.plugins.events.</span></span><span class="sig-name descname"><span class="pre">setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://discordpy.readthedocs.io/en/stable/ext/commands/api.html#discord.ext.commands.Bot" title="(in discord.py v2.6.4)"><span class="pre">Bot</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/plugins/events.html#setup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.plugins.events.setup" title="Link to this definition">¶</a></dt>
+<dd><p>Set up the Events cog.</p>
+</dd></dl>
+
 </section>
 
         </article>
