@@ -33,8 +33,8 @@ class TestButtonEmbedView:
         return Embed(title="Short Title", description="Brief description", colour=Colour.green())
 
     @pytest.fixture
-    def view(self, mock_bot: Bot, original_embed: Embed, minified_embed: Embed) -> ButtonEmbedView:
-        """Create ButtonEmbedView instance."""
+    async def view(self, mock_bot: Bot, original_embed: Embed, minified_embed: Embed) -> ButtonEmbedView:
+        """Create ButtonEmbedView instance (must be async to have event loop)."""
         return ButtonEmbedView(
             author=987654321,
             bot=mock_bot,
@@ -42,7 +42,7 @@ class TestButtonEmbedView:
             minified_embed=minified_embed,
         )
 
-    def test_initialization(
+    async def test_initialization(
         self, view: ButtonEmbedView, mock_bot: Bot, original_embed: Embed, minified_embed: Embed
     ) -> None:
         """Test view initialization with all parameters."""
@@ -86,7 +86,8 @@ class TestButtonEmbedView:
         assert result is False
         interaction.response.send_message.assert_called_once()
         call_args = interaction.response.send_message.call_args
-        assert "permission" in call_args[1]["ephemeral"] or call_args[0][0]
+        # Check message content contains "permission"
+        assert "permission" in call_args[0][0].lower()
         assert call_args[1]["ephemeral"] is True
 
     async def test_delete_interaction_check_no_guild_permissions(self, view: ButtonEmbedView) -> None:

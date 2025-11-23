@@ -30,7 +30,8 @@ class TestByteInitialization:
 
         assert bot.command_prefix == prefix
         assert bot.intents == intents
-        assert bot.activity == activity
+        # Compare activity by name since Activity objects don't compare by value
+        assert bot.activity.name == activity.name
 
     def test_bot_inherits_from_bot(self) -> None:
         """Test Byte inherits from discord.ext.commands.Bot."""
@@ -210,11 +211,16 @@ class TestOnReady:
     @pytest.mark.asyncio
     async def test_on_ready_logs_connection(self) -> None:
         """Test on_ready logs bot connection."""
+        from unittest.mock import PropertyMock
+
         intents = Intents.default()
         activity = Activity(name="test")
         bot = Byte(command_prefix=["!"], intents=intents, activity=activity)
-        bot.user = MagicMock()
-        bot.user.name = "ByteBot"
+
+        # Mock user property
+        mock_user = MagicMock()
+        mock_user.name = "ByteBot"
+        type(bot).user = PropertyMock(return_value=mock_user)
 
         with patch("byte_bot.bot.logger") as mock_logger:
             await bot.on_ready()
