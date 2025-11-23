@@ -1,0 +1,32 @@
+[project]
+name = "byte-api"
+version = "0.2.0"
+description = "REST API service for Byte Bot"
+authors = [
+    { name = "Jacob Coffee", email = "jacob@z7x.org" },
+]
+dependencies = [
+    "byte-common",
+    "litestar[full]>=2.4.3",
+    "advanced-alchemy>=0.6.1",
+    "asyncpg>=0.29.0",
+    "alembic>=1.13.0",
+    "githubkit[auth-app] @ git+https://github.com/yanyongyu/githubkit.git",
+    "httpx",
+    "pydantic>=2.5.2",
+    "pydantic-settings>=2.1.0",
+    "python-dotenv>=1.0.0",
+    "PyJWT>=2.8.0",
+]
+requires-python = ">=3.12,<4.0"
+license = { text = "MIT" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.uv.sources]
+byte-common = { workspace = true }
