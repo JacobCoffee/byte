@@ -408,7 +408,7 @@ async def test_forum_config_service_bug_fix_verification(db_session: AsyncSessio
 
     service = ForumConfigService(session=db_session)
 
-    # Create forum config
+    # Create forum config with list[int] for help_thread_notify_roles
     created_config = await service.create(
         {
             "guild_id": sample_guild.guild_id,
@@ -416,7 +416,7 @@ async def test_forum_config_service_bug_fix_verification(db_session: AsyncSessio
             "help_forum_category": "Support",
             "help_thread_auto_close": False,
             "help_thread_notify": True,
-            "help_thread_notify_roles": "moderator,helper",
+            "help_thread_notify_roles": [123456789, 987654321],  # list[int] not string
             "help_thread_notify_days": 3,
             "showcase_forum": True,
             "showcase_forum_category": "Projects",
@@ -433,7 +433,7 @@ async def test_forum_config_service_bug_fix_verification(db_session: AsyncSessio
     assert retrieved_config.help_forum_category == "Support"
     assert retrieved_config.help_thread_auto_close is False
     assert retrieved_config.help_thread_notify is True
-    assert retrieved_config.help_thread_notify_roles == "moderator,helper"
+    assert retrieved_config.help_thread_notify_roles == [123456789, 987654321]  # list[int] comparison
     assert retrieved_config.help_thread_notify_days == 3
     assert retrieved_config.showcase_forum is True
     assert retrieved_config.showcase_forum_category == "Projects"
