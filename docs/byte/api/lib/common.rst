@@ -4,14 +4,14 @@ common
 
 Common functions and classes used by the other modules.
 
-.. automodule:: byte_bot.byte.lib.common.assets
+.. automodule:: byte_bot.lib.common.assets
      :members:
 
-.. automodule:: byte_bot.byte.lib.common.colors
+.. automodule:: byte_bot.lib.common.colors
      :members:
 
-.. automodule:: byte_bot.byte.lib.common.guilds
+.. automodule:: byte_bot.lib.common.guilds
      :members:
 
-.. automodule:: byte_bot.byte.lib.common.links
+.. automodule:: byte_bot.lib.common.links
      :members:
