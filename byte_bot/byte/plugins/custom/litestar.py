@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import datetime
-from typing import Self
 
 from dateutil.zoneinfo import gettz
 from discord import Embed, EntityType, Interaction, Message, Object, PrivacyLevel
@@ -26,21 +25,21 @@ __all__ = ("LitestarCommands", "setup")
 class GitHubIssue(Modal, title="Create GitHub Issue"):
     """Modal for GitHub issue creation."""
 
-    title_ = TextInput[Self](label="title", placeholder="Title")
-    description = TextInput[Self](
+    title_ = TextInput(label="title", placeholder="Title")
+    description = TextInput(
         label="Description",
         style=TextStyle.paragraph,
         placeholder="Please enter an description of the bug you are encountering.",
     )
-    mcve = TextInput[Self](
+    mcve = TextInput(
         label="MCVE",
         style=TextStyle.paragraph,
         placeholder="Please provide a minimal, complete, and verifiable example of the issue.",
     )
-    logs = TextInput[Self](
+    logs = TextInput(
         label="Logs", style=TextStyle.paragraph, placeholder="Please copy and paste any relevant log output."
     )
-    version = TextInput[Self](
+    version = TextInput(
         label="Litestar Version", placeholder="What version of Litestar are you using when encountering this issue?"
     )
 
@@ -180,6 +179,10 @@ class LitestarCommands(Cog):
             interaction: Interaction object.
             delay: Optional. Number of weeks to delay the event.
         """
+        if interaction.guild is None:
+            await interaction.response.send_message("This command can only be used in a guild.", ephemeral=True)
+            return
+
         now_cst = datetime.datetime.now(gettz("America/Chicago"))
         start_dt, end_dt = get_next_friday(now_cst, delay)
         existing_events = interaction.guild.scheduled_events

@@ -35,8 +35,8 @@ DTOFactoryT = TypeVar("DTOFactoryT", bound=DataclassDTO | SQLAlchemyDTO)
 """Type variable for DTO factories."""
 ModelDictDTOT: TypeAlias = dict[str, Any] | ModelT | DTOData
 """Type alias for model or dict DTOs."""
-ModelDictListDTOT: TypeAlias = list[ModelT | dict[str, Any]] | list[dict[str, Any]] | DTOData
-"""Type alias for model or dict DTOs."""
+ModelDictListDTOT: TypeAlias = list[SQLAlchemyModelT | DataclassModelT | dict[str, Any]] | DTOData
+"""Type alias for list of models, dicts, or DTOData."""
 
 # -- App Types
 Status: TypeAlias = Literal["online", "offline", "degraded"]
