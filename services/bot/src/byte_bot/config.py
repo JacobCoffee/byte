@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from pydantic import ValidationError, field_validator
+from pydantic import Field, ValidationError, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 __all__ = [
@@ -29,16 +29,15 @@ class BotSettings(BaseSettings):
     model_config = SettingsConfigDict(
         case_sensitive=True,
         env_file=".env",
-        env_prefix="BOT_",
         extra="ignore",
     )
 
     # Discord configuration
-    discord_token: str
-    """Discord API token (from DISCORD_TOKEN or BOT_DISCORD_TOKEN)."""
-    discord_dev_guild_id: int | None = None
+    discord_token: str = Field(..., validation_alias="DISCORD_TOKEN")
+    """Discord API token (from DISCORD_TOKEN)."""
+    discord_dev_guild_id: int | None = Field(default=None, validation_alias="DISCORD_DEV_GUILD_ID")
     """Discord Guild ID for development."""
-    discord_dev_user_id: int | None = None
+    discord_dev_user_id: int | None = Field(default=None, validation_alias="DISCORD_DEV_USER_ID")
     """Discord User ID for development."""
     command_prefix: list[str] = ["!"]
     """Command prefix for bot commands."""
@@ -46,7 +45,7 @@ class BotSettings(BaseSettings):
     """Bot presence URL."""
 
     # API service configuration
-    api_service_url: str = "http://localhost:8000"
+    api_service_url: str = Field(default="http://localhost:8000", validation_alias="API_SERVICE_URL")
     """Base URL for the API service."""
 
     # Plugin configuration
@@ -54,9 +53,9 @@ class BotSettings(BaseSettings):
     """Path to plugins directory."""
 
     # Environment
-    environment: str = "dev"
+    environment: str = Field(default="dev", validation_alias="ENVIRONMENT")
     """Environment: dev, test, or prod."""
-    debug: bool = False
+    debug: bool = Field(default=False, validation_alias="DEBUG")
     """Enable debug mode."""
 
     @field_validator("command_prefix")
@@ -102,33 +101,6 @@ class BotSettings(BaseSettings):
         environment = os.getenv("ENVIRONMENT", "dev")
         return os.getenv("PRESENCE_URL", env_urls.get(environment, "https://dev.byte-bot.app/"))
 
-    @field_validator("discord_token", mode="before")
-    @classmethod
-    def get_discord_token(cls, value: str | None) -> str:
-        """Get Discord token from environment.
-
-        Supports both DISCORD_TOKEN and BOT_DISCORD_TOKEN.
-
-        Args:
-            value: Token value from pydantic
-
-        Returns:
-            Discord token
-
-        Raises:
-            ValueError: If token is not set
-        """
-        if value:
-            return value
-
-        # Try BOT_DISCORD_TOKEN first, then DISCORD_TOKEN
-        token = os.getenv("BOT_DISCORD_TOKEN") or os.getenv("DISCORD_TOKEN")
-        if not token:
-            msg = "Discord token must be set via DISCORD_TOKEN or BOT_DISCORD_TOKEN"
-            raise ValueError(msg)
-
-        return token
-
 
 class LogSettings(BaseSettings):
     """Logging configuration for the bot service."""
@@ -136,7 +108,6 @@ class LogSettings(BaseSettings):
     model_config = SettingsConfigDict(
         case_sensitive=True,
         env_file=".env",
-        env_prefix="LOG_",
         extra="ignore",
     )
 
@@ -166,8 +137,8 @@ def load_settings() -> tuple[BotSettings, LogSettings]:
         ValidationError: If settings validation fails
     """
     try:
-        bot = BotSettings.model_validate({})
-        log = LogSettings.model_validate({})
+        bot = BotSettings()
+        log = LogSettings()
     except ValidationError as error:
         print(f"Could not load settings. Error: {error!r}")  # noqa: T201
         raise
