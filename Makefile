@@ -115,7 +115,7 @@ ruff-noqa: ## Runs Ruff, adding noqa comments to disable warnings
 	@$(UV) run --no-sync ruff check . --add-noqa
 
 type-check: ## Run ty type checker
-	@$(UV) run --no-sync ty check
+	@$(UV) run --no-sync ty check services/bot/src packages/byte-common/src
 
 test:  ## Run the tests
 	@$(UV) run --no-sync pytest
