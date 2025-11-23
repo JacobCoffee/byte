@@ -526,7 +526,6 @@ class TestDatabaseIntegrity:
         guild1 = Guild(guild_id=5555, guild_name="First Guild")
         db_session.add(guild1)
         await db_session.flush()
-        await db_session.commit()
 
         # Try to create duplicate - should raise integrity error
         from sqlalchemy.exc import IntegrityError
@@ -536,8 +535,6 @@ class TestDatabaseIntegrity:
 
         with pytest.raises(IntegrityError):
             await db_session.flush()
-
-        await db_session.rollback()
 
     async def test_foreign_key_constraint_enforced(
         self,
