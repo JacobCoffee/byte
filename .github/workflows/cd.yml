@@ -30,24 +30,13 @@ jobs:
           config: pyproject.toml
           args: -vv --latest --strip header
 
-      - name: Fetch latest main
-        run: git fetch origin main
-
-      - name: Create worktree for changelog
-        run: git worktree add worktree-changelog origin/main
-
-      - name: Install git-cliff
-        uses: taiki-e/install-action@v2
+      - name: Generate changelog file
+        uses: orhun/git-cliff-action@main
         with:
-          tool: git-cliff
-
-      - name: Generate changelog in worktree
-        run: |
-          cd worktree-changelog
-          git-cliff --config ../pyproject.toml -vv --latest --strip header --output docs/changelog.rst
+          config: pyproject.toml
+          args: -vv --latest --strip header --output docs/changelog.rst
 
       - name: Commit and push changelog
-        working-directory: worktree-changelog
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
@@ -56,9 +45,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "docs: update changelog [skip ci]"
-            git push origin HEAD:main
+            git push origin main
           fi
-
-      - name: Cleanup worktree
-        if: always()
-        run: git worktree remove worktree-changelog || true
