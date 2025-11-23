@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-from typing import Self
-
 from discord import Interaction, Message, TextStyle, app_commands
 from discord.ext.commands import Bot, Cog
 from discord.ui import Modal, TextInput
@@ -18,21 +16,21 @@ __all__ = ("GitHubCommands", "setup")
 class GitHubIssue(Modal, title="Create GitHub Issue"):
     """Modal for GitHub issue creation."""
 
-    title_ = TextInput[Self](label="title", placeholder="Title")
-    description = TextInput[Self](
+    title_ = TextInput(label="title", placeholder="Title")
+    description = TextInput(
         label="Description",
         style=TextStyle.paragraph,
         placeholder="Please enter an description of the bug you are encountering.",
     )
-    mcve = TextInput[Self](
+    mcve = TextInput(
         label="MCVE",
         style=TextStyle.paragraph,
         placeholder="Please provide a minimal, complete, and verifiable example of the issue.",
     )
-    logs = TextInput[Self](
+    logs = TextInput(
         label="Logs", style=TextStyle.paragraph, placeholder="Please copy and paste any relevant log output."
     )
-    version = TextInput[Self](
+    version = TextInput(
         label="Project Version", placeholder="What version of the project are you using when encountering this issue?"
     )
 

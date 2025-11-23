@@ -101,11 +101,10 @@ dev-dependencies = [
     "sphinx-sqlalchemy>=0.2.0",
     # - Linting
     "codespell>=2.2.6",
-    "mypy>=1.7.1",
     "prek>=0.2.18",
     "pytailwindcss>=0.2.0",
     "sourcery>=1.14.0",
-    "pyright>=1.1.339",
+    "ty>=0.0.1a26",
     "aiosqlite>=0.21.0",
 ]
 
@@ -177,61 +176,10 @@ filterwarnings = [
     "ignore::DeprecationWarning:sphinxcontrib",
 ]
 
-[tool.pyright]
-include = ["byte_bot/", "tests", "packages/byte-common/src", "packages/byte-common/tests"]
-extraPaths = ["packages/byte-common/src"]
-disableBytesTypePromotions = true
-exclude = [
-    "tools",
-    "docs",
-]
-pythonVersion = "3.12"
-reportOptionalMemberAccess = false
-reportUnknownMemberType = false
-reportGeneralTypeIssues = true
+[tool.ty]
 
-[tool.mypy]
-namespace_packages = true # discord.Githupy
-disallow_any_generics = false
-disallow_incomplete_defs = true
-disallow_untyped_decorators = false
-disallow_untyped_defs = true
-disallow_subclassing_any = false
-exclude = '''(?x)(
-^build/
-|^dist/
-|^.venv/
-|^node_modules/
-|^migrations/
-)
-'''
-implicit_reexport = false
-plugins = ['pydantic.mypy']
-show_error_codes = true
-strict = true
-warn_redundant_casts = true
-warn_return_any = true
-warn_unreachable = true
-warn_unused_configs = true
-warn_unused_ignores = true
-
-[[tool.mypy.overrides]]
-module = ["tests.*"]
-disallow_untyped_decorators = false
-
-[[tool.mypy.overrides]]
-ignore_missing_imports = true
-module = ["sqlalchemy.*", "saq.*", "uvicorn.*", "aiohttp.*", "jsbeautifier", "jsbeautifier.*", "re2.*", "uvloop", "uvloop.*"]
-
-[[tool.mypy.overrides]]
-module = ["app.lib.db.migrations.*"]
-ignore_errors = true
-
-[tool.pydantic-mypy]
-init_forbid_extra = true
-init_typed = true
-warn_required_dynamic_aliases = true
-warn_untyped_fields = true
+[tool.ty.environment]
+extra-paths = ["byte_bot/", "tests/", "packages/byte-common/src/", "packages/byte-common/tests/"]
 
 [tool.slotscheck]
 strict-imports = false

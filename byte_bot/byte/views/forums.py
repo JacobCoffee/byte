@@ -16,9 +16,9 @@ logger = get_logger()
 class HelpThreadView(View):
     """View for the help thread."""
 
-    def __init__(self, author: Member, guild_id: int, bot: Bot, *args: list, **kwargs: dict) -> None:
+    def __init__(self, author: Member, guild_id: int, bot: Bot, *, timeout: float | None = 180.0) -> None:
         """Initialize the view."""
-        super().__init__(*args, **kwargs)
+        super().__init__(timeout=timeout)
         self.author = author
         self.bot = bot
         self.guild_id = guild_id
@@ -84,8 +84,11 @@ class HelpThreadView(View):
 
             # noinspection PyBroadException
             try:
-                await solve_command.invoke(ctx)
-                await interaction.followup.send("Marked as solved and closed the help forum!", ephemeral=True)
+                if solve_command is not None:
+                    await solve_command.invoke(ctx)
+                    await interaction.followup.send("Marked as solved and closed the help forum!", ephemeral=True)
+                else:
+                    await interaction.followup.send("Solve command not found. Please try again.", ephemeral=True)
             except Exception:
                 logger.exception("failed to invoke solve command")
                 await interaction.followup.send("Failed to mark as solved. Please try again.", ephemeral=True)

@@ -107,6 +107,7 @@ class TestCreateGuildRequest:
         with pytest.raises(ValidationError) as exc_info:
             CreateGuildRequest(guild_name="Test Guild")  # type: ignore[call-arg]  # Missing guild_id intentionally
 
+        assert isinstance(exc_info.value, ValidationError)
         errors = exc_info.value.errors()
         assert any(error["loc"] == ("guild_id",) for error in errors)
 
@@ -119,6 +120,7 @@ class TestCreateGuildRequest:
                 guild_name="",
             )
 
+        assert isinstance(exc_info.value, ValidationError)
         errors = exc_info.value.errors()
         assert any(error["loc"] == ("guild_name",) for error in errors)
 
