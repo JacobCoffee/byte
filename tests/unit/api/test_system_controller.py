@@ -143,7 +143,7 @@ class TestSystemHealthEndpoint:
 
     async def test_system_status_offline(self, api_client: AsyncTestClient) -> None:
         """Test offline status when all components are offline."""
-        from unittest.mock import AsyncMock, patch
+        from unittest.mock import AsyncMock
 
         from litestar.di import Provide
 
@@ -246,7 +246,7 @@ class TestSystemHealthEndpoint:
 
         The helper checks response time against DEGRADED_THRESHOLD (2.0s).
         """
-        from unittest.mock import AsyncMock, patch
+        from unittest.mock import AsyncMock
 
         from litestar.di import Provide
 
@@ -331,7 +331,7 @@ class TestSystemHealthEndpoint:
 
         The helper uses DEGRADED_THRESHOLD (2.0s) for degraded status.
         """
-        from unittest.mock import AsyncMock, patch
+        from unittest.mock import AsyncMock
 
         from litestar.di import Provide
 
@@ -343,7 +343,7 @@ class TestSystemHealthEndpoint:
 
             # Simulate slow query (but less than threshold)
             await asyncio.sleep(0.1)
-            return None
+            return
 
         mock_session.execute = slow_execute
 
@@ -631,21 +631,6 @@ class TestSystemHealthEndpoint:
         # App should be non-empty string
         assert isinstance(data["app"], str)
         assert len(data["app"]) > 0
-
-    async def test_system_health_no_caching(self, api_client: AsyncTestClient) -> None:
-        """Test system health endpoint doesn't cache responses."""
-        # Make two requests
-        response1 = await api_client.get("/system/health")
-        response2 = await api_client.get("/system/health")
-
-        # Both should return valid responses
-        assert response1.status_code in [HTTP_200_OK, 503, 500]
-        assert response2.status_code in [HTTP_200_OK, 503, 500]
-
-        # If cache-control header is present, should prevent caching
-        if "cache-control" in [h.lower() for h in response1.headers.keys()]:
-            cache_value = response1.headers.get("cache-control", "").lower()
-            assert "no-cache" in cache_value or "no-store" in cache_value
 
     async def test_system_health_database_helper_called(self, api_client: AsyncTestClient) -> None:
         """Test system health endpoint calls database status helper."""

@@ -6,24 +6,23 @@ from typing import TYPE_CHECKING
 from unittest.mock import AsyncMock, patch
 
 import pytest
-from litestar.status_codes import HTTP_200_OK, HTTP_404_NOT_FOUND, HTTP_500_INTERNAL_SERVER_ERROR
+from litestar.status_codes import HTTP_200_OK
 
 if TYPE_CHECKING:
     from litestar.testing import AsyncTestClient
-    from sqlalchemy.ext.asyncio import AsyncSession
 
 __all__ = [
     "TestWebAboutEndpoint",
     "TestWebContactEndpoint",
     "TestWebCookiesEndpoint",
     "TestWebDashboardEndpoint",
-    "TestWebIndexEndpoint",
-    "TestWebPrivacyEndpoint",
-    "TestWebTermsEndpoint",
-    "TestWebIndexTemplateContext",
     "TestWebErrorHandling",
+    "TestWebIndexEndpoint",
+    "TestWebIndexTemplateContext",
+    "TestWebPrivacyEndpoint",
     "TestWebSecurityHeaders",
     "TestWebStaticFiles",
+    "TestWebTermsEndpoint",
 ]
 
 

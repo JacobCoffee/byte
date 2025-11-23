@@ -2,8 +2,6 @@
 
 from __future__ import annotations
 
-import inspect
-
 import pytest
 from pydantic import ValidationError
 
@@ -19,16 +17,16 @@ from byte_api.domain.guilds.schemas import (
 )
 
 __all__ = [
-    "TestGitHubConfigSchema",
-    "TestSOTagsConfigSchema",
     "TestAllowedUsersConfigSchema",
     "TestForumConfigSchema",
-    "TestGuildSchema",
+    "TestGitHubConfigSchema",
     "TestGuildCreate",
+    "TestGuildSchema",
     "TestGuildUpdate",
-    "TestUpdateableGuildSetting",
+    "TestSOTagsConfigSchema",
     "TestSchemaDocumentation",
     "TestSchemaValidation",
+    "TestUpdateableGuildSetting",
 ]
 
 
@@ -584,7 +582,6 @@ class TestSchemaValidation:
         """Test schemas reject unknown fields."""
         # Pydantic v2 allows extra fields by default unless configured
         # This test verifies the current behavior
-        from uuid import uuid4
 
         try:
             schema = GuildCreate(id=123, name="Test", unknown_field="value")  # type: ignore[call-arg]
