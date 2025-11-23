@@ -63,9 +63,9 @@ html.dark {
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand mr-4" href="/">
-      <img class="light-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <img class="dark-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <strong>byte-bot</strong>
+      <img class="light-logo" src="../../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <img class="dark-logo" src="../../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <strong>Byte Bot</strong>
     </a>
     <div class="sy-head-links" id="NavLinks">
       <nav class="sy-head-nav">
@@ -234,21 +234,7 @@ html.dark {
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
-  <div class="localtoc">
-    <h3>On this page</h3>
-    <ul>
-<li><a class="reference internal" href="#byte_bot.server.domain.guilds.urls.GUILD_CREATE"><code class="docutils literal notranslate"><span class="pre">GUILD_CREATE</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.domain.guilds.urls.GUILD_LIST"><code class="docutils literal notranslate"><span class="pre">GUILD_LIST</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.domain.guilds.urls.GUILD_UPDATE"><code class="docutils literal notranslate"><span class="pre">GUILD_UPDATE</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.domain.guilds.urls.GUILD_DETAIL"><code class="docutils literal notranslate"><span class="pre">GUILD_DETAIL</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.domain.guilds.urls.GUILD_GITHUB_DETAIL"><code class="docutils literal notranslate"><span class="pre">GUILD_GITHUB_DETAIL</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.domain.guilds.urls.GUILD_SOTAGS_DETAIL"><code class="docutils literal notranslate"><span class="pre">GUILD_SOTAGS_DETAIL</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.domain.guilds.urls.GUILD_ALLOWED_USERS_DETAIL"><code class="docutils literal notranslate"><span class="pre">GUILD_ALLOWED_USERS_DETAIL</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.domain.guilds.urls.GUILD_FORUM_DETAIL"><code class="docutils literal notranslate"><span class="pre">GUILD_FORUM_DETAIL</span></code></a></li>
-</ul>
-
-  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
@@ -283,7 +269,7 @@ html.dark {
     <ul class="flex-1">
       
       
-      <li><a href="../../../../index.html">byte-bot</a><span>/</span></li>
+      <li><a href="../../../../index.html">Byte Bot</a><span>/</span></li>
       
       <li><a href="../../index.html">API Reference</a><span>/</span></li>
       
@@ -309,55 +295,6 @@ html.dark {
           <section id="urls">
 <h1>urls<a class="headerlink" href="#urls" title="Link to this heading">¶</a></h1>
 <p>URL declarations for the guilds domain routes.</p>
-<p id="module-byte_bot.server.domain.guilds.urls">Guild URLs.</p>
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.domain.guilds.urls.GUILD_CREATE">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.guilds.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_CREATE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/create'</span></em><a class="headerlink" href="#byte_bot.server.domain.guilds.urls.GUILD_CREATE" title="Link to this definition">¶</a></dt>
-<dd><p>Create guild URL.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.domain.guilds.urls.GUILD_LIST">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.guilds.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_LIST</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/list'</span></em><a class="headerlink" href="#byte_bot.server.domain.guilds.urls.GUILD_LIST" title="Link to this definition">¶</a></dt>
-<dd><p>Guild list URL.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.domain.guilds.urls.GUILD_UPDATE">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.guilds.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_UPDATE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/{guild_id:int}/update'</span></em><a class="headerlink" href="#byte_bot.server.domain.guilds.urls.GUILD_UPDATE" title="Link to this definition">¶</a></dt>
-<dd><p>Update guild URL.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.domain.guilds.urls.GUILD_DETAIL">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.guilds.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_DETAIL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/{guild_id:int}/info'</span></em><a class="headerlink" href="#byte_bot.server.domain.guilds.urls.GUILD_DETAIL" title="Link to this definition">¶</a></dt>
-<dd><p>Guild detail URL.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.domain.guilds.urls.GUILD_GITHUB_DETAIL">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.guilds.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_GITHUB_DETAIL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/{guild_id:int}/github/info'</span></em><a class="headerlink" href="#byte_bot.server.domain.guilds.urls.GUILD_GITHUB_DETAIL" title="Link to this definition">¶</a></dt>
-<dd><p>Guild GitHub detail URL.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.domain.guilds.urls.GUILD_SOTAGS_DETAIL">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.guilds.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_SOTAGS_DETAIL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/{guild_id:int}/sotags/info'</span></em><a class="headerlink" href="#byte_bot.server.domain.guilds.urls.GUILD_SOTAGS_DETAIL" title="Link to this definition">¶</a></dt>
-<dd><p>Guild StackOverflow tags detail URL.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.domain.guilds.urls.GUILD_ALLOWED_USERS_DETAIL">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.guilds.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_ALLOWED_USERS_DETAIL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/{guild_id:int}/allowed_users/info'</span></em><a class="headerlink" href="#byte_bot.server.domain.guilds.urls.GUILD_ALLOWED_USERS_DETAIL" title="Link to this definition">¶</a></dt>
-<dd><p>Guild allowed users detail URL.</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.domain.guilds.urls.GUILD_FORUM_DETAIL">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.domain.guilds.urls.</span></span><span class="sig-name descname"><span class="pre">GUILD_FORUM_DETAIL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Final</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/api/guilds/{guild_id:int}/forum/info'</span></em><a class="headerlink" href="#byte_bot.server.domain.guilds.urls.GUILD_FORUM_DETAIL" title="Link to this definition">¶</a></dt>
-<dd><p>Guild forum detail URL.</p>
-</dd></dl>
-
 </section>
 
         </article>
@@ -412,7 +349,7 @@ html.dark {
     </div>
   </div>
 </footer></div>
-      <script src="../../../../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>

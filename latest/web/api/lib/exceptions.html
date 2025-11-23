@@ -63,9 +63,9 @@ html.dark {
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand mr-4" href="/">
-      <img class="light-logo" src="../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <img class="dark-logo" src="../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <strong>byte-bot</strong>
+      <img class="light-logo" src="../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <img class="dark-logo" src="../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <strong>Byte Bot</strong>
     </a>
     <div class="sy-head-links" id="NavLinks">
       <nav class="sy-head-nav">
@@ -234,21 +234,7 @@ html.dark {
     <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
       <i class="i-icon close"></i>
     </button>
-    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
-  <div class="localtoc">
-    <h3>On this page</h3>
-    <ul>
-<li><a class="reference internal" href="#byte_bot.server.lib.exceptions.ApplicationError"><code class="docutils literal notranslate"><span class="pre">ApplicationError</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.lib.exceptions.AuthorizationError"><code class="docutils literal notranslate"><span class="pre">AuthorizationError</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.lib.exceptions.HealthCheckConfigurationError"><code class="docutils literal notranslate"><span class="pre">HealthCheckConfigurationError</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.lib.exceptions.MissingDependencyError"><code class="docutils literal notranslate"><span class="pre">MissingDependencyError</span></code></a><ul>
-<li><a class="reference internal" href="#byte_bot.server.lib.exceptions.MissingDependencyError.__init__"><code class="docutils literal notranslate"><span class="pre">MissingDependencyError.__init__()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#byte_bot.server.lib.exceptions.after_exception_hook_handler"><code class="docutils literal notranslate"><span class="pre">after_exception_hook_handler()</span></code></a></li>
-</ul>
-
-  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
   data-type="github" data-user="JacobCoffee" data-repo="byte">
   <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
     <i class="i-icon github"></i>
@@ -283,7 +269,7 @@ html.dark {
     <ul class="flex-1">
       
       
-      <li><a href="../../../index.html">byte-bot</a><span>/</span></li>
+      <li><a href="../../../index.html">Byte Bot</a><span>/</span></li>
       
       <li><a href="../index.html">API Reference</a><span>/</span></li>
       
@@ -307,78 +293,6 @@ html.dark {
           <section id="exceptions">
 <h1>exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">¶</a></h1>
 <p>Application exceptions</p>
-<p id="module-byte_bot.server.lib.exceptions">exception types.</p>
-<p>Also, defines functions that translate service and repository exceptions
-into HTTP exceptions.</p>
-<dl class="py exception">
-<dt class="sig sig-object py" id="byte_bot.server.lib.exceptions.ApplicationError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.exceptions.</span></span><span class="sig-name descname"><span class="pre">ApplicationError</span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/exceptions.html#ApplicationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.exceptions.ApplicationError" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
-<p>Base exception type for the lib’s custom exception types.</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="byte_bot.server.lib.exceptions.AuthorizationError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.exceptions.</span></span><span class="sig-name descname"><span class="pre">AuthorizationError</span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/exceptions.html#AuthorizationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.exceptions.AuthorizationError" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationClientError</span></code></p>
-<p>A user tried to do something they shouldn’t have.</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="byte_bot.server.lib.exceptions.HealthCheckConfigurationError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.exceptions.</span></span><span class="sig-name descname"><span class="pre">HealthCheckConfigurationError</span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/exceptions.html#HealthCheckConfigurationError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.exceptions.HealthCheckConfigurationError" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#byte_bot.server.lib.exceptions.ApplicationError" title="byte_bot.server.lib.exceptions.ApplicationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationError</span></code></a></p>
-<p>An error occurred while registering a health check.</p>
-</dd></dl>
-
-<dl class="py exception">
-<dt class="sig sig-object py" id="byte_bot.server.lib.exceptions.MissingDependencyError">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.exceptions.</span></span><span class="sig-name descname"><span class="pre">MissingDependencyError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/exceptions.html#MissingDependencyError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.exceptions.MissingDependencyError" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#byte_bot.server.lib.exceptions.ApplicationError" title="byte_bot.server.lib.exceptions.ApplicationError"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApplicationError</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></a></p>
-<p>A required dependency is not installed.</p>
-<p>Missing Dependency Error.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>module</strong> – name of the package that should be installed</p></li>
-<li><p><strong>config</strong> – name of the extra to install the package.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="byte_bot.server.lib.exceptions.MissingDependencyError.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/exceptions.html#MissingDependencyError.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.exceptions.MissingDependencyError.__init__" title="Link to this definition">¶</a></dt>
-<dd><p>Missing Dependency Error.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>module</strong> – name of the package that should be installed</p></li>
-<li><p><strong>config</strong> – name of the extra to install the package.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="byte_bot.server.lib.exceptions.after_exception_hook_handler">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.exceptions.</span></span><span class="sig-name descname"><span class="pre">after_exception_hook_handler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.14)"><span class="pre">Exception</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">_scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Scope</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../_modules/byte_bot/server/lib/exceptions.html#after_exception_hook_handler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.exceptions.after_exception_hook_handler" title="Link to this definition">¶</a></dt>
-<dd><p>Binds <code class="docutils literal notranslate"><span class="pre">exc_info</span></code> key with exception instance as value to structlog context vars.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This must be a coroutine so that it is not wrapped in a thread where we’ll lose context.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>exc</strong> – the exception that was raised.</p></li>
-<li><p><strong>_scope</strong> – scope of the request</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
         </article>
@@ -433,7 +347,7 @@ into HTTP exceptions.</p>
     </div>
   </div>
 </footer></div>
-      <script src="../../../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>

@@ -63,9 +63,9 @@ html.dark {
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand mr-4" href="/">
-      <img class="light-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <img class="dark-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <strong>byte-bot</strong>
+      <img class="light-logo" src="../../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <img class="dark-logo" src="../../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <strong>Byte Bot</strong>
     </a>
     <div class="sy-head-links" id="NavLinks">
       <nav class="sy-head-nav">
@@ -269,7 +269,7 @@ html.dark {
     <ul class="flex-1">
       
       
-      <li><a href="../../../../index.html">byte-bot</a><span>/</span></li>
+      <li><a href="../../../../index.html">Byte Bot</a><span>/</span></li>
       
       <li><a href="../../index.html">API Reference</a><span>/</span></li>
       
@@ -295,125 +295,6 @@ html.dark {
           <section id="controller">
 <h1>controller<a class="headerlink" href="#controller" title="Link to this heading">¶</a></h1>
 <p>Log config for the controllers</p>
-<p>Logging config for the application.</p>
-<p>Ensures that the app and uvicorn loggers all log through the queue listener.</p>
-<p>Adds a filter for health check route logs.</p>
-<dl class="py class">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.log.controller.</span></span><span class="sig-name descname"><span class="pre">BeforeSendHandler</span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#BeforeSendHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Extraction of request and response data from connection scope.</p>
-<p>Configure the handler.</p>
-<dl class="py method">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#BeforeSendHandler.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Configure the handler.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Message</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Scope</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#BeforeSendHandler.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Receives ASGI response messages and scope, and logs per configuration.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>message</strong> – ASGI response event.</p></li>
-<li><p><strong>scope</strong> – ASGI connection scope.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">log_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Scope</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#BeforeSendHandler.log_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Handle extracting the request data and logging the message.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>scope</strong> – The ASGI connection scope.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">log_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Scope</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#BeforeSendHandler.log_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Handle extracting the response data and logging the message.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>scope</strong> – The ASGI connection scope.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract_request_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Request</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#BeforeSendHandler.extract_request_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Create a dictionary of values for the log.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>request</strong> – A [Request][litestar.connection.request.Request] instance.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>An OrderedDict.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">extract_response_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scope</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Scope</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#BeforeSendHandler.extract_response_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Extract data from the response.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>scope</strong> – The ASGI connection scope.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>An OrderedDict.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.log.controller.</span></span><span class="sig-name descname"><span class="pre">drop_health_logs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WrappedLogger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EventDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">EventDict</span></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#drop_health_logs"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Prevent logging of successful health checks.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>_</strong> – Wrapped logger object.</p></li>
-<li><p><strong>__</strong> – Name of the wrapped method, e.g., “info”, “warning”, etc.</p></li>
-<li><p><strong>event_dict</strong> – Current context with current event, e.g, <cite>{“a”: 42, “event”: “foo”}</cite>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><cite>event_dict</cite> for further processing if it does not represent a successful health check.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.log.controller.</span></span><span class="sig-name descname"><span class="pre">middleware_factory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ASGIApp</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ASGIApp</span></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/controller.html#middleware_factory"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Middleware to ensure that every request has a clean structlog context.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>app</strong> – The previous ASGI app in the call chain.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A new ASGI app that cleans the structlog contextvars.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
         </article>
@@ -468,7 +349,7 @@ html.dark {
     </div>
   </div>
 </footer></div>
-      <script src="../../../../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>

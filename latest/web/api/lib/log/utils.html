@@ -63,9 +63,9 @@ html.dark {
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand mr-4" href="/">
-      <img class="light-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <img class="dark-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <strong>byte-bot</strong>
+      <img class="light-logo" src="../../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <img class="dark-logo" src="../../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <strong>Byte Bot</strong>
     </a>
     <div class="sy-head-links" id="NavLinks">
       <nav class="sy-head-nav">
@@ -269,7 +269,7 @@ html.dark {
     <ul class="flex-1">
       
       
-      <li><a href="../../../../index.html">byte-bot</a><span>/</span></li>
+      <li><a href="../../../../index.html">Byte Bot</a><span>/</span></li>
       
       <li><a href="../../index.html">API Reference</a><span>/</span></li>
       
@@ -295,90 +295,6 @@ html.dark {
           <section id="utils">
 <h1>utils<a class="headerlink" href="#utils" title="Link to this heading">¶</a></h1>
 <p>Log utils</p>
-<p>Logging utilities.</p>
-<p><code class="xref py py-func docutils literal notranslate"><span class="pre">msgspec_json_renderer()</span></code> - A JSON Renderer for structlog using msgspec.</p>
-<p>Msgspec doesn’t have an API consistent with the stdlib’s <a class="reference external" href="https://docs.python.org/3/library/json.html#module-json" title="(in Python v3.14)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">json</span></code></a> module,
-which is required for <a class="reference external" href="https://www.structlog.org/en/stable/api.html#structlog.processors.JSONRenderer" title="(in structlog v25.5)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Structlog's</span> <span class="pre">JSONRenderer</span></code></a>.</p>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">EventFilter</span></code> - A structlog processor that removes keys from the log event if they exist.</p>
-<dl class="py class">
-<dt class="sig sig-object py">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.log.utils.</span></span><span class="sig-name descname"><span class="pre">EventFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/utils.html#EventFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.14)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Remove keys from the log event.</p>
-<p>Add an instance to the processor chain.</p>
-<p>Example:
-# noqa</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">structlog</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span>
-</span><span id="1-2">    <span class="o">...</span><span class="p">,</span>
-</span><span id="1-3">    <span class="n">processors</span><span class="o">=</span><span class="p">[</span>
-</span><span id="1-4">        <span class="o">...</span><span class="p">,</span>
-</span><span id="1-5">        <span class="n">EventFilter</span><span class="p">([</span><span class="s2">&quot;color_message&quot;</span><span class="p">]),</span>
-</span><span id="1-6">        <span class="o">...</span><span class="p">,</span>
-</span><span id="1-7">    <span class="p">],</span>
-</span><span id="1-8"><span class="p">)</span>
-</span></pre></div>
-</div>
-<p>Initialize the processor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filter_keys</strong> – Iterable of string keys to be excluded from the log event.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter_keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/utils.html#EventFilter.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Initialize the processor.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>filter_keys</strong> – Iterable of string keys to be excluded from the log event.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WrappedLogger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EventDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">EventDict</span></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/utils.html#EventFilter.__call__"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Receive the log event, and filter keys.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>_</strong></p></li>
-<li><p><strong>__</strong></p></li>
-<li><p><strong>event_dict</strong> – The data to be logged.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The log event with any key in <code class="docutils literal notranslate"><span class="pre">self.filter_keys</span></code> removed.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.log.utils.</span></span><span class="sig-name descname"><span class="pre">msgspec_json_renderer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">WrappedLogger</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">EventDict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.14)"><span class="pre">bytes</span></a></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/log/utils.html#msgspec_json_renderer"><span class="viewcode-link"><span class="pre">[source]</span></span></a></dt>
-<dd><p>Structlog processor that uses <a class="reference external" href="https://jcristharif.com/msgspec/index.html" title="(in msgspec)"><span class="xref std std-doc">msgspec</span></a> for JSON encoding.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>_</strong></p></li>
-<li><p><strong>__</strong></p></li>
-<li><p><strong>event_dict</strong> – The data to be logged.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The log event encoded to JSON by msgspec.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
         </article>
@@ -433,7 +349,7 @@ which is required for <a class="reference external" href="https://www.structlog.
     </div>
   </div>
 </footer></div>
-      <script src="../../../../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>

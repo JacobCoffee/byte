@@ -63,9 +63,9 @@ html.dark {
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
     <a class="sy-head-brand mr-4" href="/">
-      <img class="light-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <img class="dark-logo" src="../../../../_static/badge.svg" alt="byte-bot" height="28" />
-      <strong>byte-bot</strong>
+      <img class="light-logo" src="../../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <img class="dark-logo" src="../../../../_static/badge.svg" alt="Byte Bot" height="28" />
+      <strong>Byte Bot</strong>
     </a>
     <div class="sy-head-links" id="NavLinks">
       <nav class="sy-head-nav">
@@ -238,11 +238,7 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#module-byte_bot.server.lib.db.base">API Reference</a><ul>
-<li><a class="reference internal" href="#byte_bot.server.lib.db.base.async_session_factory"><code class="docutils literal notranslate"><span class="pre">async_session_factory</span></code></a></li>
-<li><a class="reference internal" href="#byte_bot.server.lib.db.base.session"><code class="docutils literal notranslate"><span class="pre">session()</span></code></a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#api-reference">API Reference</a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -280,7 +276,7 @@ html.dark {
     <ul class="flex-1">
       
       
-      <li><a href="../../../../index.html">byte-bot</a><span>/</span></li>
+      <li><a href="../../../../index.html">Byte Bot</a><span>/</span></li>
       
       <li><a href="../../index.html">API Reference</a><span>/</span></li>
       
@@ -305,31 +301,8 @@ html.dark {
         <article class="yue" role="main">
           <section id="base">
 <h1>base<a class="headerlink" href="#base" title="Link to this heading">¶</a></h1>
-<section id="module-byte_bot.server.lib.db.base">
-<span id="api-reference"></span><h2>API Reference<a class="headerlink" href="#module-byte_bot.server.lib.db.base" title="Link to this heading">¶</a></h2>
-<p>Database session and engine.</p>
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_bot.server.lib.db.base.async_session_factory">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.base.</span></span><span class="sig-name descname"><span class="pre">async_session_factory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">async_sessionmaker</span><span class="p"><span class="pre">[</span></span><span class="pre">AsyncSession</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">async_sessionmaker(class_='AsyncSession',</span> <span class="pre">bind=&lt;sqlalchemy.ext.asyncio.engine.AsyncEngine</span> <span class="pre">object&gt;,</span> <span class="pre">autoflush=True,</span> <span class="pre">expire_on_commit=False)</span></em><a class="headerlink" href="#byte_bot.server.lib.db.base.async_session_factory" title="Link to this definition">¶</a></dt>
-<dd><p>Database session factory.</p>
-<p>See <a class="reference external" href="sqlalchemy.ext.asyncio.async_sessionmaker">async_sessionmaker</a>.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="byte_bot.server.lib.db.base.session">
-<span class="sig-prename descclassname"><span class="pre">byte_bot.server.lib.db.base.</span></span><span class="sig-name descname"><span class="pre">session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AsyncIterator</span><span class="p"><span class="pre">[</span></span><span class="pre">AsyncSession</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/byte_bot/server/lib/db/base.html#session"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.server.lib.db.base.session" title="Link to this definition">¶</a></dt>
-<dd><p>Use this to get a database session where you can’t in Litestar.</p>
-<div class="deprecated">
-<p><span class="versionmodified deprecated">Deprecated since version Use: </span><a class="reference external" href="https://docs.advanced-alchemy.litestar.dev/latest/reference/config/asyncio.html#advanced_alchemy.config.asyncio.SQLAlchemyAsyncConfig.get_session" title="(in advanced_alchemy)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">config.get_session</span></code></a>
-instead. Introduced in <a class="reference external" href="https://github.com/jolt-org/advanced-alchemy/releases/tag/v0.5.2">Advanced Alchemy v0.5.2</a>.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>AsyncIterator[AsyncSession]</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -385,7 +358,7 @@ instead. Introduced in <a class="reference external" href="https://github.com/jo
     </div>
   </div>
 </footer></div>
-      <script src="../../../../_static/documentation_options.js?v=8dde47fa"></script>
+      <script src="../../../../_static/documentation_options.js?v=938c9ccc"></script>
       <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
