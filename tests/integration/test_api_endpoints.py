@@ -42,8 +42,8 @@ class TestFullGuildLifecycle:
         get_response = await api_client.get("/api/guilds/789000/info")
         assert get_response.status_code == HTTP_200_OK
         data = get_response.json()
-        assert data["guild_id"] == 789000
-        assert data["guild_name"] == "Integration Test Guild"
+        assert data["guildId"] == 789000
+        assert data["guildName"] == "Integration Test Guild"
 
         # VERIFY in database directly
         from sqlalchemy import select
@@ -73,7 +73,7 @@ class TestFullGuildLifecycle:
         assert data["total"] >= 3
 
         # Verify all created guilds are in the list
-        guild_ids = {item["guild_id"] for item in data["items"]}
+        guild_ids = {item["guildId"] for item in data["items"]}
         assert 1001 in guild_ids
         assert 1002 in guild_ids
         assert 1003 in guild_ids
@@ -117,7 +117,7 @@ class TestGuildWithConfigurations:
 
         if github_response.status_code == HTTP_200_OK:
             config_data = github_response.json()
-            assert config_data["discussion_sync"] is True
+            assert config_data["discussionSync"] is True
 
     async def test_guild_without_config_returns_error(
         self,
@@ -244,7 +244,7 @@ class TestFullGuildLifecycleWithAllConfigs:
         get_resp = await api_client.get("/api/guilds/9999/info")
         assert get_resp.status_code == HTTP_200_OK
         guild_data = get_resp.json()
-        assert guild_data["guild_id"] == 9999
+        assert guild_data["guildId"] == 9999
 
         # ADD GitHub config directly in DB (API endpoints may not exist)
         result = await db_session.execute(select(Guild).where(Guild.guild_id == 9999))
@@ -282,9 +282,8 @@ class TestFullGuildLifecycleWithAllConfigs:
         )
         db_session.add(forum_config)
         await db_session.flush()
-        await db_session.commit()
 
-        # VERIFY all configs exist in DB
+        # VERIFY all configs exist in DB (no commit needed - still in same transaction)
         github_result = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == 9999))
         assert github_result.scalar_one_or_none() is not None
 
@@ -393,8 +392,8 @@ class TestConcurrentOperations:
 
         # All should return same data
         data_list = [r.json() for r in results]
-        assert all(d["guild_id"] == 6666 for d in data_list)
-        assert all(d["guild_name"] == "Concurrent Read Test" for d in data_list)
+        assert all(d["guildId"] == 6666 for d in data_list)
+        assert all(d["guildName"] == "Concurrent Read Test" for d in data_list)
 
 
 @pytest.mark.asyncio
@@ -531,15 +530,16 @@ class TestDatabaseIntegrity:
         await db_session.flush()
         await db_session.commit()
 
-        # Try to create duplicate
+        # Try to create duplicate - should raise integrity error
+        from sqlalchemy.exc import IntegrityError
+
         guild2 = Guild(guild_id=5555, guild_name="Duplicate Guild")
         db_session.add(guild2)
 
-        # Should raise integrity error
-        from sqlalchemy.exc import IntegrityError
-
         with pytest.raises(IntegrityError):
             await db_session.flush()
+
+        await db_session.rollback()
 
     async def test_foreign_key_constraint_enforced(
         self,
@@ -633,7 +633,7 @@ class TestCrossEndpointDataConsistency:
         assert list_resp.status_code == HTTP_200_OK
 
         data = list_resp.json()
-        guild_ids = {item["guild_id"] for item in data["items"]}
+        guild_ids = {item["guildId"] for item in data["items"]}
         assert 3333 in guild_ids
 
     async def test_guild_info_matches_list_data(
@@ -659,12 +659,12 @@ class TestCrossEndpointDataConsistency:
         list_data = list_resp.json()
 
         # Find matching guild in list
-        matching_guild = next((g for g in list_data["items"] if g["guild_id"] == 2222), None)
+        matching_guild = next((g for g in list_data["items"] if g["guildId"] == 2222), None)
         assert matching_guild is not None
 
         # Compare key fields
-        assert info_data["guild_id"] == matching_guild["guild_id"]
-        assert info_data["guild_name"] == matching_guild["guild_name"]
+        assert info_data["guildId"] == matching_guild["guildId"]
+        assert info_data["guildName"] == matching_guild["guildName"]
         assert info_data["prefix"] == matching_guild["prefix"]
 
 
