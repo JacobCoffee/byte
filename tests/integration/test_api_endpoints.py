@@ -42,9 +42,8 @@ class TestFullGuildLifecycle:
         get_response = await api_client.get("/api/guilds/789000/info")
         assert get_response.status_code == HTTP_200_OK
         data = get_response.json()
-        # Verify response structure (camelCase from CamelizedBaseModel)
-        assert data["guildId"] == 789000
-        assert data["guildName"] == "Integration Test Guild"
+        assert data["guild_id"] == 789000
+        assert data["guild_name"] == "Integration Test Guild"
 
         # VERIFY in database directly
         from sqlalchemy import select
@@ -73,8 +72,8 @@ class TestFullGuildLifecycle:
         data = list_response.json()
         assert data["total"] >= 3
 
-        # Verify all created guilds are in the list (camelCase from CamelizedBaseModel)
-        guild_ids = {item["guildId"] for item in data["items"]}
+        # Verify all created guilds are in the list
+        guild_ids = {item["guild_id"] for item in data["items"]}
         assert 1001 in guild_ids
         assert 1002 in guild_ids
         assert 1003 in guild_ids
@@ -245,8 +244,7 @@ class TestFullGuildLifecycleWithAllConfigs:
         get_resp = await api_client.get("/api/guilds/9999/info")
         assert get_resp.status_code == HTTP_200_OK
         guild_data = get_resp.json()
-        # Verify response structure (camelCase from CamelizedBaseModel)
-        assert guild_data["guildId"] == 9999
+        assert guild_data["guild_id"] == 9999
 
         # ADD GitHub config directly in DB (API endpoints may not exist)
         result = await db_session.execute(select(Guild).where(Guild.guild_id == 9999))
@@ -284,6 +282,7 @@ class TestFullGuildLifecycleWithAllConfigs:
         )
         db_session.add(forum_config)
         await db_session.flush()
+        await db_session.commit()
 
         # VERIFY all configs exist in DB
         github_result = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == 9999))
@@ -298,6 +297,7 @@ class TestFullGuildLifecycleWithAllConfigs:
         # DELETE guild (should cascade)
         await db_session.delete(guild)
         await db_session.flush()
+        await db_session.commit()
 
         # VERIFY cascade deleted all configs
         guild_check = await db_session.execute(select(Guild).where(Guild.guild_id == 9999))
@@ -334,6 +334,7 @@ class TestFullGuildLifecycleWithAllConfigs:
             db_session.add(so_tag)
 
         await db_session.flush()
+        await db_session.commit()
 
         # Verify all tags exist
         result = await db_session.execute(select(SOTagsConfig).where(SOTagsConfig.guild_id == 8888))
@@ -363,7 +364,7 @@ class TestConcurrentOperations:
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         # One should succeed (201), one should fail (409 or 500)
-        status_codes: list[int] = [r.status_code if hasattr(r, "status_code") else 500 for r in results]  # type: ignore[misc]
+        status_codes: list[int] = [r.status_code if hasattr(r, "status_code") else 500 for r in results]
         assert HTTP_201_CREATED in status_codes
         # At least one should indicate a conflict/error
         assert any(code >= 400 for code in status_codes)
@@ -390,9 +391,9 @@ class TestConcurrentOperations:
         # All should succeed
         assert all(r.status_code == HTTP_200_OK for r in results)
 
-        # All should return same data (camelCase from CamelizedBaseModel)
+        # All should return same data
         data_list = [r.json() for r in results]
-        assert all(d["guildId"] == 6666 for d in data_list)
+        assert all(d["guild_id"] == 6666 for d in data_list)
         assert all(d["guildName"] == "Concurrent Read Test" for d in data_list)
 
 
@@ -531,6 +532,7 @@ class TestDatabaseIntegrity:
         guild1 = Guild(guild_id=5555, guild_name="First Guild")
         db_session.add(guild1)
         await db_session.flush()
+        await db_session.commit()
 
         # Try to create duplicate
         guild2 = Guild(guild_id=5555, guild_name="Duplicate Guild")
@@ -598,10 +600,12 @@ class TestDatabaseIntegrity:
 
         db_session.add_all([github, forum, so_tag])
         await db_session.flush()
+        await db_session.commit()
 
         # Delete guild
         await db_session.delete(guild)
         await db_session.flush()
+        await db_session.commit()
 
         # Verify all configs deleted
         github_check = await db_session.execute(select(GitHubConfig).where(GitHubConfig.guild_id == 4444))
@@ -632,8 +636,7 @@ class TestCrossEndpointDataConsistency:
         assert list_resp.status_code == HTTP_200_OK
 
         data = list_resp.json()
-        # Verify list items use camelCase from CamelizedBaseModel
-        guild_ids = {item["guildId"] for item in data["items"]}
+        guild_ids = {item["guild_id"] for item in data["items"]}
         assert 3333 in guild_ids
 
     async def test_guild_info_matches_list_data(
@@ -658,12 +661,12 @@ class TestCrossEndpointDataConsistency:
         assert list_resp.status_code == HTTP_200_OK
         list_data = list_resp.json()
 
-        # Find matching guild in list (camelCase from CamelizedBaseModel)
-        matching_guild = next((g for g in list_data["items"] if g["guildId"] == 2222), None)
+        # Find matching guild in list
+        matching_guild = next((g for g in list_data["items"] if g["guild_id"] == 2222), None)
         assert matching_guild is not None
 
-        # Compare key fields (all camelCase)
-        assert info_data["guildId"] == matching_guild["guildId"]
+        # Compare key fields
+        assert info_data["guild_id"] == matching_guild["guild_id"]
         assert info_data["guildName"] == matching_guild["guildName"]
         assert info_data["prefix"] == matching_guild["prefix"]
 
