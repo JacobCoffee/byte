@@ -1,0 +1,126 @@
+version: "3.9"
+
+# =============================================================================
+# Production Docker Compose Override
+# =============================================================================
+# This file provides production-specific configuration that overrides the
+# base docker-compose.yml settings.
+#
+# Usage:
+#   docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# Or set via environment:
+#   export COMPOSE_FILE=docker-compose.yml:docker-compose.prod.yml
+#   docker-compose up -d
+#
+# This file should be used for:
+# - Railway deployments
+# - Production environments
+# - Staging environments
+# =============================================================================
+
+services:
+  postgres:
+    # Production PostgreSQL configuration
+    environment:
+      # Use strong passwords from environment/secrets
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
+    volumes:
+      # Use named volume for data persistence
+      - pgdata-prod:/var/lib/postgresql/data
+    # Remove port exposure in production (internal only)
+    ports: []
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2G
+        reservations:
+          cpus: "1.0"
+          memory: 1G
+
+  api:
+    # Production API service configuration
+    environment:
+      # Production environment settings
+      - ENVIRONMENT=prod
+      - DEBUG=False
+      - LOG_LEVEL=20
+      - SERVER_HTTP_WORKERS=${SERVER_HTTP_WORKERS:-4}
+      - DB_POOL_DISABLE=False
+      - DB_URL=${DB_URL}
+      - SECRET_KEY=${SECRET_KEY}
+      - GITHUB_APP_ID=${GITHUB_APP_ID}
+      - GITHUB_APP_PRIVATE_KEY=${GITHUB_APP_PRIVATE_KEY}
+      - GITHUB_APP_CLIENT_ID=${GITHUB_APP_CLIENT_ID}
+      - GITHUB_APP_CLIENT_SECRET=${GITHUB_APP_CLIENT_SECRET}
+    # Remove volume mounts (no hot-reload in production)
+    volumes: []
+    # Production command without reload
+    command:
+      sh -c "alembic upgrade head && uvicorn byte_api.app:create_app --factory --host 0.0.0.0 --port 8000 --workers
+      ${SERVER_HTTP_WORKERS:-4}"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 512M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+  bot:
+    # Production bot service configuration
+    environment:
+      # Production environment settings
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - DISCORD_DEV_GUILD_ID=${DISCORD_DEV_GUILD_ID:-}
+      - DISCORD_DEV_USER_ID=${DISCORD_DEV_USER_ID:-}
+      - API_SERVICE_URL=http://api:8000
+      - ENVIRONMENT=prod
+      - LOG_LEVEL=20
+    # Remove volume mounts (no hot-reload in production)
+    volumes: []
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+
+volumes:
+  pgdata-prod:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      # Bind to persistent storage location
+      # Update this path based on your deployment environment
+      device: /var/lib/byte/postgres-data

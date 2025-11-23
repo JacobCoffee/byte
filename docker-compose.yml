@@ -1,0 +1,109 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: byte-postgres
+    environment:
+      POSTGRES_USER: byte
+      POSTGRES_PASSWORD: bot
+      POSTGRES_DB: byte
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - byte-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U byte"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  api:
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+    container_name: byte-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_URL=postgresql+asyncpg://byte:bot@postgres:5432/byte
+      - ENVIRONMENT=dev
+      - DEBUG=True
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8000
+      - LOG_LEVEL=10
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - byte-network
+    volumes:
+      # Mount source code for hot-reload in development
+      - ./services/api/src:/app/services/api/src:delegated
+      - ./packages/byte-common:/app/packages/byte-common:delegated
+    # Override CMD for development with reload
+    command:
+      sh -c "alembic upgrade head && uvicorn byte_api.app:create_app --factory --reload --host 0.0.0.0 --port 8000"
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          'python -c ''import urllib.request; urllib.request.urlopen("http://localhost:8000/health")'' || exit 1',
+        ]
+      interval: 30s
+      timeout: 10s
+      start_period: 60s
+      retries: 3
+
+  bot:
+    build:
+      context: .
+      dockerfile: services/bot/Dockerfile
+    container_name: byte-bot
+    environment:
+      # Discord settings - must be provided via .env or environment
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
+      - DISCORD_DEV_GUILD_ID=${DISCORD_DEV_GUILD_ID:-}
+      - DISCORD_DEV_USER_ID=${DISCORD_DEV_USER_ID:-}
+      # API service configuration
+      - API_SERVICE_URL=http://api:8000
+      - ENVIRONMENT=dev
+      - LOG_LEVEL=10
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - byte-network
+    volumes:
+      # Mount source code for development
+      - ./services/bot/src:/app/services/bot/src:delegated
+      - ./packages/byte-common:/app/packages/byte-common:delegated
+    restart: unless-stopped
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  byte-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local

@@ -16,6 +16,8 @@ UV 			    ?= 	uv $(UV_OPTS)
 .PHONY: fmt-fix test coverage check-all lint fmt-check
 .PHONY: docs-install docs-clean docs-serve docs-build
 .PHONY: clean run-dev-frontend run-dev-server production develop destroy
+.PHONY: docker-up docker-down docker-logs docker-shell-api docker-shell-bot docker-ps
+.PHONY: docker-restart docker-rebuild infra-up infra-down
 
 help: ## Display this help text for Makefile
 	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z0-9_-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
@@ -153,6 +155,92 @@ migrate: ## Apply database migrations
 .PHONY: db
 db: ## Run the database
 	@docker compose -f "docker-compose.infra.yml" up -d --build
+
+# =============================================================================
+# Docker Compose Commands
+# =============================================================================
+
+.PHONY: docker-up
+docker-up: ## Start all services (PostgreSQL, API, Bot) with Docker Compose
+	@echo "=> Starting all services with Docker Compose"
+	@docker compose up -d --build
+	@echo "=> All services started. API: http://localhost:8000"
+
+.PHONY: docker-down
+docker-down: ## Stop all Docker Compose services
+	@echo "=> Stopping all Docker Compose services"
+	@docker compose down
+	@echo "=> All services stopped"
+
+.PHONY: docker-down-volumes
+docker-down-volumes: ## Stop all services and remove volumes
+	@echo "=> Stopping all services and removing volumes"
+	@docker compose down -v
+	@echo "=> All services stopped and volumes removed"
+
+.PHONY: docker-logs
+docker-logs: ## Follow logs from all Docker Compose services
+	@docker compose logs -f
+
+.PHONY: docker-logs-api
+docker-logs-api: ## Follow logs from API service
+	@docker compose logs -f api
+
+.PHONY: docker-logs-bot
+docker-logs-bot: ## Follow logs from bot service
+	@docker compose logs -f bot
+
+.PHONY: docker-logs-postgres
+docker-logs-postgres: ## Follow logs from PostgreSQL service
+	@docker compose logs -f postgres
+
+.PHONY: docker-shell-api
+docker-shell-api: ## Open shell in API container
+	@docker compose exec api /bin/bash
+
+.PHONY: docker-shell-bot
+docker-shell-bot: ## Open shell in bot container
+	@docker compose exec bot /bin/bash
+
+.PHONY: docker-shell-postgres
+docker-shell-postgres: ## Open PostgreSQL shell
+	@docker compose exec postgres psql -U byte -d byte
+
+.PHONY: docker-restart
+docker-restart: ## Restart all Docker Compose services
+	@echo "=> Restarting all services"
+	@docker compose restart
+	@echo "=> All services restarted"
+
+.PHONY: docker-restart-api
+docker-restart-api: ## Restart API service
+	@docker compose restart api
+
+.PHONY: docker-restart-bot
+docker-restart-bot: ## Restart bot service
+	@docker compose restart bot
+
+.PHONY: docker-ps
+docker-ps: ## Show status of Docker Compose services
+	@docker compose ps
+
+.PHONY: docker-rebuild
+docker-rebuild: ## Rebuild and restart all services
+	@echo "=> Rebuilding all services"
+	@docker compose up -d --build --force-recreate
+	@echo "=> All services rebuilt and restarted"
+
+.PHONY: infra-up
+infra-up: ## Start only PostgreSQL infrastructure
+	@echo "=> Starting PostgreSQL infrastructure"
+	@docker compose -f docker-compose.infra.yml up -d
+	@echo "=> PostgreSQL started on localhost:5432"
+
+.PHONY: infra-down
+infra-down: ## Stop PostgreSQL infrastructure
+	@echo "=> Stopping PostgreSQL infrastructure"
+	@docker compose -f docker-compose.infra.yml down
+	@echo "=> PostgreSQL stopped"
 
 # =============================================================================
 # Main

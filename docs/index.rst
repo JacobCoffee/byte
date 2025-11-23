@@ -40,5 +40,6 @@ Usage
     :hidden:
 
     contribution-guide
+    docker-compose
     database-migrations
     changelog
