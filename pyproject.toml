@@ -74,6 +74,7 @@ packages = ["byte_bot/"]
 [tool.uv.workspace]
 members = [
     "packages/byte-common",
+    "services/api",
 ]
 
 [tool.uv]
@@ -234,6 +235,9 @@ known-first-party = ["byte_bot", "byte_common", "tests"]
 "byte_bot/**/*.*" = ["PLR0913", "SLF001", "PLC0415"]  # Imports inside functions in monolith
 "byte_bot/server/lib/db/base.py" = ["E501"]
 "byte_bot/server/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH", "PLC"]
+"services/api/src/byte_api/app.py" = ["PLC0415"]  # Imports inside create_app() to avoid circular imports
+"services/api/src/byte_api/lib/db/migrations/env.py" = ["SLF001"]  # Alembic workaround
+"services/api/src/byte_api/lib/db/migrations/versions/*.*" = ["D", "INP", "PGH", "PLC"]  # Alembic-generated
 "tests/**/*.*" = [
     "S101",
     "D",
