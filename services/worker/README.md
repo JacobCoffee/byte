@@ -13,7 +13,7 @@ This service handles asynchronous background tasks including:
 
 ## Technology Stack
 
-- Python 3.12+
+- Python 3.14+
 - Task queue framework (TBD: SAQ, Celery, or similar)
 - Shared code from `byte-common` package
 

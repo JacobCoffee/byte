@@ -14,7 +14,7 @@ This service handles all Discord-related functionality including:
 
 ## Technology Stack
 
-- **Python**: 3.12+
+- **Python**: 3.14+
 - **Discord.py**: v2.3.2+
 - **HTTP Client**: httpx (for API calls)
 - **Settings**: pydantic-settings
@@ -62,7 +62,7 @@ services/bot/
 
 ### Prerequisites
 
-- Python 3.12+
+- Python 3.14+
 - uv package manager
 - Discord bot token (from Discord Developer Portal)
 - Access to Byte API (or run locally)
