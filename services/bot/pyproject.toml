@@ -1,5 +1,5 @@
 [project]
-name = "byte-bot"
+name = "byte-bot-service"
 version = "0.2.0"
 description = "Discord bot service for Byte Bot"
 authors = [
