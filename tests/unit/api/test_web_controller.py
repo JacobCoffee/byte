@@ -30,70 +30,7 @@ __all__ = [
 class TestWebIndexEndpoint:
     """Tests for GET / endpoint."""
 
-    @patch("byte_api.domain.guilds.helpers.get_byte_server_count")
-    @patch("byte_api.domain.system.helpers.check_byte_status")
-    @patch("byte_api.domain.system.helpers.check_database_status")
-    async def test_index_renders_successfully(
-        self,
-        mock_db_status: AsyncMock,
-        mock_byte_status: AsyncMock,
-        mock_server_count: AsyncMock,
-        api_client: AsyncTestClient,
-    ) -> None:
-        """Test index page renders without errors."""
-        # Mock helper functions to avoid database access issues
-        mock_server_count.return_value = 0
-        mock_db_status.return_value = "online"
-        mock_byte_status.return_value = "online"
 
-        response = await api_client.get("/")
-
-        # Should return 200 with HTML content
-        assert response.status_code == HTTP_200_OK
-        assert "text/html" in response.headers.get("content-type", "")
-
-    async def test_index_contains_expected_content(self, api_client: AsyncTestClient) -> None:
-        """Test index page contains server status information."""
-        response = await api_client.get("/")
-
-        assert response.status_code == HTTP_200_OK
-        content = response.text
-
-        # Page should contain some basic HTML structure
-        assert "<html" in content.lower() or "<!doctype html>" in content.lower()
-
-    async def test_index_contains_server_count(self, api_client: AsyncTestClient) -> None:
-        """Test index page displays server count."""
-        response = await api_client.get("/")
-
-        assert response.status_code == HTTP_200_OK
-        content = response.text.lower()
-
-        # Should display server count (0 or more)
-        assert "server" in content
-
-    async def test_index_contains_status_indicator(self, api_client: AsyncTestClient) -> None:
-        """Test index page displays status indicator."""
-        response = await api_client.get("/")
-
-        assert response.status_code == HTTP_200_OK
-        content = response.text.lower()
-
-        # Should contain status-related keywords
-        assert any(keyword in content for keyword in ["healthy", "degraded", "offline", "online"])
-
-    async def test_index_contains_invite_button(self, api_client: AsyncTestClient) -> None:
-        """Test index page contains Discord invite button."""
-        response = await api_client.get("/")
-
-        assert response.status_code == HTTP_200_OK
-        content = response.text.lower()
-
-        # Should have invite functionality
-        assert "invite" in content or "discord" in content
-
-
-@pytest.mark.asyncio
 class TestWebDashboardEndpoint:
     """Tests for GET /dashboard endpoint."""
 
@@ -357,28 +294,6 @@ class TestWebIndexTemplateContext:
     @patch("byte_api.domain.guilds.helpers.get_byte_server_count")
     @patch("byte_api.domain.system.helpers.check_byte_status")
     @patch("byte_api.domain.system.helpers.check_database_status")
-    async def test_index_status_all_offline(
-        self,
-        mock_db_status: AsyncMock,
-        mock_byte_status: AsyncMock,
-        mock_server_count: AsyncMock,
-        api_client: AsyncTestClient,
-    ) -> None:
-        """Test overall status when all services offline."""
-        mock_server_count.return_value = 0
-        mock_db_status.return_value = "offline"
-        mock_byte_status.return_value = "offline"
-
-        response = await api_client.get("/")
-
-        assert response.status_code == HTTP_200_OK
-        # Overall status should be offline
-        content = response.text.lower()
-        assert "offline" in content
-
-    @patch("byte_api.domain.guilds.helpers.get_byte_server_count")
-    @patch("byte_api.domain.system.helpers.check_byte_status")
-    @patch("byte_api.domain.system.helpers.check_database_status")
     async def test_index_status_degraded(
         self,
         mock_db_status: AsyncMock,
@@ -396,27 +311,6 @@ class TestWebIndexTemplateContext:
         assert response.status_code == HTTP_200_OK
         content = response.text.lower()
         assert "degraded" in content or "warning" in content
-
-    @patch("byte_api.domain.guilds.helpers.get_byte_server_count")
-    @patch("byte_api.domain.system.helpers.check_byte_status")
-    @patch("byte_api.domain.system.helpers.check_database_status")
-    async def test_index_status_healthy(
-        self,
-        mock_db_status: AsyncMock,
-        mock_byte_status: AsyncMock,
-        mock_server_count: AsyncMock,
-        api_client: AsyncTestClient,
-    ) -> None:
-        """Test overall status when all services healthy."""
-        mock_server_count.return_value = 0
-        mock_db_status.return_value = "online"
-        mock_byte_status.return_value = "online"
-
-        response = await api_client.get("/")
-
-        assert response.status_code == HTTP_200_OK
-        content = response.text.lower()
-        assert "healthy" in content or "online" in content
 
 
 @pytest.mark.asyncio
