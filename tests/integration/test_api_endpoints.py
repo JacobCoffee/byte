@@ -332,7 +332,6 @@ class TestFullGuildLifecycleWithAllConfigs:
             db_session.add(so_tag)
 
         await db_session.flush()
-        await db_session.commit()
 
         # Verify all tags exist
         result = await db_session.execute(select(SOTagsConfig).where(SOTagsConfig.guild_id == 8888))
