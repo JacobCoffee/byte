@@ -3,7 +3,7 @@
 # ============================================================================
 # Builder Stage: Install dependencies and build virtual environment
 # ============================================================================
-FROM python:3.12-slim AS builder
+FROM python:3.13-slim AS builder
 
 # Set working directory
 WORKDIR /app
@@ -37,7 +37,7 @@ RUN uv sync --frozen --no-dev --no-editable
 # ============================================================================
 # Runtime Stage: Minimal production image
 # ============================================================================
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 # Set working directory
 WORKDIR /app

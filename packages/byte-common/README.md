@@ -19,7 +19,7 @@ The package will include:
 
 ## Technology Stack
 
-- Python 3.12+
+- Python 3.13+
 - Pydantic for models
 - Pydantic Settings for configuration
 - Advanced Alchemy for database models

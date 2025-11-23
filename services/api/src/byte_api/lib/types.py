@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, Literal, TypeAlias, TypeVar
+from typing import TYPE_CHECKING, Any, Literal, TypeVar
 
 from advanced_alchemy.extensions.litestar import SQLAlchemyDTO
 from advanced_alchemy.filters import FilterTypes
@@ -21,7 +21,7 @@ SQLAlchemyAsyncRepoServiceT = TypeVar("SQLAlchemyAsyncRepoServiceT", bound="SQLA
 """Type variable for SQLAlchemy async repository services."""
 DataclassModelT = TypeVar("DataclassModelT", bound=DataclassProtocol)
 """Type variable for dataclass models."""
-ModelT: TypeAlias = SQLAlchemyModelT | DataclassModelT
+type ModelT[SQLAlchemyModelT: DeclarativeBase, DataclassModelT: DataclassProtocol] = SQLAlchemyModelT | DataclassModelT
 """Type alias for models."""
 FilterTypeT = TypeVar("FilterTypeT", bound=FilterTypes)
 """Type variable for filter types."""
@@ -33,11 +33,13 @@ DTOT = TypeVar("DTOT", bound=DataclassProtocol | DeclarativeBase)
 """Type variable for DTOs."""
 DTOFactoryT = TypeVar("DTOFactoryT", bound=DataclassDTO | SQLAlchemyDTO)
 """Type variable for DTO factories."""
-ModelDictDTOT: TypeAlias = dict[str, Any] | ModelT | DTOData
+type ModelDictDTOT = dict[str, Any] | ModelT | DTOData
 """Type alias for model or dict DTOs."""
-ModelDictListDTOT: TypeAlias = list[SQLAlchemyModelT | DataclassModelT | dict[str, Any]] | DTOData
+type ModelDictListDTOT[SQLAlchemyModelT: DeclarativeBase, DataclassModelT: DataclassProtocol] = (
+    list[SQLAlchemyModelT | DataclassModelT | dict[str, Any]] | DTOData
+)
 """Type alias for list of models, dicts, or DTOData."""
 
 # -- App Types
-Status: TypeAlias = Literal["online", "offline", "degraded"]
+type Status = Literal["online", "offline", "degraded"]
 """Type alias for health check status."""

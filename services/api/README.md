@@ -1,6 +1,6 @@
 # Byte API Service
 
-> **Version**: 0.2.0 **Python**: 3.12+ **Framework**: Litestar 2.4.3+
+> **Version**: 0.2.0 **Python**: 3.13+ **Framework**: Litestar 2.4.3+
 
 ## Overview
 
@@ -231,7 +231,7 @@ Deploy as a standalone service with PostgreSQL database plugin attached.
 
 - Install dependencies: `uv sync`
 - Verify `byte-common` is installed in same environment
-- Check Python version: `python --version` (should be 3.12+)
+- Check Python version: `python --version` (should be 3.13+)
 
 ## Additional Resources
 
