@@ -493,10 +493,10 @@ class TestAPIPaginationConsistency:
         await db_session.commit()
 
         # Test with explicit limit
-        response = await api_client.get("/api/guilds/list?limit=5")
+        response = await api_client.get("/api/guilds/list?pageSize=5")
         if response.status_code == HTTP_200_OK:
             data = response.json()
-            # Should respect limit (if implemented)
+            # Should respect page size limit
             if "items" in data:
                 assert len(data["items"]) <= 5
 
