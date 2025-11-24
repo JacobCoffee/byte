@@ -3,21 +3,68 @@
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING, Any, Self
+from typing import TYPE_CHECKING, Any, Self, TypedDict
 
 import httpx
+from tenacity import (
+    before_sleep_log,
+    retry,
+    retry_if_exception,
+    stop_after_attempt,
+    wait_exponential,
+)
 
 from byte_common.schemas.guild import CreateGuildRequest, GuildSchema, UpdateGuildRequest
 
 if TYPE_CHECKING:
     from uuid import UUID
 
-__all__ = ("APIError", "ByteAPIClient")
+__all__ = ("APIError", "ByteAPIClient", "RetryStats")
+
+
+class RetryStats(TypedDict):
+    """Statistics tracking for retry attempts."""
+
+    total_retries: int
+    failed_requests: int
+    retried_methods: dict[str, int]
+
 
 logger = logging.getLogger(__name__)
 
 # HTTP status codes
 HTTP_NOT_FOUND = 404
+HTTP_CLIENT_ERROR_MIN = 400
+HTTP_CLIENT_ERROR_MAX = 499
+HTTP_SERVER_ERROR_MIN = 500
+
+
+def _should_retry(exception: BaseException) -> bool:
+    """Determine if an exception should trigger a retry.
+
+    Retries on:
+    - HTTP 5xx errors (server errors)
+    - Connection errors (ConnectError, ConnectTimeout, ReadTimeout)
+
+    Does NOT retry on:
+    - HTTP 4xx errors (client errors - bad request, auth, etc.)
+
+    Args:
+        exception: The exception to evaluate
+
+    Returns:
+        True if the request should be retried, False otherwise
+    """
+    # Retry on connection errors
+    if isinstance(exception, (httpx.ConnectError, httpx.ConnectTimeout, httpx.ReadTimeout)):
+        return True
+
+    # Retry on HTTP 5xx errors (server errors)
+    if isinstance(exception, httpx.HTTPStatusError):
+        return exception.response.status_code >= HTTP_SERVER_ERROR_MIN
+
+    # Don't retry on other errors (including 4xx)
+    return False
 
 
 class APIError(Exception):
@@ -38,7 +85,14 @@ class ByteAPIClient:
     """HTTP client for Byte API service.
 
     This client handles all communication between the bot service and the API service,
-    replacing direct database access.
+    replacing direct database access. Includes automatic retry logic with exponential
+    backoff for transient failures.
+
+    Retry Configuration:
+        - Max retries: 3 attempts
+        - Backoff: Exponential (1s, 2s, 4s, max 10s)
+        - Retryable errors: HTTP 5xx, connection errors
+        - Non-retryable: HTTP 4xx (client errors)
     """
 
     def __init__(self, base_url: str, timeout: float = 10.0) -> None:
@@ -54,6 +108,11 @@ class ByteAPIClient:
             timeout=timeout,
             headers={"Content-Type": "application/json"},
         )
+        self.retry_stats: RetryStats = {
+            "total_retries": 0,
+            "failed_requests": 0,
+            "retried_methods": {},
+        }
 
     async def close(self) -> None:
         """Close the HTTP client."""
@@ -67,8 +126,30 @@ class ByteAPIClient:
         """Async context manager exit."""
         await self.close()
 
+    def _track_retry(self, method_name: str) -> None:
+        """Track a retry attempt for statistics.
+
+        Args:
+            method_name: Name of the method being retried
+        """
+        self.retry_stats["total_retries"] += 1
+        if method_name not in self.retry_stats["retried_methods"]:
+            self.retry_stats["retried_methods"][method_name] = 0
+        self.retry_stats["retried_methods"][method_name] += 1
+
+    def _track_failure(self) -> None:
+        """Track a failed request for statistics."""
+        self.retry_stats["failed_requests"] += 1
+
     # Guild Management
 
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=1, max=10),
+        retry=retry_if_exception(_should_retry),
+        before_sleep=before_sleep_log(logger, logging.WARNING),
+        reraise=True,
+    )
     async def create_guild(
         self,
         guild_id: int,
@@ -105,14 +186,28 @@ class ByteAPIClient:
             response.raise_for_status()
             return GuildSchema.model_validate(response.json())
         except httpx.HTTPStatusError as e:
+            # Track retry if applicable
+            if _should_retry(e):
+                self._track_retry("create_guild")
+            else:
+                self._track_failure()
+
             msg = f"Failed to create guild: {e.response.text}"
             logger.exception(msg, extra={"guild_id": guild_id, "status_code": e.response.status_code})
             raise APIError(msg, status_code=e.response.status_code) from e
         except httpx.RequestError as e:
+            self._track_retry("create_guild")
             msg = f"Failed to connect to API service: {e!s}"
             logger.exception(msg, extra={"guild_id": guild_id})
             raise APIError(msg) from e
 
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=1, max=10),
+        retry=retry_if_exception(_should_retry),
+        before_sleep=before_sleep_log(logger, logging.WARNING),
+        reraise=True,
+    )
     async def get_guild(self, guild_id: int) -> GuildSchema | None:
         """Get guild by Discord ID.
 
@@ -134,14 +229,28 @@ class ByteAPIClient:
             response.raise_for_status()
             return GuildSchema.model_validate(response.json())
         except httpx.HTTPStatusError as e:
+            # Track retry if applicable
+            if _should_retry(e):
+                self._track_retry("get_guild")
+            else:
+                self._track_failure()
+
             msg = f"Failed to get guild: {e.response.text}"
             logger.exception(msg, extra={"guild_id": guild_id, "status_code": e.response.status_code})
             raise APIError(msg, status_code=e.response.status_code) from e
         except httpx.RequestError as e:
+            self._track_retry("get_guild")
             msg = f"Failed to connect to API service: {e!s}"
             logger.exception(msg, extra={"guild_id": guild_id})
             raise APIError(msg) from e
 
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=1, max=10),
+        retry=retry_if_exception(_should_retry),
+        before_sleep=before_sleep_log(logger, logging.WARNING),
+        reraise=True,
+    )
     async def update_guild(
         self,
         guild_id: UUID,
@@ -169,14 +278,28 @@ class ByteAPIClient:
             response.raise_for_status()
             return GuildSchema.model_validate(response.json())
         except httpx.HTTPStatusError as e:
+            # Track retry if applicable
+            if _should_retry(e):
+                self._track_retry("update_guild")
+            else:
+                self._track_failure()
+
             msg = f"Failed to update guild: {e.response.text}"
             logger.exception(msg, extra={"guild_id": guild_id, "status_code": e.response.status_code})
             raise APIError(msg, status_code=e.response.status_code) from e
         except httpx.RequestError as e:
+            self._track_retry("update_guild")
             msg = f"Failed to connect to API service: {e!s}"
             logger.exception(msg, extra={"guild_id": guild_id})
             raise APIError(msg) from e
 
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=1, max=10),
+        retry=retry_if_exception(_should_retry),
+        before_sleep=before_sleep_log(logger, logging.WARNING),
+        reraise=True,
+    )
     async def delete_guild(self, guild_id: UUID) -> None:
         """Delete a guild.
 
@@ -190,10 +313,17 @@ class ByteAPIClient:
             response = await self.client.delete(f"/api/guilds/{guild_id}")
             response.raise_for_status()
         except httpx.HTTPStatusError as e:
+            # Track retry if applicable
+            if _should_retry(e):
+                self._track_retry("delete_guild")
+            else:
+                self._track_failure()
+
             msg = f"Failed to delete guild: {e.response.text}"
             logger.exception(msg, extra={"guild_id": guild_id, "status_code": e.response.status_code})
             raise APIError(msg, status_code=e.response.status_code) from e
         except httpx.RequestError as e:
+            self._track_retry("delete_guild")
             msg = f"Failed to connect to API service: {e!s}"
             logger.exception(msg, extra={"guild_id": guild_id})
             raise APIError(msg) from e
@@ -231,6 +361,13 @@ class ByteAPIClient:
 
     # Health Check
 
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=1, max=10),
+        retry=retry_if_exception(_should_retry),
+        before_sleep=before_sleep_log(logger, logging.WARNING),
+        reraise=True,
+    )
     async def health_check(self) -> dict[str, Any]:
         """Check API service health.
 
@@ -244,7 +381,18 @@ class ByteAPIClient:
             response = await self.client.get("/health")
             response.raise_for_status()
             return response.json()
-        except (httpx.HTTPStatusError, httpx.RequestError) as e:
+        except httpx.HTTPStatusError as e:
+            # Track retry if applicable
+            if _should_retry(e):
+                self._track_retry("health_check")
+            else:
+                self._track_failure()
+
+            msg = f"API health check failed: {e!s}"
+            logger.exception(msg)
+            raise APIError(msg) from e
+        except httpx.RequestError as e:
+            self._track_retry("health_check")
             msg = f"API health check failed: {e!s}"
             logger.exception(msg)
             raise APIError(msg) from e
