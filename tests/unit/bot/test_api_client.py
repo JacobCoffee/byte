@@ -129,39 +129,43 @@ class TestCreateGuild:
 
     @respx.mock
     async def test_create_guild_server_error(self, respx_mock: MockRouter) -> None:
-        """Test guild creation with server error (500)."""
+        """Test guild creation with server error (500) - retries then fails."""
+        from httpx import HTTPStatusError
+
         respx_mock.post("http://localhost:8000/api/guilds").mock(
             return_value=Response(500, json={"detail": "Internal server error"})
         )
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises HTTPStatusError
+            with pytest.raises(HTTPStatusError) as exc_info:
                 await client.create_guild(guild_id=123456789, guild_name="Test Guild", prefix="!")
 
-        assert exc_info.value.status_code == 500
+        assert exc_info.value.response.status_code == 500
 
     @respx.mock
     async def test_create_guild_connection_error(self, respx_mock: MockRouter) -> None:
-        """Test guild creation with connection error."""
+        """Test guild creation with connection error - retries then fails."""
         respx_mock.post("http://localhost:8000/api/guilds").mock(side_effect=ConnectError("Connection refused"))
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises ConnectError
+            with pytest.raises(ConnectError) as exc_info:
                 await client.create_guild(guild_id=123456789, guild_name="Test Guild", prefix="!")
 
-        assert "Failed to connect to API service" in str(exc_info.value)
-        assert exc_info.value.status_code is None
+        assert "Connection refused" in str(exc_info.value)
 
     @respx.mock
     async def test_create_guild_timeout(self, respx_mock: MockRouter) -> None:
-        """Test guild creation with timeout."""
+        """Test guild creation with timeout - retries then fails."""
         respx_mock.post("http://localhost:8000/api/guilds").mock(side_effect=TimeoutException("Timeout"))
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises TimeoutException
+            with pytest.raises(TimeoutException) as exc_info:
                 await client.create_guild(guild_id=123456789, guild_name="Test Guild", prefix="!")
 
-        assert "Failed to connect to API service" in str(exc_info.value)
+        assert "Timeout" in str(exc_info.value)
 
 
 class TestGetGuild:
@@ -202,30 +206,33 @@ class TestGetGuild:
 
     @respx.mock
     async def test_get_guild_server_error(self, respx_mock: MockRouter) -> None:
-        """Test guild retrieval with server error."""
+        """Test guild retrieval with server error - retries then fails."""
+        from httpx import HTTPStatusError
+
         respx_mock.get("http://localhost:8000/api/guilds/123456789").mock(
             return_value=Response(500, json={"detail": "Internal server error"})
         )
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises HTTPStatusError
+            with pytest.raises(HTTPStatusError) as exc_info:
                 await client.get_guild(guild_id=123456789)
 
-        assert exc_info.value.status_code == 500
-        assert "Failed to get guild" in str(exc_info.value)
+        assert exc_info.value.response.status_code == 500
 
     @respx.mock
     async def test_get_guild_connection_error(self, respx_mock: MockRouter) -> None:
-        """Test guild retrieval with connection error."""
+        """Test guild retrieval with connection error - retries then fails."""
         respx_mock.get("http://localhost:8000/api/guilds/123456789").mock(
             side_effect=ConnectError("Connection refused")
         )
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises ConnectError
+            with pytest.raises(ConnectError) as exc_info:
                 await client.get_guild(guild_id=123456789)
 
-        assert "Failed to connect to API service" in str(exc_info.value)
+        assert "Connection refused" in str(exc_info.value)
 
 
 class TestUpdateGuild:
@@ -310,17 +317,18 @@ class TestUpdateGuild:
 
     @respx.mock
     async def test_update_guild_connection_error(self, respx_mock: MockRouter) -> None:
-        """Test update with connection error."""
+        """Test update with connection error - retries then fails."""
         guild_uuid = uuid4()
         respx_mock.patch(f"http://localhost:8000/api/guilds/{guild_uuid}").mock(
             side_effect=ConnectError("Connection refused")
         )
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises ConnectError
+            with pytest.raises(ConnectError) as exc_info:
                 await client.update_guild(guild_id=guild_uuid, prefix=">>")
 
-        assert "Failed to connect to API service" in str(exc_info.value)
+        assert "Connection refused" in str(exc_info.value)
 
 
 class TestDeleteGuild:
@@ -353,31 +361,35 @@ class TestDeleteGuild:
 
     @respx.mock
     async def test_delete_guild_server_error(self, respx_mock: MockRouter) -> None:
-        """Test delete with server error."""
+        """Test delete with server error - retries then fails."""
+        from httpx import HTTPStatusError
+
         guild_uuid = uuid4()
         respx_mock.delete(f"http://localhost:8000/api/guilds/{guild_uuid}").mock(
             return_value=Response(500, json={"detail": "Internal server error"})
         )
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises HTTPStatusError
+            with pytest.raises(HTTPStatusError) as exc_info:
                 await client.delete_guild(guild_id=guild_uuid)
 
-        assert exc_info.value.status_code == 500
+        assert exc_info.value.response.status_code == 500
 
     @respx.mock
     async def test_delete_guild_connection_error(self, respx_mock: MockRouter) -> None:
-        """Test delete with connection error."""
+        """Test delete with connection error - retries then fails."""
         guild_uuid = uuid4()
         respx_mock.delete(f"http://localhost:8000/api/guilds/{guild_uuid}").mock(
             side_effect=ConnectError("Connection refused")
         )
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises ConnectError
+            with pytest.raises(ConnectError) as exc_info:
                 await client.delete_guild(guild_id=guild_uuid)
 
-        assert "Failed to connect to API service" in str(exc_info.value)
+        assert "Connection refused" in str(exc_info.value)
 
 
 class TestGetOrCreateGuild:
@@ -477,33 +489,38 @@ class TestHealthCheck:
 
     @respx.mock
     async def test_health_check_unhealthy(self, respx_mock: MockRouter) -> None:
-        """Test health check with unhealthy service."""
+        """Test health check with unhealthy service - retries then fails."""
+        from httpx import HTTPStatusError
+
         respx_mock.get("http://localhost:8000/health").mock(return_value=Response(503, json={"status": "unhealthy"}))
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises HTTPStatusError
+            with pytest.raises(HTTPStatusError) as exc_info:
                 await client.health_check()
 
-        assert "API health check failed" in str(exc_info.value)
+        assert exc_info.value.response.status_code == 503
 
     @respx.mock
     async def test_health_check_connection_error(self, respx_mock: MockRouter) -> None:
-        """Test health check with connection error."""
+        """Test health check with connection error - retries then fails."""
         respx_mock.get("http://localhost:8000/health").mock(side_effect=ConnectError("Connection refused"))
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises ConnectError
+            with pytest.raises(ConnectError) as exc_info:
                 await client.health_check()
 
-        assert "API health check failed" in str(exc_info.value)
+        assert "Connection refused" in str(exc_info.value)
 
     @respx.mock
     async def test_health_check_timeout(self, respx_mock: MockRouter) -> None:
-        """Test health check with timeout."""
+        """Test health check with timeout - retries then fails."""
         respx_mock.get("http://localhost:8000/health").mock(side_effect=TimeoutException("Timeout"))
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After retries exhausted, raises TimeoutException
+            with pytest.raises(TimeoutException) as exc_info:
                 await client.health_check()
 
-        assert "API health check failed" in str(exc_info.value)
+        assert "Timeout" in str(exc_info.value)

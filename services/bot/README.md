@@ -198,8 +198,68 @@ The bot service calls the Byte API for database operations. See `src/byte_bot/ap
 - `create_guild(guild_data: dict)` - Create new guild
 - `update_guild(guild_id: str, guild_data: dict)` - Update guild
 - `delete_guild(guild_id: str)` - Delete guild
+- `health_check()` - Check API service health
 
 All database operations go through the API - the bot does not directly access the database.
+
+### API Client Retry Logic
+
+The bot's API client implements automatic retry logic with exponential backoff to improve reliability when communicating with the API service.
+
+#### Configuration
+
+- **Max Retries**: 3 attempts per request
+- **Backoff**: Exponential (1s, 2s, 4s, max 10s between retries)
+- **Retryable Errors**: HTTP 5xx (server errors), connection errors
+- **Non-Retryable**: HTTP 4xx (client errors like 400, 401, 404)
+- **Timeout**: 10s request timeout
+
+#### Retry Behavior
+
+**Retryable Errors (Automatic Retry):**
+
+The client automatically retries on:
+
+- HTTP 5xx errors: 500 Internal Server Error, 502 Bad Gateway, 503 Service Unavailable, 504 Gateway Timeout
+- Connection errors: `ConnectError`, `ConnectTimeout`, `ReadTimeout`
+
+**Non-Retryable Errors (Immediate Failure):**
+
+The client does **not** retry on:
+
+- HTTP 4xx errors: 400 Bad Request, 401 Unauthorized, 403 Forbidden, 404 Not Found
+- These errors indicate client-side issues that won't be resolved by retrying
+
+#### Retry Statistics
+
+Access retry statistics via `api_client.retry_stats`:
+
+```python
+client = ByteAPIClient("http://api:8000")
+
+# Make some requests...
+await client.create_guild(...)
+await client.get_guild(...)
+
+# Check stats
+print(client.retry_stats)
+# {
+#     "total_retries": 5,           # Total retry attempts across all methods
+#     "failed_requests": 2,         # Failed requests (4xx errors)
+#     "retried_methods": {          # Retries per method
+#         "create_guild": 3,
+#         "get_guild": 2,
+#     }
+# }
+```
+
+#### Logging
+
+The client logs retry attempts at **WARNING** level before each retry:
+
+```
+WARNING  Retrying byte_bot.api_client.ByteAPIClient.create_guild in 1 seconds as it raised HTTPStatusError: Server error '500 Internal Server Error'
+```
 
 ## Testing
 
@@ -210,23 +270,25 @@ uv run pytest services/bot/tests
 
 ## Status
 
-**Phase 1.2**: ✅ Complete
+**Phase 3.2**: ✅ Complete
 
 - [x] Bot service extracted from monolith
 - [x] All plugins migrated to `services/bot/src/byte_bot/plugins/`
 - [x] All views migrated to `services/bot/src/byte_bot/views/`
-- [x] API client implemented
+- [x] API client implemented with retry logic
 - [x] Configuration system set up
 - [x] Entry points configured
 - [x] Import errors fixed
 - [x] Dockerfile created
-- [ ] Tests implemented (TODO: Phase 1.3)
+- [x] Comprehensive test suite (25+ retry tests)
+- [x] Retry logic with exponential backoff
+- [x] Retry statistics tracking
 
 ## Next Steps
 
-- **Phase 1.3**: Implement comprehensive test suite
-- **Phase 2**: Remove old monolith code (`byte_bot/byte/`)
-- **Phase 3**: Deploy bot and API services independently
+- **Phase 3.3**: Implement circuit breaker pattern (optional)
+- **Phase 4**: Add caching layer to API client
+- **Phase 5**: Implement health checks and monitoring
 
 ## License
 
