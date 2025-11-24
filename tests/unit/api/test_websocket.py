@@ -22,9 +22,9 @@ def mock_db_session() -> AsyncMock:
     return AsyncMock(spec=AsyncSession)
 
 
-async def test_websocket_connection(app: Litestar) -> None:
+async def test_websocket_connection(api_app: Litestar) -> None:
     """Test WebSocket connection and initial message reception."""
-    async with AsyncTestClient(app=app) as client:
+    async with AsyncTestClient(app=api_app) as client:
         ws = await client.websocket_connect("/ws/dashboard")
         # Receive first message
         data = await ws.receive_json()
@@ -48,9 +48,9 @@ async def test_websocket_connection(app: Litestar) -> None:
         ws.close()
 
 
-async def test_websocket_multiple_messages(app: Litestar) -> None:
+async def test_websocket_multiple_messages(api_app: Litestar) -> None:
     """Test receiving multiple updates from WebSocket."""
-    async with AsyncTestClient(app=app) as client:
+    async with AsyncTestClient(app=api_app) as client:
         ws = await client.websocket_connect("/ws/dashboard")
         # Receive first message
         data1 = await ws.receive_json()
@@ -68,9 +68,9 @@ async def test_websocket_multiple_messages(app: Litestar) -> None:
         ws.close()
 
 
-async def test_websocket_server_count(app: Litestar) -> None:
+async def test_websocket_server_count(api_app: Litestar) -> None:
     """Test that server count is returned correctly."""
-    async with AsyncTestClient(app=app) as client:
+    async with AsyncTestClient(app=api_app) as client:
         ws = await client.websocket_connect("/ws/dashboard")
         data = await ws.receive_json()
 
@@ -80,9 +80,9 @@ async def test_websocket_server_count(app: Litestar) -> None:
         ws.close()
 
 
-async def test_websocket_bot_status(app: Litestar) -> None:
+async def test_websocket_bot_status(api_app: Litestar) -> None:
     """Test that bot status is returned."""
-    async with AsyncTestClient(app=app) as client:
+    async with AsyncTestClient(app=api_app) as client:
         ws = await client.websocket_connect("/ws/dashboard")
         data = await ws.receive_json()
 
@@ -92,9 +92,9 @@ async def test_websocket_bot_status(app: Litestar) -> None:
         ws.close()
 
 
-async def test_websocket_uptime_format(app: Litestar) -> None:
+async def test_websocket_uptime_format(api_app: Litestar) -> None:
     """Test that uptime is in correct format (seconds)."""
-    async with AsyncTestClient(app=app) as client:
+    async with AsyncTestClient(app=api_app) as client:
         ws = await client.websocket_connect("/ws/dashboard")
         data = await ws.receive_json()
 
@@ -157,12 +157,12 @@ async def test_set_startup_time() -> None:
 
 
 @patch("byte_api.domain.web.controllers.websocket.get_server_count")
-async def test_websocket_with_mocked_server_count(mock_get_server_count: AsyncMock, app: Litestar) -> None:
+async def test_websocket_with_mocked_server_count(mock_get_server_count: AsyncMock, api_app: Litestar) -> None:
     """Test WebSocket with mocked server count."""
     # Mock server count to return specific value
     mock_get_server_count.return_value = 42
 
-    async with AsyncTestClient(app=app) as client:
+    async with AsyncTestClient(app=api_app) as client:
         ws = await client.websocket_connect("/ws/dashboard")
         data = await ws.receive_json()
 
