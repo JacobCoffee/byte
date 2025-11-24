@@ -40,8 +40,8 @@
           </svg>
         </div>
         <div class="stat-title text-base-content">Server Count</div>
-        <div class="stat-value text-primary">1</div>
-        <div class="stat-desc">100% more than before Byte was born</div>
+        <div class="stat-value text-primary" id="server-count">-</div>
+        <div class="stat-desc">Servers connected to Byte</div>
       </div>
 
       <div class="stat">
@@ -68,16 +68,22 @@
 
       <div class="stat">
         <div class="stat-figure text-secondary">
-          <div class="avatar online">
+          <div class="avatar" id="bot-avatar">
             <div class="w-16 rounded-full">
               <img src="static/logo.svg" alt="Byte Logo" />
             </div>
           </div>
         </div>
-        <div class="stat-title text-base-content">Uptime</div>
-        <div class="stat-value text-primary">99.99%</div>
-        <div class="stat-desc text-warning">2 issues in the last 24 hours</div>
+        <div class="stat-title text-base-content">Bot Status</div>
+        <div class="stat-value">
+          <span id="bot-status" class="badge badge-lg">-</span>
+        </div>
+        <div class="stat-desc">Uptime: <span id="uptime">-</span></div>
       </div>
+    </div>
+    <div class="mt-4 text-sm text-center text-base-content/60 dark:text-base-100/40">
+      Last update: <span id="last-update">-</span>
+      | WebSocket: <span id="ws-status" class="ws-status">disconnected</span>
     </div>
     <div class="mt-10 p-4 rounded-lg shadow-2xl bg-base-100/60 dark:bg-neutral/60">
       <h1 class="text-5xl font-bold text-base-content dark:text-base-100/80">Activity</h1>
@@ -487,4 +493,122 @@
     </div>
   </div>
 </main>
-{% endblock content %} {% block extrajs %}{% endblock extrajs %}
+{% endblock content %}
+{% block extrajs %}
+<script>
+let ws = null;
+let reconnectAttempts = 0;
+const maxReconnectAttempts = 5;
+
+function connectWebSocket() {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const wsUrl = `${protocol}//${window.location.host}/ws/dashboard`;
+
+    console.log('Connecting to WebSocket:', wsUrl);
+    ws = new WebSocket(wsUrl);
+
+    ws.onopen = () => {
+        console.log('WebSocket connected');
+        reconnectAttempts = 0;
+        updateConnectionStatus('connected');
+    };
+
+    ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log('WebSocket message received:', data);
+        updateDashboard(data);
+    };
+
+    ws.onclose = () => {
+        console.log('WebSocket closed, attempting reconnect...');
+        updateConnectionStatus('disconnected');
+
+        if (reconnectAttempts < maxReconnectAttempts) {
+            reconnectAttempts++;
+            const delay = 3000 * reconnectAttempts;
+            console.log(`Reconnecting in ${delay}ms (attempt ${reconnectAttempts}/${maxReconnectAttempts})`);
+            setTimeout(connectWebSocket, delay);
+        } else {
+            console.error('Max reconnection attempts reached');
+            updateConnectionStatus('failed');
+        }
+    };
+
+    ws.onerror = (error) => {
+        console.error('WebSocket error:', error);
+        updateConnectionStatus('error');
+    };
+}
+
+function updateDashboard(data) {
+    // Update server count
+    const serverCountEl = document.getElementById('server-count');
+    if (serverCountEl) {
+        serverCountEl.textContent = data.server_count;
+    }
+
+    // Update bot status
+    const botStatusEl = document.getElementById('bot-status');
+    const botAvatarEl = document.getElementById('bot-avatar');
+    if (botStatusEl) {
+        const isOnline = data.bot_status === 'online';
+        botStatusEl.textContent = data.bot_status;
+        botStatusEl.className = isOnline ? 'badge badge-lg badge-success' : 'badge badge-lg badge-error';
+
+        // Update avatar online indicator
+        if (botAvatarEl) {
+            if (isOnline) {
+                botAvatarEl.classList.add('online');
+            } else {
+                botAvatarEl.classList.remove('online');
+            }
+        }
+    }
+
+    // Update uptime
+    const uptimeEl = document.getElementById('uptime');
+    if (uptimeEl) {
+        uptimeEl.textContent = formatUptime(data.uptime);
+    }
+
+    // Update last update timestamp
+    const timestampEl = document.getElementById('last-update');
+    if (timestampEl) {
+        const updateTime = new Date(data.timestamp);
+        timestampEl.textContent = updateTime.toLocaleTimeString();
+    }
+}
+
+function formatUptime(seconds) {
+    const days = Math.floor(seconds / 86400);
+    const hours = Math.floor((seconds % 86400) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+
+    if (days > 0) {
+        return `${days}d ${hours}h ${minutes}m`;
+    } else if (hours > 0) {
+        return `${hours}h ${minutes}m`;
+    } else {
+        return `${minutes}m`;
+    }
+}
+
+function updateConnectionStatus(status) {
+    const statusEl = document.getElementById('ws-status');
+    if (statusEl) {
+        statusEl.textContent = status;
+        statusEl.className = `ws-status ws-status-${status}`;
+    }
+}
+
+// Connect on page load
+document.addEventListener('DOMContentLoaded', connectWebSocket);
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    if (ws) {
+        ws.close();
+    }
+});
+</script>
+{% endblock extrajs %}

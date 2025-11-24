@@ -38,6 +38,8 @@ def create_app() -> Litestar:
 
     dependencies = create_collection_dependencies()
 
+    from byte_api.domain.web.controllers.websocket import set_startup_time
+
     return Litestar(
         # Handlers
         exception_handlers={
@@ -55,7 +57,10 @@ def create_app() -> Litestar:
         # Lifecycle
         before_send=[log.controller.BeforeSendHandler()],
         on_shutdown=[],
-        on_startup=[lambda: log.configure(log.default_processors)],  # type: ignore[arg-type]
+        on_startup=[
+            lambda: log.configure(log.default_processors),  # type: ignore[arg-type]
+            set_startup_time,
+        ],
         on_app_init=[],
         # Other
         debug=settings.project.DEBUG,

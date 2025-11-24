@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* WebSocket status indicator styles */
+.ws-status {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.ws-status-connected {
+  background-color: #10b981;
+  color: white;
+}
+
+.ws-status-disconnected {
+  background-color: #f59e0b;
+  color: white;
+}
+
+.ws-status-error,
+.ws-status-failed {
+  background-color: #ef4444;
+  color: white;
+}

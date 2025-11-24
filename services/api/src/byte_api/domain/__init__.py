@@ -28,6 +28,7 @@ routes: list[ControllerRouterHandler] = [
     system.controllers.system.SystemController,
     system.controllers.health.HealthController,
     web.controllers.web.WebController,
+    web.controllers.websocket.dashboard_stream,
     guilds.controllers.GuildsController,
 ]
 """Routes for the application."""
