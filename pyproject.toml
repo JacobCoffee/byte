@@ -38,6 +38,7 @@ dev = [
     "codespell>=2.2.6",
     "prek>=0.2.18",
     "pytailwindcss>=0.2.0",
+    "bunenv>=0.1.0",
     "sourcery>=1.14.0",
     "ty>=0.0.1a26",
     "aiosqlite>=0.21.0",

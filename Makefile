@@ -53,7 +53,7 @@ install-prek: ## Install prek and install hooks
 .PHONY: install-frontend
 install-frontend: ## Install the frontend dependencies
 	@echo "=> Installing frontend dependencies"
-	@nodeenv --python-virtualenv
+	@bunenv --python-virtualenv --bun=latest
 	@bun install
 	@echo "=> Frontend dependencies installed"
 
