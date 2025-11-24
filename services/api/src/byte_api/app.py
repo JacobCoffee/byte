@@ -35,6 +35,7 @@ def create_app() -> Litestar:
         template,
     )
     from byte_api.lib.dependencies import create_collection_dependencies
+    from byte_api.lib.middleware import correlation_middleware, metrics_middleware
 
     dependencies = create_collection_dependencies()
 
@@ -59,7 +60,7 @@ def create_app() -> Litestar:
         on_app_init=[],
         # Other
         debug=settings.project.DEBUG,
-        middleware=[log.controller.middleware_factory],
+        middleware=[correlation_middleware, metrics_middleware, log.controller.middleware_factory],
         signature_namespace=domain.signature_namespace,
         type_encoders={
             SecretStr: str,

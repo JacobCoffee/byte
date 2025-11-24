@@ -27,6 +27,7 @@ __all__ = [
 routes: list[ControllerRouterHandler] = [
     system.controllers.system.SystemController,
     system.controllers.health.HealthController,
+    system.controllers.metrics.MetricsController,
     web.controllers.web.WebController,
     guilds.controllers.GuildsController,
 ]
