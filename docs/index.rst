@@ -42,4 +42,5 @@ Usage
     contribution-guide
     docker-compose
     database-migrations
+    observability
     changelog
