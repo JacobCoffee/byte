@@ -93,14 +93,17 @@ class TestRetryLogic:
     @respx.mock
     async def test_create_guild_max_retries_exceeded(self, respx_mock: MockRouter) -> None:
         """Test that create_guild fails after max retries."""
+        from httpx import HTTPStatusError
+
         route = respx_mock.post("http://localhost:8000/api/guilds")
         route.mock(return_value=Response(500, json={"detail": "Internal server error"}))
 
         async with ByteAPIClient(base_url="http://localhost:8000") as client:
-            with pytest.raises(APIError) as exc_info:
+            # After all retries exhausted, the original HTTPStatusError is raised
+            with pytest.raises(HTTPStatusError) as exc_info:
                 await client.create_guild(guild_id=123456789, guild_name="Test Guild", prefix="!")
 
-        assert exc_info.value.status_code == 500
+        assert exc_info.value.response.status_code == 500
         assert route.call_count == 3  # Max 3 attempts
         assert client.retry_stats["total_retries"] == 3
 

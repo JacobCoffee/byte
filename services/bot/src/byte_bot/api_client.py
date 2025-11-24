@@ -186,20 +186,20 @@ class ByteAPIClient:
             response.raise_for_status()
             return GuildSchema.model_validate(response.json())
         except httpx.HTTPStatusError as e:
-            # Track retry if applicable
+            # Track retry if applicable and re-raise for tenacity to retry
             if _should_retry(e):
                 self._track_retry("create_guild")
-            else:
-                self._track_failure()
+                raise  # Re-raise original exception for tenacity to retry
+            # Not retryable, convert to APIError
+            self._track_failure()
 
             msg = f"Failed to create guild: {e.response.text}"
             logger.exception(msg, extra={"guild_id": guild_id, "status_code": e.response.status_code})
             raise APIError(msg, status_code=e.response.status_code) from e
-        except httpx.RequestError as e:
+        except httpx.RequestError:
+            # Connection error - track and re-raise for tenacity to retry
             self._track_retry("create_guild")
-            msg = f"Failed to connect to API service: {e!s}"
-            logger.exception(msg, extra={"guild_id": guild_id})
-            raise APIError(msg) from e
+            raise  # Re-raise original exception for tenacity to retry
 
     @retry(
         stop=stop_after_attempt(3),
@@ -229,20 +229,20 @@ class ByteAPIClient:
             response.raise_for_status()
             return GuildSchema.model_validate(response.json())
         except httpx.HTTPStatusError as e:
-            # Track retry if applicable
+            # Track retry if applicable and re-raise for tenacity to retry
             if _should_retry(e):
                 self._track_retry("get_guild")
-            else:
-                self._track_failure()
+                raise  # Re-raise original exception for tenacity to retry
+            # Not retryable, convert to APIError
+            self._track_failure()
 
             msg = f"Failed to get guild: {e.response.text}"
             logger.exception(msg, extra={"guild_id": guild_id, "status_code": e.response.status_code})
             raise APIError(msg, status_code=e.response.status_code) from e
-        except httpx.RequestError as e:
+        except httpx.RequestError:
+            # Connection error - track and re-raise for tenacity to retry
             self._track_retry("get_guild")
-            msg = f"Failed to connect to API service: {e!s}"
-            logger.exception(msg, extra={"guild_id": guild_id})
-            raise APIError(msg) from e
+            raise  # Re-raise original exception for tenacity to retry
 
     @retry(
         stop=stop_after_attempt(3),
@@ -278,20 +278,20 @@ class ByteAPIClient:
             response.raise_for_status()
             return GuildSchema.model_validate(response.json())
         except httpx.HTTPStatusError as e:
-            # Track retry if applicable
+            # Track retry if applicable and re-raise for tenacity to retry
             if _should_retry(e):
                 self._track_retry("update_guild")
-            else:
-                self._track_failure()
+                raise  # Re-raise original exception for tenacity to retry
+            # Not retryable, convert to APIError
+            self._track_failure()
 
             msg = f"Failed to update guild: {e.response.text}"
             logger.exception(msg, extra={"guild_id": guild_id, "status_code": e.response.status_code})
             raise APIError(msg, status_code=e.response.status_code) from e
-        except httpx.RequestError as e:
+        except httpx.RequestError:
+            # Connection error - track and re-raise for tenacity to retry
             self._track_retry("update_guild")
-            msg = f"Failed to connect to API service: {e!s}"
-            logger.exception(msg, extra={"guild_id": guild_id})
-            raise APIError(msg) from e
+            raise  # Re-raise original exception for tenacity to retry
 
     @retry(
         stop=stop_after_attempt(3),
@@ -313,20 +313,20 @@ class ByteAPIClient:
             response = await self.client.delete(f"/api/guilds/{guild_id}")
             response.raise_for_status()
         except httpx.HTTPStatusError as e:
-            # Track retry if applicable
+            # Track retry if applicable and re-raise for tenacity to retry
             if _should_retry(e):
                 self._track_retry("delete_guild")
-            else:
-                self._track_failure()
+                raise  # Re-raise original exception for tenacity to retry
+            # Not retryable, convert to APIError
+            self._track_failure()
 
             msg = f"Failed to delete guild: {e.response.text}"
             logger.exception(msg, extra={"guild_id": guild_id, "status_code": e.response.status_code})
             raise APIError(msg, status_code=e.response.status_code) from e
-        except httpx.RequestError as e:
+        except httpx.RequestError:
+            # Connection error - track and re-raise for tenacity to retry
             self._track_retry("delete_guild")
-            msg = f"Failed to connect to API service: {e!s}"
-            logger.exception(msg, extra={"guild_id": guild_id})
-            raise APIError(msg) from e
+            raise  # Re-raise original exception for tenacity to retry
 
     async def get_or_create_guild(
         self,
@@ -382,17 +382,17 @@ class ByteAPIClient:
             response.raise_for_status()
             return response.json()
         except httpx.HTTPStatusError as e:
-            # Track retry if applicable
+            # Track retry if applicable and re-raise for tenacity to retry
             if _should_retry(e):
                 self._track_retry("health_check")
-            else:
-                self._track_failure()
+                raise  # Re-raise original exception for tenacity to retry
+            # Not retryable, convert to APIError
+            self._track_failure()
 
             msg = f"API health check failed: {e!s}"
             logger.exception(msg)
             raise APIError(msg) from e
-        except httpx.RequestError as e:
+        except httpx.RequestError:
+            # Connection error - track and re-raise for tenacity to retry
             self._track_retry("health_check")
-            msg = f"API health check failed: {e!s}"
-            logger.exception(msg)
-            raise APIError(msg) from e
+            raise  # Re-raise original exception for tenacity to retry
