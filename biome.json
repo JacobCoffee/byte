@@ -7,23 +7,7 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "includes": ["**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx", "**/*.json", "**/*.html", "**/*.css"],
-    "experimentalScannerIgnores": [
-      "_templates/**",
-      ".git/**",
-      "node_modules/**",
-      ".venv/**",
-      "dist/**",
-      "build/**",
-      "**/*.pyc",
-      "__pycache__/**",
-      "**/*.egg-info/**",
-      ".pytest_cache/**",
-      ".ruff_cache/**",
-      "docs/_build/**",
-      "**/*.svg",
-      "services/api/src/byte_api/domain/web/resources/style.css"
-    ]
+    "includes": ["**/*.js", "**/*.ts", "**/*.jsx", "**/*.tsx", "**/*.json", "**/*.html", "**/*.css"]
   },
   "formatter": {
     "enabled": true,

@@ -396,6 +396,7 @@ dependencies = [
     { name = "githubkit", extra = ["auth-app"] },
     { name = "httpx" },
     { name = "litestar", extra = ["full"] },
+    { name = "prometheus-client" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
     { name = "pyjwt" },
@@ -411,6 +412,7 @@ requires-dist = [
     { name = "githubkit", extras = ["auth-app"], git = "https://github.com/yanyongyu/githubkit.git" },
     { name = "httpx" },
     { name = "litestar", extras = ["full"], specifier = ">=2.4.3" },
+    { name = "prometheus-client", specifier = ">=0.19.0" },
     { name = "pydantic", specifier = ">=2.5.2" },
     { name = "pydantic-settings", specifier = ">=2.1.0" },
     { name = "pyjwt", specifier = ">=2.8.0" },
@@ -430,6 +432,7 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "python-dateutil" },
     { name = "python-dotenv" },
+    { name = "tenacity" },
 ]
 
 [package.metadata]
@@ -442,6 +445,7 @@ requires-dist = [
     { name = "pydantic-settings", specifier = ">=2.1.0" },
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
+    { name = "tenacity", specifier = ">=8.2.0" },
 ]
 
 [[package]]
@@ -2372,6 +2376,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/86/6d/93cd8b2233c4040e2922ff77377ed33817f0370d603e0cc5c9a9c391adda/targ-0.6.0.tar.gz", hash = "sha256:4025476f1528eef963900295c2979b38ba28aadbd3668df9ae6677237b62a1d5", size = 9891, upload-time = "2025-07-09T22:04:01.224Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/90/434ca23854e9d358f8562b51e688760bcc59a1d4be46a91aa37fd0f37d24/targ-0.6.0-py3-none-any.whl", hash = "sha256:75b83a49181d4758c2ef0caf345c8ced78156dee66613bab0a1a614e8e0ec7b6", size = 7308, upload-time = "2025-07-09T22:04:00.373Z" },
+]
+
+[[package]]
+name = "tenacity"
+version = "9.1.2"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/0a/d4/2b0cd0fe285e14b36db076e78c93766ff1d529d70408bd1d2a5a84f1d929/tenacity-9.1.2.tar.gz", hash = "sha256:1169d376c297e7de388d18b4481760d478b0e99a777cad3a9c86e556f4b697cb", size = 48036, upload-time = "2025-04-02T08:25:09.966Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e5/30/643397144bfbfec6f6ef821f36f33e57d35946c44a2352d3c9f0ae847619/tenacity-9.1.2-py3-none-any.whl", hash = "sha256:f77bf36710d8b73a50b2dd155c97b870017ad21afe6ab300326b0371b3b05138", size = 28248, upload-time = "2025-04-02T08:25:07.678Z" },
 ]
 
 [[package]]

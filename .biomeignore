@@ -1,0 +1,5 @@
+# Generated/compiled CSS files
+services/api/src/byte_api/domain/web/resources/style.css
+
+# Documentation CSS (has intentional !important rules)
+docs/_static/custom.css
