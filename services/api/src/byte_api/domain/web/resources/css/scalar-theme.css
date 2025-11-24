@@ -1,0 +1,107 @@
+/* Byte Brand Custom Theme for Scalar OpenAPI Documentation */
+
+/* Light Mode Variables */
+:root {
+  /* Primary accent color - Byte Teal */
+  --scalar-color-accent: #42b1a8;
+
+  /* Background colors */
+  --scalar-background-1: #ebebe9; /* byte-white base */
+  --scalar-background-2: #ffffff; /* slightly lighter */
+  --scalar-background-3: #d4d4d2; /* slightly darker */
+
+  /* Text colors */
+  --scalar-color-1: #0c0c0c; /* byte-dark primary text */
+  --scalar-color-2: #3c3c3c; /* medium text */
+  --scalar-color-3: #6c6c6c; /* light text */
+
+  /* Border color - Byte Blue secondary */
+  --scalar-border-color: #7bcebc;
+
+  /* Sidebar */
+  --scalar-sidebar-background-1: #42b1a8; /* byte-teal */
+  --scalar-sidebar-background-2: #7bcebc; /* byte-blue */
+  --scalar-sidebar-color-1: #ebebe9; /* light text on dark sidebar */
+  --scalar-sidebar-color-2: #ffffff; /* white text */
+  --scalar-sidebar-color-active: #abe6d2; /* byte-light-blue for active items */
+  --scalar-sidebar-border-color: #7bcebc;
+
+  /* Status colors from DaisyUI theme */
+  --scalar-color-green: #059669; /* success */
+  --scalar-color-yellow: #d4a35a; /* byte-orange warning */
+  --scalar-color-red: #fc7054; /* byte-red error */
+  --scalar-color-blue: #7bcebc; /* byte-blue info */
+
+  /* Additional accents */
+  --scalar-button-1: #42b1a8;
+  --scalar-button-1-hover: #389e96;
+  --scalar-button-2: #7bcebc;
+  --scalar-button-2-hover: #6ab8a8;
+}
+
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Primary accent - keep teal */
+    --scalar-color-accent: #42b1a8;
+
+    /* Background colors - inverted */
+    --scalar-background-1: #0c0c0c; /* byte-dark */
+    --scalar-background-2: #1a1a1a; /* slightly lighter */
+    --scalar-background-3: #2a2a2a; /* lighter still */
+
+    /* Text colors - inverted */
+    --scalar-color-1: #ebebe9; /* byte-white for text */
+    --scalar-color-2: #d4d4d2; /* medium text */
+    --scalar-color-3: #a4a4a2; /* light text */
+
+    /* Border color */
+    --scalar-border-color: #42b1a8;
+
+    /* Sidebar - darker in dark mode */
+    --scalar-sidebar-background-1: #0c0c0c;
+    --scalar-sidebar-background-2: #1a1a1a;
+    --scalar-sidebar-color-1: #ebebe9;
+    --scalar-sidebar-color-2: #ffffff;
+    --scalar-sidebar-color-active: #42b1a8;
+    --scalar-sidebar-border-color: #42b1a8;
+
+    /* Status colors remain consistent */
+    --scalar-color-green: #059669;
+    --scalar-color-yellow: #d4a35a;
+    --scalar-color-red: #fc7054;
+    --scalar-color-blue: #7bcebc;
+
+    /* Buttons in dark mode */
+    --scalar-button-1: #42b1a8;
+    --scalar-button-1-hover: #52c1b8;
+    --scalar-button-2: #7bcebc;
+    --scalar-button-2-hover: #8bdccc;
+  }
+}
+
+/* Force dark mode when .dark class is present */
+.dark {
+  --scalar-color-accent: #42b1a8;
+  --scalar-background-1: #0c0c0c;
+  --scalar-background-2: #1a1a1a;
+  --scalar-background-3: #2a2a2a;
+  --scalar-color-1: #ebebe9;
+  --scalar-color-2: #d4d4d2;
+  --scalar-color-3: #a4a4a2;
+  --scalar-border-color: #42b1a8;
+  --scalar-sidebar-background-1: #0c0c0c;
+  --scalar-sidebar-background-2: #1a1a1a;
+  --scalar-sidebar-color-1: #ebebe9;
+  --scalar-sidebar-color-2: #ffffff;
+  --scalar-sidebar-color-active: #42b1a8;
+  --scalar-sidebar-border-color: #42b1a8;
+  --scalar-color-green: #059669;
+  --scalar-color-yellow: #d4a35a;
+  --scalar-color-red: #fc7054;
+  --scalar-color-blue: #7bcebc;
+  --scalar-button-1: #42b1a8;
+  --scalar-button-1-hover: #52c1b8;
+  --scalar-button-2: #7bcebc;
+  --scalar-button-2-hover: #8bdccc;
+}

@@ -20,6 +20,8 @@ __all__ = [
     "test_openapi_config_created",
     "test_openapi_contact_info",
     "test_openapi_includes_all_endpoints",
+    "test_openapi_render_plugins_configured",
+    "test_openapi_scalar_primary_plugin",
     "test_openapi_schema_generation",
     "test_openapi_security_schemes",
     "test_openapi_servers_configured",
@@ -58,9 +60,13 @@ def test_openapi_uses_handler_docstrings() -> None:
     assert openapi.config.use_handler_docstrings is True
 
 
-def test_openapi_root_schema_site() -> None:
-    """Test OpenAPI root schema site is set to Swagger."""
-    assert openapi.config.root_schema_site == "swagger"
+def test_openapi_render_plugins_configured() -> None:
+    """Test OpenAPI render plugins are configured with Scalar and Swagger."""
+    assert openapi.config.render_plugins is not None
+    assert len(openapi.config.render_plugins) >= 2
+    plugin_types = [type(plugin).__name__ for plugin in openapi.config.render_plugins]
+    assert "ScalarRenderPlugin" in plugin_types
+    assert "SwaggerRenderPlugin" in plugin_types
 
 
 @pytest.mark.asyncio
@@ -330,9 +336,12 @@ def test_openapi_use_handler_docstrings_true() -> None:
     assert openapi.config.use_handler_docstrings is True
 
 
-def test_openapi_root_schema_site_swagger() -> None:
-    """Test root schema site is Swagger."""
-    assert openapi.config.root_schema_site == "swagger"
+def test_openapi_scalar_primary_plugin() -> None:
+    """Test Scalar is the primary render plugin."""
+    assert openapi.config.render_plugins is not None
+    assert len(openapi.config.render_plugins) > 0
+    first_plugin_type = type(openapi.config.render_plugins[0]).__name__
+    assert first_plugin_type == "ScalarRenderPlugin"
 
 
 def test_openapi_config_immutable() -> None:

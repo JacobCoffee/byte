@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 from litestar.openapi.config import OpenAPIConfig
+from litestar.openapi.plugins import SwaggerRenderPlugin
 from litestar.openapi.spec import Contact
 
 from byte_api.lib import settings
+from byte_api.lib.scalar_theme import create_scalar_plugin
 
 __all__ = ("config",)
 
@@ -17,8 +19,11 @@ config = OpenAPIConfig(
     version=settings.openapi.VERSION,
     contact=Contact(name=settings.openapi.CONTACT_NAME, email=settings.openapi.CONTACT_EMAIL),
     use_handler_docstrings=True,
-    root_schema_site="swagger",
     path=settings.openapi.PATH,
+    render_plugins=[
+        create_scalar_plugin(),
+        SwaggerRenderPlugin(path="/swagger"),
+    ],
 )
 """OpenAPI config for the project.
 See :class:`OpenAPISettings <.settings.OpenAPISettings>` for configuration.

@@ -292,7 +292,8 @@ When dispatching subagents:
 
 - **Project Docs**: `docs/` (Sphinx RST format)
 - **Docker Guide**: `docs/docker-setup.md`
-- **API Docs**: http://localhost:8000/api/swagger (when running)
+- **API Docs (Scalar)**: http://localhost:8000/api/scalar (default, modern UI)
+- **API Docs (Swagger)**: http://localhost:8000/api/swagger (fallback)
 - **External**:
   - discord.py: https://discordpy.readthedocs.io/
   - Litestar: https://docs.litestar.dev/

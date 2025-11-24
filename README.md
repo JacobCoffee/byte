@@ -57,7 +57,8 @@ make docker-up
 
 # 4. Access the application
 # API: http://localhost:8000
-# API Docs: http://localhost:8000/api/swagger
+# API Docs (Scalar): http://localhost:8000/api/scalar
+# API Docs (Swagger): http://localhost:8000/api/swagger
 ```
 
 **📚 Full Docker Guide**: See [docs/docker-setup.md](docs/docker-setup.md) for comprehensive documentation including:
