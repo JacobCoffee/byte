@@ -13,6 +13,7 @@ members = [
 dev = [
     { name = "aiosqlite", specifier = ">=0.21.0" },
     { name = "autodoc-pydantic", specifier = ">=2.0.1" },
+    { name = "bunenv", specifier = ">=0.1.0" },
     { name = "codespell", specifier = ">=2.2.6" },
     { name = "coverage", specifier = ">=7.3.2" },
     { name = "hypothesis", specifier = ">=6.92.0" },
@@ -382,6 +383,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/b3/73/3183c9e41ca755713bdf2cc1d0810df742c09484e2e1ddd693bee53877c1/brotli-1.2.0-cp314-cp314-musllinux_1_2_x86_64.whl", hash = "sha256:d2d085ded05278d1c7f65560aae97b3160aeb2ea2c0b3e26204856beccb60888", size = 1488164, upload-time = "2025-11-05T18:38:53.079Z" },
     { url = "https://files.pythonhosted.org/packages/64/6a/0c78d8f3a582859236482fd9fa86a65a60328a00983006bcf6d83b7b2253/brotli-1.2.0-cp314-cp314-win32.whl", hash = "sha256:832c115a020e463c2f67664560449a7bea26b0c1fdd690352addad6d0a08714d", size = 339280, upload-time = "2025-11-05T18:38:54.02Z" },
     { url = "https://files.pythonhosted.org/packages/f5/10/56978295c14794b2c12007b07f3e41ba26acda9257457d7085b0bb3bb90c/brotli-1.2.0-cp314-cp314-win_amd64.whl", hash = "sha256:e7c0af964e0b4e3412a0ebf341ea26ec767fa0b4cf81abb5e897c9338b5ad6a3", size = 375639, upload-time = "2025-11-05T18:38:55.67Z" },
+]
+
+[[package]]
+name = "bunenv"
+version = "0.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/28/6d/9ac15a847c5f878dcc5c5cc19d47154bff5ea02083864faf1dbdb388d296/bunenv-0.1.0.tar.gz", hash = "sha256:8c2b6280dce68abcf6081c24119870152cf50d5dfcf57f17ce1666302d9c7919", size = 14281, upload-time = "2025-11-23T21:03:59.431Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/7d/71/68b53bb174d1eee7278d3bff609b1f9a8ba7b74191cbbdabe4ec08dbeeb8/bunenv-0.1.0-py3-none-any.whl", hash = "sha256:ee1b5b1bb2116b142aa7ccfb9a6ee1c1c9a12124c2e79ad80efdb0819c58b3b2", size = 15352, upload-time = "2025-11-23T21:03:58.311Z" },
 ]
 
 [[package]]
