@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Observability - Docs</title>
+    <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Changelog" href="changelog.html" /><link rel="prev" title="Database Migrations" href="database-migrations.html" />
+  <script>
+    const isDarkTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const sessionTheme = sessionStorage['_theme']
+    if (sessionTheme) {
+      document.documentElement.classList.add(sessionTheme)
+    } else if (isDarkTheme) {
+      document.documentElement.classList.add('dark')
+    }
+  </script><link rel="shortcut icon" href="_static/badge.svg"/><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=aecf457f" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=28c32440" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=ee381b95" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=80d31e7b" />
+    <style>
+:root {
+  --sy-f-sys:-apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Droid Sans, Helvetica Neue;--sy-f-cjk:PingFang SC, Hiragino Sans GB, Droid Sans Fallback, Microsoft YaHei;--sy-f-heading:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-text:var(--sy-f-sys), var(--sy-f-cjk), sans-serif;--sy-f-mono:Menlo, Monaco, Consolas, "Courier New", monospace;--sy-c-divider:rgba(var(--sy-rc-text), 0.1);--sy-c-divider-weak:rgba(var(--sy-rc-text), 0.05);--sy-c-border:rgba(var(--sy-rc-text), 0.14);--sy-s-banner-height:0rem;--sy-s-navbar-height:56px;--sy-s-offset-top:calc(var(--sy-s-navbar-height) + var(--sy-s-banner-height));--sy-c-link:rgb(var(--sy-rc-theme));--sy-c-link-weak:rgba(var(--sy-rc-theme), 0.86);
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+  }
+}
+html.light {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:255, 255, 255;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#fff;--sy-c-bg-weak:12, 12, 12;--sy-c-text:#0C0C0C;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#0C0C0C;--sy-c-foot-bg:#fafafa;--sy-c-foot-divider:#42B1A8;
+}
+html.dark {
+  --sy-rc-theme:66, 177, 168;--sy-rc-bg:12, 12, 12;--sy-rc-invert:66, 177, 168;--sy-rc-text:66, 177, 168;--sy-c-bg:#42B1A8;--sy-c-bg-weak:#0C0C0C;--sy-c-text:#EBEBE9;--sy-c-text-weak:#42B1A8;--sy-c-heading:#42B1A8;--sy-c-bold:#42B1A8;--sy-c-foot-text:#EBEBE9;--sy-c-foot-bg:#0C0C0C;--sy-c-foot-divider:#42B1A8;
+}
+</style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-heading: Inter, var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Observability"/>
+<meta name="twitter:card" content="summary"/></head>
+<body><div class="document"><div class="announcement">
+    <div class="announcement-inner">
+      <p>This documentation is currently under development.</p>
+      <button class="announcement-close" aria-label="Close announcement">
+        <i class="i-icon close"></i>
+      </button>
+    </div>
+  </div><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand mr-4" href="/">
+      <img class="light-logo" src="_static/badge.svg" alt="Byte Bot" height="28" />
+      <img class="dark-logo" src="_static/badge.svg" alt="Byte Bot" height="28" />
+      <strong>Byte Bot</strong>
+    </a>
+    <div class="sy-head-links" id="NavLinks">
+      <nav class="sy-head-nav">
+
+<ul><li class="link">
+          <a href="https://byte-bot.app/"><span>Dashboard</span><i class="i-icon external-link"></i></a>
+        </li><li class="link">
+          <a href="https://github.com/sponsors/JacobCoffee"><span>Sponsor me</span><i class="i-icon external-link"></i></a>
+        </li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form>
+        
+        
+        <div class="sy-head-social flex items-center">
+            <a class="flex items-center" href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub">
+              <i class="i-icon github"></i>
+            </a>
+            <a class="flex items-center" href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord">
+              <i class="i-icon discord"></i>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden">
+      <button class="js-theme theme-switch flex items-center" data-aria-light="Switch to dark mode" data-aria-dark="Switch to light mode">
+        <i class="i-icon theme-icon"></i>
+      </button>
+      <button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="NavLinks" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2 -translate-x-2"></span>
+          <span class="hamburger_3 -translate-x-1"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><p class="caption" role="heading"><span class="caption-text">Byte Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="byte/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="byte/usage/byte.html">About Byte</a></li>
+<li class="toctree-l2"><a class="reference internal" href="byte/usage/starting.html">Starting Byte</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="byte/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="byte/api/bot.html">bot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="byte/api/plugins/index.html">plugins</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/admin.html">admin</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/events.html">events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/general.html">general</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/github.html">github</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/testing.html">testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/plugins/python.html">python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="byte/api/views/index.html">views</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/views/forums.html">forums</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/views/astral.html">astral</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/views/python.html">python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/views/abstract.html">abstract</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="byte/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/lib/common.html">common</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/lib/logging.html">logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="byte/api/lib/utils.html">utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Web Docs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="web/usage/index.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="web/usage/server.html">About the Server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/usage/starting.html">Starting Server</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="web/api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="web/api/app.html">app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/metadata.html">metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/domain/index.html">domain</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/init.html">Domain Initializer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/urls.html">urls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/system/index.html">system</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/system/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/system/dtos.html">dtos</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/system/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/guilds/index.html">guilds</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/controllers.html">controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/dependencies.html">dependencies</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/helpers.html">helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/schemas.html">schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/services.html">services</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/guilds/urls.html">urls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/github/index.html">github</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/github/helpers.html">helpers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/web/index.html">web</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/web/controllers.html">controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/domain/db/index.html">Database</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/domain/db/models.html">models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="web/api/lib/index.html">lib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/constants.html">constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/cors.html">cors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/dependencies.html">dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/dtos.html">dtos</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/exceptions.html">exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/openapi.html">openapi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/schema.html">schema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/serialization.html">serialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/settings.html">settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/static_files.html">static files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/types.html">types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/template.html">template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/log/index.html">logging</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/controller.html">controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/init.html">init</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/log/utils.html">utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="web/api/lib/db/index.html">Database Library</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/db/base.html">base</a></li>
+<li class="toctree-l4"><a class="reference internal" href="web/api/lib/db/orm.html">orm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="contribution-guide.html">Contribution guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docker-compose.html">Docker Compose Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database-migrations.html">Database Migrations</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+        </div>
+      </div>
+      
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-icon close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4">
+  <div class="localtoc">
+    <h3>On this page</h3>
+    <ul>
+<li><a class="reference internal" href="#structured-logging">Structured Logging</a><ul>
+<li><a class="reference internal" href="#log-fields">Log Fields</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#correlation-ids">Correlation IDs</a><ul>
+<li><a class="reference internal" href="#how-it-works">How It Works</a></li>
+<li><a class="reference internal" href="#example-usage">Example Usage</a></li>
+<li><a class="reference internal" href="#bot-service-integration">Bot Service Integration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#prometheus-metrics">Prometheus Metrics</a><ul>
+<li><a class="reference internal" href="#available-metrics">Available Metrics</a><ul>
+<li><a class="reference internal" href="#http-metrics">HTTP Metrics</a></li>
+<li><a class="reference internal" href="#database-metrics">Database Metrics</a></li>
+<li><a class="reference internal" href="#business-metrics">Business Metrics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#accessing-metrics">Accessing Metrics</a></li>
+<li><a class="reference internal" href="#prometheus-configuration">Prometheus Configuration</a></li>
+<li><a class="reference internal" href="#grafana-dashboards">Grafana Dashboards</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#implementation-details">Implementation Details</a><ul>
+<li><a class="reference internal" href="#middleware-stack">Middleware Stack</a><ul>
+<li><a class="reference internal" href="#middleware-configuration">Middleware Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#custom-metrics">Custom Metrics</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#testing">Testing</a><ul>
+<li><a class="reference internal" href="#correlation-id-tests">Correlation ID Tests</a></li>
+<li><a class="reference internal" href="#metrics-tests">Metrics Tests</a></li>
+<li><a class="reference internal" href="#running-tests">Running Tests</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#missing-correlation-ids">Missing Correlation IDs</a></li>
+<li><a class="reference internal" href="#metrics-not-updating">Metrics Not Updating</a></li>
+<li><a class="reference internal" href="#high-memory-usage">High Memory Usage</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+
+  </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
+  data-type="github" data-user="JacobCoffee" data-repo="byte">
+  <span class="w-8 flex items-center justify-around shrink-0 text-2xl">
+    <i class="i-icon github"></i>
+  </span>
+  <span class="flex-grow px-2">
+    <span>JacobCoffee/byte</span>
+    <span class="flex text-sm repo-stats-count">
+      <span class="flex items-center pr-3">
+        <i class="i-icon star"></i>
+        <strong class="js-repo-stars ml-1">0</strong>
+      </span>
+      <span class="flex items-center">
+        <i class="i-icon git-fork"></i>
+        <strong class="js-repo-forks ml-1">0</strong>
+      </span>
+    </span>
+  </span>
+</a><div class="edit-this-page">
+  <a href="https://github.com/JacobCoffee/byte/blob/master/docs/observability.rst">Edit this page</a>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div>
+    </div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+    <div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-icon menu"></i>
+      </button>
+    </div>
+    <ul class="flex-1">
+      
+      
+      <li><a href="index.html">Byte Bot</a><span>/</span></li>
+      
+      <li><strong>Observability</strong></li>
+      
+      
+    </ul>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-icon outdent"></i>
+      </button>
+    </div>
+  </div>
+</div>
+    <div class="flex flex-col break-words justify-between">
+      <div class="min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+        <article class="yue" role="main">
+          <section id="observability">
+<h1>Observability<a class="headerlink" href="#observability" title="Link to this heading">¶</a></h1>
+<p>This document describes the observability features of Byte Bot, including structured logging,
+correlation IDs for request tracing, and Prometheus metrics for monitoring.</p>
+<section id="structured-logging">
+<h2>Structured Logging<a class="headerlink" href="#structured-logging" title="Link to this heading">¶</a></h2>
+<p>All services use structured logging with the following features:</p>
+<ul class="simple">
+<li><p><strong>JSON output in production</strong>: Logs are formatted as JSON for easy parsing by log aggregation systems</p></li>
+<li><p><strong>Pretty console output in development</strong>: Human-readable colored output when running in TTY mode</p></li>
+<li><p><strong>Correlation IDs</strong>: Every HTTP request is tagged with a unique correlation ID</p></li>
+<li><p><strong>Contextual information</strong>: Logs include timestamp, log level, logger name, and structured context</p></li>
+</ul>
+<section id="log-fields">
+<h3>Log Fields<a class="headerlink" href="#log-fields" title="Link to this heading">¶</a></h3>
+<p>Every log entry includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code>: ISO 8601 timestamp (UTC)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: Log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">logger</span></code>: Name of the logger that created the entry</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">correlation_id</span></code>: Request correlation ID (for HTTP requests)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">event</span></code>: Log message</p></li>
+<li><p>Additional context fields specific to the event</p></li>
+</ul>
+<p>Example log entry:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="p">{</span>
+</span><span id="1-2"><span class="w">  </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2025-11-23T10:30:45.123456Z&quot;</span><span class="p">,</span>
+</span><span id="1-3"><span class="w">  </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;info&quot;</span><span class="p">,</span>
+</span><span id="1-4"><span class="w">  </span><span class="nt">&quot;logger&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;byte_api.domain.guilds.controllers&quot;</span><span class="p">,</span>
+</span><span id="1-5"><span class="w">  </span><span class="nt">&quot;correlation_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a1b2c3d4-e5f6-7890-abcd-ef1234567890&quot;</span><span class="p">,</span>
+</span><span id="1-6"><span class="w">  </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Guild fetched successfully&quot;</span><span class="p">,</span>
+</span><span id="1-7"><span class="w">  </span><span class="nt">&quot;guild_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">123456789</span><span class="p">,</span>
+</span><span id="1-8"><span class="w">  </span><span class="nt">&quot;guild_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;My Discord Server&quot;</span>
+</span><span id="1-9"><span class="p">}</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="correlation-ids">
+<h2>Correlation IDs<a class="headerlink" href="#correlation-ids" title="Link to this heading">¶</a></h2>
+<p>Every HTTP request processed by the API service is assigned a correlation ID, which enables
+tracing requests across services and through the entire request lifecycle.</p>
+<section id="how-it-works">
+<h3>How It Works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Request Ingress</strong>: When a request arrives at the API:</p>
+<ul class="simple">
+<li><p>If the request includes an <code class="docutils literal notranslate"><span class="pre">X-Correlation-ID</span></code> header, that value is used</p></li>
+<li><p>Otherwise, a new UUID v4 is generated</p></li>
+</ul>
+</li>
+<li><p><strong>Log Context</strong>: The correlation ID is bound to the structured logging context
+for the duration of the request</p></li>
+<li><p><strong>Response Headers</strong>: The correlation ID is included in the <code class="docutils literal notranslate"><span class="pre">X-Correlation-ID</span></code>
+response header</p></li>
+<li><p><strong>Service Propagation</strong>: When the bot service calls the API service, it includes
+its generated correlation ID in the request headers</p></li>
+</ol>
+</section>
+<section id="example-usage">
+<h3>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading">¶</a></h3>
+<p><strong>API Request</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span id="1-1">curl<span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;X-Correlation-ID: my-custom-id-123&quot;</span><span class="w"> </span>http://localhost:8000/api/guilds/123
+</span></pre></div>
+</div>
+<p><strong>Response Headers</strong>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span id="1-1">HTTP/1.1 200 OK
+</span><span id="1-2">X-Correlation-ID: my-custom-id-123
+</span><span id="1-3">Content-Type: application/json
+</span></pre></div>
+</div>
+<p><strong>Logs</strong>:</p>
+<p>All logs generated during this request will include <code class="docutils literal notranslate"><span class="pre">&quot;correlation_id&quot;:</span> <span class="pre">&quot;my-custom-id-123&quot;</span></code>,
+making it easy to trace the entire request flow.</p>
+</section>
+<section id="bot-service-integration">
+<h3>Bot Service Integration<a class="headerlink" href="#bot-service-integration" title="Link to this heading">¶</a></h3>
+<p>The bot service automatically generates correlation IDs for all API requests:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="c1"># In byte_bot/api_client.py</span>
+</span><span id="1-2"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">httpx</span><span class="o">.</span><span class="n">Response</span><span class="p">:</span>
+</span><span id="1-3">    <span class="n">correlation_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+</span><span id="1-4">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X-Correlation-ID&quot;</span><span class="p">:</span> <span class="n">correlation_id</span><span class="p">}</span>
+</span><span id="1-5">
+</span><span id="1-6">    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+</span><span id="1-7">        <span class="s2">&quot;API request&quot;</span><span class="p">,</span>
+</span><span id="1-8">        <span class="n">extra</span><span class="o">=</span><span class="p">{</span>
+</span><span id="1-9">            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="n">method</span><span class="p">,</span>
+</span><span id="1-10">            <span class="s2">&quot;endpoint&quot;</span><span class="p">:</span> <span class="n">endpoint</span><span class="p">,</span>
+</span><span id="1-11">            <span class="s2">&quot;correlation_id&quot;</span><span class="p">:</span> <span class="n">correlation_id</span><span class="p">,</span>
+</span><span id="1-12">        <span class="p">},</span>
+</span><span id="1-13">    <span class="p">)</span>
+</span><span id="1-14">
+</span><span id="1-15">    <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="1-16">    <span class="c1"># ... response logged with same correlation_id</span>
+</span></pre></div>
+</div>
+<p>This creates an end-to-end trace from Discord event → bot service → API service.</p>
+</section>
+</section>
+<section id="prometheus-metrics">
+<h2>Prometheus Metrics<a class="headerlink" href="#prometheus-metrics" title="Link to this heading">¶</a></h2>
+<p>The API service exposes Prometheus metrics at <code class="docutils literal notranslate"><span class="pre">/metrics</span></code> for monitoring and alerting.</p>
+<section id="available-metrics">
+<h3>Available Metrics<a class="headerlink" href="#available-metrics" title="Link to this heading">¶</a></h3>
+<section id="http-metrics">
+<h4>HTTP Metrics<a class="headerlink" href="#http-metrics" title="Link to this heading">¶</a></h4>
+<dl>
+<dt><strong>http_requests_total</strong> (Counter)</dt><dd><p>Total number of HTTP requests, labeled by:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code>: HTTP method (GET, POST, etc.)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">endpoint</span></code>: Request path</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>: HTTP status code (200, 404, 500, etc.)</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span id="1-1">http_requests_total{method=&quot;GET&quot;,endpoint=&quot;/api/guilds/123&quot;,status=&quot;200&quot;} 42
+</span></pre></div>
+</div>
+</dd>
+<dt><strong>http_request_duration_seconds</strong> (Histogram)</dt><dd><p>HTTP request latency distribution, labeled by:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code>: HTTP method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">endpoint</span></code>: Request path</p></li>
+</ul>
+<p>Includes buckets for:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_sum</span></code>: Total time spent</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">_count</span></code>: Total number of requests</p></li>
+<li><p>Histogram buckets for percentile calculations</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span id="1-1">http_request_duration_seconds_sum{method=&quot;GET&quot;,endpoint=&quot;/api/guilds/123&quot;} 1.234
+</span><span id="1-2">http_request_duration_seconds_count{method=&quot;GET&quot;,endpoint=&quot;/api/guilds/123&quot;} 42
+</span></pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="database-metrics">
+<h4>Database Metrics<a class="headerlink" href="#database-metrics" title="Link to this heading">¶</a></h4>
+<dl>
+<dt><strong>db_queries_total</strong> (Counter)</dt><dd><p>Total number of database queries, labeled by:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">operation</span></code>: Query type (SELECT, INSERT, UPDATE, DELETE)</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span id="1-1">db_queries_total{operation=&quot;SELECT&quot;} 150
+</span></pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="business-metrics">
+<h4>Business Metrics<a class="headerlink" href="#business-metrics" title="Link to this heading">¶</a></h4>
+<dl>
+<dt><strong>guild_operations_total</strong> (Counter)</dt><dd><p>Total guild operations, labeled by:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">operation</span></code>: Operation type (create, update, delete, fetch)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">status</span></code>: Operation status (success, error)</p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span id="1-1">guild_operations_total{operation=&quot;create&quot;,status=&quot;success&quot;} 10
+</span><span id="1-2">guild_operations_total{operation=&quot;create&quot;,status=&quot;error&quot;} 2
+</span></pre></div>
+</div>
+</dd>
+</dl>
+</section>
+</section>
+<section id="accessing-metrics">
+<h3>Accessing Metrics<a class="headerlink" href="#accessing-metrics" title="Link to this heading">¶</a></h3>
+<p>The metrics endpoint is available at:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span id="1-1">http://localhost:8000/metrics
+</span></pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span id="1-1"># HELP http_requests_total Total HTTP requests
+</span><span id="1-2"># TYPE http_requests_total counter
+</span><span id="1-3">http_requests_total{method=&quot;GET&quot;,endpoint=&quot;/health&quot;,status=&quot;200&quot;} 1234.0
+</span><span id="1-4">http_requests_total{method=&quot;GET&quot;,endpoint=&quot;/api/guilds/123&quot;,status=&quot;200&quot;} 42.0
+</span><span id="1-5">http_requests_total{method=&quot;POST&quot;,endpoint=&quot;/api/guilds&quot;,status=&quot;201&quot;} 10.0
+</span><span id="1-6">
+</span><span id="1-7"># HELP http_request_duration_seconds HTTP request latency
+</span><span id="1-8"># TYPE http_request_duration_seconds histogram
+</span><span id="1-9">http_request_duration_seconds_bucket{le=&quot;0.005&quot;,method=&quot;GET&quot;,endpoint=&quot;/health&quot;} 1200.0
+</span><span id="1-10">http_request_duration_seconds_bucket{le=&quot;0.01&quot;,method=&quot;GET&quot;,endpoint=&quot;/health&quot;} 1234.0
+</span><span id="1-11">http_request_duration_seconds_sum{method=&quot;GET&quot;,endpoint=&quot;/health&quot;} 1.234
+</span><span id="1-12">http_request_duration_seconds_count{method=&quot;GET&quot;,endpoint=&quot;/health&quot;} 1234.0
+</span></pre></div>
+</div>
+</section>
+<section id="prometheus-configuration">
+<h3>Prometheus Configuration<a class="headerlink" href="#prometheus-configuration" title="Link to this heading">¶</a></h3>
+<p>To scrape these metrics with Prometheus, add to your <code class="docutils literal notranslate"><span class="pre">prometheus.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="nt">scrape_configs</span><span class="p">:</span>
+</span><span id="1-2"><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;byte-api&#39;</span>
+</span><span id="1-3"><span class="w">    </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15s</span>
+</span><span id="1-4"><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+</span><span id="1-5"><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;localhost:8000&#39;</span><span class="p p-Indicator">]</span>
+</span><span id="1-6"><span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/metrics</span>
+</span></pre></div>
+</div>
+</section>
+<section id="grafana-dashboards">
+<h3>Grafana Dashboards<a class="headerlink" href="#grafana-dashboards" title="Link to this heading">¶</a></h3>
+<p>Recommended panels for Grafana:</p>
+<ol class="arabic">
+<li><p><strong>Request Rate</strong>:</p>
+<div class="highlight-promql notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
+</span></pre></div>
+</div>
+</li>
+<li><p><strong>Error Rate</strong>:</p>
+<div class="highlight-promql notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kr">rate</span><span class="o">(</span><span class="nv">http_requests_total</span><span class="p">{</span><span class="nl">status</span><span class="o">=~</span><span class="p">&quot;</span><span class="s">5..</span><span class="p">&quot;}[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
+</span></pre></div>
+</div>
+</li>
+<li><p><strong>Request Latency (p95)</strong>:</p>
+<div class="highlight-promql notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kr">histogram_quantile</span><span class="o">(</span><span class="mf">0.95</span><span class="p">,</span><span class="w"> </span><span class="kr">rate</span><span class="o">(</span><span class="nv">http_request_duration_seconds_bucket</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">))</span>
+</span></pre></div>
+</div>
+</li>
+<li><p><strong>Guild Operations</strong>:</p>
+<div class="highlight-promql notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kr">rate</span><span class="o">(</span><span class="nv">guild_operations_total</span><span class="p">[</span><span class="s">5m</span><span class="p">]</span><span class="o">)</span>
+</span></pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+<section id="implementation-details">
+<h2>Implementation Details<a class="headerlink" href="#implementation-details" title="Link to this heading">¶</a></h2>
+<section id="middleware-stack">
+<h3>Middleware Stack<a class="headerlink" href="#middleware-stack" title="Link to this heading">¶</a></h3>
+<p>The observability features are implemented as Litestar middleware in this order:</p>
+<ol class="arabic simple">
+<li><p><strong>Correlation ID Middleware</strong> (<code class="docutils literal notranslate"><span class="pre">byte_api.lib.middleware.correlation</span></code>)
+- Extracts or generates correlation ID
+- Binds to structlog context
+- Adds to response headers</p></li>
+<li><p><strong>Metrics Middleware</strong> (<code class="docutils literal notranslate"><span class="pre">byte_api.lib.middleware.metrics</span></code>)
+- Tracks HTTP request count and latency
+- Records to Prometheus registry</p></li>
+<li><p><strong>Logging Middleware</strong> (<code class="docutils literal notranslate"><span class="pre">byte_api.lib.log.controller</span></code>)
+- Handles request/response logging</p></li>
+</ol>
+<section id="middleware-configuration">
+<h4>Middleware Configuration<a class="headerlink" href="#middleware-configuration" title="Link to this heading">¶</a></h4>
+<p>In <code class="docutils literal notranslate"><span class="pre">byte_api/app.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_api.lib.middleware</span><span class="w"> </span><span class="kn">import</span> <span class="n">correlation_middleware</span><span class="p">,</span> <span class="n">metrics_middleware</span>
+</span><span id="1-2">
+</span><span id="1-3"><span class="n">app</span> <span class="o">=</span> <span class="n">Litestar</span><span class="p">(</span>
+</span><span id="1-4">    <span class="n">middleware</span><span class="o">=</span><span class="p">[</span>
+</span><span id="1-5">        <span class="n">correlation_middleware</span><span class="p">,</span>
+</span><span id="1-6">        <span class="n">metrics_middleware</span><span class="p">,</span>
+</span><span id="1-7">        <span class="n">log</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">middleware_factory</span><span class="p">,</span>
+</span><span id="1-8">    <span class="p">],</span>
+</span><span id="1-9">    <span class="c1"># ...</span>
+</span><span id="1-10"><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="custom-metrics">
+<h3>Custom Metrics<a class="headerlink" href="#custom-metrics" title="Link to this heading">¶</a></h3>
+<p>To add custom business metrics, update <code class="docutils literal notranslate"><span class="pre">byte_api/domain/system/controllers/metrics.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kn">from</span><span class="w"> </span><span class="nn">prometheus_client</span><span class="w"> </span><span class="kn">import</span> <span class="n">Counter</span>
+</span><span id="1-2">
+</span><span id="1-3"><span class="c1"># Add to registry</span>
+</span><span id="1-4"><span class="n">custom_metric</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span>
+</span><span id="1-5">    <span class="s2">&quot;custom_operations_total&quot;</span><span class="p">,</span>
+</span><span id="1-6">    <span class="s2">&quot;Total custom operations&quot;</span><span class="p">,</span>
+</span><span id="1-7">    <span class="p">[</span><span class="s2">&quot;operation_type&quot;</span><span class="p">,</span> <span class="s2">&quot;status&quot;</span><span class="p">],</span>
+</span><span id="1-8">    <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">,</span>
+</span><span id="1-9"><span class="p">)</span>
+</span><span id="1-10">
+</span><span id="1-11"><span class="c1"># Use in your code</span>
+</span><span id="1-12"><span class="n">custom_metric</span><span class="o">.</span><span class="n">labels</span><span class="p">(</span><span class="n">operation_type</span><span class="o">=</span><span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;success&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">inc</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
+<section id="correlation-id-tests">
+<h3>Correlation ID Tests<a class="headerlink" href="#correlation-id-tests" title="Link to this heading">¶</a></h3>
+<p>Location: <code class="docutils literal notranslate"><span class="pre">tests/unit/api/lib/test_correlation_middleware.py</span></code></p>
+<p>Tests verify:</p>
+<ul class="simple">
+<li><p>Correlation IDs are generated when not provided</p></li>
+<li><p>Provided correlation IDs are propagated</p></li>
+<li><p>Each request gets a unique ID</p></li>
+<li><p>IDs are included in response headers</p></li>
+</ul>
+</section>
+<section id="metrics-tests">
+<h3>Metrics Tests<a class="headerlink" href="#metrics-tests" title="Link to this heading">¶</a></h3>
+<p>Location: <code class="docutils literal notranslate"><span class="pre">tests/unit/api/domain/system/controllers/test_metrics.py</span></code></p>
+<p>Tests verify:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/metrics</span></code> endpoint returns Prometheus format</p></li>
+<li><p>HTTP requests are tracked</p></li>
+<li><p>Metrics include method and status labels</p></li>
+<li><p>Endpoint is excluded from OpenAPI schema</p></li>
+</ul>
+</section>
+<section id="running-tests">
+<h3>Running Tests<a class="headerlink" href="#running-tests" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="c1"># Run all observability tests</span>
+</span><span id="1-2">uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/unit/api/lib/test_correlation_middleware.py<span class="w"> </span>-v
+</span><span id="1-3">uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>tests/unit/api/domain/system/controllers/test_metrics.py<span class="w"> </span>-v
+</span><span id="1-4">
+</span><span id="1-5"><span class="c1"># Or run all tests</span>
+</span><span id="1-6">make<span class="w"> </span><span class="nb">test</span>
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p><strong>Always include correlation IDs</strong>: When making HTTP requests between services,
+propagate correlation IDs to enable end-to-end tracing</p></li>
+<li><p><strong>Log at appropriate levels</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DEBUG</span></code>: Detailed information for debugging</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">INFO</span></code>: General informational messages</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WARNING</span></code>: Warning messages for unexpected but handled situations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ERROR</span></code>: Error messages for failures</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CRITICAL</span></code>: Critical failures that require immediate attention</p></li>
+</ul>
+</li>
+<li><p><strong>Include context in logs</strong>: Use structured logging with relevant context:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Guild created&quot;</span><span class="p">,</span> <span class="n">guild_id</span><span class="o">=</span><span class="n">guild</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">guild_name</span><span class="o">=</span><span class="n">guild</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</li>
+<li><p><strong>Monitor key metrics</strong>: Set up alerts for:</p>
+<ul class="simple">
+<li><p>High error rates (5xx responses)</p></li>
+<li><p>High latency (p95 &gt; threshold)</p></li>
+<li><p>Unusual request patterns</p></li>
+</ul>
+</li>
+<li><p><strong>Use correlation IDs for debugging</strong>: When investigating issues, search logs
+by correlation ID to see the complete request flow</p></li>
+</ol>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
+<section id="missing-correlation-ids">
+<h3>Missing Correlation IDs<a class="headerlink" href="#missing-correlation-ids" title="Link to this heading">¶</a></h3>
+<p><strong>Symptom</strong>: Logs don’t include correlation IDs</p>
+<p><strong>Solution</strong>: Ensure the correlation middleware is registered before the logging middleware
+in <code class="docutils literal notranslate"><span class="pre">byte_api/app.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="n">middleware</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="1-2">    <span class="n">correlation_middleware</span><span class="p">,</span>  <span class="c1"># Must come first</span>
+</span><span id="1-3">    <span class="n">metrics_middleware</span><span class="p">,</span>
+</span><span id="1-4">    <span class="n">log</span><span class="o">.</span><span class="n">controller</span><span class="o">.</span><span class="n">middleware_factory</span><span class="p">,</span>
+</span><span id="1-5"><span class="p">]</span>
+</span></pre></div>
+</div>
+</section>
+<section id="metrics-not-updating">
+<h3>Metrics Not Updating<a class="headerlink" href="#metrics-not-updating" title="Link to this heading">¶</a></h3>
+<p><strong>Symptom</strong>: Prometheus metrics always show 0 or don’t update</p>
+<p><strong>Solution</strong>: Verify the metrics middleware is registered and placed correctly in
+the middleware stack. Check that you’re accessing the correct registry:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="kn">from</span><span class="w"> </span><span class="nn">byte_api.domain.system.controllers.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">registry</span>
+</span></pre></div>
+</div>
+</section>
+<section id="high-memory-usage">
+<h3>High Memory Usage<a class="headerlink" href="#high-memory-usage" title="Link to this heading">¶</a></h3>
+<p><strong>Symptom</strong>: High memory usage from metrics</p>
+<p><strong>Solution</strong>: Prometheus metrics store time series data in memory. Consider:</p>
+<ul class="simple">
+<li><p>Using fewer labels (high cardinality = more memory)</p></li>
+<li><p>Aggregating similar endpoints (e.g., <code class="docutils literal notranslate"><span class="pre">/api/guilds/{id}</span></code> → <code class="docutils literal notranslate"><span class="pre">/api/guilds/*</span></code>)</p></li>
+<li><p>Increasing Prometheus scrape interval</p></li>
+</ul>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://prometheus.io/docs/practices/naming/">Prometheus Best Practices</a></p></li>
+<li><p><a class="reference external" href="https://www.structlog.org/">Structured Logging with structlog</a></p></li>
+<li><p><a class="reference external" href="https://docs.litestar.dev/latest/usage/middleware/">Litestar Middleware Documentation</a></p></li>
+</ul>
+</section>
+</section>
+
+        </article>
+        
+        <div class="navigation flex print:hidden">
+  <div class="navigation-prev">
+    <a href="database-migrations.html">
+      <i class="i-icon chevron"></i>
+      <div class="page-info">
+        <span>Previous</span>
+        
+        <div class="title">Database Migrations</div>
+        
+      </div>
+    </a>
+  </div>
+  <div class="navigation-next">
+    <a href="changelog.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Changelog</div>
+      </div>
+      <i class="i-icon chevron"></i>
+    </a>
+  </div>
+</div>
+        
+      </div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2023, Jacob Coffee</p>
+        
+        <p>
+          Made with
+          
+          <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+          
+          <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+        </p>
+      </div>
+      <div class="sy-foot-socials">
+          <a href="https://github.com/JacobCoffee/byte-bot" aria-label="GitHub"><i class="i-icon github"></i></a>
+          <a href="https://twitter.com/_scriptr" aria-label="X (Twitter)"><i class="i-icon x-twitter"></i></a>
+          <a href="https://discord.gg/ZVG8hN6RrJ/" aria-label="Discord"><i class="i-icon discord"></i></a>
+          <a href="https://youtube.com/@monorepo" aria-label="YouTube"><i class="i-icon youtube"></i></a>
+      </div>
+    </div>
+  </div>
+</footer></div>
+      <script src="_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+      <script src="_static/shibuya.js?v=3e5c8598"></script>
+    
+</body>
+</html>
