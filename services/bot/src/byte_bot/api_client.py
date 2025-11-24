@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import uuid
 from typing import TYPE_CHECKING, Any, Self
 
 import httpx
@@ -67,6 +68,52 @@ class ByteAPIClient:
         """Async context manager exit."""
         await self.close()
 
+    async def _request(
+        self,
+        method: str,
+        endpoint: str,
+        **kwargs: Any,
+    ) -> httpx.Response:
+        """Make HTTP request with correlation ID tracking.
+
+        Args:
+            method: HTTP method (GET, POST, etc.)
+            endpoint: API endpoint path
+            **kwargs: Additional httpx request parameters
+
+        Returns:
+            HTTP response
+
+        Note:
+            Automatically generates and logs correlation IDs for request tracing.
+        """
+        correlation_id = str(uuid.uuid4())
+        headers = kwargs.pop("headers", {})
+        headers["X-Correlation-ID"] = correlation_id
+
+        logger.info(
+            "API request",
+            extra={
+                "method": method,
+                "endpoint": endpoint,
+                "correlation_id": correlation_id,
+            },
+        )
+
+        response = await self.client.request(method, endpoint, headers=headers, **kwargs)
+
+        logger.info(
+            "API response",
+            extra={
+                "method": method,
+                "endpoint": endpoint,
+                "status": response.status_code,
+                "correlation_id": correlation_id,
+            },
+        )
+
+        return response
+
     # Guild Management
 
     async def create_guild(
@@ -98,7 +145,8 @@ class ByteAPIClient:
         )
 
         try:
-            response = await self.client.post(
+            response = await self._request(
+                "POST",
                 "/api/guilds",
                 json=request.model_dump(),
             )
@@ -126,7 +174,7 @@ class ByteAPIClient:
             APIError: If the API request fails (excluding 404)
         """
         try:
-            response = await self.client.get(f"/api/guilds/{guild_id}")
+            response = await self._request("GET", f"/api/guilds/{guild_id}")
 
             if response.status_code == HTTP_NOT_FOUND:
                 return None
@@ -162,7 +210,8 @@ class ByteAPIClient:
         request = UpdateGuildRequest(**updates)
 
         try:
-            response = await self.client.patch(
+            response = await self._request(
+                "PATCH",
                 f"/api/guilds/{guild_id}",
                 json=request.model_dump(exclude_unset=True),
             )
@@ -187,7 +236,7 @@ class ByteAPIClient:
             APIError: If the API request fails
         """
         try:
-            response = await self.client.delete(f"/api/guilds/{guild_id}")
+            response = await self._request("DELETE", f"/api/guilds/{guild_id}")
             response.raise_for_status()
         except httpx.HTTPStatusError as e:
             msg = f"Failed to delete guild: {e.response.text}"
@@ -241,7 +290,7 @@ class ByteAPIClient:
             APIError: If the API is unhealthy
         """
         try:
-            response = await self.client.get("/health")
+            response = await self._request("GET", "/health")
             response.raise_for_status()
             return response.json()
         except (httpx.HTTPStatusError, httpx.RequestError) as e:
