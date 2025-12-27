@@ -27,13 +27,10 @@ ENV UV_SYSTEM_PYTHON=1 \
 # Copy workspace configuration files
 COPY pyproject.toml uv.lock ./
 
-# Copy shared packages and service code
+# Copy all workspace members (needed to satisfy lockfile)
 COPY packages/byte-common ./packages/byte-common
 COPY services/bot ./services/bot
-
-# Create stub for services/api to satisfy workspace definition
-RUN mkdir -p services/api/src && \
-    echo '[project]\nname = "byte-api"\nversion = "0.1.0"' > services/api/pyproject.toml
+COPY services/api ./services/api
 
 # Install dependencies with frozen lockfile (no dev dependencies)
 # This creates a .venv directory with all dependencies
