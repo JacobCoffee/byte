@@ -37,7 +37,7 @@ RUN mkdir -p services/api/src && \
 
 # Install dependencies with frozen lockfile (no dev dependencies)
 # This creates a .venv directory with all dependencies
-RUN uv sync --frozen --no-dev --no-editable --package byte-bot --package byte-common
+RUN uv sync --frozen --no-dev --no-editable
 
 # ============================================================================
 # Runtime Stage: Minimal production image
