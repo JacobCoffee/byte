@@ -442,6 +442,7 @@ dependencies = [
     { name = "pydantic-settings" },
     { name = "python-dateutil" },
     { name = "python-dotenv" },
+    { name = "ruff" },
     { name = "tenacity" },
 ]
 
@@ -455,6 +456,7 @@ requires-dist = [
     { name = "pydantic-settings", specifier = ">=2.1.0" },
     { name = "python-dateutil", specifier = ">=2.9.0.post0" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
+    { name = "ruff", specifier = ">=0.8.0" },
     { name = "tenacity", specifier = ">=8.2.0" },
 ]
 
