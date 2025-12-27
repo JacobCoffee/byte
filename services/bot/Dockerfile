@@ -30,9 +30,13 @@ COPY pyproject.toml uv.lock ./
 COPY packages/byte-common ./packages/byte-common
 COPY services/bot ./services/bot
 
+# Create stub for services/api to satisfy workspace definition
+RUN mkdir -p services/api/src && \
+    echo '[project]\nname = "byte-api"\nversion = "0.1.0"' > services/api/pyproject.toml
+
 # Install dependencies with frozen lockfile (no dev dependencies)
 # This creates a .venv directory with all dependencies
-RUN uv sync --frozen --no-dev --no-editable
+RUN uv sync --frozen --no-dev --no-editable --package byte-bot --package byte-common
 
 # ============================================================================
 # Runtime Stage: Minimal production image
