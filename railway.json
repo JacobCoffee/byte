@@ -4,6 +4,6 @@
     "builder": "NIXPACKS"
   },
   "deploy": {
-    "startCommand": "uv run python -m byte_api.scripts.migrate && uv run litestar run --app byte_api.app:create_app --host 0.0.0.0 --port $PORT --workers 2"
+    "startCommand": "uv run python -m byte_api.scripts.migrate && uv run litestar --app byte_api.app:create_app run --host 0.0.0.0 --port $PORT -W 2"
   }
 }
