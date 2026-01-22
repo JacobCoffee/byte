@@ -963,6 +963,16 @@ class TestSmartChunkText:
         result = smart_chunk_text("")
         assert result == []
 
+    def test_invalid_max_size_raises_error(self) -> None:
+        """Test that non-positive max_size raises ValueError."""
+        import pytest
+
+        with pytest.raises(ValueError, match="max_size must be positive"):
+            smart_chunk_text("test", max_size=0)
+
+        with pytest.raises(ValueError, match="max_size must be positive"):
+            smart_chunk_text("test", max_size=-1)
+
     def test_text_within_limit(self) -> None:
         """Test text that fits within max_size."""
         text = "Short text"
@@ -1027,13 +1037,21 @@ class TestSmartChunkText:
             assert "`my_function()`" in combined
 
     def test_preserves_code_blocks(self) -> None:
-        """Test that code blocks are not broken when they fit within max_size."""
+        """Test that code blocks stay in the same chunk when they fit within max_size."""
         text = "Example:\n\n```python\ndef foo():\n    pass\n```\n\nEnd of content."
         result = smart_chunk_text(text, 60)
-        combined = "".join(result)
-        assert "```python" in combined
-        assert "def foo():" in combined
-        assert "```" in combined
+
+        block_chunk_found = False
+        for chunk in result:
+            backtick_fence_count = chunk.count("```")
+            assert backtick_fence_count in (0, 2), "Chunk should not contain unmatched code fence"
+
+            if "```python" in chunk:
+                assert "def foo():" in chunk, "Code block content should stay with opening fence"
+                assert chunk.count("```") == 2, "Opening and closing fences should be in same chunk"
+                block_chunk_found = True
+
+        assert block_chunk_found, "Should find a chunk containing the code block"
 
     def test_chunks_do_not_exceed_max_size(self) -> None:
         """Test that all chunks respect max_size limit."""

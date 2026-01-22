@@ -200,11 +200,18 @@ def smart_chunk_text(text: str, max_size: int = 1000) -> list[str]:
 
     Args:
         text: The text to chunk.
-        max_size: Maximum characters per chunk.
+        max_size: Maximum characters per chunk (must be > 0).
 
     Returns:
         List of text chunks.
+
+    Raises:
+        ValueError: If max_size is not positive.
     """
+    if max_size <= 0:
+        msg = f"max_size must be positive, got {max_size}"
+        raise ValueError(msg)
+
     if not text:
         return []
 
