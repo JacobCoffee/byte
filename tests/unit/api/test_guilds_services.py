@@ -25,11 +25,17 @@ if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
 __all__ = [
+    "test_allowed_users_config_get_by_guild_id_not_found",
+    "test_allowed_users_config_get_by_guild_id_success",
     "test_allowed_users_config_repository_create",
     "test_allowed_users_config_service_operations",
+    "test_forum_config_get_by_guild_id_not_found",
+    "test_forum_config_get_by_guild_id_success",
     "test_forum_config_repository_type",
     "test_forum_config_service_bug_fix_verification",
     "test_forum_config_service_operations",
+    "test_github_config_get_by_guild_id_not_found",
+    "test_github_config_get_by_guild_id_success",
     "test_github_config_repository_create",
     "test_github_config_service_match_fields",
     "test_guilds_repository_create",
@@ -39,6 +45,8 @@ __all__ = [
     "test_guilds_repository_update",
     "test_guilds_service_create",
     "test_guilds_service_match_fields",
+    "test_sotags_config_get_by_guild_id_not_found",
+    "test_sotags_config_get_by_guild_id_success",
     "test_sotags_config_repository_create",
     "test_sotags_config_service_operations",
 ]
@@ -452,3 +460,158 @@ async def test_forum_config_service_bug_fix_verification(db_session: AsyncSessio
     configs, count = await service.list_and_count()
     assert count >= 1
     assert any(c.id == created_config.id for c in configs)
+
+
+# --- get_by_guild_id Helper Method Tests ---
+
+
+@pytest.mark.asyncio
+@pytest.mark.unit
+async def test_github_config_get_by_guild_id_success(db_session: AsyncSession, sample_guild: Guild) -> None:
+    """Test GitHubConfigService.get_by_guild_id returns config for valid guild."""
+    guild_repo = GuildsRepository(session=db_session)
+    await guild_repo.add(sample_guild)
+    await db_session.flush()
+
+    service = GitHubConfigService(session=db_session)
+    created_config = await service.create(
+        {
+            "guild_id": sample_guild.guild_id,
+            "github_organization": "test-org",
+            "github_repository": "test-repo",
+            "discussion_sync": True,
+        }
+    )
+
+    result = await service.get_by_guild_id(sample_guild.guild_id)
+
+    assert result.id == created_config.id
+    assert result.guild_id == sample_guild.guild_id
+    assert result.github_organization == "test-org"
+
+
+@pytest.mark.asyncio
+@pytest.mark.unit
+async def test_github_config_get_by_guild_id_not_found(db_session: AsyncSession) -> None:
+    """Test GitHubConfigService.get_by_guild_id raises NotFoundError for missing config."""
+    from advanced_alchemy.exceptions import NotFoundError
+
+    service = GitHubConfigService(session=db_session)
+
+    with pytest.raises(NotFoundError):
+        await service.get_by_guild_id(999999999)
+
+
+@pytest.mark.asyncio
+@pytest.mark.unit
+async def test_sotags_config_get_by_guild_id_success(db_session: AsyncSession, sample_guild: Guild) -> None:
+    """Test SOTagsConfigService.get_by_guild_id returns config for valid guild."""
+    guild_repo = GuildsRepository(session=db_session)
+    await guild_repo.add(sample_guild)
+    await db_session.flush()
+
+    service = SOTagsConfigService(session=db_session)
+    created_config = await service.create(
+        {
+            "guild_id": sample_guild.guild_id,
+            "tag_name": "python",
+        }
+    )
+
+    result = await service.get_by_guild_id(sample_guild.guild_id)
+
+    assert result.id == created_config.id
+    assert result.guild_id == sample_guild.guild_id
+    assert result.tag_name == "python"
+
+
+@pytest.mark.asyncio
+@pytest.mark.unit
+async def test_sotags_config_get_by_guild_id_not_found(db_session: AsyncSession) -> None:
+    """Test SOTagsConfigService.get_by_guild_id raises NotFoundError for missing config."""
+    from advanced_alchemy.exceptions import NotFoundError
+
+    service = SOTagsConfigService(session=db_session)
+
+    with pytest.raises(NotFoundError):
+        await service.get_by_guild_id(999999999)
+
+
+@pytest.mark.asyncio
+@pytest.mark.unit
+async def test_allowed_users_config_get_by_guild_id_success(
+    db_session: AsyncSession,
+    sample_guild: Guild,
+    sample_user: User,
+) -> None:
+    """Test AllowedUsersConfigService.get_by_guild_id returns config for valid guild."""
+    guild_repo = GuildsRepository(session=db_session)
+    await guild_repo.add(sample_guild)
+    await db_session.flush()
+
+    await db_session.merge(sample_user)
+    await db_session.flush()
+
+    service = AllowedUsersConfigService(session=db_session)
+    created_config = await service.create(
+        {
+            "guild_id": sample_guild.guild_id,
+            "user_id": sample_user.id,
+        }
+    )
+
+    result = await service.get_by_guild_id(sample_guild.guild_id)
+
+    assert result.id == created_config.id
+    assert result.guild_id == sample_guild.guild_id
+
+
+@pytest.mark.asyncio
+@pytest.mark.unit
+async def test_allowed_users_config_get_by_guild_id_not_found(db_session: AsyncSession) -> None:
+    """Test AllowedUsersConfigService.get_by_guild_id raises NotFoundError for missing config."""
+    from advanced_alchemy.exceptions import NotFoundError
+
+    service = AllowedUsersConfigService(session=db_session)
+
+    with pytest.raises(NotFoundError):
+        await service.get_by_guild_id(999999999)
+
+
+@pytest.mark.asyncio
+@pytest.mark.unit
+async def test_forum_config_get_by_guild_id_success(db_session: AsyncSession, sample_guild: Guild) -> None:
+    """Test ForumConfigService.get_by_guild_id returns config for valid guild."""
+    guild_repo = GuildsRepository(session=db_session)
+    await guild_repo.add(sample_guild)
+    await db_session.flush()
+
+    service = ForumConfigService(session=db_session)
+    created_config = await service.create(
+        {
+            "guild_id": sample_guild.guild_id,
+            "help_forum": True,
+            "help_forum_category": "Help",
+            "help_thread_auto_close": False,
+            "showcase_forum": False,
+        }
+    )
+
+    result = await service.get_by_guild_id(sample_guild.guild_id)
+
+    assert result.id == created_config.id
+    assert result.guild_id == sample_guild.guild_id
+    assert result.help_forum is True
+    assert result.help_forum_category == "Help"
+
+
+@pytest.mark.asyncio
+@pytest.mark.unit
+async def test_forum_config_get_by_guild_id_not_found(db_session: AsyncSession) -> None:
+    """Test ForumConfigService.get_by_guild_id raises NotFoundError for missing config."""
+    from advanced_alchemy.exceptions import NotFoundError
+
+    service = ForumConfigService(session=db_session)
+
+    with pytest.raises(NotFoundError):
+        await service.get_by_guild_id(999999999)

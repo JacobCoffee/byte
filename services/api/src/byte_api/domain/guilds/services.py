@@ -61,6 +61,20 @@ class GitHubConfigService(SQLAlchemyAsyncRepositoryService[GitHubConfig]):
     repository_type = GitHubConfigRepository
     match_fields = ["guild_id"]
 
+    async def get_by_guild_id(self, guild_id: int) -> GitHubConfig:
+        """Get GitHub config by guild ID.
+
+        Args:
+            guild_id: The Discord guild ID.
+
+        Returns:
+            The GitHub config for the guild.
+
+        Raises:
+            NotFoundError: If no config exists for the guild.
+        """
+        return await self.get(guild_id, id_attribute="guild_id")
+
     async def to_model(self, data: ModelDictT[GitHubConfig], operation: str | None = None) -> GitHubConfig:
         """Convert data to a model.
 
@@ -85,6 +99,20 @@ class SOTagsConfigService(SQLAlchemyAsyncRepositoryService[SOTagsConfig]):
 
     repository_type = SOTagsConfigRepository
     match_fields = ["guild_id"]
+
+    async def get_by_guild_id(self, guild_id: int) -> SOTagsConfig:
+        """Get StackOverflow tags config by guild ID.
+
+        Args:
+            guild_id: The Discord guild ID.
+
+        Returns:
+            The StackOverflow tags config for the guild.
+
+        Raises:
+            NotFoundError: If no config exists for the guild.
+        """
+        return await self.get(guild_id, id_attribute="guild_id")
 
     async def to_model(self, data: ModelDictT[SOTagsConfig], operation: str | None = None) -> SOTagsConfig:
         """Convert data to a model.
@@ -111,6 +139,20 @@ class AllowedUsersConfigService(SQLAlchemyAsyncRepositoryService[AllowedUsersCon
     repository_type = AllowedUsersConfigRepository
     match_fields = ["guild_id"]
 
+    async def get_by_guild_id(self, guild_id: int) -> AllowedUsersConfig:
+        """Get allowed users config by guild ID.
+
+        Args:
+            guild_id: The Discord guild ID.
+
+        Returns:
+            The allowed users config for the guild.
+
+        Raises:
+            NotFoundError: If no config exists for the guild.
+        """
+        return await self.get(guild_id, id_attribute="guild_id")
+
     async def to_model(self, data: ModelDictT[AllowedUsersConfig], operation: str | None = None) -> AllowedUsersConfig:
         """Convert data to a model.
 
@@ -135,6 +177,20 @@ class ForumConfigService(SQLAlchemyAsyncRepositoryService[ForumConfig]):
 
     repository_type = ForumConfigRepository
     match_fields = ["guild_id"]
+
+    async def get_by_guild_id(self, guild_id: int) -> ForumConfig:
+        """Get forum config by guild ID.
+
+        Args:
+            guild_id: The Discord guild ID.
+
+        Returns:
+            The forum config for the guild.
+
+        Raises:
+            NotFoundError: If no config exists for the guild.
+        """
+        return await self.get(guild_id, id_attribute="guild_id")
 
     async def to_model(self, data: ModelDictT[ForumConfig], operation: str | None = None) -> ForumConfig:
         """Convert data to a model.

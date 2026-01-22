@@ -212,8 +212,6 @@ class GuildsController(Controller):
     ) -> GitHubConfigSchema | OffsetPagination[GitHubConfigSchema]:
         """Get a guild's GitHub config by ID.
 
-        TODO(#88): a helper method that we can use outside of routes would be nice.
-
         Args:
             github_service (GitHubConfigService): GitHub config service
             guild_id (int): Guild ID
@@ -221,7 +219,7 @@ class GuildsController(Controller):
         Returns:
             GitHubConfig: GitHub config object
         """
-        result = await github_service.get(guild_id, id_attribute="guild_id")
+        result = await github_service.get_by_guild_id(guild_id)
         return github_service.to_schema(schema_type=GitHubConfigSchema, data=result)
 
     @get(
@@ -247,7 +245,7 @@ class GuildsController(Controller):
         Returns:
             SOTagsConfig: StackOverflow tags config object
         """
-        result = await sotags_service.get(guild_id, id_attribute="guild_id")
+        result = await sotags_service.get_by_guild_id(guild_id)
         return sotags_service.to_schema(schema_type=SOTagsConfigSchema, data=result)
 
     @get(
@@ -273,7 +271,7 @@ class GuildsController(Controller):
         Returns:
             AllowedUsersConfig: Allowed users config object
         """
-        result = await allowed_users_service.get(guild_id, id_attribute="guild_id")
+        result = await allowed_users_service.get_by_guild_id(guild_id)
         return allowed_users_service.to_schema(schema_type=AllowedUsersConfigSchema, data=result)
 
     @get(
@@ -299,5 +297,5 @@ class GuildsController(Controller):
         Returns:
             ForumConfig: Forum config object
         """
-        result = await forum_service.get(guild_id, id_attribute="guild_id")
+        result = await forum_service.get_by_guild_id(guild_id)
         return forum_service.to_schema(schema_type=ForumConfigSchema, data=result)
