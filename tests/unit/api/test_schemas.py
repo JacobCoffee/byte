@@ -7,23 +7,35 @@ from pydantic import ValidationError
 
 from byte_api.domain.guilds.schemas import (
     AllowedUsersConfigSchema,
+    AllowedUserSetting,
+    BaseGuildSetting,
     ForumConfigSchema,
+    ForumSetting,
     GitHubConfigSchema,
+    GitHubConfigSetting,
     GuildCreate,
+    GuildModelSetting,
     GuildSchema,
     GuildUpdate,
     SOTagsConfigSchema,
+    SOTagsSetting,
     UpdateableGuildSetting,
 )
 
 __all__ = [
+    "TestAllowedUserSetting",
     "TestAllowedUsersConfigSchema",
+    "TestBaseGuildSetting",
     "TestForumConfigSchema",
+    "TestForumSetting",
     "TestGitHubConfigSchema",
+    "TestGitHubConfigSetting",
     "TestGuildCreate",
+    "TestGuildModelSetting",
     "TestGuildSchema",
     "TestGuildUpdate",
     "TestSOTagsConfigSchema",
+    "TestSOTagsSetting",
     "TestSchemaDocumentation",
     "TestSchemaValidation",
     "TestUpdateableGuildSetting",
@@ -470,6 +482,250 @@ class TestUpdateableGuildSetting:
         assert data["help_thread_notify_roles"] == []
 
 
+class TestBaseGuildSetting:
+    """Tests for BaseGuildSetting schema."""
+
+    def test_base_guild_setting_is_base_class(self) -> None:
+        """Test BaseGuildSetting serves as a base class for setting schemas."""
+        from byte_api.lib.schema import CamelizedBaseModel
+
+        assert issubclass(BaseGuildSetting, CamelizedBaseModel)
+        schema = BaseGuildSetting()
+        assert schema.model_dump() == {}
+
+    def test_base_guild_setting_has_docstring(self) -> None:
+        """Test BaseGuildSetting has a docstring."""
+        assert BaseGuildSetting.__doc__ is not None
+
+
+class TestGuildModelSetting:
+    """Tests for GuildModelSetting schema."""
+
+    def test_guild_model_setting_valid(self) -> None:
+        """Test creating valid GuildModelSetting."""
+        schema = GuildModelSetting(
+            prefix="!",
+            help_channel_id=123,
+            showcase_channel_id=456,
+            sync_label="sync",
+            issue_linking=True,
+            comment_linking=False,
+            pep_linking=True,
+        )
+
+        assert schema.prefix == "!"
+        assert schema.help_channel_id == 123
+        assert schema.showcase_channel_id == 456
+        assert schema.sync_label == "sync"
+        assert schema.issue_linking is True
+        assert schema.comment_linking is False
+        assert schema.pep_linking is True
+
+    def test_guild_model_setting_inherits_from_base(self) -> None:
+        """Test GuildModelSetting inherits from BaseGuildSetting."""
+        assert issubclass(GuildModelSetting, BaseGuildSetting)
+
+    def test_guild_model_setting_required_fields(self) -> None:
+        """Test GuildModelSetting has all required fields."""
+        required_fields = {
+            "prefix",
+            "help_channel_id",
+            "showcase_channel_id",
+            "sync_label",
+            "issue_linking",
+            "comment_linking",
+            "pep_linking",
+        }
+        assert required_fields.issubset(GuildModelSetting.model_fields.keys())
+
+    def test_guild_model_setting_serialization(self) -> None:
+        """Test GuildModelSetting serialization."""
+        schema = GuildModelSetting(
+            prefix="$",
+            help_channel_id=1,
+            showcase_channel_id=2,
+            sync_label="label",
+            issue_linking=False,
+            comment_linking=False,
+            pep_linking=False,
+        )
+
+        data = schema.model_dump()
+
+        assert data["prefix"] == "$"
+        assert data["help_channel_id"] == 1
+        assert data["issue_linking"] is False
+
+
+class TestGitHubConfigSetting:
+    """Tests for GitHubConfigSetting schema."""
+
+    def test_github_config_setting_valid(self) -> None:
+        """Test creating valid GitHubConfigSetting."""
+        schema = GitHubConfigSetting(
+            discussion_sync=True,
+            github_organization="my-org",
+            github_repository="my-repo",
+        )
+
+        assert schema.discussion_sync is True
+        assert schema.github_organization == "my-org"
+        assert schema.github_repository == "my-repo"
+
+    def test_github_config_setting_inherits_from_base(self) -> None:
+        """Test GitHubConfigSetting inherits from BaseGuildSetting."""
+        assert issubclass(GitHubConfigSetting, BaseGuildSetting)
+
+    def test_github_config_setting_required_fields(self) -> None:
+        """Test GitHubConfigSetting has all required fields."""
+        required_fields = {"discussion_sync", "github_organization", "github_repository"}
+        assert required_fields.issubset(GitHubConfigSetting.model_fields.keys())
+
+    def test_github_config_setting_serialization(self) -> None:
+        """Test GitHubConfigSetting serialization."""
+        schema = GitHubConfigSetting(
+            discussion_sync=False,
+            github_organization="org",
+            github_repository="repo",
+        )
+
+        data = schema.model_dump()
+
+        assert data["discussion_sync"] is False
+        assert data["github_organization"] == "org"
+
+
+class TestSOTagsSetting:
+    """Tests for SOTagsSetting schema."""
+
+    def test_sotags_setting_valid(self) -> None:
+        """Test creating valid SOTagsSetting."""
+        schema = SOTagsSetting(tag_name=["python", "litestar"])
+
+        assert schema.tag_name == ["python", "litestar"]
+
+    def test_sotags_setting_inherits_from_base(self) -> None:
+        """Test SOTagsSetting inherits from BaseGuildSetting."""
+        assert issubclass(SOTagsSetting, BaseGuildSetting)
+
+    def test_sotags_setting_required_fields(self) -> None:
+        """Test SOTagsSetting has all required fields."""
+        required_fields = {"tag_name"}
+        assert required_fields.issubset(SOTagsSetting.model_fields.keys())
+
+    def test_sotags_setting_empty_list(self) -> None:
+        """Test SOTagsSetting with empty list."""
+        schema = SOTagsSetting(tag_name=[])
+
+        assert schema.tag_name == []
+
+    def test_sotags_setting_serialization(self) -> None:
+        """Test SOTagsSetting serialization."""
+        schema = SOTagsSetting(tag_name=["tag1", "tag2"])
+
+        data = schema.model_dump()
+
+        assert data["tag_name"] == ["tag1", "tag2"]
+
+
+class TestAllowedUserSetting:
+    """Tests for AllowedUserSetting schema."""
+
+    def test_allowed_user_setting_valid(self) -> None:
+        """Test creating valid AllowedUserSetting."""
+        schema = AllowedUserSetting(allowed_user_id=123456789)
+
+        assert schema.allowed_user_id == 123456789
+
+    def test_allowed_user_setting_inherits_from_base(self) -> None:
+        """Test AllowedUserSetting inherits from BaseGuildSetting."""
+        assert issubclass(AllowedUserSetting, BaseGuildSetting)
+
+    def test_allowed_user_setting_required_fields(self) -> None:
+        """Test AllowedUserSetting has all required fields."""
+        required_fields = {"allowed_user_id"}
+        assert required_fields.issubset(AllowedUserSetting.model_fields.keys())
+
+    def test_allowed_user_setting_serialization(self) -> None:
+        """Test AllowedUserSetting serialization."""
+        schema = AllowedUserSetting(allowed_user_id=999)
+
+        data = schema.model_dump()
+
+        assert data["allowed_user_id"] == 999
+
+
+class TestForumSetting:
+    """Tests for ForumSetting schema."""
+
+    def test_forum_setting_valid(self) -> None:
+        """Test creating valid ForumSetting."""
+        schema = ForumSetting(
+            help_forum=True,
+            help_forum_category="Help",
+            help_thread_auto_close=True,
+            help_thread_auto_close_days=7,
+            help_thread_notify=False,
+            help_thread_notify_roles=[123, 456],
+            help_thread_notify_days=3,
+            help_thread_sync=True,
+            showcase_forum=True,
+            showcase_forum_category="Showcase",
+            showcase_thread_auto_close=False,
+            showcase_thread_auto_close_days=0,
+        )
+
+        assert schema.help_forum is True
+        assert schema.help_forum_category == "Help"
+        assert schema.help_thread_auto_close_days == 7
+        assert schema.help_thread_notify_roles == [123, 456]
+        assert schema.showcase_forum is True
+
+    def test_forum_setting_inherits_from_base(self) -> None:
+        """Test ForumSetting inherits from BaseGuildSetting."""
+        assert issubclass(ForumSetting, BaseGuildSetting)
+
+    def test_forum_setting_required_fields(self) -> None:
+        """Test ForumSetting has all required fields."""
+        required_fields = {
+            "help_forum",
+            "help_forum_category",
+            "help_thread_auto_close",
+            "help_thread_auto_close_days",
+            "help_thread_notify",
+            "help_thread_notify_roles",
+            "help_thread_notify_days",
+            "help_thread_sync",
+            "showcase_forum",
+            "showcase_forum_category",
+            "showcase_thread_auto_close",
+            "showcase_thread_auto_close_days",
+        }
+        assert required_fields.issubset(ForumSetting.model_fields.keys())
+
+    def test_forum_setting_serialization(self) -> None:
+        """Test ForumSetting serialization."""
+        schema = ForumSetting(
+            help_forum=False,
+            help_forum_category="",
+            help_thread_auto_close=False,
+            help_thread_auto_close_days=0,
+            help_thread_notify=False,
+            help_thread_notify_roles=[],
+            help_thread_notify_days=0,
+            help_thread_sync=False,
+            showcase_forum=False,
+            showcase_forum_category="",
+            showcase_thread_auto_close=False,
+            showcase_thread_auto_close_days=0,
+        )
+
+        data = schema.model_dump()
+
+        assert data["help_forum"] is False
+        assert data["help_thread_notify_roles"] == []
+
+
 class TestSchemaDocumentation:
     """Tests for schema documentation and metadata."""
 
@@ -484,6 +740,12 @@ class TestSchemaDocumentation:
             GuildCreate,
             GuildUpdate,
             UpdateableGuildSetting,
+            BaseGuildSetting,
+            GuildModelSetting,
+            GitHubConfigSetting,
+            SOTagsSetting,
+            AllowedUserSetting,
+            ForumSetting,
         ]
 
         for schema in schemas:
@@ -609,10 +871,37 @@ class TestSchemaInheritance:
             GuildCreate,
             GuildUpdate,
             UpdateableGuildSetting,
+            BaseGuildSetting,
+            GuildModelSetting,
+            GitHubConfigSetting,
+            SOTagsSetting,
+            AllowedUserSetting,
+            ForumSetting,
         ]
 
         for schema in schemas:
             assert issubclass(schema, CamelizedBaseModel), f"{schema.__name__} doesn't inherit from CamelizedBaseModel"
+
+    def test_updateable_guild_setting_inherits_from_all_focused_classes(self) -> None:
+        """Test UpdateableGuildSetting inherits from all focused setting classes."""
+        assert issubclass(UpdateableGuildSetting, GuildModelSetting)
+        assert issubclass(UpdateableGuildSetting, GitHubConfigSetting)
+        assert issubclass(UpdateableGuildSetting, SOTagsSetting)
+        assert issubclass(UpdateableGuildSetting, AllowedUserSetting)
+        assert issubclass(UpdateableGuildSetting, ForumSetting)
+
+    def test_focused_classes_inherit_from_base_guild_setting(self) -> None:
+        """Test all focused setting classes inherit from BaseGuildSetting."""
+        focused_classes = [
+            GuildModelSetting,
+            GitHubConfigSetting,
+            SOTagsSetting,
+            AllowedUserSetting,
+            ForumSetting,
+        ]
+
+        for cls in focused_classes:
+            assert issubclass(cls, BaseGuildSetting), f"{cls.__name__} doesn't inherit from BaseGuildSetting"
 
     def test_camelized_serialization_works(self) -> None:
         """Test that camelCase serialization works."""
