@@ -25,6 +25,7 @@ __all__ = (
     "LogSettings",
     "OpenAPISettings",
     "ProjectSettings",
+    "RateLimitSettings",
     "ServerSettings",
     "TemplateSettings",
     "load_settings",
@@ -368,6 +369,40 @@ class DatabaseSettings(BaseSettings):
     """Name of the table used to track DDL version."""
 
 
+class RateLimitSettings(BaseSettings):
+    """Configures rate limiting for the API."""
+
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="RATE_LIMIT_", extra="ignore")
+
+    ENABLED: bool = True
+    """Enable or disable rate limiting."""
+    REQUESTS_PER_MINUTE: int = 100
+    """Maximum requests allowed per minute for general endpoints."""
+    EXCLUDE_PATHS: list[str] = ["/health", "/api/schema", "/api/scalar", "/api/swagger"]
+    """Paths to exclude from rate limiting."""
+    SET_HEADERS: bool = True
+    """Include rate limit headers in responses."""
+
+    @field_validator("EXCLUDE_PATHS", mode="before")
+    @classmethod
+    def parse_exclude_paths(cls, value: str | list[str] | None) -> list[str]:
+        """Parse exclude paths from string or list.
+
+        Args:
+            value: A comma-separated string of paths, or a list of paths.
+
+        Returns:
+            A list of paths to exclude.
+        """
+        if value is None:
+            return ["/health", "/api/schema", "/api/scalar", "/api/swagger"]
+        if isinstance(value, list):
+            return value
+        if isinstance(value, str):
+            return [path.strip() for path in value.split(",")]
+        return []
+
+
 class GitHubSettings(BaseSettings):
     """Configures GitHub app for the project."""
 
@@ -433,6 +468,7 @@ def load_settings() -> tuple[
     LogSettings,
     DatabaseSettings,
     GitHubSettings,
+    RateLimitSettings,
 ]:
     """Load Settings file.
 
@@ -452,6 +488,7 @@ def load_settings() -> tuple[
         log: LogSettings = LogSettings.model_validate({})
         database: DatabaseSettings = DatabaseSettings.model_validate({})
         github: GitHubSettings = GitHubSettings.model_validate({})
+        rate_limit: RateLimitSettings = RateLimitSettings.model_validate({})
 
     except ValidationError as error:
         print(f"Could not load settings. Error: {error!r}")  # noqa: T201
@@ -465,6 +502,7 @@ def load_settings() -> tuple[
         log,
         database,
         github,
+        rate_limit,
     )
 
 
@@ -477,4 +515,5 @@ def load_settings() -> tuple[
     log,
     db,
     github,
+    rate_limit,
 ) = load_settings()

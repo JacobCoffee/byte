@@ -29,6 +29,7 @@ def create_app() -> Litestar:
         exceptions,
         log,
         openapi,
+        rate_limit,
         schema,
         settings,
         static_files,
@@ -40,6 +41,10 @@ def create_app() -> Litestar:
     dependencies = create_collection_dependencies()
 
     from byte_api.domain.web.controllers.websocket import set_startup_time
+
+    middleware_list = [correlation_middleware, metrics_middleware, log.controller.middleware_factory]
+    if rate_limit.middleware is not None:
+        middleware_list.append(rate_limit.middleware)
 
     return Litestar(
         # Handlers
@@ -65,7 +70,7 @@ def create_app() -> Litestar:
         on_app_init=[],
         # Other
         debug=settings.project.DEBUG,
-        middleware=[correlation_middleware, metrics_middleware, log.controller.middleware_factory],
+        middleware=middleware_list,
         signature_namespace=domain.signature_namespace,
         type_encoders={
             SecretStr: str,
