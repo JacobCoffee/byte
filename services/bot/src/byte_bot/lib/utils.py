@@ -37,6 +37,7 @@ __all__ = (
     "query_all_peps",
     "query_all_ruff_rules",
     "run_ruff_format",
+    "smart_chunk_text",
 )
 
 
@@ -151,6 +152,87 @@ def chunk_sequence[T](sequence: Iterable[T], size: int) -> Iterable[tuple[T, ...
     _sequence = iter(sequence)
     while chunk := tuple(islice(_sequence, size)):
         yield chunk
+
+
+def _find_protected_regions(text: str) -> list[tuple[int, int]]:
+    """Find markdown structures that should not be split."""
+    pattern = re.compile(
+        r"```[\s\S]*?```"  # code blocks
+        r"|`[^`\n]+`"  # inline code
+        r"|\[[^\]]*\]\([^)]*\)"  # markdown links
+    )
+    return [(m.start(), m.end()) for m in pattern.finditer(text)]
+
+
+def _is_position_protected(pos: int, regions: list[tuple[int, int]]) -> bool:
+    """Check if a position falls within a protected region."""
+    return any(start <= pos < end for start, end in regions)
+
+
+def _find_split_point(
+    text_segment: str, start_offset: int, max_size: int, protected_regions: list[tuple[int, int]]
+) -> int:
+    """Find the best split point within max_size that respects protected regions."""
+    search_start = max(0, max_size - 200)
+
+    for sep in ["\n\n", ". ", "! ", "? ", "\n", " "]:
+        pos = max_size
+        while pos > search_start:
+            idx = text_segment.rfind(sep, search_start, pos)
+            if idx == -1:
+                break
+            if not _is_position_protected(start_offset + idx, protected_regions):
+                return idx + len(sep)
+            pos = idx
+
+    for i in range(max_size, search_start, -1):
+        if not _is_position_protected(start_offset + i, protected_regions):
+            return i
+
+    return max_size
+
+
+def smart_chunk_text(text: str, max_size: int = 1000) -> list[str]:
+    """Split text into chunks without breaking markdown structures.
+
+    Respects markdown links, inline code, and code blocks. Prefers splitting at
+    natural boundaries: paragraphs > sentences > newlines > spaces.
+
+    Args:
+        text: The text to chunk.
+        max_size: Maximum characters per chunk.
+
+    Returns:
+        List of text chunks.
+    """
+    if not text:
+        return []
+
+    if len(text) <= max_size:
+        return [text]
+
+    protected_regions = _find_protected_regions(text)
+    chunks: list[str] = []
+    current_pos = 0
+
+    while current_pos < len(text):
+        remaining = text[current_pos:]
+
+        if len(remaining) <= max_size:
+            chunks.append(remaining)
+            break
+
+        split_at = _find_split_point(remaining, current_pos, max_size, protected_regions)
+        chunk = remaining[:split_at].rstrip()
+
+        if chunk:
+            chunks.append(chunk)
+
+        current_pos += split_at
+        while current_pos < len(text) and text[current_pos] in " \n":
+            current_pos += 1
+
+    return chunks
 
 
 def format_resolution_link(resolution: str | None) -> str:

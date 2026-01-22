@@ -11,7 +11,7 @@ from discord.ext.commands import Bot, Cog
 
 from byte_bot.lib.common.assets import ruff_logo
 from byte_bot.lib.common.colors import astral_purple, astral_yellow
-from byte_bot.lib.utils import chunk_sequence, format_ruff_rule, query_all_ruff_rules
+from byte_bot.lib.utils import format_ruff_rule, query_all_ruff_rules, smart_chunk_text
 from byte_bot.views.astral import RuffView
 
 if TYPE_CHECKING:
@@ -69,9 +69,8 @@ class Astral(Cog):
         embed = Embed(title=f"Ruff Rule: {formatted_rule_details['name']}", color=astral_yellow)
         embed.add_field(name="Summary", value=formatted_rule_details["summary"], inline=False)
 
-        # TODO: Better chunking
-        for idx, chunk in enumerate(chunk_sequence(formatted_rule_details["explanation"], 1000)):
-            embed.add_field(name="" if idx else "Explanation", value="".join(chunk), inline=False)
+        for idx, chunk in enumerate(smart_chunk_text(formatted_rule_details["explanation"], 1000)):
+            embed.add_field(name="" if idx else "Explanation", value=chunk, inline=False)
 
         embed.add_field(name="Fix", value=formatted_rule_details["fix"], inline=False)
         embed.add_field(name="Documentation", value=docs_field, inline=False)
