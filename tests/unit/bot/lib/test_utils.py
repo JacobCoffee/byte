@@ -21,6 +21,7 @@ from byte_bot.lib.utils import (
     query_all_peps,
     query_all_ruff_rules,
     run_ruff_format,
+    smart_chunk_text,
 )
 
 
@@ -952,3 +953,162 @@ class TestGetNextFriday:
 
         # Should be same Friday
         assert start_dt_no_delay.day == start_dt_zero_delay.day
+
+
+class TestSmartChunkText:
+    """Tests for smart_chunk_text function."""
+
+    def test_empty_text(self) -> None:
+        """Test with empty text."""
+        result = smart_chunk_text("")
+        assert result == []
+
+    def test_invalid_max_size_raises_error(self) -> None:
+        """Test that non-positive max_size raises ValueError."""
+        import pytest
+
+        with pytest.raises(ValueError, match="max_size must be positive"):
+            smart_chunk_text("test", max_size=0)
+
+        with pytest.raises(ValueError, match="max_size must be positive"):
+            smart_chunk_text("test", max_size=-1)
+
+    def test_text_within_limit(self) -> None:
+        """Test text that fits within max_size."""
+        text = "Short text"
+        result = smart_chunk_text(text, 100)
+        assert result == ["Short text"]
+
+    def test_splits_at_paragraph_boundary(self) -> None:
+        """Test that splitting prefers paragraph boundaries."""
+        text = "First paragraph.\n\nSecond paragraph."
+        result = smart_chunk_text(text, 25)
+        assert len(result) == 2
+        assert result[0] == "First paragraph."
+        assert result[1] == "Second paragraph."
+
+    def test_splits_at_sentence_boundary(self) -> None:
+        """Test that splitting falls back to sentence boundaries."""
+        text = "First sentence. Second sentence. Third sentence."
+        result = smart_chunk_text(text, 35)
+        assert len(result) >= 2
+        assert all(len(chunk) <= 35 for chunk in result)
+        assert "First sentence." in result[0]
+
+    def test_splits_at_newline(self) -> None:
+        """Test that splitting falls back to newlines."""
+        text = "Line one\nLine two\nLine three"
+        result = smart_chunk_text(text, 15)
+        assert len(result) >= 2
+        assert all(len(chunk) <= 15 for chunk in result)
+
+    def test_splits_at_word_boundary(self) -> None:
+        """Test that splitting falls back to word boundaries."""
+        text = "word1 word2 word3 word4 word5"
+        result = smart_chunk_text(text, 12)
+        assert len(result) >= 2
+        assert all(len(chunk) <= 12 for chunk in result)
+
+    def test_preserves_markdown_links(self) -> None:
+        """Test that markdown links are not broken when they fit within max_size."""
+        text = (
+            "First paragraph with some text here.\n\n"
+            "Check [this link](https://example.com/path) for more info.\n\n"
+            "Third paragraph with more content."
+        )
+        result = smart_chunk_text(text, 80)
+        for chunk in result:
+            if "[this link]" in chunk:
+                assert "[this link](https://example.com/path)" in chunk
+                break
+        else:
+            combined = " ".join(result)
+            assert "[this link](https://example.com/path)" in combined
+
+    def test_preserves_inline_code(self) -> None:
+        """Test that inline code is not broken when it fits within max_size."""
+        text = "First sentence here.\n\nUse the `my_function()` method here.\n\nMore text follows."
+        result = smart_chunk_text(text, 50)
+        for chunk in result:
+            if "`my_function()`" in chunk:
+                break
+        else:
+            combined = " ".join(result)
+            assert "`my_function()`" in combined
+
+    def test_preserves_code_blocks(self) -> None:
+        """Test that code blocks stay in the same chunk when they fit within max_size."""
+        text = "Example:\n\n```python\ndef foo():\n    pass\n```\n\nEnd of content."
+        result = smart_chunk_text(text, 60)
+
+        block_chunk_found = False
+        for chunk in result:
+            backtick_fence_count = chunk.count("```")
+            assert backtick_fence_count in (0, 2), "Chunk should not contain unmatched code fence"
+
+            if "```python" in chunk:
+                assert "def foo():" in chunk, "Code block content should stay with opening fence"
+                assert chunk.count("```") == 2, "Opening and closing fences should be in same chunk"
+                block_chunk_found = True
+
+        assert block_chunk_found, "Should find a chunk containing the code block"
+
+    def test_chunks_do_not_exceed_max_size(self) -> None:
+        """Test that all chunks respect max_size limit."""
+        text = "A" * 500 + " " + "B" * 500 + " " + "C" * 500
+        result = smart_chunk_text(text, 600)
+        for chunk in result:
+            assert len(chunk) <= 600
+
+    def test_multiple_markdown_links(self) -> None:
+        """Test with multiple markdown links."""
+        text = (
+            "See [link1](https://example.com/1) and [link2](https://example.com/2) "
+            "for more details on [link3](https://example.com/3)."
+        )
+        result = smart_chunk_text(text, 60)
+        combined = " ".join(result)
+        assert "[link1](https://example.com/1)" in combined
+        assert "[link2](https://example.com/2)" in combined
+        assert "[link3](https://example.com/3)" in combined
+
+    def test_mixed_protected_regions(self) -> None:
+        """Test with mixed markdown links and code."""
+        text = "Use `code` and check [docs](https://docs.example.com) for help."
+        result = smart_chunk_text(text, 40)
+        combined = " ".join(result)
+        assert "`code`" in combined
+        assert "[docs](https://docs.example.com)" in combined
+
+    def test_long_code_block_preserved(self) -> None:
+        """Test that long code blocks spanning multiple lines are preserved."""
+        code_block = "```\nline1\nline2\nline3\nline4\n```"
+        text = f"Before\n\n{code_block}\n\nAfter"
+        result = smart_chunk_text(text, 50)
+        combined = "".join(result)
+        assert code_block in combined
+
+    def test_default_max_size(self) -> None:
+        """Test that default max_size is 1000."""
+        text = "A" * 1500
+        result = smart_chunk_text(text)
+        assert len(result) >= 2
+        assert len(result[0]) <= 1000
+
+    def test_real_world_ruff_explanation(self) -> None:
+        """Test with content similar to ruff rule explanations."""
+        text = (
+            "**Why is this bad?**\n\n"
+            "Long lines make code hard to read. See [PEP 8](https://pep8.org) for guidelines.\n\n"
+            "**Example**\n\n"
+            "```python\n"
+            "x = 'very long string'\n"
+            "```\n\n"
+            "**Fix**\n\n"
+            "Break the line using parentheses."
+        )
+        result = smart_chunk_text(text, 100)
+        combined = "".join(result)
+        assert "[PEP 8](https://pep8.org)" in combined
+        assert "```python" in combined
+        assert "```" in combined
