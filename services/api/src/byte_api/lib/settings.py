@@ -20,6 +20,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 __all__ = (
     "APISettings",
+    "CORSSettings",
     "DatabaseSettings",
     "GitHubSettings",
     "LogSettings",
@@ -69,6 +70,71 @@ class ServerSettings(BaseSettings):
     """Number of HTTP Worker processes to be spawned by Uvicorn."""
 
 
+class CORSSettings(BaseSettings):
+    """CORS (Cross-Origin Resource Sharing) configuration.
+
+    Environment variables are prefixed with CORS_.
+    For production, explicitly set CORS_ALLOW_ORIGINS to specific domains.
+    """
+
+    model_config = SettingsConfigDict(case_sensitive=True, env_file=".env", env_prefix="CORS_", extra="ignore")
+
+    ALLOW_ORIGINS: list[str] = []
+    """List of origins allowed to access the API.
+
+    For production, set to specific domains like: https://byte-bot.app,https://www.byte-bot.app
+    For development, localhost origins are automatically added when ENVIRONMENT is dev/local/test.
+    """
+    ALLOW_METHODS: list[str] = ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"]
+    """HTTP methods allowed for CORS requests."""
+    ALLOW_HEADERS: list[str] = ["Authorization", "Content-Type", "X-Request-ID", "Accept", "Origin"]
+    """HTTP headers allowed in CORS requests."""
+    ALLOW_CREDENTIALS: bool = True
+    """Allow credentials (cookies, authorization headers) in CORS requests."""
+    EXPOSE_HEADERS: list[str] = ["X-Request-ID"]
+    """Headers exposed to the browser in CORS responses."""
+    MAX_AGE: int = 600
+    """Maximum time (seconds) browsers should cache CORS preflight responses."""
+
+    @field_validator("ALLOW_ORIGINS", mode="before")
+    @classmethod
+    def parse_origins(cls, value: str | list[str] | None) -> list[str]:
+        """Parse origins from comma-separated string or list.
+
+        Args:
+            value: A comma-separated string of origins, or a list of origins.
+
+        Returns:
+            A list of origins.
+        """
+        if value is None:
+            return []
+        if isinstance(value, list):
+            return [v.strip() for v in value if v.strip()]
+        if isinstance(value, str):
+            return [v.strip() for v in value.split(",") if v.strip()]
+        return []
+
+    @field_validator("ALLOW_METHODS", "ALLOW_HEADERS", "EXPOSE_HEADERS", mode="before")
+    @classmethod
+    def parse_list_field(cls, value: str | list[str] | None) -> list[str]:
+        """Parse list fields from comma-separated string or list.
+
+        Args:
+            value: A comma-separated string or a list.
+
+        Returns:
+            A list of strings.
+        """
+        if value is None:
+            return []
+        if isinstance(value, list):
+            return [v.strip() for v in value if v.strip()]
+        if isinstance(value, str):
+            return [v.strip() for v in value.split(",") if v.strip()]
+        return []
+
+
 class ProjectSettings(BaseSettings):
     """Project Settings."""
 
@@ -101,8 +167,6 @@ class ProjectSettings(BaseSettings):
     """Secret key used for signing cookies and other things."""
     JWT_ENCRYPTION_ALGORITHM: str = "HS256"
     """Algorithm used to encrypt JWTs."""
-    BACKEND_CORS_ORIGINS: list[str] = ["*"]
-    """List of origins allowed to access the API."""
     STATIC_URL: str = "/static/"
     """Default URL where static assets are located."""
     CSRF_COOKIE_NAME: str = "csrftoken"
@@ -122,33 +186,6 @@ class ProjectSettings(BaseSettings):
             ``self.NAME``, all lowercase and hyphens instead of spaces.
         """
         return "-".join(s.lower() for s in self.NAME.split())
-
-    @field_validator("BACKEND_CORS_ORIGINS")
-    @classmethod
-    def assemble_cors_origins(
-        cls,
-        value: str | list[str] | None,
-    ) -> list[str] | str:
-        """Parse a list of origins.
-
-        Args:
-            value: A comma-separated string of origins, or a list of origins.
-
-        Returns:
-            A list of origins.
-
-        Raises:
-            ValueError: If ``value`` is not a list or string.
-        """
-        if value is None:
-            return []
-        if isinstance(value, list):
-            return value
-        if isinstance(value, str) and not value.startswith("["):
-            return [host.strip() for host in value.split(",")]
-        if isinstance(value, str) and value.startswith("[") and value.endswith("]"):
-            return list(value)
-        raise ValueError(value)
 
     @field_validator("SECRET_KEY", mode="before")
     @classmethod
@@ -433,6 +470,7 @@ def load_settings() -> tuple[
     LogSettings,
     DatabaseSettings,
     GitHubSettings,
+    CORSSettings,
 ]:
     """Load Settings file.
 
@@ -452,6 +490,7 @@ def load_settings() -> tuple[
         log: LogSettings = LogSettings.model_validate({})
         database: DatabaseSettings = DatabaseSettings.model_validate({})
         github: GitHubSettings = GitHubSettings.model_validate({})
+        cors_settings: CORSSettings = CORSSettings.model_validate({})
 
     except ValidationError as error:
         print(f"Could not load settings. Error: {error!r}")  # noqa: T201
@@ -465,6 +504,7 @@ def load_settings() -> tuple[
         log,
         database,
         github,
+        cors_settings,
     )
 
 
@@ -477,4 +517,5 @@ def load_settings() -> tuple[
     log,
     db,
     github,
+    cors_settings,
 ) = load_settings()
