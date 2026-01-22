@@ -247,6 +247,17 @@ html.dark {
 <li><a class="reference internal" href="#byte_api.lib.settings.APISettings.POLAR_URL"><code class="docutils literal notranslate"><span class="pre">APISettings.POLAR_URL</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings"><code class="docutils literal notranslate"><span class="pre">CORSSettings</span></code></a><ul>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS"><code class="docutils literal notranslate"><span class="pre">CORSSettings.ALLOW_ORIGINS</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_METHODS"><code class="docutils literal notranslate"><span class="pre">CORSSettings.ALLOW_METHODS</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_HEADERS"><code class="docutils literal notranslate"><span class="pre">CORSSettings.ALLOW_HEADERS</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_CREDENTIALS"><code class="docutils literal notranslate"><span class="pre">CORSSettings.ALLOW_CREDENTIALS</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS"><code class="docutils literal notranslate"><span class="pre">CORSSettings.EXPOSE_HEADERS</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.MAX_AGE"><code class="docutils literal notranslate"><span class="pre">CORSSettings.MAX_AGE</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_origins"><code class="docutils literal notranslate"><span class="pre">CORSSettings.parse_origins</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_list_field"><code class="docutils literal notranslate"><span class="pre">CORSSettings.parse_list_field</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#byte_api.lib.settings.DatabaseSettings"><code class="docutils literal notranslate"><span class="pre">DatabaseSettings</span></code></a><ul>
 <li><a class="reference internal" href="#byte_api.lib.settings.DatabaseSettings.ECHO"><code class="docutils literal notranslate"><span class="pre">DatabaseSettings.ECHO</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.DatabaseSettings.ECHO_POOL"><code class="docutils literal notranslate"><span class="pre">DatabaseSettings.ECHO_POOL</span></code></a></li>
@@ -317,15 +328,21 @@ html.dark {
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.NAME"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.NAME</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.SECRET_KEY"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.SECRET_KEY</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.JWT_ENCRYPTION_ALGORITHM"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.JWT_ENCRYPTION_ALGORITHM</span></code></a></li>
-<li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.BACKEND_CORS_ORIGINS</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.STATIC_URL"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.STATIC_URL</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.CSRF_COOKIE_NAME"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.CSRF_COOKIE_NAME</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.CSRF_COOKIE_SECURE"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.CSRF_COOKIE_SECURE</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.STATIC_DIR"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.STATIC_DIR</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.DEV_MODE"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.DEV_MODE</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.slug"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.slug</span></code></a></li>
-<li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.assemble_cors_origins"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.assemble_cors_origins</span></code></a></li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.generate_secret_key"><code class="docutils literal notranslate"><span class="pre">ProjectSettings.generate_secret_key</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings"><code class="docutils literal notranslate"><span class="pre">RateLimitSettings</span></code></a><ul>
+<li><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.ENABLED"><code class="docutils literal notranslate"><span class="pre">RateLimitSettings.ENABLED</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.REQUESTS_PER_MINUTE"><code class="docutils literal notranslate"><span class="pre">RateLimitSettings.REQUESTS_PER_MINUTE</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS"><code class="docutils literal notranslate"><span class="pre">RateLimitSettings.EXCLUDE_PATHS</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.SET_HEADERS"><code class="docutils literal notranslate"><span class="pre">RateLimitSettings.SET_HEADERS</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.parse_exclude_paths"><code class="docutils literal notranslate"><span class="pre">RateLimitSettings.parse_exclude_paths</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#byte_api.lib.settings.ServerSettings"><code class="docutils literal notranslate"><span class="pre">ServerSettings</span></code></a><ul>
@@ -521,6 +538,208 @@ See also: <a class="reference external" href="https://graphql-docs-v2.opencollec
 <p><a class="reference external" href="https://api.polar.sh/docs">Polar API Docs</a> and
 the <a class="reference external" href="https://github.com/polarsource/polar/issues/834">Public API #834 Issue</a>.</p>
 </div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_settings">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">settings</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.settings.</span></span><span class="sig-name descname"><span class="pre">CORSSettings</span></span><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#CORSSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.CORSSettings" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSettings</span></code></p>
+<p>CORS (Cross-Origin Resource Sharing) configuration.</p>
+<p>Environment variables are prefixed with <a href="#id1"><span class="problematic" id="id2">CORS_</span></a>.
+For production, explicitly set CORS_ALLOW_ORIGINS to specific domains.</p>
+<p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises [<cite>ValidationError</cite>][pydantic_core.ValidationError] if the input data cannot be
+validated to form a valid model.</p>
+<p><cite>self</cite> is explicitly positional-only to allow <cite>self</cite> as a field name.</p>
+<p><details  class="autodoc_pydantic_collapsable_json">
+<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="p">{</span>
+</span><span id="1-2"><span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CORSSettings&quot;</span><span class="p">,</span>
+</span><span id="1-3"><span class="w">   </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CORS (Cross-Origin Resource Sharing) configuration.\n\nEnvironment variables are prefixed with CORS_.\nFor production, explicitly set CORS_ALLOW_ORIGINS to specific domains.&quot;</span><span class="p">,</span>
+</span><span id="1-4"><span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+</span><span id="1-5"><span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-6"><span class="w">      </span><span class="nt">&quot;ALLOW_ORIGINS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-7"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+</span><span id="1-8"><span class="w">         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-9"><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-10"><span class="w">         </span><span class="p">},</span>
+</span><span id="1-11"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow Origins&quot;</span><span class="p">,</span>
+</span><span id="1-12"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+</span><span id="1-13"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-14"><span class="w">      </span><span class="nt">&quot;ALLOW_METHODS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-15"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-16"><span class="w">            </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span>
+</span><span id="1-17"><span class="w">            </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+</span><span id="1-18"><span class="w">            </span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span>
+</span><span id="1-19"><span class="w">            </span><span class="s2">&quot;DELETE&quot;</span><span class="p">,</span>
+</span><span id="1-20"><span class="w">            </span><span class="s2">&quot;PATCH&quot;</span><span class="p">,</span>
+</span><span id="1-21"><span class="w">            </span><span class="s2">&quot;OPTIONS&quot;</span>
+</span><span id="1-22"><span class="w">         </span><span class="p">],</span>
+</span><span id="1-23"><span class="w">         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-24"><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-25"><span class="w">         </span><span class="p">},</span>
+</span><span id="1-26"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow Methods&quot;</span><span class="p">,</span>
+</span><span id="1-27"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+</span><span id="1-28"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-29"><span class="w">      </span><span class="nt">&quot;ALLOW_HEADERS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-30"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-31"><span class="w">            </span><span class="s2">&quot;Authorization&quot;</span><span class="p">,</span>
+</span><span id="1-32"><span class="w">            </span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span>
+</span><span id="1-33"><span class="w">            </span><span class="s2">&quot;X-Request-ID&quot;</span><span class="p">,</span>
+</span><span id="1-34"><span class="w">            </span><span class="s2">&quot;Accept&quot;</span><span class="p">,</span>
+</span><span id="1-35"><span class="w">            </span><span class="s2">&quot;Origin&quot;</span>
+</span><span id="1-36"><span class="w">         </span><span class="p">],</span>
+</span><span id="1-37"><span class="w">         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-38"><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-39"><span class="w">         </span><span class="p">},</span>
+</span><span id="1-40"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow Headers&quot;</span><span class="p">,</span>
+</span><span id="1-41"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+</span><span id="1-42"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-43"><span class="w">      </span><span class="nt">&quot;ALLOW_CREDENTIALS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-44"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="1-45"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Allow Credentials&quot;</span><span class="p">,</span>
+</span><span id="1-46"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+</span><span id="1-47"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-48"><span class="w">      </span><span class="nt">&quot;EXPOSE_HEADERS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-49"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-50"><span class="w">            </span><span class="s2">&quot;X-Request-ID&quot;</span>
+</span><span id="1-51"><span class="w">         </span><span class="p">],</span>
+</span><span id="1-52"><span class="w">         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-53"><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-54"><span class="w">         </span><span class="p">},</span>
+</span><span id="1-55"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Expose Headers&quot;</span><span class="p">,</span>
+</span><span id="1-56"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+</span><span id="1-57"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-58"><span class="w">      </span><span class="nt">&quot;MAX_AGE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-59"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">600</span><span class="p">,</span>
+</span><span id="1-60"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Max Age&quot;</span><span class="p">,</span>
+</span><span id="1-61"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+</span><span id="1-62"><span class="w">      </span><span class="p">}</span>
+</span><span id="1-63"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-64"><span class="p">}</span>
+</span></pre></div>
+</div>
+</details></p><dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
+<li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
+<li><p><strong>env_prefix</strong>: <em>str = CORS_</em></p></li>
+<li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_CREDENTIALS" title="byte_api.lib.settings.CORSSettings.ALLOW_CREDENTIALS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ALLOW_CREDENTIALS</span> <span class="pre">(bool)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_HEADERS" title="byte_api.lib.settings.CORSSettings.ALLOW_HEADERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ALLOW_HEADERS</span> <span class="pre">(list[str])</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_METHODS" title="byte_api.lib.settings.CORSSettings.ALLOW_METHODS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ALLOW_METHODS</span> <span class="pre">(list[str])</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS" title="byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ALLOW_ORIGINS</span> <span class="pre">(list[str])</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS" title="byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EXPOSE_HEADERS</span> <span class="pre">(list[str])</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.MAX_AGE" title="byte_api.lib.settings.CORSSettings.MAX_AGE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MAX_AGE</span> <span class="pre">(int)</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_list_field" title="byte_api.lib.settings.CORSSettings.parse_list_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_list_field</span></code></a> » <a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_HEADERS" title="byte_api.lib.settings.CORSSettings.ALLOW_HEADERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ALLOW_HEADERS</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_list_field" title="byte_api.lib.settings.CORSSettings.parse_list_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_list_field</span></code></a> » <a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_METHODS" title="byte_api.lib.settings.CORSSettings.ALLOW_METHODS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ALLOW_METHODS</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_list_field" title="byte_api.lib.settings.CORSSettings.parse_list_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_list_field</span></code></a> » <a class="reference internal" href="#byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS" title="byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EXPOSE_HEADERS</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_origins" title="byte_api.lib.settings.CORSSettings.parse_origins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_origins</span></code></a> » <a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS" title="byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ALLOW_ORIGINS</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ALLOW_ORIGINS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></em><a class="headerlink" href="#byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS" title="Link to this definition">¶</a></dt>
+<dd><p>List of origins allowed to access the API.</p>
+<p>For production, set to specific domains like: <a class="reference external" href="https://byte-bot.app,https://www.byte-bot.app">https://byte-bot.app,https://www.byte-bot.app</a>
+For development, localhost origins are automatically added when ENVIRONMENT is dev/local/test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_origins" title="byte_api.lib.settings.CORSSettings.parse_origins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_origins</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings.ALLOW_METHODS">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ALLOW_METHODS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['GET',</span> <span class="pre">'POST',</span> <span class="pre">'PUT',</span> <span class="pre">'DELETE',</span> <span class="pre">'PATCH',</span> <span class="pre">'OPTIONS']</span></em><a class="headerlink" href="#byte_api.lib.settings.CORSSettings.ALLOW_METHODS" title="Link to this definition">¶</a></dt>
+<dd><p>HTTP methods allowed for CORS requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_list_field" title="byte_api.lib.settings.CORSSettings.parse_list_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_list_field</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings.ALLOW_HEADERS">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ALLOW_HEADERS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['Authorization',</span> <span class="pre">'Content-Type',</span> <span class="pre">'X-Request-ID',</span> <span class="pre">'Accept',</span> <span class="pre">'Origin']</span></em><a class="headerlink" href="#byte_api.lib.settings.CORSSettings.ALLOW_HEADERS" title="Link to this definition">¶</a></dt>
+<dd><p>HTTP headers allowed in CORS requests.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_list_field" title="byte_api.lib.settings.CORSSettings.parse_list_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_list_field</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings.ALLOW_CREDENTIALS">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ALLOW_CREDENTIALS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#byte_api.lib.settings.CORSSettings.ALLOW_CREDENTIALS" title="Link to this definition">¶</a></dt>
+<dd><p>Allow credentials (cookies, authorization headers) in CORS requests.</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EXPOSE_HEADERS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['X-Request-ID']</span></em><a class="headerlink" href="#byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS" title="Link to this definition">¶</a></dt>
+<dd><p>Headers exposed to the browser in CORS responses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.parse_list_field" title="byte_api.lib.settings.CORSSettings.parse_list_field"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_list_field</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings.MAX_AGE">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MAX_AGE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">600</span></em><a class="headerlink" href="#byte_api.lib.settings.CORSSettings.MAX_AGE" title="Link to this definition">¶</a></dt>
+<dd><p>Maximum time (seconds) browsers should cache CORS preflight responses.</p>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings.parse_origins">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_origins</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS" title="byte_api.lib.settings.CORSSettings.ALLOW_ORIGINS"><em class="xref py py-obj"><span class="pre">ALLOW_ORIGINS</span></em></a><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#CORSSettings.parse_origins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.CORSSettings.parse_origins" title="Link to this definition">¶</a></dt>
+<dd><p>Parse origins from comma-separated string or list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – A comma-separated string of origins, or a list of origins.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of origins.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="byte_api.lib.settings.CORSSettings.parse_list_field">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_list_field</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_HEADERS" title="byte_api.lib.settings.CORSSettings.ALLOW_HEADERS"><em class="xref py py-obj"><span class="pre">ALLOW_HEADERS</span></em></a><em class="property"><span class="pre">,</span> </em><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS" title="byte_api.lib.settings.CORSSettings.EXPOSE_HEADERS"><em class="xref py py-obj"><span class="pre">EXPOSE_HEADERS</span></em></a><em class="property"><span class="pre">,</span> </em><a class="reference internal" href="#byte_api.lib.settings.CORSSettings.ALLOW_METHODS" title="byte_api.lib.settings.CORSSettings.ALLOW_METHODS"><em class="xref py py-obj"><span class="pre">ALLOW_METHODS</span></em></a><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#CORSSettings.parse_list_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.CORSSettings.parse_list_field" title="Link to this definition">¶</a></dt>
+<dd><p>Parse list fields from comma-separated string or list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – A comma-separated string or a list.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of strings.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1450,47 +1669,37 @@ validated to form a valid model.</p>
 </span><span id="1-54"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jwt Encryption Algorithm&quot;</span><span class="p">,</span>
 </span><span id="1-55"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
 </span><span id="1-56"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-57"><span class="w">      </span><span class="nt">&quot;BACKEND_CORS_ORIGINS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-58"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="1-59"><span class="w">            </span><span class="s2">&quot;*&quot;</span>
-</span><span id="1-60"><span class="w">         </span><span class="p">],</span>
-</span><span id="1-61"><span class="w">         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-62"><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-</span><span id="1-63"><span class="w">         </span><span class="p">},</span>
-</span><span id="1-64"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Backend Cors Origins&quot;</span><span class="p">,</span>
-</span><span id="1-65"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+</span><span id="1-57"><span class="w">      </span><span class="nt">&quot;STATIC_URL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-58"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/static/&quot;</span><span class="p">,</span>
+</span><span id="1-59"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Static Url&quot;</span><span class="p">,</span>
+</span><span id="1-60"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-61"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-62"><span class="w">      </span><span class="nt">&quot;CSRF_COOKIE_NAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-63"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;csrftoken&quot;</span><span class="p">,</span>
+</span><span id="1-64"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Csrf Cookie Name&quot;</span><span class="p">,</span>
+</span><span id="1-65"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
 </span><span id="1-66"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-67"><span class="w">      </span><span class="nt">&quot;STATIC_URL&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-68"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/static/&quot;</span><span class="p">,</span>
-</span><span id="1-69"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Static Url&quot;</span><span class="p">,</span>
-</span><span id="1-70"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-67"><span class="w">      </span><span class="nt">&quot;CSRF_COOKIE_SECURE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-68"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="1-69"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Csrf Cookie Secure&quot;</span><span class="p">,</span>
+</span><span id="1-70"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
 </span><span id="1-71"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-72"><span class="w">      </span><span class="nt">&quot;CSRF_COOKIE_NAME&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-73"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;csrftoken&quot;</span><span class="p">,</span>
-</span><span id="1-74"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Csrf Cookie Name&quot;</span><span class="p">,</span>
-</span><span id="1-75"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-</span><span id="1-76"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-77"><span class="w">      </span><span class="nt">&quot;CSRF_COOKIE_SECURE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-78"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="1-79"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Csrf Cookie Secure&quot;</span><span class="p">,</span>
-</span><span id="1-80"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
-</span><span id="1-81"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-82"><span class="w">      </span><span class="nt">&quot;STATIC_DIR&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-83"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/runner/work/byte/byte/services/api/src/byte_api/domain/web/resources&quot;</span><span class="p">,</span>
-</span><span id="1-84"><span class="w">         </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
-</span><span id="1-85"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Static Dir&quot;</span><span class="p">,</span>
-</span><span id="1-86"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
-</span><span id="1-87"><span class="w">      </span><span class="p">},</span>
-</span><span id="1-88"><span class="w">      </span><span class="nt">&quot;DEV_MODE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-</span><span id="1-89"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-</span><span id="1-90"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dev Mode&quot;</span><span class="p">,</span>
-</span><span id="1-91"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
-</span><span id="1-92"><span class="w">      </span><span class="p">}</span>
-</span><span id="1-93"><span class="w">   </span><span class="p">},</span>
-</span><span id="1-94"><span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-</span><span id="1-95"><span class="w">      </span><span class="s2">&quot;SECRET_KEY&quot;</span>
-</span><span id="1-96"><span class="w">   </span><span class="p">]</span>
-</span><span id="1-97"><span class="p">}</span>
+</span><span id="1-72"><span class="w">      </span><span class="nt">&quot;STATIC_DIR&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-73"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/home/runner/work/byte/byte/services/api/src/byte_api/domain/web/resources&quot;</span><span class="p">,</span>
+</span><span id="1-74"><span class="w">         </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;path&quot;</span><span class="p">,</span>
+</span><span id="1-75"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Static Dir&quot;</span><span class="p">,</span>
+</span><span id="1-76"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-77"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-78"><span class="w">      </span><span class="nt">&quot;DEV_MODE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-79"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="1-80"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Dev Mode&quot;</span><span class="p">,</span>
+</span><span id="1-81"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+</span><span id="1-82"><span class="w">      </span><span class="p">}</span>
+</span><span id="1-83"><span class="w">   </span><span class="p">},</span>
+</span><span id="1-84"><span class="w">   </span><span class="nt">&quot;required&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-85"><span class="w">      </span><span class="s2">&quot;SECRET_KEY&quot;</span>
+</span><span id="1-86"><span class="w">   </span><span class="p">]</span>
+</span><span id="1-87"><span class="p">}</span>
 </span></pre></div>
 </div>
 </details></p><dl class="field-list simple">
@@ -1503,7 +1712,6 @@ validated to form a valid model.</p>
 </dd>
 <dt class="field-even">Fields<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS" title="byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BACKEND_CORS_ORIGINS</span> <span class="pre">(list[str])</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.BUILD_NUMBER" title="byte_api.lib.settings.ProjectSettings.BUILD_NUMBER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BUILD_NUMBER</span> <span class="pre">(str)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.CHECK_DB_READY" title="byte_api.lib.settings.ProjectSettings.CHECK_DB_READY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CHECK_DB_READY</span> <span class="pre">(bool)</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.CHECK_REDIS_READY" title="byte_api.lib.settings.ProjectSettings.CHECK_REDIS_READY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CHECK_REDIS_READY</span> <span class="pre">(bool)</span></code></a></p></li>
@@ -1523,7 +1731,6 @@ validated to form a valid model.</p>
 </dd>
 <dt class="field-odd">Validators<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.assemble_cors_origins" title="byte_api.lib.settings.ProjectSettings.assemble_cors_origins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assemble_cors_origins</span></code></a> » <a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS" title="byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BACKEND_CORS_ORIGINS</span></code></a></p></li>
 <li><p><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.generate_secret_key" title="byte_api.lib.settings.ProjectSettings.generate_secret_key"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generate_secret_key</span></code></a> » <a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.SECRET_KEY" title="byte_api.lib.settings.ProjectSettings.SECRET_KEY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SECRET_KEY</span></code></a></p></li>
 </ul>
 </dd>
@@ -1599,19 +1806,6 @@ mode.</p>
 </dd></dl>
 
 <dl class="py attribute pydantic_field">
-<dt class="sig sig-object py" id="byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS">
-<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BACKEND_CORS_ORIGINS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['*']</span></em><a class="headerlink" href="#byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS" title="Link to this definition">¶</a></dt>
-<dd><p>List of origins allowed to access the API.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Validated by<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.assemble_cors_origins" title="byte_api.lib.settings.ProjectSettings.assemble_cors_origins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assemble_cors_origins</span></code></a></p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute pydantic_field">
 <dt class="sig sig-object py" id="byte_api.lib.settings.ProjectSettings.STATIC_URL">
 <em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">STATIC_URL</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/static/'</span></em><a class="headerlink" href="#byte_api.lib.settings.ProjectSettings.STATIC_URL" title="Link to this definition">¶</a></dt>
 <dd><p>Default URL where static assets are located.</p>
@@ -1653,23 +1847,6 @@ mode.</p>
 </dd></dl>
 
 <dl class="py method pydantic_validator">
-<dt class="sig sig-object py" id="byte_api.lib.settings.ProjectSettings.assemble_cors_origins">
-<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">assemble_cors_origins</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS" title="byte_api.lib.settings.ProjectSettings.BACKEND_CORS_ORIGINS"><em class="xref py py-obj"><span class="pre">BACKEND_CORS_ORIGINS</span></em></a><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#ProjectSettings.assemble_cors_origins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.ProjectSettings.assemble_cors_origins" title="Link to this definition">¶</a></dt>
-<dd><p>Parse a list of origins.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>value</strong> – A comma-separated string of origins, or a list of origins.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A list of origins.</p>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">value</span></code> is not a list or string.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method pydantic_validator">
 <dt class="sig sig-object py" id="byte_api.lib.settings.ProjectSettings.generate_secret_key">
 <em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_secret_key</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings.SECRET_KEY" title="byte_api.lib.settings.ProjectSettings.SECRET_KEY"><em class="xref py py-obj"><span class="pre">SECRET_KEY</span></em></a><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#ProjectSettings.generate_secret_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.ProjectSettings.generate_secret_key" title="Link to this definition">¶</a></dt>
 <dd><p>Generate a secret key.</p>
@@ -1679,6 +1856,123 @@ mode.</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A secret key.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class pydantic_settings">
+<dt class="sig sig-object py" id="byte_api.lib.settings.RateLimitSettings">
+<em class="property"><span class="pre">pydantic</span> <span class="pre">settings</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">byte_api.lib.settings.</span></span><span class="sig-name descname"><span class="pre">RateLimitSettings</span></span><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#RateLimitSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.RateLimitSettings" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSettings</span></code></p>
+<p>Configures rate limiting for the API.</p>
+<p>Create a new model by parsing and validating input data from keyword arguments.</p>
+<p>Raises [<cite>ValidationError</cite>][pydantic_core.ValidationError] if the input data cannot be
+validated to form a valid model.</p>
+<p><cite>self</cite> is explicitly positional-only to allow <cite>self</cite> as a field name.</p>
+<p><details  class="autodoc_pydantic_collapsable_json">
+<summary>Show JSON schema</summary><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span id="1-1"><span class="p">{</span>
+</span><span id="1-2"><span class="w">   </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;RateLimitSettings&quot;</span><span class="p">,</span>
+</span><span id="1-3"><span class="w">   </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Configures rate limiting for the API.&quot;</span><span class="p">,</span>
+</span><span id="1-4"><span class="w">   </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;object&quot;</span><span class="p">,</span>
+</span><span id="1-5"><span class="w">   </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-6"><span class="w">      </span><span class="nt">&quot;ENABLED&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-7"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="1-8"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Enabled&quot;</span><span class="p">,</span>
+</span><span id="1-9"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+</span><span id="1-10"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-11"><span class="w">      </span><span class="nt">&quot;REQUESTS_PER_MINUTE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-12"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+</span><span id="1-13"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Requests Per Minute&quot;</span><span class="p">,</span>
+</span><span id="1-14"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;integer&quot;</span>
+</span><span id="1-15"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-16"><span class="w">      </span><span class="nt">&quot;EXCLUDE_PATHS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-17"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+</span><span id="1-18"><span class="w">            </span><span class="s2">&quot;/health&quot;</span><span class="p">,</span>
+</span><span id="1-19"><span class="w">            </span><span class="s2">&quot;/api/schema&quot;</span><span class="p">,</span>
+</span><span id="1-20"><span class="w">            </span><span class="s2">&quot;/api/scalar&quot;</span><span class="p">,</span>
+</span><span id="1-21"><span class="w">            </span><span class="s2">&quot;/api/swagger&quot;</span>
+</span><span id="1-22"><span class="w">         </span><span class="p">],</span>
+</span><span id="1-23"><span class="w">         </span><span class="nt">&quot;items&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-24"><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span>
+</span><span id="1-25"><span class="w">         </span><span class="p">},</span>
+</span><span id="1-26"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Exclude Paths&quot;</span><span class="p">,</span>
+</span><span id="1-27"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;array&quot;</span>
+</span><span id="1-28"><span class="w">      </span><span class="p">},</span>
+</span><span id="1-29"><span class="w">      </span><span class="nt">&quot;SET_HEADERS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+</span><span id="1-30"><span class="w">         </span><span class="nt">&quot;default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+</span><span id="1-31"><span class="w">         </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Set Headers&quot;</span><span class="p">,</span>
+</span><span id="1-32"><span class="w">         </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;boolean&quot;</span>
+</span><span id="1-33"><span class="w">      </span><span class="p">}</span>
+</span><span id="1-34"><span class="w">   </span><span class="p">}</span>
+</span><span id="1-35"><span class="p">}</span>
+</span></pre></div>
+</div>
+</details></p><dl class="field-list simple">
+<dt class="field-odd">Config<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>extra</strong>: <em>str = ignore</em></p></li>
+<li><p><strong>case_sensitive</strong>: <em>bool = True</em></p></li>
+<li><p><strong>env_prefix</strong>: <em>str = RATE_LIMIT_</em></p></li>
+<li><p><strong>env_file</strong>: <em>str = .env</em></p></li>
+</ul>
+</dd>
+<dt class="field-even">Fields<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.ENABLED" title="byte_api.lib.settings.RateLimitSettings.ENABLED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ENABLED</span> <span class="pre">(bool)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS" title="byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EXCLUDE_PATHS</span> <span class="pre">(list[str])</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.REQUESTS_PER_MINUTE" title="byte_api.lib.settings.RateLimitSettings.REQUESTS_PER_MINUTE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">REQUESTS_PER_MINUTE</span> <span class="pre">(int)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.SET_HEADERS" title="byte_api.lib.settings.RateLimitSettings.SET_HEADERS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SET_HEADERS</span> <span class="pre">(bool)</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-odd">Validators<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.parse_exclude_paths" title="byte_api.lib.settings.RateLimitSettings.parse_exclude_paths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_exclude_paths</span></code></a> » <a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS" title="byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EXCLUDE_PATHS</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.RateLimitSettings.ENABLED">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ENABLED</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#byte_api.lib.settings.RateLimitSettings.ENABLED" title="Link to this definition">¶</a></dt>
+<dd><p>Enable or disable rate limiting.</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.RateLimitSettings.REQUESTS_PER_MINUTE">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">REQUESTS_PER_MINUTE</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#byte_api.lib.settings.RateLimitSettings.REQUESTS_PER_MINUTE" title="Link to this definition">¶</a></dt>
+<dd><p>Maximum requests allowed per minute for general endpoints.</p>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EXCLUDE_PATHS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['/health',</span> <span class="pre">'/api/schema',</span> <span class="pre">'/api/scalar',</span> <span class="pre">'/api/swagger']</span></em><a class="headerlink" href="#byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS" title="Link to this definition">¶</a></dt>
+<dd><p>Paths to exclude from rate limiting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Validated by<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.parse_exclude_paths" title="byte_api.lib.settings.RateLimitSettings.parse_exclude_paths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parse_exclude_paths</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute pydantic_field">
+<dt class="sig sig-object py" id="byte_api.lib.settings.RateLimitSettings.SET_HEADERS">
+<em class="property"><span class="pre">field</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SET_HEADERS</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#byte_api.lib.settings.RateLimitSettings.SET_HEADERS" title="Link to this definition">¶</a></dt>
+<dd><p>Include rate limit headers in responses.</p>
+</dd></dl>
+
+<dl class="py method pydantic_validator">
+<dt class="sig sig-object py" id="byte_api.lib.settings.RateLimitSettings.parse_exclude_paths">
+<em class="property"><span class="pre">validator</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_exclude_paths</span></span><em class="autodoc_pydantic_validator_arrow property">&#160; <span class="pre">»</span>&#160; </em><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS" title="byte_api.lib.settings.RateLimitSettings.EXCLUDE_PATHS"><em class="xref py py-obj"><span class="pre">EXCLUDE_PATHS</span></em></a><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#RateLimitSettings.parse_exclude_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.RateLimitSettings.parse_exclude_paths" title="Link to this definition">¶</a></dt>
+<dd><p>Parse exclude paths from string or list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>value</strong> – A comma-separated string of paths, or a list of paths.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of paths to exclude.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1886,7 +2180,7 @@ validated to form a valid model.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="byte_api.lib.settings.load_settings">
-<span class="sig-prename descclassname"><span class="pre">byte_api.lib.settings.</span></span><span class="sig-name descname"><span class="pre">load_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings" title="byte_api.lib.settings.ProjectSettings"><span class="pre">ProjectSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.APISettings" title="byte_api.lib.settings.APISettings"><span class="pre">APISettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.OpenAPISettings" title="byte_api.lib.settings.OpenAPISettings"><span class="pre">OpenAPISettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.TemplateSettings" title="byte_api.lib.settings.TemplateSettings"><span class="pre">TemplateSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.ServerSettings" title="byte_api.lib.settings.ServerSettings"><span class="pre">ServerSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.LogSettings" title="byte_api.lib.settings.LogSettings"><span class="pre">LogSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.DatabaseSettings" title="byte_api.lib.settings.DatabaseSettings"><span class="pre">DatabaseSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.GitHubSettings" title="byte_api.lib.settings.GitHubSettings"><span class="pre">GitHubSettings</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#load_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.load_settings" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">byte_api.lib.settings.</span></span><span class="sig-name descname"><span class="pre">load_settings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.14)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#byte_api.lib.settings.ProjectSettings" title="byte_api.lib.settings.ProjectSettings"><span class="pre">ProjectSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.APISettings" title="byte_api.lib.settings.APISettings"><span class="pre">APISettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.OpenAPISettings" title="byte_api.lib.settings.OpenAPISettings"><span class="pre">OpenAPISettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.TemplateSettings" title="byte_api.lib.settings.TemplateSettings"><span class="pre">TemplateSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.ServerSettings" title="byte_api.lib.settings.ServerSettings"><span class="pre">ServerSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.LogSettings" title="byte_api.lib.settings.LogSettings"><span class="pre">LogSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.DatabaseSettings" title="byte_api.lib.settings.DatabaseSettings"><span class="pre">DatabaseSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.GitHubSettings" title="byte_api.lib.settings.GitHubSettings"><span class="pre">GitHubSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.RateLimitSettings" title="byte_api.lib.settings.RateLimitSettings"><span class="pre">RateLimitSettings</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#byte_api.lib.settings.CORSSettings" title="byte_api.lib.settings.CORSSettings"><span class="pre">CORSSettings</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/byte_api/lib/settings.html#load_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.settings.load_settings" title="Link to this definition">¶</a></dt>
 <dd><p>Load Settings file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>

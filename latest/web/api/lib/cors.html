@@ -239,7 +239,7 @@ html.dark {
   <div class="localtoc">
     <h3>On this page</h3>
     <ul>
-<li><a class="reference internal" href="#byte_api.lib.cors.config"><code class="docutils literal notranslate"><span class="pre">config</span></code></a></li>
+<li><a class="reference internal" href="#byte_api.lib.cors.get_allowed_origins"><code class="docutils literal notranslate"><span class="pre">get_allowed_origins()</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -301,11 +301,21 @@ html.dark {
           <section id="cors">
 <h1>cors<a class="headerlink" href="#cors" title="Link to this heading">¶</a></h1>
 <p>CORS config</p>
-<p id="module-byte_api.lib.cors">CORS config.</p>
-<dl class="py data">
-<dt class="sig sig-object py" id="byte_api.lib.cors.config">
-<span class="sig-prename descclassname"><span class="pre">byte_api.lib.cors.</span></span><span class="sig-name descname"><span class="pre">config</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">CORSConfig(allow_origins=['*'],</span> <span class="pre">allow_methods=['*'],</span> <span class="pre">allow_headers=['*'],</span> <span class="pre">allow_credentials=False,</span> <span class="pre">allow_origin_regex=None,</span> <span class="pre">expose_headers=[],</span> <span class="pre">max_age=600)</span></em><a class="headerlink" href="#byte_api.lib.cors.config" title="Link to this definition">¶</a></dt>
-<dd><p>Default CORS config.</p>
+<p id="module-byte_api.lib.cors">CORS (Cross-Origin Resource Sharing) configuration.</p>
+<p>Provides secure CORS defaults with environment-aware origin configuration.
+Production requires explicit origin configuration via CORS_ALLOW_ORIGINS.
+Development environments automatically include localhost origins.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_api.lib.cors.get_allowed_origins">
+<span class="sig-prename descclassname"><span class="pre">byte_api.lib.cors.</span></span><span class="sig-name descname"><span class="pre">get_allowed_origins</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/byte_api/lib/cors.html#get_allowed_origins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_api.lib.cors.get_allowed_origins" title="Link to this definition">¶</a></dt>
+<dd><p>Build the list of allowed CORS origins based on environment.</p>
+<p>For development/test environments, automatically includes localhost origins.
+For production, only explicitly configured origins are allowed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of allowed origin URLs.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </section>
