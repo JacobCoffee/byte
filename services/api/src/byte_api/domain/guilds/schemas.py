@@ -122,7 +122,7 @@ class GuildUpdate(CamelizedBaseModel):
 
 
 class BaseGuildSetting(CamelizedBaseModel):
-    """Abstract base class for guild settings with common validation."""
+    """Base class for guild settings providing common serialization behavior."""
 
 
 class GuildModelSetting(BaseGuildSetting):
@@ -205,7 +205,47 @@ class UpdateableGuildSetting(
 
     This is a composite class that combines all focused setting classes
     for backwards compatibility with the existing API.
+
+    Important:
+        All parent setting models must keep distinct field names and
+        compatible model_config. Introducing overlapping field names
+        may lead to subtle Pydantic MRO issues.
     """
+
+
+def _assert_distinct_updateable_guild_setting_fields() -> None:
+    """Validate that composed setting models have no overlapping fields.
+
+    Multiple inheritance of Pydantic models relies on a stable MRO; if
+    two parents introduce the same field name, behavior becomes
+    order-dependent and fragile. This guard raises at import time
+    if overlapping fields are detected.
+    """
+    parents = (
+        GuildModelSetting,
+        GitHubConfigSetting,
+        SOTagsSetting,
+        AllowedUserSetting,
+        ForumSetting,
+    )
+
+    seen: dict[str, str] = {}
+    overlaps: dict[str, list[str]] = {}
+
+    for parent in parents:
+        for field_name in parent.model_fields:
+            if field_name in seen:
+                overlaps.setdefault(field_name, [seen[field_name]]).append(parent.__name__)
+            else:
+                seen[field_name] = parent.__name__
+
+    if overlaps:
+        details = ", ".join(f"{name}: {', '.join(sorted(owners))}" for name, owners in sorted(overlaps.items()))
+        msg = f"UpdateableGuildSetting parent models must not define overlapping fields. Overlapping: {details}"
+        raise RuntimeError(msg)
+
+
+_assert_distinct_updateable_guild_setting_fields()
 
 
 UpdateableGuildSettingEnum = Enum(  # type: ignore[misc]

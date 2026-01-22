@@ -485,8 +485,8 @@ class TestUpdateableGuildSetting:
 class TestBaseGuildSetting:
     """Tests for BaseGuildSetting schema."""
 
-    def test_base_guild_setting_is_abstract_base(self) -> None:
-        """Test BaseGuildSetting serves as an abstract base class."""
+    def test_base_guild_setting_is_base_class(self) -> None:
+        """Test BaseGuildSetting serves as a base class for setting schemas."""
         from byte_api.lib.schema import CamelizedBaseModel
 
         assert issubclass(BaseGuildSetting, CamelizedBaseModel)
@@ -525,9 +525,18 @@ class TestGuildModelSetting:
         """Test GuildModelSetting inherits from BaseGuildSetting."""
         assert issubclass(GuildModelSetting, BaseGuildSetting)
 
-    def test_guild_model_setting_field_count(self) -> None:
-        """Test GuildModelSetting has exactly 7 fields."""
-        assert len(GuildModelSetting.model_fields) == 7
+    def test_guild_model_setting_required_fields(self) -> None:
+        """Test GuildModelSetting has all required fields."""
+        required_fields = {
+            "prefix",
+            "help_channel_id",
+            "showcase_channel_id",
+            "sync_label",
+            "issue_linking",
+            "comment_linking",
+            "pep_linking",
+        }
+        assert required_fields.issubset(GuildModelSetting.model_fields.keys())
 
     def test_guild_model_setting_serialization(self) -> None:
         """Test GuildModelSetting serialization."""
@@ -567,9 +576,10 @@ class TestGitHubConfigSetting:
         """Test GitHubConfigSetting inherits from BaseGuildSetting."""
         assert issubclass(GitHubConfigSetting, BaseGuildSetting)
 
-    def test_github_config_setting_field_count(self) -> None:
-        """Test GitHubConfigSetting has exactly 3 fields."""
-        assert len(GitHubConfigSetting.model_fields) == 3
+    def test_github_config_setting_required_fields(self) -> None:
+        """Test GitHubConfigSetting has all required fields."""
+        required_fields = {"discussion_sync", "github_organization", "github_repository"}
+        assert required_fields.issubset(GitHubConfigSetting.model_fields.keys())
 
     def test_github_config_setting_serialization(self) -> None:
         """Test GitHubConfigSetting serialization."""
@@ -598,9 +608,10 @@ class TestSOTagsSetting:
         """Test SOTagsSetting inherits from BaseGuildSetting."""
         assert issubclass(SOTagsSetting, BaseGuildSetting)
 
-    def test_sotags_setting_field_count(self) -> None:
-        """Test SOTagsSetting has exactly 1 field."""
-        assert len(SOTagsSetting.model_fields) == 1
+    def test_sotags_setting_required_fields(self) -> None:
+        """Test SOTagsSetting has all required fields."""
+        required_fields = {"tag_name"}
+        assert required_fields.issubset(SOTagsSetting.model_fields.keys())
 
     def test_sotags_setting_empty_list(self) -> None:
         """Test SOTagsSetting with empty list."""
@@ -630,9 +641,10 @@ class TestAllowedUserSetting:
         """Test AllowedUserSetting inherits from BaseGuildSetting."""
         assert issubclass(AllowedUserSetting, BaseGuildSetting)
 
-    def test_allowed_user_setting_field_count(self) -> None:
-        """Test AllowedUserSetting has exactly 1 field."""
-        assert len(AllowedUserSetting.model_fields) == 1
+    def test_allowed_user_setting_required_fields(self) -> None:
+        """Test AllowedUserSetting has all required fields."""
+        required_fields = {"allowed_user_id"}
+        assert required_fields.issubset(AllowedUserSetting.model_fields.keys())
 
     def test_allowed_user_setting_serialization(self) -> None:
         """Test AllowedUserSetting serialization."""
@@ -673,9 +685,23 @@ class TestForumSetting:
         """Test ForumSetting inherits from BaseGuildSetting."""
         assert issubclass(ForumSetting, BaseGuildSetting)
 
-    def test_forum_setting_field_count(self) -> None:
-        """Test ForumSetting has exactly 12 fields."""
-        assert len(ForumSetting.model_fields) == 12
+    def test_forum_setting_required_fields(self) -> None:
+        """Test ForumSetting has all required fields."""
+        required_fields = {
+            "help_forum",
+            "help_forum_category",
+            "help_thread_auto_close",
+            "help_thread_auto_close_days",
+            "help_thread_notify",
+            "help_thread_notify_roles",
+            "help_thread_notify_days",
+            "help_thread_sync",
+            "showcase_forum",
+            "showcase_forum_category",
+            "showcase_thread_auto_close",
+            "showcase_thread_auto_close_days",
+        }
+        assert required_fields.issubset(ForumSetting.model_fields.keys())
 
     def test_forum_setting_serialization(self) -> None:
         """Test ForumSetting serialization."""
