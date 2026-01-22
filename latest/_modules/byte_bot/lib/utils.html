@@ -327,220 +327,312 @@ html.dark {
 </span><span id="1-37">    <span class="s2">&quot;query_all_peps&quot;</span><span class="p">,</span>
 </span><span id="1-38">    <span class="s2">&quot;query_all_ruff_rules&quot;</span><span class="p">,</span>
 </span><span id="1-39">    <span class="s2">&quot;run_ruff_format&quot;</span><span class="p">,</span>
-</span><span id="1-40"><span class="p">)</span>
-</span><span id="1-41">
+</span><span id="1-40">    <span class="s2">&quot;smart_chunk_text&quot;</span><span class="p">,</span>
+</span><span id="1-41"><span class="p">)</span>
 </span><span id="1-42">
+</span><span id="1-43">
 <div class="viewcode-block" id="linker">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.linker">[docs]</a>
-</span><span id="1-43"><span class="k">def</span><span class="w"> </span><span class="nf">linker</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show_embed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-44"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Markdown link, optionally with an embed.</span>
-</span><span id="1-45">
-</span><span id="1-46"><span class="sd">    Args:</span>
-</span><span id="1-47"><span class="sd">        title: The title of the link.</span>
-</span><span id="1-48"><span class="sd">        link: The URL of the link.</span>
-</span><span id="1-49"><span class="sd">        show_embed: Whether to show the embed or not.</span>
-</span><span id="1-50">
-</span><span id="1-51"><span class="sd">    Returns:</span>
-</span><span id="1-52"><span class="sd">        A Markdown link.</span>
-</span><span id="1-53"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-54">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">show_embed</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](&lt;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&gt;)&quot;</span></div>
+</span><span id="1-44"><span class="k">def</span><span class="w"> </span><span class="nf">linker</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">link</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">show_embed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-45"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a Markdown link, optionally with an embed.</span>
+</span><span id="1-46">
+</span><span id="1-47"><span class="sd">    Args:</span>
+</span><span id="1-48"><span class="sd">        title: The title of the link.</span>
+</span><span id="1-49"><span class="sd">        link: The URL of the link.</span>
+</span><span id="1-50"><span class="sd">        show_embed: Whether to show the embed or not.</span>
+</span><span id="1-51">
+</span><span id="1-52"><span class="sd">    Returns:</span>
+</span><span id="1-53"><span class="sd">        A Markdown link.</span>
+</span><span id="1-54"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-55">    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">show_embed</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2">](&lt;</span><span class="si">{</span><span class="n">link</span><span class="si">}</span><span class="s2">&gt;)&quot;</span></div>
 
-</span><span id="1-55">
 </span><span id="1-56">
+</span><span id="1-57">
 <div class="viewcode-block" id="format_ruff_rule">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.format_ruff_rule">[docs]</a>
-</span><span id="1-57"><span class="k">def</span><span class="w"> </span><span class="nf">format_ruff_rule</span><span class="p">(</span><span class="n">rule_data</span><span class="p">:</span> <span class="n">RuffRule</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FormattedRuffRule</span><span class="p">:</span>
-</span><span id="1-58"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Format ruff rule data for embed-friendly output and append rule link.</span>
-</span><span id="1-59">
-</span><span id="1-60"><span class="sd">    Args:</span>
-</span><span id="1-61"><span class="sd">        rule_data: The ruff rule data.</span>
-</span><span id="1-62">
-</span><span id="1-63"><span class="sd">    Returns:</span>
-</span><span id="1-64"><span class="sd">        FormattedRuffRule: The formatted rule data.</span>
-</span><span id="1-65"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-66">    <span class="n">explanation_formatted</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;## (.+)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;**\1**&quot;</span><span class="p">,</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;explanation&quot;</span><span class="p">])</span>
-</span><span id="1-67">    <span class="n">rule_code</span> <span class="o">=</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span>
-</span><span id="1-68">    <span class="n">rule_name</span> <span class="o">=</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-</span><span id="1-69">    <span class="n">rule_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://docs.astral.sh/ruff/rules/</span><span class="si">{</span><span class="n">rule_name</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="1-70">    <span class="n">rule_anchor_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://docs.astral.sh/ruff/rules/#</span><span class="si">{</span><span class="n">rule_code</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="1-71">
-</span><span id="1-72">    <span class="k">return</span> <span class="p">{</span>
-</span><span id="1-73">        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;No name available&quot;</span><span class="p">),</span>
-</span><span id="1-74">        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="s2">&quot;No summary available&quot;</span><span class="p">),</span>
-</span><span id="1-75">        <span class="s2">&quot;explanation&quot;</span><span class="p">:</span> <span class="n">explanation_formatted</span><span class="p">,</span>
-</span><span id="1-76">        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fix&quot;</span><span class="p">,</span> <span class="s2">&quot;No fix available&quot;</span><span class="p">),</span>
-</span><span id="1-77">        <span class="s2">&quot;rule_link&quot;</span><span class="p">:</span> <span class="n">rule_link</span><span class="p">,</span>
-</span><span id="1-78">        <span class="s2">&quot;rule_anchor_link&quot;</span><span class="p">:</span> <span class="n">rule_anchor_link</span><span class="p">,</span>
-</span><span id="1-79">    <span class="p">}</span></div>
+</span><span id="1-58"><span class="k">def</span><span class="w"> </span><span class="nf">format_ruff_rule</span><span class="p">(</span><span class="n">rule_data</span><span class="p">:</span> <span class="n">RuffRule</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FormattedRuffRule</span><span class="p">:</span>
+</span><span id="1-59"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Format ruff rule data for embed-friendly output and append rule link.</span>
+</span><span id="1-60">
+</span><span id="1-61"><span class="sd">    Args:</span>
+</span><span id="1-62"><span class="sd">        rule_data: The ruff rule data.</span>
+</span><span id="1-63">
+</span><span id="1-64"><span class="sd">    Returns:</span>
+</span><span id="1-65"><span class="sd">        FormattedRuffRule: The formatted rule data.</span>
+</span><span id="1-66"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-67">    <span class="n">explanation_formatted</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;## (.+)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;**\1**&quot;</span><span class="p">,</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;explanation&quot;</span><span class="p">])</span>
+</span><span id="1-68">    <span class="n">rule_code</span> <span class="o">=</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;code&quot;</span><span class="p">]</span>
+</span><span id="1-69">    <span class="n">rule_name</span> <span class="o">=</span> <span class="n">rule_data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+</span><span id="1-70">    <span class="n">rule_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://docs.astral.sh/ruff/rules/</span><span class="si">{</span><span class="n">rule_name</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="1-71">    <span class="n">rule_anchor_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;https://docs.astral.sh/ruff/rules/#</span><span class="si">{</span><span class="n">rule_code</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="1-72">
+</span><span id="1-73">    <span class="k">return</span> <span class="p">{</span>
+</span><span id="1-74">        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;No name available&quot;</span><span class="p">),</span>
+</span><span id="1-75">        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="s2">&quot;No summary available&quot;</span><span class="p">),</span>
+</span><span id="1-76">        <span class="s2">&quot;explanation&quot;</span><span class="p">:</span> <span class="n">explanation_formatted</span><span class="p">,</span>
+</span><span id="1-77">        <span class="s2">&quot;fix&quot;</span><span class="p">:</span> <span class="n">rule_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fix&quot;</span><span class="p">,</span> <span class="s2">&quot;No fix available&quot;</span><span class="p">),</span>
+</span><span id="1-78">        <span class="s2">&quot;rule_link&quot;</span><span class="p">:</span> <span class="n">rule_link</span><span class="p">,</span>
+</span><span id="1-79">        <span class="s2">&quot;rule_anchor_link&quot;</span><span class="p">:</span> <span class="n">rule_anchor_link</span><span class="p">,</span>
+</span><span id="1-80">    <span class="p">}</span></div>
 
-</span><span id="1-80">
 </span><span id="1-81">
+</span><span id="1-82">
 <div class="viewcode-block" id="query_all_ruff_rules">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.query_all_ruff_rules">[docs]</a>
-</span><span id="1-82"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">query_all_ruff_rules</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RuffRule</span><span class="p">]:</span>
-</span><span id="1-83"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Query all Ruff linting rules.</span>
-</span><span id="1-84">
-</span><span id="1-85"><span class="sd">    Returns:</span>
-</span><span id="1-86"><span class="sd">        list[RuffRule]: All ruff rules</span>
-</span><span id="1-87"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-88">    <span class="n">_ruff</span> <span class="o">=</span> <span class="n">find_ruff_bin</span><span class="p">()</span>
-</span><span id="1-89">    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">run_process</span><span class="p">([</span><span class="n">_ruff</span><span class="p">,</span> <span class="s2">&quot;rule&quot;</span><span class="p">,</span> <span class="s2">&quot;--all&quot;</span><span class="p">,</span> <span class="s2">&quot;--output-format&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">])</span>
-</span><span id="1-90">
-</span><span id="1-91">    <span class="c1"># Check returncode since anyio.run_process doesn&#39;t raise CalledProcessError by default</span>
-</span><span id="1-92">    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="1-93">        <span class="n">stderr</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
-</span><span id="1-94">        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error while querying all rules: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="s2">&quot;</span>
-</span><span id="1-95">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-</span><span id="1-96">
-</span><span id="1-97">    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span></div>
+</span><span id="1-83"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">query_all_ruff_rules</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">RuffRule</span><span class="p">]:</span>
+</span><span id="1-84"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Query all Ruff linting rules.</span>
+</span><span id="1-85">
+</span><span id="1-86"><span class="sd">    Returns:</span>
+</span><span id="1-87"><span class="sd">        list[RuffRule]: All ruff rules</span>
+</span><span id="1-88"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-89">    <span class="n">_ruff</span> <span class="o">=</span> <span class="n">find_ruff_bin</span><span class="p">()</span>
+</span><span id="1-90">    <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">run_process</span><span class="p">([</span><span class="n">_ruff</span><span class="p">,</span> <span class="s2">&quot;rule&quot;</span><span class="p">,</span> <span class="s2">&quot;--all&quot;</span><span class="p">,</span> <span class="s2">&quot;--output-format&quot;</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">])</span>
+</span><span id="1-91">
+</span><span id="1-92">    <span class="c1"># Check returncode since anyio.run_process doesn&#39;t raise CalledProcessError by default</span>
+</span><span id="1-93">    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="1-94">        <span class="n">stderr</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">stderr</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+</span><span id="1-95">        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Error while querying all rules: </span><span class="si">{</span><span class="n">stderr</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="1-96">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span><span id="1-97">
+</span><span id="1-98">    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span></div>
 
-</span><span id="1-98">
 </span><span id="1-99">
+</span><span id="1-100">
 <div class="viewcode-block" id="run_ruff_format">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.run_ruff_format">[docs]</a>
-</span><span id="1-100"><span class="k">def</span><span class="w"> </span><span class="nf">run_ruff_format</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-101"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats code using Ruff.</span>
-</span><span id="1-102">
-</span><span id="1-103"><span class="sd">    Args:</span>
-</span><span id="1-104"><span class="sd">        code: The code to format.</span>
-</span><span id="1-105">
-</span><span id="1-106"><span class="sd">    Returns:</span>
-</span><span id="1-107"><span class="sd">        str: The formatted code.</span>
-</span><span id="1-108"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-109">    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
-</span><span id="1-110">        <span class="p">[</span><span class="s2">&quot;ruff&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">],</span>  <span class="c1"># noqa: S607</span>
-</span><span id="1-111">        <span class="nb">input</span><span class="o">=</span><span class="n">code</span><span class="p">,</span>
-</span><span id="1-112">        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-113">        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-</span><span id="1-114">        <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-</span><span id="1-115">    <span class="p">)</span>
-</span><span id="1-116">    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">code</span></div>
+</span><span id="1-101"><span class="k">def</span><span class="w"> </span><span class="nf">run_ruff_format</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-102"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats code using Ruff.</span>
+</span><span id="1-103">
+</span><span id="1-104"><span class="sd">    Args:</span>
+</span><span id="1-105"><span class="sd">        code: The code to format.</span>
+</span><span id="1-106">
+</span><span id="1-107"><span class="sd">    Returns:</span>
+</span><span id="1-108"><span class="sd">        str: The formatted code.</span>
+</span><span id="1-109"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-110">    <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+</span><span id="1-111">        <span class="p">[</span><span class="s2">&quot;ruff&quot;</span><span class="p">,</span> <span class="s2">&quot;format&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">],</span>  <span class="c1"># noqa: S607</span>
+</span><span id="1-112">        <span class="nb">input</span><span class="o">=</span><span class="n">code</span><span class="p">,</span>
+</span><span id="1-113">        <span class="n">capture_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-114">        <span class="n">text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span id="1-115">        <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+</span><span id="1-116">    <span class="p">)</span>
+</span><span id="1-117">    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">stdout</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">returncode</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">code</span></div>
 
-</span><span id="1-117">
 </span><span id="1-118">
+</span><span id="1-119">
 <div class="viewcode-block" id="paste">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.paste">[docs]</a>
-</span><span id="1-119"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-120"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Uploads the given code to paste.pythondiscord.com.</span>
-</span><span id="1-121">
-</span><span id="1-122"><span class="sd">    Args:</span>
-</span><span id="1-123"><span class="sd">        code: The formatted code to upload.</span>
-</span><span id="1-124">
-</span><span id="1-125"><span class="sd">    Returns:</span>
-</span><span id="1-126"><span class="sd">        str: The URL of the uploaded paste.</span>
-</span><span id="1-127"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-128">    <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="1-129">        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-</span><span id="1-130">            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pastebin</span><span class="si">}</span><span class="s2">/api/v1/paste&quot;</span><span class="p">,</span>
-</span><span id="1-131">            <span class="n">json</span><span class="o">=</span><span class="p">{</span>
-</span><span id="1-132">                <span class="s2">&quot;expiry&quot;</span><span class="p">:</span> <span class="s2">&quot;1day&quot;</span><span class="p">,</span>
-</span><span id="1-133">                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;byte-bot_formatted_code.py&quot;</span><span class="p">,</span> <span class="s2">&quot;lexer&quot;</span><span class="p">:</span> <span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">code</span><span class="p">}],</span>
-</span><span id="1-134">            <span class="p">},</span>
-</span><span id="1-135">        <span class="p">)</span>
-</span><span id="1-136">        <span class="n">response_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</span><span id="1-137">        <span class="n">paste_link</span> <span class="o">=</span> <span class="n">response_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;link&quot;</span><span class="p">)</span>
-</span><span id="1-138">        <span class="k">return</span> <span class="n">paste_link</span> <span class="ow">or</span> <span class="s2">&quot;Failed to upload formatted code.&quot;</span></div>
+</span><span id="1-120"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">paste</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-121"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Uploads the given code to paste.pythondiscord.com.</span>
+</span><span id="1-122">
+</span><span id="1-123"><span class="sd">    Args:</span>
+</span><span id="1-124"><span class="sd">        code: The formatted code to upload.</span>
+</span><span id="1-125">
+</span><span id="1-126"><span class="sd">    Returns:</span>
+</span><span id="1-127"><span class="sd">        str: The URL of the uploaded paste.</span>
+</span><span id="1-128"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-129">    <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span id="1-130">        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+</span><span id="1-131">            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pastebin</span><span class="si">}</span><span class="s2">/api/v1/paste&quot;</span><span class="p">,</span>
+</span><span id="1-132">            <span class="n">json</span><span class="o">=</span><span class="p">{</span>
+</span><span id="1-133">                <span class="s2">&quot;expiry&quot;</span><span class="p">:</span> <span class="s2">&quot;1day&quot;</span><span class="p">,</span>
+</span><span id="1-134">                <span class="s2">&quot;files&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;byte-bot_formatted_code.py&quot;</span><span class="p">,</span> <span class="s2">&quot;lexer&quot;</span><span class="p">:</span> <span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">code</span><span class="p">}],</span>
+</span><span id="1-135">            <span class="p">},</span>
+</span><span id="1-136">        <span class="p">)</span>
+</span><span id="1-137">        <span class="n">response_data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span><span id="1-138">        <span class="n">paste_link</span> <span class="o">=</span> <span class="n">response_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;link&quot;</span><span class="p">)</span>
+</span><span id="1-139">        <span class="k">return</span> <span class="n">paste_link</span> <span class="ow">or</span> <span class="s2">&quot;Failed to upload formatted code.&quot;</span></div>
 
-</span><span id="1-139">
 </span><span id="1-140">
+</span><span id="1-141">
 <div class="viewcode-block" id="chunk_sequence">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.chunk_sequence">[docs]</a>
-</span><span id="1-141"><span class="k">def</span><span class="w"> </span><span class="nf">chunk_sequence</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">sequence</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
-</span><span id="1-142"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Naïve chunking of an iterable.</span>
-</span><span id="1-143">
-</span><span id="1-144"><span class="sd">    Args:</span>
-</span><span id="1-145"><span class="sd">        sequence (Iterable[T]): Iterable to chunk</span>
-</span><span id="1-146"><span class="sd">        size (int): Size of chunk</span>
-</span><span id="1-147">
-</span><span id="1-148"><span class="sd">    Yields:</span>
-</span><span id="1-149"><span class="sd">        Iterable[tuple[T, ...]]: An n-tuple that contains chunked data</span>
-</span><span id="1-150"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-151">    <span class="n">_sequence</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
-</span><span id="1-152">    <span class="k">while</span> <span class="n">chunk</span> <span class="o">:=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">_sequence</span><span class="p">,</span> <span class="n">size</span><span class="p">)):</span>
-</span><span id="1-153">        <span class="k">yield</span> <span class="n">chunk</span></div>
+</span><span id="1-142"><span class="k">def</span><span class="w"> </span><span class="nf">chunk_sequence</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">sequence</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="o">...</span><span class="p">]]:</span>
+</span><span id="1-143"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Naïve chunking of an iterable.</span>
+</span><span id="1-144">
+</span><span id="1-145"><span class="sd">    Args:</span>
+</span><span id="1-146"><span class="sd">        sequence (Iterable[T]): Iterable to chunk</span>
+</span><span id="1-147"><span class="sd">        size (int): Size of chunk</span>
+</span><span id="1-148">
+</span><span id="1-149"><span class="sd">    Yields:</span>
+</span><span id="1-150"><span class="sd">        Iterable[tuple[T, ...]]: An n-tuple that contains chunked data</span>
+</span><span id="1-151"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-152">    <span class="n">_sequence</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span>
+</span><span id="1-153">    <span class="k">while</span> <span class="n">chunk</span> <span class="o">:=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">islice</span><span class="p">(</span><span class="n">_sequence</span><span class="p">,</span> <span class="n">size</span><span class="p">)):</span>
+</span><span id="1-154">        <span class="k">yield</span> <span class="n">chunk</span></div>
 
-</span><span id="1-154">
 </span><span id="1-155">
+</span><span id="1-156">
+</span><span id="1-157"><span class="k">def</span><span class="w"> </span><span class="nf">_find_protected_regions</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+</span><span id="1-158"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Find markdown structures that should not be split.&quot;&quot;&quot;</span>
+</span><span id="1-159">    <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+</span><span id="1-160">        <span class="sa">r</span><span class="s2">&quot;```[\s\S]*?```&quot;</span>  <span class="c1"># code blocks</span>
+</span><span id="1-161">        <span class="sa">r</span><span class="s2">&quot;|`[^`\n]+`&quot;</span>  <span class="c1"># inline code</span>
+</span><span id="1-162">        <span class="sa">r</span><span class="s2">&quot;|\[[^\]]*\]\([^)]*\)&quot;</span>  <span class="c1"># markdown links</span>
+</span><span id="1-163">    <span class="p">)</span>
+</span><span id="1-164">    <span class="k">return</span> <span class="p">[(</span><span class="n">m</span><span class="o">.</span><span class="n">start</span><span class="p">(),</span> <span class="n">m</span><span class="o">.</span><span class="n">end</span><span class="p">())</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">)]</span>
+</span><span id="1-165">
+</span><span id="1-166">
+</span><span id="1-167"><span class="k">def</span><span class="w"> </span><span class="nf">_is_position_protected</span><span class="p">(</span><span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">regions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+</span><span id="1-168"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a position falls within a protected region.&quot;&quot;&quot;</span>
+</span><span id="1-169">    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="o">&lt;</span> <span class="n">end</span> <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">)</span>
+</span><span id="1-170">
+</span><span id="1-171">
+</span><span id="1-172"><span class="k">def</span><span class="w"> </span><span class="nf">_find_split_point</span><span class="p">(</span>
+</span><span id="1-173">    <span class="n">text_segment</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">start_offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">protected_regions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
+</span><span id="1-174"><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span><span id="1-175"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the best split point within max_size that respects protected regions.&quot;&quot;&quot;</span>
+</span><span id="1-176">    <span class="n">search_start</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">max_size</span> <span class="o">-</span> <span class="mi">200</span><span class="p">)</span>
+</span><span id="1-177">
+</span><span id="1-178">    <span class="k">for</span> <span class="n">sep</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;. &quot;</span><span class="p">,</span> <span class="s2">&quot;! &quot;</span><span class="p">,</span> <span class="s2">&quot;? &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">]:</span>
+</span><span id="1-179">        <span class="n">pos</span> <span class="o">=</span> <span class="n">max_size</span>
+</span><span id="1-180">        <span class="k">while</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="n">search_start</span><span class="p">:</span>
+</span><span id="1-181">            <span class="n">idx</span> <span class="o">=</span> <span class="n">text_segment</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="n">sep</span><span class="p">,</span> <span class="n">search_start</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+</span><span id="1-182">            <span class="k">if</span> <span class="n">idx</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+</span><span id="1-183">                <span class="k">break</span>
+</span><span id="1-184">            <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_position_protected</span><span class="p">(</span><span class="n">start_offset</span> <span class="o">+</span> <span class="n">idx</span><span class="p">,</span> <span class="n">protected_regions</span><span class="p">):</span>
+</span><span id="1-185">                <span class="k">return</span> <span class="n">idx</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">sep</span><span class="p">)</span>
+</span><span id="1-186">            <span class="n">pos</span> <span class="o">=</span> <span class="n">idx</span>
+</span><span id="1-187">
+</span><span id="1-188">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_size</span><span class="p">,</span> <span class="n">search_start</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+</span><span id="1-189">        <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_position_protected</span><span class="p">(</span><span class="n">start_offset</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">protected_regions</span><span class="p">):</span>
+</span><span id="1-190">            <span class="k">return</span> <span class="n">i</span>
+</span><span id="1-191">
+</span><span id="1-192">    <span class="k">return</span> <span class="n">max_size</span>
+</span><span id="1-193">
+</span><span id="1-194">
+<div class="viewcode-block" id="smart_chunk_text">
+<a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.smart_chunk_text">[docs]</a>
+</span><span id="1-195"><span class="k">def</span><span class="w"> </span><span class="nf">smart_chunk_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">max_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="1-196"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Split text into chunks without breaking markdown structures.</span>
+</span><span id="1-197">
+</span><span id="1-198"><span class="sd">    Respects markdown links, inline code, and code blocks. Prefers splitting at</span>
+</span><span id="1-199"><span class="sd">    natural boundaries: paragraphs &gt; sentences &gt; newlines &gt; spaces.</span>
+</span><span id="1-200">
+</span><span id="1-201"><span class="sd">    Args:</span>
+</span><span id="1-202"><span class="sd">        text: The text to chunk.</span>
+</span><span id="1-203"><span class="sd">        max_size: Maximum characters per chunk (must be &gt; 0).</span>
+</span><span id="1-204">
+</span><span id="1-205"><span class="sd">    Returns:</span>
+</span><span id="1-206"><span class="sd">        List of text chunks.</span>
+</span><span id="1-207">
+</span><span id="1-208"><span class="sd">    Raises:</span>
+</span><span id="1-209"><span class="sd">        ValueError: If max_size is not positive.</span>
+</span><span id="1-210"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-211">    <span class="k">if</span> <span class="n">max_size</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="1-212">        <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;max_size must be positive, got </span><span class="si">{</span><span class="n">max_size</span><span class="si">}</span><span class="s2">&quot;</span>
+</span><span id="1-213">        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+</span><span id="1-214">
+</span><span id="1-215">    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+</span><span id="1-216">        <span class="k">return</span> <span class="p">[]</span>
+</span><span id="1-217">
+</span><span id="1-218">    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_size</span><span class="p">:</span>
+</span><span id="1-219">        <span class="k">return</span> <span class="p">[</span><span class="n">text</span><span class="p">]</span>
+</span><span id="1-220">
+</span><span id="1-221">    <span class="n">protected_regions</span> <span class="o">=</span> <span class="n">_find_protected_regions</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</span><span id="1-222">    <span class="n">chunks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="1-223">    <span class="n">current_pos</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span id="1-224">
+</span><span id="1-225">    <span class="k">while</span> <span class="n">current_pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+</span><span id="1-226">        <span class="n">remaining</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">current_pos</span><span class="p">:]</span>
+</span><span id="1-227">
+</span><span id="1-228">        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">remaining</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_size</span><span class="p">:</span>
+</span><span id="1-229">            <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">remaining</span><span class="p">)</span>
+</span><span id="1-230">            <span class="k">break</span>
+</span><span id="1-231">
+</span><span id="1-232">        <span class="n">split_at</span> <span class="o">=</span> <span class="n">_find_split_point</span><span class="p">(</span><span class="n">remaining</span><span class="p">,</span> <span class="n">current_pos</span><span class="p">,</span> <span class="n">max_size</span><span class="p">,</span> <span class="n">protected_regions</span><span class="p">)</span>
+</span><span id="1-233">        <span class="n">chunk</span> <span class="o">=</span> <span class="n">remaining</span><span class="p">[:</span><span class="n">split_at</span><span class="p">]</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span>
+</span><span id="1-234">
+</span><span id="1-235">        <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>
+</span><span id="1-236">            <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+</span><span id="1-237">
+</span><span id="1-238">        <span class="n">current_pos</span> <span class="o">+=</span> <span class="n">split_at</span>
+</span><span id="1-239">        <span class="k">while</span> <span class="n">current_pos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="ow">and</span> <span class="n">text</span><span class="p">[</span><span class="n">current_pos</span><span class="p">]</span> <span class="ow">in</span> <span class="s2">&quot; </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">:</span>
+</span><span id="1-240">            <span class="n">current_pos</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span id="1-241">
+</span><span id="1-242">    <span class="k">return</span> <span class="n">chunks</span></div>
+
+</span><span id="1-243">
+</span><span id="1-244">
 <div class="viewcode-block" id="format_resolution_link">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.format_resolution_link">[docs]</a>
-</span><span id="1-156"><span class="k">def</span><span class="w"> </span><span class="nf">format_resolution_link</span><span class="p">(</span><span class="n">resolution</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="1-157"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats the resolution URL into a markdown link.</span>
-</span><span id="1-158">
-</span><span id="1-159"><span class="sd">    Args:</span>
-</span><span id="1-160"><span class="sd">        resolution (str): The resolution URL.</span>
-</span><span id="1-161">
-</span><span id="1-162"><span class="sd">    Returns:</span>
-</span><span id="1-163"><span class="sd">        str: The formatted markdown link.</span>
-</span><span id="1-164"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-165">    <span class="k">if</span> <span class="ow">not</span> <span class="n">resolution</span><span class="p">:</span>
-</span><span id="1-166">        <span class="k">return</span> <span class="s2">&quot;N/A&quot;</span>
-</span><span id="1-167">    <span class="k">if</span> <span class="s2">&quot;discuss.python.org&quot;</span> <span class="ow">in</span> <span class="n">resolution</span><span class="p">:</span>
-</span><span id="1-168">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[via Discussion Forum](</span><span class="si">{</span><span class="n">resolution</span><span class="si">}</span><span class="s2">)&quot;</span>
-</span><span id="1-169">    <span class="k">if</span> <span class="s2">&quot;mail.python.org&quot;</span> <span class="ow">in</span> <span class="n">resolution</span><span class="p">:</span>
-</span><span id="1-170">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[via Mailist](</span><span class="si">{</span><span class="n">resolution</span><span class="si">}</span><span class="s2">)&quot;</span>
-</span><span id="1-171">    <span class="k">return</span> <span class="n">resolution</span></div>
+</span><span id="1-245"><span class="k">def</span><span class="w"> </span><span class="nf">format_resolution_link</span><span class="p">(</span><span class="n">resolution</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="1-246"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Formats the resolution URL into a markdown link.</span>
+</span><span id="1-247">
+</span><span id="1-248"><span class="sd">    Args:</span>
+</span><span id="1-249"><span class="sd">        resolution (str): The resolution URL.</span>
+</span><span id="1-250">
+</span><span id="1-251"><span class="sd">    Returns:</span>
+</span><span id="1-252"><span class="sd">        str: The formatted markdown link.</span>
+</span><span id="1-253"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-254">    <span class="k">if</span> <span class="ow">not</span> <span class="n">resolution</span><span class="p">:</span>
+</span><span id="1-255">        <span class="k">return</span> <span class="s2">&quot;N/A&quot;</span>
+</span><span id="1-256">    <span class="k">if</span> <span class="s2">&quot;discuss.python.org&quot;</span> <span class="ow">in</span> <span class="n">resolution</span><span class="p">:</span>
+</span><span id="1-257">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[via Discussion Forum](</span><span class="si">{</span><span class="n">resolution</span><span class="si">}</span><span class="s2">)&quot;</span>
+</span><span id="1-258">    <span class="k">if</span> <span class="s2">&quot;mail.python.org&quot;</span> <span class="ow">in</span> <span class="n">resolution</span><span class="p">:</span>
+</span><span id="1-259">        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;[via Mailist](</span><span class="si">{</span><span class="n">resolution</span><span class="si">}</span><span class="s2">)&quot;</span>
+</span><span id="1-260">    <span class="k">return</span> <span class="n">resolution</span></div>
 
-</span><span id="1-172">
-</span><span id="1-173">
+</span><span id="1-261">
+</span><span id="1-262">
 <div class="viewcode-block" id="query_all_peps">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.query_all_peps">[docs]</a>
-</span><span id="1-174"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">query_all_peps</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PEP</span><span class="p">]:</span>
-</span><span id="1-175"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Query all PEPs from the PEPs Python.org API.</span>
-</span><span id="1-176">
-</span><span id="1-177"><span class="sd">    Returns:</span>
-</span><span id="1-178"><span class="sd">        list[PEP]: All PEPs</span>
-</span><span id="1-179"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-180">    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://peps.python.org/api/peps.json&quot;</span>
-</span><span id="1-181">    <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
-</span><span id="1-182">        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</span><span id="1-183">        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-</span><span id="1-184">        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</span><span id="1-185">
-</span><span id="1-186">    <span class="k">return</span> <span class="p">[</span>  <span class="c1"># type: ignore[reportReturnType]</span>
-</span><span id="1-187">        <span class="p">{</span>
-</span><span id="1-188">            <span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">],</span>
-</span><span id="1-189">            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span>
-</span><span id="1-190">            <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;authors&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">),</span>
-</span><span id="1-191">            <span class="s2">&quot;discussions_to&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;discussions_to&quot;</span><span class="p">],</span>
-</span><span id="1-192">            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">PEPStatus</span><span class="p">(</span><span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]),</span>
-</span><span id="1-193">            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">PEPType</span><span class="p">(</span><span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]),</span>
-</span><span id="1-194">            <span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;topic&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
-</span><span id="1-195">            <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">-%b-%Y&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">UTC</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>
-</span><span id="1-196">            <span class="s2">&quot;python_version&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;python_version&quot;</span><span class="p">),</span>
-</span><span id="1-197">            <span class="s2">&quot;post_history&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;post_history&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-</span><span id="1-198">            <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="n">format_resolution_link</span><span class="p">(</span><span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resolution&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">)),</span>
-</span><span id="1-199">            <span class="s2">&quot;requires&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;requires&quot;</span><span class="p">),</span>
-</span><span id="1-200">            <span class="s2">&quot;replaces&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;replaces&quot;</span><span class="p">),</span>
-</span><span id="1-201">            <span class="s2">&quot;superseded_by&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;superseded_by&quot;</span><span class="p">),</span>
-</span><span id="1-202">            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">],</span>
-</span><span id="1-203">        <span class="p">}</span>
-</span><span id="1-204">        <span class="k">for</span> <span class="n">pep_info</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
-</span><span id="1-205">    <span class="p">]</span></div>
+</span><span id="1-263"><span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">query_all_peps</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PEP</span><span class="p">]:</span>
+</span><span id="1-264"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Query all PEPs from the PEPs Python.org API.</span>
+</span><span id="1-265">
+</span><span id="1-266"><span class="sd">    Returns:</span>
+</span><span id="1-267"><span class="sd">        list[PEP]: All PEPs</span>
+</span><span id="1-268"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-269">    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://peps.python.org/api/peps.json&quot;</span>
+</span><span id="1-270">    <span class="k">async</span> <span class="k">with</span> <span class="n">httpx</span><span class="o">.</span><span class="n">AsyncClient</span><span class="p">()</span> <span class="k">as</span> <span class="n">client</span><span class="p">:</span>
+</span><span id="1-271">        <span class="n">response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span><span id="1-272">        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+</span><span id="1-273">        <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</span><span id="1-274">
+</span><span id="1-275">    <span class="k">return</span> <span class="p">[</span>  <span class="c1"># type: ignore[reportReturnType]</span>
+</span><span id="1-276">        <span class="p">{</span>
+</span><span id="1-277">            <span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">],</span>
+</span><span id="1-278">            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">],</span>
+</span><span id="1-279">            <span class="s2">&quot;authors&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;authors&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="p">),</span>
+</span><span id="1-280">            <span class="s2">&quot;discussions_to&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;discussions_to&quot;</span><span class="p">],</span>
+</span><span id="1-281">            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">PEPStatus</span><span class="p">(</span><span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]),</span>
+</span><span id="1-282">            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">PEPType</span><span class="p">(</span><span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]),</span>
+</span><span id="1-283">            <span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;topic&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+</span><span id="1-284">            <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;created&quot;</span><span class="p">],</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">-%b-%Y&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">tzinfo</span><span class="o">=</span><span class="n">UTC</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">),</span>
+</span><span id="1-285">            <span class="s2">&quot;python_version&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;python_version&quot;</span><span class="p">),</span>
+</span><span id="1-286">            <span class="s2">&quot;post_history&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;post_history&quot;</span><span class="p">,</span> <span class="p">[]),</span>
+</span><span id="1-287">            <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="n">format_resolution_link</span><span class="p">(</span><span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;resolution&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">)),</span>
+</span><span id="1-288">            <span class="s2">&quot;requires&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;requires&quot;</span><span class="p">),</span>
+</span><span id="1-289">            <span class="s2">&quot;replaces&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;replaces&quot;</span><span class="p">),</span>
+</span><span id="1-290">            <span class="s2">&quot;superseded_by&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;superseded_by&quot;</span><span class="p">),</span>
+</span><span id="1-291">            <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">pep_info</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">],</span>
+</span><span id="1-292">        <span class="p">}</span>
+</span><span id="1-293">        <span class="k">for</span> <span class="n">pep_info</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+</span><span id="1-294">    <span class="p">]</span></div>
 
-</span><span id="1-206">
-</span><span id="1-207">
+</span><span id="1-295">
+</span><span id="1-296">
 <div class="viewcode-block" id="get_next_friday">
 <a class="viewcode-back" href="../../../byte/api/lib/utils.html#byte_bot.lib.utils.get_next_friday">[docs]</a>
-</span><span id="1-208"><span class="k">def</span><span class="w"> </span><span class="nf">get_next_friday</span><span class="p">(</span><span class="n">now</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]:</span>
-</span><span id="1-209"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the next Friday from ``now``.</span>
-</span><span id="1-210">
-</span><span id="1-211"><span class="sd">    If ``delay``, calculate the Friday for ``delay`` weeks from now.</span>
-</span><span id="1-212">
-</span><span id="1-213"><span class="sd">    Args:</span>
-</span><span id="1-214"><span class="sd">        now: The current date and time.</span>
-</span><span id="1-215"><span class="sd">        delay: The number of weeks to delay the calculation.</span>
-</span><span id="1-216">
-</span><span id="1-217"><span class="sd">    Returns:</span>
-</span><span id="1-218"><span class="sd">        datetime: The next Friday, optionally for the week after next.</span>
-</span><span id="1-219"><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="1-220">    <span class="n">days_ahead</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">-</span> <span class="n">now</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span>
-</span><span id="1-221">    <span class="k">if</span> <span class="n">days_ahead</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="1-222">        <span class="n">days_ahead</span> <span class="o">+=</span> <span class="mi">7</span>
-</span><span id="1-223">    <span class="k">if</span> <span class="n">delay</span><span class="p">:</span>
-</span><span id="1-224">        <span class="n">days_ahead</span> <span class="o">+=</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">delay</span>
-</span><span id="1-225">    <span class="n">start_dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days_ahead</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-</span><span id="1-226">    <span class="n">end_dt</span> <span class="o">=</span> <span class="n">start_dt</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span id="1-227">    <span class="k">return</span> <span class="n">start_dt</span><span class="p">,</span> <span class="n">end_dt</span></div>
+</span><span id="1-297"><span class="k">def</span><span class="w"> </span><span class="nf">get_next_friday</span><span class="p">(</span><span class="n">now</span><span class="p">:</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">delay</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">datetime</span><span class="p">,</span> <span class="n">datetime</span><span class="p">]:</span>
+</span><span id="1-298"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the next Friday from ``now``.</span>
+</span><span id="1-299">
+</span><span id="1-300"><span class="sd">    If ``delay``, calculate the Friday for ``delay`` weeks from now.</span>
+</span><span id="1-301">
+</span><span id="1-302"><span class="sd">    Args:</span>
+</span><span id="1-303"><span class="sd">        now: The current date and time.</span>
+</span><span id="1-304"><span class="sd">        delay: The number of weeks to delay the calculation.</span>
+</span><span id="1-305">
+</span><span id="1-306"><span class="sd">    Returns:</span>
+</span><span id="1-307"><span class="sd">        datetime: The next Friday, optionally for the week after next.</span>
+</span><span id="1-308"><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="1-309">    <span class="n">days_ahead</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">-</span> <span class="n">now</span><span class="o">.</span><span class="n">weekday</span><span class="p">()</span>
+</span><span id="1-310">    <span class="k">if</span> <span class="n">days_ahead</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="1-311">        <span class="n">days_ahead</span> <span class="o">+=</span> <span class="mi">7</span>
+</span><span id="1-312">    <span class="k">if</span> <span class="n">delay</span><span class="p">:</span>
+</span><span id="1-313">        <span class="n">days_ahead</span> <span class="o">+=</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">delay</span>
+</span><span id="1-314">    <span class="n">start_dt</span> <span class="o">=</span> <span class="p">(</span><span class="n">now</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="n">days_ahead</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">hour</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">minute</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="1-315">    <span class="n">end_dt</span> <span class="o">=</span> <span class="n">start_dt</span> <span class="o">+</span> <span class="n">dt</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span id="1-316">    <span class="k">return</span> <span class="n">start_dt</span><span class="p">,</span> <span class="n">end_dt</span></div>
 
 </span></pre></div>
         </article>

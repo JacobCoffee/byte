@@ -253,6 +253,7 @@ html.dark {
 <li><a class="reference internal" href="#byte_bot.lib.utils.query_all_peps"><code class="docutils literal notranslate"><span class="pre">query_all_peps()</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.lib.utils.query_all_ruff_rules"><code class="docutils literal notranslate"><span class="pre">query_all_ruff_rules()</span></code></a></li>
 <li><a class="reference internal" href="#byte_bot.lib.utils.run_ruff_format"><code class="docutils literal notranslate"><span class="pre">run_ruff_format()</span></code></a></li>
+<li><a class="reference internal" href="#byte_bot.lib.utils.smart_chunk_text"><code class="docutils literal notranslate"><span class="pre">smart_chunk_text()</span></code></a></li>
 </ul>
 
   </div><a class="js-repo-stats repo-stats flex items-center" href="https://github.com/JacobCoffee/byte"
@@ -506,6 +507,28 @@ but are differentiated here for clarity.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)">str</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="byte_bot.lib.utils.smart_chunk_text">
+<span class="sig-prename descclassname"><span class="pre">byte_bot.lib.utils.</span></span><span class="sig-name descname"><span class="pre">smart_chunk_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../_modules/byte_bot/lib/utils.html#smart_chunk_text"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#byte_bot.lib.utils.smart_chunk_text" title="Link to this definition">¶</a></dt>
+<dd><p>Split text into chunks without breaking markdown structures.</p>
+<p>Respects markdown links, inline code, and code blocks. Prefers splitting at
+natural boundaries: paragraphs &gt; sentences &gt; newlines &gt; spaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> – The text to chunk.</p></li>
+<li><p><strong>max_size</strong> – Maximum characters per chunk (must be &gt; 0).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of text chunks.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.14)"><strong>ValueError</strong></a> – If max_size is not positive.</p>
 </dd>
 </dl>
 </dd></dl>
